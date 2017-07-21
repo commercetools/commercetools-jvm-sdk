@@ -129,8 +129,9 @@ extends <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Object.html?
  <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/customers/queries/CustomerByEmailTokenGet.html" title="interface in io.sphere.sdk.customers.queries"><code>CustomerByEmailTokenGet</code></a> to retrieve a customer by email token.</li>
  <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/producttypes/commands/updateactions/SetInputTip.html" title="class in io.sphere.sdk.producttypes.commands.updateactions"><code>SetInputTip</code></a> update action.</li>
  <li class=fixed-in-release><a href="../../../../io/sphere/sdk/customers/queries/CustomerByPasswordTokenGet.html" title="interface in io.sphere.sdk.customers.queries"><code>CustomerByPasswordTokenGet</code></a> now uses the new endpoint.</li>
- <li class=change-in-release>Changed type of <a href="../../../../io/sphere/sdk/products/ProductDraft.html#getCategories--"><code>ProductDraft.getCategories()</code></a> to <code>ResourceIdentifier<Category></code>. This change doesn't require changes to your source code,
- but requires a recompilation of all projects that depend on this class. </li>
+ <li class=change-in-release>Changed type of <a href="../../../../io/sphere/sdk/products/ProductDraft.html#getCategories--"><code>ProductDraft.getCategories()</code></a> from Set&lt;Reference&lt;Category&gt;&gt;&gt; to Set&lt;ResourceIdentifier&lt;Category&gt;&gt;.
+ This breaking change requires an update of your source code. But since our backend never used the additional properties (<a href="../../../../io/sphere/sdk/models/Reference.html#getObj--"><code>Reference.getObj()</code></a> ) of the <a href="../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models"><code>Reference</code></a>,
+ changing the type from Reference&lt;Category&gt; to ResourceIdentifier&lt;Category&gt; shouldn't require additional changes to your source code.
  <li class=change-in-release>Updated <a href="http://javamoney.github.io/ri.html#welcome-to-moneta---the-jsr-354-reference-implementation">moneta</a> to version 1.1</li>
  <li class=change-in-release>Changed <code>SphereProjectScope</code> from an enum to a class and added missing scopes. This change doesn't require changes to your source code,
  but requires a recompilation of all projects that depend on this class.</li>
