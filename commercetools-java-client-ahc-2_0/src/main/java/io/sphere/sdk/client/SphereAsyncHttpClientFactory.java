@@ -9,9 +9,7 @@ import org.asynchttpclient.DefaultAsyncHttpClientConfig;
 /**
  * Creates an {@link HttpClient} with a commercetools configured underlying {@link org.asynchttpclient.AsyncHttpClient}.
  */
-public final class SphereAsyncHttpClientFactory extends Base {
-    private SphereAsyncHttpClientFactory() {
-    }
+public final class SphereAsyncHttpClientFactory extends SphereHttpClientFactory {
 
     public static HttpClient create() {
         /*
@@ -24,4 +22,11 @@ public final class SphereAsyncHttpClientFactory extends Base {
                 .build();
         return AsyncHttpClientAdapter.of(new DefaultAsyncHttpClient(config));
     }
+
+    @Override
+    public  HttpClient getClient(){
+        return create();
+    }
+
+
 }

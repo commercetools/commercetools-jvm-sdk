@@ -1,4 +1,4 @@
-package test;
+package io.sphere.sdk.models;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.models.Reference;

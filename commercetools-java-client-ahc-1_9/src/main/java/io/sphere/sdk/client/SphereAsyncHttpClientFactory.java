@@ -6,11 +6,14 @@ import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.http.AsyncHttpClientAdapter;
 import io.sphere.sdk.models.Base;
 
-public final class SphereAsyncHttpClientFactory extends Base {
-    private SphereAsyncHttpClientFactory() {
-    }
+public final class SphereAsyncHttpClientFactory extends SphereHttpClientFactory {
 
     public static HttpClient create() {
         return AsyncHttpClientAdapter.of(new AsyncHttpClient(new AsyncHttpClientConfig.Builder().setEnabledProtocols(new String[]{"TLSv1.1", "TLSv1.2"}).build()));
+    }
+
+    @Override
+    public HttpClient getClient() {
+        return create();
     }
 }

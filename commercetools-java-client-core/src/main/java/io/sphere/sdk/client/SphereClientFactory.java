@@ -7,6 +7,7 @@ import io.sphere.sdk.models.SphereException;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ServiceLoader;
 import java.util.concurrent.CompletionStage;
 import java.util.function.Supplier;
 
@@ -97,24 +98,12 @@ public interface SphereClientFactory {
     }
 
     static SphereClientFactory of() {
-        try {
-            Class<?> clazz;
-            try {
-                clazz = Class.forName("io.sphere.sdk.client.SphereAsyncHttpClientFactory");
-            } catch (final ClassNotFoundException e) {
-                clazz = Class.forName("io.sphere.sdk.client.SphereApacheHttpClientFactory");
-            }
-            final Method create = clazz.getMethod("create");
-            final Supplier<HttpClient> supplier = () -> {
-                try {
-                    return  (HttpClient) create.invoke(null);
-                } catch (IllegalAccessException | InvocationTargetException e) {
-                    throw new SphereException(e);
-                }
-            };
-            return of(supplier);
-        } catch (ClassNotFoundException | NoSuchMethodException e) {
-            throw new SphereException(e);
+
+        ServiceLoader<SphereHttpClientFactory> loader = ServiceLoader.load(SphereHttpClientFactory.class,SphereClientFactory.class.getClassLoader());
+        SphereHttpClientFactory httpClientFactory = loader.iterator().next();
+        if(httpClientFactory == null){
+            throw new SphereException(new NoClassDefFoundError(SphereHttpClientFactory.class.getCanonicalName()));
         }
+        return of(httpClientFactory::getClient);
     }
 }

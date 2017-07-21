@@ -4,12 +4,15 @@ import com.ning.http.client.AsyncHttpClient;
 import io.sphere.sdk.http.AsyncHttpClientAdapter;
 import io.sphere.sdk.http.HttpClient;
 
-public final class SphereAsyncHttpClientFactory {
-    private SphereAsyncHttpClientFactory() {
-    }
+public final class SphereAsyncHttpClientFactory extends SphereHttpClientFactory{
 
     public static HttpClient create() {
         return AsyncHttpClientAdapter.of(new AsyncHttpClient());
+    }
+
+    @Override
+    public HttpClient getClient() {
+        return create();
     }
 }
 

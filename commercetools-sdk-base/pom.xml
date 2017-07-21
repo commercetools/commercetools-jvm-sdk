@@ -7,7 +7,7 @@
     </parent>
     <groupId>com.commercetools.sdk.jvm.core</groupId>
     <artifactId>commercetools-sdk-base</artifactId>
-    <packaging>jar</packaging>
+    <packaging>bundle</packaging>
     <version>1.20.1-SNAPSHOT</version>
     <licenses>
         <license>
@@ -24,8 +24,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.javamoney</groupId>
-            <artifactId>moneta</artifactId>
+            <groupId>com.commercetools.sdk.jvm.core</groupId>
+            <artifactId>org.javamoney-wrapper</artifactId>
+            <version>1.20.1-SNAPSHOT</version>
             <exclusions>
                 <exclusion>
                     <groupId>javax.annotation</groupId>
@@ -58,6 +59,12 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
             <version>${jackson.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-annotations</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -74,15 +81,76 @@
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-parameter-names</artifactId>
             <version>${jackson.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-annotations</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
             <version>${jackson.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-annotations</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven-jar-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>
+                                test-jar
+                            </goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>${felix.maven.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
+                        <Export-Package>
+                            io.sphere.sdk,
+                            io.sphere.sdk.annotations,
+                            io.sphere.sdk.client,
+                            io.sphere.sdk.commands,
+                            io.sphere.sdk.expansion,
+                            io.sphere.sdk.json,
+                            io.sphere.sdk.meta,
+                            io.sphere.sdk.models,
+                            io.sphere.sdk.models.errors,
+                            io.sphere.sdk.queries,
+                            io.sphere.sdk.retry,
+                            io.sphere.sdk.search,
+                            io.sphere.sdk.search.model,
+                            io.sphere.sdk.search.tokenizer,
+                            io.sphere.sdk.utils
+                        </Export-Package>
+                        <Import-Package>!javax.annotation,*</Import-Package>
+                        <Bundle-Version>${project.version}</Bundle-Version>
+                        <Require-Capability> osgi.extender;filter:="(osgi.extender=osgi.serviceloader.registrar)"</Require-Capability>
+                        <Provide-Capability>
+                            osgi.serviceloader;
+                            osgi.serviceloader="io.sphere.sdk.client.SphereClientModule"
+                        </Provide-Capability>
+                    </instructions>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>com.google.code.maven-replacer-plugin</groupId>
                 <artifactId>maven-replacer-plugin</artifactId>

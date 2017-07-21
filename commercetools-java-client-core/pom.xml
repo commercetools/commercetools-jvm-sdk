@@ -7,7 +7,7 @@
     </parent>
     <groupId>com.commercetools.sdk.jvm.core</groupId>
     <artifactId>commercetools-java-client-core</artifactId>
-    <packaging>jar</packaging>
+    <packaging>bundle</packaging>
     <version>1.20.1-SNAPSHOT</version>
     <licenses>
         <license>
@@ -26,6 +26,44 @@
     </dependencies>
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven-jar-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>
+                                test-jar
+                            </goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>${felix.maven.version}</version>
+                <extensions>true</extensions>
+
+                <configuration>
+
+                    <instructions>
+                        <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
+                        <Export-Package>
+                           io.sphere.sdk.client
+                        </Export-Package>
+                        <Import-Package>!javax.annotation,*</Import-Package>
+                        <Bundle-Version>${project.version}</Bundle-Version>
+                        <Require-Capability>
+                            osgi.extender;filter:="(osgi.extender=osgi.serviceloader.processor)",
+                            osgi.serviceloader;filter:="(osgi.serviceloader=io.sphere.sdk.client.SolutionInfo)"; cardinality:=multiple;
+                            filter:="(osgi.serviceloader=io.sphere.sdk.client.SphereClientModule)"; cardinality:=multiple</Require-Capability>
+                        <Fragment-Host>${project.groupId}.commercetools-sdk-base</Fragment-Host>
+                        <split-package>-merge-last</split-package>
+                    </instructions>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

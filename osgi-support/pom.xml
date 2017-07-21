@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>commercetools-jvm-sdk</artifactId>
+        <groupId>com.commercetools.sdk.jvm.core</groupId>
+        <version>1.20.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>osgi-support</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>commercetools-sdk-base-tests-fragment</module>
+        <module>sdk-http-tests-fragment</module>
+        <module>sdk-osgi-test-campaign</module>
+        <module>commercetools-java-client-apache-async-tests-fragment</module>
+        <module>commercetools-models-tests-fragment</module>
+        <module>commercetools-java-client-core-tests-fragment</module>
+        <!--For test purposes only-->
+        <module>commercetools-unbandled-osgi-dependencies</module>
+    </modules>
+    <properties>
+        <reflections.version>0.9.11</reflections.version>
+    </properties>
+</project>
