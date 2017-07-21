@@ -42,6 +42,10 @@ import static java.util.stream.Collectors.toList;
         "\n" +
         "    default ShippingMethodQuery byIsDefault() {\n" +
         "        return withPredicates(m -> m.isDefault().is(true));\n" +
+        "    }\n" +
+        "\n" +
+        "    default ShippingMethodQuery byKey(final String key) {\n" +
+        "        return withPredicates(ShippingMethodQueryModel.of().key().is(key));\n" +
         "    }")
 @ResourceInfo(pluralName = "shipping methods", pathElement = "shipping-methods")
 @HasByIdGetEndpoint(javadocSummary = "Fetches a shipping method by ID.", includeExamples = "io.sphere.sdk.shippingmethods.queries.ShippingMethodByIdGetIntegrationTest#execution()")
