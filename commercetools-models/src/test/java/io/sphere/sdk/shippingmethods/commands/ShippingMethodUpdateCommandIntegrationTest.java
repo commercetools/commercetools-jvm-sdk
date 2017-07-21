@@ -44,6 +44,18 @@ public class ShippingMethodUpdateCommandIntegrationTest extends IntegrationTest 
     }
 
     @Test
+    public void setKey() throws Exception {
+        withUpdateableShippingMethod(client(), shippingMethod -> {
+            final String newKey = randomString();
+            assertThat(shippingMethod.getKey()).isNotEqualTo(newKey);
+            final ShippingMethodUpdateCommand cmd = ShippingMethodUpdateCommand.of(shippingMethod, SetKey.of(newKey));
+            final ShippingMethod updatedShippingMethod = client().executeBlocking(cmd);
+            assertThat(updatedShippingMethod.getKey()).isEqualTo(newKey);
+            return updatedShippingMethod;
+        });
+    }
+
+    @Test
     public void changeName() throws Exception {
         withUpdateableShippingMethod(client(), shippingMethod -> {
             final String newName = randomString();
