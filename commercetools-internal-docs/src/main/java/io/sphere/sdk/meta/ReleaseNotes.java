@@ -141,8 +141,9 @@ import java.util.function.Function;
  <li class=new-in-release>Added {@link io.sphere.sdk.customers.queries.CustomerByEmailTokenGet} to retrieve a customer by email token.</li>
  <li class=new-in-release>Added {@link io.sphere.sdk.producttypes.commands.updateactions.SetInputTip} update action.</li>
  <li class=fixed-in-release>{@link io.sphere.sdk.customers.queries.CustomerByPasswordTokenGet} now uses the new endpoint.</li>
- <li class=change-in-release>Changed type of {@link ProductDraft#getCategories()} to {@link ResourceIdentifier<Category>}. This change doesn't require changes to your source code,
- but requires a recompilation of all projects that depend on this class. </li>
+ <li class=change-in-release>Changed type of {@link ProductDraft#getCategories()} from {@link Set&lt;Reference&lt;Category&gt;&gt;&gt;} to {@link Set&lt;ResourceIdentifier&lt;Category&gt;&gt;}.
+ This breaking change requires an update of your source code. But since our backend never used the additional properties ({@link Reference#getObj()} ) of the {@link Reference},
+ changing the type from {@link Reference&lt;Category&gt;} to {@link ResourceIdentifier&lt;Category&gt;} shouldn't require additional changes to your source code.
  <li class=change-in-release>Updated <a href="http://javamoney.github.io/ri.html#welcome-to-moneta---the-jsr-354-reference-implementation">moneta</a> to version 1.1</li>
  <li class=change-in-release>Changed {@link SphereProjectScope} from an enum to a class and added missing scopes. This change doesn't require changes to your source code,
  but requires a recompilation of all projects that depend on this class.</li>
