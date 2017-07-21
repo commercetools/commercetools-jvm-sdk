@@ -81,6 +81,7 @@ public interface ShippingMethod extends Resource<ShippingMethod> {
 
     @JsonProperty("isDefault")
     @IgnoreInQueryModel
+    @HasNoUpdateAction
     Boolean isDefault();
 
     @Override
