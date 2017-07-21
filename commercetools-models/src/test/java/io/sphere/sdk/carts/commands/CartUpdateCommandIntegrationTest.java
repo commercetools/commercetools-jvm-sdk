@@ -37,6 +37,7 @@ import java.util.stream.Collectors;
 
 import static io.sphere.sdk.carts.CartFixtures.*;
 import static io.sphere.sdk.carts.CustomLineItemFixtures.createCustomLineItemDraft;
+import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withB2cCustomerGroup;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.payments.PaymentFixtures.withPayment;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethodForGermany;
@@ -240,6 +241,17 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
         final String email = "info@commercetools.de";
         final Cart cartWithEmail = client().executeBlocking(CartUpdateCommand.of(cart, SetCustomerEmail.of(email)));
         assertThat(cartWithEmail.getCustomerEmail()).contains(email);
+    }
+
+    @Test
+    public void setCustomerGroup() throws Exception {
+        withB2cCustomerGroup(client(), customerGroup -> {
+            final Cart cart = createCartWithCountry(client());
+            assertThat(cart.getCustomerGroup()).isNull();
+            Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, SetCustomerGroup.of(customerGroup)));
+            assertThat(updatedCart.getCustomerGroup().toReference()).isEqualTo(customerGroup.toReference());
+            client().executeBlocking(CartDeleteCommand.of(updatedCart));
+        });
     }
 
     @Test
