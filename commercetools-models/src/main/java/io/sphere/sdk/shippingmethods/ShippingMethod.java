@@ -5,9 +5,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.carts.CartShippingInfo;
-import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.zones.Zone;
 
@@ -20,7 +20,6 @@ import static java.util.stream.Collectors.toList;
 
 /**
  * Shipping Methods define where orders can be shipped and what the costs are.
- *
  *
  * @see io.sphere.sdk.shippingmethods.commands.ShippingMethodCreateCommand
  * @see io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommand
@@ -48,9 +47,9 @@ import static java.util.stream.Collectors.toList;
 @HasByIdGetEndpoint(javadocSummary = "Fetches a shipping method by ID.", includeExamples = "io.sphere.sdk.shippingmethods.queries.ShippingMethodByIdGetIntegrationTest#execution()")
 @HasCreateCommand(javadocSummary = "Creates a {@link io.sphere.sdk.shippingmethods.ShippingMethod}.", includeExamples = "io.sphere.sdk.shippingmethods.commands.ShippingMethodCreateCommandIntegrationTest#execution()")
 @HasUpdateCommand
-@HasDeleteCommand
 @HasQueryModel(additionalContents = "BooleanQueryModel<ShippingMethod> isDefault();")
 @HasUpdateActions
+@HasDeleteCommand(deleteWithKey = true)
 public interface ShippingMethod extends Resource<ShippingMethod> {
 
     @Nullable
@@ -91,8 +90,9 @@ public interface ShippingMethod extends Resource<ShippingMethod> {
 
     /**
      * A type hint for references which resource type is linked in a reference.
-     * @see Reference#getTypeId()
+     *
      * @return type hint
+     * @see Reference#getTypeId()
      */
     static String referenceTypeId() {
         return "shipping-method";
@@ -101,12 +101,11 @@ public interface ShippingMethod extends Resource<ShippingMethod> {
     /**
      * Creates a container which contains the full Java type information to deserialize this class from JSON.
      *
+     * @return type reference
      * @see io.sphere.sdk.json.SphereJsonUtils#readObject(byte[], TypeReference)
      * @see io.sphere.sdk.json.SphereJsonUtils#readObject(String, TypeReference)
      * @see io.sphere.sdk.json.SphereJsonUtils#readObject(com.fasterxml.jackson.databind.JsonNode, TypeReference)
      * @see io.sphere.sdk.json.SphereJsonUtils#readObjectFromResource(String, TypeReference)
-     *
-     * @return type reference
      */
     static TypeReference<ShippingMethod> typeReference() {
         return new TypeReference<ShippingMethod>() {
@@ -119,12 +118,12 @@ public interface ShippingMethod extends Resource<ShippingMethod> {
 
     /**
      * Creates a reference for one item of this class by a known ID.
-     *
+     * <p>
      * <p>An example for categories but this applies for other resources, too:</p>
      * {@include.example io.sphere.sdk.categories.CategoryTest#referenceOfId()}
-     *
+     * <p>
      * <p>If you already have a resource object, then use {@link #toReference()} instead:</p>
-     *
+     * <p>
      * {@include.example io.sphere.sdk.categories.CategoryTest#toReference()}
      *
      * @param id the ID of the resource which should be referenced.

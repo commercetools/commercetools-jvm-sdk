@@ -1,9 +1,8 @@
 package io.sphere.sdk.shippingmethods.commands;
 
 import com.neovisionaries.i18n.CountryCode;
-import io.sphere.sdk.client.SphereRequest;
-import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.queries.Query;
+import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.shippingmethods.ZoneRate;
@@ -122,7 +121,7 @@ public class ShippingMethodUpdateCommandIntegrationTest extends IntegrationTest 
 
                 //check reference expansion
                 final ShippingMethodByIdGet shippingMethodByIdGet = ShippingMethodByIdGet.of(shippingMethod)
-                                .plusExpansionPaths(m -> m.zoneRates().zone());
+                        .plusExpansionPaths(m -> m.zoneRates().zone());
                 final ShippingMethod loadedShippingMethod = client().executeBlocking(shippingMethodByIdGet);
                 assertThat(loadedShippingMethod.getZoneRates().get(0).getZone().getObj()).isNotNull();
                 assertThat(loadedShippingMethod.getZones().get(0).getObj())

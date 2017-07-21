@@ -22,13 +22,13 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Collections.singleton;
 
 public class ShippingMethodFixtures {
-    public static void withShippingMethod(final BlockingSphereClient client, final ShippingMethodDraft draft, final Consumer<ShippingMethod> consumer){
+    public static void withShippingMethod(final BlockingSphereClient client, final ShippingMethodDraft draft, final Consumer<ShippingMethod> consumer) {
         final ShippingMethod shippingMethod = client.executeBlocking(ShippingMethodCreateCommand.of(draft));
         consumer.accept(shippingMethod);
         client.executeBlocking(ShippingMethodDeleteCommand.of(shippingMethod));
     }
 
-    public static void withShippingMethod(final BlockingSphereClient client, final Consumer<ShippingMethod> consumer){
+    public static void withShippingMethod(final BlockingSphereClient client, final Consumer<ShippingMethod> consumer) {
         withUpdateableShippingMethod(client, consumerToFunction(consumer));
     }
 
@@ -53,12 +53,20 @@ public class ShippingMethodFixtures {
         });
     }
 
-    public static void withUpdateableShippingMethod(final BlockingSphereClient client, final Function<ShippingMethod, ShippingMethod> f){
+    public static void withUpdateableShippingMethod(final BlockingSphereClient client, final Function<ShippingMethod, ShippingMethod> f) {
         withTaxCategory(client, taxCategory -> {
             final ShippingMethodDraft draft = ShippingMethodDraft.of(randomString(), "test shipping method", taxCategory, asList());
             final ShippingMethod shippingMethod = client.executeBlocking(ShippingMethodCreateCommand.of(draft));
             final ShippingMethod possiblyUpdatedShippingMethod = f.apply(shippingMethod);
             client.executeBlocking(ShippingMethodDeleteCommand.of(possiblyUpdatedShippingMethod));
+        });
+    }
+
+    public static void withUpdateableShippingMethod(final BlockingSphereClient client, final Consumer<ShippingMethod> consumer) {
+        withTaxCategory(client, taxCategory -> {
+            final ShippingMethodDraft draft = ShippingMethodDraft.of(randomString(), "test shipping method", taxCategory, asList());
+            final ShippingMethod shippingMethod = client.executeBlocking(ShippingMethodCreateCommand.of(draft));
+            consumer.accept(shippingMethod);
         });
     }
 }
