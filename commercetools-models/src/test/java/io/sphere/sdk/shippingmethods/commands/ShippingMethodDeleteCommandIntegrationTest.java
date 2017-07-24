@@ -11,6 +11,18 @@ import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ShippingMethodDeleteCommandIntegrationTest extends IntegrationTest {
+
+    @Test
+    public void byVersioned() {
+        withUpdateableShippingMethod(client(), shippingMethod -> {
+            assertThat(shippingMethod).isNotNull();
+            final String shippingMethodId = shippingMethod.getId();
+            client().executeBlocking(ShippingMethodDeleteCommand.of(shippingMethod));
+            final ShippingMethodQuery shippingMethodQuery = ShippingMethodQuery.of().withPredicates(m -> m.id().is(shippingMethodId));
+            assertThat(client().executeBlocking(shippingMethodQuery).getCount()).isZero();
+        });
+    }
+
     @Test
     public void byKey() {
         withUpdateableShippingMethod(client(), shippingMethod -> {
