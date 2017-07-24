@@ -1,9 +1,8 @@
 package io.sphere.sdk.shippingmethods.commands;
 
 import com.neovisionaries.i18n.CountryCode;
-import io.sphere.sdk.client.SphereRequest;
-import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.queries.Query;
+import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.shippingmethods.ZoneRate;
@@ -39,6 +38,18 @@ public class ShippingMethodUpdateCommandIntegrationTest extends IntegrationTest 
             final ShippingMethodUpdateCommand cmd = ShippingMethodUpdateCommand.of(shippingMethod, SetDescription.of(newDescription));
             final ShippingMethod updatedShippingMethod = client().executeBlocking(cmd);
             assertThat(updatedShippingMethod.getDescription()).isEqualTo(newDescription);
+            return updatedShippingMethod;
+        });
+    }
+
+    @Test
+    public void setKey() throws Exception {
+        withUpdateableShippingMethod(client(), shippingMethod -> {
+            final String newKey = randomString();
+            assertThat(shippingMethod.getKey()).isNotEqualTo(newKey);
+            final ShippingMethodUpdateCommand cmd = ShippingMethodUpdateCommand.of(shippingMethod, SetKey.of(newKey));
+            final ShippingMethod updatedShippingMethod = client().executeBlocking(cmd);
+            assertThat(updatedShippingMethod.getKey()).isEqualTo(newKey);
             return updatedShippingMethod;
         });
     }
@@ -110,7 +121,7 @@ public class ShippingMethodUpdateCommandIntegrationTest extends IntegrationTest 
 
                 //check reference expansion
                 final ShippingMethodByIdGet shippingMethodByIdGet = ShippingMethodByIdGet.of(shippingMethod)
-                                .plusExpansionPaths(m -> m.zoneRates().zone());
+                        .plusExpansionPaths(m -> m.zoneRates().zone());
                 final ShippingMethod loadedShippingMethod = client().executeBlocking(shippingMethodByIdGet);
                 assertThat(loadedShippingMethod.getZoneRates().get(0).getZone().getObj()).isNotNull();
                 assertThat(loadedShippingMethod.getZones().get(0).getObj())
