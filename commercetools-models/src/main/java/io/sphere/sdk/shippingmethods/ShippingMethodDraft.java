@@ -17,6 +17,10 @@ import java.util.List;
         @FactoryMethod(parameterNames = {"name", "taxCategory", "zoneRates", "default"})
 })
 public interface ShippingMethodDraft {
+
+    @Nullable
+    String getKey();
+
     String getName();
 
     @Nullable
