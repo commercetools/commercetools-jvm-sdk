@@ -18,24 +18,12 @@ public class LineItemDraftBuilder extends LineItemDraftBuilderBase<LineItemDraft
     /**
      * Creates a new object initialized with the given values.
      *
-     * @param variantIdentifier   initial value for the {@link LineItemDraft#getProductId()} and {@link LineItemDraft#getVariantId()} properties
-     * @param quantity            initial value for the {@link LineItemDraft#getQuantity()} property
-     * @param supplyChannel       initial value for the {@link LineItemDraft#getSupplyChannel()} property
-     * @param distributionChannel initial value for the {@link LineItemDraft#getDistributionChannel()} property
-     * @param custom              initial value for the {@link LineItemDraft#getCustom()} property
-     * @param externalTaxRate     initial value for the {@link LineItemDraft#getExternalTaxRate()} property
-     * @param externalPrice       initial value for the {@link LineItemDraft#getExternalPrice()} property
-     * @param externalTotalPrice  initial value for the {@link LineItemDraft#getExternalTotalPrice()} property
+     * @param variantIdentifier initial value for the {@link LineItemDraft#getProductId()} and {@link LineItemDraft#getVariantId()} properties
+     * @param quantity          initial value for the {@link LineItemDraft#getQuantity()} property
      * @return new object initialized with the given values
      */
-    public static LineItemDraftBuilder ofVariantIdentifier(final ByIdVariantIdentifier variantIdentifier,
-                                                           @Nullable final Long quantity,
-                                                           @Nullable final Reference<Channel> supplyChannel,
-                                                           @Nullable final Reference<Channel> distributionChannel,
-                                                           @Nullable final CustomFieldsDraft custom,
-                                                           @Nullable final ExternalTaxRateDraft externalTaxRate,
-                                                           @Nullable final MonetaryAmount externalPrice,
-                                                           @Nullable final ExternalLineItemTotalPrice externalTotalPrice) {
-        return of(variantIdentifier.getProductId(), variantIdentifier.getVariantId(), quantity, supplyChannel, distributionChannel, custom, externalTaxRate, externalPrice, externalTotalPrice);
+    public static LineItemDraftBuilder ofVariantIdentifier(final ByIdVariantIdentifier variantIdentifier, @Nullable final Long quantity) {
+        return of(variantIdentifier.getProductId(), variantIdentifier.getVariantId(), quantity, null, null, null, null, null, null);
     }
+
 }

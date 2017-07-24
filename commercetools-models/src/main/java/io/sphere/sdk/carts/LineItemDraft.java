@@ -21,7 +21,7 @@ import javax.money.MonetaryAmount;
 @ResourceDraftValue(
         abstractBuilderClass = true,
         factoryMethods = {
-                @FactoryMethod(methodName = "ofSku", parameterNames = {"sku", "quantity", "supplyChannel", "distributionChannel", "custom", "externalTaxRate", "externalPrice", "externalTotalPrice"}),
+                @FactoryMethod(methodName = "ofSku", parameterNames = {"sku", "quantity"}),
                 @FactoryMethod(parameterNames = {"productId", "variantId", "quantity", "supplyChannel", "distributionChannel", "custom", "externalTaxRate", "externalPrice", "externalTotalPrice"})
         }
 )

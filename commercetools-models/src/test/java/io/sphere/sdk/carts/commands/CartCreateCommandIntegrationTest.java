@@ -75,46 +75,61 @@ public class CartCreateCommandIntegrationTest extends IntegrationTest {
                 final CustomFieldsDraft customFieldsDraft =
                         CustomFieldsDraft.ofTypeKeyAndObjects(type.getKey(), singletonMap(TypeFixtures.STRING_FIELD_NAME, "foo"));
                 withShippingMethodForGermany(client(), shippingMethod -> {
-                    withTaxedProduct(client(), product -> {
-                        final List<LineItemDraft> lineItems = singletonList(LineItemDraft.of(product, 1, 15));
+                    withTaxedProduct(client(), product1 -> {
+                        withTaxedProduct(client(), product2 -> {
+                            withTaxedProduct(client(), product3 -> {
+                                final LineItemDraft lineItemDraft1 = LineItemDraft.of(product1, 1, 15);
+                                final LineItemDraft lineItemDraft2 = LineItemDraftBuilder.ofVariantIdentifier(product2.getMasterData().getStaged().getMasterVariant().getIdentifier(), 25L).build();
+//                                final LineItemDraft lineItemDraft3 = LineItemDraftBuilder.ofVariantIdentifier(product3.getMasterData().getStaged().getMasterVariant().getIdentifier(), 25L).build();
+                                String sku = product3.getMasterData().getStaged().getMasterVariant().getSku();
+//                                final LineItemDraft lineItemDraft3 = LineItemDraftBuilder.ofSku(sku, 35L).build();
+                                final List<LineItemDraft> lineItems = asList(lineItemDraft1, lineItemDraft2/*, lineItemDraft3*/);
 
-                        final List<CustomLineItemDraft> customLineItems = singletonList(CustomLineItemDraft.of(randomSlug(), "foo-bar", EURO_5, product.getTaxCategory(), 1L, null));
 
-                        final CartDraft cartDraft = CartDraft.of(EUR)
-                                .withCountry(DE)
-                                .withLocale(Locale.GERMAN)
-                                .withCustomerId(customerId)
-                                .withCustomerEmail(customerEmail)
-                                .withLineItems(lineItems)
-                                .withCustomLineItems(customLineItems)
-                                .withBillingAddress(billingAddress)
-                                .withShippingAddress(shippingAddress)
-                                .withShippingMethod(shippingMethod)
-                                .withCustom(customFieldsDraft);
-                        final CartCreateCommand cartCreateCommand = CartCreateCommand.of(cartDraft)
-                                .plusExpansionPaths(m -> m.lineItems().productType());
-                        final Cart cart = client().executeBlocking(cartCreateCommand);
+                                final List<CustomLineItemDraft> customLineItems = singletonList(CustomLineItemDraft.of(randomSlug(), "foo-bar", EURO_5, product1.getTaxCategory(), 1L, null));
 
-                        softAssert(s -> {
-                            s.assertThat(cart.getCountry()).isEqualTo(DE);
-                            s.assertThat(cart.getLocale()).isEqualTo(Locale.GERMAN);
-                            s.assertThat(cart.getTotalPrice().getCurrency()).isEqualTo(EUR);
-                            s.assertThat(cart.getCurrency()).isEqualTo(EUR);
-                            s.assertThat(cart.getCustomerId()).isEqualTo(customerId);
-                            s.assertThat(cart.getCustomerEmail()).isEqualTo(customerEmail);
-                            final LineItem lineItem = cart.getLineItems().get(0);
-                            s.assertThat(lineItem.getProductId()).isEqualTo(product.getId());
-                            s.assertThat(lineItem.getQuantity()).isEqualTo(15);
-                            s.assertThat(lineItem.getProductType()).isEqualTo(product.getProductType());
-                            s.assertThat(lineItem.getProductType().getObj()).isNotNull();
-                            s.assertThat(cart.getCustomLineItems().get(0).getSlug()).isEqualTo("foo-bar");
-                            s.assertThat(cart.getBillingAddress()).isEqualTo(billingAddress);
-                            s.assertThat(cart.getShippingAddress()).isEqualTo(shippingAddress);
-                            s.assertThat(cart.getCustom().getFieldsJsonMap()).isEqualTo(customFieldsDraft.getFields());
+                                final CartDraft cartDraft = CartDraft.of(EUR)
+                                        .withCountry(DE)
+                                        .withLocale(Locale.GERMAN)
+                                        .withCustomerId(customerId)
+                                        .withCustomerEmail(customerEmail)
+                                        .withLineItems(lineItems)
+                                        .withCustomLineItems(customLineItems)
+                                        .withBillingAddress(billingAddress)
+                                        .withShippingAddress(shippingAddress)
+                                        .withShippingMethod(shippingMethod)
+                                        .withCustom(customFieldsDraft);
+                                final CartCreateCommand cartCreateCommand = CartCreateCommand.of(cartDraft)
+                                        .plusExpansionPaths(m -> m.lineItems().productType());
+                                final Cart cart = client().executeBlocking(cartCreateCommand);
+
+                                softAssert(s -> {
+                                    s.assertThat(cart.getCountry()).isEqualTo(DE);
+                                    s.assertThat(cart.getLocale()).isEqualTo(Locale.GERMAN);
+                                    s.assertThat(cart.getTotalPrice().getCurrency()).isEqualTo(EUR);
+                                    s.assertThat(cart.getCurrency()).isEqualTo(EUR);
+                                    s.assertThat(cart.getCustomerId()).isEqualTo(customerId);
+                                    s.assertThat(cart.getCustomerEmail()).isEqualTo(customerEmail);
+                                    s.assertThat(cart.getLineItems()).hasSize(2);
+                                    final LineItem lineItem1 = cart.getLineItems().get(0);
+                                    s.assertThat(lineItem1.getProductId()).isEqualTo(product1.getId());
+                                    s.assertThat(lineItem1.getQuantity()).isEqualTo(15);
+                                    s.assertThat(lineItem1.getProductType()).isEqualTo(product1.getProductType());
+                                    s.assertThat(lineItem1.getProductType().getObj()).isNotNull();
+
+                                    final LineItem lineItem2 = cart.getLineItems().get(1);
+                                    s.assertThat(lineItem2.getProductId()).isEqualTo(product2.getId());
+
+                                    s.assertThat(cart.getCustomLineItems().get(0).getSlug()).isEqualTo("foo-bar");
+                                    s.assertThat(cart.getBillingAddress()).isEqualTo(billingAddress);
+                                    s.assertThat(cart.getShippingAddress()).isEqualTo(shippingAddress);
+                                    s.assertThat(cart.getCustom().getFieldsJsonMap()).isEqualTo(customFieldsDraft.getFields());
+                                });
+
+                                //cleanup
+                                client().executeBlocking(CartDeleteCommand.of(cart));
+                            });
                         });
-
-                        //cleanup
-                        client().executeBlocking(CartDeleteCommand.of(cart));
                     });
                 });
                 return type;
@@ -145,31 +160,31 @@ public class CartCreateCommandIntegrationTest extends IntegrationTest {
             withType(client(),
                     typeBuilder -> typeBuilder.key("json-demo-type-key").fieldDefinitions(singletonList(FieldDefinition.of(StringFieldType.of(), "stringField", randomSlug(), true))),
                     type -> {
-                referenceResolver.addResourceByKey("sample-product", product);
-                referenceResolver.addResourceByKey("standard-tax", product.getTaxCategory());
-                final CartDraft cartDraft = draftFromJsonResource("drafts-tests/cart.json", CartDraft.class, referenceResolver);
+                        referenceResolver.addResourceByKey("sample-product", product);
+                        referenceResolver.addResourceByKey("standard-tax", product.getTaxCategory());
+                        final CartDraft cartDraft = draftFromJsonResource("drafts-tests/cart.json", CartDraft.class, referenceResolver);
 
-                final Cart cart = client().executeBlocking(CartCreateCommand.of(cartDraft));
+                        final Cart cart = client().executeBlocking(CartCreateCommand.of(cartDraft));
 
-                assertThat(cart.getCurrency()).isEqualTo(EUR);
-                assertThat(cart.getCountry()).isEqualTo(CountryCode.DE);
-                assertThat(cart.getInventoryMode()).isEqualTo(InventoryMode.TRACK_ONLY);
-                final LineItem lineItem = cart.getLineItems().get(0);
-                assertThat(lineItem.getProductId()).isEqualTo(product.getId());
-                assertThat(lineItem.getVariant().getId()).isEqualTo(1);
-                assertThat(lineItem.getQuantity()).isEqualTo(2);
-                final CustomLineItem customLineItem = cart.getCustomLineItems().get(0);
-                assertThat(customLineItem.getName().get(Locale.ENGLISH)).isEqualTo("a custom line item");
-                assertThat(customLineItem.getQuantity()).isEqualTo(3);
-                assertThat(customLineItem.getMoney()).isEqualTo(EURO_20);
-                assertThat(customLineItem.getSlug()).isEqualTo("foo");
-                assertThat(customLineItem.getTaxCategory()).isEqualTo(product.getTaxCategory());
+                        assertThat(cart.getCurrency()).isEqualTo(EUR);
+                        assertThat(cart.getCountry()).isEqualTo(CountryCode.DE);
+                        assertThat(cart.getInventoryMode()).isEqualTo(InventoryMode.TRACK_ONLY);
+                        final LineItem lineItem = cart.getLineItems().get(0);
+                        assertThat(lineItem.getProductId()).isEqualTo(product.getId());
+                        assertThat(lineItem.getVariant().getId()).isEqualTo(1);
+                        assertThat(lineItem.getQuantity()).isEqualTo(2);
+                        final CustomLineItem customLineItem = cart.getCustomLineItems().get(0);
+                        assertThat(customLineItem.getName().get(Locale.ENGLISH)).isEqualTo("a custom line item");
+                        assertThat(customLineItem.getQuantity()).isEqualTo(3);
+                        assertThat(customLineItem.getMoney()).isEqualTo(EURO_20);
+                        assertThat(customLineItem.getSlug()).isEqualTo("foo");
+                        assertThat(customLineItem.getTaxCategory()).isEqualTo(product.getTaxCategory());
                         final Address expectedAddress = Address.of(DE).withLastName("Osgood").withFax("0300000000");
                         assertThat(cart.getShippingAddress()).isEqualTo(expectedAddress);
-                assertThat(cart.getCustom().getFieldAsString("stringField")).isEqualTo("bar");
+                        assertThat(cart.getCustom().getFieldAsString("stringField")).isEqualTo("bar");
 
-                client().executeBlocking(CartDeleteCommand.of(cart));
-            });
+                        client().executeBlocking(CartDeleteCommand.of(cart));
+                    });
         });
 
     }
