@@ -12,7 +12,6 @@ import static java.util.Objects.requireNonNull;
 
 /**
  * Draft for {@link CustomFields}.
- *
  * @see CustomFieldsDraftBuilder
  */
 @JsonDeserialize(as = CustomFieldsDraftImpl.class)
