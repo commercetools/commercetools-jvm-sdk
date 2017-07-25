@@ -72,7 +72,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>${maven-jar-plugin.version}</version>
-
                 <executions>
                     <execution>
                         <goals>
@@ -89,6 +88,7 @@
                 <version>${felix.maven.version}</version>
                 <extensions>true</extensions>
                 <configuration>
+                    <niceManifest>true</niceManifest>
                     <instructions>
                         <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
                         <Export-Package>
@@ -230,6 +230,7 @@
                         </Export-Package>
                         <Import-Package>!javax.annotation,*</Import-Package>
                         <Bundle-Version>${project.version}</Bundle-Version>
+                        <Fragment-Host>${project.groupId}.commercetools-sdk-base</Fragment-Host>
                     </instructions>
                 </configuration>
             </plugin>

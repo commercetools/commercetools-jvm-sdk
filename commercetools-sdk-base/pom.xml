@@ -131,6 +131,7 @@
                             io.sphere.sdk.commands,
                             io.sphere.sdk.expansion,
                             io.sphere.sdk.json,
+                            io.sphere.sdk.http,
                             io.sphere.sdk.meta,
                             io.sphere.sdk.models,
                             io.sphere.sdk.models.errors,

@@ -11,14 +11,10 @@
     <artifactId>osgi-support</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>commercetools-sdk-base-tests-fragment</module>
-        <module>sdk-http-tests-fragment</module>
         <module>sdk-osgi-test-campaign</module>
-        <module>commercetools-java-client-apache-async-tests-fragment</module>
+        <module>commercetools-tests-fragment</module>
         <module>commercetools-models-tests-fragment</module>
-        <module>commercetools-java-client-core-tests-fragment</module>
-        <!--For test purposes only-->
-        <module>commercetools-unbandled-osgi-dependencies</module>
+        <module>mirror-subclass-plugin</module>
     </modules>
     <properties>
         <reflections.version>0.9.11</reflections.version>

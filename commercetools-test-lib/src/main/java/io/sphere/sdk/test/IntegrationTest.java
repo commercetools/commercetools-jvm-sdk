@@ -3,7 +3,6 @@ package io.sphere.sdk.test;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import io.sphere.sdk.client.*;
-import io.sphere.sdk.http.AsyncHttpClientAdapter;
 import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpResponse;
@@ -14,9 +13,6 @@ import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 import org.assertj.core.api.Condition;
 import org.assertj.core.api.SoftAssertions;
-import org.asynchttpclient.AsyncHttpClient;
-import org.asynchttpclient.DefaultAsyncHttpClient;
-import org.asynchttpclient.DefaultAsyncHttpClientConfig;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
@@ -108,8 +104,7 @@ public abstract class IntegrationTest {
     }
 
     protected static HttpClient newHttpClient() {
-        final AsyncHttpClient asyncHttpClient = new DefaultAsyncHttpClient(new DefaultAsyncHttpClientConfig.Builder().setAcceptAnyCertificate(true).build());
-        return AsyncHttpClientAdapter.of(asyncHttpClient);
+        return SphereClientFactory.of().createHttpClient();
     }
 
     protected static String accessToken() {

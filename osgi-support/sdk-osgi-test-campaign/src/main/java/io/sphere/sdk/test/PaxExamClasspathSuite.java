@@ -1,7 +1,6 @@
 
-package test;
+package io.sphere.sdk.test;
 
-import org.junit.Test;
 import org.junit.extensions.cpsuite.ClassesFinder;
 import org.junit.extensions.cpsuite.ClassesFinderFactory;
 import org.junit.extensions.cpsuite.ClasspathFinderFactory;
@@ -10,11 +9,8 @@ import org.junit.runner.Runner;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.Suite;
-import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.RunnerBuilder;
-import org.reflections.Reflections;
-import org.reflections.scanners.MethodAnnotationsScanner;
-import org.reflections.scanners.TypeElementsScanner;
+import org.ops4j.pax.exam.junit.impl.ProbeRunner;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -35,50 +31,49 @@ public class PaxExamClasspathSuite extends Suite {
     private static final String DEFAULT_CLASSPATH_PROPERTY = "java.class.path";
     private final Class<?> suiteClass;
 
+
+    private static String TEST_SUFFIX = "osgi";
     /**
      * Used by JUnit
      */
-    public PaxExamClasspathSuite(Class<?> suiteClass, RunnerBuilder builder) throws InitializationError, InstantiationException, IllegalAccessException {
+    public PaxExamClasspathSuite(final Class<?> suiteClass, final RunnerBuilder builder) throws Exception {
         this(suiteClass, builder, new ClasspathFinderFactory());
     }
 
     /**
      * For testing purposes only
      */
-    public PaxExamClasspathSuite(Class<?> suiteClass, RunnerBuilder builder, ClassesFinderFactory factory) throws InitializationError, InstantiationException, IllegalAccessException {
-        super(suiteClass, setPaxExamRunnerForTestSuitClasses(getSortedTestclasses(createFinder(suiteClass, factory)), suiteClass));
+    public PaxExamClasspathSuite(final Class<?> suiteClass,final  RunnerBuilder builder,final  ClassesFinderFactory factory) throws Exception {
+        super(suiteClass, setPaxExamRunnerForTestSuitClasses(getSortedTestclasses(createFinder(suiteClass, factory))));
         this.suiteClass = suiteClass;
     }
 
-    private static List<Runner> setPaxExamRunnerForTestSuitClasses(final Class<?>[] classes, Class testSuiteClass) throws InitializationError, InstantiationException, IllegalAccessException {
+    private static List<Runner> setPaxExamRunnerForTestSuitClasses(final Class<?>[] classes) throws Exception {
         List<Runner> runners = new ArrayList<>();
         for (Class clazz : classes) {
-            runners.add(new CustomProbeRunner(clazz, testSuiteClass));
+            if(clazz.getSimpleName().startsWith("___") ){
+                runners.add(new ProbeRunner(clazz));
+            }
         }
         return runners;
     }
 
-
-    private static ClassesFinder createFinder(Class<?> suiteClass, ClassesFinderFactory finderFactory) {
+    private static ClassesFinder createFinder(final Class<?> suiteClass,final  ClassesFinderFactory finderFactory) {
         return finderFactory.create(getSearchInJars(suiteClass), getClassnameFilters(suiteClass), getSuiteTypes(suiteClass),
                 getBaseTypes(suiteClass), getExcludedBaseTypes(suiteClass), getClasspathProperty(suiteClass));
     }
 
-    private static Class<?>[] getSortedTestclasses(ClassesFinder finder) {
+    private static Class<?>[] getSortedTestclasses(final ClassesFinder finder) {
         List<Class<?>> testclasses = finder.find();
         Collections.sort(testclasses, getClassComparator());
         return testclasses.toArray(new Class[testclasses.size()]);
     }
 
     private static Comparator<Class<?>> getClassComparator() {
-        return new Comparator<Class<?>>() {
-            public int compare(Class<?> o1, Class<?> o2) {
-                return o1.getName().compareTo(o2.getName());
-            }
-        };
+        return Comparator.comparing(Class::getName);
     }
 
-    private static String[] getClassnameFilters(Class<?> suiteClass) {
+    private static String[] getClassnameFilters(final Class<?> suiteClass) {
         ClassnameFilters filtersAnnotation = suiteClass.getAnnotation(ClassnameFilters.class);
         if (filtersAnnotation == null) {
             return DEFAULT_CLASSNAME_FILTERS;
@@ -86,7 +81,7 @@ public class PaxExamClasspathSuite extends Suite {
         return filtersAnnotation.value();
     }
 
-    private static boolean getSearchInJars(Class<?> suiteClass) {
+    private static boolean getSearchInJars(final Class<?> suiteClass) {
         IncludeJars includeJarsAnnotation = suiteClass.getAnnotation(IncludeJars.class);
         if (includeJarsAnnotation == null) {
             return DEFAULT_INCLUDE_JARS;
@@ -94,7 +89,7 @@ public class PaxExamClasspathSuite extends Suite {
         return includeJarsAnnotation.value();
     }
 
-    private static SuiteType[] getSuiteTypes(Class<?> suiteClass) {
+    private static SuiteType[] getSuiteTypes(final Class<?> suiteClass) {
         SuiteTypes suiteTypesAnnotation = suiteClass.getAnnotation(SuiteTypes.class);
         if (suiteTypesAnnotation == null) {
             return DEFAULT_SUITE_TYPES;
@@ -102,7 +97,7 @@ public class PaxExamClasspathSuite extends Suite {
         return suiteTypesAnnotation.value();
     }
 
-    private static Class<?>[] getBaseTypes(Class<?> suiteClass) {
+    private static Class<?>[] getBaseTypes(final Class<?> suiteClass) {
         BaseTypeFilter baseTypeAnnotation = suiteClass.getAnnotation(BaseTypeFilter.class);
         if (baseTypeAnnotation == null) {
             return DEFAULT_BASE_TYPES;
@@ -110,7 +105,7 @@ public class PaxExamClasspathSuite extends Suite {
         return baseTypeAnnotation.value();
     }
 
-    private static Class<?>[] getExcludedBaseTypes(Class<?> suiteClass) {
+    private static Class<?>[] getExcludedBaseTypes(final Class<?> suiteClass) {
         ExcludeBaseTypeFilter excludeBaseTypeAnnotation = suiteClass.getAnnotation(ExcludeBaseTypeFilter.class);
         if (excludeBaseTypeAnnotation == null) {
             return DEFAULT_EXCLUDED_BASES_TYPES;
@@ -118,7 +113,7 @@ public class PaxExamClasspathSuite extends Suite {
         return excludeBaseTypeAnnotation.value();
     }
 
-    private static String getClasspathProperty(Class<?> suiteClass) {
+    private static String getClasspathProperty(final Class<?> suiteClass) {
         ClasspathProperty cpPropertyAnnotation = suiteClass.getAnnotation(ClasspathProperty.class);
         if (cpPropertyAnnotation == null) {
             return DEFAULT_CLASSPATH_PROPERTY;
@@ -127,7 +122,7 @@ public class PaxExamClasspathSuite extends Suite {
     }
 
     @Override
-    public void run(RunNotifier notifier) {
+    public void run(final RunNotifier notifier) {
         try {
             runBeforeMethods();
         } catch (Exception e) {
@@ -147,7 +142,7 @@ public class PaxExamClasspathSuite extends Suite {
         }
     }
 
-    private boolean isPublicStaticVoid(Method method) {
+    private boolean isPublicStaticVoid(final Method method) {
         return method.getReturnType() == void.class && method.getParameterTypes().length == 0
                 && (method.getModifiers() & Modifier.STATIC) != 0;
     }

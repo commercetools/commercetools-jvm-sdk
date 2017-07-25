@@ -12,11 +12,6 @@
     <artifactId>sdk-osgi-test-campaign</artifactId>
     <dependencies>
         <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.core</artifactId>
-            <version>6.0.0</version>
-        </dependency>
-        <dependency>
             <groupId>org.ops4j.pax.exam</groupId>
             <artifactId>pax-exam-junit4</artifactId>
             <version>${pax-exam.version}</version>
@@ -61,17 +56,7 @@
             <artifactId>takari-cpsuite</artifactId>
             <version>1.2.7</version>
         </dependency>
-        <dependency>
-            <groupId>org.reflections</groupId>
-            <artifactId>reflections</artifactId>
-            <version>0.9.11</version>
-        </dependency>
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <version>${assertj.version}</version>
-            <scope>test</scope>
-        </dependency>
+
 
         <dependency>
             <groupId>org.ops4j.pax.exam</groupId>
@@ -117,27 +102,11 @@
         </dependency>
 
         <dependency>
-            <groupId>com.google.code.findbugs</groupId>
-            <artifactId>jsr305</artifactId>
-            <version>3.0.1</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>javax.annotation</groupId>
-                    <artifactId>javax.annotation-api</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.3.1</version>
         </dependency>
-        <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax.inject</artifactId>
-            <version>1</version>
-        </dependency>
+
 
 
 
@@ -199,40 +168,19 @@
         </dependency>
         <dependency>
             <groupId>com.commercetools.sdk.jvm.core</groupId>
-            <artifactId>commercetools-sdk-base-tests-fragment</artifactId>
+            <artifactId>commercetools-tests-fragment</artifactId>
             <version>1.20.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.commercetools.sdk.jvm.core</groupId>
-            <artifactId>sdk-http-tests-fragment</artifactId>
-            <version>1.20.1-SNAPSHOT</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.commercetools.sdk.jvm.core</groupId>
-                    <artifactId>sdk-http</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>com.commercetools.sdk.jvm.core</groupId>
-            <artifactId>commercetools-java-client-core-tests-fragment</artifactId>
+            <artifactId>commercetools-models-tests-fragment</artifactId>
             <version>1.20.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.commercetools.sdk.jvm.core</groupId>
-            <artifactId>commercetools-java-client-apache-async-tests-fragment</artifactId>
+            <artifactId>commercetools-test-lib</artifactId>
             <version>1.20.1-SNAPSHOT</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>com.commercetools.sdk.jvm.core</groupId>-->
-            <!--<artifactId>commercetools-models-fragment</artifactId>-->
-            <!--<version>1.20.1-SNAPSHOT</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>com.commercetools.sdk.jvm.core</groupId>-->
-            <!--<artifactId>commercetools-test-lib</artifactId>-->
-            <!--<version>1.20.1-SNAPSHOT</version>-->
-        <!--</dependency>-->
         <!--<dependency>-->
             <!--<groupId>com.commercetools.sdk.jvm.core</groupId>-->
             <!--<artifactId>commercetools-unbandled-osgi-dependencies</artifactId>-->

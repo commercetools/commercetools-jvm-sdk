@@ -19,12 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>commercetools-java-client</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>commercetools-sdk-base</artifactId>
+            <artifactId>commercetools-java-client-core</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -47,20 +42,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>${maven-jar-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>
-                                test-jar
-                            </goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
                 <version>${felix.maven.version}</version>
@@ -68,9 +49,10 @@
                 <configuration>
                     <instructions>
                         <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
-                        <Export-Package>io.sphere.sdk.*</Export-Package>
+                        <Export-Package>io.sphere.sdk.test</Export-Package>
                         <Import-Package>!javax.annotation,*</Import-Package>
                         <Bundle-Version>${project.version}</Bundle-Version>
+                        <Fragment-Host>${project.groupId}.commercetools-sdk-base</Fragment-Host>
                     </instructions>
                 </configuration>
             </plugin>
