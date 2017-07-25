@@ -84,7 +84,6 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
                     io.sphere.sdk.carts.LineItemDraftBuilder.ofSku(sku, quantity)
                             .distributionChannel(distributionChannel)
                             .supplyChannel(inventorySupplyChannel)
-                            .externalPrice(EURO_1)
                             .build();
 
             final AddLineItem action = AddLineItem.of(lineItemDraft);
@@ -96,6 +95,38 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(lineItem.getQuantity()).isEqualTo(quantity);
             assertThat(lineItem.getProductSlug()).isEqualTo(product.getMasterData().getStaged().getSlug());
             assertThat(lineItem.getVariant().getIdentifier()).isEqualTo(ByIdVariantIdentifier.of(lineItem.getProductId(), lineItem.getVariant().getId()));
+            assertThat(lineItem.getSupplyChannel().toReference()).isEqualTo(inventorySupplyChannel.toReference());
+            assertThat(lineItem.getDistributionChannel().toReference()).isEqualTo(distributionChannel.toReference());
+            assertThat(lineItem.getDiscountedPricePerQuantity()).isNotNull().isEmpty();
+        });
+    }
+
+    @Test
+    public void addLineItemOfDraftOfVariantIdentifier() throws Exception {
+        withEmptyCartAndProduct(client(), (cart, product) -> {
+            assertThat(cart.getLineItems()).isEmpty();
+            final long quantity = 3;
+            final Channel inventorySupplyChannel = ChannelFixtures.persistentChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY);
+            final Channel distributionChannel = ChannelFixtures.persistentChannelOfRole(client(), ChannelRole.PRODUCT_DISTRIBUTION);
+
+            ByIdVariantIdentifier variantIdentifier = product.getMasterData().getStaged().getMasterVariant().getIdentifier();
+            final LineItemDraft lineItemDraft =
+                    io.sphere.sdk.carts.LineItemDraftBuilder.ofVariantIdentifier(variantIdentifier, quantity)
+                            .distributionChannel(distributionChannel)
+                            .supplyChannel(inventorySupplyChannel)
+                            .build();
+
+            final AddLineItem action = AddLineItem.of(lineItemDraft);
+
+            final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, action));
+            assertThat(updatedCart.getLineItems()).hasSize(1);
+            final LineItem lineItem = updatedCart.getLineItems().get(0);
+            assertThat(lineItem.getName()).isEqualTo(product.getMasterData().getStaged().getName());
+            assertThat(lineItem.getQuantity()).isEqualTo(quantity);
+            assertThat(lineItem.getProductSlug()).isEqualTo(product.getMasterData().getStaged().getSlug());
+            assertThat(lineItem.getVariant().getIdentifier()).isEqualTo(ByIdVariantIdentifier.of(lineItem.getProductId(), lineItem.getVariant().getId()));
+            assertThat(lineItem.getSupplyChannel().toReference()).isEqualTo(inventorySupplyChannel.toReference());
+            assertThat(lineItem.getDistributionChannel().toReference()).isEqualTo(distributionChannel.toReference());
             assertThat(lineItem.getDiscountedPricePerQuantity()).isNotNull().isEmpty();
         });
     }
