@@ -79,12 +79,10 @@ public class CartCreateCommandIntegrationTest extends IntegrationTest {
                         withTaxedProduct(client(), product2 -> {
                             withTaxedProduct(client(), product3 -> {
                                 final LineItemDraft lineItemDraft1 = LineItemDraft.of(product1, 1, 15);
-                                final LineItemDraft lineItemDraft2 = LineItemDraftBuilder.ofVariantIdentifier(product2.getMasterData().getStaged().getMasterVariant().getIdentifier(), 25L).build();
-//                                final LineItemDraft lineItemDraft3 = LineItemDraftBuilder.ofVariantIdentifier(product3.getMasterData().getStaged().getMasterVariant().getIdentifier(), 25L).build();
+                                final LineItemDraft lineItemDraftOfVariantIdentifier = LineItemDraftBuilder.ofVariantIdentifier(product2.getMasterData().getStaged().getMasterVariant().getIdentifier(), 25L).build();
                                 String sku = product3.getMasterData().getStaged().getMasterVariant().getSku();
-//                                final LineItemDraft lineItemDraft3 = LineItemDraftBuilder.ofSku(sku, 35L).build();
-                                final List<LineItemDraft> lineItems = asList(lineItemDraft1, lineItemDraft2/*, lineItemDraft3*/);
-
+                                final LineItemDraft lineItemDraftOfSku = LineItemDraftBuilder.ofSku(sku, 35L).build();
+                                final List<LineItemDraft> lineItems = asList(lineItemDraft1, lineItemDraftOfVariantIdentifier, lineItemDraftOfSku);
 
                                 final List<CustomLineItemDraft> customLineItems = singletonList(CustomLineItemDraft.of(randomSlug(), "foo-bar", EURO_5, product1.getTaxCategory(), 1L, null));
 
@@ -110,7 +108,7 @@ public class CartCreateCommandIntegrationTest extends IntegrationTest {
                                     s.assertThat(cart.getCurrency()).isEqualTo(EUR);
                                     s.assertThat(cart.getCustomerId()).isEqualTo(customerId);
                                     s.assertThat(cart.getCustomerEmail()).isEqualTo(customerEmail);
-                                    s.assertThat(cart.getLineItems()).hasSize(2);
+                                    s.assertThat(cart.getLineItems()).hasSize(3);
                                     final LineItem lineItem1 = cart.getLineItems().get(0);
                                     s.assertThat(lineItem1.getProductId()).isEqualTo(product1.getId());
                                     s.assertThat(lineItem1.getQuantity()).isEqualTo(15);
@@ -119,6 +117,12 @@ public class CartCreateCommandIntegrationTest extends IntegrationTest {
 
                                     final LineItem lineItem2 = cart.getLineItems().get(1);
                                     s.assertThat(lineItem2.getProductId()).isEqualTo(product2.getId());
+                                    s.assertThat(lineItem2.getVariant().getId()).isEqualTo(product2.getMasterData().getStaged().getMasterVariant().getId());
+
+                                    final LineItem lineItem3 = cart.getLineItems().get(2);
+                                    s.assertThat(lineItem3.getProductId()).isEqualTo(product3.getId());
+                                    s.assertThat(lineItem3.getVariant().getId()).isEqualTo(product3.getMasterData().getStaged().getMasterVariant().getId());
+                                    s.assertThat(lineItem3.getVariant().getSku()).isEqualTo(product3.getMasterData().getStaged().getMasterVariant().getSku());
 
                                     s.assertThat(cart.getCustomLineItems().get(0).getSlug()).isEqualTo("foo-bar");
                                     s.assertThat(cart.getBillingAddress()).isEqualTo(billingAddress);
