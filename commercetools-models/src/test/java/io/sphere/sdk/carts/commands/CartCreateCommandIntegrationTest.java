@@ -4,6 +4,7 @@ import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.carts.queries.CartQuery;
 import io.sphere.sdk.models.Address;
+import io.sphere.sdk.products.BySkuVariantIdentifier;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.JsonNodeReferenceResolver;
 import io.sphere.sdk.types.CustomFieldsDraft;
@@ -81,7 +82,7 @@ public class CartCreateCommandIntegrationTest extends IntegrationTest {
                                 final LineItemDraft lineItemDraft1 = LineItemDraft.of(product1, 1, 15);
                                 final LineItemDraft lineItemDraftOfVariantIdentifier = LineItemDraftBuilder.ofVariantIdentifier(product2.getMasterData().getStaged().getMasterVariant().getIdentifier(), 25L).build();
                                 String sku = product3.getMasterData().getStaged().getMasterVariant().getSku();
-                                final LineItemDraft lineItemDraftOfSku = LineItemDraftBuilder.ofSku(sku, 35L).build();
+                                final LineItemDraft lineItemDraftOfSku = LineItemDraftBuilder.ofSkuVariantIdentifier(BySkuVariantIdentifier.of(sku), 35L).build();
                                 final List<LineItemDraft> lineItems = asList(lineItemDraft1, lineItemDraftOfVariantIdentifier, lineItemDraftOfSku);
 
                                 final List<CustomLineItemDraft> customLineItems = singletonList(CustomLineItemDraft.of(randomSlug(), "foo-bar", EURO_5, product1.getTaxCategory(), 1L, null));
