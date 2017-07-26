@@ -141,8 +141,8 @@ import java.util.function.Function;
  <li class=new-in-release>Added {@link io.sphere.sdk.customers.queries.CustomerByEmailTokenGet} to retrieve a customer by email token.</li>
  <li class=new-in-release>Added {@link io.sphere.sdk.producttypes.commands.updateactions.SetInputTip} update action.</li>
  <li class=fixed-in-release>{@link io.sphere.sdk.customers.queries.CustomerByPasswordTokenGet} now uses the new endpoint.</li>
- <li class=change-in-release>Changed type of {@link ProductDraft#getCategories()} from Set&lt;Reference&lt;Category&gt;&gt;&gt; to Set&lt;ResourceIdentifier&lt;Category&gt;&gt;.
- This breaking change may require an update of your source code, depending on how you use thie {@link ProductDraft} type.
+ <li class=change-in-release>Changed type of {@link ProductDraft#getCategories()} from Set&lt;Reference&lt;Category&gt;&gt; to Set&lt;ResourceIdentifier&lt;Category&gt;&gt;.
+ This breaking change may require an update of your source code, depending on how you use the {@link ProductDraft} type.
  The previously returned {@link Reference} instances provided a {@link Reference#getObj()} method
  that is not available from {@link ResourceIdentifier}. If you relied on the {@link Reference#getObj()} method to retrieve the id or key of the referenced object, you now have
  to use the {@link ResourceIdentifier#getId()} and {@link ResourceIdentifier#getKey()} as exposed by the {@link ResourceIdentifier} interface.
