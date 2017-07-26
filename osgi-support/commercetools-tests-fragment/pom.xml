@@ -70,7 +70,7 @@
                         <Export-Package>io.sphere.sdk.*</Export-Package>
                         <Import-Package>!javax.annotation,*</Import-Package>
                         <Bundle-Version>${project.version}</Bundle-Version>
-                        <Embed-Dependency>*;scope=compile|runtime;inline=!META-INF/**;
+                        <Embed-Dependency>*;scope=compile|runtime;inline=!META-INF/*;
                             artifactId=
                                 commercetools-java-client-apache-async
                                 |commercetools-java-client-core

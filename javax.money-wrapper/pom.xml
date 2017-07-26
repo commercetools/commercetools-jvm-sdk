@@ -59,7 +59,7 @@
                             osgi.serviceloader;
                             filter:="(osgi.serviceloader=org.javamoney.moneta.spi.LoaderService)"; cardinality:=multiple,
                         </Require-Capability>
-                        <Embed-Dependency>*;scope=compile|runtime;inline=!META-INF/**;artifactId=money-api</Embed-Dependency>
+                        <Embed-Dependency>*;scope=compile|runtime;inline=!META-INF/*;artifactId=money-api</Embed-Dependency>
                     </instructions>
                 </configuration>
             </plugin>

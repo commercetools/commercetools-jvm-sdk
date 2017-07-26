@@ -73,7 +73,7 @@
                             osgi.serviceloader;
                             osgi.serviceloader="org.javamoney.moneta.spi.LoaderService"
                         </Provide-Capability>
-                        <Embed-Dependency>*;scope=compile|runtime;inline=!META-INF/**;artifactId=moneta</Embed-Dependency>
+                        <Embed-Dependency>*;scope=compile|runtime;inline=!META-INF/*;artifactId=moneta</Embed-Dependency>
                         <Include-Resource>{maven-resources} </Include-Resource>
                     </instructions>
                 </configuration>

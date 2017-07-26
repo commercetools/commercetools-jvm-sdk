@@ -156,14 +156,16 @@
 
                         </Export-Package>
                         <Import-Package>
+
                             !javax.annotation,
                             !com.amazonaws.*,
                             !com.microsoft.*,
                             !net.jcip.annotations.*,
                             *
+
                         </Import-Package>
                         <Bundle-Version>${project.version}</Bundle-Version>
-                        <Embed-Dependency>*;scope=compile|runtime;inline=META-INF/services/**,!META-INF/**;artifactId=commercetools-models</Embed-Dependency>
+                        <Embed-Dependency>*;scope=compile|runtime;inline=true;artifactId=commercetools-models</Embed-Dependency>
                     </instructions>
                 </configuration>
             </plugin>
