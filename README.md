@@ -124,9 +124,9 @@ apiUrl=https://api.sphere.io
 authUrl=https://auth.sphere.io
 ```
 
-1. use `mvn verify` to execute all integration tests
-1. use `mvn -Dit.test=*Product* -DfailIfNoTests=false verify` to execute all integration test classes which have "Product" in the class name
-1. for running the unit tests use `mvn test`
+1. use `./mvnw verify` to execute all integration tests
+1. use `./mvnw -Dit.test=*Product* -DfailIfNoTests=false verify` to execute all integration test classes which have "Product" in the class name
+1. for running the unit tests use `./mvnw test`
 1. alternatively use your IDE to execute the tests
 1. for some IDEs like IntelliJ IDEA you need to add the Javac flag "-parameters", then also rebuild the whole project to apply the change
 
