@@ -9,16 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <packaging>bundle</packaging>
-
     <artifactId>javax.money-wrapper</artifactId>
-    <dependencies>
-
-        <dependency>
-            <groupId>javax.money</groupId>
-            <artifactId>money-api</artifactId>
-            <version>1.0.1</version>
-        </dependency>
-    </dependencies>
     <build>
         <plugins>
             <plugin>
@@ -59,7 +50,6 @@
                             osgi.serviceloader;
                             filter:="(osgi.serviceloader=org.javamoney.moneta.spi.LoaderService)"; cardinality:=multiple,
                         </Require-Capability>
-                        <Embed-Dependency>*;scope=compile|runtime;inline=!META-INF/*;artifactId=money-api</Embed-Dependency>
                     </instructions>
                 </configuration>
             </plugin>

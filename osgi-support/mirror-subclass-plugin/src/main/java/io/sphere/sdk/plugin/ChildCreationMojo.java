@@ -89,7 +89,7 @@ public class ChildCreationMojo extends AbstractMojo {
             String newClassName = stringBuilder.insert(className.lastIndexOf(".")+1,childClassPrefix).toString();
             CtClass child = pool.makeClass(newClassName );
             child.setSuperclass(superClass);
-            child.writeFile(outDire);
+            child.debugWriteFile(outDire);
 
     }
 

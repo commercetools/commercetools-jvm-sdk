@@ -11,17 +11,17 @@
     <packaging>bundle</packaging>
     <artifactId>org.javamoney-wrapper</artifactId>
     <dependencies>
-        <dependency>
-            <groupId>org.javamoney</groupId>
-            <artifactId>moneta</artifactId>
-            <version>${moneta.version}</version>
-            <scope>compile</scope>
-        </dependency>
+
         <dependency>
             <!-- replaces javax.annotation-api from above and is licensed under the APL 2.0 -->
             <groupId>org.apache.geronimo.specs</groupId>
             <artifactId>geronimo-annotation_1.2_spec</artifactId>
             <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.commercetools.sdk.jvm.core</groupId>
+            <artifactId>javax.money-wrapper</artifactId>
+            <version>1.20.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
     <build>
@@ -67,7 +67,6 @@
                             osgi.serviceloader;
                             osgi.serviceloader="org.javamoney.moneta.spi.LoaderService"
                         </Provide-Capability>
-                        <Embed-Dependency>*;scope=compile|runtime;inline=!META-INF/*;artifactId=moneta</Embed-Dependency>
                         <Include-Resource>{maven-resources} </Include-Resource>
                     </instructions>
                 </configuration>
