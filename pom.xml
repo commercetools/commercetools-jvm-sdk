@@ -452,7 +452,7 @@
                 the -Pjavadoc-jdk-8u121 option to maven.
             -->
             <activation>
-                <jdk>[1.8.0,)</jdk>
+                <jdk>1.8.0_121</jdk>
             </activation>
             <properties>
                 <javadoc.additionalparams>--allow-script-in-comments</javadoc.additionalparams>
