@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
+import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
@@ -37,6 +38,9 @@ public interface CartDraft extends CustomDraft {
 
     @Nullable
     String getCustomerEmail();
+
+    @Nullable
+    Reference<CustomerGroup> getCustomerGroup();
 
     @Nullable
     Address getBillingAddress();
