@@ -5,7 +5,7 @@
     <parent>
         <artifactId>osgi-support</artifactId>
         <groupId>com.commercetools.sdk.jvm.core</groupId>
-        <version>1.20.1-SNAPSHOT</version>
+        <version>1.21.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -121,7 +121,7 @@
         <dependency>
             <groupId>com.commercetools.sdk.jvm.core</groupId>
             <artifactId>org.javamoney-wrapper</artifactId>
-            <version>1.20.1-SNAPSHOT</version>
+            <version>${project.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>javax.annotation</groupId>
@@ -140,12 +140,12 @@
         <dependency>
             <groupId>com.commercetools.sdk.jvm.core</groupId>
             <artifactId>javax.money-wrapper</artifactId>
-            <version>1.20.1-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.commercetools.sdk.jvm.core</groupId>
             <artifactId>sdk-http-apache-async</artifactId>
-            <version>1.20.1-SNAPSHOT</version>
+            <version>${project.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.fasterxml.jackson.core</groupId>
@@ -160,7 +160,7 @@
         <dependency>
             <groupId>com.commercetools.sdk.jvm.core</groupId>
             <artifactId>commercetools-java-client-core</artifactId>
-            <version>1.20.1-SNAPSHOT</version>
+            <version>${project.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.fasterxml.jackson.core</groupId>
@@ -171,32 +171,32 @@
         <dependency>
             <groupId>com.commercetools.sdk.jvm.core</groupId>
             <artifactId>commercetools-models</artifactId>
-            <version>1.20.1-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.commercetools.sdk.jvm.core</groupId>
             <artifactId>commercetools-java-client-apache-async</artifactId>
-            <version>1.20.1-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.commercetools.sdk.jvm.core</groupId>
             <artifactId>commercetools-tests-fragment</artifactId>
-            <version>1.20.1-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.commercetools.sdk.jvm.core</groupId>
             <artifactId>commercetools-models-tests-fragment</artifactId>
-            <version>1.20.1-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.commercetools.sdk.jvm.core</groupId>
             <artifactId>commercetools-test-lib</artifactId>
-            <version>1.20.1-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <!--<dependency>-->
             <!--<groupId>com.commercetools.sdk.jvm.core</groupId>-->
             <!--<artifactId>commercetools-unbandled-osgi-dependencies</artifactId>-->
-            <!--<version>1.20.1-SNAPSHOT</version>-->
+            <!--<version>${project.version}</version>-->
         <!--</dependency>-->
 
     </dependencies>
