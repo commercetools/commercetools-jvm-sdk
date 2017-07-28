@@ -55,7 +55,6 @@ public class JvmSdkConfigurationFactory implements ConfigurationFactory {
                 "org.apache.httpcomponents.httpclient",
                 "org.apache.httpcomponents.httpcore",
                 "org.assertj.core",
-                "org.jsr-305",
                 "org.objectweb.asm",
                 "org.objectweb.asm.commons",
                 "org.objectweb.asm.tree",

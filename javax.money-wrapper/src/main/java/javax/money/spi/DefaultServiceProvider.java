@@ -62,7 +62,7 @@ class DefaultServiceProvider implements ServiceProvider {
     private <T> List<T> loadServices(final Class<T> serviceType) {
         List<T> services = new ArrayList<>();
         try {
-            for (T t : ServiceLoader.load(serviceType)) {
+            for (T t : ServiceLoader.load(serviceType,DefaultServiceProvider.class.getClassLoader())) {
                 services.add(t);
             }
             @SuppressWarnings("unchecked")

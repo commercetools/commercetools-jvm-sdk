@@ -11,7 +11,6 @@
     <packaging>bundle</packaging>
     <artifactId>org.javamoney-wrapper</artifactId>
     <dependencies>
-
         <dependency>
             <!-- replaces javax.annotation-api from above and is licensed under the APL 2.0 -->
             <groupId>org.apache.geronimo.specs</groupId>
@@ -35,7 +34,7 @@
                     <instructions>
                         <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
                         <Export-Package>!java-money.defaults.*, org.javamoney.moneta.*</Export-Package>
-                        <Import-Package>!javax.annotation.*,*</Import-Package>
+                        <Import-Package>*</Import-Package>
                         <Bundle-Version>${project.version}</Bundle-Version>
                         <Require-Capability>
                             osgi.extender;
@@ -67,7 +66,6 @@
                             osgi.serviceloader;
                             osgi.serviceloader="org.javamoney.moneta.spi.LoaderService"
                         </Provide-Capability>
-                        <Include-Resource>{maven-resources} </Include-Resource>
                     </instructions>
                 </configuration>
             </plugin>

@@ -12,6 +12,16 @@
     <artifactId>sdk-osgi-test-campaign</artifactId>
     <dependencies>
         <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.4</version>
+        </dependency>
+        <dependency>
             <groupId>org.ops4j.pax.exam</groupId>
             <artifactId>pax-exam-junit4</artifactId>
             <version>${pax-exam.version}</version>
@@ -41,11 +51,6 @@
             <artifactId>pax-exam-link-assembly</artifactId>
             <version>${pax-exam.version}</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.ops4j.pax.exam</groupId>-->
-            <!--<artifactId>exam-maven-plugin</artifactId>-->
-            <!--<version>${pax-exam.version}</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>org.ops4j.pax.exam</groupId>
             <artifactId>pax-exam-invoker-junit</artifactId>
@@ -100,23 +105,47 @@
             <artifactId>httpcore-osgi</artifactId>
             <version>4.4.6</version>
         </dependency>
-
-
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpasyncclient-osgi</artifactId>
+            <version>${apache.httpclient.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
             <version>${jackson.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-parameter-names</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.neovisionaries</groupId>
+            <artifactId>nv-i18n</artifactId>
+            <version>1.17</version>
+        </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.3.1</version>
         </dependency>
-
-
-
 
         <dependency>
             <groupId>com.commercetools.sdk.jvm.core</groupId>
@@ -124,16 +153,8 @@
             <version>${project.version}</version>
             <exclusions>
                 <exclusion>
-                    <groupId>javax.annotation</groupId>
-                    <artifactId>javax.annotation-api</artifactId>
-                </exclusion>
-                <exclusion>
                     <groupId>org.apache.geronimo.specs</groupId>
                     <artifactId>geronimo-annotation_1.2_spec</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.javamoney</groupId>
-                    <artifactId>moneta</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -193,11 +214,11 @@
             <artifactId>commercetools-test-lib</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>com.commercetools.sdk.jvm.core</groupId>-->
-            <!--<artifactId>commercetools-unbandled-osgi-dependencies</artifactId>-->
-            <!--<version>${project.version}</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>com.commercetools.sdk.jvm.core</groupId>
+            <artifactId>commercetools-sdk-base</artifactId>
+            <version>1.21.1-SNAPSHOT</version>
+        </dependency>
 
     </dependencies>
 
