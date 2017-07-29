@@ -14,9 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.ops4j.pax.exam.CoreOptions.junitBundles;
-import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
-import static org.ops4j.pax.exam.CoreOptions.options;
+import static org.ops4j.pax.exam.CoreOptions.*;
 
 public class JvmSdkConfigurationFactory implements ConfigurationFactory {
 
@@ -24,7 +22,8 @@ public class JvmSdkConfigurationFactory implements ConfigurationFactory {
     public Option[] createConfiguration() {
         return options(
                 getBundles(),
-                junitBundles()
+                junitBundles(),
+                environment("org.apache.commons.logging.Log=org.apache.commons.logging.impl.NoOpLog")
         );
     }
 

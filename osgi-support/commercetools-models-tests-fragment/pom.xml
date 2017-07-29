@@ -161,6 +161,7 @@
                             !com.amazonaws.*,
                             !com.microsoft.*,
                             !net.jcip.annotations.*,
+                            !org.slf4j.*,
                             *
 
                         </Import-Package>
