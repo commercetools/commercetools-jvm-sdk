@@ -7,13 +7,14 @@ import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.options.CompositeOption;
 import org.ops4j.pax.exam.options.DefaultCompositeOption;
 import org.ops4j.pax.exam.options.UrlProvisionOption;
+import org.ops4j.pax.exam.util.PathUtils;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static org.ops4j.pax.exam.CoreOptions.junitBundles;
-import static org.ops4j.pax.exam.CoreOptions.options;
+import static org.ops4j.pax.exam.CoreOptions.*;
+
 
 public class JvmSdkConfigurationFactory implements ConfigurationFactory {
 
@@ -21,7 +22,9 @@ public class JvmSdkConfigurationFactory implements ConfigurationFactory {
     public Option[] createConfiguration() {
         return options(
                 getBundles(),
-                junitBundles()
+                junitBundles(),
+                systemProperty("logback.configurationFile").value( "file:" + PathUtils.getBaseDir() +
+                        "/src/main/resources/logback.xml" )
         );
     }
 
