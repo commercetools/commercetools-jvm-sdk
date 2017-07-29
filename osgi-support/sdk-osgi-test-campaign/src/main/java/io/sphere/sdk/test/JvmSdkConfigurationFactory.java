@@ -8,13 +8,12 @@ import org.ops4j.pax.exam.options.CompositeOption;
 import org.ops4j.pax.exam.options.DefaultCompositeOption;
 import org.ops4j.pax.exam.options.UrlProvisionOption;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.ops4j.pax.exam.CoreOptions.*;
+import static org.ops4j.pax.exam.CoreOptions.junitBundles;
+import static org.ops4j.pax.exam.CoreOptions.options;
 
 public class JvmSdkConfigurationFactory implements ConfigurationFactory {
 
@@ -22,8 +21,7 @@ public class JvmSdkConfigurationFactory implements ConfigurationFactory {
     public Option[] createConfiguration() {
         return options(
                 getBundles(),
-                junitBundles(),
-                environment("org.apache.commons.logging.Log=org.apache.commons.logging.impl.NoOpLog")
+                junitBundles()
         );
     }
 
