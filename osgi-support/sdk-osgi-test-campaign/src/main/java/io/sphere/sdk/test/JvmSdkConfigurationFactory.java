@@ -24,7 +24,9 @@ public class JvmSdkConfigurationFactory implements ConfigurationFactory {
                 getBundles(),
                 junitBundles(),
                 systemProperty("logback.configurationFile").value( "file:" + PathUtils.getBaseDir() +
-                        "/src/main/resources/logback.xml" )
+                        "/src/main/resources/logback.xml" ),
+                //disabling noisy logs from apache http
+                systemProperty("org.ops4j.pax.logging.DefaultServiceLog.level").value("WARN")
         );
     }
 

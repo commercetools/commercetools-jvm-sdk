@@ -8,7 +8,9 @@
         <version>1.21.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
+    <properties>
+        <org.ops4j.pax.logging.DefaultServiceLog.level>ERROR</org.ops4j.pax.logging.DefaultServiceLog.level>
+    </properties>
     <artifactId>sdk-osgi-test-campaign</artifactId>
     <dependencies>
         <dependency>
@@ -26,6 +28,17 @@
             <artifactId>pax-exam-junit4</artifactId>
             <version>${pax-exam.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.ops4j.pax.logging</groupId>
+            <artifactId>pax-logging-api</artifactId>
+            <version>1.10.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.ops4j.pax.logging</groupId>
+            <artifactId>pax-logging-service</artifactId>
+            <version>1.10.1</version>
+        </dependency>
+
         <dependency>
             <groupId>org.apache.felix</groupId>
             <artifactId>org.apache.felix.framework</artifactId>
@@ -110,6 +123,13 @@
             <artifactId>httpasyncclient-osgi</artifactId>
             <version>${apache.httpclient.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.inject/javax.inject -->
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>1</version>
+        </dependency>
+
 
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
