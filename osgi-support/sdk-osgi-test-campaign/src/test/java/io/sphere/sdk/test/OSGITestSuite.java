@@ -12,8 +12,9 @@ import static org.junit.extensions.cpsuite.ClasspathSuite.*;
  */
 @RunWith(PaxExamClasspathSuite.class)
 @SuiteTypes(TEST_CLASSES)
-@ClassnameFilters({"!io.sphere.sdk.subscriptions.*", "io.sphere.sdk.categories.*"})
+@ClassnameFilters({"!io.sphere.sdk.subscriptions.*", "io.sphere.sdk.categories.___CategoriesCustomFieldsIntegrationTest.*"})
 @IncludeJars(true)
+
 public class OSGITestSuite {
 
 
