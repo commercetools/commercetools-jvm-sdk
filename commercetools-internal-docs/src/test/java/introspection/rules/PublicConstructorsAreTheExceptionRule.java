@@ -20,7 +20,10 @@ public class PublicConstructorsAreTheExceptionRule extends ConstructorStrategyRu
                     "io.sphere.sdk.products.attributes.DefaultProductAttributeFormatter," +
                     "io.sphere.sdk.search.model.TermFilterExpression," +
                     "io.sphere.sdk.utils.JavaMoneySphereClientModule," +
-                    "io.sphere.sdk.client.SolutionInfo").split(",( )?"));
+                    "io.sphere.sdk.client.SolutionInfo," +
+                    "io.sphere.sdk.client.SphereApacheHttpClientFactory," +
+                    "io.sphere.sdk.client.SphereAsyncHttpClientFactory," +
+                    "io.sphere.sdk.client.SphereHttpClientFactory").split(",( )?"));
 
     @Override
     protected boolean classIsIncludedInRule(final Class<?> clazz) {
