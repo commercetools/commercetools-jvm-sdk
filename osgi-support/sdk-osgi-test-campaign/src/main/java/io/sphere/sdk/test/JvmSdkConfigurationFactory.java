@@ -7,7 +7,6 @@ import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.options.CompositeOption;
 import org.ops4j.pax.exam.options.DefaultCompositeOption;
 import org.ops4j.pax.exam.options.UrlProvisionOption;
-import org.ops4j.pax.exam.util.PathUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,11 +19,13 @@ public class JvmSdkConfigurationFactory implements ConfigurationFactory {
 
 
     public Option[] createConfiguration() {
+
+
         return options(
+                workingDirectory("target/paxexam/"),
+                cleanCaches(true),
                 getBundles(),
                 junitBundles(),
-                systemProperty("logback.configurationFile").value( "file:" + PathUtils.getBaseDir() +
-                        "/src/main/resources/logback.xml" ),
                 //disabling noisy logs from apache http
                 systemProperty("org.ops4j.pax.logging.DefaultServiceLog.level").value("WARN")
         );
@@ -61,10 +62,12 @@ public class JvmSdkConfigurationFactory implements ConfigurationFactory {
                 "org.objectweb.asm.commons",
                 "org.objectweb.asm.tree",
 
+
+                "org.ops4j.pax.logging.pax-logging-api",
+                "org.ops4j.pax.logging.pax-logging-service",
                 //dependencies for tests
                 "ch.qos.logback.classic",
-                "ch.qos.logback.core",
-                "slf4j.api"
+                "ch.qos.logback.core"
 
         );
 

@@ -3,6 +3,7 @@ package io.sphere.sdk.test;
 import org.junit.extensions.cpsuite.ClasspathSuite.ClassnameFilters;
 import org.junit.extensions.cpsuite.ClasspathSuite.SuiteTypes;
 import org.junit.runner.RunWith;
+import org.ops4j.pax.logging.internal.DefaultServiceLog;
 
 import static org.junit.extensions.cpsuite.SuiteType.TEST_CLASSES;
 import static org.junit.extensions.cpsuite.ClasspathSuite.*;
@@ -15,6 +16,9 @@ import static org.junit.extensions.cpsuite.ClasspathSuite.*;
 @ClassnameFilters({"!io.sphere.sdk.subscriptions.*", "io.sphere.sdk.*"})
 @IncludeJars(true)
 public class OSGITestSuite {
+    static {
+        DefaultServiceLog.setLogLevel("INFO");
+    }
 
 
 }
