@@ -27,7 +27,7 @@ public class JvmSdkConfigurationFactory implements ConfigurationFactory {
                 getBundles(),
                 junitBundles(),
                 //disabling noisy logs from apache http
-                systemProperty("org.ops4j.pax.logging.DefaultServiceLog.level").value("WARN")
+                systemProperty("org.ops4j.pax.logging.DefaultServiceLog.level").value("INFO")
         );
     }
 

@@ -17,7 +17,7 @@ import static org.junit.extensions.cpsuite.ClasspathSuite.*;
 @IncludeJars(true)
 public class OSGITestSuite {
     static {
-        DefaultServiceLog.setLogLevel("INFO");
+        System.setProperty("org.ops4j.pax.logging.DefaultServiceLog.level","WARN");
     }
 
 
