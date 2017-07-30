@@ -32,7 +32,13 @@ public class PaxExamClasspathSuite extends Suite {
     private final Class<?> suiteClass;
 
 
-    private static String TEST_SUFFIX = "osgi";
+    private static String TEST_PREFIX = "___";
+
+    static{
+        System.setProperty("org.ops4j.pax.logging.DefaultServiceLog.level","WARN");
+    }
+
+
     /**
      * Used by JUnit
      */
@@ -51,7 +57,7 @@ public class PaxExamClasspathSuite extends Suite {
     private static List<Runner> setPaxExamRunnerForTestSuitClasses(final Class<?>[] classes) throws Exception {
         List<Runner> runners = new ArrayList<>();
         for (Class clazz : classes) {
-            if(clazz.getSimpleName().startsWith("___") ){
+            if(clazz.getSimpleName().startsWith(TEST_PREFIX) ){
                 runners.add(new ProbeRunner(clazz));
             }
         }

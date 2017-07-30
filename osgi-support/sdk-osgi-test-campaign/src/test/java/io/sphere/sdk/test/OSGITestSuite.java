@@ -16,9 +16,5 @@ import static org.junit.extensions.cpsuite.ClasspathSuite.*;
 @ClassnameFilters({"!io.sphere.sdk.subscriptions.*", "io.sphere.sdk.*"})
 @IncludeJars(true)
 public class OSGITestSuite {
-    static {
-        System.setProperty("org.ops4j.pax.logging.DefaultServiceLog.level","WARN");
-    }
-
 
 }
