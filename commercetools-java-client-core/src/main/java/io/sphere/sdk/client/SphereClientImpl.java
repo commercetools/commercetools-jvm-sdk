@@ -15,6 +15,7 @@ import java.util.Optional;
 import java.util.ServiceLoader;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
+import java.util.function.Supplier;
 
 import static io.sphere.sdk.client.HttpResponseBodyUtils.bytesToString;
 import static io.sphere.sdk.utils.SphereInternalLogger.getLogger;
@@ -107,8 +108,11 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
     }
 
     private <T> HttpRequest createHttpRequest(final SphereRequest<T> sphereRequest, final String token) {
+        final Supplier<String> correlationIdGenerator = getConfig().getCorrelationIdGenerator();
+        final String correlationId = correlationIdGenerator.get();
         return sphereRequest
                 .httpRequestIntent()
+                .plusHeader(HttpHeaders.X_CORRELATION_ID, correlationId)
                 .plusHeader(HttpHeaders.USER_AGENT, userAgent)
                 .plusHeader(HttpHeaders.ACCEPT_ENCODING, "gzip")
                 .plusHeader(HttpHeaders.AUTHORIZATION, "Bearer " + token)

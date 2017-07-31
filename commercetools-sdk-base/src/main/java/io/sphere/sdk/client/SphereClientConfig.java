@@ -5,6 +5,8 @@ import io.sphere.sdk.models.Base;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.UUID;
+import java.util.function.Supplier;
 
 import static io.sphere.sdk.client.ClientPackage.*;
 
@@ -35,14 +37,16 @@ public final class SphereClientConfig extends Base implements SphereAuthConfig, 
     private final String authUrl;
     private final String apiUrl;
     private final List<String> scopes;
+    private final Supplier<String> correlationIdGenerator;
 
-    SphereClientConfig(final String projectKey, final String clientId, final String clientSecret, final String authUrl, final String apiUrl, final List<String> scopes) {
+    SphereClientConfig(final String projectKey, final String clientId, final String clientSecret, final String authUrl, final String apiUrl, final List<String> scopes, final Supplier<String> correlationIdGenerator) {
         this.scopes = new ArrayList<>(scopes);
         this.apiUrl = requireNonBlank(apiUrl, "apiUrl");
         this.projectKey = requireNonBlank(projectKey, "projectKey");
         this.clientId = requireNonBlank(clientId, "clientId");
         this.clientSecret = requireNonBlank(clientSecret, "clientSecret");
         this.authUrl = requireNonBlank(authUrl, "authUrl");
+        this.correlationIdGenerator = correlationIdGenerator;
     }
 
     public static SphereClientConfig of(final String projectKey, final String clientId, final String clientSecret) {
@@ -50,7 +54,7 @@ public final class SphereClientConfig extends Base implements SphereAuthConfig, 
     }
 
     public static SphereClientConfig of(final String projectKey, final String clientId, final String clientSecret, final String authUrl, final String apiUrl) {
-        return new SphereClientConfig(projectKey, clientId, clientSecret, authUrl, apiUrl, ClientPackage.DEFAULT_SCOPES);
+        return new SphereClientConfig(projectKey, clientId, clientSecret, authUrl, apiUrl, ClientPackage.DEFAULT_SCOPES, () -> String.format("%s/%s", projectKey, UUID.randomUUID()));
     }
 
     @Override
@@ -78,6 +82,11 @@ public final class SphereClientConfig extends Base implements SphereAuthConfig, 
         return projectKey;
     }
 
+    @Override
+    public Supplier<String> getCorrelationIdGenerator() {
+        return correlationIdGenerator;
+    }
+
     /**
      * Gets the scopes which are permitted.
      *
@@ -91,11 +100,11 @@ public final class SphereClientConfig extends Base implements SphereAuthConfig, 
     }
 
     public SphereClientConfig withApiUrl(final String apiUrl) {
-        return new SphereClientConfig(getProjectKey(), getClientId(), getClientSecret(), getAuthUrl(), apiUrl, getScopes());
+        return new SphereClientConfig(getProjectKey(), getClientId(), getClientSecret(), getAuthUrl(), apiUrl, getScopes(), getCorrelationIdGenerator());
     }
     
     public SphereClientConfig withAuthUrl(final String authUrl) {
-        return new SphereClientConfig(getProjectKey(), getClientId(), getClientSecret(), authUrl, getApiUrl(), getScopes());
+        return new SphereClientConfig(getProjectKey(), getClientId(), getClientSecret(), authUrl, getApiUrl(), getScopes(), getCorrelationIdGenerator());
     }
 
     /**

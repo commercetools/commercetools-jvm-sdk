@@ -4,6 +4,8 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 
 import java.util.List;
+import java.util.UUID;
+import java.util.function.Supplier;
 
 import static io.sphere.sdk.client.ClientPackage.transformEnumScopeListToStringList;
 
@@ -14,6 +16,7 @@ public final class SphereClientConfigBuilder extends Base implements Builder<Sph
     private String authUrl = ClientPackage.AUTH_URL;
     private String apiUrl = ClientPackage.API_URL;
     private List<String> scopes = ClientPackage.DEFAULT_SCOPES;
+    private Supplier<String> correlationIdGenerator;
 
     private SphereClientConfigBuilder() {
     }
@@ -22,7 +25,8 @@ public final class SphereClientConfigBuilder extends Base implements Builder<Sph
         return ofKeyIdSecret(config.getProjectKey(), config.getClientId(), config.getClientSecret())
                 .authUrl(config.getAuthUrl())
                 .apiUrl(config.getApiUrl())
-                .scopeStrings(config.getScopes());
+                .scopeStrings(config.getScopes())
+                .correlationIdGenerator(config.getCorrelationIdGenerator());
     }
 
     public static SphereClientConfigBuilder ofKeyIdSecret(final String projectKey, final String clientId, final String clientSecret) {
@@ -30,6 +34,7 @@ public final class SphereClientConfigBuilder extends Base implements Builder<Sph
         builder.clientId = clientId;
         builder.clientSecret = clientSecret;
         builder.projectKey = projectKey;
+        builder.correlationIdGenerator = () -> String.format("%s/%s", projectKey, UUID.randomUUID());
         return builder;
     }
 
@@ -67,8 +72,13 @@ public final class SphereClientConfigBuilder extends Base implements Builder<Sph
         return this;
     }
 
+    public SphereClientConfigBuilder correlationIdGenerator(final Supplier<String> correlationIdGenerator) {
+        this.correlationIdGenerator = correlationIdGenerator;
+        return this;
+    }
+
     @Override
     public SphereClientConfig build() {
-        return new SphereClientConfig(projectKey, clientId, clientSecret, authUrl, apiUrl, scopes);
+        return new SphereClientConfig(projectKey, clientId, clientSecret, authUrl, apiUrl, scopes, correlationIdGenerator);
     }
 }
