@@ -1,7 +1,6 @@
 package io.sphere.sdk.products;
 
-import io.sphere.sdk.client.SphereProjectScope;
-import io.sphere.sdk.models.Base;
+import static org.apache.commons.lang3.text.WordUtils.capitalize;
 
 /**
  * PublishScope.
@@ -15,8 +14,7 @@ public enum PublishScope {
     PRICES;
 
     public String toScopeString() {
-        final String lowerCase = name().toLowerCase();
-        return lowerCase.substring(0, 1).toUpperCase() + lowerCase.substring(1);
+        return capitalize(name().toLowerCase());
     }
 
     public static PublishScope ofScopeString(final String scope) {
