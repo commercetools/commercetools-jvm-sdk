@@ -9,7 +9,7 @@ public final class PublishScope extends Base {
 
     private final String scope;
 
-    public PublishScope(final String scope) {
+    private PublishScope(final String scope) {
         this.scope = scope;
     }
 
