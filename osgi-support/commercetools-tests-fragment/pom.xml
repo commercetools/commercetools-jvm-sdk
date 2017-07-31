@@ -8,7 +8,7 @@
         <version>1.21.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
     <artifactId>commercetools-tests-fragment</artifactId>
     <dependencies>
         <dependency>
@@ -31,13 +31,21 @@
         </dependency>
         <dependency>
             <groupId>com.commercetools.sdk.jvm.core</groupId>
-            <artifactId>sdk-http</artifactId>
-            <version>${project.version}</version>
+            <artifactId>commercetools-models</artifactId>
+            <version>1.21.1-SNAPSHOT</version>
             <type>test-jar</type>
         </dependency>
     </dependencies>
     <build>
         <plugins>
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+                    </archive>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>com.commercetools.sdk.jvm.core</groupId>
                 <artifactId>mirror-subclass-plugin</artifactId>
@@ -47,7 +55,7 @@
                         <process>commercetools-java-client-apache-async</process>
                         <process>commercetools-java-client-core</process>
                         <process>commercetools-sdk-base</process>
-                        <process>sdk-http</process>
+                        <process>commercetools-models</process>
                     </artifactsToProcess>
                 </configuration>
                 <executions>
@@ -64,21 +72,44 @@
                 <version>${felix.maven.version}</version>
                 <extensions>true</extensions>
                 <configuration>
+                    <niceManifest>true</niceManifest>
+                    <supportedProjectTypes>
+                        <supportedProjectType>jar</supportedProjectType>
+                        <supportedProjectType>bundle</supportedProjectType>
+                    </supportedProjectTypes>
                     <instructions>
                         <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
                         <Fragment-Host>${project.groupId}.commercetools-sdk-base</Fragment-Host>
                         <Export-Package>io.sphere.sdk.*</Export-Package>
-                        <Import-Package>!javax.annotation,*</Import-Package>
+                        <Import-Package>
+                            !javax.annotation,
+                            !com.amazonaws.*,
+                            !com.microsoft.*,
+                            !net.jcip.annotations.*,
+                            *
+                        </Import-Package>
                         <Bundle-Version>${project.version}</Bundle-Version>
-                        <Embed-Dependency>*;scope=compile|runtime;inline=true;
-                            artifactId=
-                                commercetools-java-client-apache-async
-                                |commercetools-java-client-core
-                                |commercetools-sdk-base
-                                |sdk-http
-                        </Embed-Dependency>
+                        <Require-Capability>
+                            osgi.extender;
+                            filter:="(osgi.extender=osgi.serviceloader.registrar)",
+                            osgi.extender;
+                            filter:="(osgi.extender=osgi.serviceloader.processor)"
+                        </Require-Capability>
+                        <Provide-Capability>
+                            osgi.serviceloader;
+                                osgi.serviceloader="io.sphere.sdk.client.SolutionInfo"
+                        </Provide-Capability>
                     </instructions>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>bundle-manifest</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>manifest</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

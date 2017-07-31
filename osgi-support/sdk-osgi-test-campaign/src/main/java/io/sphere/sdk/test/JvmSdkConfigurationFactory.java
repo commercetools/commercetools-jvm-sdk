@@ -80,8 +80,7 @@ public class JvmSdkConfigurationFactory implements ConfigurationFactory {
                 "com.commercetools.sdk.jvm.core.commercetools-test-lib",
 
                 //Test Fragments
-                "com.commercetools.sdk.jvm.core.commercetools-tests-fragment",
-                "com.commercetools.sdk.jvm.core.commercetools-models-tests-fragment"
+                "com.commercetools.sdk.jvm.core.commercetools-tests-fragment"
 
         );
 

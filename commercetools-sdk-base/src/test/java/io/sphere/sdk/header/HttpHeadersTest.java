@@ -1,5 +1,6 @@
-package io.sphere.sdk.http;
+package io.sphere.sdk.header;
 
+import io.sphere.sdk.http.HttpHeaders;
 import org.junit.Test;
 
 import java.util.Optional;

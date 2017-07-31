@@ -13,7 +13,6 @@
     <modules>
         <module>sdk-osgi-test-campaign</module>
         <module>commercetools-tests-fragment</module>
-        <module>commercetools-models-tests-fragment</module>
         <module>mirror-subclass-plugin</module>
     </modules>
     <properties>

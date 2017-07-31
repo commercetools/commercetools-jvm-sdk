@@ -226,11 +226,6 @@
         </dependency>
         <dependency>
             <groupId>com.commercetools.sdk.jvm.core</groupId>
-            <artifactId>commercetools-models-tests-fragment</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.commercetools.sdk.jvm.core</groupId>
             <artifactId>commercetools-test-lib</artifactId>
             <version>${project.version}</version>
         </dependency>

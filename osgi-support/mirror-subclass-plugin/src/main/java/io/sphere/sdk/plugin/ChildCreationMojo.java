@@ -12,6 +12,8 @@ import org.apache.maven.project.MavenProject;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -41,6 +43,7 @@ public class ChildCreationMojo extends AbstractMojo {
 
             if (artifactsToProcess == null || artifactsToProcess.length == 0)
                 return;
+            String outputDir = project.getBuild().getOutputDirectory();
 
             List<String> set = Arrays.asList(artifactsToProcess);
             List<Artifact> artifacts = project.getDependencyArtifacts()
@@ -55,13 +58,29 @@ public class ChildCreationMojo extends AbstractMojo {
                 JarFile jarFile = new JarFile(jarLocation);
                 Enumeration<JarEntry> entries = jarFile.entries();
                 while (entries.hasMoreElements()) {
+
+                    //Copy the content of the test JAR
                     JarEntry next = entries.nextElement();
+                    File outputFile = new File(outputDir + java.io.File.separator + next.getName());
+                    if(next.isDirectory()){
+                        outputFile.mkdirs();
+                        continue;
+                    }
+                    InputStream is = jarFile.getInputStream(next);
+                    FileOutputStream fos = new FileOutputStream(outputFile);
+                    while (is.available() > 0) {
+                        fos.write(is.read());
+                    }
+                    fos.close();
+                    is.close();
+                    //End of jar copy
+
                     if (!next.isDirectory()
                             && !next.getName().contains("$")
                             && next.getName().endsWith(".class")) {
 
                         String className = next.getName().replace(File.separator, ".").replaceAll(".class$", "");
-                        generateChildClasses(className, project.getBuild().getOutputDirectory());
+                        generateChildClasses(className, outputDir);
                     }
                 }
 
@@ -95,7 +114,7 @@ public class ChildCreationMojo extends AbstractMojo {
 
     private boolean shouldCreateChild(final CtClass superClass) throws Exception{
 
-        //only classes containing Tests shoul be processed
+        //only classes containing Tests should be processed
         boolean isTestClass = false;
 
         for(CtMethod method : superClass.getMethods()){
