@@ -1,11 +1,13 @@
 package io.sphere.sdk.client;
 
+import io.sphere.sdk.models.Base;
+
 import java.util.UUID;
 
 /**
  * Default implementation of {@link CorrelationIdGenerator}.
  */
-class CorrelationIdGeneratorImpl implements CorrelationIdGenerator {
+final class CorrelationIdGeneratorImpl extends Base implements CorrelationIdGenerator {
     private final String projectKey;
 
     CorrelationIdGeneratorImpl(final String projectKey) {
