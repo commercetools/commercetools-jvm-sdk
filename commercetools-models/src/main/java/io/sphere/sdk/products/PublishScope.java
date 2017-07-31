@@ -1,30 +1,26 @@
 package io.sphere.sdk.products;
 
+import io.sphere.sdk.client.SphereProjectScope;
 import io.sphere.sdk.models.Base;
 
 /**
  * PublishScope.
  */
-public final class PublishScope extends Base {
-
-    private final String scope;
-
-    private PublishScope(final String scope) {
-        this.scope = scope;
-    }
+public enum PublishScope {
 
     /* ALL is the scope by default to allow to publish all changes */
-    public final static PublishScope ALL = of("All");
+    ALL,
 
     /* PRICES allow to publish only the prices */
-    public final static PublishScope PRICES = of("Prices");
-
-    private static PublishScope of(final String scope) {
-        return new PublishScope(scope);
-    }
+    PRICES;
 
     public String toScopeString() {
-        return this.scope;
+        final String lowerCase = name().toLowerCase();
+        return lowerCase.substring(0, 1).toUpperCase() + lowerCase.substring(1);
+    }
+
+    public static PublishScope ofScopeString(final String scope) {
+        return valueOf(scope.toUpperCase());
     }
 
 }
