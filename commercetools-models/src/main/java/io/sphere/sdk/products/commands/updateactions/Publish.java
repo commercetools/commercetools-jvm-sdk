@@ -18,9 +18,9 @@ import javax.annotation.Nullable;
 public final class Publish extends UpdateActionImpl<Product> {
 
     @Nullable
-    final private String scope;
+    final private PublishScope scope;
 
-    private Publish(@Nullable final String scope) {
+    private Publish(@Nullable final PublishScope scope) {
         super("publish");
         this.scope = scope;
     }
@@ -30,11 +30,11 @@ public final class Publish extends UpdateActionImpl<Product> {
     }
 
     public static Publish ofScope(@Nullable final PublishScope scope) {
-        return new Publish(scope != null ? scope.toScopeString() : null);
+        return new Publish(scope);
     }
 
     @Nullable
-    public String getScope() {
+    public PublishScope getScope() {
         return scope;
     }
 }
