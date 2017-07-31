@@ -13,7 +13,7 @@ public final class PublishScope extends Base {
         this.scope = scope;
     }
 
-    /* ALL is the scope by default  allow to publish only the prices */
+    /* ALL is the scope by default to allow to publish all changes */
     public final static PublishScope ALL = of("All");
 
     /* PRICES allow to publish only the prices */

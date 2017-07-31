@@ -30,7 +30,7 @@ public final class Publish extends UpdateActionImpl<Product> {
     }
 
     public static Publish ofScope(@Nullable final PublishScope scope) {
-        return new Publish(scope.toScopeString());
+        return new Publish(scope != null ? scope.toScopeString() : null);
     }
 
     @Nullable
