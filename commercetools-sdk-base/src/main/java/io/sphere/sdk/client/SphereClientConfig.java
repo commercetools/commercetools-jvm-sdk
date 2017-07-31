@@ -5,8 +5,6 @@ import io.sphere.sdk.models.Base;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import java.util.UUID;
-import java.util.function.Supplier;
 
 import static io.sphere.sdk.client.ClientPackage.*;
 
@@ -37,9 +35,9 @@ public final class SphereClientConfig extends Base implements SphereAuthConfig, 
     private final String authUrl;
     private final String apiUrl;
     private final List<String> scopes;
-    private final Supplier<String> correlationIdGenerator;
+    private final CorrelationIdGenerator correlationIdGenerator;
 
-    SphereClientConfig(final String projectKey, final String clientId, final String clientSecret, final String authUrl, final String apiUrl, final List<String> scopes, final Supplier<String> correlationIdGenerator) {
+    SphereClientConfig(final String projectKey, final String clientId, final String clientSecret, final String authUrl, final String apiUrl, final List<String> scopes, final CorrelationIdGenerator correlationIdGenerator) {
         this.scopes = new ArrayList<>(scopes);
         this.apiUrl = requireNonBlank(apiUrl, "apiUrl");
         this.projectKey = requireNonBlank(projectKey, "projectKey");
@@ -54,7 +52,7 @@ public final class SphereClientConfig extends Base implements SphereAuthConfig, 
     }
 
     public static SphereClientConfig of(final String projectKey, final String clientId, final String clientSecret, final String authUrl, final String apiUrl) {
-        return new SphereClientConfig(projectKey, clientId, clientSecret, authUrl, apiUrl, ClientPackage.DEFAULT_SCOPES, () -> String.format("%s/%s", projectKey, UUID.randomUUID()));
+        return new SphereClientConfig(projectKey, clientId, clientSecret, authUrl, apiUrl, ClientPackage.DEFAULT_SCOPES, CorrelationIdGenerator.of(projectKey));
     }
 
     @Override
@@ -83,7 +81,7 @@ public final class SphereClientConfig extends Base implements SphereAuthConfig, 
     }
 
     @Override
-    public Supplier<String> getCorrelationIdGenerator() {
+    public CorrelationIdGenerator getCorrelationIdGenerator() {
         return correlationIdGenerator;
     }
 

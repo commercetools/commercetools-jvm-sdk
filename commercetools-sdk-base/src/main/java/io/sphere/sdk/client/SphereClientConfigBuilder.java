@@ -4,8 +4,6 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 
 import java.util.List;
-import java.util.UUID;
-import java.util.function.Supplier;
 
 import static io.sphere.sdk.client.ClientPackage.transformEnumScopeListToStringList;
 
@@ -16,7 +14,7 @@ public final class SphereClientConfigBuilder extends Base implements Builder<Sph
     private String authUrl = ClientPackage.AUTH_URL;
     private String apiUrl = ClientPackage.API_URL;
     private List<String> scopes = ClientPackage.DEFAULT_SCOPES;
-    private Supplier<String> correlationIdGenerator;
+    private CorrelationIdGenerator correlationIdGenerator;
 
     private SphereClientConfigBuilder() {
     }
@@ -34,7 +32,7 @@ public final class SphereClientConfigBuilder extends Base implements Builder<Sph
         builder.clientId = clientId;
         builder.clientSecret = clientSecret;
         builder.projectKey = projectKey;
-        builder.correlationIdGenerator = () -> String.format("%s/%s", projectKey, UUID.randomUUID());
+        builder.correlationIdGenerator = CorrelationIdGenerator.of(projectKey);
         return builder;
     }
 
@@ -72,7 +70,7 @@ public final class SphereClientConfigBuilder extends Base implements Builder<Sph
         return this;
     }
 
-    public SphereClientConfigBuilder correlationIdGenerator(final Supplier<String> correlationIdGenerator) {
+    public SphereClientConfigBuilder correlationIdGenerator(final CorrelationIdGenerator correlationIdGenerator) {
         this.correlationIdGenerator = correlationIdGenerator;
         return this;
     }
