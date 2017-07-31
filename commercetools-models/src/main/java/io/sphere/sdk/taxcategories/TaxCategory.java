@@ -5,28 +5,29 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.carts.CartShippingInfo;
 import io.sphere.sdk.carts.CustomLineItem;
-import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.products.Product;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
-/** Tax Categories define how products are to be taxed in different countries.
-
- @see io.sphere.sdk.taxcategories.commands.TaxCategoryCreateCommand
- @see io.sphere.sdk.taxcategories.commands.TaxCategoryUpdateCommand
- @see io.sphere.sdk.taxcategories.commands.TaxCategoryDeleteCommand
- @see io.sphere.sdk.taxcategories.queries.TaxCategoryByIdGet
- @see io.sphere.sdk.taxcategories.queries.TaxCategoryQuery
- @see CartShippingInfo#getTaxCategory()
- @see io.sphere.sdk.orders.OrderShippingInfo#getTaxCategory()
- @see CustomLineItem#getTaxCategory()
- @see Product#getTaxCategory()
- @see io.sphere.sdk.products.ProductProjection#getTaxCategory()
- @see io.sphere.sdk.shippingmethods.ShippingMethod#getTaxCategory()
+/**
+ * Tax Categories define how products are to be taxed in different countries.
+ *
+ * @see io.sphere.sdk.taxcategories.commands.TaxCategoryCreateCommand
+ * @see io.sphere.sdk.taxcategories.commands.TaxCategoryUpdateCommand
+ * @see io.sphere.sdk.taxcategories.commands.TaxCategoryDeleteCommand
+ * @see io.sphere.sdk.taxcategories.queries.TaxCategoryByIdGet
+ * @see io.sphere.sdk.taxcategories.queries.TaxCategoryQuery
+ * @see CartShippingInfo#getTaxCategory()
+ * @see io.sphere.sdk.orders.OrderShippingInfo#getTaxCategory()
+ * @see CustomLineItem#getTaxCategory()
+ * @see Product#getTaxCategory()
+ * @see io.sphere.sdk.products.ProductProjection#getTaxCategory()
+ * @see io.sphere.sdk.shippingmethods.ShippingMethod#getTaxCategory()
  */
-@JsonDeserialize(as=TaxCategoryImpl.class)
+@JsonDeserialize(as = TaxCategoryImpl.class)
 @ResourceValue
 @HasQueryEndpoint(additionalContentsQueryInterface = "\n" +
         "    default TaxCategoryQuery byName(final String name) {\n" +
@@ -34,9 +35,14 @@ import java.util.List;
         "    }")
 @ResourceInfo(pluralName = "tax categories", pathElement = "tax-categories")
 @HasByIdGetEndpoint(javadocSummary = "Fetches a tax category by a known ID.", includeExamples = "io.sphere.sdk.taxcategories.queries.TaxCategoryByIdGetIntegrationTest#execution()")
+@HasByKeyGetEndpoint(javadocSummary = "Fetches a tax category by a known Key.", includeExamples = "io.sphere.sdk.taxcategories.queries.TaxCategoryByKeyGetIntegrationTest#execution()")
 @HasCreateCommand(includeExamples = "io.sphere.sdk.taxcategories.TaxCategoryIntegrationTest#createTaxCategory()")
 @HasUpdateCommand
-@HasDeleteCommand(javadocSummary = "Deletes a tax category.", includeExamples = "io.sphere.sdk.taxcategories.TaxCategoryIntegrationTest#demoForDeletion()")
+@HasUpdateActions
+@HasDeleteCommand(
+        deleteWithKey = true,
+        javadocSummary = "Deletes a tax category.", includeExamples = "io.sphere.sdk.taxcategories.TaxCategoryIntegrationTest#demoForDeletion()"
+)
 @HasQueryModel
 public interface TaxCategory extends Resource<TaxCategory> {
     String getName();
@@ -44,6 +50,9 @@ public interface TaxCategory extends Resource<TaxCategory> {
     @Nullable
     @IgnoreInQueryModel
     String getDescription();
+
+    @Nullable
+    String getKey();
 
     /**
      * Gets the tax rates. Alias for {@link #getRates()}.
@@ -61,12 +70,11 @@ public interface TaxCategory extends Resource<TaxCategory> {
     /**
      * Creates a container which contains the full Java type information to deserialize this class from JSON.
      *
+     * @return type reference
      * @see io.sphere.sdk.json.SphereJsonUtils#readObject(byte[], TypeReference)
      * @see io.sphere.sdk.json.SphereJsonUtils#readObject(String, TypeReference)
      * @see io.sphere.sdk.json.SphereJsonUtils#readObject(com.fasterxml.jackson.databind.JsonNode, TypeReference)
      * @see io.sphere.sdk.json.SphereJsonUtils#readObjectFromResource(String, TypeReference)
-     *
-     * @return type reference
      */
     static TypeReference<TaxCategory> typeReference() {
         return new TypeReference<TaxCategory>() {
@@ -84,8 +92,9 @@ public interface TaxCategory extends Resource<TaxCategory> {
 
     /**
      * A type hint for references which resource type is linked in a reference.
-     * @see Reference#getTypeId()
+     *
      * @return type hint
+     * @see Reference#getTypeId()
      */
     static String referenceTypeId() {
         return "tax-category";
@@ -93,12 +102,12 @@ public interface TaxCategory extends Resource<TaxCategory> {
 
     /**
      * Creates a reference for one item of this class by a known ID.
-     *
+     * <p>
      * <p>An example for categories but this applies for other resources, too:</p>
      * {@include.example io.sphere.sdk.categories.CategoryTest#referenceOfId()}
-     *
+     * <p>
      * <p>If you already have a resource object, then use {@link #toReference()} instead:</p>
-     *
+     * <p>
      * {@include.example io.sphere.sdk.categories.CategoryTest#toReference()}
      *
      * @param id the ID of the resource which should be referenced.
