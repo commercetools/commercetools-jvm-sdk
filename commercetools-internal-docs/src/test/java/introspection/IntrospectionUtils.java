@@ -28,7 +28,7 @@ public class IntrospectionUtils {
                     .filter(name -> !name.contains("io.sphere.sdk.plugin."))
                     .filter(name -> !name.contains("org.javamoney.moneta."))
                     .filter(name -> !name.contains("javax.money."))
-                    .filter(name -> !name.contains("jio.sphere.sdk.test"))
+                    .filter(name -> !name.contains("io.sphere.sdk.test"))
                     .filter(name -> !name.contains("AsyncRetrySupervisor"))
                     .filter(name -> !name.contains("io.sphere.sdk.annotations.processors"))
                     .filter(name -> !name.contains("AddBillingAddressId"))
