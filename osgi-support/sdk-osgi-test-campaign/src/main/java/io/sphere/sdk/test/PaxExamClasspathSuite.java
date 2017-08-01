@@ -1,6 +1,7 @@
 
 package io.sphere.sdk.test;
 
+import io.sphere.sdk.test.annotations.MinimumTestClassesInSuite;
 import org.junit.extensions.cpsuite.ClassesFinder;
 import org.junit.extensions.cpsuite.ClassesFinderFactory;
 import org.junit.extensions.cpsuite.ClasspathFinderFactory;
@@ -50,11 +51,23 @@ public class PaxExamClasspathSuite extends Suite {
      * For testing purposes only
      */
     public PaxExamClasspathSuite(final Class<?> suiteClass,final  RunnerBuilder builder,final  ClassesFinderFactory factory) throws Exception {
-        super(suiteClass, setPaxExamRunnerForTestSuitClasses(getSortedTestclasses(createFinder(suiteClass, factory))));
+
+        super(suiteClass, getPaxExamRunnerForTestSuitClasses(getSortedTestclasses(createFinder(suiteClass, factory))));
+
+        if(suiteClass.getAnnotation(MinimumTestClassesInSuite.class)!=null
+                &&
+                getChildren().size() < suiteClass.getAnnotation(MinimumTestClassesInSuite.class).value()){
+            final String errorMessage = String.format("Test suite contains less test classes then expected: actual %s, expected (specified by @%s) %s",
+                    getChildren().size(),
+                    MinimumTestClassesInSuite.class.getName(),
+                    suiteClass.getAnnotation(MinimumTestClassesInSuite.class).value());
+            throw new Exception(errorMessage);
+        }
+
         this.suiteClass = suiteClass;
     }
 
-    private static List<Runner> setPaxExamRunnerForTestSuitClasses(final Class<?>[] classes) throws Exception {
+    private static List<Runner> getPaxExamRunnerForTestSuitClasses(final Class<?>[] classes) throws Exception {
         List<Runner> runners = new ArrayList<>();
         for (Class clazz : classes) {
             if(clazz.getSimpleName().startsWith(TEST_PREFIX) ){
