@@ -50,8 +50,8 @@ public interface PagedResult<T> {
      }
 
     /**
-     * Calculates the page number of the result, the page numbers starts with 0, so if you need to use it in the UI, starting from page 1 you need to use
-     *{@code getPageIndex() + 1}
+     * Calculates the page number of the result, the pages are indexed staring 0, which means that {@code getPageIndex()}
+     * returns a value in [0,n) , given 'n' is the total number of pages
      *
      * @return the page number of the result, 0 if the page size is 0, meaning if {@code getCount()} returns 0.
      */
