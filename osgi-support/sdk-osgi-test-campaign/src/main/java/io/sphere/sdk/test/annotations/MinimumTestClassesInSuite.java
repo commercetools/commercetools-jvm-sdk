@@ -7,9 +7,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * This annotation is added to check that hwen running a test suite it contains a minimum of tests,
- * this especially useful in the case where the classpath isnt resolved correctly that,
- * the suite has succeeded because no test was passed but not because all the tests succeeded
+ * This annotation is added to check that when running a test suite, it contains a minimum of test classes,
+ * this is especially useful in the case where the classpath isn't resolved correctly, because in thatcase
+ * the suite  succeeds while no test has passed since there are no tests to run.
  * */
 
 @Retention(RetentionPolicy.RUNTIME)
@@ -17,7 +17,7 @@ import java.lang.annotation.Target;
 public @interface MinimumTestClassesInSuite {
     /**
      *
-     * @return the minimum number required in the suite
+     * @return the minimum number of test classes required in the suite
      */
     int value();
 
