@@ -19,7 +19,7 @@ public class TaxCategoryDeleteCommandIntegrationTest extends IntegrationTest {
     public void deleteByVersioned() {
         final List<TaxRateDraft> taxRates = singletonList(TaxRateDraftBuilder.of("de19", 0.19, true, CountryCode.DE).build());
         final TaxCategoryDraft taxCategoryDraft =
-                TaxCategoryDraftBuilder.of("Category Name", taxRates, "tax category description")
+                TaxCategoryDraftBuilder.of(randomKey(), taxRates, "tax category description")
                         .build();
         final TaxCategory taxCategory = client().executeBlocking(TaxCategoryCreateCommand.of(taxCategoryDraft));
         final String taxCategoryId = taxCategory.getId();
@@ -33,7 +33,7 @@ public class TaxCategoryDeleteCommandIntegrationTest extends IntegrationTest {
         final String key = randomKey();
         final List<TaxRateDraft> taxRates = singletonList(TaxRateDraftBuilder.of("de19", 0.19, true, CountryCode.DE).build());
         final TaxCategoryDraft taxCategoryDraft =
-                TaxCategoryDraftBuilder.of("Category Name", taxRates, "tax category description")
+                TaxCategoryDraftBuilder.of(randomKey(), taxRates, "tax category description")
                         .key(key)
                         .build();
         final TaxCategory taxCategory = client().executeBlocking(TaxCategoryCreateCommand.of(taxCategoryDraft));
