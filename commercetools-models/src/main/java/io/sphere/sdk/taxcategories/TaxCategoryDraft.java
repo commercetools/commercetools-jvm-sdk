@@ -10,9 +10,8 @@ import java.util.List;
 
 /**
  * Draft for a new TaxCategory.
- *
- * <p>If you need to create a TaxCategory without tax rates, just provide an empty list as parameter for {@code taxRates}.</p>
- *
+ * <p>
+ * If you need to create a TaxCategory without tax rates, just provide an empty list as parameter for {@code taxRates}.
  */
 @JsonDeserialize(as = TaxCategoryDraftDsl.class)
 @ResourceDraftValue(factoryMethods = {
@@ -20,6 +19,9 @@ import java.util.List;
 })
 public interface TaxCategoryDraft {
     String getName();
+
+    @Nullable
+    String getKey();
 
     @Nullable
     String getDescription();
