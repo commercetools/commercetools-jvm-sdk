@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
+import io.sphere.sdk.models.WithKey;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.List;
 @ResourceDraftValue(factoryMethods = {
         @FactoryMethod(parameterNames = {"name", "taxRates", "description"})
 })
-public interface TaxCategoryDraft {
+public interface TaxCategoryDraft extends WithKey {
     String getName();
 
     @Nullable

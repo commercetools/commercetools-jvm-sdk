@@ -7,6 +7,7 @@ import io.sphere.sdk.carts.CartShippingInfo;
 import io.sphere.sdk.carts.CustomLineItem;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
+import io.sphere.sdk.models.WithKey;
 import io.sphere.sdk.products.Product;
 
 import javax.annotation.Nullable;
@@ -44,7 +45,7 @@ import java.util.List;
         javadocSummary = "Deletes a tax category.", includeExamples = "io.sphere.sdk.taxcategories.TaxCategoryIntegrationTest#demoForDeletion()"
 )
 @HasQueryModel
-public interface TaxCategory extends Resource<TaxCategory> {
+public interface TaxCategory extends Resource<TaxCategory>, WithKey {
     String getName();
 
     @Nullable
