@@ -52,8 +52,7 @@ public class ReferenceTest {
     @Test
     public void deserializationCanContainExpandedObject() throws Exception {
         final String json = String.format("{\"typeId\":\"%s\",\"id\": \"%s\",\"obj\":{\"foo\":\"value\"}}", typeId, id);
-        final Reference<TestEntity> actual = newObjectMapper().<Reference<TestEntity>>readValue(json, new TypeReference<Reference<TestEntity>>() {
-        });
+        final Reference<TestEntity> actual = newObjectMapper().readValue(json, TypeReferenceImpl.of());
         assertThat(actual).isEqualTo(newFilledReference());
     }
 
@@ -75,8 +74,7 @@ public class ReferenceTest {
     }
 
     private void deserializationWithOutExpandedObject(final String json) throws java.io.IOException {
-        final Reference<TestEntity> actual = newObjectMapper().<Reference<TestEntity>>readValue(json, new TypeReference<Reference<TestEntity>>() {
-        });
+        final Reference<TestEntity> actual = newObjectMapper().readValue(json, TypeReferenceImpl.of());
         assertThat(actual).isEqualTo(newEmptyReference());
     }
 
