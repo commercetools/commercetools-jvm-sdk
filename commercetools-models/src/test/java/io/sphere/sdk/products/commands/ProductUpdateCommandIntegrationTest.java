@@ -65,6 +65,30 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     public static final Random RANDOM = new Random();
 
     @Test
+    public void updateCommandPlusUpdateActions() {
+        withUpdateableProduct(client(), (Product product) -> {
+            assertThat(product.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
+
+            final Image image = createExternalImage();
+            final AddExternalImage updateAction1 = AddExternalImage.of(image, MASTER_VARIANT_ID);
+            final ProductUpdateCommand command = ProductUpdateCommand.of(product, updateAction1);
+            assertThat(command.getUpdateActions()).hasSize(1);
+            assertThat(command.getUpdateActions().get(0)).isEqualTo(updateAction1);
+
+            final LocalizedString localizedName = en("New Name");
+            final ChangeName updateAction2 = ChangeName.of(localizedName);
+            final ProductUpdateCommand updatedCommand = command.plusUpdateActions(asList(updateAction2));
+            assertThat(updatedCommand.getUpdateActions()).hasSize(2);
+            assertThat(updatedCommand.getUpdateActions().get(1)).isEqualTo(updateAction2);
+
+            final Product updatedProduct = client().executeBlocking(updatedCommand);
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).isEqualTo(asList(image));
+            assertThat(updatedProduct.getMasterData().getStaged().getName()).isEqualTo(localizedName);
+            return updatedProduct;
+        });
+    }
+
+    @Test
     public void moveImageToPositionByVariantId() throws Exception {
         final String url1 = "http://www.commercetools.com/ct_logo_farbe_1.gif";
         final String url2 = "http://www.commercetools.com/ct_logo_farbe_2.gif";
@@ -2395,7 +2419,6 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
 
-
     @Test
     public void setAssetSourcesByVariantId() throws Exception {
         withProductHavingAssets(client(), product -> {
@@ -2411,7 +2434,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                     ProductUpdateCommand.of(product, SetAssetSources.ofVariantId(masterVariant.getId(), assetId, Collections.singletonList(assetSource)));
             final Product updatedProduct = client().executeBlocking(cmd);
 
-            AssetSource source  = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0).getSources().get(0);
+            AssetSource source = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0).getSources().get(0);
             assertThat(source.getUri()).isEqualTo("http://dev.commercetools.com/assets/img/CT-logo.svg");
             assertThat(source.getKey()).isEqualTo("commercetools-logo");
             assertThat(source.getContentType()).isEqualTo("image/svg+xml");
@@ -2434,7 +2457,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                     ProductUpdateCommand.of(product, SetAssetSources.ofSku(masterVariant.getSku(), assetId, Collections.singletonList(assetSource)));
             final Product updatedProduct = client().executeBlocking(cmd);
 
-            AssetSource source  = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0).getSources().get(0);
+            AssetSource source = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0).getSources().get(0);
             assertThat(source.getUri()).isEqualTo("http://dev.commercetools.com/assets/img/CT-logo.svg");
             assertThat(source.getKey()).isEqualTo("commercetools-logo");
             assertThat(source.getContentType()).isEqualTo("image/svg+xml");
@@ -2460,10 +2483,10 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             final String assetId = masterVariant.getAssets().get(0).getId();
 
             final ProductUpdateCommand cmd =
-                    ProductUpdateCommand.of(product, SetAssetSources.ofVariantId(masterVariant.getId(), assetId, Collections.singletonList(assetSource),staged));
+                    ProductUpdateCommand.of(product, SetAssetSources.ofVariantId(masterVariant.getId(), assetId, Collections.singletonList(assetSource), staged));
             final Product updatedProduct = client().executeBlocking(cmd);
 
-            AssetSource source  = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0).getSources().get(0);
+            AssetSource source = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0).getSources().get(0);
             assertThat(source.getUri()).isEqualTo("http://dev.commercetools.com/assets/img/CT-logo.svg");
             assertThat(source.getKey()).isEqualTo("commercetools-logo");
             assertThat(source.getContentType()).isEqualTo("image/svg+xml");

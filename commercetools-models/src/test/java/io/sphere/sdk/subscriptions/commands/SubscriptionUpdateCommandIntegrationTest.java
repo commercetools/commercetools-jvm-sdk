@@ -42,7 +42,7 @@ public class SubscriptionUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void setKeyIronMq(){
+    public void setKey() {
         assumeHasIronMqEnv();
         setKeyQueue(SubscriptionFixtures::ironMqSubscriptionDraftBuilder);
     }

@@ -23,6 +23,8 @@ import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.commands.UpdateCommand;
+import io.sphere.sdk.customergroups.CustomerGroup;
+import io.sphere.sdk.customergroups.CustomerGroupDraft;
 import io.sphere.sdk.customergroups.CustomerGroupDraftBuilder;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.customers.CustomerDraft;
@@ -69,6 +71,7 @@ import io.sphere.sdk.products.commands.updateactions.SetMetaTitle;
 import io.sphere.sdk.products.expansion.ProductDataExpansionModel;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
 import io.sphere.sdk.products.messages.ProductDeletedMessage;
+import io.sphere.sdk.products.messages.ProductPublishedMessage;
 import io.sphere.sdk.products.messages.ProductRevertedStagedChangesMessage;
 import io.sphere.sdk.products.messages.ProductVariantDeletedMessage;
 import io.sphere.sdk.products.queries.*;
@@ -131,6 +134,22 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+ <h3 class=released-version id="v1_21_0">1.21.0 (18.07.2017)</h3>
+ <ul>
+ <li class=new-in-release>Added {@link CustomerGroup#getKey()} and {@link CustomerGroupDraft#getKey()}.</li>
+ <li class=new-in-release>Added {@link ProductPublishedMessage#getRemovedImageUrls()}.</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.customers.queries.CustomerByEmailTokenGet} to retrieve a customer by email token.</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.producttypes.commands.updateactions.SetInputTip} update action.</li>
+ <li class=fixed-in-release>{@link io.sphere.sdk.customers.queries.CustomerByPasswordTokenGet} now uses the new endpoint.</li>
+ <li class=change-in-release>Changed type of {@link ProductDraft#getCategories()} from Set&lt;Reference&lt;Category&gt;&gt; to Set&lt;ResourceIdentifier&lt;Category&gt;&gt;.
+ This breaking change may require an update of your source code, depending on how you use the {@link ProductDraft} type.
+ The previously returned {@link Reference} instances provided a {@link Reference#getObj()} method
+ that is not available from {@link ResourceIdentifier}. If you relied on the {@link Reference#getObj()} method to retrieve the id or key of the referenced object, you now have
+ to use the {@link ResourceIdentifier#getId()} and {@link ResourceIdentifier#getKey()} as exposed by the {@link ResourceIdentifier} interface.
+ <li class=change-in-release>Updated <a href="http://javamoney.github.io/ri.html#welcome-to-moneta---the-jsr-354-reference-implementation">moneta</a> to version 1.1</li>
+ <li class=change-in-release>Changed {@link SphereProjectScope} from an enum to a class and added missing scopes. This change doesn't require changes to your source code,
+ but requires a recompilation of all projects that depend on this class.</li>
+ </ul>
 
  <h3 class=released-version id="v1_20_0">1.20.0 (23.06.2017)</h3>
  <ul>

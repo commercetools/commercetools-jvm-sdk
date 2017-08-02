@@ -3,6 +3,8 @@ package io.sphere.sdk.commands;
 import io.sphere.sdk.models.ResourceView;
 import io.sphere.sdk.models.Versioned;
 
+import java.util.List;
+
 /**
  * Subinterface for update commands which supports updating the version for retries on {@link io.sphere.sdk.client.ConcurrentModificationException}s
  * @param <T> the type of the resource to be updated
@@ -21,4 +23,13 @@ public interface UpdateCommandDsl<T extends ResourceView<T, T>, C extends Update
     C withVersion(final Versioned<T> versioned);
 
     C withVersion(final Long version);
+
+    /**
+     * Creates a copy of this update command with additional update actions.
+     * @param updateActions the new update actions to append to the update command.
+     * @return the new update command
+     */
+    C plusUpdateActions(List<? extends UpdateAction<T>> updateActions);
+
+    C withUpdateActions(List<? extends UpdateAction<T>> updateActions);
 }

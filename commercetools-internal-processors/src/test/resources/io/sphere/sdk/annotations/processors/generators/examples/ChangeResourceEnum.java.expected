@@ -8,6 +8,8 @@ import javax.annotation.Generated;
 /**
  * Updates the {@code resourceEnum} property of a {@link MyResource}.
  *
+ * {@include.example io.sphere.sdk.annotations.processors.generators.examples.commands.MyResourceUpdateCommandIntegrationTest#changeResourceEnum()}
+ *
  * @see MyResource#getResourceEnum()
  */
 @Generated(

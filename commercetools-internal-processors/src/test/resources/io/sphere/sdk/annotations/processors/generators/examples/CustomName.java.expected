@@ -1,0 +1,50 @@
+package io.sphere.sdk.annotations.processors.generators.examples.commands.updateactions;
+
+import io.sphere.sdk.annotations.processors.generators.examples.ExampleResourceWithUpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
+import java.lang.String;
+import javax.annotation.Generated;
+import javax.annotation.Nullable;
+
+/**
+ * Updates the {@code optionalUserName} property of a {@link ExampleResourceWithUpdateAction}.
+ *
+ * @see ExampleResourceWithUpdateAction#getOptionalUserName()
+ */
+@Generated(
+    value = "io.sphere.sdk.annotations.processors.generators.UpdateActionGenerator",
+    comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.ExampleResourceWithUpdateAction"
+)
+public final class CustomName extends UpdateActionImpl<ExampleResourceWithUpdateAction> {
+  @Nullable
+  private final String optionalUserName;
+
+  private CustomName(@Nullable final String optionalUserName) {
+    super("customName");
+    this.optionalUserName = optionalUserName;
+  }
+
+  @Nullable
+  public String getOptionalUserName() {
+    return optionalUserName;
+  }
+
+  /**
+   * Creates a new object initialized with the given values.
+   *
+   * @param optionalUserName initial value for the {@link ExampleResourceWithUpdateAction#getOptionalUserName()} property
+   * @return new object initialized with the given values
+   */
+  public static CustomName of(@Nullable final String optionalUserName) {
+    return new CustomName(optionalUserName);
+  }
+
+  /**
+   * Creates a new object initialized with the given values.
+   *
+   * @return new object initialized with the given values
+   */
+  public static CustomName ofUnset() {
+    return new CustomName(null);
+  }
+}

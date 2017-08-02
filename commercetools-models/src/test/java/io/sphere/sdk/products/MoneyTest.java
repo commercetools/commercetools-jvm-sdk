@@ -1,10 +1,9 @@
 package io.sphere.sdk.products;
 
-import io.sphere.sdk.json.TypeReferences;
 import io.sphere.sdk.json.SphereJsonUtils;
+import io.sphere.sdk.json.TypeReferences;
 import io.sphere.sdk.utils.MoneyImpl;
-import io.sphere.sdk.utils.SphereInternalUtils;
-import org.javamoney.moneta.function.MonetaryUtil;
+import org.javamoney.moneta.function.MonetaryQueries;
 import org.junit.Test;
 
 import javax.money.Monetary;
@@ -75,9 +74,10 @@ public class MoneyTest {
     @Test
     public void yen() throws Exception {
         assertThat(MoneyImpl.ofCents(123456, "JPY")).isEqualTo(MoneyImpl.of(123456, Monetary.getCurrency("JPY")));
-        assertThat(MoneyImpl.of(123456, Monetary.getCurrency("JPY")).query(MonetaryUtil.minorUnits())).isEqualTo(123456);
-        assertThat(MoneyImpl.of(123456, Monetary.getCurrency("JPY")).query(MonetaryUtil.majorUnits())).isEqualTo(123456);
-        assertThat(MoneyImpl.of(new BigDecimal("1234.56"), Monetary.getCurrency("JPY")).query(MonetaryUtil.minorUnits())).isEqualTo(1234);
+        assertThat(MoneyImpl.of(123456, Monetary.getCurrency("JPY")).query(MonetaryQueries.extractMajorPart())).isEqualTo(123456);
+        assertThat(MoneyImpl.of(123456, Monetary.getCurrency("JPY")).query(MonetaryQueries.extractMajorPart())).isEqualTo(123456);
+        assertThat(MoneyImpl.of(new BigDecimal("1234.56"), Monetary.getCurrency("JPY")).query(MonetaryQueries.extractMajorPart())).isEqualTo(1234);
+        assertThat(MoneyImpl.of(new BigDecimal("1234.56"), Monetary.getCurrency("JPY")).query(MonetaryQueries.extractMinorPart())).isEqualTo(0);
     }
 
     private void checkSerialization(final MonetaryAmount money, final String json) {

@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.ser.std.StdScalarSerializer;
 
 import javax.money.MonetaryAmount;
 import java.io.IOException;
-import java.math.BigDecimal;
 
 final class MoneySerializer extends StdScalarSerializer<MonetaryAmount> {
     static final long serialVersionUID = 0L;

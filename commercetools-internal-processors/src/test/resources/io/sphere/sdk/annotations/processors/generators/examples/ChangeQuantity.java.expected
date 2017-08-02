@@ -8,6 +8,8 @@ import javax.annotation.Generated;
 /**
  * Updates the {@code quantity} property of a {@link MyResource}.
  *
+ * {@include.example io.sphere.sdk.annotations.processors.generators.examples.commands.MyResourceUpdateCommandIntegrationTest#changeQuantity()}
+ *
  * @see MyResource#getQuantity()
  */
 @Generated(

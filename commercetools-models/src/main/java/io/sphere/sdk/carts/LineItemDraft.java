@@ -18,10 +18,17 @@ import javax.money.MonetaryAmount;
  * @see io.sphere.sdk.carts.commands.CartCreateCommand
  */
 @JsonDeserialize(as = LineItemDraftDsl.class)
-@ResourceDraftValue(factoryMethods = {
-        @FactoryMethod(parameterNames = {"productId", "variantId", "quantity", "supplyChannel", "distributionChannel", "custom", "externalTaxRate", "externalPrice", "externalTotalPrice"})
-})
+@ResourceDraftValue(
+        abstractBuilderClass = true,
+        factoryMethods = {
+                @FactoryMethod(methodName = "ofSku", parameterNames = {"sku", "quantity"}),
+                @FactoryMethod(parameterNames = {"productId", "variantId", "quantity", "supplyChannel", "distributionChannel", "custom", "externalTaxRate", "externalPrice", "externalTotalPrice"})
+        }
+)
 public interface LineItemDraft {
+
+    String getSku();
+
     @Nullable
     CustomFieldsDraft getCustom();
 
@@ -41,9 +48,8 @@ public interface LineItemDraft {
     /**
      * The optional external tax rate if the cart has the tax mode {@link TaxMode#EXTERNAL}.
      *
-     * @see TaxMode
-     *
      * @return external tax rate or null
+     * @see TaxMode
      */
     @Nullable
     ExternalTaxRateDraft getExternalTaxRate();

@@ -10,7 +10,7 @@ public class DraftBuilderGeneratorTest extends AbstractGeneratorTest {
 
     @Before
     public void setup() {
-        generator = new DraftBuilderGenerator(compilationRule.getElements(), compilationRule.getTypes());
+        generator = new DraftBuilderGenerator(compilationRule.getElements(), compilationRule.getTypes(),messager);
     }
 
     @Test
