@@ -110,7 +110,7 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
     }
 
     private <T> HttpRequest createHttpRequest(final SphereRequest<T> sphereRequest, final String token) {
-        final String correlationId = correlationIdGenerator.createCorrelationId();
+        final String correlationId = correlationIdGenerator.get();
         return sphereRequest
                 .httpRequestIntent()
                 .plusHeader(HttpHeaders.X_CORRELATION_ID, correlationId)

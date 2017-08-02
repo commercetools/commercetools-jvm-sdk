@@ -1,14 +1,15 @@
 package io.sphere.sdk.client;
 
+import java.util.function.Supplier;
+
 /**
  * Generates correlation ids for each request.
  *
  * The format of the correlation id is defined as:
  * {@code <projectKey> / <UUID> (/ customId)*}
  */
-interface CorrelationIdGenerator {
-
-    String getProjectKey();
+@FunctionalInterface
+interface CorrelationIdGenerator extends Supplier<String> {
 
     /**
      * Creates a new correlation id.
@@ -17,7 +18,8 @@ interface CorrelationIdGenerator {
      *
      * @return returns a new unique correlation id
      */
-    String createCorrelationId();
+    @Override
+    String get();
 
     /**
      * Creates a new default correlation id generator for the given project key.

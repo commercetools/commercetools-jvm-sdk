@@ -14,13 +14,12 @@ final class CorrelationIdGeneratorImpl extends Base implements CorrelationIdGene
         this.projectKey = projectKey;
     }
 
-    @Override
     public String getProjectKey() {
         return projectKey;
     }
 
     @Override
-    public String createCorrelationId() {
+    public String get() {
         return String.join("/", projectKey, UUID.randomUUID().toString());
     }
 }

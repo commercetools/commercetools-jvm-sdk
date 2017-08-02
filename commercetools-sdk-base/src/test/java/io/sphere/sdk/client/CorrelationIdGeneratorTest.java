@@ -20,9 +20,7 @@ public class CorrelationIdGeneratorTest {
         final CorrelationIdGenerator correlationIdGenerator =
                 CorrelationIdGenerator.of(projectKey);
 
-        assertThat(correlationIdGenerator.getProjectKey()).isEqualTo(projectKey);
-
-        final String correlationId = correlationIdGenerator.createCorrelationId();
+        final String correlationId = correlationIdGenerator.get();
         final List<String> correlationIdParts = Arrays.asList(correlationId.split("/"));
 
         assertThat(correlationIdParts).hasSize(2);
