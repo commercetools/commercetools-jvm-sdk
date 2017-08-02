@@ -234,7 +234,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             final List<UpdateAction<Product>> updateActions = asList(
                     AddExternalImage.of(image, MASTER_VARIANT_ID),
                     AddPrice.of(MASTER_VARIANT_ID, expectedPrice),
-                    Publish.ofScope(PublishScope.Prices)
+                    Publish.ofScope(PublishScope.PRICES)
             );
             final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(publishedProduct, updateActions));
             List<Price> prices = updatedProduct.getMasterData().getCurrent().getMasterVariant().getPrices();
@@ -265,7 +265,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             final List<UpdateAction<Product>> updateActions = asList(
                     AddExternalImage.of(image, MASTER_VARIANT_ID),
                     AddPrice.of(MASTER_VARIANT_ID, expectedPrice),
-                    Publish.ofScope(PublishScope.All)
+                    Publish.ofScope(PublishScope.ALL)
             );
             final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(publishedProduct, updateActions));
             List<Price> prices = updatedProduct.getMasterData().getCurrent().getMasterVariant().getPrices();

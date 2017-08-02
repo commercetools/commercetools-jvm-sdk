@@ -1,14 +1,23 @@
 package io.sphere.sdk.products;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
+import static org.apache.commons.lang3.StringUtils.capitalize;
+
 /**
  * PublishScope.
  */
 public enum PublishScope {
 
-    /* All is the scope by default to allow to publish all changes */
-    All,
+    /* ALL is the scope by default to allow to publish all changes */
+    ALL,
 
-    /* Prices allow to publish only the prices */
-    Prices;
+    /* PRICES allow to publish only the prices */
+    PRICES;
+
+    @JsonValue
+    public String toScopeString() {
+        return capitalize(name().toLowerCase());
+    }
 
 }
