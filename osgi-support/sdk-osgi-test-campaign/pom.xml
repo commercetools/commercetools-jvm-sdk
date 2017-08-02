@@ -52,7 +52,6 @@
         </dependency>
         <!--
             pax-exam-container-native will run the OSGi platform.
-            In our case its the felix framework defined within the profile section.
         -->
         <dependency>
             <groupId>org.ops4j.pax.exam</groupId>
@@ -123,7 +122,6 @@
             <artifactId>httpasyncclient-osgi</artifactId>
             <version>${apache.httpclient.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/javax.inject/javax.inject -->
         <dependency>
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>

@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @Mojo(name = "process-classes", threadSafe = true, defaultPhase = LifecyclePhase.PROCESS_CLASSES)
 public class ChildCreationMojo extends AbstractMojo {
 
-    private ClassPool pool = ClassPool.getDefault();
+    private final ClassPool pool = ClassPool.getDefault();
 
 
     @Parameter(defaultValue = "${project}", readonly = true)
@@ -33,8 +33,7 @@ public class ChildCreationMojo extends AbstractMojo {
 
     private String childClassPrefix = "___";
 
-    public ChildCreationMojo() {
-    }
+    public ChildCreationMojo() {}
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {

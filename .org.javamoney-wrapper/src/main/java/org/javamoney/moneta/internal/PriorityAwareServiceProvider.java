@@ -31,7 +31,7 @@ import java.util.logging.Logger;
  *
  * @author Anatole Tresch
  */
-public class OSGIPriorityAwareServiceProvider implements ServiceProvider {
+public class PriorityAwareServiceProvider implements ServiceProvider {
     /**
      * List of services loaded, per class.
      */
@@ -95,17 +95,17 @@ public class OSGIPriorityAwareServiceProvider implements ServiceProvider {
     private <T> List<T> loadServices(final Class<T> serviceType) {
         List<T> services = new ArrayList<>();
         try {
-            for (T t : ServiceLoader.load(serviceType,OSGIPriorityAwareServiceProvider.class.getClassLoader())) {
+            for (T t : ServiceLoader.load(serviceType,PriorityAwareServiceProvider.class.getClassLoader())) {
                 services.add(t);
             }
-            services.sort(OSGIPriorityAwareServiceProvider::compareServices);
+            services.sort(PriorityAwareServiceProvider::compareServices);
             @SuppressWarnings("unchecked")
             final List<T> previousServices = (List<T>) servicesLoaded.putIfAbsent(serviceType, (List<Object>) services);
             return Collections.unmodifiableList(previousServices != null ? previousServices : services);
         } catch (Exception e) {
-            Logger.getLogger(OSGIPriorityAwareServiceProvider.class.getName()).log(Level.WARNING,
+            Logger.getLogger(PriorityAwareServiceProvider.class.getName()).log(Level.WARNING,
                     "Error loading services of type " + serviceType, e);
-            services.sort(OSGIPriorityAwareServiceProvider::compareServices);
+            services.sort(PriorityAwareServiceProvider::compareServices);
             return services;
         }
     }
