@@ -26,16 +26,19 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
     private final SphereApiConfig config;
     private final SphereAccessTokenSupplier tokenSupplier;
     private final String userAgent;
+    private final CorrelationIdGenerator correlationIdGenerator;
 
     static {
         ServiceLoader.load(SphereClientModule.class).iterator().forEachRemaining(m -> {});
     }
 
-    private SphereClientImpl(final SphereApiConfig config, final SphereAccessTokenSupplier tokenSupplier, final HttpClient httpClient) {
+    private SphereClientImpl(final SphereApiConfig config, final SphereAccessTokenSupplier tokenSupplier,
+                             final HttpClient httpClient, final CorrelationIdGenerator correlationIdGenerator) {
         this.httpClient = httpClient;
         this.config = config;
         this.tokenSupplier = tokenSupplier;
         userAgent = UserAgentUtils.obtainUserAgent(httpClient);
+        this.correlationIdGenerator = correlationIdGenerator;
     }
 
     @Override
@@ -107,7 +110,6 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
     }
 
     private <T> HttpRequest createHttpRequest(final SphereRequest<T> sphereRequest, final String token) {
-        final CorrelationIdGenerator correlationIdGenerator = getConfig().getCorrelationIdGenerator();
         final String correlationId = correlationIdGenerator.createCorrelationId();
         return sphereRequest
                 .httpRequestIntent()
@@ -166,8 +168,9 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
         closeQuietly(httpClient);
     }
 
-    public static SphereClient of(final SphereApiConfig config, final HttpClient httpClient, final SphereAccessTokenSupplier tokenSupplier) {
-        return new SphereClientImpl(config, tokenSupplier, httpClient);
+    public static SphereClient of(final SphereApiConfig config, final HttpClient httpClient,
+                                  final SphereAccessTokenSupplier tokenSupplier, final CorrelationIdGenerator correlationIdGenerator) {
+        return new SphereClientImpl(config, tokenSupplier, httpClient, correlationIdGenerator);
     }
 
     @Override

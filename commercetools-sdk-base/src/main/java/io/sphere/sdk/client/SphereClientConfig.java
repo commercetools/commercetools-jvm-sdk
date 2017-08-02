@@ -80,7 +80,7 @@ public final class SphereClientConfig extends Base implements SphereAuthConfig, 
         return projectKey;
     }
 
-    @Override
+
     public CorrelationIdGenerator getCorrelationIdGenerator() {
         return correlationIdGenerator;
     }

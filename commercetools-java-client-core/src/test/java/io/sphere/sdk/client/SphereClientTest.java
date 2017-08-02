@@ -43,7 +43,6 @@ public class SphereClientTest {
         when: {
             when(sphereApiConfig.getProjectKey()).thenReturn(projectKey);
             when(sphereApiConfig.getApiUrl()).thenReturn("http://api.commercetools.de");
-            when(sphereApiConfig.getCorrelationIdGenerator()).thenReturn(CorrelationIdGenerator.of(projectKey));
             when(httpClient.getUserAgent()).thenReturn("user-agent");
             when(sphereAccessTokenSupplier.get()).thenReturn(CompletableFutureUtils.successful("token"));
 

@@ -25,8 +25,7 @@ final class SphereApiConfigImpl extends Base implements SphereApiConfig {
         return projectKey;
     }
 
-    @Override
-    public CorrelationIdGenerator getCorrelationIdGenerator() {
+    CorrelationIdGenerator getCorrelationIdGenerator() {
         return correlationIdGenerator;
     }
 }

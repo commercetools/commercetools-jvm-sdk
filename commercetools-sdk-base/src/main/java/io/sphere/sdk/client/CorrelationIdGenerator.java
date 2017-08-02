@@ -6,7 +6,7 @@ package io.sphere.sdk.client;
  * The format of the correlation id is defined as:
  * {@code <projectKey> / <UUID> (/ customId)*}
  */
-public interface CorrelationIdGenerator {
+interface CorrelationIdGenerator {
 
     String getProjectKey();
 

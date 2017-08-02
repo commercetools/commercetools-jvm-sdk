@@ -10,8 +10,6 @@ public interface SphereApiConfig {
 
     String getProjectKey();
 
-    CorrelationIdGenerator getCorrelationIdGenerator();
-
     static SphereApiConfig of(final String projectKey) {
         return of(projectKey, API_URL);
     }
