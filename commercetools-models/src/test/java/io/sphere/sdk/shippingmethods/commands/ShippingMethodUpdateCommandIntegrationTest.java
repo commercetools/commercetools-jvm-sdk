@@ -45,7 +45,7 @@ public class ShippingMethodUpdateCommandIntegrationTest extends IntegrationTest 
     @Test
     public void setKey() throws Exception {
         withUpdateableShippingMethod(client(), shippingMethod -> {
-            final String newKey = randomString();
+            final String newKey = randomKey();
             assertThat(shippingMethod.getKey()).isNotEqualTo(newKey);
             final ShippingMethodUpdateCommand cmd = ShippingMethodUpdateCommand.of(shippingMethod, SetKey.of(newKey));
             final ShippingMethod updatedShippingMethod = client().executeBlocking(cmd);
