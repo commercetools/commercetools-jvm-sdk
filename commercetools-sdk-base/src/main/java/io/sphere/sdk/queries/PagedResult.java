@@ -36,7 +36,7 @@ public interface PagedResult<T> {
       * to {@link io.sphere.sdk.queries.PagedResult#getTotal()} the container contains only a subset of all
       * elements that match the request.
       * @return {@link io.sphere.sdk.queries.PagedResult#getCount()} elements matching the request
-      */
+      */ 
      List<T> getResults();
 
     /**
