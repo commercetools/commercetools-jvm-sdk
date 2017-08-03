@@ -35,10 +35,6 @@ public class PaxExamClasspathSuite extends Suite {
 
     private static String TEST_PREFIX = "___";
 
-    static{
-        System.setProperty("org.ops4j.pax.logging.DefaultServiceLog.level","WARN");
-    }
-
 
     /**
      * Used by JUnit

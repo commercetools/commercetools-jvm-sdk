@@ -17,6 +17,12 @@ import static org.ops4j.pax.exam.CoreOptions.*;
 
 public class JvmSdkConfigurationFactory implements ConfigurationFactory {
 
+    ///Disabling annoying outputs
+    static{
+        System.setProperty("org.ops4j.pax.logging.DefaultServiceLog.level","WARN");
+    }
+
+
     @Override
     public Option[] createConfiguration() {
 
@@ -37,8 +43,6 @@ public class JvmSdkConfigurationFactory implements ConfigurationFactory {
 
                 "com.commercetools.sdk.jvm.core.commercetools-sdk-base",
                 "com.commercetools.sdk.jvm.core.sdk-http",
-//                "com.commercetools.sdk.jvm.core.org.javamoney-wrapper",
-//                "javax.money.api",
                 "com.fasterxml.jackson.core.jackson-annotations",
                 "com.fasterxml.jackson.core.jackson-core",
                 "com.fasterxml.jackson.core.jackson-databind",

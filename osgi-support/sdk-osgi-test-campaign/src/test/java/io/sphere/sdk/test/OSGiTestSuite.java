@@ -28,6 +28,6 @@ import static org.junit.extensions.cpsuite.ClasspathSuite.*;
 })
 @IncludeJars(true)
 @MinimumTestClassesInSuite(250)
-public class OSGITestSuite {
+public class OSGiTestSuite {
 
 }
