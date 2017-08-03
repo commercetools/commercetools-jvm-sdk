@@ -16,7 +16,7 @@ interface CorrelationIdGenerator extends Supplier<String> {
      *
      * @see io.sphere.sdk.http.HttpHeaders#X_CORRELATION_ID
      *
-     * @return returns a new unique correlation id
+     * @return a new unique correlation id
      */
     @Override
     String get();
