@@ -23,7 +23,8 @@ public class PublicConstructorsAreTheExceptionRule extends ConstructorStrategyRu
                     "io.sphere.sdk.client.SolutionInfo," +
                     "io.sphere.sdk.client.SphereApacheHttpClientFactory," +
                     "io.sphere.sdk.client.SphereAsyncHttpClientFactory," +
-                    "io.sphere.sdk.client.SphereHttpClientFactory").split(",( )?"));
+                    "io.sphere.sdk.client.SphereHttpClientFactory," +
+                    "io.sphere.sdk.utils.OSGiPriorityAwareServiceProvider").split(",( )?"));
 
     @Override
     protected boolean classIsIncludedInRule(final Class<?> clazz) {

@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class OSGiPriorityAwareServiceProvider implements ServiceProvider {
+public final class OSGiPriorityAwareServiceProvider implements ServiceProvider {
     /**
      * List of services loaded, per class.
      */
@@ -46,7 +46,7 @@ public class OSGiPriorityAwareServiceProvider implements ServiceProvider {
         return loadServices(serviceType);
     }
 
-    public static int compareServices(Object o1, Object o2) {
+    public static int compareServices(final Object o1,final  Object o2) {
         int prio1 = 0;
         int prio2 = 0;
         Priority prio1Annot = o1.getClass().getAnnotation(Priority.class);

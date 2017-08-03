@@ -18,6 +18,7 @@ public class EveryObjectHasAGoodBaseClass extends ClassStrategyRule {
                 && !clazz.getName().endsWith("DefaultCurrencyUnits")
                 && !clazz.getName().endsWith("HttpStatusCode")
                 && !clazz.getName().equals("io.sphere.sdk.models.Base")
+                && !clazz.getName().equals("io.sphere.sdk.utils.OSGiPriorityAwareServiceProvider")
                 && !clazz.getName().equals("io.sphere.sdk.meta.BuildInfo");
     }
 
