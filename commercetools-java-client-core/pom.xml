@@ -56,9 +56,7 @@
                         <Import-Package>!javax.annotation,*</Import-Package>
                         <Bundle-Version>${project.version}</Bundle-Version>
                         <Require-Capability>
-                            osgi.extender;filter:="(osgi.extender=osgi.serviceloader.processor)",
-                            osgi.serviceloader;filter:="(osgi.serviceloader=io.sphere.sdk.client.SolutionInfo)"; cardinality:=multiple;
-                            filter:="(osgi.serviceloader=io.sphere.sdk.client.SphereClientModule)"; cardinality:=multiple</Require-Capability>
+                            osgi.extender;filter:="(osgi.extender=osgi.serviceloader.processor)"</Require-Capability>
                         <Fragment-Host>${project.groupId}.commercetools-sdk-base</Fragment-Host>
                         <split-package>-merge-last</split-package>
                     </instructions>

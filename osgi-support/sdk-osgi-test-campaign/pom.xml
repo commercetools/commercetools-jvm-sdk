@@ -164,23 +164,6 @@
             <artifactId>gson</artifactId>
             <version>2.3.1</version>
         </dependency>
-
-        <dependency>
-            <groupId>com.commercetools.sdk.jvm.core</groupId>
-            <artifactId>org.javamoney-wrapper</artifactId>
-            <version>${project.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.apache.geronimo.specs</groupId>
-                    <artifactId>geronimo-annotation_1.2_spec</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>com.commercetools.sdk.jvm.core</groupId>
-            <artifactId>javax.money-wrapper</artifactId>
-            <version>${project.version}</version>
-        </dependency>
         <dependency>
             <groupId>com.commercetools.sdk.jvm.core</groupId>
             <artifactId>sdk-http-apache-async</artifactId>

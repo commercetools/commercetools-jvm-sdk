@@ -60,8 +60,6 @@
         <module>sdk-http-ahc-1_9</module>
         <module>sdk-http-ahc-2_0</module>
         <module>sdk-http-apache-async</module>
-        <module>.org.javamoney-wrapper</module>
-        <module>.javax.money-wrapper</module>
         <module>osgi-support</module>
     </modules>
     <scm>
