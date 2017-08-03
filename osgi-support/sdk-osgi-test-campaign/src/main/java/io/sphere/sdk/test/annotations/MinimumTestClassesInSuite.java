@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 
 /**
  * This annotation is added to check that when running a test suite, it contains a minimum of test classes,
- * this is especially useful in the case where the classpath isn't resolved correctly, because in thatcase
+ * this is especially useful in the case where the classpath isn't resolved correctly, because in that case
  * the suite  succeeds while no test has passed since there are no tests to run.
  * */
 

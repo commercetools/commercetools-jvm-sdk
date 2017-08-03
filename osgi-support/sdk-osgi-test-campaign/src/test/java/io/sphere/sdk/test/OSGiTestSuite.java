@@ -23,7 +23,6 @@ import static org.junit.extensions.cpsuite.ClasspathSuite.*;
         "!io.sphere.sdk.products.commands.___ProductCreateCommandIntegrationTest",
         "!io.sphere.sdk.queries.___IsInQueryPredicateTest",
         "!io.sphere.sdk.search.___PagedSearchResultTest",
-        "io.sphere.sdk.queries.___NotEqQueryPredicateTest",
         "io.sphere.sdk.*"
 })
 @IncludeJars(true)
