@@ -55,7 +55,8 @@ public class SphereClientTest {
             final DummySphereRequest sphereRequest = DummySphereRequest.of();
 
             final CompletableFuture<String> completionStage = (CompletableFuture<String>) sphereClient.execute(sphereRequest);
-            assertThat(completionStage).isCompletedWithValue(DummySphereRequest.DEFAULT_RESPONSE_OBJECT);
+            final String response = completionStage.get();
+            assertThat(response).isEqualTo(DummySphereRequest.DEFAULT_RESPONSE_OBJECT);
 
             final HttpHeaders headers = httpRequestArgumentCaptor.getValue().getHeaders();
             final Optional<String> correlationId = headers.findFlatHeader(HttpHeaders.X_CORRELATION_ID);
