@@ -169,6 +169,11 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
     }
 
     public static SphereClient of(final SphereApiConfig config, final HttpClient httpClient,
+                                  final SphereAccessTokenSupplier tokenSupplier) {
+        return new SphereClientImpl(config, tokenSupplier, httpClient, CorrelationIdGenerator.of(config.getProjectKey()));
+    }
+
+    public static SphereClient of(final SphereApiConfig config, final HttpClient httpClient,
                                   final SphereAccessTokenSupplier tokenSupplier, final CorrelationIdGenerator correlationIdGenerator) {
         return new SphereClientImpl(config, tokenSupplier, httpClient, correlationIdGenerator);
     }
