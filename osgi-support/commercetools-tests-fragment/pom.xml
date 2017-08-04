@@ -73,7 +73,7 @@
                 <version>${felix.maven.version}</version>
                 <extensions>true</extensions>
                 <configuration>
-
+                    <niceManifest>true</niceManifest>
                     <supportedProjectTypes>
                         <supportedProjectType>jar</supportedProjectType>
                         <supportedProjectType>bundle</supportedProjectType>

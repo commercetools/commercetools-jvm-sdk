@@ -67,8 +67,10 @@ public class JvmSdkConfigurationFactory implements ConfigurationFactory {
                 "org.objectweb.asm",
                 "org.objectweb.asm.commons",
                 "org.objectweb.asm.tree",
-
-
+                "org.objenesis",
+                "net.bytebuddy.byte-buddy",
+                "net.bytebuddy.byte-buddy-agent",
+                "org.mockito.mockito-core",
                 "org.ops4j.pax.logging.pax-logging-api",
                 "org.ops4j.pax.logging.pax-logging-service",
                 //dependencies for tests
