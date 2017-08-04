@@ -14,6 +14,19 @@ import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TaxCategoryUpdateCommandIntegrationTest extends IntegrationTest {
+
+    @Test
+    public void setKey() {
+        withUpdateableTaxCategory(client(), taxCategory -> {
+            final String newKey = randomKey();
+            assertThat(taxCategory.getKey()).isNotEqualTo(newKey);
+
+            final TaxCategory updatedTaxCategory = client().executeBlocking(TaxCategoryUpdateCommand.of(taxCategory, SetKey.of(newKey)));
+            assertThat(updatedTaxCategory.getKey()).isEqualTo(newKey);
+            return updatedTaxCategory;
+        });
+    }
+
     @Test
     public void changeName() {
         withUpdateableTaxCategory(client(), taxCategory -> {
