@@ -15,6 +15,6 @@ public interface SphereApiConfig {
     }
 
     static SphereApiConfig of(final String projectKey, final String apiUrl) {
-        return new SphereApiConfigImpl(projectKey, apiUrl);
+        return new SphereApiConfigImpl(projectKey, apiUrl, CorrelationIdGenerator.of(projectKey));
     }
 }
