@@ -31,24 +31,23 @@
         <dependency>
             <groupId>org.ops4j.pax.logging</groupId>
             <artifactId>pax-logging-api</artifactId>
-            <version>1.10.1</version>
+            <version>${pax-exam.logging.version}</version>
         </dependency>
         <dependency>
             <groupId>org.ops4j.pax.logging</groupId>
             <artifactId>pax-logging-service</artifactId>
-            <version>1.10.1</version>
+            <version>${pax-exam.logging.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.felix</groupId>
             <artifactId>org.apache.felix.framework</artifactId>
-            <version>5.6.2</version>
+            <version>${felix.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
-            <scope>compile</scope>
         </dependency>
         <!--
             pax-exam-container-native will run the OSGi platform.
@@ -213,7 +212,7 @@
         <dependency>
             <groupId>com.commercetools.sdk.jvm.core</groupId>
             <artifactId>commercetools-sdk-base</artifactId>
-            <version>1.21.1-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
 
     </dependencies>

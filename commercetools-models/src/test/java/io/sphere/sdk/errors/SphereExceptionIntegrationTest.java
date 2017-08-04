@@ -292,7 +292,7 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
     }
 
     private ExceptionTestDsl executing(final Supplier<SphereRequest<?>> f) {
-        return new ExceptionTestDsl(f,thrown,client());
+        return  ExceptionTestDsl.of(f,thrown,client());
     }
 
     @Test

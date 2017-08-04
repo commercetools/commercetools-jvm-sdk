@@ -42,7 +42,7 @@
                 <version>${felix.maven.version}</version>
                 <extensions>true</extensions>
                 <configuration>
-                    <niceManifest>true</niceManifest>
+
                     <instructions>
                         <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
                         <Export-Package>io.sphere.sdk.http</Export-Package>

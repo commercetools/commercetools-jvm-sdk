@@ -14,7 +14,9 @@ import java.util.stream.Stream;
 
 import static org.ops4j.pax.exam.CoreOptions.*;
 
-
+/**
+ * This class contains the {@link CoreOptions#options(Option...)} that will be used to set the OSGi environment for the tests
+ */
 public class JvmSdkConfigurationFactory implements ConfigurationFactory {
 
     ///Disabling annoying outputs

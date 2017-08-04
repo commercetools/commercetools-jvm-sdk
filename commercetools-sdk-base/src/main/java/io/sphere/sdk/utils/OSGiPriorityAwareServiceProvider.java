@@ -12,6 +12,12 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * This class replaces the {@link PriorityAwareServiceProvider} provided since the latest
+ * contains some bug that doesen't allow using it with OSGi, these bugs are mainly due to not specifying
+ * the {@link ClassLoader} when using {@link ServiceLoader#load(Class, ClassLoader)}
+ *
+ */
 public final class OSGiPriorityAwareServiceProvider implements ServiceProvider {
     /**
      * List of services loaded, per class.

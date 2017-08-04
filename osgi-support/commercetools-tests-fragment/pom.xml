@@ -32,7 +32,7 @@
         <dependency>
             <groupId>com.commercetools.sdk.jvm.core</groupId>
             <artifactId>commercetools-models</artifactId>
-            <version>1.21.1-SNAPSHOT</version>
+            <version>${project.version}</version>
             <type>test-jar</type>
         </dependency>
     </dependencies>
@@ -73,7 +73,7 @@
                 <version>${felix.maven.version}</version>
                 <extensions>true</extensions>
                 <configuration>
-                    <niceManifest>true</niceManifest>
+
                     <supportedProjectTypes>
                         <supportedProjectType>jar</supportedProjectType>
                         <supportedProjectType>bundle</supportedProjectType>

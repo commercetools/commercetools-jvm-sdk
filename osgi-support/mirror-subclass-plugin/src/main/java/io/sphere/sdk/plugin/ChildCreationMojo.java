@@ -19,6 +19,12 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.stream.Collectors;
 
+
+/**
+ * this mojo is used for copying the content of test jars in a fragment that will be started later as part of the OSGi platform.<br>
+ * in addition it subclasses all the tests in that class.<br>
+ * The subclasses have the same name as the test class prefixed by "___" to differ them from their parents
+ */
 @Mojo(name = "process-classes", threadSafe = true, defaultPhase = LifecyclePhase.PROCESS_CLASSES)
 public class ChildCreationMojo extends AbstractMojo {
 

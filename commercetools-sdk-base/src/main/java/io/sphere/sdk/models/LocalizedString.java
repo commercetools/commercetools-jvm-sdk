@@ -31,10 +31,6 @@ public final class LocalizedString extends Base {
 
     private static final Comparator<Map.Entry<Locale, String>> BY_LOCALE_COMPARATOR = (left, right) -> left.getKey().toString().compareTo(right.getKey().toString());
 
-    public static String getJsonCreatorName(){
-        return JsonCreator.class.getName();
-    }
-
     @JsonIgnore
     private final Map<Locale, String> translations;
 

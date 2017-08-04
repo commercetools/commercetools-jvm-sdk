@@ -45,7 +45,7 @@
         <dependency>
             <groupId>com.commercetools.sdk.jvm.core</groupId>
             <artifactId>commercetools-sdk-base</artifactId>
-            <version>1.21.1-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>net.sourceforge.plantuml</groupId>

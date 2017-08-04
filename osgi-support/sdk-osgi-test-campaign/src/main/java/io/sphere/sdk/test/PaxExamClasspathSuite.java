@@ -22,6 +22,11 @@ import java.util.List;
 
 import static org.junit.extensions.cpsuite.ClasspathSuite.*;
 
+/**
+ * this Class allows to run all the tests existing in the classpath.<br>
+ * it runs them  with {@link ProbeRunner} class.<br>
+ * like this we avoid the necessity to annotated all the tests we need to run as OSGi tests with {@code @RunWith(ProbeRunner.class}}
+ */
 public class PaxExamClasspathSuite extends Suite {
 
     private static final boolean DEFAULT_INCLUDE_JARS = false;
@@ -48,7 +53,7 @@ public class PaxExamClasspathSuite extends Suite {
      */
     public PaxExamClasspathSuite(final Class<?> suiteClass,final  RunnerBuilder builder,final  ClassesFinderFactory factory) throws Exception {
 
-        super(suiteClass, getPaxExamRunnerForTestSuitClasses(getSortedTestclasses(createFinder(suiteClass, factory))));
+        super(suiteClass, getPaxExamRunnerForTestSuitClasses(getSortedTestClasses(createFinder(suiteClass, factory))));
 
         if(suiteClass.getAnnotation(MinimumTestClassesInSuite.class)!=null
                 &&
@@ -74,11 +79,11 @@ public class PaxExamClasspathSuite extends Suite {
     }
 
     private static ClassesFinder createFinder(final Class<?> suiteClass,final  ClassesFinderFactory finderFactory) {
-        return finderFactory.create(getSearchInJars(suiteClass), getClassnameFilters(suiteClass), getSuiteTypes(suiteClass),
+        return finderFactory.create(getSearchInJars(suiteClass), getClassNameFilters(suiteClass), getSuiteTypes(suiteClass),
                 getBaseTypes(suiteClass), getExcludedBaseTypes(suiteClass), getClasspathProperty(suiteClass));
     }
 
-    private static Class<?>[] getSortedTestclasses(final ClassesFinder finder) {
+    private static Class<?>[] getSortedTestClasses(final ClassesFinder finder) {
         List<Class<?>> testclasses = finder.find();
         Collections.sort(testclasses, getClassComparator());
         return testclasses.toArray(new Class[testclasses.size()]);
@@ -88,7 +93,7 @@ public class PaxExamClasspathSuite extends Suite {
         return Comparator.comparing(Class::getName);
     }
 
-    private static String[] getClassnameFilters(final Class<?> suiteClass) {
+    private static String[] getClassNameFilters(final Class<?> suiteClass) {
         ClassnameFilters filtersAnnotation = suiteClass.getAnnotation(ClassnameFilters.class);
         if (filtersAnnotation == null) {
             return DEFAULT_CLASSNAME_FILTERS;

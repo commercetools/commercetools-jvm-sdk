@@ -12,10 +12,14 @@ public class ExceptionTestDsl {
         private final Supplier<SphereRequest<?>> f;
         private ExpectedException thrown;
         private BlockingSphereClient client;
-        public ExceptionTestDsl(final Supplier<SphereRequest<?>> f,ExpectedException thrown,BlockingSphereClient client) {
+        private ExceptionTestDsl(final Supplier<SphereRequest<?>> f,ExpectedException thrown,BlockingSphereClient client) {
             this.f = f;
             this.thrown = thrown;
             this.client = client;
+        }
+
+        public static ExceptionTestDsl of(final Supplier<SphereRequest<?>> f,ExpectedException thrown,BlockingSphereClient client) {
+                return new ExceptionTestDsl(f,thrown,client);
         }
 
         public void resultsInA(final Class<? extends Throwable> type) {

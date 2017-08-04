@@ -132,7 +132,7 @@ import java.util.function.Function;
  </ul>
  -->
 
- <h3 class=released-version id="v1_20_0">1.20.0 (23.06.2017)</h3>
+ <h3 class=released-version id="v1_21_0">1.21.0 (18.07.2017)</h3>
  <ul>
  <li class=new-in-release>Added support for Azure ServiceBus subscription destinations {@link AzureServiceBusDestination}.</li>
  <li class=new-in-release>Added support for for external line item prices {@link LineItemDraft#getExternalPrice()}, {@link LineItemPriceMode#EXTERNAL_PRICE}.</li>

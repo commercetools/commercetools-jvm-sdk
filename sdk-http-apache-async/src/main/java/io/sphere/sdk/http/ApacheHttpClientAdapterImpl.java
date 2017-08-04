@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -99,7 +100,7 @@ final class ApacheHttpClientAdapterImpl extends HttpClientAdapterBase {
             final HttpRequestBody body = httpRequest.getBody();
             final HttpEntity httpEntity;
             if (body instanceof StringHttpRequestBody) {
-                StringEntity stringEntity = new StringEntity(((StringHttpRequestBody) body).getString(),"UTF-8");
+                final StringEntity stringEntity = new StringEntity(((StringHttpRequestBody) body).getString(), StandardCharsets.UTF_8);
                 stringEntity.setContentType(ContentType.APPLICATION_JSON.toString());
                 httpEntity = stringEntity;
 
