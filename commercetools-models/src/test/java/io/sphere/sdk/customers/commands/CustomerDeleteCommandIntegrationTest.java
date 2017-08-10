@@ -23,7 +23,7 @@ public class CustomerDeleteCommandIntegrationTest extends CustomerIntegrationTes
     }
 
     @Test
-    public void execution2() throws Exception {
+    public void deleteByKey() throws Exception {
         final String key = randomKey();
         final CustomerSignInResult result = client().executeBlocking(CustomerCreateCommand.of(newCustomerDraft().withKey(key)));
         final Customer customer = result.getCustomer();

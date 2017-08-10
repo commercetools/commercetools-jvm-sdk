@@ -139,6 +139,8 @@ public interface Customer extends Resource<Customer>, Custom, WithKey {
      *
      * @see io.sphere.sdk.customers.queries.CustomerByIdGet
      * @see io.sphere.sdk.carts.queries.CartByCustomerIdGet
+     *
+     * @return ID
      */
     @HasNoUpdateAction
     @Override
@@ -147,8 +149,8 @@ public interface Customer extends Resource<Customer>, Custom, WithKey {
     /**
      * User-specific unique identifier for a customer. Must be unique across a project.
      *
-     * @return key
      * @see io.sphere.sdk.customers.queries.CustomerByKeyGet
+     * @return key
      */
     @Nullable
     String getKey();
