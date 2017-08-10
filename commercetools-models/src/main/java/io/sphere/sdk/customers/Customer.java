@@ -120,10 +120,14 @@ import static java.util.stream.Collectors.toList;
         "    }")
 @ResourceInfo(pluralName = "customers", pathElement = "customers")
 @HasByIdGetEndpoint(javadocSummary = "Fetches a customer by a known ID.", includeExamples = "io.sphere.sdk.customers.queries.CustomerByIdGetIntegrationTest#execution()")
+@HasByKeyGetEndpoint(javadocSummary = "Fetches a customer by a known key.", includeExamples = "io.sphere.sdk.customers.queries.CustomerByKeyGetIntegrationTest#execution()")
 @HasUpdateCommand(javadocSummary = " Updates a customer.\n" +
         " \n" +
         " To update the properties {@link Customer#isEmailVerified()} or {@link Customer#getPassword()} special commands are required which are documented in the {@link Customer customer Javadoc}.")
-@HasDeleteCommand(javadocSummary = "Deletes a customer.", includeExamples = "io.sphere.sdk.customers.commands.CustomerDeleteCommandIntegrationTest#execution()")
+@HasDeleteCommand(
+        javadocSummary = "Deletes a customer.", includeExamples = "io.sphere.sdk.customers.commands.CustomerDeleteCommandIntegrationTest#execution()",
+        deleteWithKey = true
+)
 @HasQueryModel(additionalContents = {
         "StringQuerySortingModel<Customer> lowercaseEmail();",
         "BooleanQueryModel<Customer> isEmailVerified();"
@@ -144,7 +148,7 @@ public interface Customer extends Resource<Customer>, Custom, WithKey {
      * User-specific unique identifier for a customer. Must be unique across a project.
      *
      * @return key
-     * //     * @see io.sphere.sdk.customers.queries.CustomerByKeyGet
+     * @see io.sphere.sdk.customers.queries.CustomerByKeyGet
      */
     @Nullable
     String getKey();
