@@ -1,5 +1,6 @@
 package io.sphere.sdk.products;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.SphereEnumeration;
 
 /**
@@ -12,5 +13,10 @@ public enum PublishScope implements SphereEnumeration {
 
     /* PRICES allow to publish only the prices */
     PRICES;
+
+    @JsonCreator
+    public static PublishScope ofSphereValue(final String value) {
+        return SphereEnumeration.findBySphereName(values(), value).get();
+    }
 
 }
