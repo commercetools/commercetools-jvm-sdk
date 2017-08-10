@@ -7,6 +7,7 @@ import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.WithKey;
 import io.sphere.sdk.types.CustomDraft;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
@@ -26,9 +27,12 @@ import java.util.Locale;
         @FactoryMethod(parameterNames = {"email", "password"})},
         abstractBuilderClass = true,
         abstractResourceDraftValueClass = true)
-public interface CustomerDraft extends CustomDraft {
+public interface CustomerDraft extends CustomDraft, WithKey {
     @Nullable
     String getCustomerNumber();
+
+    @Nullable
+    String getKey();
 
     String getEmail();
 
