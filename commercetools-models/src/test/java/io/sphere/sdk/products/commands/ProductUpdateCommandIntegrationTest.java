@@ -52,7 +52,6 @@ import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
 import static io.sphere.sdk.states.StateType.PRODUCT_STATE;
 import static io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.MONEY_ATTRIBUTE_NAME;
 import static io.sphere.sdk.test.SphereTestUtils.*;
-import static io.sphere.sdk.test.SphereTestUtils.MASTER_VARIANT_ID;
 import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
 import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
 import static java.util.Collections.*;
@@ -215,6 +214,65 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                     .collect(toList());
             assertThat(urls).containsExactly(url2, url1, url3);
             assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void publishWithPriceScope() throws Exception {
+        withUpdateableProduct(client(), (Product product) -> {
+            final ProductData stagedData = product.getMasterData().getStaged();
+            final Product publishedProduct = client().executeBlocking(ProductUpdateCommand.of(product, Publish.of()));
+            final ProductData currentData = publishedProduct.getMasterData().getCurrent();
+            assertThat(stagedData.getMasterVariant().getImages()).hasSize(0);
+            assertThat(stagedData.getMasterVariant().getPrices()).hasSize(0);
+            assertThat(currentData).isEqualTo(stagedData);
+
+            final PriceDraft expectedPrice = PriceDraft.of(EURO_10);
+            final Image image = createExternalImage();
+            final List<UpdateAction<Product>> updateActions = asList(
+                    AddExternalImage.of(image, MASTER_VARIANT_ID),
+                    AddPrice.of(MASTER_VARIANT_ID, expectedPrice),
+                    Publish.ofScope(PublishScope.PRICES)
+            );
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(publishedProduct, updateActions));
+            List<Price> prices = updatedProduct.getMasterData().getCurrent().getMasterVariant().getPrices();
+
+            //Verify published price in the current product
+            assertThat(prices).hasSize(1);
+            assertThat(expectedPrice).isEqualTo(PriceDraft.of(prices.get(0)));
+
+            //Verify that the image has not been published
+            assertThat(updatedProduct.getMasterData().getCurrent().getMasterVariant().getImages()).hasSize(0);
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void publishWithAllScope() throws Exception {
+        withUpdateableProduct(client(), (Product product) -> {
+            final ProductData stagedData = product.getMasterData().getStaged();
+            final Product publishedProduct = client().executeBlocking(ProductUpdateCommand.of(product, Publish.of()));
+            final ProductData currentData = publishedProduct.getMasterData().getCurrent();
+            assertThat(stagedData.getMasterVariant().getImages()).hasSize(0);
+            assertThat(stagedData.getMasterVariant().getPrices()).hasSize(0);
+            assertThat(currentData).isEqualTo(stagedData);
+
+            final PriceDraft expectedPrice = PriceDraft.of(EURO_10);
+            final Image image = createExternalImage();
+            final List<UpdateAction<Product>> updateActions = asList(
+                    AddExternalImage.of(image, MASTER_VARIANT_ID),
+                    AddPrice.of(MASTER_VARIANT_ID, expectedPrice),
+                    Publish.ofScope(PublishScope.ALL)
+            );
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(publishedProduct, updateActions));
+            List<Price> prices = updatedProduct.getMasterData().getCurrent().getMasterVariant().getPrices();
+
+            assertThat(prices).hasSize(1);
+            assertThat(expectedPrice).isEqualTo(PriceDraft.of(prices.get(0)));
+            assertThat(updatedProduct.getMasterData().getCurrent().getMasterVariant().getImages()).isEqualTo(asList(image));
 
             return updatedProduct;
         });

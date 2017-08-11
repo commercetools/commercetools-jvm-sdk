@@ -98,6 +98,8 @@ import io.sphere.sdk.shoppinglists.expansion.LineItemExpansionModel;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.states.StateDraftDsl;
 import io.sphere.sdk.subscriptions.AzureServiceBusDestination;
+import io.sphere.sdk.taxcategories.TaxCategory;
+import io.sphere.sdk.taxcategories.TaxCategoryDraft;
 import io.sphere.sdk.taxcategories.TaxCategoryDraftBuilder;
 import io.sphere.sdk.taxcategories.TaxRate;
 import io.sphere.sdk.types.CustomFields;
@@ -134,6 +136,29 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+ <h3 class=released-version id="v1_22_0">1.22.0 (09.08.2017)</h3>
+ <ul>
+ <li class=new-in-release>A correlation id is now generated for each {@link SphereRequest}.</li>
+ <li class=new-in-release>Added {@link TaxCategory#getKey()}, {@link TaxCategoryDraft#getKey()} and
+ corresponding update action {@link io.sphere.sdk.taxcategories.commands.updateactions.SetKey}.
+ </li>
+ <li class=new-in-release>
+ Added {@link io.sphere.sdk.taxcategories.queries.TaxCategoryByKeyGet} and
+ {@link io.sphere.sdk.taxcategories.commands.TaxCategoryDeleteCommand#ofKey(String, Long)}.
+ </li>
+ <li class=new-in-release>Add {@link LineItemDraft#getSku()}.</li>
+ <li class=new-in-release>Add {@link io.sphere.sdk.shippingmethods.ShippingMethod#getKey()},
+ {@link io.sphere.sdk.shippingmethods.ShippingMethodDraft#getKey()} and update action
+ {@link io.sphere.sdk.shippingmethods.commands.updateactions.SetKey}.
+ </li>
+ <li class=new-in-release>
+ Added {@link io.sphere.sdk.shippingmethods.commands.ShippingMethodDeleteCommand#ofKey(String, Long)}.
+ </li>
+ <li class=new-in-release>Add {@link CartDraft#getCustomerGroup()} and update action
+ {@link io.sphere.sdk.carts.commands.updateactions.SetCustomerGroup}.</li>
+ </ul>
+
+
  <h3 class=released-version id="v1_21_0">1.21.0 (18.07.2017)</h3>
  <ul>
  <li class=new-in-release>Added {@link CustomerGroup#getKey()} and {@link CustomerGroupDraft#getKey()}.</li>
