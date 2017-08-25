@@ -1,6 +1,7 @@
 package io.sphere.sdk.shippingmethods;
 
 import io.sphere.sdk.client.BlockingSphereClient;
+import io.sphere.sdk.products.ProductDraftBuilder;
 import io.sphere.sdk.shippingmethods.commands.ShippingMethodCreateCommand;
 import io.sphere.sdk.shippingmethods.commands.ShippingMethodDeleteCommand;
 import io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommand;
@@ -56,6 +57,16 @@ public class ShippingMethodFixtures {
     public static void withUpdateableShippingMethod(final BlockingSphereClient client, final Function<ShippingMethod, ShippingMethod> f) {
         withTaxCategory(client, taxCategory -> {
             final ShippingMethodDraft draft = ShippingMethodDraft.of(randomString(), "test shipping method", taxCategory, asList());
+            final ShippingMethod shippingMethod = client.executeBlocking(ShippingMethodCreateCommand.of(draft));
+            final ShippingMethod possiblyUpdatedShippingMethod = f.apply(shippingMethod);
+            client.executeBlocking(ShippingMethodDeleteCommand.of(possiblyUpdatedShippingMethod));
+        });
+    }
+
+    public static void withUpdateableShippingMethod(final BlockingSphereClient client, final UnaryOperator<ShippingMethodDraftBuilder> builderMapper, final Function<ShippingMethod, ShippingMethod> f) {
+        withTaxCategory(client, taxCategory -> {
+            final ShippingMethodDraftBuilder builder = ShippingMethodDraftBuilder.of(randomString(), "test shipping method", taxCategory.toReference(), asList(), false);
+            final ShippingMethodDraft draft = builderMapper.apply(builder).build();
             final ShippingMethod shippingMethod = client.executeBlocking(ShippingMethodCreateCommand.of(draft));
             final ShippingMethod possiblyUpdatedShippingMethod = f.apply(shippingMethod);
             client.executeBlocking(ShippingMethodDeleteCommand.of(possiblyUpdatedShippingMethod));
