@@ -86,6 +86,10 @@ public interface Cart extends CartLike<Cart> {
         return Reference.of(referenceTypeId(), getId(), this);
     }
 
+    @HasUpdateAction
+    @Nullable
+    String getAnonymousId();
+
     /**
      * State in the perspective if the cart is active, merged with another cart or ordered.
      *

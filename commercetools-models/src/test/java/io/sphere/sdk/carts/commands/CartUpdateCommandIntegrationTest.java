@@ -53,6 +53,16 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
     public static final int MASTER_VARIANT_ID = 1;
 
     @Test
+    public void setAnonymousId() throws Exception {
+        withEmptyCartAndProduct(client(), (cart, product) -> {
+            final String anonymousId = randomString();
+            final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, SetAnonymousId.of(anonymousId)));
+
+            assertThat(updatedCart.getAnonymousId()).isEqualTo(anonymousId);
+        });
+    }
+
+    @Test
     public void addLineItem() throws Exception {
         withEmptyCartAndProduct(client(), (cart, product) -> {
             assertThat(cart.getLineItems()).isEmpty();
