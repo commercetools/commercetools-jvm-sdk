@@ -78,6 +78,9 @@ public class CategoryDocumentationIntegrationTest extends IntegrationTest {
             .queryAll(client(), CategoryQuery.of(), (categories -> categories), 500);
         final List<List<Category>> categoryPages = SphereClientUtils
             .blockingWait(categoryPagesStage, Duration.ofMinutes(5));
+
+        assertThat(categoryPages).hasSize(1);
+
         final List<Category> categories = categoryPages.stream()
                                                        .flatMap(List::stream)
                                                        .collect(toList());
@@ -88,16 +91,41 @@ public class CategoryDocumentationIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void fetchAllExternalIds() throws Exception {
+    public void fetchAllExternalIdsWithUniformPageSizes() throws Exception {
         final Function<List<Category>, List<String>> externalIdCallBack = categories ->
             categories.stream()
                       .map(Category::getExternalId)
                       .collect(toList());
 
         final CompletionStage<List<List<String>>> categoryPagesStage = QueryExecutionUtils
-            .queryAll(client(), CategoryQuery.of(), externalIdCallBack, 500);
+            .queryAll(client(), CategoryQuery.of(), externalIdCallBack, 3);
         final List<List<String>> categoryPages = SphereClientUtils
             .blockingWait(categoryPagesStage, Duration.ofMinutes(5));
+
+        assertThat(categoryPages).hasSize(5);
+
+        final List<String> externalIds = categoryPages.stream()
+                                                      .flatMap(List::stream)
+                                                      .collect(toList());
+
+        assertThat(externalIds).hasSize(15);
+        IntStream.range(0, externalIds.size()).forEach(index -> assertThat(externalIds).contains(index + ""));
+    }
+
+    @Test
+    public void fetchAllExternalIdsWithNonUniformPageSizes() throws Exception {
+        final Function<List<Category>, List<String>> externalIdCallBack = categories ->
+            categories.stream()
+                      .map(Category::getExternalId)
+                      .collect(toList());
+
+        final CompletionStage<List<List<String>>> categoryPagesStage = QueryExecutionUtils
+            .queryAll(client(), CategoryQuery.of(), externalIdCallBack, 4);
+        final List<List<String>> categoryPages = SphereClientUtils
+            .blockingWait(categoryPagesStage, Duration.ofMinutes(5));
+
+        assertThat(categoryPages).hasSize(4);
+
         final List<String> externalIds = categoryPages.stream()
                                                       .flatMap(List::stream)
                                                       .collect(toList());
