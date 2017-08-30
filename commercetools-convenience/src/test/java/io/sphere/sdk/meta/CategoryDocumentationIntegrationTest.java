@@ -44,6 +44,7 @@ import java.util.*;
 import java.util.concurrent.CompletionStage;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.stream.IntStream;
 
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static io.sphere.sdk.utils.SphereInternalUtils.asSet;
@@ -73,29 +74,82 @@ public class CategoryDocumentationIntegrationTest extends IntegrationTest {
 
     @Test
     public void fetchAll() throws Exception {
-        final CompletionStage<List<Category>> categoriesStage = QueryExecutionUtils.queryAll(client(), CategoryQuery.of(), 500);
-        final List<Category> categories = SphereClientUtils.blockingWait(categoriesStage, Duration.ofMinutes(5));
+        final CompletionStage<List<List<Category>>> categoryPagesStage = QueryExecutionUtils
+            .queryAll(client(), CategoryQuery.of(), (categories -> categories), 500);
+        final List<List<Category>> categoryPages = SphereClientUtils
+            .blockingWait(categoryPagesStage, Duration.ofMinutes(5));
+        final List<Category> categories = categoryPages.stream()
+                                                       .flatMap(List::stream)
+                                                       .collect(toList());
+
         assertThat(categories)
-                .hasSize(15)
-                .matches(cats -> cats.parallelStream().anyMatch(cat -> cat.getSlug().get(ENGLISH).equals("boots-women")));
+            .hasSize(15)
+            .matches(cats -> cats.parallelStream().anyMatch(cat -> cat.getSlug().get(ENGLISH).equals("boots-women")));
     }
+
+    @Test
+    public void fetchAllExternalIds() throws Exception {
+        final Function<List<Category>, List<String>> externalIdCallBack = categories ->
+            categories.stream()
+                      .map(Category::getExternalId)
+                      .collect(toList());
+
+        final CompletionStage<List<List<String>>> categoryPagesStage = QueryExecutionUtils
+            .queryAll(client(), CategoryQuery.of(), externalIdCallBack, 500);
+        final List<List<String>> categoryPages = SphereClientUtils
+            .blockingWait(categoryPagesStage, Duration.ofMinutes(5));
+        final List<String> externalIds = categoryPages.stream()
+                                                      .flatMap(List::stream)
+                                                      .collect(toList());
+
+        assertThat(externalIds).hasSize(15);
+        IntStream.range(0, externalIds.size()).forEach(index -> assertThat(externalIds).contains(index + ""));
+    }
+
+    @Test
+    public void collectAllExternalIds() throws Exception {
+        final List<String> externalIds = new ArrayList<>();
+
+        final Consumer<List<Category>> categoryPageConsumer = categoriesPage ->
+            categories.forEach(category -> externalIds.add(category.getExternalId()));
+
+        final CompletionStage<Void> categoryPagesStage = QueryExecutionUtils
+            .queryAll(client(), CategoryQuery.of(), categoryPageConsumer, 500);
+        SphereClientUtils.blockingWait(categoryPagesStage, Duration.ofMinutes(5));
+
+        assertThat(externalIds).hasSize(15);
+        IntStream.range(0, externalIds.size()).forEach(index -> assertThat(externalIds).contains(index + ""));
+    }
+
     @Test
     public void fetchAllAsJson() throws Exception {
-        final CompletionStage<List<JsonNode>> categoriesStage = QueryExecutionUtils.queryAll(client(), JsonNodeQuery.of("/categories"), 500);;
-        final List<JsonNode> categories = SphereClientUtils.blockingWait(categoriesStage, Duration.ofMinutes(5));
+        final CompletionStage<List<List<JsonNode>>> categoryPagesStage = QueryExecutionUtils
+            .queryAll(client(), JsonNodeQuery.of("/categories"), (categories -> categories), 500);
+        final List<List<JsonNode>> categoryPages = SphereClientUtils
+            .blockingWait(categoryPagesStage, Duration.ofMinutes(5));
+        final List<JsonNode> categories = categoryPages.stream()
+                                                       .flatMap(List::stream)
+                                                       .collect(toList());
+
         assertThat(categories)
-                .hasSize(15)
-                .matches(cats -> cats.parallelStream().anyMatch(cat -> cat.get("slug").get("en").asText().equals("boots-women")));
+            .hasSize(15)
+            .matches(cats -> cats.parallelStream()
+                                 .anyMatch(cat -> cat.get("slug").get("en").asText().equals("boots-women")));
     }
 
     @Test
     public void fetchRoots() throws Exception {
         final CategoryQuery seedQuery = CategoryQuery.of().withPredicates(m -> m.parent().isNotPresent());
-        final CompletionStage<List<Category>> categoriesStage = QueryExecutionUtils.queryAll(client(), seedQuery);
-        final List<Category> rootCategories = SphereClientUtils.blockingWait(categoriesStage, Duration.ofMinutes(5));
+        final CompletionStage<List<List<Category>>> rootCategoryPagesStage = QueryExecutionUtils
+            .queryAll(client(), seedQuery, (categories -> categories));
+        final List<List<Category>> rootCategoryPages = SphereClientUtils
+            .blockingWait(rootCategoryPagesStage, Duration.ofMinutes(5));
+        final List<Category> rootCategories = rootCategoryPages.stream()
+                                                               .flatMap(List::stream)
+                                                               .collect(toList());
         assertThat(rootCategories.stream().allMatch(cat -> cat.getParent() == null))
-                .overridingErrorMessage("fetched only root categories")
-                .isTrue();
+            .overridingErrorMessage("fetched only root categories")
+            .isTrue();
     }
 
     @Test
@@ -299,15 +353,25 @@ public class CategoryDocumentationIntegrationTest extends IntegrationTest {
     }
 
     private static CategoryTree fetchCurrentTree() {
-        final CompletionStage<List<Category>> categoriesStage = QueryExecutionUtils.queryAll(client(), CategoryQuery.of());
-        final List<Category> categories = SphereClientUtils.blockingWait(categoriesStage, Duration.ofMinutes(5));
+        final CompletionStage<List<List<Category>>> categoryPagesStage = QueryExecutionUtils.queryAll(client(), CategoryQuery.of(), (categories -> categories));
+        final List<List<Category>> categoryPages = SphereClientUtils
+            .blockingWait(categoryPagesStage, Duration.ofMinutes(5));
+        final List<Category> categories = categoryPages.stream()
+                                                       .flatMap(List::stream)
+                                                       .collect(toList());
         return CategoryTree.of(categories);
     }
 
     private CategoryTree createCategoryTree() {
         //stuff from previous example
-        final CompletionStage<List<Category>> categoriesStage = QueryExecutionUtils.queryAll(client(), CategoryQuery.of());
-        final List<Category> categories = SphereClientUtils.blockingWait(categoriesStage, Duration.ofMinutes(5));
+        final CompletionStage<List<List<Category>>> categoryPagesStage = QueryExecutionUtils
+            .queryAll(client(), CategoryQuery.of(), (categories -> categories));
+        final List<List<Category>> categoryPages = SphereClientUtils
+            .blockingWait(categoryPagesStage, Duration.ofMinutes(5));
+
+        final List<Category> categories = categoryPages.stream()
+                                                       .flatMap(List::stream)
+                                                       .collect(toList());
 
         //creation of a category tree
         final CategoryTree categoryTree = CategoryTree.of(categories);
