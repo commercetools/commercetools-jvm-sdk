@@ -51,6 +51,18 @@ public class QueryExecutionUtilsTest {
         withClient(clientWithDelays(16), list -> assertThat(list).isSortedAccordingTo(categoryComparator).hasSize(16));
     }
 
+    @Test
+    public void onGetTotalNumberOfPages() {
+        // With uniform splitting
+        final QueryAllImpl<Category, CategoryQuery> query = QueryAllImpl.of(CategoryQuery.of(), 2);
+        long totalNumberOfPages = query.getTotalNumberOfPages(10);
+        assertThat(totalNumberOfPages).isEqualTo(5);
+
+        // With non uniform splitting
+        totalNumberOfPages = query.getTotalNumberOfPages(7);
+        assertThat(totalNumberOfPages).isEqualTo(4);
+    }
+
     private void withClient(final SphereClient client, final Consumer<List<Category>> test) {
         final List<List<Category>> elementPages = QueryExecutionUtils.queryAll(client, CategoryQuery.of(), (categories -> categories), PAGE_SIZE)
                 .toCompletableFuture().join();
