@@ -52,8 +52,11 @@ public class QueryExecutionUtilsTest {
     }
 
     private void withClient(final SphereClient client, final Consumer<List<Category>> test) {
-        final List<Category> elements = QueryExecutionUtils.queryAll(client, CategoryQuery.of(), PAGE_SIZE)
+        final List<List<Category>> elementPages = QueryExecutionUtils.queryAll(client, CategoryQuery.of(), (categories -> categories), PAGE_SIZE)
                 .toCompletableFuture().join();
+        final List<Category> elements = elementPages.stream()
+                                                    .flatMap(List::stream)
+                                                    .collect(toList());
         test.accept(elements);
     }
 
