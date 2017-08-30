@@ -46,7 +46,7 @@ public class CartDiscountInActualCartIntegrationTest extends IntegrationTest {
 
 
                         final LocalizedString name = en("di");
-                        final CartDiscountPredicate cartPredicate = CartDiscountPredicate.of(format("customer.id = \"%s\"", customer.getId()));
+                        final CartPredicate cartPredicate = CartPredicate.of(format("customer.id = \"%s\"", customer.getId()));
                         final MonetaryAmount discountAmount = EURO_1;
                         final AbsoluteCartDiscountValue value = CartDiscountValue.ofAbsolute(discountAmount);
                         final CartDiscountDraft discountDraft = CartDiscountDraftBuilder.of(name, cartPredicate, value, LineItemsTarget.ofAll(), randomSortOrder(), false)
@@ -117,7 +117,7 @@ public class CartDiscountInActualCartIntegrationTest extends IntegrationTest {
                 CartDiscountFixtures.withCartDiscount(client(), builder -> builder
                         .value(RelativeCartDiscountValue.of(10000))
                         .target(ShippingCostTarget.of())
-                        .cartPredicate(CartDiscountPredicate.of("customer.id =\"" + customer.getId() + "\"")), cartDiscount -> {
+                        .cartPredicate(CartPredicate.of("customer.id =\"" + customer.getId() + "\"")), cartDiscount -> {
                     assertEventually(() -> {
                         final Versioned<Cart> cartVersion = client().executeBlocking(CartByIdGet.of(cart));
                         final CartUpdateCommand cmd =

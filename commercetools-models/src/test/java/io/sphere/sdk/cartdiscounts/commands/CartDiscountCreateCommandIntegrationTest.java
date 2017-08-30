@@ -48,7 +48,7 @@ public class CartDiscountCreateCommandIntegrationTest extends IntegrationTest {
         final LineItemsTarget target = LineItemsTarget.of("1 = 1");
         final String sortOrder = "0.54";
         final boolean requiresDiscountCode = false;
-        final CartDiscountDraft discountDraft = CartDiscountDraftBuilder.of(name, CartDiscountPredicate.of(predicate),
+        final CartDiscountDraft discountDraft = CartDiscountDraftBuilder.of(name, CartPredicate.of(predicate),
                 value, target, sortOrder, requiresDiscountCode)
                 .validFrom(validFrom)
                 .validUntil(validUntil)

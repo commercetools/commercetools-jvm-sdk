@@ -33,6 +33,8 @@ public interface ShippingMethodDraft {
     @JsonProperty("isDefault")
     Boolean isDefault();
 
+    @Nullable
+    String getPredicate();
 
     static ShippingMethodDraft of(final String name, @Nullable final String description, final Referenceable<TaxCategory> taxCategory, final List<ZoneRate> zoneRates) {
         return of(name, description, taxCategory, zoneRates, false);

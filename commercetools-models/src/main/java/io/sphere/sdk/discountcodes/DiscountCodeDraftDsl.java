@@ -2,6 +2,7 @@ package io.sphere.sdk.discountcodes;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sphere.sdk.cartdiscounts.CartDiscount;
+import io.sphere.sdk.cartdiscounts.CartPredicate;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
@@ -24,7 +25,7 @@ public final class DiscountCodeDraftDsl extends DiscountCodeDraftDslBase<Discoun
         return of(code, Collections.singletonList(cartDiscount.toReference()));
     }
 
-    public DiscountCodeDraftDsl withCartPredicate(@Nullable final io.sphere.sdk.cartdiscounts.CartDiscountPredicate cartPredicate) {
+    public DiscountCodeDraftDsl withCartPredicate(@Nullable final CartPredicate cartPredicate) {
         return newBuilder().cartPredicate(cartPredicate.toSphereCartPredicate()).build();
     }
 

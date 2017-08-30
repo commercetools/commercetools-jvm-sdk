@@ -87,6 +87,11 @@ public interface ShippingMethod extends Resource<ShippingMethod> {
     @HasNoUpdateAction
     Boolean isDefault();
 
+    @IgnoreInQueryModel
+    @HasNoUpdateAction
+    @Nullable
+    String getPredicate();
+
     @Override
     default Reference<ShippingMethod> toReference() {
         return Reference.of(referenceTypeId(), getId(), this);
