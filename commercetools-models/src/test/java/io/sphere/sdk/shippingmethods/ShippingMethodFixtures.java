@@ -54,6 +54,13 @@ public class ShippingMethodFixtures {
         });
     }
 
+    public static void withDynamicShippingMethodForGermany(final BlockingSphereClient client, final CartPredicate cartPredicate, final Consumer<ShippingMethod> consumer) {
+        withUpdateableDynamicShippingMethodForGermany(client, cartPredicate, m -> {
+            consumer.accept(m);
+            return m;
+        });
+    }
+
     public static void withUpdateableShippingMethod(final BlockingSphereClient client, final Function<ShippingMethod, ShippingMethod> f) {
         withTaxCategory(client, taxCategory -> {
             final ShippingMethodDraft draft = ShippingMethodDraft.of(randomString(), "test shipping method", taxCategory, asList());
