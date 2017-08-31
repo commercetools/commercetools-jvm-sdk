@@ -31,6 +31,19 @@ public class ShippingMethodUpdateCommandIntegrationTest extends IntegrationTest 
     }
 
     @Test
+    public void updateByKey() throws Exception {
+        final String key = randomKey();
+        withUpdateableShippingMethod(client(), builder -> builder.key(key), shippingMethod -> {
+            final String newDescription = randomString();
+            assertThat(shippingMethod.getDescription()).isNotEqualTo(newDescription);
+            final ShippingMethodUpdateCommand cmd = ShippingMethodUpdateCommand.ofKey(key, shippingMethod.getVersion(), SetDescription.of(newDescription));
+            final ShippingMethod updatedShippingMethod = client().executeBlocking(cmd);
+            assertThat(updatedShippingMethod.getDescription()).isEqualTo(newDescription);
+            return updatedShippingMethod;
+        });
+    }
+
+    @Test
     public void setDescription() throws Exception {
         withUpdateableShippingMethod(client(), shippingMethod -> {
             final String newDescription = randomString();
