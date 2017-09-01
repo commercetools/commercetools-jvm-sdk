@@ -9,7 +9,7 @@ import javax.money.MonetaryAmount;
 import java.util.List;
 
 /**
- * The total tax amount of the cart can be set if it has the {@link io.sphere.sdk.carts.TaxMode#EXTERNAL} set.
+ * The total tax amount of the cart can be set if it has the {@link io.sphere.sdk.carts.TaxMode#EXTERNAL_AMOUNT} set.
  */
 public final class SetCartTotalTax extends UpdateActionImpl<Cart> {
     private final MonetaryAmount externalTotalGross;
