@@ -617,6 +617,27 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void setShippingMethodTaxAmount() throws Exception {
+        withShippingMethodForGermany(client(), shippingMethod -> {
+            withCustomLineItemFilledCartWithTaxMode(client(), TaxMode.EXTERNAL_AMOUNT, cart -> {
+                final Cart cartWithShippingMethod = client().executeBlocking(CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod)));
+                final ExternalTaxRateDraft taxRate = ExternalTaxRateDraftBuilder
+                        .ofAmount(1.0, "Test Tax", CountryCode.DE)
+                        .build();
+                final MonetaryAmount totalGross = MoneyImpl.ofCents(1000, EUR);
+                final ExternalTaxAmountDraftDsl taxAmountDraft = ExternalTaxAmountDraftBuilder
+                        .of(totalGross, taxRate)
+                        .build();
+                final SetShippingMethodTaxAmount setShippingMethodTaxAmount = SetShippingMethodTaxAmount.of(taxAmountDraft);
+
+                final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cartWithShippingMethod, setShippingMethodTaxAmount));
+
+                return updatedCart;
+            });
+        });
+    }
+
+    @Test
     public void setLineItemTaxAmount() throws Exception {
         withFilledCartWithTaxMode(client(), TaxMode.EXTERNAL_AMOUNT, cart -> {
             final LineItem originalLineItem = cart.getLineItems().get(0);
