@@ -1,5 +1,6 @@
 package io.sphere.sdk.shippingmethods;
 
+import io.sphere.sdk.cartdiscounts.CartPredicate;
 import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.shippingmethods.commands.ShippingMethodCreateCommand;
 import io.sphere.sdk.shippingmethods.commands.ShippingMethodDeleteCommand;
