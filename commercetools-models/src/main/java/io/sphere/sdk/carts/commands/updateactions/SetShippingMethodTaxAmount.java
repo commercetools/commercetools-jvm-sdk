@@ -13,7 +13,7 @@ public final class SetShippingMethodTaxAmount extends UpdateActionImpl<Cart> {
     @Nullable
     private final ExternalTaxAmountDraft externalTaxAmount;
 
-    public SetShippingMethodTaxAmount(final ExternalTaxAmountDraft externalTaxAmount) {
+    private SetShippingMethodTaxAmount(final ExternalTaxAmountDraft externalTaxAmount) {
         super("setShippingMethodTaxAmount");
         this.externalTaxAmount = externalTaxAmount;
     }

@@ -15,7 +15,7 @@ public final class SetCustomLineItemTaxAmount extends UpdateActionImpl<Cart> {
     @Nullable
     private final ExternalTaxAmountDraft externalTaxAmount;
 
-    public SetCustomLineItemTaxAmount(final String customLineItemId, final ExternalTaxAmountDraft externalTaxAmount) {
+    private SetCustomLineItemTaxAmount(final String customLineItemId, final ExternalTaxAmountDraft externalTaxAmount) {
         super("setCustomLineItemTaxAmount");
         this.customLineItemId = customLineItemId;
         this.externalTaxAmount = externalTaxAmount;
