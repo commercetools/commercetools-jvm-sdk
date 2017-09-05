@@ -22,7 +22,6 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class SubscriptionUpdateCommandIntegrationTest extends IntegrationTest {
 
-
     @Test
     public void setKeyAzureSBQueue(){
         assumeHasAzureSBEnv();
@@ -59,11 +58,7 @@ public class SubscriptionUpdateCommandIntegrationTest extends IntegrationTest {
         setMessagesQueue(SubscriptionFixtures::ironMqSubscriptionDraftBuilder);
     }
 
-
-
-
     public void setKeyQueue(Supplier<SubscriptionDraftBuilder> subscriptionDraftBuilderSupplier) {
-
         withSubscription(client(), withCategoryChanges(subscriptionDraftBuilderSupplier.get()), subscription -> {
             final String newKey = randomKey();
             final SubscriptionUpdateCommand setKeyCommand = SubscriptionUpdateCommand.of(subscription, SetKey.of(newKey));
@@ -76,8 +71,6 @@ public class SubscriptionUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     public void setChangesQueue(Supplier<SubscriptionDraftBuilder> subscriptionDraftBuilderSupplier) {
-
-
         withSubscription(client(), withCategoryChanges(subscriptionDraftBuilderSupplier.get()), subscription -> {
             final List<ChangeSubscription> newChangeSubscriptions = Collections.singletonList(ChangeSubscription.of(Payment.resourceTypeId()));
 
@@ -96,8 +89,6 @@ public class SubscriptionUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     public void setMessagesQueue(Supplier<SubscriptionDraftBuilder> subscriptionDraftBuilderSupplier) {
-
-
         withSubscription(client(), withCategoryCreatedMessage(subscriptionDraftBuilderSupplier.get()), subscription -> {
             final List<MessageSubscription> newMessageSubscriptions = Collections.singletonList(MessageSubscription.of(Payment.resourceTypeId(),Collections.emptyList()));
 
@@ -114,8 +105,6 @@ public class SubscriptionUpdateCommandIntegrationTest extends IntegrationTest {
 
             return updatedSubscription;
         });
-
-
     }
 
     @AfterClass
