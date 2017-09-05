@@ -39,7 +39,7 @@ public class ShippingMethodCreateCommandIntegrationTest extends IntegrationTest 
     }
 
     @Test
-    public void createShippingMethod() throws Exception {
+    public void execution() throws Exception {
         final CurrencyUnit currencyUnit = USD;
         final TaxRateDraft taxRate = TaxRateDraft.of("x20", 0.20, true, COUNTRY_CODE);
         withZone(client(), zone -> {
