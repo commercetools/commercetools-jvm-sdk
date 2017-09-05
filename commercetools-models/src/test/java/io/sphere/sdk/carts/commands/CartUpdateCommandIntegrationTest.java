@@ -621,16 +621,23 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
         withShippingMethodForGermany(client(), shippingMethod -> {
             withCustomLineItemFilledCartWithTaxMode(client(), TaxMode.EXTERNAL_AMOUNT, cart -> {
                 final Cart cartWithShippingMethod = client().executeBlocking(CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod)));
+                assertThat(cartWithShippingMethod.getShippingInfo()).isNotNull();
+                assertThat(cartWithShippingMethod.getShippingInfo().getTaxedPrice()).isNull();
+
                 final ExternalTaxRateDraft taxRate = ExternalTaxRateDraftBuilder
                         .ofAmount(1.0, "Test Tax", CountryCode.DE)
                         .build();
-                final MonetaryAmount totalGross = MoneyImpl.ofCents(1000, EUR);
+                final MonetaryAmount totalGross = MoneyImpl.ofCents(100000, EUR);
                 final ExternalTaxAmountDraftDsl taxAmountDraft = ExternalTaxAmountDraftBuilder
                         .of(totalGross, taxRate)
                         .build();
                 final SetShippingMethodTaxAmount setShippingMethodTaxAmount = SetShippingMethodTaxAmount.of(taxAmountDraft);
 
                 final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cartWithShippingMethod, setShippingMethodTaxAmount));
+
+                final TaxedItemPrice taxedPrice = updatedCart.getShippingInfo().getTaxedPrice();
+
+                assertThat(taxedPrice.getTotalGross()).isEqualTo(totalGross);
 
                 return updatedCart;
             });
