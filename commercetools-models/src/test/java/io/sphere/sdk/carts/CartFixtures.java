@@ -107,6 +107,23 @@ public class CartFixtures {
         });
     }
 
+    public static void withFilledCartWithTaxMode(final BlockingSphereClient client, final TaxMode taxMode, final Consumer<Cart> f) {
+        withTaxedProduct(client, product -> {
+            final Cart cart = client.executeBlocking(CartUpdateCommand.of(createCartWithShippingAddress(client), ChangeTaxMode.of(taxMode)));
+            assertThat(cart.getLineItems()).hasSize(0);
+            final long quantity = 3;
+            final String productId = product.getId();
+            final AddLineItem action = AddLineItem.of(productId, 1, quantity);
+
+            final Cart updatedCart = client.executeBlocking(CartUpdateCommand.of(cart, action));
+            assertThat(updatedCart.getLineItems()).hasSize(1);
+            final LineItem lineItem = updatedCart.getLineItems().get(0);
+            assertThat(lineItem.getName()).isEqualTo(product.getMasterData().getStaged().getName());
+            assertThat(lineItem.getQuantity()).isEqualTo(quantity);
+            f.accept(updatedCart);
+        });
+    }
+
     public static void withCustomerAndFilledCart(final BlockingSphereClient client, final BiConsumer<Customer, Cart> consumer) {
         withCustomer(client, customer -> {
             withFilledCart(client, cart -> {
@@ -148,6 +165,23 @@ public class CartFixtures {
             final LineItem lineItem = updatedCart.getLineItems().get(0);
             assertThat(lineItem.getName()).isEqualTo(product.getMasterData().getStaged().getName());
             assertThat(lineItem.getQuantity()).isEqualTo(quantity);
+            final Cart cartToDelete = op.apply(updatedCart);
+            client.executeBlocking(CartDeleteCommand.of(cartToDelete));
+        });
+    }
+
+    public static void withCustomLineItemFilledCartWithTaxMode(final BlockingSphereClient client, final TaxMode taxMode,  final UnaryOperator<Cart> op) {
+        withTaxedProduct(client, product -> {
+            final Cart cart = client.executeBlocking(CartUpdateCommand.of(createCartWithShippingAddress(client), ChangeTaxMode.of(taxMode)));
+
+            final MonetaryAmount money = MoneyImpl.of("23.50", EUR);
+            final String slug = "thing-slug";
+            final LocalizedString name = en("thing");
+            final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, product.getTaxCategory(), 5L, null);
+            final AddCustomLineItem addCustomLineItemAction = AddCustomLineItem.of(item);
+
+            final Cart updatedCart = client.executeBlocking(CartUpdateCommand.of(cart, asList(addCustomLineItemAction)));
+
             final Cart cartToDelete = op.apply(updatedCart);
             client.executeBlocking(CartDeleteCommand.of(cartToDelete));
         });

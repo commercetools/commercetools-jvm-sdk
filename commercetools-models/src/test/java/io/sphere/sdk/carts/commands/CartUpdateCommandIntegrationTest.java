@@ -1,5 +1,6 @@
 package io.sphere.sdk.carts.commands;
 
+import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.carts.commands.updateactions.*;
 import io.sphere.sdk.carts.queries.CartByIdGet;
@@ -24,6 +25,8 @@ import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.shoppinglists.LineItemDraftBuilder;
 import io.sphere.sdk.shoppinglists.ShoppingListDraftDsl;
+import io.sphere.sdk.taxcategories.ExternalTaxRateDraft;
+import io.sphere.sdk.taxcategories.ExternalTaxRateDraftBuilder;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
@@ -599,6 +602,83 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(lineItem.getPrice().getValue()).isEqualTo(itemPrice);
             assertThat(lineItem.getTotalPrice()).isEqualTo(totalPrice);
             assertThat(lineItem.getPriceMode()).isEqualTo(LineItemPriceMode.EXTERNAL_TOTAL);
+        });
+    }
+
+    @Test
+    public void setCartTotalTax() throws Exception {
+        withFilledCartWithTaxMode(client(), TaxMode.EXTERNAL_AMOUNT, cart -> {
+            final MonetaryAmount externalTotalGross = MoneyImpl.ofCents(1000, EUR);
+            final SetCartTotalTax setCartTotalTax = SetCartTotalTax.of(externalTotalGross);
+            final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, setCartTotalTax));
+
+            assertThat(updatedCart.getTaxedPrice().getTotalGross()).isEqualTo(externalTotalGross);
+        });
+    }
+
+    @Test
+    public void setShippingMethodTaxAmount() throws Exception {
+        withShippingMethodForGermany(client(), shippingMethod -> {
+            withCustomLineItemFilledCartWithTaxMode(client(), TaxMode.EXTERNAL_AMOUNT, cart -> {
+                final Cart cartWithShippingMethod = client().executeBlocking(CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod)));
+                assertThat(cartWithShippingMethod.getShippingInfo()).isNotNull();
+                assertThat(cartWithShippingMethod.getShippingInfo().getTaxedPrice()).isNull();
+
+                final ExternalTaxRateDraft taxRate = ExternalTaxRateDraftBuilder
+                        .ofAmount(1.0, "Test Tax", CountryCode.DE)
+                        .build();
+                final MonetaryAmount totalGross = MoneyImpl.ofCents(100000, EUR);
+                final ExternalTaxAmountDraftDsl taxAmountDraft = ExternalTaxAmountDraftBuilder
+                        .of(totalGross, taxRate)
+                        .build();
+                final SetShippingMethodTaxAmount setShippingMethodTaxAmount = SetShippingMethodTaxAmount.of(taxAmountDraft);
+
+                final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cartWithShippingMethod, setShippingMethodTaxAmount));
+
+                final TaxedItemPrice taxedPrice = updatedCart.getShippingInfo().getTaxedPrice();
+
+                assertThat(taxedPrice.getTotalGross()).isEqualTo(totalGross);
+
+                return updatedCart;
+            });
+        });
+    }
+
+    @Test
+    public void setLineItemTaxAmount() throws Exception {
+        withFilledCartWithTaxMode(client(), TaxMode.EXTERNAL_AMOUNT, cart -> {
+            final LineItem originalLineItem = cart.getLineItems().get(0);
+            final ExternalTaxRateDraft taxRate = ExternalTaxRateDraftBuilder
+                    .ofAmount(1.0, "Test Tax", CountryCode.DE)
+                    .build();
+            final MonetaryAmount totalGross = MoneyImpl.ofCents(1000, EUR);
+            final ExternalTaxAmountDraftDsl taxAmountDraft = ExternalTaxAmountDraftBuilder
+                    .of(totalGross, taxRate)
+                    .build();
+            final SetLineItemTaxAmount setLineItemTaxAmount = SetLineItemTaxAmount.of(originalLineItem.getId(), taxAmountDraft);
+            final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, setLineItemTaxAmount));
+            final LineItem updatedLineItem = updatedCart.getLineItems().get(0);
+            assertThat(updatedLineItem.getTaxedPrice().getTotalGross()).isEqualTo(totalGross);
+        });
+    }
+
+    @Test
+    public void setCustomLineItemTaxAmount() throws Exception {
+        withCustomLineItemFilledCartWithTaxMode(client(), TaxMode.EXTERNAL_AMOUNT, cart -> {
+            final CustomLineItem originalCustomLineItem = cart.getCustomLineItems().get(0);
+            final ExternalTaxRateDraft taxRate = ExternalTaxRateDraftBuilder
+                    .ofAmount(1.0, "Test Tax", CountryCode.DE)
+                    .build();
+            final MonetaryAmount totalGross = MoneyImpl.ofCents(1000, EUR);
+            final ExternalTaxAmountDraftDsl taxAmountDraft = ExternalTaxAmountDraftBuilder
+                    .of(totalGross, taxRate)
+                    .build();
+            final SetCustomLineItemTaxAmount setCustomLineItemTaxAmount = SetCustomLineItemTaxAmount.of(originalCustomLineItem.getId(), taxAmountDraft);
+            final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, setCustomLineItemTaxAmount));
+            final CustomLineItem updatedCustomLineItem = updatedCart.getCustomLineItems().get(0);
+            assertThat(updatedCustomLineItem.getTaxedPrice().getTotalGross()).isEqualTo(totalGross);
+
+            return updatedCart;
         });
     }
 
