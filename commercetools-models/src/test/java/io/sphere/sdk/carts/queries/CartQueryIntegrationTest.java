@@ -66,7 +66,7 @@ public class CartQueryIntegrationTest extends IntegrationTest {
 
     @Test
     public void expandLineItemsDiscount() throws Exception {
-        final RelativeCartDiscountValue relativeCartDiscountValue = RelativeCartDiscountValue.of(15000);
+        final RelativeCartDiscountValue relativeCartDiscountValue = RelativeCartDiscountValue.of(10000);
         withCartHavingCartDiscountedLineItem(client(), relativeCartDiscountValue, (cart) -> {
             final Cart[] cartsToCleanUp = new Cart[1];
             assertEventually(Duration.ofSeconds(80), Duration.ofMillis(200), () -> {
