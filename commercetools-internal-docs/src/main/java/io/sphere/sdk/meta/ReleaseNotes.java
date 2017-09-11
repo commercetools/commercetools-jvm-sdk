@@ -21,6 +21,7 @@ import io.sphere.sdk.client.SphereApiConfig;
 import io.sphere.sdk.client.SphereAuthConfig;
 import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.client.SphereRequest;
+import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.commands.UpdateCommand;
 import io.sphere.sdk.customergroups.CustomerGroup;
@@ -90,6 +91,8 @@ import io.sphere.sdk.search.PagedSearchResult;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.search.model.ExistsFilterSearchModelSupport;
 import io.sphere.sdk.search.model.MissingFilterSearchModelSupport;
+import io.sphere.sdk.shippingmethods.ShippingMethod;
+import io.sphere.sdk.shippingmethods.ShippingMethodDraft;
 import io.sphere.sdk.shippingmethods.ShippingMethodDraftBuilder;
 import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.shoppinglists.ShoppingList;
@@ -102,11 +105,7 @@ import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxCategoryDraft;
 import io.sphere.sdk.taxcategories.TaxCategoryDraftBuilder;
 import io.sphere.sdk.taxcategories.TaxRate;
-import io.sphere.sdk.types.CustomFields;
-import io.sphere.sdk.types.CustomFieldsDraftBuilder;
-import io.sphere.sdk.types.FieldType;
-import io.sphere.sdk.types.TypeDraft;
-import io.sphere.sdk.types.TypeDraftBuilder;
+import io.sphere.sdk.types.*;
 import io.sphere.sdk.zones.ZoneDraftBuilder;
 
 import javax.money.CurrencyUnit;
@@ -136,6 +135,23 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+ <h3 class=released-version id="v1_23_0">1.23.0 (11.09.2017)</h3>
+ <ul>
+ <li class=new-in-releas>Added new shipping method predicate {@link ShippingMethod#getPredicate()}, {@link ShippingMethodDraft#getPredicate()}.</li>
+ <li class=new-in-release>Added new shipping info method state {@link CartShippingInfo#getShippingMethodState()}.</li>
+ <li class=new-in-release>Introduced new {@link io.sphere.sdk.cartdiscounts.CartPredicate} which generalizes and deprecates the
+ {@link io.sphere.sdk.cartdiscounts.CartDiscountPredicate}.</li>
+ <li class=new-in-release>Added new tax mode {@link TaxMode#EXTERNAL_AMOUNT}. Added new {@link ExternalTaxAmountDraft} type, which can be used to set the external tax amount
+ with the new update actions {@link io.sphere.sdk.carts.commands.updateactions.SetLineItemTaxAmount}, {@link io.sphere.sdk.carts.commands.updateactions.SetCustomLineItemTaxAmount},
+ {@link io.sphere.sdk.carts.commands.updateactions.SetShippingMethodTaxAmount} and {@link io.sphere.sdk.carts.commands.updateactions.SetCartTotalTax}.</li>
+ <li class=new-in-release>Add support for getting {@link io.sphere.sdk.shippingmethods.queries.ShippingMethodByKeyGet} and updating {@link io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommand#ofKey(String, Long, UpdateAction)}
+ a shipping method by key.</li>
+ <li class=new-in-release><Added correlation id to oauth requests./li>
+ <li class=new-in-release>Added new {@link io.sphere.sdk.carts.commands.updateactions.SetAnonymousId} cart update action.</li>
+ <li class=new-in-release>Added new key property to customer {@link Customer#getKey()}, {@link CustomerDraft#getKey()} and corresponding update action {@link io.sphere.sdk.customers.commands.updateactions.SetKey}.
+ Added {@link io.sphere.sdk.customers.queries.CustomerByKeyGet}, {@link io.sphere.sdk.customers.commands.CustomerDeleteCommand#ofKey(String, Long)} and {@link io.sphere.sdk.customers.commands.CustomerUpdateCommand#ofKey(String, Long, UpdateAction)}.</li>
+ <li class=new-in-release><Added support for publish prices only {@link PublishScope}, {@link io.sphere.sdk.products.commands.updateactions.Publish#ofScope(PublishScope)} and {@link ProductPublishedMessage#getScope()}.</li>
+ </ul>
  <h3 class=released-version id="v1_22_0">1.22.0 (09.08.2017)</h3>
  <ul>
  <li class=new-in-release>A correlation id is now generated for each {@link SphereRequest}.</li>
