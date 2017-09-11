@@ -142,6 +142,7 @@ public class ScopedPriceSearchIntegrationTest extends IntegrationTest {
 
                     //it is also possible to filter for discounted values
                     final ProductProjectionSearch searchForDiscountedValue = ProductProjectionSearch.ofStaged()
+                            .withMarkingMatchingVariants(true)
                             .withPriceSelection(PriceSelection.of(EUR).withPriceCountry(DE))
                             .plusQueryFilters(m -> m.id().is(product.getId()))
                             //filter by discounted value
