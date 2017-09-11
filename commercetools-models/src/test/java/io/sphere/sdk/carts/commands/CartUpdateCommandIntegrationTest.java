@@ -1,6 +1,7 @@
 package io.sphere.sdk.carts.commands;
 
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.cartdiscounts.CartPredicate;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.carts.commands.updateactions.*;
 import io.sphere.sdk.carts.queries.CartByIdGet;
@@ -8,6 +9,7 @@ import io.sphere.sdk.carts.queries.CartQuery;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.ChannelFixtures;
 import io.sphere.sdk.channels.ChannelRole;
+import io.sphere.sdk.client.ErrorResponseException;
 import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.*;
@@ -43,6 +45,7 @@ import static io.sphere.sdk.carts.CustomLineItemFixtures.createCustomLineItemDra
 import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withB2cCustomerGroup;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.payments.PaymentFixtures.withPayment;
+import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withDynamicShippingMethodForGermany;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethodForGermany;
 import static io.sphere.sdk.shoppinglists.ShoppingListFixtures.newShoppingListDraftBuilder;
 import static io.sphere.sdk.shoppinglists.ShoppingListFixtures.withShoppingList;
@@ -51,6 +54,7 @@ import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CartUpdateCommandIntegrationTest extends IntegrationTest {
     public static final int MASTER_VARIANT_ID = 1;
@@ -402,6 +406,7 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
                                 .plusExpansionPaths(m -> m.shippingInfo().shippingMethod().taxCategory())
                                 .plusExpansionPaths(m -> m.shippingInfo().taxCategory());
                 final Cart cartWithShippingMethod = client().executeBlocking(updateCommand);
+                assertThat(cartWithShippingMethod.getShippingInfo().getShippingMethodState()).isEqualTo(ShippingMethodState.MATCHES_CART);
                 assertThat(cartWithShippingMethod.getShippingInfo().getShippingMethod()).isEqualTo(shippingMethod.toReference());
                 assertThat(cartWithShippingMethod.getShippingInfo().getShippingMethod().getObj())
                         .as("reference expansion shippingMethod")
@@ -416,6 +421,19 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
                 assertThat(cartWithoutShippingMethod.getShippingInfo()).isNull();
 
                 return cartWithoutShippingMethod;
+            });
+        });
+    }
+
+    @Test
+    public void setShippingMethodDoesNotMatchCart() throws Exception {
+        withDynamicShippingMethodForGermany(client(), CartPredicate.of("customer.email=\"john@example.com\""), shippingMethod -> {
+            withCart(client(), createCartWithShippingAddress(client()), cart -> {
+                final CartUpdateCommand updateCommand =
+                        CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod));
+                assertThatThrownBy(() -> client().executeBlocking(updateCommand)).isInstanceOf(ErrorResponseException.class).hasMessageContaining("does not match");
+
+                return cart;
             });
         });
     }

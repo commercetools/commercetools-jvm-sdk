@@ -1,7 +1,7 @@
 package io.sphere.sdk.orders.errors;
 
 import io.sphere.sdk.cartdiscounts.CartDiscountFixtures;
-import io.sphere.sdk.cartdiscounts.CartDiscountPredicate;
+import io.sphere.sdk.cartdiscounts.CartPredicate;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.AddDiscountCode;
@@ -46,7 +46,7 @@ public class DiscountCodeNonApplicableErrorIntegrationTest extends IntegrationTe
 
     private void withDiscountCodeOfPredicate(final String predicate, final Consumer<DiscountCode> consumer) {
         CartDiscountFixtures.withCartDiscount(client(),
-                builder -> builder.cartPredicate(CartDiscountPredicate.of(predicate))
+                builder -> builder.cartPredicate(CartPredicate.of(predicate))
                         .requiresDiscountCode(true),
                 cartDiscount -> {
                     final DiscountCodeDraft draft = DiscountCodeDraft.of(randomKey(), cartDiscount);

@@ -1,7 +1,7 @@
 package io.sphere.sdk.cartdiscounts.commands.updateactions;
 
 import io.sphere.sdk.cartdiscounts.CartDiscount;
-import io.sphere.sdk.cartdiscounts.CartDiscountPredicate;
+import io.sphere.sdk.cartdiscounts.CartPredicate;
 import io.sphere.sdk.commands.UpdateActionImpl;
 
 /**
@@ -19,7 +19,7 @@ public final class ChangeCartPredicate extends UpdateActionImpl<CartDiscount> {
         this.cartPredicate = cartPredicate;
     }
 
-    public static ChangeCartPredicate of(final CartDiscountPredicate cartPredicate) {
+    public static ChangeCartPredicate of(final CartPredicate cartPredicate) {
         return of(cartPredicate.toSphereCartPredicate());
     }
 

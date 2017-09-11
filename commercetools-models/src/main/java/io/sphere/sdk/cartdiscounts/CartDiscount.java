@@ -38,7 +38,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      * Predicate where the discounts should be applied to.
      *
      * @see #isRequiringDiscountCode()
-     * @see CartDiscountPredicate
+     * @see CartPredicate
      *
      * @return predicate
      */

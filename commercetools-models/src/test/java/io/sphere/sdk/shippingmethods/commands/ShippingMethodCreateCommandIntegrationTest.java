@@ -1,10 +1,10 @@
 package io.sphere.sdk.shippingmethods.commands;
 
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.cartdiscounts.CartPredicate;
 import io.sphere.sdk.shippingmethods.*;
 import io.sphere.sdk.shippingmethods.queries.ShippingMethodQuery;
 import io.sphere.sdk.taxcategories.TaxCategoryDraft;
-import io.sphere.sdk.taxcategories.TaxRate;
 import io.sphere.sdk.taxcategories.TaxRateDraft;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.JsonNodeReferenceResolver;
@@ -47,6 +47,24 @@ public class ShippingMethodCreateCommandIntegrationTest extends IntegrationTest 
                 final ZoneRate zoneRate = ZoneRate.of(zone, asList(ShippingRate.of(MoneyImpl.of(30, currencyUnit))));
                 final ShippingMethodDraft draft =
                         ShippingMethodDraft.of("standard shipping", "description", taxCategory, asList(zoneRate));
+                final ShippingMethod shippingMethod = client().executeBlocking(ShippingMethodCreateCommand.of(draft));
+                //deletion
+                client().executeBlocking(ShippingMethodDeleteCommand.of(shippingMethod));
+            });
+        }, COUNTRY_CODE);
+    }
+
+    @Test
+    public void createShippingMethodWithPredicate() throws Exception {
+        final CurrencyUnit currencyUnit = USD;
+        final TaxRateDraft taxRate = TaxRateDraft.of("x20", 0.20, true, COUNTRY_CODE);
+        withZone(client(), zone -> {
+            withTaxCategory(client(), TaxCategoryDraft.of("taxcat", asList(taxRate)), taxCategory -> {
+                final ZoneRate zoneRate = ZoneRate.of(zone, asList(ShippingRate.of(MoneyImpl.of(30, currencyUnit))));
+                final ShippingMethodDraft draft =
+                        ShippingMethodDraftBuilder.of("standard shipping", "description", taxCategory.toReference(), asList(zoneRate), false)
+                                .predicate(CartPredicate.of("customer.email = \"john@example.com\""))
+                                .build();
                 final ShippingMethod shippingMethod = client().executeBlocking(ShippingMethodCreateCommand.of(draft));
                 //deletion
                 client().executeBlocking(ShippingMethodDeleteCommand.of(shippingMethod));

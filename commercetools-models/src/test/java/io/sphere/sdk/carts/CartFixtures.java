@@ -191,7 +191,7 @@ public class CartFixtures {
         withTaxedProduct(client, product -> {
             withCustomer(client, (customer) -> {
                 CartDiscountFixtures.withCartDiscount(client, builder -> builder
-                        .cartPredicate(CartDiscountPredicate.of("customer.id=\"" + customer.getId() + "\""))
+                        .cartPredicate(CartPredicate.of("customer.id=\"" + customer.getId() + "\""))
                         .value(relativeCartDiscountValue)
                         .target(LineItemsTarget.of("product.id=\"" + product.getId() + "\"")), cartDiscount -> {
                     withCart(client, (cart) -> {
@@ -214,7 +214,7 @@ public class CartFixtures {
         withTaxedProduct(client, product -> {
             withCustomer(client, (customer) -> {
                 CartDiscountFixtures.withCartDiscount(client, builder -> builder
-                        .cartPredicate(CartDiscountPredicate.of("customer.id=\"" + customer.getId() + "\""))
+                        .cartPredicate(CartPredicate.of("customer.id=\"" + customer.getId() + "\""))
                         .value(relativeCartDiscountValue)
                         .target(CustomLineItemsTarget.of("slug =\"thing-discounted-slug\"")), cartDiscount -> {
                     withCart(client, (cart) -> {
@@ -238,7 +238,7 @@ public class CartFixtures {
     public static void withCartAndDiscountCode(final BlockingSphereClient client, final BiFunction<Cart, DiscountCode, Cart> user) {
         withCustomerAndCart(client, (customer, cart) -> {
             final CartDiscountDraft draft = CartDiscountFixtures.newCartDiscountDraftBuilder()
-                    .cartPredicate(CartDiscountPredicate.of(format("customer.id = \"%s\"", customer.getId())))
+                    .cartPredicate(CartPredicate.of(format("customer.id = \"%s\"", customer.getId())))
                     .isActive(true)
                     .validFrom(null)
                     .validUntil(null)
