@@ -146,7 +146,7 @@ import java.util.function.Function;
  {@link io.sphere.sdk.carts.commands.updateactions.SetShippingMethodTaxAmount} and {@link io.sphere.sdk.carts.commands.updateactions.SetCartTotalTax}.</li>
  <li class=new-in-release>Add support for getting {@link io.sphere.sdk.shippingmethods.queries.ShippingMethodByKeyGet} and updating {@link io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommand#ofKey(String, Long, UpdateAction)}
  a shipping method by key.</li>
- <li class=new-in-release><Added correlation id to oauth requests./li>
+ <li class=new-in-release>Added correlation id to oauth requests.</li>
  <li class=new-in-release>Added new {@link io.sphere.sdk.carts.commands.updateactions.SetAnonymousId} cart update action.</li>
  <li class=new-in-release>Added new key property to customer {@link Customer#getKey()}, {@link CustomerDraft#getKey()} and corresponding update action {@link io.sphere.sdk.customers.commands.updateactions.SetKey}.
  Added {@link io.sphere.sdk.customers.queries.CustomerByKeyGet}, {@link io.sphere.sdk.customers.commands.CustomerDeleteCommand#ofKey(String, Long)} and {@link io.sphere.sdk.customers.commands.CustomerUpdateCommand#ofKey(String, Long, UpdateAction)}.</li>
