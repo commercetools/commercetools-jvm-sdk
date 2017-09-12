@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
  * A multi-buy discount is not applied on line items but on the individual items that are contained in a line item and subsumed under the
  * quantity field of the line item. A multi-buy discount can be applied multiple times in a cart.
  */
-public class MultiBuyLineItemsTarget extends Base implements CartDiscountTarget {
+public final class MultiBuyLineItemsTarget extends Base implements CartDiscountTarget {
     private Long discountedQuantity;
 
     @Nullable
