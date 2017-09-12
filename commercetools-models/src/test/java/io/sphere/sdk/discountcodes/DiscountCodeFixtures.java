@@ -9,9 +9,10 @@ import io.sphere.sdk.discountcodes.queries.DiscountCodeQueryModel;
 
 import java.util.Optional;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.defaultCartDiscount;
-import static io.sphere.sdk.test.SphereTestUtils.*;
+import static io.sphere.sdk.test.SphereTestUtils.en;
 
 public class DiscountCodeFixtures {
     public static void withPersistentDiscountCode(final BlockingSphereClient client, final Consumer<DiscountCode> consumer) {
@@ -24,19 +25,29 @@ public class DiscountCodeFixtures {
     }
 
     public static DiscountCode createDiscountCode(final BlockingSphereClient client, final String code) {
-        final CartDiscount cartDiscount = defaultCartDiscount(client);
-        final DiscountCodeDraft draft = DiscountCodeDraft.of(code, cartDiscount)
-                .withName(en("sample discount code"))
-                .withDescription(en("sample discount code descr."))
-                .withIsActive(true)
-                .withMaxApplications(5L)
-                .withMaxApplicationsPerCustomer(1L);
+        final DiscountCodeDraft draft = discountCodeDraftBuilder(client, code).build();
         return client.executeBlocking(DiscountCodeCreateCommand.of(draft));
+    }
+
+    public static DiscountCodeDraftBuilder discountCodeDraftBuilder(BlockingSphereClient client, String code) {
+        final CartDiscount cartDiscount = defaultCartDiscount(client);
+        return DiscountCodeDraftBuilder.of(code, cartDiscount)
+                .name(en("sample discount code"))
+                .description(en("sample discount code descr."))
+                .isActive(true)
+                .maxApplications(5L)
+                .maxApplicationsPerCustomer(1L);
     }
 
     public static void withDiscountCode(final BlockingSphereClient client, final DiscountCodeDraft draft, final Consumer<DiscountCode> consumer) {
         final DiscountCode discountCode = client.executeBlocking(DiscountCodeCreateCommand.of(draft));
         consumer.accept(discountCode);
         client.executeBlocking(DiscountCodeDeleteCommand.of(discountCode));
+    }
+
+    public static void withUpdateableDiscountCode(final BlockingSphereClient client, final DiscountCodeDraft draft, final Function<DiscountCode, DiscountCode> f) {
+        final DiscountCode discountCode = client.executeBlocking(DiscountCodeCreateCommand.of(draft));
+        final DiscountCode updatedDiscountCode = f.apply(discountCode);
+        client.executeBlocking(DiscountCodeDeleteCommand.of(updatedDiscountCode));
     }
 }
