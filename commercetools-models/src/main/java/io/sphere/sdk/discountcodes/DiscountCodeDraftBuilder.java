@@ -1,7 +1,7 @@
 package io.sphere.sdk.discountcodes;
 
 import io.sphere.sdk.cartdiscounts.CartDiscount;
-import io.sphere.sdk.cartdiscounts.CartDiscountPredicate;
+import io.sphere.sdk.cartdiscounts.CartPredicate;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
@@ -16,7 +16,7 @@ public final class DiscountCodeDraftBuilder extends DiscountCodeDraftBuilderBase
         super(active, cartDiscounts, cartPredicate, code, description, maxApplications, maxApplicationsPerCustomer, name);
     }
 
-    public DiscountCodeDraftBuilder cartPredicate(@Nullable final CartDiscountPredicate cartPredicate) {
+    public DiscountCodeDraftBuilder cartPredicate(@Nullable final CartPredicate cartPredicate) {
         return cartPredicate(cartPredicate.toSphereCartPredicate());
     }
 

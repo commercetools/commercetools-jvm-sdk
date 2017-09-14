@@ -4,9 +4,7 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.utils.SphereInternalUtils;
 
 import javax.annotation.Nullable;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public final class TypeDraftBuilder extends TypeDraftBuilderBase<TypeDraftBuilder> {
 
@@ -19,8 +17,10 @@ public final class TypeDraftBuilder extends TypeDraftBuilderBase<TypeDraftBuilde
     }
 
     public TypeDraftBuilder plusFieldDefinitions(final List<FieldDefinition> fieldDefinitions) {
-        this.fieldDefinitions = SphereInternalUtils.listOf(getFieldDefinitions(), fieldDefinitions);
+
+        this.fieldDefinitions = SphereInternalUtils.listOf(Optional.ofNullable(getFieldDefinitions()).orElseGet(ArrayList::new), fieldDefinitions);
         return this;
+
     }
 
     public TypeDraftBuilder plusFieldDefinitions(final FieldDefinition fieldDefinition) {

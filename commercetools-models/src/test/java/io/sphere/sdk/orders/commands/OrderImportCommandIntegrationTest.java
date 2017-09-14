@@ -20,7 +20,6 @@ import io.sphere.sdk.test.JsonNodeReferenceResolver;
 import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.utils.MoneyImpl;
-import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.junit.Test;
 
 import javax.annotation.Nullable;
@@ -276,7 +275,7 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
                 final OrderShippingInfo shippingInfo = OrderShippingInfo.of(randomString(), price, shippingRate, taxRate, taxCategoryRef, shippingMethodRef, deliveries);
                 testOrderAspect(
                         builder -> builder.shippingInfo(shippingInfo),
-                        order -> assertThat(order).matches(o -> EqualsBuilder.reflectionEquals(o.getShippingInfo(), shippingInfo, "taxedPrice"))
+                        order -> assertThat(order.getShippingInfo()).isEqualToIgnoringGivenFields(shippingInfo, "taxedPrice", "shippingMethodState")
                 );
             });
         });

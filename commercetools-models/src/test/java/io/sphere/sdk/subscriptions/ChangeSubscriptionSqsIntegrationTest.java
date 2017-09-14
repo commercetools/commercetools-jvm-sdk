@@ -5,7 +5,6 @@ import com.amazonaws.services.sqs.model.ReceiveMessageResult;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.Product;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -19,9 +18,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Integration tests for {@link ChangeSubscription} and {@link SqsDestination}.
  */
+@org.junit.experimental.categories.Category(SubscriptionMessagingIntegrationTest.class)
 public class ChangeSubscriptionSqsIntegrationTest extends SqsIntegrationTest {
 
-    @Ignore("this test is very flaky and thus we ignore it")
     @Test
     public void productCreated() throws Exception {
         assumeHasAwsCliEnv();

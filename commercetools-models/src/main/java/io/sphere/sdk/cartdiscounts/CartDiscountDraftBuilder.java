@@ -17,11 +17,11 @@ public final class CartDiscountDraftBuilder extends CartDiscountDraftBuilderBase
         return new CartDiscountDraftBuilder(null, cartPredicate, null, name, requiresDiscountCode, sortOrder, target, null, null, value);
     }
 
-    public static CartDiscountDraftBuilder of(final LocalizedString name, final CartDiscountPredicate cartPredicate, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final boolean requiresDiscountCode) {
+    public static CartDiscountDraftBuilder of(final LocalizedString name, final CartPredicate cartPredicate, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final boolean requiresDiscountCode) {
         return of(name, cartPredicate.toSphereCartPredicate(), value, target, sortOrder, requiresDiscountCode);
     }
 
-    public CartDiscountDraftBuilder cartPredicate(final CartDiscountPredicate cartPredicate) {
+    public CartDiscountDraftBuilder cartPredicate(final CartPredicate cartPredicate) {
         this.cartPredicate = cartPredicate.toSphereCartPredicate();
         return this;
     }

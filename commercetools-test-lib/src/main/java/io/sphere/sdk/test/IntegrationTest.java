@@ -24,6 +24,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
@@ -35,6 +36,9 @@ import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class IntegrationTest {
+
+    private static final int MAX_DEPTH_LEVEL = 3;
+
     @Rule
     public Timeout globalTimeout = Timeout.seconds(180);
 
@@ -115,10 +119,17 @@ public abstract class IntegrationTest {
     }
 
     public static SphereClientConfig getSphereClientConfig() {
-        File file = new File("integrationtest.properties");
-        file = file.exists() ? file : new File("../integrationtest.properties");//test runner is maybe in subproject
-        return file.exists() ? loadViaProperties(file) : loadViaEnvironmentArgs();
+        String propertiesFile = "integrationtest.properties";
+        String parentDir = ".";
+        for (int i = 0; i < MAX_DEPTH_LEVEL; i++) {
+            if (Paths.get(parentDir, propertiesFile).toFile().exists()) {
+                return loadViaProperties(Paths.get(parentDir, propertiesFile).toFile());
+            }
+            parentDir = "../" + parentDir;
+        }
+        return loadViaEnvironmentArgs();
     }
+
 
     private static SphereClientConfig loadViaEnvironmentArgs() {
         return SphereClientConfig.ofEnvironmentVariables("JVM_SDK_IT");

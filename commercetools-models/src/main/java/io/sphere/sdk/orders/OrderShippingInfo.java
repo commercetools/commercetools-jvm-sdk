@@ -1,6 +1,7 @@
 package io.sphere.sdk.orders;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.carts.CartShippingInfo;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
@@ -13,6 +14,7 @@ import javax.money.MonetaryAmount;
 import java.util.List;
 
 @JsonDeserialize(as = OrderShippingInfoImpl.class)
+@ResourceValue
 public interface OrderShippingInfo extends CartShippingInfo {
     List<Delivery> getDeliveries();
 
@@ -48,6 +50,6 @@ public interface OrderShippingInfo extends CartShippingInfo {
      * @return OrderShippingInfo
      */
     static OrderShippingInfo of(final String shippingMethodName, final MonetaryAmount price, final ShippingRate shippingRate, final TaxRate taxRate, final Reference<TaxCategory> taxCategory, final Reference<ShippingMethod> shippingMethod, final List<Delivery> deliveries) {
-        return new OrderShippingInfoImpl(shippingMethodName, price, shippingRate, taxRate, taxCategory, shippingMethod, deliveries, null, null);
+        return new OrderShippingInfoImpl(deliveries, null, price, shippingMethod,  shippingMethodName, null, shippingRate, taxCategory, taxRate, null);
     }
 }

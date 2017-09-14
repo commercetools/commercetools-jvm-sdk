@@ -29,7 +29,7 @@ public class CartDiscountFixtures {
         final LineItemsTarget target = LineItemsTarget.of("1 = 1");
         final String sortOrder = randomSortOrder();
         final boolean requiresDiscountCode = false;
-        return CartDiscountDraftBuilder.of(name, CartDiscountPredicate.of(predicate),
+        return CartDiscountDraftBuilder.of(name, CartPredicate.of(predicate),
                 value, target, sortOrder, requiresDiscountCode)
                 .validFrom(validFrom)
                 .validUntil(validUntil)

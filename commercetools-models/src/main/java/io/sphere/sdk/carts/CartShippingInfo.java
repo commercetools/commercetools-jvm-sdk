@@ -1,6 +1,7 @@
 package io.sphere.sdk.carts;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.cartdiscounts.DiscountedLineItemPrice;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
@@ -17,6 +18,7 @@ import javax.money.MonetaryAmount;
  * @see io.sphere.sdk.carts.commands.updateactions.SetShippingAddress
  */
 @JsonDeserialize(as = CartShippingInfoImpl.class)
+@ResourceValue
 public interface CartShippingInfo {
     String getShippingMethodName();
 
@@ -36,4 +38,6 @@ public interface CartShippingInfo {
 
     @Nullable
     DiscountedLineItemPrice getDiscountedPrice();
+
+    ShippingMethodState getShippingMethodState();
 }

@@ -19,20 +19,16 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class SubscriptionDeleteCommandIntegrationTest extends IntegrationTest {
 
-
-
     @Test
     public void deleteByKeyAzureQueue() throws Exception {
         assumeHasAzureSBEnv();
         deleteByKey(SubscriptionFixtures::azureServiceBusSubscriptionDraftBuilder);
-
     }
 
     @Test
     public void deleteByIdAzureQueue() throws Exception {
         assumeHasAzureSBEnv();
         deleteByID(SubscriptionFixtures::azureServiceBusSubscriptionDraftBuilder);
-
     }
 
     @Test
