@@ -2,9 +2,13 @@ package io.sphere.sdk.annotations.processors.generators.examples;
 
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
+import io.sphere.sdk.utils.SphereInternalUtils;
 import java.lang.Boolean;
 import java.lang.String;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import javax.annotation.Generated;
 import javax.annotation.Nullable;
 
@@ -113,6 +117,28 @@ public final class ExampleDraftBuilder extends Base implements Builder<ExampleDr
    */
   public ExampleDraftBuilder sku(final String sku) {
     this.sku = sku;
+    return this;
+  }
+
+  /**
+   * Concatenate {@code names} parameter to the {@code names} List property of this builder.
+   *
+   * @param names the value for {@link ExampleDraft#getNames()}
+   * @return this builder
+   */
+  public ExampleDraftBuilder plusNames(final List<String> names) {
+    this.names =  SphereInternalUtils.listOf(Optional.ofNullable(this.names).orElseGet(ArrayList::new), names);
+    return this;
+  }
+
+  /**
+   * Adds {@code names} parameter to the {@code names} List property of this builder.
+   *
+   * @param names the value of the element to add to {@link ExampleDraft#getNames()}
+   * @return this builder
+   */
+  public ExampleDraftBuilder plusNames(final String names) {
+    this.names =  SphereInternalUtils.listOf(Optional.ofNullable(this.names).orElseGet(ArrayList::new), Collections.singletonList(names));
     return this;
   }
 
