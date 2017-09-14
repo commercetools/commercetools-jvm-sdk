@@ -82,10 +82,10 @@ public class DraftBuilderGenerator extends AbstractBuilderGenerator<ResourceDraf
                 .addMethod(createDefaultConstructor(constructorModifiers))
                 .addMethod(createConstructor(properties, constructorModifiers))
                 .addMethods(builderMethodSpecs)
-                .addMethods(createPlusLists(resourceDraftValueType,properties))
-                .addMethods(createPlusTolListElementsMethodSpec(resourceDraftValueType,properties))
-                .addMethods(createPlusSetsMethodSpec(resourceDraftValueType,properties))
-                .addMethods(createPlusElementToSetMethodSpec(resourceDraftValueType,properties));
+                .addMethods(createListPluser(resourceDraftValueType,properties))
+                .addMethods(createListElementPluser(resourceDraftValueType,properties))
+                .addMethods(createSetPluser(resourceDraftValueType,properties))
+                .addMethods(createSetElementPluser(resourceDraftValueType,properties));
         if (resourceDraftValue.gettersForBuilder()) {
             List<MethodSpec> getMethods = propertyMethods.stream()
                     .map(this::createGetMethod)
@@ -130,14 +130,14 @@ public class DraftBuilderGenerator extends AbstractBuilderGenerator<ResourceDraf
         }
     }
 
-    private boolean isListProperty(PropertyGenModel propertyGenModel){
+    private boolean isListProperty(final PropertyGenModel propertyGenModel){
         final boolean isParmetrizedList = (propertyGenModel.getType() instanceof ParameterizedTypeName) && ((ParameterizedTypeName)propertyGenModel.getType()).rawType.reflectionName().equals(List.class.getTypeName());
         final boolean isNonParmetrizedList = (propertyGenModel.getType() instanceof ClassName) && ((ClassName)propertyGenModel.getType()).reflectionName().equals(List.class.getTypeName());
 
         return isNonParmetrizedList || isParmetrizedList;
     }
 
-    private List<MethodSpec> createPlusLists(final TypeElement resourceDraftValueType,final List<PropertyGenModel> propertyGenModels){
+    private List<MethodSpec> createListPluser(final TypeElement resourceDraftValueType, final List<PropertyGenModel> propertyGenModels){
 
         return propertyGenModels.stream()
                 .filter(this::isListProperty)
@@ -146,12 +146,12 @@ public class DraftBuilderGenerator extends AbstractBuilderGenerator<ResourceDraf
 
     }
 
-    private MethodSpec createPlusListMethodSpec(final TypeElement resourceDraftValueType, PropertyGenModel property){
+    private MethodSpec createPlusListMethodSpec(final TypeElement resourceDraftValueType,final PropertyGenModel property){
         final String methodName = "plus" + StringUtils.capitalize(property.getName());
         MethodSpec.Builder builder = MethodSpec
                 .methodBuilder(methodName)
                 .addModifiers(Modifier.PUBLIC)
-                .addJavadoc("Concatenate {@code $L} parameter to the {@code $L} List property of this builder.\n\n", property.getName(), property.getName())
+                .addJavadoc("Concatenate {@code $L} parameter to the {@code $L} list property of this builder.\n\n", property.getName(), property.getName())
                 .addJavadoc("@param $L the value for $L\n", property.getJavaIdentifier(), property.getJavadocLinkTag())
                 .addJavadoc("@return this builder\n")
                 .addParameter(createParameter(property,property.getType(),false))
@@ -160,7 +160,7 @@ public class DraftBuilderGenerator extends AbstractBuilderGenerator<ResourceDraf
         return builder.build();
     }
 
-    private List<MethodSpec> createPlusTolListElementsMethodSpec(final TypeElement resourceDraftValueType, final List<PropertyGenModel> propertyGenModels){
+    private List<MethodSpec> createListElementPluser(final TypeElement resourceDraftValueType, final List<PropertyGenModel> propertyGenModels){
 
         return propertyGenModels.stream()
                 .filter(this::isListProperty)
@@ -169,14 +169,14 @@ public class DraftBuilderGenerator extends AbstractBuilderGenerator<ResourceDraf
 
     }
 
-    private MethodSpec createPlusToListElementMethodSpec(final TypeElement resourceDraftValueType, PropertyGenModel property){
+    private MethodSpec createPlusToListElementMethodSpec(final TypeElement resourceDraftValueType,final PropertyGenModel property){
 
         final String methodName = "plus" + StringUtils.capitalize(property.getName());
         final TypeName parameterTypeName = property.getType() instanceof ParameterizedTypeName ? ((ParameterizedTypeName)property.getType()).typeArguments.get(0) : ClassName.get(Object.class);
         MethodSpec.Builder builder = MethodSpec
                 .methodBuilder(methodName)
                 .addModifiers(Modifier.PUBLIC)
-                .addJavadoc("Adds {@code $L} parameter to the {@code $L} List property of this builder.\n\n", property.getName(), property.getName())
+                .addJavadoc("Adds {@code $L} parameter to the {@code $L} list property of this builder.\n\n", property.getName(), property.getName())
                 .addJavadoc("@param $L the value of the element to add to $L\n", property.getJavaIdentifier(), property.getJavadocLinkTag())
                 .addJavadoc("@return this builder\n")
                 .addParameter(createParameter(property,parameterTypeName,false))
@@ -185,14 +185,14 @@ public class DraftBuilderGenerator extends AbstractBuilderGenerator<ResourceDraf
         return builder.build();
     }
 
-    private boolean isSetProperty(PropertyGenModel propertyGenModel){
+    private boolean isSetProperty(final PropertyGenModel propertyGenModel){
         final boolean isParmetrizedSet = (propertyGenModel.getType() instanceof ParameterizedTypeName) && ((ParameterizedTypeName)propertyGenModel.getType()).rawType.reflectionName().equals(Set.class.getTypeName());
         final boolean isNonParmetrizedSet = (propertyGenModel.getType() instanceof ClassName) && ((ClassName)propertyGenModel.getType()).reflectionName().equals(Set.class.getTypeName());
 
         return isNonParmetrizedSet || isParmetrizedSet;
     }
 
-    private List<MethodSpec> createPlusSetsMethodSpec(final TypeElement resourceDraftValueType, final List<PropertyGenModel> propertyGenModels){
+    private List<MethodSpec> createSetPluser(final TypeElement resourceDraftValueType, final List<PropertyGenModel> propertyGenModels){
 
         return propertyGenModels.stream()
                 .filter(this::isSetProperty)
@@ -201,12 +201,12 @@ public class DraftBuilderGenerator extends AbstractBuilderGenerator<ResourceDraf
 
     }
 
-    private MethodSpec createPlusSetMethodSpec(final TypeElement resourceDraftValueType, PropertyGenModel property){
-        final String methodName = "plus" + StringUtils.capitalize(property.getName());
+    private MethodSpec createPlusSetMethodSpec(final TypeElement resourceDraftValueType,final PropertyGenModel property){
+        final String methodName = "plus" + property.getCapitlizedName();
         MethodSpec.Builder builder = MethodSpec
                 .methodBuilder(methodName)
                 .addModifiers(Modifier.PUBLIC)
-                .addJavadoc("Concatenate {@code $L} parameter to the {@code $L} Set property of this builder.\n\n", property.getName(), property.getName())
+                .addJavadoc("Concatenate {@code $L} parameter to the {@code $L} set property of this builder.\n\n", property.getName(), property.getName())
                 .addJavadoc("@param $L the value for $L\n", property.getJavaIdentifier(), property.getJavadocLinkTag())
                 .addJavadoc("@return this builder\n")
                 .addParameter(createParameter(property,property.getType(),false))
@@ -215,23 +215,23 @@ public class DraftBuilderGenerator extends AbstractBuilderGenerator<ResourceDraf
         return builder.build();
     }
 
-    private List<MethodSpec> createPlusElementToSetMethodSpec(final TypeElement resourceDraftValueType, final List<PropertyGenModel> propertyGenModels){
+    private List<MethodSpec> createSetElementPluser(final TypeElement resourceDraftValueType, final List<PropertyGenModel> propertyGenModels){
 
         return propertyGenModels.stream()
                 .filter(this::isSetProperty)
-                .map(propertyGenModel -> createPlusElementToSetMethodSpec(resourceDraftValueType,propertyGenModel))
+                .map(propertyGenModel -> createSetElementPluser(resourceDraftValueType,propertyGenModel))
                 .collect(Collectors.toList());
 
     }
 
-    private MethodSpec createPlusElementToSetMethodSpec(final TypeElement resourceDraftValueType, PropertyGenModel property){
+    private MethodSpec createSetElementPluser(final TypeElement resourceDraftValueType, PropertyGenModel property){
 
-        final String methodName = "plus" + StringUtils.capitalize(property.getName());
+        final String methodName = "plus" + property.getCapitlizedName();
         final TypeName parameterTypeName = property.getType() instanceof ParameterizedTypeName ? ((ParameterizedTypeName)property.getType()).typeArguments.get(0) : ClassName.get(Object.class);
         MethodSpec.Builder builder = MethodSpec
                 .methodBuilder(methodName)
                 .addModifiers(Modifier.PUBLIC)
-                .addJavadoc("Adds {@code $L} parameter to the {@code $L} Set property of this builder.\n\n", property.getName(), property.getName())
+                .addJavadoc("Adds {@code $L} parameter to the {@code $L} set property of this builder.\n\n", property.getName(), property.getName())
                 .addJavadoc("@param $L the value of the element to add to $L\n", property.getJavaIdentifier(), property.getJavadocLinkTag())
                 .addJavadoc("@return this builder\n")
                 .addParameter(createParameter(property,parameterTypeName,false))
