@@ -6,6 +6,7 @@ import io.sphere.sdk.annotations.ResourceDraftValue;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Example draft class used in our tests.
@@ -25,6 +26,12 @@ public interface ExampleDraft {
      * This tests a parameterized type.
      */
     List<String> getNames();
+
+    /**
+     *This tests plus methods for a set
+     */
+
+    Set<String> getValues();
 
     /**
      * This tests that an {@code active(Boolean)} and {@code isActive(Boolean)} builder method is generated.
