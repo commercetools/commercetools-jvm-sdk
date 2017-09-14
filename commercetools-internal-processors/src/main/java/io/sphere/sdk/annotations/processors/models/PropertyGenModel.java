@@ -34,13 +34,17 @@ public class PropertyGenModel {
 
     private final boolean useReference;
 
-    private PropertyGenModel(final String name, final String jsonName, final TypeMirror type, final String javaDocLinkTag, final boolean optional,final boolean useReference) {
+    private final boolean deprecated;
+
+    private PropertyGenModel(final String name, final String jsonName, final TypeMirror type, final String javaDocLinkTag,
+                             final boolean optional, final boolean useReference, final boolean deprecated) {
         this.name = name;
         this.jsonName = jsonName;
         this.javaIdentifier = (SourceVersion.isKeyword(name) ? "_" : "") + name;
         this.type = type;
         this.javadocLinkTag = javaDocLinkTag;
         this.optional = optional;
+        this.deprecated = deprecated;
         this.useReference =useReference;
     }
 
@@ -81,6 +85,10 @@ public class PropertyGenModel {
 
     public boolean isOptional() {
         return optional;
+    }
+
+    public boolean isDeprecated() {
+        return deprecated;
     }
 
     /**
@@ -166,12 +174,14 @@ public class PropertyGenModel {
         final String jsonName = jsonProperty != null ? jsonProperty.value() : null;
         final String javadocLinkTag =
                 String.format("{@link %s#%s()}", getterMethod.getEnclosingElement().getSimpleName(), getterMethod.getSimpleName());
-        return new PropertyGenModel(getPropertyName(getterMethod), jsonName, getterMethod.getReturnType(), javadocLinkTag, optional,false);
+        final boolean deprecated = getterMethod.getAnnotation(Deprecated.class) != null;
+        return new PropertyGenModel(getPropertyName(getterMethod), jsonName, getterMethod.getReturnType(), javadocLinkTag,
+                optional,false, deprecated);
     }
 
 
     public static PropertyGenModel of(final String name, final String jsonName, final TypeMirror type, final String javaDocLinkTag, final boolean optional ,boolean useReference) {
-        return new PropertyGenModel(name, jsonName, type, javaDocLinkTag, optional,useReference);
+        return new PropertyGenModel(name, jsonName, type, javaDocLinkTag, optional,useReference, false);
     }
     /**
      * Returns the property name of the given property method.

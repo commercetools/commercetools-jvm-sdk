@@ -116,6 +116,8 @@ public class UpdateActionGenerator extends AbstractGenerator<ExecutableElement> 
                 .addMethods(createCopyFactoryMethods(copyFactoryMethods, concreteClassName, propertyGenModelList))
                 .addSuperinterfaces(superInterfaces);
 
+        copyDeprecatedAnnotation(property, typeSpecBuilder);
+
         if (allAttributesOptional) {
             typeSpecBuilder.addMethod(createFactoryMethod(propertyGenModelList, concreteClassName, Arrays.asList(), "ofUnset", false));
         }

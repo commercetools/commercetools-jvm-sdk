@@ -20,4 +20,7 @@ public interface MyResource {
     Locale getLocale();
 
     MyResourceEnum getResourceEnum();
+
+    @Deprecated
+    String getMyDeprecatedField();
 }

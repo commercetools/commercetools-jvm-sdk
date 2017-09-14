@@ -75,6 +75,9 @@ public class UpdateActionsGenerator extends AbstractMultipleFileGenerator<TypeEl
                 .addMethod(createConstructor(property, updateAction))
                 .addMethod(getMethod)
                 .addMethod(createFactoryMethod(property, updateActionClassName));
+
+        copyDeprecatedAnnotation(property, typeSpecBuilder);
+
         if (property.isOptional()) {
             typeSpecBuilder.addMethod(createUnsetMethod(updateActionClassName, property));
         }
