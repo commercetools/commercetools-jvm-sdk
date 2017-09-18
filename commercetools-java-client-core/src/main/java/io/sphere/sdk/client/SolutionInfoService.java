@@ -10,7 +10,7 @@ final class SolutionInfoService extends Base {
     private ServiceLoader<SolutionInfo> loader;
 
     private SolutionInfoService() {
-        loader = ServiceLoader.load(SolutionInfo.class);
+        loader = ServiceLoader.load(SolutionInfo.class,SolutionInfoService.class.getClassLoader());
     }
 
     public static synchronized SolutionInfoService getInstance() {

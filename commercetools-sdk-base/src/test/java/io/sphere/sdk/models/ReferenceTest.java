@@ -1,8 +1,5 @@
-package test;
+package io.sphere.sdk.models;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.models.TestEntity;
 import org.junit.Test;
 
 import static io.sphere.sdk.json.SphereJsonUtils.newObjectMapper;
@@ -52,8 +49,7 @@ public class ReferenceTest {
     @Test
     public void deserializationCanContainExpandedObject() throws Exception {
         final String json = String.format("{\"typeId\":\"%s\",\"id\": \"%s\",\"obj\":{\"foo\":\"value\"}}", typeId, id);
-        final Reference<TestEntity> actual = newObjectMapper().<Reference<TestEntity>>readValue(json, new TypeReference<Reference<TestEntity>>() {
-        });
+        final Reference<TestEntity> actual = newObjectMapper().readValue(json, TypeReferenceTestImpl.of());
         assertThat(actual).isEqualTo(newFilledReference());
     }
 
@@ -75,8 +71,7 @@ public class ReferenceTest {
     }
 
     private void deserializationWithOutExpandedObject(final String json) throws java.io.IOException {
-        final Reference<TestEntity> actual = newObjectMapper().<Reference<TestEntity>>readValue(json, new TypeReference<Reference<TestEntity>>() {
-        });
+        final Reference<TestEntity> actual = newObjectMapper().readValue(json, TypeReferenceTestImpl.of());
         assertThat(actual).isEqualTo(newEmptyReference());
     }
 

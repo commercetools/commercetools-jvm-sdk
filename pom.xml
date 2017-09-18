@@ -67,7 +67,7 @@
         <tag>HEAD</tag>
     </scm>
     <properties>
-        <jackson.version>2.6.5</jackson.version>
+        <jackson.version>2.8.9</jackson.version>
         <gson.version>2.5</gson.version>
         <asynchttpclient18.version>1.8.16</asynchttpclient18.version>
         <asynchttpclient19.version>1.9.33</asynchttpclient19.version>
@@ -102,6 +102,10 @@
         <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
         <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
         <handlebars.version>4.0.6</handlebars.version>
+        <maven-jar-plugin.version>2.6</maven-jar-plugin.version>
+        <money-api.version>1.0.1</money-api.version>
+        <moneta.version>1.1</moneta.version>
+        <apache.httpclient.version>4.1.3</apache.httpclient.version>
         <javadoc.additionalparams />
     </properties>
     <dependencyManagement>
@@ -116,14 +120,54 @@
                 <artifactId>commons-lang3</artifactId>
                 <version>3.4</version>
             </dependency>
-            <dependency>
-                <groupId>org.javamoney</groupId>
-                <artifactId>moneta</artifactId>
-                <version>${moneta.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
     <dependencies>
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-parameter-names</artifactId>
+            <version>${jackson.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-annotations</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-annotations</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-annotations</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${jackson.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-annotations</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -382,6 +426,20 @@
                         <phase>package</phase>
                         <goals>
                             <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven-jar-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>
+                                test-jar
+                            </goal>
                         </goals>
                     </execution>
                 </executions>

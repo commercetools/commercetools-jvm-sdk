@@ -14,6 +14,7 @@ import io.sphere.sdk.customobjects.queries.CustomObjectByKeyGet;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.test.IntegrationTest;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -57,9 +58,7 @@ public class CustomObjectUpsertCommandIntegrationTest extends IntegrationTest {
     @Test
     public void storyBinaryData() throws Exception {
         final String name = "hello.pdf";
-        final File file = new File(".", "src/test/resources/" + name).getAbsoluteFile();
-        final byte[] bytes = FileUtils.readFileToByteArray(file);
-        final BinaryData value = new BinaryData(name, bytes);
+        final BinaryData value = new BinaryData(name, IOUtils.toByteArray(ClassLoader.getSystemResourceAsStream(name)));
         final String key = "storyBinaryData";
         final CustomObjectUpsertCommand<BinaryData> command = CustomObjectUpsertCommand.of(CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, value, BinaryData.class));
         final BinaryData loadedValue = client().executeBlocking(command).getValue();

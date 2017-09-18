@@ -28,6 +28,11 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.commercetools.sdk.jvm.core</groupId>
+            <artifactId>commercetools-java-client</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>commercetools-convenience</artifactId>
             <version>${project.version}</version>
@@ -35,6 +40,11 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>commercetools-java-client-apache-async</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.commercetools.sdk.jvm.core</groupId>
+            <artifactId>commercetools-sdk-base</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

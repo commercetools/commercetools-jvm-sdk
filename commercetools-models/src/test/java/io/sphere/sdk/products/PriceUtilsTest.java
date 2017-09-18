@@ -1,17 +1,12 @@
 package io.sphere.sdk.products;
 
-import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.carts.TaxedItemPrice;
-import io.sphere.sdk.taxcategories.SubRate;
 import io.sphere.sdk.taxcategories.TaxRate;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
-import java.util.List;
 
 import static io.sphere.sdk.products.PriceUtils.*;
 import static io.sphere.sdk.test.SphereTestUtils.EUR;
@@ -94,58 +89,10 @@ public class PriceUtilsTest {
     }
 
     private static TaxRate taxRateOf(final double taxRateAmount, final boolean isIncludedInPrice) {
-        return new TaxRate() {
-            @Nullable
-            @Override
-            public String getId() {
-                throw new UnsupportedOperationException();
-            }
-
-            @Override
-            public String getName() {
-                throw new UnsupportedOperationException();
-            }
-
-            @Override
-            public Double getAmount() {
-                return taxRateAmount;
-            }
-
-            @Override
-            public Boolean isIncludedInPrice() {
-                return isIncludedInPrice;
-            }
-
-            @Override
-            public CountryCode getCountry() {
-                throw new UnsupportedOperationException();
-            }
-
-            @Nullable
-            @Override
-            public String getState() {
-                throw new UnsupportedOperationException();
-            }
-
-            @Nonnull
-            @Override
-            public List<SubRate> getSubRates() {
-                throw new UnsupportedOperationException();
-            }
-        };
+        return TaxRateTestImpl.of(taxRateAmount,isIncludedInPrice);
     }
 
     private static TaxedItemPrice taxedPriceOf(final MonetaryAmount totalNet, final MonetaryAmount totalGross) {
-        return new TaxedItemPrice() {
-            @Override
-            public MonetaryAmount getTotalNet() {
-                return totalNet;
-            }
-
-            @Override
-            public MonetaryAmount getTotalGross() {
-                return totalGross;
-            }
-        };
+        return  TaxedItemPriceTestImpl.of(totalNet, totalGross);
     }
 }

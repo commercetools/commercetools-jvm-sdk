@@ -18,18 +18,17 @@ import io.sphere.sdk.channels.queries.ChannelByIdGet;
 import io.sphere.sdk.client.*;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.customers.queries.CustomerQuery;
-import io.sphere.sdk.http.*;
+import io.sphere.sdk.http.HttpHeaders;
+import io.sphere.sdk.http.HttpResponse;
+import io.sphere.sdk.http.HttpStatusCode;
 import io.sphere.sdk.meta.BuildInfo;
-import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.SphereException;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.models.errors.InvalidJsonInputError;
-import io.sphere.sdk.models.errors.SphereError;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.utils.VrapHeaders;
-import org.hamcrest.CustomTypeSafeMatcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -38,7 +37,8 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.CompletionException;
+import java.util.concurrent.CompletionStage;
 import java.util.function.Supplier;
 
 import static io.sphere.sdk.carts.CartFixtures.withCart;
@@ -250,7 +250,7 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
      */
     @Test
     public void retryOnInvalidToken() throws Exception {
-        final RetryInvalidTokenHttpClient httpClient = new RetryInvalidTokenHttpClient();
+        final RetryInvalidTokenHttpClient httpClient = new RetryInvalidTokenHttpClient(getSphereClientConfig());
         final SphereAccessTokenSupplier tokenSupplier =
                 SphereAccessTokenSupplier.ofAutoRefresh(getSphereClientConfig(), httpClient, false);
         try(final SphereClient client = SphereClient.of(getSphereClientConfig(), httpClient, tokenSupplier)) {
@@ -288,157 +288,11 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
     }
 
     private DummyExceptionTestDsl aHttpResponseWithCode(final int responseCode) {
-        return new DummyExceptionTestDsl(responseCode);
+        return new DummyExceptionTestDsl(responseCode,thrown);
     }
 
     private ExceptionTestDsl executing(final Supplier<SphereRequest<?>> f) {
-        return new ExceptionTestDsl(f);
-    }
-
-    private static class RetryInvalidTokenHttpClient implements HttpClient {
-        private final ExecutorService executorService = Executors.newFixedThreadPool(1);
-
-        private volatile boolean tokenValid = true;
-        private volatile boolean tokenNew = false;
-
-        RetryInvalidTokenHttpClient() {
-        }
-
-        public boolean isTokenValid() {
-            return tokenValid;
-        }
-
-        @Override
-        public CompletionStage<HttpResponse> execute(final HttpRequest httpRequest) {
-            final CompletableFuture<HttpResponse> future = new CompletableFuture<>();
-            executorService.execute(() -> {
-                final HttpResponse httpResponse = executeSync(httpRequest);
-                logger.info("request: {} response: {} tokenIsValid: {}", httpRequest, httpResponse, tokenValid);
-                future.complete(httpResponse);
-            });
-            return future;
-        }
-
-        private HttpResponse executeSync(final HttpRequest httpRequest) {
-            if (httpRequest.getUrl().contains("oauth")) {
-                if (tokenValid && !tokenNew) {
-                    return HttpResponse.of(200, String.format("{\"access_token\":\"first-token\",\"token_type\":\"Bearer\",\"expires_in\":172800,\"scope\":\"manage_project:%s\"}", getSphereClientConfig().getProjectKey()));
-                } else {
-                    tokenValid = true;
-                    tokenNew = true;
-                    return HttpResponse.of(200, String.format("{\"access_token\":\"second-token\",\"token_type\":\"Bearer\",\"expires_in\":172800,\"scope\":\"manage_project:%s\"}", getSphereClientConfig().getProjectKey()));
-                }
-            }
-            if (httpRequest.getUrl().contains("cat-id")) {
-                tokenValid = false;//after that, the token expires
-                return HttpResponse.of(404);
-            }
-            if (httpRequest.getUrl().contains("channel-id")) {
-                if (tokenValid && httpRequest.getHeaders().getHeader(HttpHeaders.AUTHORIZATION).get(0).equals("Bearer second-token")) {
-                    return HttpResponse.of(404);
-                } else {
-                    return HttpResponse.of(401, "{\"statusCode\":401,\"message\":\"invalid_token\",\"errors\":[{\"code\":\"invalid_token\",\"message\":\"invalid_token\"}],\"error\":\"invalid_token\"}");
-                }
-            }
-            return HttpResponse.of(500);
-        }
-
-        @Override
-        public void close() {
-            executorService.shutdownNow();
-        }
-    }
-
-    private class DummyExceptionTestDsl {
-        private final int responseCode;
-
-        public DummyExceptionTestDsl(final int responseCode) {
-            this.responseCode = responseCode;
-        }
-
-        public void resultsInA(final Class<? extends Throwable> type) throws Throwable {
-            thrown.expect(type);
-            try {
-                TestDoubleSphereClientFactory.createHttpTestDouble(
-                        request -> HttpResponse.of(responseCode)).execute(CategoryQuery.of()
-                ).toCompletableFuture().join();
-            } catch (final CompletionException e) {
-                throw e.getCause();
-            }
-        }
-    }
-
-    private class ExceptionTestDsl {
-        private final Supplier<SphereRequest<?>> f;
-
-        public ExceptionTestDsl(final Supplier<SphereRequest<?>> f) {
-            this.f = f;
-        }
-
-        public void resultsInA(final Class<? extends Throwable> type) {
-            thrown.expect(type);
-            final SphereRequest<?> testSphereRequest = f.get();
-            client().executeBlocking(testSphereRequest);
-        }
-
-        public void resultsInA(final Class<? extends ErrorResponseException> type, final Class<? extends SphereError> error) {
-            thrown.expect(type);
-            thrown.expect(ExceptionCodeMatches.of(error));
-            final SphereRequest<?> testSphereRequest = f.get();
-            client().executeBlocking(testSphereRequest);
-        }
-    }
-
-    private static class TestSphereRequest extends Base implements SphereRequest<String> {
-
-        private final HttpRequestIntent requestIntent;
-
-        private TestSphereRequest(final HttpRequestIntent requestIntent) {
-            this.requestIntent = requestIntent;
-        }
-
-        public static TestSphereRequest of(final HttpRequestIntent requestIntent) {
-            return new TestSphereRequest(requestIntent);
-        }
-
-
-        @Override
-        public String deserialize(final HttpResponse httpResponse) {
-            return null;
-        }
-
-        @Override
-        public HttpRequestIntent httpRequestIntent() {
-            return requestIntent;
-        }
-    }
-
-    private static class ExceptionCodeMatches<T extends SphereError> extends CustomTypeSafeMatcher<ErrorResponseException> {
-        private final Class<T> error;
-
-        private ExceptionCodeMatches(final Class<T> error) {
-            super("expects sphere error");
-            this.error = error;
-        }
-
-        @Override
-        protected boolean matchesSafely(final ErrorResponseException e) {
-            boolean matches = false;
-            if (!e.getErrors().isEmpty()) {
-                final SphereError firstError = e.getErrors().get(0);
-                try {
-                    firstError.as(error);
-                    matches = true;
-                } catch (final IllegalArgumentException e1) {
-                    matches = false;
-                }
-            }
-            return matches;
-        }
-
-        public static <T extends SphereError> ExceptionCodeMatches<T> of(final Class<T> error) {
-            return new ExceptionCodeMatches<>(error);
-        }
+        return  ExceptionTestDsl.of(f,thrown,client());
     }
 
     @Test
