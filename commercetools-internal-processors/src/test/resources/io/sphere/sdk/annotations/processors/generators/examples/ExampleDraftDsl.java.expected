@@ -6,6 +6,7 @@ import io.sphere.sdk.models.Base;
 import java.lang.Boolean;
 import java.lang.String;
 import java.util.List;
+import java.util.Set;
 import javax.annotation.Generated;
 import javax.annotation.Nullable;
 
@@ -28,14 +29,18 @@ public final class ExampleDraftDsl extends Base implements ExampleDraft {
 
   private String sku;
 
+  private Set<String> values;
+
   @JsonCreator
   ExampleDraftDsl(final Boolean _default, @JsonProperty("isActive") final Boolean active,
-      final List<String> names, @Nullable final String optional, final String sku) {
+      final List<String> names, @Nullable final String optional, final String sku,
+      final Set<String> values) {
     this._default = _default;
     this.active = active;
     this.names = names;
     this.optional = optional;
     this.sku = sku;
+    this.values = values;
   }
 
   public Boolean isDefault() {
@@ -60,13 +65,17 @@ public final class ExampleDraftDsl extends Base implements ExampleDraft {
     return sku;
   }
 
+  public Set<String> getValues() {
+    return values;
+  }
+
   /**
    * Creates a new builder with the values of this object.
    *
    * @return new builder
    */
   public ExampleDraftBuilder newBuilder() {
-    return new ExampleDraftBuilder(_default, active, names, optional, sku);
+    return new ExampleDraftBuilder(_default, active, names, optional, sku, values);
   }
 
   public ExampleDraftDsl withDefault(final Boolean _default) {
@@ -89,6 +98,10 @@ public final class ExampleDraftDsl extends Base implements ExampleDraft {
     return newBuilder().sku(sku).build();
   }
 
+  public ExampleDraftDsl withValues(final Set<String> values) {
+    return newBuilder().values(values).build();
+  }
+
   public ExampleDraftDsl withIsActive(final Boolean active) {
     return newBuilder().active(active).build();
   }
@@ -101,7 +114,7 @@ public final class ExampleDraftDsl extends Base implements ExampleDraft {
    * @return new object initialized with the given values
    */
   public static ExampleDraftDsl of(final String sku, final Boolean active) {
-    return new ExampleDraftDsl(null, active, null, null, sku);
+    return new ExampleDraftDsl(null, active, null, null, sku, null);
   }
 
   /**
@@ -112,7 +125,7 @@ public final class ExampleDraftDsl extends Base implements ExampleDraft {
    * @return new object initialized with the given values
    */
   public static ExampleDraftDsl of(final Boolean _default, final Boolean active) {
-    return new ExampleDraftDsl(_default, active, null, null, null);
+    return new ExampleDraftDsl(_default, active, null, null, null, null);
   }
 
   /**
@@ -123,7 +136,7 @@ public final class ExampleDraftDsl extends Base implements ExampleDraft {
    * @return new object initialized with the given values
    */
   public static ExampleDraftDsl of(final Boolean _default, @Nullable final String optional) {
-    return new ExampleDraftDsl(_default, null, null, optional, null);
+    return new ExampleDraftDsl(_default, null, null, optional, null, null);
   }
 
   /**
@@ -133,6 +146,6 @@ public final class ExampleDraftDsl extends Base implements ExampleDraft {
    * @return a new object initialized from the template
    */
   public static ExampleDraftDsl of(final ExampleDraft template) {
-    return new ExampleDraftDsl(template.isDefault(), template.isActive(), template.getNames(), template.getOptional(), template.getSku());
+    return new ExampleDraftDsl(template.isDefault(), template.isActive(), template.getNames(), template.getOptional(), template.getSku(), template.getValues());
   }
 }

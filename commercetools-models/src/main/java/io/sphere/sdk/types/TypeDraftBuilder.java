@@ -16,14 +16,4 @@ public final class TypeDraftBuilder extends TypeDraftBuilderBase<TypeDraftBuilde
         return of(key, name, resourceTypeIdsSetBuilder.build());
     }
 
-    public TypeDraftBuilder plusFieldDefinitions(final List<FieldDefinition> fieldDefinitions) {
-
-        this.fieldDefinitions = SphereInternalUtils.listOf(Optional.ofNullable(getFieldDefinitions()).orElseGet(ArrayList::new), fieldDefinitions);
-        return this;
-
-    }
-
-    public TypeDraftBuilder plusFieldDefinitions(final FieldDefinition fieldDefinition) {
-        return plusFieldDefinitions(Collections.singletonList(fieldDefinition));
-    }
 }

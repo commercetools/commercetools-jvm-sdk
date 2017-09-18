@@ -48,6 +48,10 @@ public class PropertyGenModel {
         return name;
     }
 
+    public String getCapitlizedName(){
+        return StringUtils.capitalize(getName());
+    }
+
     /**
      * Returns the name of this poroperty as specified with {@link com.fasterxml.jackson.annotation.JsonProperty}
      *

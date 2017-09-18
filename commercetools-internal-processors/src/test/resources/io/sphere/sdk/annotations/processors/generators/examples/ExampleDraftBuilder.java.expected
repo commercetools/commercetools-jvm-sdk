@@ -2,9 +2,15 @@ package io.sphere.sdk.annotations.processors.generators.examples;
 
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
+import io.sphere.sdk.utils.SphereInternalUtils;
 import java.lang.Boolean;
 import java.lang.String;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import javax.annotation.Generated;
 import javax.annotation.Nullable;
 
@@ -27,16 +33,19 @@ public final class ExampleDraftBuilder extends Base implements Builder<ExampleDr
 
   private String sku;
 
+  private Set<String> values;
+
   ExampleDraftBuilder() {
   }
 
   ExampleDraftBuilder(final Boolean _default, final Boolean active, final List<String> names,
-      @Nullable final String optional, final String sku) {
+      @Nullable final String optional, final String sku, final Set<String> values) {
     this._default = _default;
     this.active = active;
     this.names = names;
     this.optional = optional;
     this.sku = sku;
+    this.values = values;
   }
 
   /**
@@ -117,12 +126,67 @@ public final class ExampleDraftBuilder extends Base implements Builder<ExampleDr
   }
 
   /**
+   * Sets the {@code values} property of this builder.
+   *
+   * @param values the value for {@link ExampleDraft#getValues()}
+   * @return this builder
+   */
+  public ExampleDraftBuilder values(final Set<String> values) {
+    this.values = values;
+    return this;
+  }
+
+  /**
+   * Concatenate {@code names} parameter to the {@code names} list property of this builder.
+   *
+   * @param names the value for {@link ExampleDraft#getNames()}
+   * @return this builder
+   */
+  public ExampleDraftBuilder plusNames(final List<String> names) {
+    this.names =  SphereInternalUtils.listOf(Optional.ofNullable(this.names).orElseGet(ArrayList::new), names);
+    return this;
+  }
+
+  /**
+   * Adds {@code names} parameter to the {@code names} list property of this builder.
+   *
+   * @param names the value of the element to add to {@link ExampleDraft#getNames()}
+   * @return this builder
+   */
+  public ExampleDraftBuilder plusNames(final String names) {
+    this.names =  SphereInternalUtils.listOf(Optional.ofNullable(this.names).orElseGet(ArrayList::new), Collections.singletonList(names));
+    return this;
+  }
+
+  /**
+   * Concatenate {@code values} parameter to the {@code values} set property of this builder.
+   *
+   * @param values the value for {@link ExampleDraft#getValues()}
+   * @return this builder
+   */
+  public ExampleDraftBuilder plusValues(final Set<String> values) {
+    this.values =  SphereInternalUtils.setOf(Optional.ofNullable(this.values).orElseGet(HashSet::new), values);
+    return this;
+  }
+
+  /**
+   * Adds {@code values} parameter to the {@code values} set property of this builder.
+   *
+   * @param values the value of the element to add to {@link ExampleDraft#getValues()}
+   * @return this builder
+   */
+  public ExampleDraftBuilder plusValues(final String values) {
+    this.values =  SphereInternalUtils.setOf(Collections.singleton(values), Optional.ofNullable(this.values).orElseGet(HashSet::new));
+    return this;
+  }
+
+  /**
    * Creates a new instance of {@code ExampleDraftDsl} with the values of this builder.
    *
    * @return the instance
    */
   public ExampleDraftDsl build() {
-    return new ExampleDraftDsl(_default, active, names, optional, sku);
+    return new ExampleDraftDsl(_default, active, names, optional, sku, values);
   }
 
   /**
@@ -133,7 +197,7 @@ public final class ExampleDraftBuilder extends Base implements Builder<ExampleDr
    * @return new object initialized with the given values
    */
   public static ExampleDraftBuilder of(final String sku, final Boolean active) {
-    return new ExampleDraftBuilder(null, active, null, null, sku);
+    return new ExampleDraftBuilder(null, active, null, null, sku, null);
   }
 
   /**
@@ -144,7 +208,7 @@ public final class ExampleDraftBuilder extends Base implements Builder<ExampleDr
    * @return new object initialized with the given values
    */
   public static ExampleDraftBuilder of(final Boolean _default, final Boolean active) {
-    return new ExampleDraftBuilder(_default, active, null, null, null);
+    return new ExampleDraftBuilder(_default, active, null, null, null, null);
   }
 
   /**
@@ -155,7 +219,7 @@ public final class ExampleDraftBuilder extends Base implements Builder<ExampleDr
    * @return new object initialized with the given values
    */
   public static ExampleDraftBuilder of(final Boolean _default, @Nullable final String optional) {
-    return new ExampleDraftBuilder(_default, null, null, optional, null);
+    return new ExampleDraftBuilder(_default, null, null, optional, null, null);
   }
 
   /**
@@ -165,6 +229,6 @@ public final class ExampleDraftBuilder extends Base implements Builder<ExampleDr
    * @return a new object initialized from the template
    */
   public static ExampleDraftBuilder of(final ExampleDraft template) {
-    return new ExampleDraftBuilder(template.isDefault(), template.isActive(), template.getNames(), template.getOptional(), template.getSku());
+    return new ExampleDraftBuilder(template.isDefault(), template.isActive(), template.getNames(), template.getOptional(), template.getSku(), template.getValues());
   }
 }
