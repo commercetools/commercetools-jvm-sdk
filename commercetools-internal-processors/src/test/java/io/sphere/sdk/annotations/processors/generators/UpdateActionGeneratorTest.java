@@ -1,12 +1,10 @@
 package io.sphere.sdk.annotations.processors.generators;
 
 import com.google.common.base.Charsets;
-import com.google.testing.compile.CompilationRule;
 import com.squareup.javapoet.JavaFile;
 import io.sphere.sdk.annotations.processors.generators.examples.ExampleResourceWithUpdateAction;
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 
 import javax.lang.model.element.ExecutableElement;
@@ -50,7 +48,11 @@ public class UpdateActionGeneratorTest  extends AbstractGeneratorTest {
         assertThat(content).isEqualTo(expectedContent(ExampleResourceWithUpdateAction.class,"getOptionalUserName"));
     }
 
-
+    @Test
+    public void generateExampleUpdateActionNullableWithDeprecatedField() throws Exception {
+        final String content = generateAsString(ExampleResourceWithUpdateAction.class,"getDeprecatedField");
+        assertThat(content).isEqualTo(expectedContent(ExampleResourceWithUpdateAction.class,"getDeprecatedField"));
+    }
 
     protected String generateAsString(final Class<?> clazz,String methodName) throws Exception {
         final TypeElement typeElement = compilationRule.getElements().getTypeElement(clazz.getCanonicalName());

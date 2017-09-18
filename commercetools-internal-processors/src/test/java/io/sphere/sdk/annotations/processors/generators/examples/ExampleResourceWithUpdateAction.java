@@ -23,6 +23,7 @@ public interface ExampleResourceWithUpdateAction {
     @HasUpdateAction
     Locale getOptionalLocale();
 
-
-
+    @Deprecated
+    @HasUpdateAction
+    String getDeprecatedField();
 }

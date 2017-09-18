@@ -138,6 +138,14 @@ abstract class BaseAbstractGenerator {
         builder.addAnnotation(suppressWarnings);
     }
 
+    protected void copyDeprecatedAnnotation(final PropertyGenModel property, final TypeSpec.Builder typeSpecBuilder) {
+        if (property.isDeprecated()) {
+            typeSpecBuilder.addJavadoc("\n");
+            typeSpecBuilder.addJavadoc("@deprecated This update action will be removed with the next major SDK update.\n");
+            typeSpecBuilder.addAnnotation(Deprecated.class);
+        }
+    }
+
     /**
      * @param property             the property to generate the parameter
      * @param useLowercaseBooleans {@link FactoryMethod#useLowercaseBooleans()}
