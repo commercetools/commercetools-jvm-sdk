@@ -6,6 +6,7 @@ import io.sphere.sdk.http.HttpClient;
 
 public final class SphereAsyncHttpClientFactory extends SphereHttpClientFactory{
 
+    @Deprecated
     public static HttpClient create() {
         return AsyncHttpClientAdapter.of(new AsyncHttpClient());
     }
