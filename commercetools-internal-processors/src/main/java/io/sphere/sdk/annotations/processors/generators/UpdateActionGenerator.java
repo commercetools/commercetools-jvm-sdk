@@ -174,13 +174,11 @@ public class UpdateActionGenerator extends AbstractGenerator<ExecutableElement> 
     }
 
 
-    private MethodSpec createGetMethod(final PropertyGenModel propertyGenModel) {
-
-        String prefix = propertyGenModel.getType().equals(BOXED_BOOLEAN)? "is" : "get";
-        MethodSpec.Builder specBuilder = MethodSpec.methodBuilder(prefix + StringUtils.capitalize(propertyGenModel.getName()))
+    protected MethodSpec createGetMethod(final PropertyGenModel propertyGenModel) {
+        final MethodSpec.Builder specBuilder = MethodSpec.methodBuilder(propertyGenModel.getMethodName())
                 .addModifiers(Modifier.PUBLIC)
                 .returns(propertyGenModel.getType())
-                .addCode("return $L;\n", propertyGenModel.getName());
+                .addCode("return $L;\n", propertyGenModel.getJavaIdentifier());
 
         if (propertyGenModel.isOptional()) {
             specBuilder.addAnnotation(Nullable.class);
@@ -221,7 +219,8 @@ public class UpdateActionGenerator extends AbstractGenerator<ExecutableElement> 
             typeMirror = e.getTypeMirror();
         }
         final String jsonName = StringUtils.isEmpty(propertySpec.jsonName()) ? null : propertySpec.jsonName();
-        return PropertyGenModel.of(escapeJavaKeyword(propertySpec.name()), jsonName, typeMirror, propertySpec.docLinkTaglet(), propertySpec.isOptional(), propertySpec.useReference());
+        return PropertyGenModel.of(escapeJavaKeyword(propertySpec.name()), jsonName, typeMirror, propertySpec.docLinkTaglet(),
+                propertySpec.isOptional(), propertySpec.useReference());
 
     }
 

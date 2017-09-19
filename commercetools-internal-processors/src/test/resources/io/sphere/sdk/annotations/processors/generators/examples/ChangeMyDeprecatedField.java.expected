@@ -13,7 +13,7 @@ import javax.annotation.Generated;
  *
  * @see MyResource#getMyDeprecatedField()
  *
- * @deprecated This update action will be removed with the next major SDK update.
+ * @deprecated This type will be removed with the next major SDK update.
  */
 @Generated(
     value = "io.sphere.sdk.annotations.processors.generators.UpdateActionsGenerator",
@@ -28,6 +28,11 @@ public final class ChangeMyDeprecatedField extends UpdateActionImpl<MyResource> 
     this.myDeprecatedField = myDeprecatedField;
   }
 
+  /**
+   *
+   * @deprecated This method will be removed with the next major SDK update.
+   */
+  @Deprecated
   public String getMyDeprecatedField() {
     return myDeprecatedField;
   }

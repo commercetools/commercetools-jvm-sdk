@@ -1,6 +1,5 @@
 package io.sphere.sdk.annotations.processors.generators;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.squareup.javapoet.*;
 import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.annotations.processors.models.PropertyGenModel;
@@ -32,7 +31,7 @@ public class ResourceValueImplGenerator extends AbstractGenerator<TypeElement> {
         final List<PropertyGenModel> propertyGenModels = getPropertyGenModels(propertyMethods);
         final List<FieldSpec> fields = propertyGenModels.stream().map(this::createField).collect(Collectors.toList());
 
-        final List<MethodSpec> getMethods = propertyMethods.stream().map(this::createGetMethod).collect(Collectors.toList());
+        final List<MethodSpec> getMethods = propertyGenModels.stream().map(this::createGetMethod).collect(Collectors.toList());
 
         final ResourceValue resourceValue = resourceValueTypeElement.getAnnotation(ResourceValue.class);
 
@@ -62,20 +61,6 @@ public class ResourceValueImplGenerator extends AbstractGenerator<TypeElement> {
                 .build();
 
         return typeSpec;
-    }
-
-    @Override
-    protected MethodSpec.Builder createGetMethodBuilder(final ExecutableElement propertyMethod) {
-        final MethodSpec.Builder builder = super.createGetMethodBuilder(propertyMethod);
-
-        final JsonProperty jsonProperty = propertyMethod.getAnnotation(JsonProperty.class);
-        final String jsonName = jsonProperty != null ? jsonProperty.value() : null;
-
-        if (jsonName != null) {
-            return builder.addAnnotation(createJsonPropertyAnnotation(jsonName));
-        }
-
-        return builder;
     }
 
     @Override

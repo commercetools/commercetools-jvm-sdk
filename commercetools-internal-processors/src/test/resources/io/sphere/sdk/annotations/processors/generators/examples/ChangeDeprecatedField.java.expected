@@ -11,7 +11,7 @@ import javax.annotation.Generated;
  *
  * @see ExampleResourceWithUpdateAction#getDeprecatedField()
  *
- * @deprecated This update action will be removed with the next major SDK update.
+ * @deprecated This type will be removed with the next major SDK update.
  */
 @Generated(
     value = "io.sphere.sdk.annotations.processors.generators.UpdateActionGenerator",
