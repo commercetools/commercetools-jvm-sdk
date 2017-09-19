@@ -124,17 +124,16 @@ public abstract class IntegrationTest {
     }
 
     private static CloseableHttpAsyncClient createNoSSLClient() {
-        TrustStrategy acceptingTrustStrategy = (X509Certificate[] chain, String authType) ->  true;
-        SSLContext sslContext = null;
+        final TrustStrategy acceptingTrustStrategy = (X509Certificate[] chain, String authType) ->  true;
         try {
-            sslContext = SSLContexts.custom().loadTrustMaterial(null, acceptingTrustStrategy).build();
+            final SSLContext sslContext = SSLContexts.custom().loadTrustMaterial(null, acceptingTrustStrategy).build();
+            return HttpAsyncClients.custom()
+                    .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE)
+                    .setSSLContext(sslContext).build();
         } catch (Exception e) {
-            logger.error("Could not create SSLContext");
+            logger.error("Could not create SSLContext",e);
+            return null;
         }
-
-        return HttpAsyncClients.custom()
-                .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE)
-                .setSSLContext(sslContext).build();
     }
 
     protected static String accessToken() {
