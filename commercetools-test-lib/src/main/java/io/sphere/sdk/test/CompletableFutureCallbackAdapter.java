@@ -7,6 +7,10 @@ import org.apache.http.concurrent.FutureCallback;
 
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * This class was duplicated as a dependency for {@link IntegrationTestHttpClient}
+ * to avoid creating cyclic dependencies in the API.
+ */
 final class CompletableFutureCallbackAdapter<T> extends Base implements FutureCallback<T> {
     private final CompletableFuture<T> future;
 

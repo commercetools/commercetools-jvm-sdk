@@ -18,7 +18,6 @@ import javax.annotation.Nullable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
@@ -31,10 +30,15 @@ import java.util.zip.GZIPInputStream;
 
 import static java.util.Arrays.asList;
 
-final class ApacheHttpClientAdapterImpl extends HttpClientAdapterBase {
+/**
+ * This class is a duplication of {@code ApacheHttpClientAdapterImpl},
+ * it was duplicated in order to avoid cyclic dependencies, which would break the modularity of the SDK API
+ *
+ */
+final class IntegrationTestHttpClient extends HttpClientAdapterBase {
     private final CloseableHttpAsyncClient apacheHttpClient;
 
-    private ApacheHttpClientAdapterImpl(final CloseableHttpAsyncClient apacheHttpClient) {
+    private IntegrationTestHttpClient(final CloseableHttpAsyncClient apacheHttpClient) {
         this.apacheHttpClient = apacheHttpClient;
         if (!apacheHttpClient.isRunning()) {
             apacheHttpClient.start();
@@ -42,7 +46,7 @@ final class ApacheHttpClientAdapterImpl extends HttpClientAdapterBase {
     }
 
     public static HttpClient of(final CloseableHttpAsyncClient client) {
-        return new ApacheHttpClientAdapterImpl(client);
+        return new IntegrationTestHttpClient(client);
     }
 
     @Override

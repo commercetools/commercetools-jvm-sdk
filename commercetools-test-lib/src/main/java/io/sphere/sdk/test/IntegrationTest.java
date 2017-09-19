@@ -111,7 +111,7 @@ public abstract class IntegrationTest {
 
     protected static HttpClient newHttpClient() {
         //NO SSL Client: this client doesn't perform ssl certification check, which is a necessity to run tests on CI
-        return ApacheHttpClientAdapterImpl.of(HttpAsyncClients.custom().setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE).build());
+        return IntegrationTestHttpClient.of(HttpAsyncClients.custom().setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE).build());
     }
 
     protected static String accessToken() {
