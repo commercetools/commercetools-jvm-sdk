@@ -11,6 +11,8 @@ import io.sphere.sdk.models.DefaultCurrencyUnits;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
+import org.apache.http.impl.nio.client.HttpAsyncClients;
 import org.assertj.core.api.Condition;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Before;
@@ -108,7 +110,8 @@ public abstract class IntegrationTest {
     }
 
     protected static HttpClient newHttpClient() {
-        return SphereClientFactory.of().createHttpClient();
+        //NO SSL Client: this client doesn't perform ssl certification check, which is a necessity to run tests on CI
+        return ApacheHttpClientAdapterImpl.of(HttpAsyncClients.custom().setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE).build());
     }
 
     protected static String accessToken() {

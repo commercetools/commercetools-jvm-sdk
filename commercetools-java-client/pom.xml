@@ -19,7 +19,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>commercetools-java-client-ahc-2_0</artifactId>
+            <artifactId>commercetools-java-client-apache-async</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>
