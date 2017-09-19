@@ -18,6 +18,11 @@
     </licenses>
     <dependencies>
         <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpasyncclient-osgi</artifactId>
+            <version>${apache.httpclient.version}</version>
+        </dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>commercetools-java-client-core</artifactId>
             <version>${project.version}</version>
