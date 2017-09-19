@@ -12,21 +12,28 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
+import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
 import org.apache.http.impl.nio.client.HttpAsyncClients;
+import org.apache.http.ssl.SSLContexts;
+import org.apache.http.ssl.TrustStrategy;
 import org.assertj.core.api.Condition;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.rules.Timeout;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nullable;
 import javax.money.CurrencyUnit;
+import javax.net.ssl.SSLContext;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Paths;
+import java.security.cert.X509Certificate;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
@@ -43,6 +50,8 @@ public abstract class IntegrationTest {
 
     @Rule
     public Timeout globalTimeout = Timeout.seconds(180);
+
+    protected static final Logger logger = LoggerFactory.getLogger(IntegrationTest.class);
 
     private static BlockingSphereClient client;
 
@@ -111,7 +120,21 @@ public abstract class IntegrationTest {
 
     protected static HttpClient newHttpClient() {
         //NO SSL Client: this client doesn't perform ssl certification check, which is a necessity to run tests on CI
-        return IntegrationTestHttpClient.of(HttpAsyncClients.custom().setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE).build());
+        return IntegrationTestHttpClient.of(createNoSSLClient());
+    }
+
+    private static CloseableHttpAsyncClient createNoSSLClient() {
+        TrustStrategy acceptingTrustStrategy = (X509Certificate[] chain, String authType) ->  true;
+        SSLContext sslContext = null;
+        try {
+            sslContext = SSLContexts.custom().loadTrustMaterial(null, acceptingTrustStrategy).build();
+        } catch (Exception e) {
+            logger.error("Could not create SSLContext");
+        }
+
+        return HttpAsyncClients.custom()
+                .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE)
+                .setSSLContext(sslContext).build();
     }
 
     protected static String accessToken() {
