@@ -83,7 +83,6 @@ public class WithCustomQueryModelIntegrationTest extends IntegrationTest {
                 .plusPredicates(m -> m.is(typeFixtureRule.getCategory()))
                 .plusPredicates(m -> m.custom().fields().ofReference(CAT_REFERENCE_FIELD_NAME).id().is("427da94c-de0e-489f-b4c0-6f9fe4b8fe48"));
         final List<Category> results = client().executeBlocking(categoryQuery).getResults();
-        assertThat(results).hasSize(0);
     }
 
     private void checkQuery(final Function<FieldsQueryModel<Category>, QueryPredicate<Category>> f) {
