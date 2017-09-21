@@ -1,18 +1,25 @@
 package io.sphere.sdk.types.queries;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
+import io.sphere.sdk.categories.commands.updateactions.SetCustomType;
 import io.sphere.sdk.categories.queries.CategoryQuery;
+import io.sphere.sdk.expansion.ExpansionPath;
+import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.types.TypeFixtureRule;
 import org.junit.ClassRule;
 import org.junit.Test;
 
-import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.function.Function;
 
+import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.types.TypeFixtureRule.*;
 import static io.sphere.sdk.types.TypeFixtures.*;
 import static java.util.Collections.singletonList;
@@ -21,6 +28,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class WithCustomQueryModelIntegrationTest extends IntegrationTest {
     @ClassRule
     public static TypeFixtureRule typeFixtureRule = new TypeFixtureRule(client());
+
+    private static final TypeReference<Reference<Category>> TYPE_REFERENCE = new TypeReference<Reference<Category>>() {};
 
     @Test
     public void queryByString() {
@@ -77,17 +86,26 @@ public class WithCustomQueryModelIntegrationTest extends IntegrationTest {
         checkQuery(fields -> fields.ofStringCollection(STRING_SET_FIELD_NAME).containsAny(singletonList("s1")));
     }
 
-    /**
-     * This intended to make sure that when the category query
-     * is provided with a correct uuid,  it works without exceptions
-     * (due to uuid format validation)
-     */
     @Test
     public void queryByReference() {
-        final CategoryQuery categoryQuery = CategoryQuery.of()
-                .plusPredicates(m -> m.is(typeFixtureRule.getCategory()))
-                .plusPredicates(m -> m.custom().fields().ofReference(CAT_REFERENCE_FIELD_NAME).id().is("427da94c-de0e-489f-b4c0-6f9fe4b8fe48"));
-        final List<Category> results = client().executeBlocking(categoryQuery).getResults();
+
+            withUpdateableType(client(), type -> {
+                withCategory(client(), referencedCategory -> {
+                    withCategory(client(), category -> {
+                        final Map<String, Object> fields = Collections.singletonMap(CAT_REFERENCE_FIELD_NAME, referencedCategory.toReference());
+                        final CategoryUpdateCommand categoryUpdateCommand = CategoryUpdateCommand.of(category, SetCustomType.ofTypeIdAndObjects(type.getId(), fields));
+                        final ExpansionPath<Category> expansionPath = ExpansionPath.of("custom.fields." + CAT_REFERENCE_FIELD_NAME);
+                        final Category updatedCategory = client().executeBlocking(categoryUpdateCommand.withExpansionPaths(expansionPath));
+                        final Reference<Category> createdReference = updatedCategory.getCustom().getField(CAT_REFERENCE_FIELD_NAME, TYPE_REFERENCE);
+                        final CategoryQuery categoryQuery = CategoryQuery.of()
+                                                .plusPredicates(m -> m.is(updatedCategory))
+                                                .plusPredicates(m -> m.custom().fields().ofReference(CAT_REFERENCE_FIELD_NAME).id().is(createdReference.getId()));
+                        final List<Category> results = client().executeBlocking(categoryQuery).getResults();
+                        assertThat(results).hasSize(1);
+                    });
+                });
+                return type;
+            });
     }
 
     private void checkQuery(final Function<FieldsQueryModel<Category>, QueryPredicate<Category>> f) {
