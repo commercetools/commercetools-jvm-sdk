@@ -77,6 +77,11 @@ public class WithCustomQueryModelIntegrationTest extends IntegrationTest {
         checkQuery(fields -> fields.ofStringCollection(STRING_SET_FIELD_NAME).containsAny(singletonList("s1")));
     }
 
+    /**
+     * This intended to make sure that when the category query
+     * is provided with a correct uuid,  it works without exceptions
+     * (due to uuid format validation)
+     */
     @Test
     public void queryByReference() {
         final CategoryQuery categoryQuery = CategoryQuery.of()
