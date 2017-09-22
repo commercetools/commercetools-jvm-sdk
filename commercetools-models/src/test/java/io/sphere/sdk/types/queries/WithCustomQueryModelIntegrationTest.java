@@ -13,10 +13,7 @@ import io.sphere.sdk.types.TypeFixtureRule;
 import org.junit.ClassRule;
 import org.junit.Test;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
@@ -28,8 +25,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class WithCustomQueryModelIntegrationTest extends IntegrationTest {
     @ClassRule
     public static TypeFixtureRule typeFixtureRule = new TypeFixtureRule(client());
-
-    private static final TypeReference<Reference<Category>> TYPE_REFERENCE = new TypeReference<Reference<Category>>() {};
 
     @Test
     public void queryByString() {
@@ -92,14 +87,17 @@ public class WithCustomQueryModelIntegrationTest extends IntegrationTest {
             withUpdateableType(client(), type -> {
                 withCategory(client(), referencedCategory -> {
                     withCategory(client(), category -> {
-                        final Map<String, Object> fields = Collections.singletonMap(CAT_REFERENCE_FIELD_NAME, referencedCategory.toReference());
+                        final TypeReference<Reference<Category>> TYPE_REFERENCE = new TypeReference<Reference<Category>>() {};
+                        final Map<String, Object> fields = new HashMap<>();
+                        fields.put(CAT_REFERENCE_FIELD_NAME, referencedCategory.toReference());
                         final CategoryUpdateCommand categoryUpdateCommand = CategoryUpdateCommand.of(category, SetCustomType.ofTypeIdAndObjects(type.getId(), fields));
                         final ExpansionPath<Category> expansionPath = ExpansionPath.of("custom.fields." + CAT_REFERENCE_FIELD_NAME);
                         final Category updatedCategory = client().executeBlocking(categoryUpdateCommand.withExpansionPaths(expansionPath));
                         final Reference<Category> createdReference = updatedCategory.getCustom().getField(CAT_REFERENCE_FIELD_NAME, TYPE_REFERENCE);
                         final CategoryQuery categoryQuery = CategoryQuery.of()
-                                                .plusPredicates(m -> m.is(updatedCategory))
-                                                .plusPredicates(m -> m.custom().fields().ofReference(CAT_REFERENCE_FIELD_NAME).id().is(createdReference.getId()));
+                                .plusExpansionPaths(expansionPath)
+                                .plusPredicates(m -> m.is(updatedCategory))
+                                .plusPredicates(m -> m.custom().fields().ofReference(CAT_REFERENCE_FIELD_NAME).typeId().is(createdReference.getTypeId()));
                         final List<Category> results = client().executeBlocking(categoryQuery).getResults();
                         assertThat(results).hasSize(1);
                     });
