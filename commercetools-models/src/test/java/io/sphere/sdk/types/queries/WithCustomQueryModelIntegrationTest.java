@@ -97,7 +97,7 @@ public class WithCustomQueryModelIntegrationTest extends IntegrationTest {
                         final CategoryQuery categoryQuery = CategoryQuery.of()
                                 .plusExpansionPaths(expansionPath)
                                 .plusPredicates(m -> m.is(updatedCategory))
-                                .plusPredicates(m -> m.custom().fields().ofReference(CAT_REFERENCE_FIELD_NAME).typeId().is(createdReference.getTypeId()));
+                                .plusPredicates(m -> m.custom().fields().ofReference(CAT_REFERENCE_FIELD_NAME).id().is(createdReference.getId()));
                         final List<Category> results = client().executeBlocking(categoryQuery).getResults();
                         assertThat(results).hasSize(1);
                     });
