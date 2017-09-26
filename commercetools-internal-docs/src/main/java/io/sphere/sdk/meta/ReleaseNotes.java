@@ -135,6 +135,10 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+ <h3 class=released-version id="v1_23_1">1.23.1 (26.09.2017)</h3>
+ <ul>
+ <li class=fixed-in-release>Fixed NullPointerException in {@link PriceDraftBuilder#of(Price)}.</li>
+ </ul>
  <h3 class=released-version id="v1_23_0">1.23.0 (11.09.2017)</h3>
  <ul>
  <li class=new-in-releas>Added new shipping method predicate {@link ShippingMethod#getPredicate()}, {@link ShippingMethodDraft#getPredicate()}.</li>
