@@ -12,7 +12,6 @@ import java.util.List;
  * Update commands for the {@link Project} entity
  *{@include.example io.sphere.sdk.projects.commands.ProjectUpdateActionsIntegrationTest#execution()}
  */
-@JsonDeserialize(as = ProjectUpdateCommandImpl.class)
 public interface ProjectUpdateCommand extends Command<Project> {
 
     /**
