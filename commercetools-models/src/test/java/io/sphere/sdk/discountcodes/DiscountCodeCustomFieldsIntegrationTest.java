@@ -14,6 +14,7 @@ import java.util.HashMap;
 
 import static io.sphere.sdk.discountcodes.DiscountCodeFixtures.discountCodeDraftBuilder;
 import static io.sphere.sdk.discountcodes.DiscountCodeFixtures.withUpdateableDiscountCode;
+import static io.sphere.sdk.test.SphereTestUtils.randomString;
 import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
 import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,8 +27,8 @@ public class DiscountCodeCustomFieldsIntegrationTest extends IntegrationTest {
                     .addObject(STRING_FIELD_NAME, "a value")
                     .build();
 
-
-            final DiscountCodeDraft discountCodeDraft = discountCodeDraftBuilder(client(), "ABC").custom(customFieldsDraft).build();
+            final String code = randomString();
+            final DiscountCodeDraft discountCodeDraft = discountCodeDraftBuilder(client(), code).custom(customFieldsDraft).build();
             final DiscountCode discountCode = client().executeBlocking(DiscountCodeCreateCommand.of(discountCodeDraft));
             assertThat(discountCode.getCustom().getFieldAsString(STRING_FIELD_NAME))
                     .isEqualTo("a value");
@@ -46,7 +47,8 @@ public class DiscountCodeCustomFieldsIntegrationTest extends IntegrationTest {
 
     @Test
     public void setCustomType() {
-        final DiscountCodeDraft discountCodeDraft = discountCodeDraftBuilder(client(), "ABC").build();
+        final String code = randomString();
+        final DiscountCodeDraft discountCodeDraft = discountCodeDraftBuilder(client(), code).build();
 
         withUpdateableType(client(), type -> {
             withUpdateableDiscountCode(client(), discountCodeDraft, discountCode -> {
