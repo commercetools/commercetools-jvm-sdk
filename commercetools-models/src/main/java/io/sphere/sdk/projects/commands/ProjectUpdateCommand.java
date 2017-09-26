@@ -15,9 +15,17 @@ import java.util.List;
 @JsonDeserialize(as = ProjectUpdateCommandImpl.class)
 public interface ProjectUpdateCommand extends Command<Project> {
 
-
+    /**
+     * The expected version of the project on which the changes should be applied.
+     * If the expected version does not match the actual version, a 409 Conflict will be returned.
+     * @return Project version
+     */
     Long getVersion() ;
 
+    /**
+     * The list of update actions to be performed on the project.
+     * @return update actions list
+     */
     List<? extends UpdateAction<Project>> getActions();
 
 
