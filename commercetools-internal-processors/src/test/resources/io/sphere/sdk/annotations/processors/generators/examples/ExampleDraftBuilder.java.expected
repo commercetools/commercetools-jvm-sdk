@@ -4,6 +4,7 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.utils.SphereInternalUtils;
 import java.lang.Boolean;
+import java.lang.Deprecated;
 import java.lang.String;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,6 +27,8 @@ public final class ExampleDraftBuilder extends Base implements Builder<ExampleDr
 
   private Boolean active;
 
+  private String deprecatedField;
+
   private List<String> names;
 
   @Nullable
@@ -38,10 +41,12 @@ public final class ExampleDraftBuilder extends Base implements Builder<ExampleDr
   ExampleDraftBuilder() {
   }
 
-  ExampleDraftBuilder(final Boolean _default, final Boolean active, final List<String> names,
-      @Nullable final String optional, final String sku, final Set<String> values) {
+  ExampleDraftBuilder(final Boolean _default, final Boolean active, final String deprecatedField,
+      final List<String> names, @Nullable final String optional, final String sku,
+      final Set<String> values) {
     this._default = _default;
     this.active = active;
+    this.deprecatedField = deprecatedField;
     this.names = names;
     this.optional = optional;
     this.sku = sku;
@@ -89,6 +94,20 @@ public final class ExampleDraftBuilder extends Base implements Builder<ExampleDr
    */
   public ExampleDraftBuilder isActive(final Boolean active) {
     this.active = active;
+    return this;
+  }
+
+  /**
+   * Sets the {@code deprecatedField} property of this builder.
+   *
+   * @param deprecatedField the value for {@link ExampleDraft#getDeprecatedField()}
+   * @return this builder
+   *
+   * @deprecated This method will be removed with the next major SDK update.
+   */
+  @Deprecated
+  public ExampleDraftBuilder deprecatedField(final String deprecatedField) {
+    this.deprecatedField = deprecatedField;
     return this;
   }
 
@@ -186,7 +205,7 @@ public final class ExampleDraftBuilder extends Base implements Builder<ExampleDr
    * @return the instance
    */
   public ExampleDraftDsl build() {
-    return new ExampleDraftDsl(_default, active, names, optional, sku, values);
+    return new ExampleDraftDsl(_default, active, deprecatedField, names, optional, sku, values);
   }
 
   /**
@@ -197,7 +216,7 @@ public final class ExampleDraftBuilder extends Base implements Builder<ExampleDr
    * @return new object initialized with the given values
    */
   public static ExampleDraftBuilder of(final String sku, final Boolean active) {
-    return new ExampleDraftBuilder(null, active, null, null, sku, null);
+    return new ExampleDraftBuilder(null, active, null, null, null, sku, null);
   }
 
   /**
@@ -208,7 +227,7 @@ public final class ExampleDraftBuilder extends Base implements Builder<ExampleDr
    * @return new object initialized with the given values
    */
   public static ExampleDraftBuilder of(final Boolean _default, final Boolean active) {
-    return new ExampleDraftBuilder(_default, active, null, null, null, null);
+    return new ExampleDraftBuilder(_default, active, null, null, null, null, null);
   }
 
   /**
@@ -219,7 +238,7 @@ public final class ExampleDraftBuilder extends Base implements Builder<ExampleDr
    * @return new object initialized with the given values
    */
   public static ExampleDraftBuilder of(final Boolean _default, @Nullable final String optional) {
-    return new ExampleDraftBuilder(_default, null, null, optional, null, null);
+    return new ExampleDraftBuilder(_default, null, null, null, optional, null, null);
   }
 
   /**
@@ -229,6 +248,6 @@ public final class ExampleDraftBuilder extends Base implements Builder<ExampleDr
    * @return a new object initialized from the template
    */
   public static ExampleDraftBuilder of(final ExampleDraft template) {
-    return new ExampleDraftBuilder(template.isDefault(), template.isActive(), template.getNames(), template.getOptional(), template.getSku(), template.getValues());
+    return new ExampleDraftBuilder(template.isDefault(), template.isActive(), template.getDeprecatedField(), template.getNames(), template.getOptional(), template.getSku(), template.getValues());
   }
 }

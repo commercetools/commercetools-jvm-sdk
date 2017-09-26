@@ -87,7 +87,7 @@ public class DraftBuilderGenerator extends AbstractBuilderGenerator<ResourceDraf
                 .addMethods(createSetPluser(resourceDraftValueType,properties))
                 .addMethods(createSetElementPluser(resourceDraftValueType,properties));
         if (resourceDraftValue.gettersForBuilder()) {
-            List<MethodSpec> getMethods = propertyMethods.stream()
+            List<MethodSpec> getMethods = properties.stream()
                     .map(this::createGetMethod)
                     .collect(Collectors.toList());
             builder.addMethods(getMethods);
@@ -148,7 +148,7 @@ public class DraftBuilderGenerator extends AbstractBuilderGenerator<ResourceDraf
 
     private MethodSpec createPlusListMethodSpec(final TypeElement resourceDraftValueType,final PropertyGenModel property){
         final String methodName = "plus" + StringUtils.capitalize(property.getName());
-        MethodSpec.Builder builder = MethodSpec
+        final MethodSpec.Builder builder = MethodSpec
                 .methodBuilder(methodName)
                 .addModifiers(Modifier.PUBLIC)
                 .addJavadoc("Concatenate {@code $L} parameter to the {@code $L} list property of this builder.\n\n", property.getName(), property.getName())
@@ -156,6 +156,7 @@ public class DraftBuilderGenerator extends AbstractBuilderGenerator<ResourceDraf
                 .addJavadoc("@return this builder\n")
                 .addParameter(createParameter(property,property.getType(),false))
                 .addCode("this.$L =  $T.listOf($T.ofNullable(this.$L).orElseGet($T::new), $L);\n", property.getName(), SphereInternalUtils.class,Optional.class, property.getName(), ArrayList.class,property.getName());
+        copyDeprecatedAnnotation(property, builder);
         addBuilderMethodReturn(resourceDraftValueType,builder);
         return builder.build();
     }
@@ -181,6 +182,7 @@ public class DraftBuilderGenerator extends AbstractBuilderGenerator<ResourceDraf
                 .addJavadoc("@return this builder\n")
                 .addParameter(createParameter(property,parameterTypeName,false))
                 .addCode("this.$L =  $T.listOf($T.ofNullable(this.$L).orElseGet($T::new), $T.singletonList($L));\n", property.getName(), SphereInternalUtils.class,Optional.class, property.getName(), ArrayList.class,Collections.class,property.getName());
+        copyDeprecatedAnnotation(property, builder);
         addBuilderMethodReturn(resourceDraftValueType,builder);
         return builder.build();
     }
@@ -202,7 +204,7 @@ public class DraftBuilderGenerator extends AbstractBuilderGenerator<ResourceDraf
     }
 
     private MethodSpec createPlusSetMethodSpec(final TypeElement resourceDraftValueType,final PropertyGenModel property){
-        final String methodName = "plus" + property.getCapitlizedName();
+        final String methodName = "plus" + property.getCapitalizedName();
         MethodSpec.Builder builder = MethodSpec
                 .methodBuilder(methodName)
                 .addModifiers(Modifier.PUBLIC)
@@ -211,6 +213,7 @@ public class DraftBuilderGenerator extends AbstractBuilderGenerator<ResourceDraf
                 .addJavadoc("@return this builder\n")
                 .addParameter(createParameter(property,property.getType(),false))
                 .addCode("this.$L =  $T.setOf($T.ofNullable(this.$L).orElseGet($T::new), $L);\n", property.getName(), SphereInternalUtils.class,Optional.class, property.getName(), HashSet.class,property.getName());
+        copyDeprecatedAnnotation(property, builder);
         addBuilderMethodReturn(resourceDraftValueType,builder);
         return builder.build();
     }
@@ -226,7 +229,7 @@ public class DraftBuilderGenerator extends AbstractBuilderGenerator<ResourceDraf
 
     private MethodSpec createSetElementPluser(final TypeElement resourceDraftValueType, PropertyGenModel property){
 
-        final String methodName = "plus" + property.getCapitlizedName();
+        final String methodName = "plus" + property.getCapitalizedName();
         final TypeName parameterTypeName = property.getType() instanceof ParameterizedTypeName ? ((ParameterizedTypeName)property.getType()).typeArguments.get(0) : ClassName.get(Object.class);
         MethodSpec.Builder builder = MethodSpec
                 .methodBuilder(methodName)
@@ -236,6 +239,7 @@ public class DraftBuilderGenerator extends AbstractBuilderGenerator<ResourceDraf
                 .addJavadoc("@return this builder\n")
                 .addParameter(createParameter(property,parameterTypeName,false))
                 .addCode("this.$L =  $T.setOf($T.singleton($L), $T.ofNullable(this.$L).orElseGet($T::new));\n", property.getName(), SphereInternalUtils.class,Collections.class,property.getName(),Optional.class, property.getName(), HashSet.class);
+        copyDeprecatedAnnotation(property, builder);
         addBuilderMethodReturn(resourceDraftValueType,builder);
         return builder.build();
     }

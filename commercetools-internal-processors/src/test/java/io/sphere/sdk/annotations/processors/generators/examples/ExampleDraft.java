@@ -53,6 +53,13 @@ public interface ExampleDraft {
     String getOptional();
 
     /**
+     * This test a deprecated field.
+     * @return
+     */
+    @Deprecated
+    String getDeprecatedField();
+
+    /**
      * This tests that a default method doesn't generate a builder method.
      */
     default String getIgnored() {

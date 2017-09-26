@@ -112,6 +112,9 @@ abstract class AbstractBuilderGenerator<A extends Annotation> extends AbstractGe
         } else {
             builder.addCode("this.$L = $N;\n", fieldName, parameter);
         }
+
+        copyDeprecatedAnnotation(property, builder);
+
         return addBuilderMethodReturn(builderType, builder).build();
     }
 }
