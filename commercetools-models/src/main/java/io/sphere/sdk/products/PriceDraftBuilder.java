@@ -146,6 +146,12 @@ public final class PriceDraftBuilder extends Base implements Builder<PriceDraftD
                 .custom(template.getCustom());
     }
 
+    private static CustomFieldsDraft copyCustom(Price template) {
+        return Optional.ofNullable(template.getCustom())
+                .map(customFields -> CustomFieldsDraftBuilder.of(customFields).build())
+                .orElse(null);
+    }
+
     public static PriceDraftBuilder of(final Price template) {
         return of(template.getValue())
                 .country(template.getCountry())
@@ -153,6 +159,6 @@ public final class PriceDraftBuilder extends Base implements Builder<PriceDraftD
                 .channel(template.getChannel())
                 .validFrom(template.getValidFrom())
                 .validUntil(template.getValidUntil())
-                .custom(CustomFieldsDraftBuilder.of(template.getCustom()).build());
+                .custom(copyCustom(template));
     }
 }
