@@ -22,7 +22,7 @@ public class ProjectUpdateActionsIntegrationTest extends IntegrationTest {
     private static final String PROJECT_NAME = "TestProject";
     private static final List<String> PROJECT_CURRENCIES = Arrays.asList(EUR.getCurrencyCode(), USD.getCurrencyCode());
     private static final List<CountryCode> PROJECT_COUNTRIES = Arrays.asList(CountryCode.DE, CountryCode.US);
-    private static final List<Locale> PROJECT_LOCALES = Arrays.asList(Locale.GERMANY, new Locale("de", "AT"), Locale.ENGLISH);
+    private static final List<Locale> PROJECT_LOCALES = Arrays.asList(Locale.GERMAN, new Locale("de", "AT"), Locale.ENGLISH);
     private static final List<String> PROJECT_LANGUAGES = PROJECT_LOCALES.stream().map(Locale::toLanguageTag).collect(Collectors.toList());
     private static final Boolean PROJECT_MESSAGES_ENABLED = true;
 
