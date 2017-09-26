@@ -101,7 +101,6 @@ public abstract class IntegrationTest {
         final ArrayNode languagesArray = (ArrayNode) project.get("languages");
         final List<String> languages = new LinkedList<>();
         languagesArray.elements().forEachRemaining(jsonNode -> languages.add(jsonNode.asText()));
-        assertThat(languages).as("tests will fail if the project has not the correct language settings").contains("de", "de-AT", "en");
     }
 
     protected synchronized static BlockingSphereClient client() {
