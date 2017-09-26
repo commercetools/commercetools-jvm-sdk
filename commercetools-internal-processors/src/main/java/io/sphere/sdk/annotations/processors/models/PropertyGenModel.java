@@ -20,7 +20,11 @@ import java.util.Objects;
  * This class provides a model for properties of a {@link javax.lang.model.element.TypeElement}.
  */
 public class PropertyGenModel {
+    private static final ClassName BOXED_BOOLEAN = ClassName.get(Boolean.class);
+
     private final String name;
+
+    private final String methodName;
 
     private final String jsonName;
 
@@ -36,9 +40,11 @@ public class PropertyGenModel {
 
     private final boolean deprecated;
 
-    private PropertyGenModel(final String name, final String jsonName, final TypeMirror type, final String javaDocLinkTag,
+
+    private PropertyGenModel(final String name, final String methodName, final String jsonName, final TypeMirror type, final String javaDocLinkTag,
                              final boolean optional, final boolean useReference, final boolean deprecated) {
         this.name = name;
+        this.methodName = methodName;
         this.jsonName = jsonName;
         this.javaIdentifier = (SourceVersion.isKeyword(name) ? "_" : "") + name;
         this.type = type;
@@ -52,7 +58,7 @@ public class PropertyGenModel {
         return name;
     }
 
-    public String getCapitlizedName(){
+    public String getCapitalizedName(){
         return StringUtils.capitalize(getName());
     }
 
@@ -76,6 +82,15 @@ public class PropertyGenModel {
         else {
             return TypeName.get(type);
         }
+    }
+
+    /**
+     * Returns the getter method name for this property.
+     *
+     * @return the getter method name
+     */
+    public String getMethodName() {
+        return methodName;
     }
 
     /**
@@ -179,13 +194,16 @@ public class PropertyGenModel {
         final String javadocLinkTag =
                 String.format("{@link %s#%s()}", getterMethod.getEnclosingElement().getSimpleName(), getterMethod.getSimpleName());
         final boolean deprecated = getterMethod.getAnnotation(Deprecated.class) != null;
-        return new PropertyGenModel(getPropertyName(getterMethod), jsonName, getterMethod.getReturnType(), javadocLinkTag,
+        return new PropertyGenModel(getPropertyName(getterMethod), getterMethod.getSimpleName().toString(), jsonName, getterMethod.getReturnType(), javadocLinkTag,
                 optional,false, deprecated);
     }
 
 
     public static PropertyGenModel of(final String name, final String jsonName, final TypeMirror type, final String javaDocLinkTag, final boolean optional ,boolean useReference) {
-        return new PropertyGenModel(name, jsonName, type, javaDocLinkTag, optional,useReference, false);
+        final TypeName typeName = TypeName.get(type);
+        final String methodNamePrefix = typeName.equals(BOXED_BOOLEAN)? "is" : "get";
+        final String methodName = methodNamePrefix + StringUtils.capitalize(name);
+        return new PropertyGenModel(name, methodName, jsonName, type, javaDocLinkTag, optional,useReference, false);
     }
     /**
      * Returns the property name of the given property method.

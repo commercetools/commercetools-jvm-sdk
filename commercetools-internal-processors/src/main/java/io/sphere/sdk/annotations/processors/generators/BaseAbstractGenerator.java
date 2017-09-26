@@ -98,32 +98,27 @@ abstract class BaseAbstractGenerator {
                 .collect(Collectors.toList());
     }
 
-    protected MethodSpec createGetMethod(final ExecutableElement propertyMethod) {
-        final MethodSpec.Builder builder = createGetMethodBuilder(propertyMethod);
+    protected MethodSpec createGetMethod(final PropertyGenModel property) {
+        final MethodSpec.Builder builder = MethodSpec.methodBuilder(property.getMethodName())
+                .addModifiers(Modifier.PUBLIC)
+                .returns(property.getType())
+                .addCode("return $L;\n", property.getJavaIdentifier());
+        copyNullableAnnotation(property, builder);
+        copyDeprecatedAnnotation(property, builder);
+        copyJsonAnnotation(property, builder);
         return builder.build();
     }
 
-    protected MethodSpec.Builder createGetMethodBuilder(final ExecutableElement propertyMethod) {
-        final MethodSpec.Builder builder = MethodSpec.methodBuilder(propertyMethod.getSimpleName().toString())
-                .addModifiers(Modifier.PUBLIC)
-                .returns(TypeName.get(propertyMethod.getReturnType()))
-                .addCode("return $L;\n", escapeJavaKeyword(PropertyGenModel.getPropertyName(propertyMethod)));
-        copyNullableAnnotation(propertyMethod, builder);
-        return builder;
-    }
-
-    protected void copyJsonAnnotation(final ExecutableElement propertyMethod, final MethodSpec.Builder builder) {
-        final JsonProperty jsonProperty = propertyMethod.getAnnotation(JsonProperty.class);
-        final String jsonName = jsonProperty != null ? jsonProperty.value() : null;
+    protected void copyJsonAnnotation(final PropertyGenModel property, final MethodSpec.Builder builder) {
+        final String jsonName = property.getJsonName();
 
         if (jsonName != null) {
             builder.addAnnotation(createJsonPropertyAnnotation(jsonName));
         }
     }
 
-    private void copyNullableAnnotation(final ExecutableElement method, final MethodSpec.Builder builder) {
-        final Nullable nullable = method.getAnnotation(Nullable.class);
-        if (nullable != null) {
+    private void copyNullableAnnotation(final PropertyGenModel property, final MethodSpec.Builder builder) {
+        if (property.isOptional()) {
             builder.addAnnotation(Nullable.class);
         }
     }
@@ -141,8 +136,16 @@ abstract class BaseAbstractGenerator {
     protected void copyDeprecatedAnnotation(final PropertyGenModel property, final TypeSpec.Builder typeSpecBuilder) {
         if (property.isDeprecated()) {
             typeSpecBuilder.addJavadoc("\n");
-            typeSpecBuilder.addJavadoc("@deprecated This update action will be removed with the next major SDK update.\n");
+            typeSpecBuilder.addJavadoc("@deprecated This type will be removed with the next major SDK update.\n");
             typeSpecBuilder.addAnnotation(Deprecated.class);
+        }
+    }
+
+    protected void copyDeprecatedAnnotation(final PropertyGenModel property, final MethodSpec.Builder methodSpecBuilder) {
+        if (property.isDeprecated()) {
+            methodSpecBuilder.addJavadoc("\n");
+            methodSpecBuilder.addJavadoc("@deprecated This method will be removed with the next major SDK update.\n");
+            methodSpecBuilder.addAnnotation(Deprecated.class);
         }
     }
 

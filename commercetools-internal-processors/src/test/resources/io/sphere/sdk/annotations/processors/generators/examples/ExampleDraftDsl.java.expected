@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sphere.sdk.models.Base;
 import java.lang.Boolean;
+import java.lang.Deprecated;
 import java.lang.String;
 import java.util.List;
 import java.util.Set;
@@ -22,6 +23,8 @@ public final class ExampleDraftDsl extends Base implements ExampleDraft {
 
   private Boolean active;
 
+  private String deprecatedField;
+
   private List<String> names;
 
   @Nullable
@@ -33,10 +36,11 @@ public final class ExampleDraftDsl extends Base implements ExampleDraft {
 
   @JsonCreator
   ExampleDraftDsl(final Boolean _default, @JsonProperty("isActive") final Boolean active,
-      final List<String> names, @Nullable final String optional, final String sku,
-      final Set<String> values) {
+      final String deprecatedField, final List<String> names, @Nullable final String optional,
+      final String sku, final Set<String> values) {
     this._default = _default;
     this.active = active;
+    this.deprecatedField = deprecatedField;
     this.names = names;
     this.optional = optional;
     this.sku = sku;
@@ -50,6 +54,15 @@ public final class ExampleDraftDsl extends Base implements ExampleDraft {
   @JsonProperty("isActive")
   public Boolean isActive() {
     return active;
+  }
+
+  /**
+   *
+   * @deprecated This method will be removed with the next major SDK update.
+   */
+  @Deprecated
+  public String getDeprecatedField() {
+    return deprecatedField;
   }
 
   public List<String> getNames() {
@@ -75,7 +88,7 @@ public final class ExampleDraftDsl extends Base implements ExampleDraft {
    * @return new builder
    */
   public ExampleDraftBuilder newBuilder() {
-    return new ExampleDraftBuilder(_default, active, names, optional, sku, values);
+    return new ExampleDraftBuilder(_default, active, deprecatedField, names, optional, sku, values);
   }
 
   public ExampleDraftDsl withDefault(final Boolean _default) {
@@ -84,6 +97,15 @@ public final class ExampleDraftDsl extends Base implements ExampleDraft {
 
   public ExampleDraftDsl withActive(final Boolean active) {
     return newBuilder().active(active).build();
+  }
+
+  /**
+   *
+   * @deprecated This method will be removed with the next major SDK update.
+   */
+  @Deprecated
+  public ExampleDraftDsl withDeprecatedField(final String deprecatedField) {
+    return newBuilder().deprecatedField(deprecatedField).build();
   }
 
   public ExampleDraftDsl withNames(final List<String> names) {
@@ -114,7 +136,7 @@ public final class ExampleDraftDsl extends Base implements ExampleDraft {
    * @return new object initialized with the given values
    */
   public static ExampleDraftDsl of(final String sku, final Boolean active) {
-    return new ExampleDraftDsl(null, active, null, null, sku, null);
+    return new ExampleDraftDsl(null, active, null, null, null, sku, null);
   }
 
   /**
@@ -125,7 +147,7 @@ public final class ExampleDraftDsl extends Base implements ExampleDraft {
    * @return new object initialized with the given values
    */
   public static ExampleDraftDsl of(final Boolean _default, final Boolean active) {
-    return new ExampleDraftDsl(_default, active, null, null, null, null);
+    return new ExampleDraftDsl(_default, active, null, null, null, null, null);
   }
 
   /**
@@ -136,7 +158,7 @@ public final class ExampleDraftDsl extends Base implements ExampleDraft {
    * @return new object initialized with the given values
    */
   public static ExampleDraftDsl of(final Boolean _default, @Nullable final String optional) {
-    return new ExampleDraftDsl(_default, null, null, optional, null, null);
+    return new ExampleDraftDsl(_default, null, null, null, optional, null, null);
   }
 
   /**
@@ -146,6 +168,6 @@ public final class ExampleDraftDsl extends Base implements ExampleDraft {
    * @return a new object initialized from the template
    */
   public static ExampleDraftDsl of(final ExampleDraft template) {
-    return new ExampleDraftDsl(template.isDefault(), template.isActive(), template.getNames(), template.getOptional(), template.getSku(), template.getValues());
+    return new ExampleDraftDsl(template.isDefault(), template.isActive(), template.getDeprecatedField(), template.getNames(), template.getOptional(), template.getSku(), template.getValues());
   }
 }
