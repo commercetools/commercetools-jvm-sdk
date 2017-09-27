@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.types.CustomFields;
+import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
@@ -30,5 +31,5 @@ public interface LineItemDraft {
     ZonedDateTime getAddedAt();
 
     @Nullable
-    CustomFields getCustom();
+    CustomFieldsDraft getCustom();
 }
