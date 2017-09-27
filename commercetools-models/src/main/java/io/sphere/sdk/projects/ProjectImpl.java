@@ -8,7 +8,7 @@ import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-class ProjectImpl extends ProjectImplBase {
+final class ProjectImpl extends ProjectImplBase {
 
     @JsonCreator
     ProjectImpl(final List<CountryCode> countries, final ZonedDateTime createdAt, final List<String> currencies, final String key, final List<String> languages,
