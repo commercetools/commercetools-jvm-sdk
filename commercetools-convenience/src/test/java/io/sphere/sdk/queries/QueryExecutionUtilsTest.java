@@ -14,7 +14,6 @@ import java.util.Locale;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 import java.util.concurrent.CompletionStage;
-import java.util.function.Consumer;
 import java.util.stream.LongStream;
 
 import static java.lang.Math.max;
@@ -28,27 +27,32 @@ public class QueryExecutionUtilsTest {
 
     @Test
     public void onEmptyResult() throws Exception {
-        withClient(clientWithResults(0), list -> assertThat(list).isSortedAccordingTo(categoryComparator).isEmpty());
+        assertThat(withClientWithoutFunction(clientWithResults(0))).isSortedAccordingTo(categoryComparator).isEmpty();
+        assertThat(withClientAndFunction(clientWithResults(0))).isSortedAccordingTo(categoryComparator).isEmpty();
     }
 
     @Test
     public void onOnePageResult() throws Exception {
-        withClient(clientWithResults(3), list -> assertThat(list).isSortedAccordingTo(categoryComparator).hasSize(3));
+        assertThat(withClientWithoutFunction(clientWithResults(3))).isSortedAccordingTo(categoryComparator).hasSize(3);
+        assertThat(withClientAndFunction(clientWithResults(3))).isSortedAccordingTo(categoryComparator).hasSize(3);
     }
 
     @Test
     public void onMultiplePagesResult() throws Exception {
-        withClient(clientWithResults(16), list -> assertThat(list).isSortedAccordingTo(categoryComparator).hasSize(16));
+        assertThat(withClientWithoutFunction(clientWithResults(16))).isSortedAccordingTo(categoryComparator).hasSize(16);
+        assertThat(withClientAndFunction(clientWithResults(16))).isSortedAccordingTo(categoryComparator).hasSize(16);
     }
 
     @Test
     public void onWrongTotalResult() throws Exception {
-        withClient(clientWithWrongResults(16), list -> assertThat(list).isSortedAccordingTo(categoryComparator).hasSize(16));
+        assertThat(withClientWithoutFunction(clientWithWrongResults(16))).isSortedAccordingTo(categoryComparator).hasSize(16);
+        assertThat(withClientAndFunction(clientWithWrongResults(16))).isSortedAccordingTo(categoryComparator).hasSize(16);
     }
 
     @Test
     public void onUnsortedResponses() throws Exception {
-        withClient(clientWithDelays(16), list -> assertThat(list).isSortedAccordingTo(categoryComparator).hasSize(16));
+        assertThat(withClientWithoutFunction(clientWithDelays(16))).isSortedAccordingTo(categoryComparator).hasSize(16);
+        assertThat(withClientAndFunction(clientWithDelays(16))).isSortedAccordingTo(categoryComparator).hasSize(16);
     }
 
     @Test
@@ -63,13 +67,17 @@ public class QueryExecutionUtilsTest {
         assertThat(totalNumberOfPages).isEqualTo(4);
     }
 
-    private void withClient(final SphereClient client, final Consumer<List<Category>> test) {
+    private List<Category> withClientWithoutFunction(final SphereClient client) {
+        return QueryExecutionUtils.queryAll(client, CategoryQuery.of(), PAGE_SIZE)
+            .toCompletableFuture().join();
+    }
+
+    private  List<Category> withClientAndFunction(final SphereClient client) {
         final List<List<Category>> elementPages = QueryExecutionUtils.queryAll(client, CategoryQuery.of(), (categories -> categories), PAGE_SIZE)
-                .toCompletableFuture().join();
-        final List<Category> elements = elementPages.stream()
-                                                    .flatMap(List::stream)
-                                                    .collect(toList());
-        test.accept(elements);
+            .toCompletableFuture().join();
+        return elementPages.stream()
+                           .flatMap(List::stream)
+                           .collect(toList());
     }
 
     private SphereClient clientWithResults(final int totalResults) {

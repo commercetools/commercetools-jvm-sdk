@@ -20,6 +20,31 @@ public final class QueryExecutionUtils {
     }
 
     /**
+     * Queries all elements matching a query by using an offset based pagination with page size {@value DEFAULT_PAGE_SIZE}.
+     * @param client commercetools client
+     * @param query query containing predicates and expansion paths
+     * @param <T> type of one query result element
+     * @param <C> type of the query
+     * @return elements
+     */
+    public static <T, C extends QueryDsl<T, C>> CompletionStage<List<T>> queryAll(final SphereClient client, final QueryDsl<T, C> query) {
+        return queryAll(client, query, DEFAULT_PAGE_SIZE);
+    }
+
+    /**
+     * Queries all elements matching a query by using an offset based pagination.
+     * @param client commercetools client
+     * @param query query containing predicates and expansion paths
+     * @param pageSize size of one batch to fetch
+     * @param <T> type of one query result element
+     * @param <C> type of the query
+     * @return elements
+     */
+    public static <T, C extends QueryDsl<T, C>> CompletionStage<List<T>> queryAll(final SphereClient client, final QueryDsl<T, C> query, final int pageSize) {
+        return QueryAllImpl.of(query, pageSize).run(client);
+    }
+
+    /**
      * Queries all elements matching a query by using an offset based pagination with page size 500.
      * The method takes a callback {@link Function} that returns a result of type {@code <S>} that is returned on every
      * page of elements queried. Eventually, the method returns a {@link CompletionStage} that contains a list of all

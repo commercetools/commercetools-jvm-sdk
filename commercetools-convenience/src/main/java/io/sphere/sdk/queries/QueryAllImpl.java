@@ -24,6 +24,13 @@ final class QueryAllImpl<T, C extends QueryDsl<T, C>> {
         this.pageSize = pageSize;
     }
 
+    public CompletionStage<List<T>> run(final SphereClient client) {
+        return run(client, listOfT -> listOfT)
+            .thenApply(listOfListsOfT -> listOfListsOfT.stream()
+                .flatMap(List::stream)
+                .collect(toList()));
+    }
+
     /**
      * Given a {@code callback} {@link Function}, this method applies this callback on each page of the results from
      * {@link this} instance's {@code baseQuery} and returns a future containing a list containing the results of this
@@ -132,8 +139,8 @@ final class QueryAllImpl<T, C extends QueryDsl<T, C>> {
     @Nonnull
     private CompletionStage<PagedQueryResult<T>> queryPage(final SphereClient client, final long pageNumber) {
         final QueryDsl<T, C> query = baseQuery
-            .withOffset(pageNumber * pageSize)
-            .withLimit(pageSize);
+                .withOffset(pageNumber * pageSize)
+                .withLimit(pageSize);
         return client.execute(query);
     }
 
@@ -156,8 +163,7 @@ final class QueryAllImpl<T, C extends QueryDsl<T, C>> {
     }
 
     @Nonnull
-    static <T, C extends QueryDsl<T, C>> QueryAllImpl<T, C> of(@Nonnull final QueryDsl<T, C> baseQuery,
-                                                               final int pageSize) {
+    static <T, C extends QueryDsl<T, C>> QueryAllImpl<T, C> of(@Nonnull final QueryDsl<T, C> baseQuery, final int pageSize) {
         return new QueryAllImpl<>(baseQuery, pageSize);
     }
 }
