@@ -19,7 +19,7 @@ import java.util.Locale;
 import static java.util.stream.Collectors.toList;
 
 
-@ResourceValue
+@ResourceValue(abstractResourceClass = true)
 @JsonDeserialize(as = ProjectImpl.class)
 public interface Project extends CreationTimestamped, WithKey {
     /**
