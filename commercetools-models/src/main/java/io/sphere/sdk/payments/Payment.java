@@ -33,9 +33,10 @@ import java.util.List;
 @HasQueryEndpoint()
 @ResourceInfo(pluralName = "payments", pathElement = "payments")
 @HasByIdGetEndpoint(javadocSummary = "Retrieves a payment by a known ID.", includeExamples = "io.sphere.sdk.payments.queries.PaymentByIdGetIntegrationTest#execution()")
+@HasByKeyGetEndpoint(javadocSummary = "Retrieves a payment by a known key.", includeExamples = "io.sphere.sdk.payments.queries.PaymentByKeyGetIntegrationTest#execution()")
 @HasCreateCommand(includeExamples = "io.sphere.sdk.payments.commands.PaymentCreateCommandIntegrationTest#payingPerCreditCart()")
-@HasUpdateCommand(javadocSummary = "Updates a payment.")
-@HasDeleteCommand
+@HasUpdateCommand(javadocSummary = "Updates a payment.", updateWithKey = true)
+@HasDeleteCommand(deleteWithKey = true, includeExamples = "io.sphere.sdk.payments.commands.PaymentDeleteCommandIntegrationTest#execution()")
 @HasQueryModel
 @HasUpdateActions
 public interface Payment extends Resource<Payment>, Custom {

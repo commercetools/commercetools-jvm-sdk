@@ -5,6 +5,7 @@ import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.annotations.processors.models.PropertyGenModel;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
+import io.sphere.sdk.utils.SphereInternalUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Generated;
@@ -15,10 +16,7 @@ import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.Elements;
 import javax.lang.model.util.SimpleAnnotationValueVisitor8;
 import javax.lang.model.util.Types;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -83,9 +81,13 @@ public class DraftBuilderGenerator extends AbstractBuilderGenerator<ResourceDraf
         builder.addFields(fieldSpecs)
                 .addMethod(createDefaultConstructor(constructorModifiers))
                 .addMethod(createConstructor(properties, constructorModifiers))
-                .addMethods(builderMethodSpecs);
+                .addMethods(builderMethodSpecs)
+                .addMethods(createListPluser(resourceDraftValueType,properties))
+                .addMethods(createListElementPluser(resourceDraftValueType,properties))
+                .addMethods(createSetPluser(resourceDraftValueType,properties))
+                .addMethods(createSetElementPluser(resourceDraftValueType,properties));
         if (resourceDraftValue.gettersForBuilder()) {
-            List<MethodSpec> getMethods = propertyMethods.stream()
+            List<MethodSpec> getMethods = properties.stream()
                     .map(this::createGetMethod)
                     .collect(Collectors.toList());
             builder.addMethods(getMethods);
@@ -127,6 +129,121 @@ public class DraftBuilderGenerator extends AbstractBuilderGenerator<ResourceDraf
             builder.addMethod(createCopyFactoryMethod(templateTypeElement, concreteBuilderName, propertyMethods));
         }
     }
+
+    private boolean isListProperty(final PropertyGenModel propertyGenModel){
+        final boolean isParmetrizedList = (propertyGenModel.getType() instanceof ParameterizedTypeName) && ((ParameterizedTypeName)propertyGenModel.getType()).rawType.reflectionName().equals(List.class.getTypeName());
+        final boolean isNonParmetrizedList = (propertyGenModel.getType() instanceof ClassName) && ((ClassName)propertyGenModel.getType()).reflectionName().equals(List.class.getTypeName());
+
+        return isNonParmetrizedList || isParmetrizedList;
+    }
+
+    private List<MethodSpec> createListPluser(final TypeElement resourceDraftValueType, final List<PropertyGenModel> propertyGenModels){
+
+        return propertyGenModels.stream()
+                .filter(this::isListProperty)
+                .map(propertyGenModel -> createPlusListMethodSpec(resourceDraftValueType,propertyGenModel))
+                .collect(Collectors.toList());
+
+    }
+
+    private MethodSpec createPlusListMethodSpec(final TypeElement resourceDraftValueType,final PropertyGenModel property){
+        final String methodName = "plus" + StringUtils.capitalize(property.getName());
+        final MethodSpec.Builder builder = MethodSpec
+                .methodBuilder(methodName)
+                .addModifiers(Modifier.PUBLIC)
+                .addJavadoc("Concatenate {@code $L} parameter to the {@code $L} list property of this builder.\n\n", property.getName(), property.getName())
+                .addJavadoc("@param $L the value for $L\n", property.getJavaIdentifier(), property.getJavadocLinkTag())
+                .addJavadoc("@return this builder\n")
+                .addParameter(createParameter(property,property.getType(),false))
+                .addCode("this.$L =  $T.listOf($T.ofNullable(this.$L).orElseGet($T::new), $L);\n", property.getName(), SphereInternalUtils.class,Optional.class, property.getName(), ArrayList.class,property.getName());
+        copyDeprecatedAnnotation(property, builder);
+        addBuilderMethodReturn(resourceDraftValueType,builder);
+        return builder.build();
+    }
+
+    private List<MethodSpec> createListElementPluser(final TypeElement resourceDraftValueType, final List<PropertyGenModel> propertyGenModels){
+
+        return propertyGenModels.stream()
+                .filter(this::isListProperty)
+                .map(propertyGenModel -> createPlusToListElementMethodSpec(resourceDraftValueType,propertyGenModel))
+                .collect(Collectors.toList());
+
+    }
+
+    private MethodSpec createPlusToListElementMethodSpec(final TypeElement resourceDraftValueType,final PropertyGenModel property){
+
+        final String methodName = "plus" + StringUtils.capitalize(property.getName());
+        final TypeName parameterTypeName = property.getType() instanceof ParameterizedTypeName ? ((ParameterizedTypeName)property.getType()).typeArguments.get(0) : ClassName.get(Object.class);
+        MethodSpec.Builder builder = MethodSpec
+                .methodBuilder(methodName)
+                .addModifiers(Modifier.PUBLIC)
+                .addJavadoc("Adds {@code $L} parameter to the {@code $L} list property of this builder.\n\n", property.getName(), property.getName())
+                .addJavadoc("@param $L the value of the element to add to $L\n", property.getJavaIdentifier(), property.getJavadocLinkTag())
+                .addJavadoc("@return this builder\n")
+                .addParameter(createParameter(property,parameterTypeName,false))
+                .addCode("this.$L =  $T.listOf($T.ofNullable(this.$L).orElseGet($T::new), $T.singletonList($L));\n", property.getName(), SphereInternalUtils.class,Optional.class, property.getName(), ArrayList.class,Collections.class,property.getName());
+        copyDeprecatedAnnotation(property, builder);
+        addBuilderMethodReturn(resourceDraftValueType,builder);
+        return builder.build();
+    }
+
+    private boolean isSetProperty(final PropertyGenModel propertyGenModel){
+        final boolean isParmetrizedSet = (propertyGenModel.getType() instanceof ParameterizedTypeName) && ((ParameterizedTypeName)propertyGenModel.getType()).rawType.reflectionName().equals(Set.class.getTypeName());
+        final boolean isNonParmetrizedSet = (propertyGenModel.getType() instanceof ClassName) && ((ClassName)propertyGenModel.getType()).reflectionName().equals(Set.class.getTypeName());
+
+        return isNonParmetrizedSet || isParmetrizedSet;
+    }
+
+    private List<MethodSpec> createSetPluser(final TypeElement resourceDraftValueType, final List<PropertyGenModel> propertyGenModels){
+
+        return propertyGenModels.stream()
+                .filter(this::isSetProperty)
+                .map(propertyGenModel -> createPlusSetMethodSpec(resourceDraftValueType,propertyGenModel))
+                .collect(Collectors.toList());
+
+    }
+
+    private MethodSpec createPlusSetMethodSpec(final TypeElement resourceDraftValueType,final PropertyGenModel property){
+        final String methodName = "plus" + property.getCapitalizedName();
+        MethodSpec.Builder builder = MethodSpec
+                .methodBuilder(methodName)
+                .addModifiers(Modifier.PUBLIC)
+                .addJavadoc("Concatenate {@code $L} parameter to the {@code $L} set property of this builder.\n\n", property.getName(), property.getName())
+                .addJavadoc("@param $L the value for $L\n", property.getJavaIdentifier(), property.getJavadocLinkTag())
+                .addJavadoc("@return this builder\n")
+                .addParameter(createParameter(property,property.getType(),false))
+                .addCode("this.$L =  $T.setOf($T.ofNullable(this.$L).orElseGet($T::new), $L);\n", property.getName(), SphereInternalUtils.class,Optional.class, property.getName(), HashSet.class,property.getName());
+        copyDeprecatedAnnotation(property, builder);
+        addBuilderMethodReturn(resourceDraftValueType,builder);
+        return builder.build();
+    }
+
+    private List<MethodSpec> createSetElementPluser(final TypeElement resourceDraftValueType, final List<PropertyGenModel> propertyGenModels){
+
+        return propertyGenModels.stream()
+                .filter(this::isSetProperty)
+                .map(propertyGenModel -> createSetElementPluser(resourceDraftValueType,propertyGenModel))
+                .collect(Collectors.toList());
+
+    }
+
+    private MethodSpec createSetElementPluser(final TypeElement resourceDraftValueType, PropertyGenModel property){
+
+        final String methodName = "plus" + property.getCapitalizedName();
+        final TypeName parameterTypeName = property.getType() instanceof ParameterizedTypeName ? ((ParameterizedTypeName)property.getType()).typeArguments.get(0) : ClassName.get(Object.class);
+        MethodSpec.Builder builder = MethodSpec
+                .methodBuilder(methodName)
+                .addModifiers(Modifier.PUBLIC)
+                .addJavadoc("Adds {@code $L} parameter to the {@code $L} set property of this builder.\n\n", property.getName(), property.getName())
+                .addJavadoc("@param $L the value of the element to add to $L\n", property.getJavaIdentifier(), property.getJavadocLinkTag())
+                .addJavadoc("@return this builder\n")
+                .addParameter(createParameter(property,parameterTypeName,false))
+                .addCode("this.$L =  $T.setOf($T.singleton($L), $T.ofNullable(this.$L).orElseGet($T::new));\n", property.getName(), SphereInternalUtils.class,Collections.class,property.getName(),Optional.class, property.getName(), HashSet.class);
+        copyDeprecatedAnnotation(property, builder);
+        addBuilderMethodReturn(resourceDraftValueType,builder);
+        return builder.build();
+    }
+
 
     private void createCopyMethods(final TypeElement templateTypeElement, final List<ExecutableElement> propertyMethods, final TypeSpec.Builder builder) {
         final Map<Name, ExecutableElement> templatePropertyMethodByName = getAllPropertyMethodsSorted(templateTypeElement).stream()

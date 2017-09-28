@@ -32,6 +32,7 @@ public class MatchingVariantsFlagSearchIntegrationTest extends ProductProjection
             final ProductDraftBuilder productDraftBuilder = ProductDraftBuilder.of(productType, randomSlug(), randomSlug(), allVariants);
             withProduct(client(), productDraftBuilder, product -> {
                 final ProductProjectionSearch searchRequest = ProductProjectionSearch.ofStaged()
+                        .withMarkingMatchingVariants(true)
                         .plusQueryFilters(m -> m.id().is(product.getId()))
                         .plusQueryFilters(m -> m.allVariants().attribute().ofString(attributeName).is("3"));
                 assertEventually(() -> {

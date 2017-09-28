@@ -6,9 +6,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.cartdiscounts.CartDiscount;
-import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Resource;
+import io.sphere.sdk.types.Custom;
+import io.sphere.sdk.types.CustomFields;
+import io.sphere.sdk.types.TypeDraft;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -32,7 +35,7 @@ import java.util.List;
 @HasUpdateCommand
 @HasDeleteCommand
 @HasQueryModel
-public interface DiscountCode extends Resource<DiscountCode> {
+public interface DiscountCode extends Resource<DiscountCode>, Custom {
     /**
      * The referenced matching cart discounts can be applied to the cart once the discount code is added ({@link io.sphere.sdk.carts.commands.updateactions.AddDiscountCode}).
      * @return cart discounts
@@ -113,6 +116,10 @@ public interface DiscountCode extends Resource<DiscountCode> {
     @IgnoreInQueryModel
     List<Reference<JsonNode>> getReferences();
 
+    @Nullable
+    @Override
+    CustomFields getCustom();
+
     @Override
     default Reference<DiscountCode> toReference() {
         return Reference.of(referenceTypeId(), getId(), this);
@@ -161,5 +168,16 @@ public interface DiscountCode extends Resource<DiscountCode> {
      */
     static Reference<DiscountCode> referenceOfId(final String id) {
         return Reference.of(referenceTypeId(), id);
+    }
+
+
+    /**
+     * An identifier for this resource which supports {@link CustomFields}.
+     * @see TypeDraft#getResourceTypeIds()
+     * @see io.sphere.sdk.types.Custom
+     * @return ID of this resource type
+     */
+    static String resourceTypeId() {
+        return "discount-code";
     }
 }

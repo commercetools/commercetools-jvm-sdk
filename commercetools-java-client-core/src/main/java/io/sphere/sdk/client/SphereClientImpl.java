@@ -29,7 +29,7 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
     private final CorrelationIdGenerator correlationIdGenerator;
 
     static {
-        ServiceLoader.load(SphereClientModule.class).iterator().forEachRemaining(m -> {});
+        ServiceLoader.load(SphereClientModule.class,SphereClientImpl.class.getClassLoader()).iterator().forEachRemaining(m -> {});
     }
 
     private SphereClientImpl(final SphereApiConfig config, final SphereAccessTokenSupplier tokenSupplier,

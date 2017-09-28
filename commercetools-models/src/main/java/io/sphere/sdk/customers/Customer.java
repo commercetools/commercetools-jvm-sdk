@@ -123,7 +123,8 @@ import static java.util.stream.Collectors.toList;
 @HasByKeyGetEndpoint(javadocSummary = "Fetches a customer by a known key.", includeExamples = "io.sphere.sdk.customers.queries.CustomerByKeyGetIntegrationTest#execution()")
 @HasUpdateCommand(javadocSummary = " Updates a customer.\n" +
         " \n" +
-        " To update the properties {@link Customer#isEmailVerified()} or {@link Customer#getPassword()} special commands are required which are documented in the {@link Customer customer Javadoc}.")
+        " To update the properties {@link Customer#isEmailVerified()} or {@link Customer#getPassword()} special commands are required which are documented in the {@link Customer customer Javadoc}.",
+        updateWithKey = true)
 @HasDeleteCommand(
         javadocSummary = "Deletes a customer.", includeExamples = "io.sphere.sdk.customers.commands.CustomerDeleteCommandIntegrationTest#execution()",
         deleteWithKey = true

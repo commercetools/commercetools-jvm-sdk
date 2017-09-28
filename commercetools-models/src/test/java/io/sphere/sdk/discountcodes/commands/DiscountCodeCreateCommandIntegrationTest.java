@@ -1,7 +1,7 @@
 package io.sphere.sdk.discountcodes.commands;
 
 import io.sphere.sdk.cartdiscounts.CartDiscount;
-import io.sphere.sdk.cartdiscounts.CartDiscountPredicate;
+import io.sphere.sdk.cartdiscounts.CartPredicate;
 import io.sphere.sdk.discountcodes.DiscountCode;
 import io.sphere.sdk.discountcodes.DiscountCodeDraft;
 import io.sphere.sdk.discountcodes.queries.DiscountCodeQuery;
@@ -34,7 +34,7 @@ public class DiscountCodeCreateCommandIntegrationTest extends IntegrationTest {
             final DiscountCodeDraft draft = DiscountCodeDraft.of(code, cartDiscount)
                     .withName(en(DiscountCodeCreateCommandIntegrationTest.class.getName()))
                     .withDescription(en("sample discount code descr."))
-                    .withCartPredicate(CartDiscountPredicate.of("1 = 1"))
+                    .withCartPredicate(CartPredicate.of("1 = 1"))
                     .withIsActive(false)
                     .withMaxApplications(5L)
                     .withMaxApplicationsPerCustomer(1L);

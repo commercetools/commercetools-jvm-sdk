@@ -3,6 +3,8 @@ package io.sphere.sdk.projects;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.annotations.HasUpdateAction;
+import io.sphere.sdk.annotations.PropertySpec;
 import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.models.CreationTimestamped;
 import io.sphere.sdk.models.WithKey;
@@ -16,6 +18,8 @@ import java.util.Locale;
 
 import static java.util.stream.Collectors.toList;
 
+
+@ResourceValue(abstractResourceClass = true)
 @JsonDeserialize(as = ProjectImpl.class)
 public interface Project extends CreationTimestamped, WithKey {
     /**
@@ -26,15 +30,23 @@ public interface Project extends CreationTimestamped, WithKey {
     String getKey();
 
     /**
+     * The current version of the project.
+     * @return version
+     */
+    Long getVersion();
+
+    /**
      * The name of the project.
      * @return name
      */
+    @HasUpdateAction
     String getName();
 
     /**
      * Enabled countries.
      * @return countries
      */
+    @HasUpdateAction
     List<CountryCode> getCountries();
 
     /**
@@ -42,6 +54,7 @@ public interface Project extends CreationTimestamped, WithKey {
      * @see #getLanguageLocales()
      * @return language
      */
+    @HasUpdateAction
     List<String> getLanguages();
 
     /**
@@ -66,6 +79,7 @@ public interface Project extends CreationTimestamped, WithKey {
      * @see #getCurrencyUnits()
      * @return currency codes
      */
+    @HasUpdateAction
     List<String> getCurrencies();
 
     /**
@@ -79,6 +93,8 @@ public interface Project extends CreationTimestamped, WithKey {
                 .collect(toList());
     }
 
+    @HasUpdateAction
+    @HasUpdateAction(value = "changeMessagesEnabled", fields = {@PropertySpec(name = "messagesEnabled", fieldType = Boolean.class)})
     MessagesConfiguration getMessages();
 
     /**

@@ -3,12 +3,12 @@
     <parent>
         <groupId>com.commercetools.sdk.jvm.core</groupId>
         <artifactId>commercetools-jvm-sdk</artifactId>
-        <version>1.22.1-SNAPSHOT</version>
+        <version>1.23.1-SNAPSHOT</version>
     </parent>
     <groupId>com.commercetools.sdk.jvm.core</groupId>
     <artifactId>sdk-http-apache-async</artifactId>
     <packaging>jar</packaging>
-    <version>1.22.1-SNAPSHOT</version>
+    <version>1.23.1-SNAPSHOT</version>
     <name>commercetools Apache Async Java client</name>
     <licenses>
         <license>
@@ -26,19 +26,8 @@
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpasyncclient</artifactId>
-            <version>4.1.1</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.apache.httpcomponents</groupId>
-                    <artifactId>httpcore</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpcore</artifactId>
-            <version>4.4.4</version>
+            <artifactId>httpasyncclient-osgi</artifactId>
+            <version>${apache.httpclient.version}</version>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>

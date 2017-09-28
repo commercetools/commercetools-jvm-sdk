@@ -191,7 +191,8 @@ public final class SphereJsonUtils {
      * @return the created objected
      */
     public static <T> T readObject(final JsonNode jsonNode, final TypeReference<T> typeReference) {
-        return executing(() -> objectMapper.readerFor(typeReference).readValue(jsonNode));
+        return executing(() -> objectMapper.readerFor(typeReference)
+                .readValue(jsonNode));
     }
 
     /**

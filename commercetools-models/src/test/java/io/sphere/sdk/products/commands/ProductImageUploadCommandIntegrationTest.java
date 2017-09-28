@@ -4,9 +4,12 @@ import io.sphere.sdk.products.ByIdVariantIdentifier;
 import io.sphere.sdk.products.Image;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.test.IntegrationTest;
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 import static io.sphere.sdk.products.ProductFixtures.withUpdateableProduct;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,8 +21,20 @@ public class ProductImageUploadCommandIntegrationTest extends IntegrationTest {
     public void uploadImage() {
         withUpdateableProduct(client(),  product -> {
             final ByIdVariantIdentifier identifier = product.getMasterData().getStaged().getMasterVariant().getIdentifier();
+            File imageFile ;
+            try{
+                imageFile = File.createTempFile("ct_logo_farbe",".gif");
+                imageFile.deleteOnExit();
+                byte[] fileBytes = IOUtils.toByteArray(ClassLoader.getSystemResourceAsStream("ct_logo_farbe.gif"));
+                FileOutputStream outStream = new FileOutputStream(imageFile);
+                outStream.write(fileBytes);
+                outStream.close();
+            }catch(IOException e){
+                imageFile = new File("src/test/resources/ct_logo_farbe.gif");
+            }
+
             final ProductImageUploadCommand cmd = ProductImageUploadCommand
-                    .ofVariantId(new File("src/test/resources/ct_logo_farbe.gif"), identifier)
+                    .ofVariantId(imageFile, identifier)
                     .withFilename("logo.gif")
                     .withStaged(true);
             final Product updatedProduct = client().executeBlocking(cmd);

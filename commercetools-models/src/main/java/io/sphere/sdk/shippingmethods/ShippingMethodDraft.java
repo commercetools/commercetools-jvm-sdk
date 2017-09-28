@@ -12,9 +12,9 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 @JsonDeserialize(as = ShippingMethodDraftDsl.class)
-@ResourceDraftValue(factoryMethods = {
-        @FactoryMethod(parameterNames = {"name", "description", "taxCategory", "zoneRates", "default"}),
-        @FactoryMethod(parameterNames = {"name", "taxCategory", "zoneRates", "default"})
+@ResourceDraftValue(abstractBuilderClass = true, factoryMethods = {
+            @FactoryMethod(parameterNames = {"name", "description", "taxCategory", "zoneRates", "default"}),
+            @FactoryMethod(parameterNames = {"name", "taxCategory", "zoneRates", "default"})
 })
 public interface ShippingMethodDraft {
 
@@ -33,6 +33,8 @@ public interface ShippingMethodDraft {
     @JsonProperty("isDefault")
     Boolean isDefault();
 
+    @Nullable
+    String getPredicate();
 
     static ShippingMethodDraft of(final String name, @Nullable final String description, final Referenceable<TaxCategory> taxCategory, final List<ZoneRate> zoneRates) {
         return of(name, description, taxCategory, zoneRates, false);

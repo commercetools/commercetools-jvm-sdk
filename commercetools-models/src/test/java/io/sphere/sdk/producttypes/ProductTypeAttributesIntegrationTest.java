@@ -37,7 +37,7 @@ import static java.util.Locale.ENGLISH;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @NotThreadSafe
-public final class ProductTypeAttributesIntegrationTest extends IntegrationTest {
+public  class ProductTypeAttributesIntegrationTest extends IntegrationTest {
     public static final List<LocalizedEnumValue> LOCALIZED_ENUM_VALUES = asList(LocalizedEnumValue.of("key1", en("value1")), LocalizedEnumValue.of("key2", en("value2")));
     public static final TextInputHint TEXT_INPUT_HINT = TextInputHint.MULTI_LINE;
     public static final LocalizedString LABEL = en("label");

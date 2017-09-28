@@ -46,7 +46,7 @@ public class CartDiscountInActualCartIntegrationTest extends IntegrationTest {
 
 
                         final LocalizedString name = en("di");
-                        final CartDiscountPredicate cartPredicate = CartDiscountPredicate.of(format("customer.id = \"%s\"", customer.getId()));
+                        final CartPredicate cartPredicate = CartPredicate.of(format("customer.id = \"%s\"", customer.getId()));
                         final MonetaryAmount discountAmount = EURO_1;
                         final AbsoluteCartDiscountValue value = CartDiscountValue.ofAbsolute(discountAmount);
                         final CartDiscountDraft discountDraft = CartDiscountDraftBuilder.of(name, cartPredicate, value, LineItemsTarget.ofAll(), randomSortOrder(), false)
@@ -117,7 +117,7 @@ public class CartDiscountInActualCartIntegrationTest extends IntegrationTest {
                 CartDiscountFixtures.withCartDiscount(client(), builder -> builder
                         .value(RelativeCartDiscountValue.of(10000))
                         .target(ShippingCostTarget.of())
-                        .cartPredicate(CartDiscountPredicate.of("customer.id =\"" + customer.getId() + "\"")), cartDiscount -> {
+                        .cartPredicate(CartPredicate.of("customer.id =\"" + customer.getId() + "\"")), cartDiscount -> {
                     assertEventually(() -> {
                         final Versioned<Cart> cartVersion = client().executeBlocking(CartByIdGet.of(cart));
                         final CartUpdateCommand cmd =
@@ -130,6 +130,42 @@ public class CartDiscountInActualCartIntegrationTest extends IntegrationTest {
                         assertThat(value).isEqualTo(MoneyImpl.of(0, EUR));
                         final Reference<CartDiscount> discount = discountedPrice.getIncludedDiscounts().get(0).getDiscount();
                         assertThat(discount.getObj()).isNotNull().isEqualTo(cartDiscount);
+                    });
+                });
+                final Cart cartToDelete = client().executeBlocking(CartByIdGet.of(cart));
+                client().executeBlocking(CartDeleteCommand.of(cartToDelete));
+            });
+        });
+    }
+
+    @Test
+    public void multiBuyDiscountDiscount() {
+        final Long discountedQuantity = 2L;
+        withShippingMethodForGermany(client(), shippingMethod -> {
+            withCustomerAndFilledCart(client(), (customer, cart) -> {
+                client().executeBlocking(CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod)));
+                CartDiscountFixtures.withCartDiscount(client(), builder -> builder
+                        .value(RelativeCartDiscountValue.of(10000))
+                        .target(MultiBuyLineItemsTarget.of("1 = 1", 3L, discountedQuantity, SelectionMode.CHEAPEST))
+                        .cartPredicate(CartPredicate.of("customer.id =\"" + customer.getId() + "\"")), cartDiscount -> {
+                    assertEventually(() -> {
+                        final Versioned<Cart> cartVersion = client().executeBlocking(CartByIdGet.of(cart));
+                        final CartUpdateCommand cmd =
+                                CartUpdateCommand.of(cartVersion, Recalculate.of().withUpdateProductData(true))
+                                        .withExpansionPaths(c -> c.shippingInfo().discountedPrice().includedDiscounts().discount());
+                        final Cart loadedCart = client().executeBlocking(cmd);
+                        final List<DiscountedLineItemPriceForQuantity> discountedPricePerQuantity =
+                                loadedCart.getLineItems().get(0).getDiscountedPricePerQuantity();
+                        assertThat(discountedPricePerQuantity).hasSize(2);
+
+                        final DiscountedLineItemPriceForQuantity discountedLineItemPriceForQuantity = discountedPricePerQuantity.get(0);
+                        assertThat(discountedLineItemPriceForQuantity.getQuantity()).isEqualTo(discountedQuantity);
+                        assertThat(discountedLineItemPriceForQuantity.getDiscountedPrice().getValue()).isEqualTo(MoneyImpl.of(0, EUR));
+
+                        final DiscountedLineItemPriceForQuantity remainingLineItemPriceForQuantity = discountedPricePerQuantity.get(1);
+                        assertThat(remainingLineItemPriceForQuantity.getQuantity()).isEqualTo(1L);
+                        final MonetaryAmount totalPrice = loadedCart.getLineItems().get(0).getTotalPrice();
+                        assertThat(remainingLineItemPriceForQuantity.getDiscountedPrice().getValue()).isEqualTo(totalPrice);
                     });
                 });
                 final Cart cartToDelete = client().executeBlocking(CartByIdGet.of(cart));
