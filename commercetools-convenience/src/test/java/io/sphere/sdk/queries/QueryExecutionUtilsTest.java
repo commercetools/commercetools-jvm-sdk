@@ -57,14 +57,42 @@ public class QueryExecutionUtilsTest {
 
     @Test
     public void onGetTotalNumberOfPages() {
-        // With uniform splitting
-        final QueryAllImpl<Category, CategoryQuery> query = QueryAllImpl.of(CategoryQuery.of(), 2);
-        long totalNumberOfPages = query.getTotalNumberOfPages(10);
-        assertThat(totalNumberOfPages).isEqualTo(5);
+        final QueryAllImpl query1 = QueryAllImpl.of(CategoryQuery.of(), 1);
+        assertThat(query1.getTotalNumberOfPages(0)).isEqualTo(0);
+        assertThat(query1.getTotalNumberOfPages(1)).isEqualTo(1);
+        assertThat(query1.getTotalNumberOfPages(2)).isEqualTo(2);
+        assertThat(query1.getTotalNumberOfPages(3)).isEqualTo(3);
+        assertThat(query1.getTotalNumberOfPages(4)).isEqualTo(4);
 
-        // With non uniform splitting
-        totalNumberOfPages = query.getTotalNumberOfPages(7);
-        assertThat(totalNumberOfPages).isEqualTo(4);
+        final QueryAllImpl query2 = QueryAllImpl.of(CategoryQuery.of(), 2);
+        assertThat(query2.getTotalNumberOfPages(0)).isEqualTo(0);
+        assertThat(query2.getTotalNumberOfPages(1)).isEqualTo(1);
+        assertThat(query2.getTotalNumberOfPages(2)).isEqualTo(1);
+        assertThat(query2.getTotalNumberOfPages(3)).isEqualTo(2);
+        assertThat(query2.getTotalNumberOfPages(7)).isEqualTo(4);
+        assertThat(query2.getTotalNumberOfPages(9)).isEqualTo(5);
+        assertThat(query2.getTotalNumberOfPages(10)).isEqualTo(5);
+        assertThat(query2.getTotalNumberOfPages(11)).isEqualTo(6);
+
+        final QueryAllImpl query7  = QueryAllImpl.of(CategoryQuery.of(), 7);
+        assertThat(query7.getTotalNumberOfPages(0)).isEqualTo(0);
+        assertThat(query7.getTotalNumberOfPages(1)).isEqualTo(1);
+        assertThat(query7.getTotalNumberOfPages(6)).isEqualTo(1);
+        assertThat(query7.getTotalNumberOfPages(7)).isEqualTo(1);
+        assertThat(query7.getTotalNumberOfPages(8)).isEqualTo(2);
+        assertThat(query7.getTotalNumberOfPages(9)).isEqualTo(2);
+        assertThat(query7.getTotalNumberOfPages(699)).isEqualTo(100);
+        assertThat(query7.getTotalNumberOfPages(700)).isEqualTo(100);
+        assertThat(query7.getTotalNumberOfPages(701)).isEqualTo(101);
+        assertThat(query7.getTotalNumberOfPages(702)).isEqualTo(101);
+
+
+        final QueryAllImpl queryMax  = QueryAllImpl.of(CategoryQuery.of(), Integer.MAX_VALUE);
+        assertThat(queryMax.getTotalNumberOfPages(0)).isEqualTo(0);
+        assertThat(queryMax.getTotalNumberOfPages(1)).isEqualTo(1);
+        assertThat(queryMax.getTotalNumberOfPages(Integer.MAX_VALUE - 1)).isEqualTo(1);
+        assertThat(queryMax.getTotalNumberOfPages(Integer.MAX_VALUE)).isEqualTo(1);
+
     }
 
     private List<Category> withClientWithoutFunction(final SphereClient client) {

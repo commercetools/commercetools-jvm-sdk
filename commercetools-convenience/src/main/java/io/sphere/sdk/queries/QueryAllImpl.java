@@ -115,7 +115,7 @@ final class QueryAllImpl<T, C extends QueryDsl<T, C>> {
      * @return the total number of pages.
      */
     long getTotalNumberOfPages(final long totalElements) {
-        return (long) Math.ceil((double) totalElements / pageSize);
+        return (totalElements - 1 + pageSize) / pageSize;
     }
 
     /**
