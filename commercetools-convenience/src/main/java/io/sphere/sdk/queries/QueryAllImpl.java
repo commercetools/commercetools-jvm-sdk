@@ -27,14 +27,14 @@ final class QueryAllImpl<T, C extends QueryDsl<T, C>> {
     }
 
     /**
-     * Given a {@code callback} {@link Function}, this method applies this callback on each page of the results from
-     * {@link this} instance's {@code baseQuery} and returns a future containing a list containing the results of this
-     * callback on each page.
+     * Given a {@code resultsMapper} {@link Function}, this method applies this callback on each item of the results
+     * from {@link this} instance's {@code baseQuery} and returns a future containing a list containing the results
+     * of this {@code resultsMapper} on each item.
      *
      * @param client        the CTP client that the query is run on.
-     * @param resultsMapper the callback that gets called on each page of results.
-     * @param <S>           the type of the result of the callback on each page.
-     * @return a future containing a list of results of the callback on each page.
+     * @param resultsMapper the callback that gets called on each item of results.
+     * @param <S>           the type of the result mapped values of the callback on each requested {@code T} item.
+     * @return a future containing a list of results of the {@code resultsMapper} on each item.
      */
     @Nonnull
     <S> CompletionStage<List<S>> run(final SphereClient client, final Function<T, S> resultsMapper) {
@@ -51,12 +51,13 @@ final class QueryAllImpl<T, C extends QueryDsl<T, C>> {
     }
 
     /**
-     * Given a {@link Consumer}, this method applies this consumer on each page of the results from
+     * Given a {@link Consumer resultsConsumer}, this method applies this consumer on each item of the results from
      * {@link this} instance's {@code baseQuery}.
      *
      * @param client          the CTP client that the query is run on.
-     * @param resultsConsumer the consumer that gets called on each page of results.
-     * @return an empty future.
+     * @param resultsConsumer the consumer that gets called on each item of results.
+     * @return an empty future which when is completed the {@code resultsConsumer} is executed on every item from the
+     * {@code baseQuery}
      */
     @Nonnull
     CompletionStage<Void> run(final SphereClient client, final Consumer<T> resultsConsumer) {
@@ -69,14 +70,14 @@ final class QueryAllImpl<T, C extends QueryDsl<T, C>> {
     }
 
     /**
-     * Given a callback {@link Function}, this method first calculates the total number of pages resulting from the
-     * query, then it applies this callback on each page of the results from {@link this} instance's {@code baseQuery}
-     * and returns a list containing the result of this callback on each page.
+     * Given the {@code resultsMapper} function, this method first calculates the total number of pages
+     * resulting from the query, then it applies this {@code resultsMapper} on each item of the results
+     * from {@link this} instance's {@code baseQuery}.
      *
      * @param client        the CTP client that the query is run on.
      * @param totalElements the total number of elements resulting from the query.
-     * @param resultsMapper the callback to apply on each page of results.
-     * @return a list of futures containing the results of applying the callback on each page of results.
+     * @param resultsMapper the callback to apply on each item of results.
+     * @return a stream of stages containing stream of mapped results using {@code resultsMapper}
      */
     @Nonnull
     private <S> Stream<CompletionStage<Stream<S>>> queryNextPages(final SphereClient client, final long totalElements,
@@ -88,22 +89,22 @@ final class QueryAllImpl<T, C extends QueryDsl<T, C>> {
     }
 
     /**
-     * Given a {@link Consumer}, this method first calculates the total numbr of pages resulting from the query, then
-     * it applies this consumer on each page of the results from {@link this} instance's {@code baseQuery}
-     * and returns a list of futures after applying of this consumer on each page.
+     * Given a {@link Consumer resultsConsumer}, this method first calculates the total number of pages
+     * resulting from the query, then it accepts the results from {@link this} instance's {@code baseQuery} on this
+     * consumer and returns a stream of stages with accepting all the result items by {@code resultsConsumer}.
      *
      * @param client        the CTP client that the query is run on.
      * @param totalElements the total number of elements resulting from the query.
-     * @param consumer      the consumer to apply on each page of results.
+     * @param resultsConsumer      the consumer to apply on each page of results.
      * @return a list of futures of applying the consumer on each page of results.
      */
     @Nonnull
     private Stream<CompletionStage<Void>> queryNextPages(final SphereClient client, final long totalElements,
-                                                         final Consumer<T> consumer) {
+                                                         final Consumer<T> resultsConsumer) {
         final long totalPages = getTotalNumberOfPages(totalElements);
         return LongStream.range(1, totalPages)
                 .mapToObj(page -> queryPage(client, page)
-                        .thenAccept(results -> results.getResults().forEach(consumer)));
+                        .thenAccept(results -> results.getResults().forEach(resultsConsumer)));
     }
 
     /**
