@@ -242,6 +242,15 @@ public interface Order extends CartLike<Order> {
     PaymentInfo getPaymentInfo();
 
     /**
+     *  The shippingRateInput is used as an input to select a shipping rate price tier
+     * @return shippingRateInput
+     */
+    @Nullable
+    @Override
+    @QueryModelHint(type = "ShippingRateInputQueryModel<Order>")
+    ShippingRateInput getShippingRateInput();
+
+    /**
      * Creates a reference for one item of this class by a known ID.
      *
      * <p>An example for categories but this applies for other resources, too:</p>

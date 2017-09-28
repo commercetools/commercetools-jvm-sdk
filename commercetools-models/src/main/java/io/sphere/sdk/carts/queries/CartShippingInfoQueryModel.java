@@ -16,4 +16,6 @@ public interface CartShippingInfoQueryModel<T> {
     ReferenceOptionalQueryModel<T, ShippingMethod> shippingMethod();
 
     DiscountedLineItemPriceQueryModel<T> discountedPrice();
+
+    ShippingRateInputQueryModel<T> shippingRateInput();
 }

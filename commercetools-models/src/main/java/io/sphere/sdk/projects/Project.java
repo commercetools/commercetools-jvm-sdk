@@ -98,6 +98,15 @@ public interface Project extends CreationTimestamped, WithKey {
     MessagesConfiguration getMessages();
 
     /**
+     * The shippingRateInput is used as an input to select a shipping rate price tier at the project level
+     *@return shippingRateInput
+     */
+    @Nullable
+    @HasUpdateAction
+    ShippingRateInputType getShippingRateInputType();
+
+
+    /**
      * Creates a container which contains the full Java type information to deserialize this class from JSON.
      *
      * @see io.sphere.sdk.json.SphereJsonUtils#readObject(byte[], TypeReference)
