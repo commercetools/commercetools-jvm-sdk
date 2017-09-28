@@ -47,7 +47,7 @@ final class QueryAllImpl<T, C extends QueryDsl<T, C>> {
             final Stream<CompletionStage<Stream<S>>> nextPagesCallbackResults =
                     queryNextPages(client, result.getTotal(), resultsMapper);
 
-            return streamOfStagesToOfList(concat(Stream.of(callbackResult), nextPagesCallbackResults));
+            return streamOfStagesToStageOfList(concat(Stream.of(callbackResult), nextPagesCallbackResults));
         });
     }
 
@@ -144,7 +144,7 @@ final class QueryAllImpl<T, C extends QueryDsl<T, C>> {
      * @return a future containing a list of the results of the input futures.
      */
     @Nonnull
-    private <S> CompletionStage<List<S>> streamOfStagesToOfList(
+    private <S> CompletionStage<List<S>> streamOfStagesToStageOfList(
             final Stream<CompletionStage<Stream<S>>> futures) {
 
         return supplyAsync(() -> futures
