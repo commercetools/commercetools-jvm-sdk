@@ -4,14 +4,12 @@ import io.sphere.sdk.client.SphereClient;
 
 import javax.annotation.Nonnull;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
-import static java.util.concurrent.CompletableFuture.supplyAsync;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Stream.concat;
 
@@ -40,13 +38,15 @@ final class QueryAllImpl<T, C extends QueryDsl<T, C>> {
      */
     @Nonnull
     <S> CompletionStage<List<S>> run(final SphereClient client, final Function<T, S> resultsMapper) {
-        return queryPage(client, 0).thenCompose(result -> {
+        return queryPage(client, 0).thenApply(result -> {
             final Stream<S> firstStream = result.getResults().stream().map(resultsMapper);
-            final Stream<CompletionStage<Stream<S>>> nextPagesCallbackResults = queryNextPages(client, result.getTotal(), resultsMapper);
 
-            return streamOfStagesToStageOfStream(nextPagesCallbackResults)
-                    .thenApply(nextStream -> concat(firstStream, nextStream)
-                            .collect(toList()));
+            Stream<S> nextStream = queryNextPages(client, result.getTotal(), resultsMapper)
+                    //.parallel()
+                    .flatMap(stage -> stage.toCompletableFuture().join());
+
+            return concat(firstStream, nextStream)
+                    .collect(toList());
         });
     }
 
@@ -130,23 +130,6 @@ final class QueryAllImpl<T, C extends QueryDsl<T, C>> {
                 .withOffset(pageNumber * pageSize)
                 .withLimit(pageSize);
         return client.execute(query);
-    }
-
-    /**
-     * Given a list of futures, this method converts it to a future containing a list of results of these futures after
-     * executing them in parallel with {@link CompletableFuture#allOf(CompletableFuture[])}.
-     *
-     * @param futures list of futures.
-     * @param <S>     the type of the results of the futures.
-     * @return a future containing a list of the results of the input futures.
-     */
-    @Nonnull
-    private <S> CompletionStage<Stream<S>> streamOfStagesToStageOfStream(
-            final Stream<CompletionStage<Stream<S>>> futures) {
-
-        return supplyAsync(() -> futures
-                //.parallel()
-                .flatMap(stageStreamS -> stageStreamS.toCompletableFuture().join()));
     }
 
     @Nonnull
