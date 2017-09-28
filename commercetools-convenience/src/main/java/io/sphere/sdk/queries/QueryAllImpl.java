@@ -11,7 +11,6 @@ import java.util.function.Function;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
-import static java.util.concurrent.CompletableFuture.completedFuture;
 import static java.util.concurrent.CompletableFuture.runAsync;
 import static java.util.concurrent.CompletableFuture.supplyAsync;
 import static java.util.stream.Collectors.toList;
@@ -43,11 +42,12 @@ final class QueryAllImpl<T, C extends QueryDsl<T, C>> {
     @Nonnull
     <S> CompletionStage<List<S>> run(final SphereClient client, final Function<T, S> resultsMapper) {
         return queryPage(client, 0).thenCompose(result -> {
-            final CompletionStage<Stream<S>> callbackResult = completedFuture(result.getResults().stream().map(resultsMapper));
-            final Stream<CompletionStage<Stream<S>>> nextPagesCallbackResults =
-                    queryNextPages(client, result.getTotal(), resultsMapper);
+            final Stream<S> firstStream = result.getResults().stream().map(resultsMapper);
+            final Stream<CompletionStage<Stream<S>>> nextPagesCallbackResults = queryNextPages(client, result.getTotal(), resultsMapper);
 
-            return streamOfStagesToStageOfList(concat(Stream.of(callbackResult), nextPagesCallbackResults));
+            return streamOfStagesToStageOfStream(nextPagesCallbackResults)
+                    .thenApply(nextStream -> concat(firstStream, nextStream)
+                            .collect(toList()));
         });
     }
 
@@ -144,13 +144,12 @@ final class QueryAllImpl<T, C extends QueryDsl<T, C>> {
      * @return a future containing a list of the results of the input futures.
      */
     @Nonnull
-    private <S> CompletionStage<List<S>> streamOfStagesToStageOfList(
+    private <S> CompletionStage<Stream<S>> streamOfStagesToStageOfStream(
             final Stream<CompletionStage<Stream<S>>> futures) {
 
         return supplyAsync(() -> futures
                 //.parallel()
-                .flatMap(stageStreamS -> stageStreamS.toCompletableFuture().join())
-                .collect(toList()));
+                .flatMap(stageStreamS -> stageStreamS.toCompletableFuture().join()));
     }
 
     @Nonnull
