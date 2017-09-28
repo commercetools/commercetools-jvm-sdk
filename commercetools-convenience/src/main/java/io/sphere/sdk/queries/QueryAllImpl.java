@@ -22,13 +22,19 @@ final class QueryAllImpl<T, C extends QueryDsl<T, C>> {
         this.pageSize = pageSize;
     }
 
+    /**
+     * Execute the {@link #baseQuery} on the {@code client} and return completion stage with all pages results
+     * aggregated to list.
+     * @param client the CTP client that the query is run on.
+     * @return {@link CompletionStage} with the {@link #baseQuery} results aggregated from all pages to list.
+     */
     public CompletionStage<List<T>> run(final SphereClient client) {
         return run(client, entry -> entry);
     }
 
     /**
      * Given a {@code resultsMapper} {@link Function}, this method applies this callback on each item of the results
-     * from {@link this} instance's {@code baseQuery} and returns a future containing a list containing the results
+     * from {@link this} instance's {@link #baseQuery} and returns a future containing a list containing the results
      * of this {@code resultsMapper} on each item.
      *
      * @param client        the CTP client that the query is run on.
@@ -52,12 +58,12 @@ final class QueryAllImpl<T, C extends QueryDsl<T, C>> {
 
     /**
      * Given a {@link Consumer resultsConsumer}, this method applies this consumer on each item of the results from
-     * {@link this} instance's {@code baseQuery}.
+     * {@link this} instance's {@link #baseQuery}.
      *
      * @param client          the CTP client that the query is run on.
      * @param resultsConsumer the consumer that gets called on each item of results.
      * @return an empty future which when is completed the {@code resultsConsumer} is executed on every item from the
-     * {@code baseQuery}
+     * {@link #baseQuery}
      */
     @Nonnull
     CompletionStage<Void> run(final SphereClient client, final Consumer<T> resultsConsumer) {
@@ -72,7 +78,7 @@ final class QueryAllImpl<T, C extends QueryDsl<T, C>> {
     /**
      * Given the {@code resultsMapper} function, this method first calculates the total number of pages
      * resulting from the query, then it applies this {@code resultsMapper} on each item of the results
-     * from {@link this} instance's {@code baseQuery}.
+     * from {@link this} instance's {@link #baseQuery}.
      *
      * @param client        the CTP client that the query is run on.
      * @param totalElements the total number of elements resulting from the query.
@@ -90,7 +96,7 @@ final class QueryAllImpl<T, C extends QueryDsl<T, C>> {
 
     /**
      * Given a {@link Consumer resultsConsumer}, this method first calculates the total number of pages
-     * resulting from the query, then it accepts the results from {@link this} instance's {@code baseQuery} on this
+     * resulting from the query, then it accepts the results from {@link this} instance's {@link #baseQuery} on this
      * consumer and returns a stream of stages with accepting all the result items by {@code resultsConsumer}.
      *
      * @param client        the CTP client that the query is run on.
@@ -109,7 +115,7 @@ final class QueryAllImpl<T, C extends QueryDsl<T, C>> {
 
     /**
      * Given a total number of elements {@code totalElements} this method calculates the number of pages needed that
-     * would be needed to cover all the elements with set {@code pageSize} of {@link this} instance.
+     * would be needed to cover all the elements with set {@link #pageSize} of {@link this} instance.
      *
      * @param totalElements number of elements to get the number of pages for.
      * @return the total number of pages.
