@@ -5,7 +5,7 @@ cache:
   directories:
   - $HOME/.m2
 script:
-  - mvn clean test verify javadoc:aggregate -P javadoc-jdk-8u121,dependency-check
+  - mvn clean test verify javadoc:aggregate -P dependency-check
   - mvn exec:java -pl commercetools-internal-docs -Dexec.mainClass="introspection.rules.RulesMain" -Dexec.classpathScope="test"
   - mvn exec:java -pl commercetools-models -Dexec.mainClass="io.sphere.sdk.client.MainMethodThreadLeakTest" -Dexec.classpathScope="test"
 env:
