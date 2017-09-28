@@ -11,7 +11,6 @@ import java.util.function.Function;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
-import static java.util.concurrent.CompletableFuture.runAsync;
 import static java.util.concurrent.CompletableFuture.supplyAsync;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Stream.concat;
@@ -61,13 +60,11 @@ final class QueryAllImpl<T, C extends QueryDsl<T, C>> {
      */
     @Nonnull
     CompletionStage<Void> run(final SphereClient client, final Consumer<T> resultsConsumer) {
-        return queryPage(client, 0).thenCompose(result -> {
-
-            // we don't need to aggregate the results later, so it's fine not to pass it further
+        return queryPage(client, 0).thenAccept(result -> {
             result.getResults().forEach(resultsConsumer);
-            return runAsync(() -> queryNextPages(client, result.getTotal(), resultsConsumer)
+            queryNextPages(client, result.getTotal(), resultsConsumer)
                     //.parallel()
-                    .forEach(stageStreamS -> stageStreamS.toCompletableFuture().join()));
+                    .forEach(stageStreamS -> stageStreamS.toCompletableFuture().join());
         });
     }
 
