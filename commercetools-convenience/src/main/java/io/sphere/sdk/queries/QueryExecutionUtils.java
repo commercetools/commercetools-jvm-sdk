@@ -21,10 +21,11 @@ public final class QueryExecutionUtils {
 
     /**
      * Queries all elements matching a query by using an offset based pagination with page size {@value DEFAULT_PAGE_SIZE}.
+     *
      * @param client commercetools client
-     * @param query query containing predicates and expansion paths
-     * @param <T> type of one query result element
-     * @param <C> type of the query
+     * @param query  query containing predicates and expansion paths
+     * @param <T>    type of one query result element
+     * @param <C>    type of the query
      * @return elements
      */
     public static <T, C extends QueryDsl<T, C>> CompletionStage<List<T>> queryAll(final SphereClient client, final QueryDsl<T, C> query) {
@@ -33,11 +34,12 @@ public final class QueryExecutionUtils {
 
     /**
      * Queries all elements matching a query by using an offset based pagination.
-     * @param client commercetools client
-     * @param query query containing predicates and expansion paths
+     *
+     * @param client   commercetools client
+     * @param query    query containing predicates and expansion paths
      * @param pageSize size of one batch to fetch
-     * @param <T> type of one query result element
-     * @param <C> type of the query
+     * @param <T>      type of one query result element
+     * @param <C>      type of the query
      * @return elements
      */
     public static <T, C extends QueryDsl<T, C>> CompletionStage<List<T>> queryAll(final SphereClient client, final QueryDsl<T, C> query, final int pageSize) {
@@ -50,18 +52,18 @@ public final class QueryExecutionUtils {
      * page of elements queried. Eventually, the method returns a {@link CompletionStage} that contains a list of all
      * the results of the callbacks returned from every page.
      *
-     * @param client   commercetools client
-     * @param query    query containing predicates and expansion paths
-     * @param callBack callback function that is called on every page queried.
-     * @param <T>      type of one query result element
-     * @param <C>      type of the query
-     * @param <S>      type of the returned result of the callback function on every page.
+     * @param client        commercetools client
+     * @param query         query containing predicates and expansion paths
+     * @param resultsMapper callback function that is called on every page queried.
+     * @param <T>           type of one query result element
+     * @param <C>           type of the query
+     * @param <S>           type of the returned result of the callback function on every page.
      * @return elements
      */
     @Nonnull
     public static <T, C extends QueryDsl<T, C>, S> CompletionStage<List<S>>
-    queryAll(@Nonnull final SphereClient client, @Nonnull final QueryDsl<T, C> query, @Nonnull final Function<List<T>, S> callBack) {
-        return queryAll(client, query, callBack, DEFAULT_PAGE_SIZE);
+    queryAll(@Nonnull final SphereClient client, @Nonnull final QueryDsl<T, C> query, @Nonnull final Function<T, S> resultsMapper) {
+        return queryAll(client, query, resultsMapper, DEFAULT_PAGE_SIZE);
     }
 
     /**
@@ -70,53 +72,53 @@ public final class QueryExecutionUtils {
      * Eventually, the method returns a {@link CompletionStage} that contains a list of all the results of the
      * callbacks returned from every page.
      *
-     * @param client   commercetools client
-     * @param query    query containing predicates and expansion paths
-     * @param callback callback function that is called on every page queried.
-     * @param <T>      type of one query result element
-     * @param <C>      type of the query
-     * @param <S>      type of the returned result of the callback function on every page.
-     * @param pageSize the page size.
+     * @param client        commercetools client
+     * @param query         query containing predicates and expansion paths
+     * @param resultsMapper callback function that is called on every page queried.
+     * @param <T>           type of one query result element
+     * @param <C>           type of the query
+     * @param <S>           type of the returned result of the callback function on every page.
+     * @param pageSize      the page size.
      * @return elements
      */
     @Nonnull
     public static <T, C extends QueryDsl<T, C>, S> CompletionStage<List<S>>
-    queryAll(@Nonnull final SphereClient client, @Nonnull final QueryDsl<T, C> query, @Nonnull final Function<List<T>, S> callback, final int pageSize) {
-        return QueryAllImpl.of(query, pageSize).run(client, callback);
+    queryAll(@Nonnull final SphereClient client, @Nonnull final QueryDsl<T, C> query, @Nonnull final Function<T, S> resultsMapper, final int pageSize) {
+        return QueryAllImpl.of(query, pageSize).run(client, resultsMapper);
     }
 
     /**
      * Queries all elements matching a query by using an offset based pagination with page size 500. The method takes a
      * consumer {@link Consumer} that is applied on on every page of elements queried.
      *
-     * @param client   commercetools client
-     * @param query    query containing predicates and expansion paths
-     * @param consumer that is applied on every page queried.
-     * @param <T>      type of one query result element
-     * @param <C>      type of the query
+     * @param client          commercetools client
+     * @param query           query containing predicates and expansion paths
+     * @param resultsConsumer that is applied on every page queried.
+     * @param <T>             type of one query result element
+     * @param <C>             type of the query
      * @return elements
      */
     @Nonnull
     public static <T, C extends QueryDsl<T, C>> CompletionStage<Void>
-    queryAll(@Nonnull final SphereClient client, @Nonnull final QueryDsl<T, C> query, @Nonnull final Consumer<List<T>> consumer) {
-        return queryAll(client, query, consumer, DEFAULT_PAGE_SIZE);
+    queryAll(@Nonnull final SphereClient client, @Nonnull final QueryDsl<T, C> query, @Nonnull final Consumer<T> resultsConsumer) {
+        return queryAll(client, query, resultsConsumer, DEFAULT_PAGE_SIZE);
     }
 
     /**
      * Queries all elements matching a query by using an offset based pagination. The method takes a consumer
      * {@link Consumer} that is applied on on every page of elements queried.
      *
-     * @param client   commercetools client
-     * @param query    query containing predicates and expansion paths
-     * @param consumer that is applied on every page queried.
-     * @param <T>      type of one query result element
-     * @param <C>      type of the query
-     * @param pageSize the page size.
+     * @param client          commercetools client
+     * @param query           query containing predicates and expansion paths
+     * @param resultsConsumer that is applied on every page queried.
+     * @param <T>             type of one query result element
+     * @param <C>             type of the query
+     * @param pageSize        the page size.
      * @return elements
      */
     @Nonnull
     public static <T, C extends QueryDsl<T, C>> CompletionStage<Void>
-    queryAll(@Nonnull final SphereClient client, @Nonnull final QueryDsl<T, C> query, @Nonnull final Consumer<List<T>> consumer, final int pageSize) {
-        return QueryAllImpl.of(query, pageSize).run(client, consumer);
+    queryAll(@Nonnull final SphereClient client, @Nonnull final QueryDsl<T, C> query, @Nonnull final Consumer<T> resultsConsumer, final int pageSize) {
+        return QueryAllImpl.of(query, pageSize).run(client, resultsConsumer);
     }
 }

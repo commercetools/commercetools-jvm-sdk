@@ -69,15 +69,12 @@ public class QueryExecutionUtilsTest {
 
     private List<Category> withClientWithoutFunction(final SphereClient client) {
         return QueryExecutionUtils.queryAll(client, CategoryQuery.of(), PAGE_SIZE)
-            .toCompletableFuture().join();
+                .toCompletableFuture().join();
     }
 
-    private  List<Category> withClientAndFunction(final SphereClient client) {
-        final List<List<Category>> elementPages = QueryExecutionUtils.queryAll(client, CategoryQuery.of(), (categories -> categories), PAGE_SIZE)
-            .toCompletableFuture().join();
-        return elementPages.stream()
-                           .flatMap(List::stream)
-                           .collect(toList());
+    private List<Category> withClientAndFunction(final SphereClient client) {
+        return QueryExecutionUtils.queryAll(client, CategoryQuery.of(), (category -> category), PAGE_SIZE)
+                .toCompletableFuture().join();
     }
 
     private SphereClient clientWithResults(final int totalResults) {

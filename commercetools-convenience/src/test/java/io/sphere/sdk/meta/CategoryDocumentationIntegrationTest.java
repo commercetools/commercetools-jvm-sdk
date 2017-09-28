@@ -83,16 +83,10 @@ public class CategoryDocumentationIntegrationTest extends IntegrationTest {
 
     @Test
     public void fetchAll_withMapper() throws Exception {
-        final CompletionStage<List<List<Category>>> categoryPagesStage = QueryExecutionUtils
-            .queryAll(client(), CategoryQuery.of(), (categories -> categories), 500);
-        final List<List<Category>> categoryPages = SphereClientUtils
-            .blockingWait(categoryPagesStage, Duration.ofMinutes(5));
-
-        assertThat(categoryPages).hasSize(1);
-
-        final List<Category> categories = categoryPages.stream()
-                                                       .flatMap(List::stream)
-                                                       .collect(toList());
+        final CompletionStage<List<Category>> categoriesStage = QueryExecutionUtils
+            .queryAll(client(), CategoryQuery.of(), category -> category, 500);
+        final List<Category> categories = SphereClientUtils
+            .blockingWait(categoriesStage, Duration.ofMinutes(5));
 
         assertThat(categories)
             .hasSize(15)
@@ -101,21 +95,11 @@ public class CategoryDocumentationIntegrationTest extends IntegrationTest {
 
     @Test
     public void fetchAllExternalIdsWithUniformPageSizes() throws Exception {
-        final Function<List<Category>, List<String>> externalIdCallBack = categories ->
-            categories.stream()
-                      .map(Category::getExternalId)
-                      .collect(toList());
 
-        final CompletionStage<List<List<String>>> categoryPagesStage = QueryExecutionUtils
-            .queryAll(client(), CategoryQuery.of(), externalIdCallBack, 3);
-        final List<List<String>> categoryPages = SphereClientUtils
-            .blockingWait(categoryPagesStage, Duration.ofMinutes(5));
-
-        assertThat(categoryPages).hasSize(5);
-
-        final List<String> externalIds = categoryPages.stream()
-                                                      .flatMap(List::stream)
-                                                      .collect(toList());
+        final CompletionStage<List<String>> categoriesStage = QueryExecutionUtils
+            .queryAll(client(), CategoryQuery.of(), Category::getExternalId, 3);
+        final List<String> externalIds = SphereClientUtils
+            .blockingWait(categoriesStage, Duration.ofMinutes(5));
 
         assertThat(externalIds).hasSize(15);
         IntStream.range(0, externalIds.size()).forEach(index -> assertThat(externalIds).contains(index + ""));
@@ -123,21 +107,10 @@ public class CategoryDocumentationIntegrationTest extends IntegrationTest {
 
     @Test
     public void fetchAllExternalIdsWithNonUniformPageSizes() throws Exception {
-        final Function<List<Category>, List<String>> externalIdCallBack = categories ->
-            categories.stream()
-                      .map(Category::getExternalId)
-                      .collect(toList());
-
-        final CompletionStage<List<List<String>>> categoryPagesStage = QueryExecutionUtils
-            .queryAll(client(), CategoryQuery.of(), externalIdCallBack, 4);
-        final List<List<String>> categoryPages = SphereClientUtils
-            .blockingWait(categoryPagesStage, Duration.ofMinutes(5));
-
-        assertThat(categoryPages).hasSize(4);
-
-        final List<String> externalIds = categoryPages.stream()
-                                                      .flatMap(List::stream)
-                                                      .collect(toList());
+        final CompletionStage<List<String>> categoriesStage = QueryExecutionUtils
+            .queryAll(client(), CategoryQuery.of(), Category::getExternalId, 4);
+        final List<String> externalIds = SphereClientUtils
+            .blockingWait(categoriesStage, Duration.ofMinutes(5));
 
         assertThat(externalIds).hasSize(15);
         IntStream.range(0, externalIds.size()).forEach(index -> assertThat(externalIds).contains(index + ""));
@@ -147,12 +120,11 @@ public class CategoryDocumentationIntegrationTest extends IntegrationTest {
     public void collectAllExternalIds() throws Exception {
         final List<String> externalIds = new ArrayList<>();
 
-        final Consumer<List<Category>> categoryPageConsumer = categoriesPage ->
-            categories.forEach(category -> externalIds.add(category.getExternalId()));
+        final Consumer<Category> categoryConsumer = category -> externalIds.add(category.getExternalId());
 
-        final CompletionStage<Void> categoryPagesStage = QueryExecutionUtils
-            .queryAll(client(), CategoryQuery.of(), categoryPageConsumer, 500);
-        SphereClientUtils.blockingWait(categoryPagesStage, Duration.ofMinutes(5));
+        final CompletionStage<Void> categoriesStage = QueryExecutionUtils
+            .queryAll(client(), CategoryQuery.of(), categoryConsumer, 500);
+        SphereClientUtils.blockingWait(categoriesStage, Duration.ofMinutes(5));
 
         assertThat(externalIds).hasSize(15);
         IntStream.range(0, externalIds.size()).forEach(index -> assertThat(externalIds).contains(index + ""));
@@ -169,15 +141,11 @@ public class CategoryDocumentationIntegrationTest extends IntegrationTest {
 
     @Test
     public void fetchAllAsJson_withMapper() throws Exception {
-        final CompletionStage<List<List<JsonNode>>> categoryPagesStage = QueryExecutionUtils
-            .queryAll(client(), JsonNodeQuery.of("/categories"), (categories -> categories), 500);
-        final List<List<JsonNode>> categoryPages = SphereClientUtils
+        final CompletionStage<List<JsonNode>> categoryPagesStage = QueryExecutionUtils
+            .queryAll(client(), JsonNodeQuery.of("/categories"), category -> category, 500);
+        final List<JsonNode> categoryNodes = SphereClientUtils
             .blockingWait(categoryPagesStage, Duration.ofMinutes(5));
-        final List<JsonNode> categories = categoryPages.stream()
-                                                       .flatMap(List::stream)
-                                                       .collect(toList());
-
-        assertThat(categories)
+        assertThat(categoryNodes)
             .hasSize(15)
             .matches(cats -> cats.parallelStream()
                                  .anyMatch(cat -> cat.get("slug").get("en").asText().equals("boots-women")));
@@ -196,13 +164,10 @@ public class CategoryDocumentationIntegrationTest extends IntegrationTest {
     @Test
     public void fetchRoots_withMapper() throws Exception {
         final CategoryQuery seedQuery = CategoryQuery.of().withPredicates(m -> m.parent().isNotPresent());
-        final CompletionStage<List<List<Category>>> rootCategoryPagesStage = QueryExecutionUtils
-            .queryAll(client(), seedQuery, (categories -> categories));
-        final List<List<Category>> rootCategoryPages = SphereClientUtils
-            .blockingWait(rootCategoryPagesStage, Duration.ofMinutes(5));
-        final List<Category> rootCategories = rootCategoryPages.stream()
-                                                               .flatMap(List::stream)
-                                                               .collect(toList());
+        final CompletionStage<List<Category>> rootCategoryStage = QueryExecutionUtils
+            .queryAll(client(), seedQuery, category -> category);
+        final List<Category> rootCategories = SphereClientUtils
+            .blockingWait(rootCategoryStage, Duration.ofMinutes(5));
         assertThat(rootCategories.stream().allMatch(cat -> cat.getParent() == null))
             .overridingErrorMessage("fetched only root categories")
             .isTrue();
