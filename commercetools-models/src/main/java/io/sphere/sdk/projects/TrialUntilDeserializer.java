@@ -17,6 +17,7 @@ final class TrialUntilDeserializer extends StdScalarDeserializer<ZonedDateTime> 
     @Override
     public ZonedDateTime deserialize(final JsonParser jsonParser, final DeserializationContext deserializationContext) throws IOException {
         final String value = deserializationContext.readValue(jsonParser, String.class);//value has the format "JJJJ-mm"
-        return ZonedDateTime.parse(value + "-01T00:00:00.000Z");
+        final String correctedValue = value.matches("^\\d{4}-\\d{2}$") ? value + "-01T00:00:00.000Z" : value;
+        return ZonedDateTime.parse(correctedValue);
     }
 }
