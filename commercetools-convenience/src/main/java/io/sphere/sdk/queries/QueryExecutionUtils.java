@@ -60,8 +60,7 @@ public final class QueryExecutionUtils {
      */
     @Nonnull
     public static <T, C extends QueryDsl<T, C>, S> CompletionStage<List<S>>
-    queryAll(@Nonnull final SphereClient client, @Nonnull final QueryDsl<T, C> query,
-             @Nonnull final Function<List<T>, S> callBack) {
+    queryAll(@Nonnull final SphereClient client, @Nonnull final QueryDsl<T, C> query, @Nonnull final Function<List<T>, S> callBack) {
         return queryAll(client, query, callBack, DEFAULT_PAGE_SIZE);
     }
 
@@ -82,8 +81,7 @@ public final class QueryExecutionUtils {
      */
     @Nonnull
     public static <T, C extends QueryDsl<T, C>, S> CompletionStage<List<S>>
-    queryAll(@Nonnull final SphereClient client, @Nonnull final QueryDsl<T, C> query,
-             @Nonnull final Function<List<T>, S> callback, final int pageSize) {
+    queryAll(@Nonnull final SphereClient client, @Nonnull final QueryDsl<T, C> query, @Nonnull final Function<List<T>, S> callback, final int pageSize) {
         return QueryAllImpl.of(query, pageSize).run(client, callback);
     }
 
@@ -100,8 +98,7 @@ public final class QueryExecutionUtils {
      */
     @Nonnull
     public static <T, C extends QueryDsl<T, C>> CompletionStage<Void>
-    queryAll(@Nonnull final SphereClient client, @Nonnull final QueryDsl<T, C> query,
-             @Nonnull final Consumer<List<T>> consumer) {
+    queryAll(@Nonnull final SphereClient client, @Nonnull final QueryDsl<T, C> query, @Nonnull final Consumer<List<T>> consumer) {
         return queryAll(client, query, consumer, DEFAULT_PAGE_SIZE);
     }
 
@@ -119,8 +116,7 @@ public final class QueryExecutionUtils {
      */
     @Nonnull
     public static <T, C extends QueryDsl<T, C>> CompletionStage<Void>
-    queryAll(@Nonnull final SphereClient client, @Nonnull final QueryDsl<T, C> query,
-             @Nonnull final Consumer<List<T>> consumer, final int pageSize) {
+    queryAll(@Nonnull final SphereClient client, @Nonnull final QueryDsl<T, C> query, @Nonnull final Consumer<List<T>> consumer, final int pageSize) {
         return QueryAllImpl.of(query, pageSize).run(client, consumer);
     }
 }
