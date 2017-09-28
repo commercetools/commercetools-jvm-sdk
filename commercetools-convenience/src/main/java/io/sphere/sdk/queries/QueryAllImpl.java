@@ -3,18 +3,19 @@ package io.sphere.sdk.queries;
 import io.sphere.sdk.client.SphereClient;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.LongStream;
+import java.util.stream.Stream;
 
 import static java.util.concurrent.CompletableFuture.completedFuture;
+import static java.util.concurrent.CompletableFuture.runAsync;
+import static java.util.concurrent.CompletableFuture.supplyAsync;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Stream.concat;
 
 final class QueryAllImpl<T, C extends QueryDsl<T, C>> {
     private final QueryDsl<T, C> baseQuery;
@@ -42,15 +43,11 @@ final class QueryAllImpl<T, C extends QueryDsl<T, C>> {
     @Nonnull
     <S> CompletionStage<List<S>> run(final SphereClient client, final Function<T, S> resultsMapper) {
         return queryPage(client, 0).thenCompose(result -> {
-            final List<CompletableFuture<List<S>>> futureResults = new ArrayList<>();
+            final CompletionStage<Stream<S>> callbackResult = completedFuture(result.getResults().stream().map(resultsMapper));
+            final Stream<CompletionStage<Stream<S>>> nextPagesCallbackResults =
+                    queryNextPages(client, result.getTotal(), resultsMapper);
 
-            List<S> callbackResult = result.getResults().stream().map(resultsMapper).collect(toList());
-            final List<CompletableFuture<List<S>>> nextPagesCallbackResults =
-                queryNextPages(client, result.getTotal(), resultsMapper);
-
-            futureResults.add(completedFuture(callbackResult));
-            futureResults.addAll(nextPagesCallbackResults);
-            return transformListOfFuturesToFutureOfLists(futureResults);
+            return streamOfStagesToOfList(concat(Stream.of(callbackResult), nextPagesCallbackResults));
         });
     }
 
@@ -65,10 +62,12 @@ final class QueryAllImpl<T, C extends QueryDsl<T, C>> {
     @Nonnull
     CompletionStage<Void> run(final SphereClient client, final Consumer<T> resultsConsumer) {
         return queryPage(client, 0).thenCompose(result -> {
-            final List<CompletableFuture<Void>> futureResults = new ArrayList<>();
+
+            // we don't need to aggregate the results later, so it's fine not to pass it further
             result.getResults().forEach(resultsConsumer);
-            futureResults.addAll(queryNextPages(client, result.getTotal(), resultsConsumer));
-            return CompletableFuture.allOf(futureResults.toArray(new CompletableFuture[futureResults.size()]));
+            return runAsync(() -> queryNextPages(client, result.getTotal(), resultsConsumer)
+                    //.parallel()
+                    .forEach(stageStreamS -> stageStreamS.toCompletableFuture().join()));
         });
     }
 
@@ -83,14 +82,12 @@ final class QueryAllImpl<T, C extends QueryDsl<T, C>> {
      * @return a list of futures containing the results of applying the callback on each page of results.
      */
     @Nonnull
-    private <S> List<CompletableFuture<List<S>>> queryNextPages(final SphereClient client, final long totalElements,
+    private <S> Stream<CompletionStage<Stream<S>>> queryNextPages(final SphereClient client, final long totalElements,
                                                           final Function<T, S> resultsMapper) {
         final long totalPages = getTotalNumberOfPages(totalElements);
         return LongStream.range(1, totalPages)
                          .mapToObj(page -> queryPage(client, page)
-                             .thenApply(results -> results.getResults().stream().map(resultsMapper).collect(toList()))
-                             .toCompletableFuture())
-                         .collect(toList());
+                             .thenApply(results -> results.getResults().stream().map(resultsMapper)));
     }
 
     /**
@@ -104,14 +101,12 @@ final class QueryAllImpl<T, C extends QueryDsl<T, C>> {
      * @return a list of futures of applying the consumer on each page of results.
      */
     @Nonnull
-    private List<CompletableFuture<Void>> queryNextPages(final SphereClient client, final long totalElements,
+    private Stream<CompletionStage<Void>> queryNextPages(final SphereClient client, final long totalElements,
                                                          final Consumer<T> consumer) {
         final long totalPages = getTotalNumberOfPages(totalElements);
         return LongStream.range(1, totalPages)
                 .mapToObj(page -> queryPage(client, page)
-                        .thenAccept(results -> results.getResults().forEach(consumer))
-                        .toCompletableFuture())
-                .collect(toList());
+                        .thenAccept(results -> results.getResults().forEach(consumer)));
     }
 
     /**
@@ -149,14 +144,13 @@ final class QueryAllImpl<T, C extends QueryDsl<T, C>> {
      * @return a future containing a list of the results of the input futures.
      */
     @Nonnull
-    private <S> CompletableFuture<List<S>> transformListOfFuturesToFutureOfLists(
-            final List<CompletableFuture<List<S>>> futures) {
-        final CompletableFuture[] futuresAsArray = futures.toArray(new CompletableFuture[futures.size()]);
-        return CompletableFuture.allOf(futuresAsArray)
-                .thenApply(x -> futures.stream()
-                        .map(CompletableFuture::join)
-                        .flatMap(Collection::stream)
-                        .collect(Collectors.toList()));
+    private <S> CompletionStage<List<S>> streamOfStagesToOfList(
+            final Stream<CompletionStage<Stream<S>>> futures) {
+
+        return supplyAsync(() -> futures
+                //.parallel()
+                .flatMap(stageStreamS -> stageStreamS.toCompletableFuture().join())
+                .collect(toList()));
     }
 
     @Nonnull
