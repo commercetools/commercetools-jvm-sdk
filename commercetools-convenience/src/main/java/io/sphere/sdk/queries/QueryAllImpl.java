@@ -44,15 +44,8 @@ final class QueryAllImpl<T, C extends QueryDsl<T, C>> {
      */
     @Nonnull
     <S> CompletionStage<List<S>> run(final SphereClient client, final Function<T, S> resultsMapper) {
-        return queryPage(client, 0).thenApply(result -> {
-            final Stream<S> firstStream = result.getResults().stream().map(resultsMapper);
-
-            Stream<S> nextStream = queryNextPages(client, result.getTotal(), resultsMapper)
-                    .flatMap(stage -> stage.toCompletableFuture().join());
-
-            return concat(firstStream, nextStream)
-                    .collect(toList());
-        });
+        return queryPage(client, 0)
+                .thenApply(result -> concatPagedResultToList(result, client, resultsMapper));
     }
 
     /**
@@ -66,11 +59,28 @@ final class QueryAllImpl<T, C extends QueryDsl<T, C>> {
      */
     @Nonnull
     CompletionStage<Void> run(final SphereClient client, final Consumer<T> resultsConsumer) {
-        return queryPage(client, 0).thenAccept(result -> {
-            result.getResults().forEach(resultsConsumer);
-            queryNextPages(client, result.getTotal(), resultsConsumer)
-                    .forEach(stageStreamS -> stageStreamS.toCompletableFuture().join());
-        });
+        return queryPage(client, 0)
+                .thenAccept(result -> consumePagedResult(result, client, resultsConsumer));
+    }
+
+    private <S> List<S> concatPagedResultToList(@Nonnull PagedQueryResult<T> result,
+                                                @Nonnull SphereClient client,
+                                                @Nonnull Function<T, S> resultsMapper) {
+        final Stream<S> firstStream = result.getResults().stream().map(resultsMapper);
+
+        Stream<S> nextStream = queryNextPages(client, result.getTotal(), resultsMapper)
+                .flatMap(stage -> stage.toCompletableFuture().join());
+
+        return concat(firstStream, nextStream)
+                .collect(toList());
+    }
+
+    private void consumePagedResult(@Nonnull PagedQueryResult<T> result,
+                                    @Nonnull SphereClient client,
+                                    @Nonnull Consumer<T> resultsConsumer) {
+        result.getResults().forEach(resultsConsumer);
+        queryNextPages(client, result.getTotal(), resultsConsumer)
+                .forEach(stageStreamS -> stageStreamS.toCompletableFuture().join());
     }
 
     /**
