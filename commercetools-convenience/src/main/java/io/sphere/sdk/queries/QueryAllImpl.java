@@ -48,7 +48,6 @@ final class QueryAllImpl<T, C extends QueryDsl<T, C>> {
             final Stream<S> firstStream = result.getResults().stream().map(resultsMapper);
 
             Stream<S> nextStream = queryNextPages(client, result.getTotal(), resultsMapper)
-                    //.parallel()
                     .flatMap(stage -> stage.toCompletableFuture().join());
 
             return concat(firstStream, nextStream)
@@ -70,7 +69,6 @@ final class QueryAllImpl<T, C extends QueryDsl<T, C>> {
         return queryPage(client, 0).thenAccept(result -> {
             result.getResults().forEach(resultsConsumer);
             queryNextPages(client, result.getTotal(), resultsConsumer)
-                    //.parallel()
                     .forEach(stageStreamS -> stageStreamS.toCompletableFuture().join());
         });
     }
