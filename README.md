@@ -38,7 +38,7 @@ Users gain type-safety, encapsulation, IDE auto completion and an internal domai
 <dependency>
   <groupId>com.commercetools.sdk.jvm.core</groupId>
   <artifactId>commercetools-convenience</artifactId>
-  <version>1.23.1</version>
+  <version>1.24.0</version>
 </dependency>
 ````
 * http://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-models%7C1.24.0%7Cjar
