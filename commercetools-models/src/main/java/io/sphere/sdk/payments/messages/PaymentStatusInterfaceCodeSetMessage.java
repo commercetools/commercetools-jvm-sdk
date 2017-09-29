@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.messages.GenericMessageImpl;
 import io.sphere.sdk.messages.MessageDerivateHint;
+import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.payments.Payment;
 
 import javax.annotation.Nullable;
@@ -33,6 +34,12 @@ public final class PaymentStatusInterfaceCodeSetMessage extends GenericMessageIm
         return interfaceCode;
     }
 
+    /**
+     *
+     * @deprecated This field will be removed with the next major SDK update.
+     * Instead use the {@link Reference#getId()} method of this {@link #getResource()} method.
+     */
+    @Deprecated
     public String getPaymentId() {
         return paymentId;
     }

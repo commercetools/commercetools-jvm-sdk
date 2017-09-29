@@ -50,7 +50,7 @@ public class PaymentStatusInterfaceCodeSetMessageIntegrationTest extends Integra
                 assertThat(optMessage).isPresent();
                 PaymentStatusInterfaceCodeSetMessage message = optMessage.get();
                 assertThat(message.getInterfaceCode()).isEqualTo(interfaceCode);
-                assertThat(message.getPaymentId()).isEqualTo(updatedPayment.getId());
+                assertThat(message.getResource().getId()).isEqualTo(updatedPayment.getId());
             });
 
             return updatedPayment;

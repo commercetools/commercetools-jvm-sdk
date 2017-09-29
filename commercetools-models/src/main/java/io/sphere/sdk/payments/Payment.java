@@ -47,7 +47,10 @@ public interface Payment extends Resource<Payment>, Custom {
      * The external id  can be used as additional identifier for external systems like CRM or ERP.
      *
      * @return the external id
+     *
+     * @deprecated This field will be removed with the next major SDK update.
      */
+    @Deprecated
     @Nullable
     String getExternalId();
 
@@ -64,15 +67,31 @@ public interface Payment extends Resource<Payment>, Custom {
 
     MonetaryAmount getAmountPlanned();
 
+    /**
+     * @deprecated This field will be removed with the next major SDK update.
+     */
+    @Deprecated
     @Nullable
     MonetaryAmount getAmountAuthorized();
 
+    /**
+     * @deprecated This field will be removed with the next major SDK update.
+     */
+    @Deprecated
     @Nullable
     ZonedDateTime getAuthorizedUntil();
 
+    /**
+     * @deprecated This field will be removed with the next major SDK update.
+     */
+    @Deprecated
     @Nullable
     MonetaryAmount getAmountPaid();
 
+    /**
+     * @deprecated This field will be removed with the next major SDK update.
+     */
+    @Deprecated
     @Nullable
     MonetaryAmount getAmountRefunded();
 
