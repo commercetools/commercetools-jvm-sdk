@@ -97,6 +97,8 @@ io.sphere.sdk.producttypes.commands.updateactions
 io.sphere.sdk.producttypes.expansion
 io.sphere.sdk.producttypes.queries
 io.sphere.sdk.projects
+io.sphere.sdk.projects.commands
+io.sphere.sdk.projects.commands.updateactions
 io.sphere.sdk.projects.queries
 io.sphere.sdk.queries
 io.sphere.sdk.retry
