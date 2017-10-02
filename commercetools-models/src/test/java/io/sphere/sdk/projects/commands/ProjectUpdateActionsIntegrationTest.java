@@ -8,7 +8,9 @@ import io.sphere.sdk.projects.queries.ProjectGet;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import javax.annotation.concurrent.NotThreadSafe;
 import java.util.Arrays;
@@ -21,7 +23,7 @@ import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.models.DefaultCurrencyUnits.USD;
 import static org.assertj.core.api.Assertions.*;
 
-@NotThreadSafe
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ProjectUpdateActionsIntegrationTest extends IntegrationTest {
 
     private static final String PROJECT_NAME = "TestProject";
