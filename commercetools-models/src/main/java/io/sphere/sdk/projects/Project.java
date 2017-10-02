@@ -105,7 +105,6 @@ public interface Project extends CreationTimestamped, WithKey {
     @HasUpdateAction
     ShippingRateInputType getShippingRateInputType();
 
-
     /**
      * Creates a container which contains the full Java type information to deserialize this class from JSON.
      *

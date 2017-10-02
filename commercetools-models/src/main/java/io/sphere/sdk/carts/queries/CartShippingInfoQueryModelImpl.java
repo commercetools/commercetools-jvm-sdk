@@ -34,9 +34,4 @@ final class CartShippingInfoQueryModelImpl<T> extends QueryModelImpl<T> implemen
         return referenceOptionalModel("shippingMethod");
     }
 
-    @Override
-    public ShippingRateInputQueryModel<T> shippingRateInput(){
-        return new ShippingRateInputQueryModelImpl<>(this,"shippingRateInput");
-    }
-
 }

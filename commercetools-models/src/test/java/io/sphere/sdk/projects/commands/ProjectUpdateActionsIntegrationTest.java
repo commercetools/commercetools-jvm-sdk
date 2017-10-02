@@ -1,7 +1,8 @@
 package io.sphere.sdk.projects.commands;
 
 import com.neovisionaries.i18n.CountryCode;
-import io.sphere.sdk.projects.Project;
+import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.projects.*;
 import io.sphere.sdk.projects.commands.updateactions.*;
 import io.sphere.sdk.projects.queries.ProjectGet;
 import io.sphere.sdk.test.IntegrationTest;
@@ -10,12 +11,14 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.models.DefaultCurrencyUnits.USD;
+import static org.assertj.core.api.Assertions.*;
 
 public class ProjectUpdateActionsIntegrationTest extends IntegrationTest {
 
@@ -35,7 +38,8 @@ public class ProjectUpdateActionsIntegrationTest extends IntegrationTest {
                 ChangeCurrencies.of(PROJECT_CURRENCIES),
                 ChangeCountries.of(PROJECT_COUNTRIES),
                 ChangeLanguages.of(PROJECT_LANGUAGES),
-                ChangeMessagesEnabled.of(PROJECT_MESSAGES_ENABLED)
+                ChangeMessagesEnabled.of(PROJECT_MESSAGES_ENABLED),
+                SetShippingRateInputType.ofUnset()
         ));
 
         final Project updatedProject = client().executeBlocking(updateCommand);
@@ -50,9 +54,8 @@ public class ProjectUpdateActionsIntegrationTest extends IntegrationTest {
             soft.assertThat(updatedProject.getCurrencies()).as("currencies").isEqualTo(PROJECT_CURRENCIES);
             soft.assertThat(updatedProject.getCurrencyUnits()).as("currencies as unit").contains(EUR);
             soft.assertThat(updatedProject.getMessages().isEnabled()).isEqualTo(PROJECT_MESSAGES_ENABLED);
-
+            soft.assertThat(updatedProject.getShippingRateInputType()).isNull();
         });
-
     }
 
 
@@ -70,7 +73,6 @@ public class ProjectUpdateActionsIntegrationTest extends IntegrationTest {
             soft.assertThat(project.getCurrencies()).as("currencies").isEqualTo(PROJECT_CURRENCIES);
             soft.assertThat(project.getCurrencyUnits()).as("currencies as unit").contains(EUR);
             soft.assertThat(project.getMessages().isEnabled()).isEqualTo(PROJECT_MESSAGES_ENABLED);
-
         });
 
         final String new_project_name = "NewName";
@@ -101,9 +103,30 @@ public class ProjectUpdateActionsIntegrationTest extends IntegrationTest {
             soft.assertThat(updatedProject.getCurrencies()).as("currencies").isEqualTo(new_project_currencies);
             soft.assertThat(updatedProject.getCurrencyUnits()).as("currencies as unit").contains(USD);
             soft.assertThat(updatedProject.getMessages().isEnabled()).isEqualTo(new_project_messages_enabled);
+            soft.assertThat(updatedProject.getShippingRateInputType()).isNull();
 
         });
+    }
 
+    @Test
+    public void testSetShippingRateInputType() {
 
+        final Project project = client().executeBlocking(ProjectGet.of());
+
+        final Project updatedProjectCartValue = client().executeBlocking(ProjectUpdateCommand.of(project, SetShippingRateInputType.of(CartValue.of())));
+        assertThat(updatedProjectCartValue.getShippingRateInputType()).isNotNull();
+        assertThat(updatedProjectCartValue.getShippingRateInputType().getType()).isEqualTo(CartValue.of().getType());
+
+        final Project updatedProjectCartScore = client().executeBlocking(ProjectUpdateCommand.of(updatedProjectCartValue, SetShippingRateInputType.of(CartScore.of())));
+        assertThat(updatedProjectCartScore.getShippingRateInputType()).isNotNull();
+        assertThat(updatedProjectCartScore.getShippingRateInputType().getType()).isEqualTo(CartScore.of().getType());
+
+        final CartClassification cartClassification = CartClassification.of(Collections.singletonMap("Small", LocalizedString.of(Locale.ENGLISH, "Small", Locale.GERMAN, "Klein")));
+        final Project updatedProjectCartClassification = client().executeBlocking(ProjectUpdateCommand.of(updatedProjectCartScore, SetShippingRateInputType.of(cartClassification)));
+        assertThat(updatedProjectCartClassification.getShippingRateInputType()).isNotNull();
+        assertThat(updatedProjectCartClassification.getShippingRateInputType().getType()).isEqualTo(cartClassification.getType());
+        assertThat(((CartClassification)updatedProjectCartClassification.getShippingRateInputType()).getValues()).containsOnly(
+                CartClassificationEntry.of("Small", LocalizedString.of(Locale.ENGLISH, "Small", Locale.GERMAN, "Klein"))
+        );
     }
 }

@@ -190,6 +190,7 @@ public interface Cart extends CartLike<Cart> {
      *  The shippingRateInput is used as an input to select a shipping rate price tier
      * @return shippingRateInput
      */
+    @Override
     @Nullable
     @HasUpdateAction
     @QueryModelHint(type = "ShippingRateInputQueryModel<Cart>")

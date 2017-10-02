@@ -49,6 +49,11 @@ final class CartExpansionModelImpl<T> extends CartLikeExpansionModelImpl<T> impl
     }
 
     @Override
+    public ShippingRateInputExpansionModel shippingRateInput() {
+        return super.shippingRateInput();
+    }
+
+    @Override
     public CustomLineItemExpansionModel<T> customLineItems() {
         return super.customLineItems();
     }

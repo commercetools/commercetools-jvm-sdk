@@ -24,8 +24,8 @@ final class ShippingRateInputQueryModelImpl<T> extends QueryModelImpl<T> impleme
     }
 
     @Override
-    public StringQueryModel<T> key() {
-        return stringModel("key");
+    public StringQuerySortingModel<T> key(){
+        return stringQuerySortingModel("key");
     }
 
 }

@@ -38,6 +38,9 @@ public interface CartExpansionModel<T> extends CartLikeExpansionModel<T> {
     @Override
     ShippingInfoExpansionModel<T> shippingInfo();
 
+    @Override
+    ShippingRateInputExpansionModel shippingRateInput();
+
     static CartExpansionModel<Cart> of() {
         return new CartExpansionModelImpl<>();
     }
