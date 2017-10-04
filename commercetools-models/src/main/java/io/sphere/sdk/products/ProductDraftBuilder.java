@@ -16,7 +16,7 @@ import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 public final class ProductDraftBuilder extends ProductDraftBuilderBase<ProductDraftBuilder> {
 
 
-    ProductDraftBuilder(Set<ResourceIdentifier<Category>> categories, @Nullable CategoryOrderHints categoryOrderHints, @Nullable LocalizedString description, @Nullable String key, ProductVariantDraft masterVariant, @Nullable LocalizedString metaDescription, @Nullable LocalizedString metaKeywords, @Nullable LocalizedString metaTitle, LocalizedString name, ResourceIdentifier<ProductType> productType, @Nullable Boolean publish, SearchKeywords searchKeywords, LocalizedString slug, @Nullable Reference<State> state, @Nullable Reference<TaxCategory> taxCategory, List<ProductVariantDraft> variants) {
+    ProductDraftBuilder(Set<ResourceIdentifier<Category>> categories, @Nullable CategoryOrderHints categoryOrderHints, @Nullable LocalizedString description, @Nullable String key, @Nullable ProductVariantDraft masterVariant, @Nullable LocalizedString metaDescription, @Nullable LocalizedString metaKeywords, @Nullable LocalizedString metaTitle, LocalizedString name, ResourceIdentifier<ProductType> productType, @Nullable Boolean publish, SearchKeywords searchKeywords, LocalizedString slug, @Nullable Reference<State> state, @Nullable Reference<TaxCategory> taxCategory, List<ProductVariantDraft> variants) {
         super(categories, categoryOrderHints, description, key, masterVariant, metaDescription, metaKeywords, metaTitle, name, productType, publish, searchKeywords, slug, state, taxCategory, variants);
         init();
     }
@@ -34,7 +34,9 @@ public final class ProductDraftBuilder extends ProductDraftBuilderBase<ProductDr
                 .plusVariants(variants);
     }
 
-    public static ProductDraftBuilder of(final ResourceIdentifiable<ProductType> productType, final LocalizedString name, final LocalizedString slug, final ProductVariantDraft masterVariant) {
+    public static ProductDraftBuilder of(final ResourceIdentifiable<ProductType> productType, final LocalizedString name,
+                                         final LocalizedString slug,
+                                         @Nullable final ProductVariantDraft masterVariant) {
         return of(productType.toResourceIdentifier(),name,slug,masterVariant);
     }
 

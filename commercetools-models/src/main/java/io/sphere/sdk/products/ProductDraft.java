@@ -53,6 +53,7 @@ public interface ProductDraft extends WithLocalizedSlug, MetaAttributes {
     @Override
     LocalizedString getMetaKeywords();
 
+    @Nullable
     ProductVariantDraft getMasterVariant();
 
     List<ProductVariantDraft> getVariants();
