@@ -14,26 +14,11 @@ import org.junit.Test;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 public class SimpleMetricsSphereClientTest {
 
     public static final int MINIMUM_WAIT_IN_MILLISECONDS = 23;
     public static final String CORRELATION_ID = "ID-123456";
     public static final HttpResponse HTTP_RESPONSE = HttpResponse.of(200, "{}", HttpHeaders.of("X-Correlation-ID", CORRELATION_ID));
-
-    @Test
-    public void demo() {
-        final SphereClient asyncClient = TestDoubleSphereClientFactory
-                .createHttpTestDouble(intent -> HTTP_RESPONSE);
-        final SphereClient metricClient = SimpleMetricsSphereClientDemo.demo(asyncClient);
-
-        metricClient.execute(ProjectGet.of()).toCompletableFuture().join();
-        assertThat(Logger.getAndClear()).matches("observed: ObservedSerializationDuration\\[requestId=1,durationInMilliseconds=\\d+,request=ProjectGet\\[\\]\\]\n" +
-                "observed: ObservedDeserializationDuration\\[correlationId=ID-123456,httpResponse=.*,result=.*,requestId=1,durationInMilliseconds=\\d+,request=ProjectGet\\[\\]\\]\n" +
-                "observed: ObservedTotalDuration\\[correlationId=ID-123456,successResult=ProjectImpl\\[key=<null>,name=<null>,countries=<null>,languages=<null>,currencies=<null>,createdAt=<null>,trialUntil=<null>,messages=<null>\\],errorResult=<null>,requestId=1,durationInMilliseconds=\\d+,request=ProjectGet\\[\\]\\]");
-    }
-
 
 
     @Test

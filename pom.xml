@@ -3,7 +3,7 @@
     <groupId>com.commercetools.sdk.jvm.core</groupId>
     <artifactId>commercetools-jvm-sdk</artifactId>
     <packaging>pom</packaging>
-    <version>1.23.1-SNAPSHOT</version>
+    <version>1.24.1-SNAPSHOT</version>
     <name>commercetools JVM SDK</name>
     <description>Java bindings for the commercetools platform</description>
     <url>https://github.com/commercetools/commercetools-jvm-sdk</url>
@@ -547,11 +547,8 @@
         </profile>
         <profile>
             <id>javadoc-jdk-8u121</id>
-            <!--
-                This profile is currently only activated for the given JDK, but can be manually activated by passing
-                the -Pjavadoc-jdk-8u121 option to maven.
-            -->
             <activation>
+                <activeByDefault>true</activeByDefault>
                 <jdk>1.8.0_121</jdk>
             </activation>
             <properties>

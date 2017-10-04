@@ -10,7 +10,7 @@ import io.sphere.sdk.models.SphereEnumeration;
  *
  */
 public enum TransactionState implements SphereEnumeration {
-    PENDING, SUCCESS, FAILURE;
+    INITIAL, PENDING, SUCCESS, FAILURE;
 
     @JsonCreator
     public static TransactionState ofSphereValue(final String value) {

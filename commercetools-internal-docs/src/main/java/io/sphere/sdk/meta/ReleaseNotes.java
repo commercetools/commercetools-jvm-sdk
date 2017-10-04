@@ -43,6 +43,8 @@ import io.sphere.sdk.customobjects.commands.CustomObjectDeleteCommand;
 import io.sphere.sdk.customobjects.queries.CustomObjectByKeyGet;
 import io.sphere.sdk.customobjects.queries.CustomObjectQuery;
 import io.sphere.sdk.customobjects.queries.CustomObjectQueryModel;
+import io.sphere.sdk.discountcodes.DiscountCode;
+import io.sphere.sdk.discountcodes.DiscountCodeDraft;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.http.*;
 import io.sphere.sdk.inventory.InventoryEntry;
@@ -135,6 +137,49 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+ <h3 class=released-version id="v1_24_0">1.24.0 (29.09.2017)</h3>
+ <ul>
+ <li class=change-in-release>Changed type of {@link io.sphere.sdk.shoppinglists.LineItemDraft#getCustom()} to {@link CustomFieldsDraft}.
+ This breaking change might require changes in your source code.
+ </li>
+ <li class=change-in-release>Update com.fasterxml.jackson.core plugins group from 2.6.5 to 2.8.9</li>
+ <li class=fixed-in-release>Added missing {@link io.sphere.sdk.shoppinglists.LineItemDraftBuilder#custom(CustomFieldsDraft)} builder method
+ to replace now deprecated {@link io.sphere.sdk.shoppinglists.LineItemDraftBuilder#custom(CustomFields)} builder method.
+ </li>
+ <li class=change-in-release>Deprecated several payment properties and update actions:
+    <ul>
+        <li>{@link Payment#getAmountAuthorized()}, {@link Payment#getAmountPaid()}, {@link Payment#getAmountRefunded()},
+            {@link Payment#getAuthorizedUntil()} and {@link Payment#getExternalId()}
+        </li>
+        <li>{@link PaymentDraft#getAmountAuthorized()}, {@link PaymentDraft#getAmountPaid()}, {@link PaymentDraft#getAmountRefunded()},
+        {@link PaymentDraft#getAuthorizedUntil()} and {@link PaymentDraft#getExternalId()}
+        </li>
+        <li>{@link io.sphere.sdk.payments.commands.updateactions.SetAmountPaid}, {@link io.sphere.sdk.payments.commands.updateactions.SetAmountRefunded},
+        {@link io.sphere.sdk.payments.commands.updateactions.SetAuthorization} and {@link io.sphere.sdk.payments.commands.updateactions.SetExternalId}
+        </li>
+    </ul>
+ </li>
+ <li class=fixed-in-release>Fixed {@link NullPointerException} in {@link TypeDraftBuilder#plusFieldDefinitions(FieldDefinition)}.</li>
+ <li class=new-in-release>Added new custom fields on discount code {@link DiscountCode#getCustom()}, {@link DiscountCodeDraft#getCustom()} and
+    corresponding update actions {@link io.sphere.sdk.discountcodes.commands.updateactions.SetCustomType}, {@link io.sphere.sdk.discountcodes.commands.updateactions.SetCustomField}
+ </li>
+ <li class=new-in-release>Added new project update actions {@link io.sphere.sdk.projects.commands.updateactions.ChangeCountries},
+ {@link io.sphere.sdk.projects.commands.updateactions.ChangeCurrencies}, {@link io.sphere.sdk.projects.commands.updateactions.ChangeLanguages},
+ {@link io.sphere.sdk.projects.commands.updateactions.ChangeMessages}, {@link io.sphere.sdk.projects.commands.updateactions.ChangeMessagesEnabled}
+ and {@link io.sphere.sdk.products.commands.updateactions.ChangeName}.
+ </li>
+ <li class=new-in-release>Added {@code plus*} methods to generated draft builder to ease working with list properties
+ (e.g. {@link io.sphere.sdk.shoppinglists.ShoppingListDraftBuilder#plusLineItems(io.sphere.sdk.shoppinglists.LineItemDraft)},
+ {@link io.sphere.sdk.shoppinglists.ShoppingListDraftBuilder#plusLineItems(List)}).
+ </li>
+ <li class=new-in-release>Added missing {@link io.sphere.sdk.payments.queries.PaymentByKeyGet} query,
+ {@link io.sphere.sdk.payments.commands.PaymentDeleteCommand#ofKey(String, Long)} and<
+ {@link io.sphere.sdk.payments.commands.PaymentUpdateCommand#ofKey(String, Long, UpdateAction)} commands.
+ </li>
+ <li class=new-in-release>Added support for creating multi buy discounts {@link io.sphere.sdk.cartdiscounts.MultiBuyLineItemsTarget},
+ {@link io.sphere.sdk.cartdiscounts.SelectionMode}.
+ </li>
+ </ul>
  <h3 class=released-version id="v1_23_1">1.23.1 (26.09.2017)</h3>
  <ul>
  <li class=fixed-in-release>Fixed NullPointerException in {@link PriceDraftBuilder#of(Price)}.</li>
@@ -155,7 +200,6 @@ import java.util.function.Function;
  <li class=new-in-release>Added new key property to customer {@link Customer#getKey()}, {@link CustomerDraft#getKey()} and corresponding update action {@link io.sphere.sdk.customers.commands.updateactions.SetKey}.
  Added {@link io.sphere.sdk.customers.queries.CustomerByKeyGet}, {@link io.sphere.sdk.customers.commands.CustomerDeleteCommand#ofKey(String, Long)} and {@link io.sphere.sdk.customers.commands.CustomerUpdateCommand#ofKey(String, Long, UpdateAction)}.</li>
  <li class=new-in-release><Added support for publish prices only {@link PublishScope}, {@link io.sphere.sdk.products.commands.updateactions.Publish#ofScope(PublishScope)} and {@link ProductPublishedMessage#getScope()}.</li>
- <li class=change-in-release>Update com.fasterxml.jackson.core plugins group from 2.6.5 to 2.8.9</li>
  </ul>
  <h3 class=released-version id="v1_22_0">1.22.0 (09.08.2017)</h3>
  <ul>

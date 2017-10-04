@@ -35,7 +35,7 @@ import org.junit.Test;
 
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -252,6 +252,36 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
             final Set<ItemState> state = customLineItem.getState();
             assertThat(state).hasSize(1);
             assertThat(state).extracting("quantity").containsOnly(quantity);
+            assertThat(customLineItem.getTaxCategory()).isEqualTo(taxCategory.toReference());
+
+            final CartQuery cartQuery = CartQuery.of()
+                    .withPredicates(m -> m.customLineItems().slug().is(customLineItem.getSlug())
+                            .and(m.id().is(cart.getId())));
+            assertThat(client().executeBlocking(cartQuery).head().get().getId()).isEqualTo(cart.getId());
+        });
+    }
+
+    @Test
+    public void addMergesSameCustomLineItems() throws Exception {
+        withTaxCategory(client(), taxCategory -> {
+            final Cart cart = createCartWithCountry(client());
+            assertThat(cart.getCustomLineItems()).isEmpty();
+            final MonetaryAmount money = MoneyImpl.of("23.50", EUR);
+            final String slug = "thing-slug";//you handle to identify the custom line item
+            final LocalizedString name = en("thing");
+            final long quantity = 5;
+            final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, taxCategory, quantity, null);
+
+            final Cart cartWith5 = client().executeBlocking(CartUpdateCommand.of(cart, Arrays.asList(AddCustomLineItem.of(item), AddCustomLineItem.of(item))));
+            assertThat(cartWith5.getCustomLineItems()).hasSize(1);
+            final CustomLineItem customLineItem = cartWith5.getCustomLineItems().get(0);
+            assertThat(customLineItem.getMoney()).isEqualTo(money);
+            assertThat(customLineItem.getName()).isEqualTo(name);
+            assertThat(customLineItem.getQuantity()).isEqualTo(quantity * 2);
+            assertThat(customLineItem.getSlug()).isEqualTo(slug);
+            final Set<ItemState> state = customLineItem.getState();
+            assertThat(state).hasSize(1);
+            assertThat(state).extracting("quantity").containsOnly(quantity * 2);
             assertThat(customLineItem.getTaxCategory()).isEqualTo(taxCategory.toReference());
 
             final CartQuery cartQuery = CartQuery.of()
