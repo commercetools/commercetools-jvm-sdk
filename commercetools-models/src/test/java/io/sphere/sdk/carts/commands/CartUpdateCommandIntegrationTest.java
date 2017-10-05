@@ -31,6 +31,7 @@ import io.sphere.sdk.taxcategories.ExternalTaxRateDraft;
 import io.sphere.sdk.taxcategories.ExternalTaxRateDraftBuilder;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
@@ -261,6 +262,7 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Ignore
     @Test
     public void addMergesSameCustomLineItems() throws Exception {
         withTaxCategory(client(), taxCategory -> {
