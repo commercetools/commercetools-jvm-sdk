@@ -16,7 +16,7 @@ import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 public final class ProductDraftBuilder extends ProductDraftBuilderBase<ProductDraftBuilder> {
 
 
-    ProductDraftBuilder(Set<ResourceIdentifier<Category>> categories, @Nullable CategoryOrderHints categoryOrderHints, @Nullable LocalizedString description, @Nullable String key, @Nullable ProductVariantDraft masterVariant, @Nullable LocalizedString metaDescription, @Nullable LocalizedString metaKeywords, @Nullable LocalizedString metaTitle, LocalizedString name, ResourceIdentifier<ProductType> productType, @Nullable Boolean publish, SearchKeywords searchKeywords, LocalizedString slug, @Nullable Reference<State> state, @Nullable Reference<TaxCategory> taxCategory, List<ProductVariantDraft> variants) {
+    ProductDraftBuilder(final Set<ResourceIdentifier<Category>> categories, @Nullable final CategoryOrderHints categoryOrderHints, @Nullable final LocalizedString description, @Nullable final String key, @Nullable final ProductVariantDraft masterVariant, @Nullable final LocalizedString metaDescription, @Nullable final LocalizedString metaKeywords, @Nullable final LocalizedString metaTitle, final LocalizedString name, final ResourceIdentifier<ProductType> productType, @Nullable final Boolean publish, final SearchKeywords searchKeywords, final LocalizedString slug, @Nullable final Reference<State> state, @Nullable final Reference<TaxCategory> taxCategory, final List<ProductVariantDraft> variants) {
         super(categories, categoryOrderHints, description, key, masterVariant, metaDescription, metaKeywords, metaTitle, name, productType, publish, searchKeywords, slug, state, taxCategory, variants);
         init();
     }
