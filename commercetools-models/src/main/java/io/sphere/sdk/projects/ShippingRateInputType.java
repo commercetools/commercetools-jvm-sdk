@@ -4,15 +4,17 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import io.sphere.sdk.models.WithType;
 
+import static com.fasterxml.jackson.annotation.JsonSubTypes.*;
+
 
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
         property = "type")
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = CartValueImpl.class, name = "CartValue"),
-        @JsonSubTypes.Type(value = CartClassificationImpl.class, name = "CartClassification"),
-        @JsonSubTypes.Type(value = CartScoreImpl.class, name = "CartScore")
+        @Type(value = CartValueImpl.class, name = "CartValue"),
+        @Type(value = CartClassificationImpl.class, name = "CartClassification"),
+        @Type(value = CartScoreImpl.class, name = "CartScore")
 })
-public interface ShippingRateInputType extends WithType{
+public interface ShippingRateInputType extends WithType {
 }
