@@ -25,8 +25,8 @@ public interface CartScore extends ShippingRatePriceTier {
     @Nullable
     PriceFunction getPriceFunction();
 
-    static CartScore ofPriceFunction(final MonetaryAmount price, final PriceFunction priceFunction){
-        return new CartScoreImpl(null, price, priceFunction, null);
+    static CartScore ofPriceFunction(final PriceFunction priceFunction, final Long score){
+        return new CartScoreImpl(null, null, priceFunction, score);
     }
 
     static CartScore ofScore(final MonetaryAmount price, final Long score){

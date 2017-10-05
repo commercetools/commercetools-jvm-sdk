@@ -11,4 +11,8 @@ public interface PriceFunction {
     String getCurrencyCode();
 
     String getFunction();
+
+    static PriceFunction of(final String currencyCode, final String function) {
+        return new PriceFunctionImpl(currencyCode,function);
+    }
 }

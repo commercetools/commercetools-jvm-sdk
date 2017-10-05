@@ -14,6 +14,7 @@ import io.sphere.sdk.projects.commands.ProjectIntegrationTest;
 import io.sphere.sdk.projects.commands.ProjectUpdateCommand;
 import io.sphere.sdk.projects.commands.updateactions.SetShippingRateInputType;
 import io.sphere.sdk.projects.queries.ProjectGet;
+import io.sphere.sdk.shippingmethods.PriceFunction;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.shippingmethods.queries.ShippingMethodsByCartGet;
@@ -54,7 +55,9 @@ public class ShippingRateIntegrationTest extends ProjectIntegrationTest {
                     ExternalTaxRateDraftBuilder.ofAmount(taxRate, taxRateName, DE).build();
             final ShippingRate shippingRate = ShippingRate.of(EURO_10, null,
                     Arrays.asList(
-                            io.sphere.sdk.shippingmethods.CartScore.ofScore(EURO_20, 11L)
+                            io.sphere.sdk.shippingmethods.CartScore.ofPriceFunction(PriceFunction.of(EUR.getCurrencyCode(),"(50 * x) + 750"), 0L),
+                            io.sphere.sdk.shippingmethods.CartScore.ofScore(EURO_20, 1L),
+                            io.sphere.sdk.shippingmethods.CartScore.ofScore(EURO_20, 2L)
                     ));
 
             final SetCustomShippingMethod action =
@@ -97,8 +100,6 @@ public class ShippingRateIntegrationTest extends ProjectIntegrationTest {
                     Arrays.asList(
                             io.sphere.sdk.shippingmethods.CartClassification.of(EURO_1, "Small")
                     ));
-
-
             final SetCustomShippingMethod action =
                     SetCustomShippingMethod.ofExternalTaxCalculation("name", shippingRate, externalTaxRate);
 
