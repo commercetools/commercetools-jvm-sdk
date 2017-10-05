@@ -34,43 +34,9 @@ import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingM
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ShippingRateIntegrationTest extends ProjectIntegrationTest {
+public class ShippingRateClassificationIntegrationTest extends ProjectIntegrationTest {
 
 
-    @Test
-    public void setScoreShippingRateInput() {
-
-        final ShippingRateInputType shippingRateInputType = CartScore.of();
-        final Project project = client().executeBlocking(ProjectGet.of());
-        final Project updatedProjectCartValue = client().executeBlocking(ProjectUpdateCommand.of(project, SetShippingRateInputType.of(shippingRateInputType)));
-        assertThat(updatedProjectCartValue.getShippingRateInputType().getType()).isEqualTo(shippingRateInputType.getType());
-        final CartDraft draft = CartDraft.of(EUR)
-                .withTaxMode(TaxMode.EXTERNAL)
-                .withShippingAddress(Address.of(DE));
-
-        withCartDraft(client(), draft, (Cart cart) -> {
-            final String taxRateName = "special tax";
-            final double taxRate = 0.20;
-            final ExternalTaxRateDraft externalTaxRate =
-                    ExternalTaxRateDraftBuilder.ofAmount(taxRate, taxRateName, DE).build();
-            final ShippingRate shippingRate = ShippingRate.of(EURO_10, null,
-                    Arrays.asList(
-                            io.sphere.sdk.shippingmethods.CartScore.ofPriceFunction(PriceFunction.of(EUR.getCurrencyCode(),"(50 * x) + 750"), 0L),
-                            io.sphere.sdk.shippingmethods.CartScore.ofScore(EURO_20, 1L),
-                            io.sphere.sdk.shippingmethods.CartScore.ofScore(EURO_20, 2L)
-                    ));
-
-            final SetCustomShippingMethod action =
-                    SetCustomShippingMethod.ofExternalTaxCalculation("name", shippingRate, externalTaxRate);
-            final Cart cartWithShippingMethod = client().executeBlocking(CartUpdateCommand.of(cart, action));
-
-            final ShippingRateInput shippingRateInput = ScoreShippingRateInput.of(11L);
-            SphereJsonUtils.toJsonString(ScoreShippingRateInput.of(11L));
-            final Cart cartWithShippingMethodWithScore = client().executeBlocking(CartUpdateCommand.of(cartWithShippingMethod, SetShippingRateInput.of(shippingRateInput)));
-
-            return cartWithShippingMethodWithScore;
-        });
-    }
 
     @Test
     public void setClassificationShippingRateInput() {
@@ -111,32 +77,5 @@ public class ShippingRateIntegrationTest extends ProjectIntegrationTest {
         });
     }
 
-    @Test
-    public void setCartValueShippingRateInput() {
-
-
-        final Project project = client().executeBlocking(ProjectGet.of());
-        final Project updatedProjectCartValue = client().executeBlocking(ProjectUpdateCommand.of(project, SetShippingRateInputType.of(CartValue.of())));
-        assertThat(updatedProjectCartValue.getShippingRateInputType().getType()).isEqualTo(CartValue.of().getType());
-        final CartDraft draft = CartDraft.of(EUR)
-                .withTaxMode(TaxMode.EXTERNAL)
-                .withShippingAddress(Address.of(DE));
-        withCartDraft(client(), draft, (Cart cart) -> {
-            final String taxRateName = "special tax";
-            final double taxRate = 0.20;
-            final ExternalTaxRateDraft externalTaxRate =
-                    ExternalTaxRateDraftBuilder.ofAmount(taxRate, taxRateName, DE).build();
-            final ShippingRate shippingRate = ShippingRate.of(EURO_10, null,
-                    Arrays.asList(
-                            io.sphere.sdk.shippingmethods.CartValue.of(0l, EURO_10),
-                            io.sphere.sdk.shippingmethods.CartValue.of(1l, EURO_20)
-                    ));
-            final SetCustomShippingMethod action =
-                    SetCustomShippingMethod.ofExternalTaxCalculation("name", shippingRate, externalTaxRate);
-            final Cart cartWithShippingMethod = client().executeBlocking(CartUpdateCommand.of(cart, action));
-            assertThat(cartWithShippingMethod.getTotalPrice()).isEqualTo(EURO_10);
-            return cartWithShippingMethod;
-        });
-    }
 
 }
