@@ -2,6 +2,7 @@ package io.sphere.sdk.carts;
 
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.SetCustomShippingMethod;
+import io.sphere.sdk.carts.commands.updateactions.SetShippingRateInput;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.projects.CartScore;
@@ -9,6 +10,7 @@ import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.projects.ShippingRateInputType;
 import io.sphere.sdk.projects.commands.ProjectIntegrationTest;
 import io.sphere.sdk.projects.commands.ProjectUpdateCommand;
+import io.sphere.sdk.projects.commands.updateactions.SetShippingRateInputType;
 import io.sphere.sdk.projects.queries.ProjectGet;
 import io.sphere.sdk.shippingmethods.PriceFunction;
 import io.sphere.sdk.shippingmethods.ShippingRate;
