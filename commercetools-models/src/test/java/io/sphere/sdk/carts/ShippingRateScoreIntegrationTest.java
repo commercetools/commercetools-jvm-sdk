@@ -56,7 +56,6 @@ public class ShippingRateScoreIntegrationTest extends ProjectIntegrationTest {
             final ShippingRateInput shippingRateInput = ScoreShippingRateInput.of(11L);
             SphereJsonUtils.toJsonString(ScoreShippingRateInput.of(11L));
             final Cart cartWithShippingMethodWithScore = client().executeBlocking(CartUpdateCommand.of(cartWithShippingMethod, SetShippingRateInput.of(shippingRateInput)));
-
             return cartWithShippingMethodWithScore;
         });
     }
