@@ -83,11 +83,9 @@
                         <Fragment-Host>${project.groupId}.commercetools-sdk-base</Fragment-Host>
                         <Export-Package>io.sphere.sdk.*</Export-Package>
                         <Import-Package>
-                            !javax.annotation,
-                            !com.amazonaws.*,
-                            !com.microsoft.*,
-                            !net.jcip.annotations.*,
-                            *
+                            org.assertj.*,
+                            org.hamcrest.*,
+                            com.google.gson.*
                         </Import-Package>
                         <Bundle-Version>${project.version}</Bundle-Version>
                         <Require-Capability>
