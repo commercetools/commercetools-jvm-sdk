@@ -196,7 +196,7 @@ public class UpdateActionGenerator extends AbstractGenerator<ExecutableElement> 
     protected MethodSpec createWithMethod(final List<PropertyGenModel> properties, final PropertyGenModel propertyGenModel, final ClassName returnType) {
 
         final String callArguments = properties.stream()
-                .map(p -> propertyGenModel.getName().equals(p.getName()) ? p.getJavaIdentifier() : "get" + StringUtils.capitalize(p.getName()) + "()")
+                .map(p -> propertyGenModel.getName().equals(p.getName()) ? p.getJavaIdentifier() : p.getMethodName() + "()")
                 .collect(Collectors.joining(", "));
 
         final MethodSpec.Builder builder = MethodSpec.methodBuilder("with" + StringUtils.capitalize(propertyGenModel.getName())).addModifiers(Modifier.PUBLIC)

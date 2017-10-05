@@ -2,9 +2,7 @@ package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.sphere.sdk.annotations.HasDeleteCommand;
-import io.sphere.sdk.annotations.ResourceInfo;
-import io.sphere.sdk.annotations.ResourceValue;
+import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.productdiscounts.ProductDiscount;
@@ -41,6 +39,12 @@ import java.util.Optional;
 @HasDeleteCommand(includeExamples = "io.sphere.sdk.products.ProductDeleteExample#delete()", deleteWithKey = true)
 public interface Product extends ProductLike<Product, Product>, Resource<Product> {
 
+    @HasCustomUpdateActions(@HasUpdateAction(value = "changeImageLabel", fields = {
+            @PropertySpec(name = "variantId", fieldType = Integer.class),
+            @PropertySpec(name = "imageUrl", fieldType = String.class),
+            @PropertySpec(name = "label", fieldType = String.class, isOptional = true),
+            @PropertySpec(name = "staged", fieldType = Boolean.class, isOptional = true)
+    }))
     ProductCatalogData getMasterData();
 
     /**

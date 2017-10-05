@@ -6,6 +6,7 @@ import io.sphere.sdk.annotations.HasCustomUpdateActions;
 import javax.annotation.processing.Messager;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
 import java.util.Arrays;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 /**
  * Generates update action classes for interfaces annotated with {@link io.sphere.sdk.annotations.HasUpdateActions}.
  */
-public class CustomUpdateActionsGenerator extends AbstractMultipleFileGenerator<ExecutableElement> {
+public class CustomUpdateActionsGenerator extends AbstractMultipleFileGenerator<TypeElement> {
 
 
     public CustomUpdateActionsGenerator(final Elements elements, final Types types, final Messager messager) {
@@ -27,7 +28,7 @@ public class CustomUpdateActionsGenerator extends AbstractMultipleFileGenerator<
         return super.getPackageName(annotatedTypeElement).concat(".commands.updateactions");
     }
 
-    protected List<TypeSpec> generateTypes(final ExecutableElement annotatedTypeElement) {
+    protected List<TypeSpec> generateTypes(final TypeElement annotatedTypeElement) {
 
         return Arrays.stream(annotatedTypeElement.getAnnotation(HasCustomUpdateActions.class).value())
                 .map(hasCustomUpdateAction -> new UpdateActionGenerator(elements, types, messager).generateUpdateAction(annotatedTypeElement, hasCustomUpdateAction))
@@ -36,7 +37,7 @@ public class CustomUpdateActionsGenerator extends AbstractMultipleFileGenerator<
 
     }
 
-    protected List<String> expectedClassNames(final ExecutableElement annotatedTypeElement) {
+    protected List<String> expectedClassNames(final TypeElement annotatedTypeElement) {
         return generateTypes(annotatedTypeElement).stream().map(typeSpec -> typeSpec.name).collect(Collectors.toList());
     }
 }
