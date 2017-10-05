@@ -16,8 +16,24 @@ import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 public final class ProductDraftBuilder extends ProductDraftBuilderBase<ProductDraftBuilder> {
 
 
-    ProductDraftBuilder(final Set<ResourceIdentifier<Category>> categories, @Nullable final CategoryOrderHints categoryOrderHints, @Nullable final LocalizedString description, @Nullable final String key, @Nullable final ProductVariantDraft masterVariant, @Nullable final LocalizedString metaDescription, @Nullable final LocalizedString metaKeywords, @Nullable final LocalizedString metaTitle, final LocalizedString name, final ResourceIdentifier<ProductType> productType, @Nullable final Boolean publish, final SearchKeywords searchKeywords, final LocalizedString slug, @Nullable final Reference<State> state, @Nullable final Reference<TaxCategory> taxCategory, final List<ProductVariantDraft> variants) {
-        super(categories, categoryOrderHints, description, key, masterVariant, metaDescription, metaKeywords, metaTitle, name, productType, publish, searchKeywords, slug, state, taxCategory, variants);
+    ProductDraftBuilder(final Set<ResourceIdentifier<Category>> categories,
+                        @Nullable final CategoryOrderHints categoryOrderHints,
+                        @Nullable final LocalizedString description,
+                        @Nullable final String key,
+                        @Nullable final ProductVariantDraft masterVariant,
+                        @Nullable final LocalizedString metaDescription,
+                        @Nullable final LocalizedString metaKeywords,
+                        @Nullable final LocalizedString metaTitle,
+                        final LocalizedString name,
+                        final ResourceIdentifier<ProductType> productType,
+                        @Nullable final Boolean publish,
+                        final SearchKeywords searchKeywords,
+                        final LocalizedString slug,
+                        @Nullable final Reference<State> state,
+                        @Nullable final Reference<TaxCategory> taxCategory,
+                        final List<ProductVariantDraft> variants) {
+        super(categories, categoryOrderHints, description, key, masterVariant, metaDescription, metaKeywords, metaTitle,
+                name, productType, publish, searchKeywords, slug, state, taxCategory, variants);
         init();
     }
 
@@ -27,14 +43,18 @@ public final class ProductDraftBuilder extends ProductDraftBuilderBase<ProductDr
         searchKeywords = Optional.ofNullable(searchKeywords).orElse(SearchKeywords.of());
     }
 
-    public static ProductDraftBuilder of(final ResourceIdentifiable<ProductType> productType, final LocalizedString name, final LocalizedString slug, final List<ProductVariantDraft> allVariants) {
+    public static ProductDraftBuilder of(final ResourceIdentifiable<ProductType> productType,
+                                         final LocalizedString name,
+                                         final LocalizedString slug,
+                                         final List<ProductVariantDraft> allVariants) {
         final ProductVariantDraft masterVariant = allVariants.stream().findFirst().orElse(null);
         final List<ProductVariantDraft> variants = allVariants.stream().skip(1).collect(Collectors.toList());
         return of(productType, name, slug, masterVariant)
                 .plusVariants(variants);
     }
 
-    public static ProductDraftBuilder of(final ResourceIdentifiable<ProductType> productType, final LocalizedString name,
+    public static ProductDraftBuilder of(final ResourceIdentifiable<ProductType> productType,
+                                         final LocalizedString name,
                                          final LocalizedString slug,
                                          @Nullable final ProductVariantDraft masterVariant) {
         return of(productType.toResourceIdentifier(),name,slug,masterVariant);
