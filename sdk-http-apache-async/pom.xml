@@ -7,7 +7,7 @@
     </parent>
     <groupId>com.commercetools.sdk.jvm.core</groupId>
     <artifactId>sdk-http-apache-async</artifactId>
-    <packaging>jar</packaging>
+    <packaging>bundle</packaging>
     <version>1.24.1-SNAPSHOT</version>
     <name>commercetools Apache Async Java client</name>
     <licenses>
@@ -36,6 +36,22 @@
     </dependencies>
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>${felix.maven.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+
+                    <instructions>
+                        <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
+                        <Export-Package>io.sphere.sdk.http</Export-Package>
+                        <Import-Package>!javax.annotation,*</Import-Package>
+                        <Bundle-Version>${project.version}</Bundle-Version>
+                        <Fragment-Host>${project.groupId}.sdk-http</Fragment-Host>
+                    </instructions>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
