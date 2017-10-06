@@ -12,9 +12,11 @@ import org.junit.Test;
 
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.withCartDiscount;
 import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.withPersistentCartDiscount;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.lang.String.format;
@@ -152,6 +154,7 @@ public class CartDiscountUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(updatedDiscount.getValidFrom()).isEqualTo(dateTime);
         });
     }
+
     @Test
     public void setValidUntil() throws Exception {
         withPersistentCartDiscount(client(), cartDiscount -> {
@@ -164,6 +167,23 @@ public class CartDiscountUpdateCommandIntegrationTest extends IntegrationTest {
                     client().executeBlocking(CartDiscountUpdateCommand.of(cartDiscount, SetValidUntil.of(dateTime)));
 
             assertThat(updatedDiscount.getValidUntil()).isEqualTo(dateTime);
+        });
+    }
+
+    @Test
+    public void changeStackingMode() throws Exception {
+        withCartDiscount(client(), cartDiscount -> {
+            CartDiscount updatedDiscount = cartDiscount;
+            for (final StackingMode stackingMode : Arrays.asList(StackingMode.STOP_AFTER_THIS_DISCOUNT, StackingMode.STACKING, StackingMode.STOP_AFTER_THIS_DISCOUNT)) {
+                assertThat(updatedDiscount.getStackingMode()).isNotEqualTo(stackingMode);
+
+                updatedDiscount =
+                        client().executeBlocking(CartDiscountUpdateCommand.of(updatedDiscount, ChangeStackingMode.of(stackingMode)));
+
+                assertThat(updatedDiscount.getStackingMode()).isEqualTo(stackingMode);
+            }
+
+            return updatedDiscount;
         });
     }
 
