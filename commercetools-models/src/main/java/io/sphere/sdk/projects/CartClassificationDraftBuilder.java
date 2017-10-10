@@ -21,6 +21,10 @@ public final class CartClassificationDraftBuilder extends Base implements Builde
         return draftBuilder;
     }
 
+    public static CartClassificationDraftBuilder of(final CartClassificationDraft cartClassificationDraft){
+        return of(cartClassificationDraft.getValues());
+    }
+
     public void values(Set<CartClassificationEntry> values) {
         this.values = values;
     }
@@ -33,4 +37,6 @@ public final class CartClassificationDraftBuilder extends Base implements Builde
     public CartClassificationDraft build() {
         return new CartClassificationDraftImpl(values);
     }
+
+
 }
