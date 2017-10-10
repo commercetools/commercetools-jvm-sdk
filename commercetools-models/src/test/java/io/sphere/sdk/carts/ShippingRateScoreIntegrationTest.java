@@ -12,6 +12,7 @@ import io.sphere.sdk.projects.commands.ProjectUpdateCommand;
 import io.sphere.sdk.projects.commands.updateactions.SetShippingRateInputType;
 import io.sphere.sdk.projects.queries.ProjectGet;
 import io.sphere.sdk.shippingmethods.PriceFunction;
+import io.sphere.sdk.shippingmethods.PriceFunctionBuilder;
 import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.taxcategories.ExternalTaxRateDraft;
 import io.sphere.sdk.taxcategories.ExternalTaxRateDraftBuilder;
@@ -44,7 +45,7 @@ public class ShippingRateScoreIntegrationTest extends ProjectIntegrationTest {
                     ExternalTaxRateDraftBuilder.ofAmount(taxRate, taxRateName, DE).build();
             final ShippingRate shippingRate = ShippingRate.of(EURO_10, null,
                     Arrays.asList(
-                            io.sphere.sdk.shippingmethods.CartScoreBuilder.of( 0L,PriceFunction.of(EUR.getCurrencyCode(), "(50 * x) + 750")).build(),
+                            io.sphere.sdk.shippingmethods.CartScoreBuilder.of( 0L, PriceFunctionBuilder.of(EUR.getCurrencyCode(), "(50 * x) + 750").build()).build(),
                             io.sphere.sdk.shippingmethods.CartScoreBuilder.of(1L, EURO_20).build(),
                             io.sphere.sdk.shippingmethods.CartScoreBuilder.of(2L, EURO_20).build()
                     ));

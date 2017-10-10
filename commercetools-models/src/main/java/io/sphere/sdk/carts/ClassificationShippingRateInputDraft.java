@@ -6,11 +6,6 @@ import io.sphere.sdk.annotations.ResourceDraftValue;
 @ResourceDraftValue(factoryMethods = @FactoryMethod(parameterNames = {"key"}))
 public interface ClassificationShippingRateInputDraft extends ShippingRateInputDraft {
 
-    @Override
-    default String getType() {
-        return "Classification";
-    }
-
     String getKey();
 
 }
