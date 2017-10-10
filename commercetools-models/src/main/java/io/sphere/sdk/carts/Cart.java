@@ -192,7 +192,6 @@ public interface Cart extends CartLike<Cart> {
      */
     @Override
     @Nullable
-    @HasUpdateAction
     @QueryModelHint(type = "ShippingRateInputQueryModel<Cart>")
     ShippingRateInput getShippingRateInput();
 

@@ -25,7 +25,5 @@ public interface CartLikeExpansionModel<T> extends ExpansionPathContainer<T> {
 
     PaymentInfoExpansionModel<T> paymentInfo();
 
-    ShippingRateInputExpansionModel shippingRateInput();
-
     ShippingInfoExpansionModel<T> shippingInfo();
 }

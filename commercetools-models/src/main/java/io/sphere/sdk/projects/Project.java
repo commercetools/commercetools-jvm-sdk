@@ -92,7 +92,6 @@ public interface Project extends CreationTimestamped, WithKey {
                 .map(Monetary::getCurrency)
                 .collect(toList());
     }
-
     @HasUpdateAction
     @HasUpdateAction(value = "changeMessagesEnabled", fields = {@PropertySpec(name = "messagesEnabled", fieldType = Boolean.class)})
     MessagesConfiguration getMessages();
@@ -102,7 +101,6 @@ public interface Project extends CreationTimestamped, WithKey {
      *@return shippingRateInput
      */
     @Nullable
-    @HasUpdateAction
     ShippingRateInputType getShippingRateInputType();
 
     /**

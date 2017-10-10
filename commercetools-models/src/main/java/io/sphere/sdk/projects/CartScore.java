@@ -8,13 +8,4 @@ import io.sphere.sdk.annotations.ResourceValue;
 @JsonDeserialize(as = CartScoreImpl.class)
 public interface CartScore extends ShippingRateInputType{
 
-    @Override
-    default String getType(){
-        return "CartScore";
-    }
-
-    static CartScore of(){
-        return new CartScoreImpl();
-    }
-
 }

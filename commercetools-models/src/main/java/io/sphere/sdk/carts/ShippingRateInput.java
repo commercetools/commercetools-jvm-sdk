@@ -2,7 +2,6 @@ package io.sphere.sdk.carts;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import io.sphere.sdk.models.WithType;
 
 import static com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 
@@ -15,7 +14,8 @@ import static com.fasterxml.jackson.annotation.JsonSubTypes.Type;
         @Type(value = ClassificationShippingRateInputImpl.class, name = "Classification"),
         @Type(value = ScoreShippingRateInputImpl.class, name = "Score")
 })
-public interface ShippingRateInput extends WithType {
+public interface ShippingRateInput  {
 
+    String getType();
 
 }

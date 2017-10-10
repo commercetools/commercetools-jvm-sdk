@@ -60,8 +60,4 @@ final class OrderExpansionModelImpl<T> extends CartLikeExpansionModelImpl<T> imp
         return super.shippingInfo();
     }
 
-    @Override
-    public ShippingRateInputExpansionModel shippingRateInput() {
-        return super.shippingRateInput();
-    }
 }

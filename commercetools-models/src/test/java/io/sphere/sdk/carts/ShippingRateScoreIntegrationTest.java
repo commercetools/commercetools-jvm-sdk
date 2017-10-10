@@ -3,11 +3,10 @@ package io.sphere.sdk.carts;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.SetCustomShippingMethod;
 import io.sphere.sdk.carts.commands.updateactions.SetShippingRateInput;
-import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.Address;
-import io.sphere.sdk.projects.CartScore;
+import io.sphere.sdk.projects.CartScoreDraftBuilder;
 import io.sphere.sdk.projects.Project;
-import io.sphere.sdk.projects.ShippingRateInputType;
+import io.sphere.sdk.projects.ShippingRateInputTypeDraft;
 import io.sphere.sdk.projects.commands.ProjectIntegrationTest;
 import io.sphere.sdk.projects.commands.ProjectUpdateCommand;
 import io.sphere.sdk.projects.commands.updateactions.SetShippingRateInputType;
@@ -22,7 +21,6 @@ import java.util.Arrays;
 
 import static io.sphere.sdk.carts.CartFixtures.withCartDraft;
 import static io.sphere.sdk.test.SphereTestUtils.*;
-import static io.sphere.sdk.test.SphereTestUtils.EURO_20;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ShippingRateScoreIntegrationTest extends ProjectIntegrationTest {
@@ -31,10 +29,10 @@ public class ShippingRateScoreIntegrationTest extends ProjectIntegrationTest {
     @Test
     public void setScoreShippingRateInput() {
 
-        final ShippingRateInputType shippingRateInputType = CartScore.of();
+        final ShippingRateInputTypeDraft shippingRateInputType = CartScoreDraftBuilder.of().build();
         final Project project = client().executeBlocking(ProjectGet.of());
         final Project updatedProjectCartValue = client().executeBlocking(ProjectUpdateCommand.of(project, SetShippingRateInputType.of(shippingRateInputType)));
-        assertThat(updatedProjectCartValue.getShippingRateInputType().getType()).isEqualTo(shippingRateInputType.getType());
+        assertThat(updatedProjectCartValue.getShippingRateInputType().getType()).isEqualTo("CartScore");
         final CartDraft draft = CartDraft.of(EUR)
                 .withTaxMode(TaxMode.EXTERNAL)
                 .withShippingAddress(Address.of(DE));
@@ -46,17 +44,16 @@ public class ShippingRateScoreIntegrationTest extends ProjectIntegrationTest {
                     ExternalTaxRateDraftBuilder.ofAmount(taxRate, taxRateName, DE).build();
             final ShippingRate shippingRate = ShippingRate.of(EURO_10, null,
                     Arrays.asList(
-                            io.sphere.sdk.shippingmethods.CartScore.ofPriceFunction(PriceFunction.of(EUR.getCurrencyCode(), "(50 * x) + 750"), 0L),
-                            io.sphere.sdk.shippingmethods.CartScore.ofScore(EURO_20, 1L),
-                            io.sphere.sdk.shippingmethods.CartScore.ofScore(EURO_20, 2L)
+                            io.sphere.sdk.shippingmethods.CartScoreBuilder.of( 0L,PriceFunction.of(EUR.getCurrencyCode(), "(50 * x) + 750")).build(),
+                            io.sphere.sdk.shippingmethods.CartScoreBuilder.of(1L, EURO_20).build(),
+                            io.sphere.sdk.shippingmethods.CartScoreBuilder.of(2L, EURO_20).build()
                     ));
 
             final SetCustomShippingMethod action =
                     SetCustomShippingMethod.ofExternalTaxCalculation("name", shippingRate, externalTaxRate);
             final Cart cartWithShippingMethod = client().executeBlocking(CartUpdateCommand.of(cart, action));
 
-            final ShippingRateInput shippingRateInput = ScoreShippingRateInput.of(11L);
-            SphereJsonUtils.toJsonString(ScoreShippingRateInput.of(11L));
+            final ShippingRateInputDraft shippingRateInput = ScoreShippingRateInputDraftBuilder.of(11L).build();
             final Cart cartWithShippingMethodWithScore = client().executeBlocking(CartUpdateCommand.of(cartWithShippingMethod, SetShippingRateInput.of(shippingRateInput)));
             return cartWithShippingMethodWithScore;
         });

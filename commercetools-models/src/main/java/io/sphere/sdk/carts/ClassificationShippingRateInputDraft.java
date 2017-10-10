@@ -1,11 +1,9 @@
 package io.sphere.sdk.carts;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.sphere.sdk.annotations.ResourceValue;
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.annotations.FactoryMethod;
+import io.sphere.sdk.annotations.ResourceDraftValue;
 
-@ResourceValue
-@JsonDeserialize(as = ClassificationShippingRateInputDraftImpl.class)
+@ResourceDraftValue(factoryMethods = @FactoryMethod(parameterNames = {"key"}))
 public interface ClassificationShippingRateInputDraft extends ShippingRateInputDraft {
 
     @Override
@@ -14,10 +12,5 @@ public interface ClassificationShippingRateInputDraft extends ShippingRateInputD
     }
 
     String getKey();
-
-
-    static ClassificationShippingRateInputDraft of(final String key) {
-        return new ClassificationShippingRateInputDraftImpl(key);
-    }
 
 }

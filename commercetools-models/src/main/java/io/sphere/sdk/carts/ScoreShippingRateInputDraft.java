@@ -1,10 +1,9 @@
 package io.sphere.sdk.carts;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.sphere.sdk.annotations.ResourceValue;
+import io.sphere.sdk.annotations.FactoryMethod;
+import io.sphere.sdk.annotations.ResourceDraftValue;
 
-@ResourceValue
-@JsonDeserialize(as = ScoreShippingRateInputDraftImpl.class)
+@ResourceDraftValue(factoryMethods = @FactoryMethod(parameterNames = {"score"}))
 public interface ScoreShippingRateInputDraft extends ShippingRateInputDraft{
 
     @Override
@@ -13,10 +12,5 @@ public interface ScoreShippingRateInputDraft extends ShippingRateInputDraft{
     }
 
     Long getScore();
-
-    static ScoreShippingRateInputDraft of(final Long score){
-        return new ScoreShippingRateInputDraftImpl(score);
-    }
-
 
 }

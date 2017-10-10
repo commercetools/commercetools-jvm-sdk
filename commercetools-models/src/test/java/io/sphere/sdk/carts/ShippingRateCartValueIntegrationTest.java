@@ -3,7 +3,7 @@ package io.sphere.sdk.carts;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.SetCustomShippingMethod;
 import io.sphere.sdk.models.Address;
-import io.sphere.sdk.projects.CartValue;
+import io.sphere.sdk.projects.CartValueDraftBuilder;
 import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.projects.commands.ProjectIntegrationTest;
 import io.sphere.sdk.projects.commands.ProjectUpdateCommand;
@@ -18,7 +18,6 @@ import java.util.Arrays;
 
 import static io.sphere.sdk.carts.CartFixtures.withCartDraft;
 import static io.sphere.sdk.test.SphereTestUtils.*;
-import static io.sphere.sdk.test.SphereTestUtils.EURO_10;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ShippingRateCartValueIntegrationTest extends ProjectIntegrationTest {
@@ -28,8 +27,8 @@ public class ShippingRateCartValueIntegrationTest extends ProjectIntegrationTest
     public void setCartValueShippingRateInput() {
 
         final Project project = client().executeBlocking(ProjectGet.of());
-        final Project updatedProjectCartValue = client().executeBlocking(ProjectUpdateCommand.of(project, SetShippingRateInputType.of(CartValue.of())));
-        assertThat(updatedProjectCartValue.getShippingRateInputType().getType()).isEqualTo(CartValue.of().getType());
+        final Project updatedProjectCartValue = client().executeBlocking(ProjectUpdateCommand.of(project, SetShippingRateInputType.of(CartValueDraftBuilder.of().build())));
+        assertThat(updatedProjectCartValue.getShippingRateInputType().getType()).isEqualTo("CartValue");
         final CartDraft draft = CartDraft.of(EUR)
                 .withTaxMode(TaxMode.EXTERNAL)
                 .withShippingAddress(Address.of(DE));
@@ -40,8 +39,8 @@ public class ShippingRateCartValueIntegrationTest extends ProjectIntegrationTest
                     ExternalTaxRateDraftBuilder.ofAmount(taxRate, taxRateName, DE).build();
             final ShippingRate shippingRate = ShippingRate.of(EURO_10, null,
                     Arrays.asList(
-                            io.sphere.sdk.shippingmethods.CartValue.of(0l, EURO_10),
-                            io.sphere.sdk.shippingmethods.CartValue.of(1l, EURO_20)
+                            io.sphere.sdk.shippingmethods.CartValueBuilder.of(0l, EURO_10).build(),
+                            io.sphere.sdk.shippingmethods.CartValueBuilder.of(1l, EURO_20).build()
                     ));
             final SetCustomShippingMethod action =
                     SetCustomShippingMethod.ofExternalTaxCalculation("name", shippingRate, externalTaxRate);

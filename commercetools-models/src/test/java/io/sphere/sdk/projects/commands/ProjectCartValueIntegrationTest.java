@@ -1,6 +1,6 @@
 package io.sphere.sdk.projects.commands;
 
-import io.sphere.sdk.projects.CartValue;
+import io.sphere.sdk.projects.CartValueDraftBuilder;
 import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.projects.commands.updateactions.SetShippingRateInputType;
 import io.sphere.sdk.projects.queries.ProjectGet;
@@ -14,9 +14,9 @@ public class ProjectCartValueIntegrationTest extends ProjectIntegrationTest {
     public void execution() {
 
         final Project project = client().executeBlocking(ProjectGet.of());
-        final Project updatedProjectCartValue = client().executeBlocking(ProjectUpdateCommand.of(project, SetShippingRateInputType.of(CartValue.of())));
+        final Project updatedProjectCartValue = client().executeBlocking(ProjectUpdateCommand.of(project, SetShippingRateInputType.of(CartValueDraftBuilder.of().build())));
         assertThat(updatedProjectCartValue.getShippingRateInputType()).isNotNull();
-        assertThat(updatedProjectCartValue.getShippingRateInputType().getType()).isEqualTo(CartValue.of().getType());
+        assertThat(updatedProjectCartValue.getShippingRateInputType().getType()).isEqualTo("CartValue");
 
     }
 
