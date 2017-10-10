@@ -3,6 +3,8 @@ package io.sphere.sdk.cartdiscounts;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.FactoryMethod;
+import io.sphere.sdk.annotations.HasUpdateAction;
+import io.sphere.sdk.annotations.IgnoreInQueryModel;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.models.LocalizedString;
 
@@ -46,4 +48,13 @@ public interface CartDiscountDraft {
     ZonedDateTime getValidUntil();
 
     CartDiscountValue getValue();
+
+    /**
+     * Specify whether the application of this discount causes the following discounts to be ignored.
+     * Defaults to {@link StackingMode#STACKING}.
+     *
+     * @return the stacking mode of this object
+     */
+    @Nullable
+    StackingMode getStackingMode();
 }
