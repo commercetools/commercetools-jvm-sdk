@@ -39,8 +39,11 @@ public class OrderFixtures {
     public static final String CUSTOMER_EMAIL = "foo@bar.tld";
 
     public static void withOrder(final BlockingSphereClient client, final UnaryOperator<Order> op) {
-        withCustomer(client, customer -> withOrder(client, customer, op)
-        );
+        withCustomer(client, customer -> withOrder(client, customer, op));
+    }
+
+    public static void withOrder(final BlockingSphereClient client, final Consumer<Order> consumer) {
+        withCustomer(client, customer -> withOrder(client, customer, consumer));
     }
 
     public static void withNonUpdatedOrder(final BlockingSphereClient client, final UnaryOperator<Order> op) {
@@ -50,24 +53,35 @@ public class OrderFixtures {
 
     public static void withOrder(final BlockingSphereClient client, final Customer customer, final UnaryOperator<Order> op) {
         withFilledCart(client, cart -> {
-            final TaxCategory taxCategory = TaxCategoryFixtures.defaultTaxCategory(client);
-            final SetCustomShippingMethod shippingMethodAction = SetCustomShippingMethod.of("custom shipping method", ShippingRate.of(EURO_10), taxCategory);
-            final SetCustomerEmail emailAction = SetCustomerEmail.of(CUSTOMER_EMAIL);
-            final Cart updatedCart = client.executeBlocking(CartUpdateCommand.of(cart, asList(shippingMethodAction, emailAction)));
-
-            final CustomerSignInCommand signInCommand = CustomerSignInCommand.of(customer.getEmail(), CustomerFixtures.PASSWORD, cart.getId());
-            final CustomerSignInResult signInResult = client.executeBlocking(signInCommand);
-
-            final Order order = client.executeBlocking(OrderFromCartCreateCommand.of(signInResult.getCart()));
-
-            final Order updatedOrder = client.executeBlocking(OrderUpdateCommand.of(order, asList(
-                    ChangeShipmentState.of(ShipmentState.READY),
-                    ChangePaymentState.of(PaymentState.PENDING),
-                    SetOrderNumber.of(randomKey())
-            )));
+            final Order updatedOrder = createOrderFromCart(client, customer, cart);
             final Order orderToDelete = op.apply(updatedOrder);
             client.executeBlocking(OrderDeleteCommand.of(orderToDelete));
         });
+    }
+
+    public static void withOrder(final BlockingSphereClient client, final Customer customer, final Consumer<Order> consumer) {
+        withFilledCart(client, cart -> {
+            final Order updatedOrder = createOrderFromCart(client, customer, cart);
+            consumer.accept(updatedOrder);
+        });
+    }
+
+    private static Order createOrderFromCart(BlockingSphereClient client, Customer customer, Cart cart) {
+        final TaxCategory taxCategory = TaxCategoryFixtures.defaultTaxCategory(client);
+        final SetCustomShippingMethod shippingMethodAction = SetCustomShippingMethod.of("custom shipping method", ShippingRate.of(EURO_10), taxCategory);
+        final SetCustomerEmail emailAction = SetCustomerEmail.of(CUSTOMER_EMAIL);
+        client.executeBlocking(CartUpdateCommand.of(cart, asList(shippingMethodAction, emailAction)));
+
+        final CustomerSignInCommand signInCommand = CustomerSignInCommand.of(customer.getEmail(), CustomerFixtures.PASSWORD, cart.getId());
+        final CustomerSignInResult signInResult = client.executeBlocking(signInCommand);
+
+        final Order order = client.executeBlocking(OrderFromCartCreateCommand.of(signInResult.getCart()));
+
+        return client.executeBlocking(OrderUpdateCommand.of(order, asList(
+                ChangeShipmentState.of(ShipmentState.READY),
+                ChangePaymentState.of(PaymentState.PENDING),
+                SetOrderNumber.of(randomKey())
+        )));
     }
 
     public static void withNonUpdatedOrder(final BlockingSphereClient client, final Customer customer, final UnaryOperator<Order> op) {

@@ -1,17 +1,15 @@
 package io.sphere.sdk.orders.commands;
 
-import io.sphere.sdk.carts.*;
+import io.sphere.sdk.carts.CustomLineItem;
+import io.sphere.sdk.carts.ItemState;
+import io.sphere.sdk.carts.LineItem;
+import io.sphere.sdk.carts.LineItemLike;
 import io.sphere.sdk.messages.queries.MessageQuery;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.orders.*;
 import io.sphere.sdk.orders.commands.updateactions.*;
-import io.sphere.sdk.orders.commands.updateactions.AddPayment;
-import io.sphere.sdk.orders.commands.updateactions.RemovePayment;
-import io.sphere.sdk.orders.commands.updateactions.SetBillingAddress;
-import io.sphere.sdk.orders.commands.updateactions.SetCustomerEmail;
-import io.sphere.sdk.orders.commands.updateactions.SetShippingAddress;
 import io.sphere.sdk.orders.messages.*;
 import io.sphere.sdk.orders.queries.OrderByIdGet;
 import io.sphere.sdk.orders.queries.OrderQuery;
@@ -57,6 +55,17 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
         withOrder(client(), order -> {
             assertThat(order.getOrderState()).isEqualTo(OrderState.OPEN);
             final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, ChangeOrderState.of(OrderState.COMPLETE)));
+            assertThat(updatedOrder.getOrderState()).isEqualTo(OrderState.COMPLETE);
+
+            return updatedOrder;
+        });
+    }
+
+    @Test
+    public void changeOrderStateByOrderNumber() throws Exception {
+        withOrder(client(), order -> {
+            assertThat(order.getOrderState()).isEqualTo(OrderState.OPEN);
+            final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.ofOrderNumber(order.getOrderNumber(), order.getVersion(), ChangeOrderState.of(OrderState.COMPLETE)));
             assertThat(updatedOrder.getOrderState()).isEqualTo(OrderState.COMPLETE);
 
             return updatedOrder;
