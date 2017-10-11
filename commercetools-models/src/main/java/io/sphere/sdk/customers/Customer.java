@@ -124,10 +124,10 @@ import static java.util.stream.Collectors.toList;
 @HasUpdateCommand(javadocSummary = " Updates a customer.\n" +
         " \n" +
         " To update the properties {@link Customer#isEmailVerified()} or {@link Customer#getPassword()} special commands are required which are documented in the {@link Customer customer Javadoc}.",
-        updateWithKey = true)
+        updateWith = "key")
 @HasDeleteCommand(
         javadocSummary = "Deletes a customer.", includeExamples = "io.sphere.sdk.customers.commands.CustomerDeleteCommandIntegrationTest#execution()",
-        deleteWithKey = true
+        deleteWith = "key"
 )
 @HasQueryModel(additionalContents = {
         "StringQuerySortingModel<Customer> lowercaseEmail();",

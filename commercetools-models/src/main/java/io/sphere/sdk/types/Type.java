@@ -31,8 +31,8 @@ import java.util.Set;
 @ResourceInfo(pluralName = "types", pathElement = "types")
 @HasByIdGetEndpoint
 @HasCreateCommand(includeExamples = "io.sphere.sdk.types.commands.TypeCreateCommandIntegrationTest#execution()")
-@HasUpdateCommand(updateWithKey = true)
-@HasDeleteCommand(deleteWithKey = true)
+@HasUpdateCommand(updateWith = "key")
+@HasDeleteCommand(deleteWith = "key")
 @HasQueryModel
 @HasUpdateActions
 public interface Type extends Resource<Type>, WithKey {

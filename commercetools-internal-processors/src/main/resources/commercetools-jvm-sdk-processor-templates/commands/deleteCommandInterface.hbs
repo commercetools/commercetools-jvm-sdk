@@ -27,16 +27,16 @@ public interface {{resourceName}}DeleteCommand extends MetaModelReferenceExpansi
         return new {{resourceName}}DeleteCommandImpl(versioned);
     }
 
-{{#if deleteWithKey}}
+{{#each deleteWith}}
     /**
-        Creates a command object to delete a {@link {{resourceName}}{{!}}} by its key.
-        @param key the key of the {{resourceName}} to delete, see {@link {{resourceName}}#getKey()}
+        Creates a command object to delete a {@link {{resourceName}}{{!}}} by its {{name}}.
+        @param {{name}} the {{name}} of the {{resourceName}} to delete, see {@link {{resourceName}}#get{{capitalizedName}}()}
         @param version the current version of the {{resourceName}}, see {@link {{resourceName}}#getVersion()}
         @return delete command
     */
-    static {{resourceName}}DeleteCommand ofKey(final String key, final Long version) {
-        final Versioned<{{resourceName}}> versioned = Versioned.of("key=" + key, version);//hack for simple reuse
+    static {{resourceName}}DeleteCommand of{{capitalizedName}}(final String {{name}}, final Long version) {
+        final Versioned<{{resourceName}}> versioned = Versioned.of("{{name}}=" + {{name}}, version);//hack for simple reuse
         return of(versioned);
     }
-{{/if}}
+{{/each}}
 }

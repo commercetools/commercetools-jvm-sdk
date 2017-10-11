@@ -8,10 +8,13 @@ import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
 import java.lang.annotation.Annotation;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static java.util.Arrays.asList;
+import static org.apache.commons.lang3.text.WordUtils.capitalize;
 
 @SupportedAnnotationTypes({"io.sphere.sdk.annotations.HasUpdateCommand"})
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
@@ -40,6 +43,13 @@ public class UpdateCommandEndpointAnnotationProcessor<A extends Annotation> exte
 
     @Override
     protected void additions(final HasUpdateCommand annotation, final HashMap<String, Object> map) {
-        map.put("updateWithKey", annotation.updateWithKey());
+        final List<Map<String, String>> updateWith = new ArrayList<>();
+        for (final String property : annotation.updateWith()) {
+            final Map<String, String> updateWithProperties = new HashMap<>();
+            updateWithProperties.put("name", property);
+            updateWithProperties.put("capitalizedName", capitalize(property));
+            updateWith.add(updateWithProperties);
+        }
+        map.put("updateWith", updateWith);
     }
 }

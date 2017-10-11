@@ -7,5 +7,5 @@ import java.lang.annotation.RetentionPolicy;
 public @interface HasUpdateCommand {
     String javadocSummary() default "";
     String[] includeExamples() default {};
-    boolean updateWithKey() default false;
+    String[] updateWith() default {};
 }

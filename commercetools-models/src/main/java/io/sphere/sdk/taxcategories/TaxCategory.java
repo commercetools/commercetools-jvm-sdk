@@ -41,7 +41,7 @@ import java.util.List;
 @HasUpdateCommand
 @HasUpdateActions
 @HasDeleteCommand(
-        deleteWithKey = true,
+        deleteWith = "key",
         javadocSummary = "Deletes a tax category.", includeExamples = "io.sphere.sdk.taxcategories.TaxCategoryIntegrationTest#demoForDeletion()"
 )
 @HasQueryModel
