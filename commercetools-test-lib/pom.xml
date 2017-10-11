@@ -56,7 +56,11 @@
                     <instructions>
                         <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
                         <Export-Package>io.sphere.sdk.test</Export-Package>
-                        <Import-Package>!javax.annotation,*</Import-Package>
+                        <Import-Package>
+                            javax.*,
+                            org.junit.*,
+                            org.apache.*
+                        </Import-Package>
                         <Bundle-Version>${project.version}</Bundle-Version>
                         <Fragment-Host>${project.groupId}.commercetools-sdk-base</Fragment-Host>
                     </instructions>

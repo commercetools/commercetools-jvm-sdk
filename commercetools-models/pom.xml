@@ -74,7 +74,7 @@
                 <version>${felix.maven.version}</version>
                 <extensions>true</extensions>
                 <configuration>
-
+                    <niceManifest>true</niceManifest>
                     <instructions>
                         <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
                         <Export-Package>
@@ -214,7 +214,10 @@
                             io.sphere.sdk.zones.queries
 
                         </Export-Package>
-                        <Import-Package>!javax.annotation,*</Import-Package>
+                        <Import-Package>
+                            org.apache.*,
+                            org.junit.*
+                        </Import-Package>
                         <Bundle-Version>${project.version}</Bundle-Version>
                         <Fragment-Host>${project.groupId}.commercetools-sdk-base</Fragment-Host>
                     </instructions>

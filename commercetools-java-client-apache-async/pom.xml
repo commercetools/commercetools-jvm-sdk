@@ -50,7 +50,6 @@
                         <Export-Package>
                             io.sphere.sdk.client
                         </Export-Package>
-                        <Import-Package>!javax.annotation,*</Import-Package>
                         <Bundle-Version>${project.version}</Bundle-Version>
                         <Fragment-Host>${project.groupId}.commercetools-sdk-base</Fragment-Host>
                     </instructions>

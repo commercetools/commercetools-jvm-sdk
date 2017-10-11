@@ -38,7 +38,7 @@
                         <Export-Package>
                             io.sphere.sdk.client
                         </Export-Package>
-                        <Import-Package>!javax.annotation,*</Import-Package>
+                        <Import-Package></Import-Package>
                         <Bundle-Version>${project.version}</Bundle-Version>
                         <Require-Capability>
                             osgi.extender;filter:="(osgi.extender=osgi.serviceloader.processor)"</Require-Capability>

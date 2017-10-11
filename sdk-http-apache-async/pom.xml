@@ -46,7 +46,7 @@
                     <instructions>
                         <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
                         <Export-Package>io.sphere.sdk.http</Export-Package>
-                        <Import-Package>!javax.annotation,*</Import-Package>
+                        <Import-Package>org.apache.*</Import-Package>
                         <Bundle-Version>${project.version}</Bundle-Version>
                         <Fragment-Host>${project.groupId}.sdk-http</Fragment-Host>
                     </instructions>
