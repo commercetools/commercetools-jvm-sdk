@@ -63,7 +63,7 @@ public class OrderFixtures {
             final Order updatedOrder = client.executeBlocking(OrderUpdateCommand.of(order, asList(
                     ChangeShipmentState.of(ShipmentState.READY),
                     ChangePaymentState.of(PaymentState.PENDING),
-                    SetOrderNumber.of(randomString())
+                    SetOrderNumber.of(randomKey())
             )));
             final Order orderToDelete = op.apply(updatedOrder);
             client.executeBlocking(OrderDeleteCommand.of(orderToDelete));
