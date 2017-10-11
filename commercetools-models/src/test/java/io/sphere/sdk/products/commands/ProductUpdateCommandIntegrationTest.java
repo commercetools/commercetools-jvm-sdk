@@ -179,10 +179,10 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void changeImageLabel() throws Exception {
+    public void setImageLabel() throws Exception {
         withProductWithImages(client(), Arrays.asList(URL_1), (Product product) -> {
             final String changeToImageLabel = "New image label";
-            final ProductUpdateCommand updateCommand = ProductUpdateCommand.of(product, ChangeImageLabel.of(1, URL_1, changeToImageLabel, null));
+            final ProductUpdateCommand updateCommand = ProductUpdateCommand.of(product, SetImageLabel.of(1, URL_1, changeToImageLabel, null));
 
             final Product updatedProduct = client().executeBlocking(updateCommand);
 
