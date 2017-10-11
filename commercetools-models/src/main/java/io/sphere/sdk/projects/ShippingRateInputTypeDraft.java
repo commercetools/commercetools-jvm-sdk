@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 )
 @JsonSubTypes({
         @JsonSubTypes.Type(value = CartValueDraftImpl.class, name = "CartValue"),
-        @JsonSubTypes.Type(value = CartClassificationDraftImpl.class, name = "CartClassification"),
+        @JsonSubTypes.Type(value = CartClassificationDraftDsl.class, name = "CartClassification"),
         @JsonSubTypes.Type(value = CartScoreDraftImpl.class, name = "CartScore")
 })
 public interface ShippingRateInputTypeDraft  {

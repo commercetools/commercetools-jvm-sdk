@@ -1,11 +1,12 @@
 package io.sphere.sdk.projects;
 
 
-import io.sphere.sdk.annotations.ResourceValue;
+import io.sphere.sdk.annotations.FactoryMethod;
+import io.sphere.sdk.annotations.ResourceDraftValue;
 
 import java.util.Set;
 
-@ResourceValue
+@ResourceDraftValue(factoryMethods = @FactoryMethod(parameterNames = {"values"}))
 public interface CartClassificationDraft extends ShippingRateInputTypeDraft{
 
 
