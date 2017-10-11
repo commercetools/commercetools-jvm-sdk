@@ -1,5 +1,6 @@
 package io.sphere.sdk.projects.commands;
 
+import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.projects.*;
 import io.sphere.sdk.projects.commands.updateactions.SetShippingRateInputType;
@@ -17,12 +18,12 @@ public class ProjectCartClassificationIntegrationTest extends ProjectIntegration
     public void execution() {
 
         final Project project = client().executeBlocking(ProjectGet.of());
-        final CartClassificationDraft cartClassification = CartClassificationDraftBuilder.of(Collections.singleton(CartClassificationEntryBuilder.of("Small", LocalizedString.of(Locale.ENGLISH, "Small", Locale.GERMAN, "Klein")).build())).build();
+        final CartClassificationDraft cartClassification = CartClassificationDraftBuilder.of(Collections.singleton(LocalizedEnumValue.of("Small", LocalizedString.of(Locale.ENGLISH, "Small", Locale.GERMAN, "Klein")))).build();
         final Project updatedProjectCartClassification = client().executeBlocking(ProjectUpdateCommand.of(project, SetShippingRateInputType.of(cartClassification)));
         assertThat(updatedProjectCartClassification.getShippingRateInputType()).isNotNull();
         assertThat(updatedProjectCartClassification.getShippingRateInputType().getType()).isEqualTo("CartClassification");
         assertThat(((CartClassification)updatedProjectCartClassification.getShippingRateInputType()).getValues()).containsOnly(
-                CartClassificationEntryBuilder.of("Small", LocalizedString.of(Locale.ENGLISH, "Small", Locale.GERMAN, "Klein")).build()
+                LocalizedEnumValue.of("Small", LocalizedString.of(Locale.ENGLISH, "Small", Locale.GERMAN, "Klein"))
         );
     }
 }

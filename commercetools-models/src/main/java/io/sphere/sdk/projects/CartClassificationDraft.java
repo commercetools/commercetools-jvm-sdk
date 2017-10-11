@@ -3,6 +3,7 @@ package io.sphere.sdk.projects;
 
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
+import io.sphere.sdk.models.LocalizedEnumValue;
 
 import java.util.Set;
 
@@ -10,6 +11,6 @@ import java.util.Set;
 public interface CartClassificationDraft extends ShippingRateInputTypeDraft{
 
 
-    Set<CartClassificationEntry> getValues();
+    Set<LocalizedEnumValue> getValues();
 
 }

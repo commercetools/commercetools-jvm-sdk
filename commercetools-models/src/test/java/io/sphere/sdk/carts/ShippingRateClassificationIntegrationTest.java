@@ -4,6 +4,7 @@ import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.SetCustomShippingMethod;
 import io.sphere.sdk.carts.commands.updateactions.SetShippingRateInput;
 import io.sphere.sdk.models.Address;
+import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.projects.*;
 import io.sphere.sdk.projects.commands.ProjectIntegrationTest;
@@ -31,10 +32,10 @@ public class ShippingRateClassificationIntegrationTest extends ProjectIntegratio
     @Test
     public void setClassificationShippingRateInput() {
 
-        final Set<CartClassificationEntry> set = new HashSet();
-        set.add(CartClassificationEntryBuilder.of("Small", LocalizedString.of(Locale.ENGLISH, "Small", Locale.GERMANY, "Klein")).build());
-        set.add(CartClassificationEntryBuilder.of("Medium", LocalizedString.of(Locale.ENGLISH, "Medium", Locale.GERMANY, "Mittel")).build());
-        set.add(CartClassificationEntryBuilder.of("Heavy", LocalizedString.of(Locale.ENGLISH, "Heavy", Locale.GERMANY, "Schwergut")).build());
+        final Set<LocalizedEnumValue> set = new HashSet();
+        set.add(LocalizedEnumValue.of("Small", LocalizedString.of(Locale.ENGLISH, "Small", Locale.GERMANY, "Klein")));
+        set.add(LocalizedEnumValue.of("Medium", LocalizedString.of(Locale.ENGLISH, "Medium", Locale.GERMANY, "Mittel")));
+        set.add(LocalizedEnumValue.of("Heavy", LocalizedString.of(Locale.ENGLISH, "Heavy", Locale.GERMANY, "Schwergut")));
 
         final ShippingRateInputTypeDraft classificationInputType = CartClassificationDraftBuilder.of(set).build();
 
