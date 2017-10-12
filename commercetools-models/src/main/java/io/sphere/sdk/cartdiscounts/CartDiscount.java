@@ -155,6 +155,16 @@ public interface CartDiscount extends Resource<CartDiscount> {
     CartDiscountValue getValue();
 
     /**
+     * Specify whether the application of this discount causes the following discounts to be ignored.
+     * Defaults to {@link StackingMode#STACKING}.
+     *
+     * @return the stacking mode of this object
+     */
+    @IgnoreInQueryModel
+    @HasUpdateAction
+    StackingMode getStackingMode();
+
+    /**
      * A type hint for references which resource type is linked in a reference.
      * @see Reference#getTypeId()
      * @return type hint
