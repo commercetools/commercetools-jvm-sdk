@@ -15,6 +15,7 @@ import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.Suite;
 import org.junit.runners.model.RunnerBuilder;
 import org.ops4j.pax.exam.junit.impl.ProbeRunner;
+import org.ops4j.pax.logging.internal.DefaultServiceLog;
 import org.slf4j.Logger;
 
 import java.lang.reflect.Method;
@@ -44,6 +45,9 @@ public class PaxExamClasspathSuite extends Suite {
 
     private static String TEST_PREFIX = "___";
 
+    static {
+        DefaultServiceLog.setLogLevel("INFO");
+    }
 
     /**
      * Used by JUnit
