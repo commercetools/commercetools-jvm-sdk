@@ -5,8 +5,9 @@ cache:
   directories:
   - $HOME/.m2
 script:
-  - mvn clean test verify javadoc:aggregate -P javadoc-jdk-8u121,dependency-check
-  - mvn test -pl osgi-support/sdk-osgi-test-campaign/ -Dtest=OSGiTestSuite -DfailIfNoTests=true
+  - mvn clean install  javadoc:aggregate -P javadoc-jdk-8u121,dependency-check -DskipTests
+  - mvn test verify -pl osgi-support/sdk-osgi-test-campaign/ -Dtest=OSGiTestSuite -DfailIfNoTests=true
+  - mvn test verify -pl osgi-support/sdk-osgi-test-campaign/ -Dtest=NonOSGiTestSuite -DfailIfNoTests=true
   - mvn exec:java -pl commercetools-internal-docs -Dexec.mainClass="introspection.rules.RulesMain" -Dexec.classpathScope="test"
   - mvn exec:java -pl commercetools-models -Dexec.mainClass="io.sphere.sdk.client.MainMethodThreadLeakTest" -Dexec.classpathScope="test"
 env:
