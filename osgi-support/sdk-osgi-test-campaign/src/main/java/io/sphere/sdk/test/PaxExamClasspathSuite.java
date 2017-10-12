@@ -1,17 +1,21 @@
 
 package io.sphere.sdk.test;
 
+import io.sphere.sdk.annotations.NotOSGiCompatible;
 import io.sphere.sdk.test.annotations.MinimumTestClassesInSuite;
 import org.junit.extensions.cpsuite.ClassesFinder;
 import org.junit.extensions.cpsuite.ClassesFinderFactory;
 import org.junit.extensions.cpsuite.ClasspathFinderFactory;
 import org.junit.extensions.cpsuite.SuiteType;
+import org.junit.runner.RunWith;
 import org.junit.runner.Runner;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
+import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.Suite;
 import org.junit.runners.model.RunnerBuilder;
 import org.ops4j.pax.exam.junit.impl.ProbeRunner;
+import org.slf4j.Logger;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -71,8 +75,20 @@ public class PaxExamClasspathSuite extends Suite {
     private static List<Runner> getPaxExamRunnerForTestSuitClasses(final Class<?>[] classes) throws Exception {
         List<Runner> runners = new ArrayList<>();
         for (Class clazz : classes) {
-            if(clazz.getSimpleName().startsWith(TEST_PREFIX) ){
-                runners.add(new ProbeRunner(clazz));
+            if (clazz.getSimpleName().startsWith(TEST_PREFIX)) {
+                if ((clazz.getAnnotation(NotOSGiCompatible.class) == null) && (clazz.getAnnotation(RunWith.class) == null)) {
+                    runners.add(new ProbeRunner(clazz));
+                } else {
+                    if (clazz.getAnnotation(RunWith.class) != null) {
+                        RunWith r = (RunWith) clazz.getAnnotation(RunWith.class);
+                        Runner runner = r.value().getConstructor(Class.class).newInstance(clazz);
+                        runners.add(runner);
+                    } else {
+                        runners.add(new BlockJUnit4ClassRunner(clazz));
+                    }
+
+                }
+
             }
         }
         return runners;

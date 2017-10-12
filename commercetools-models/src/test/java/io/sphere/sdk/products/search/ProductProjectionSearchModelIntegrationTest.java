@@ -1,5 +1,6 @@
 package io.sphere.sdk.products.search;
 
+import io.sphere.sdk.annotations.NotOSGiCompatible;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.producttypes.ProductType;
@@ -23,6 +24,7 @@ import static io.sphere.sdk.products.ProductsScenario1Fixtures.createScenario;
 import static io.sphere.sdk.products.ProductsScenario1Fixtures.destroy;
 import static io.sphere.sdk.test.SphereTestUtils.asList;
 
+@NotOSGiCompatible
 public abstract class ProductProjectionSearchModelIntegrationTest extends IntegrationTest {
     protected static Data data;
     protected static Product product1;

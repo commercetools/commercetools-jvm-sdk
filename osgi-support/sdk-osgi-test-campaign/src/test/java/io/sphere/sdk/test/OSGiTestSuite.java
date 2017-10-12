@@ -14,21 +14,10 @@ import static org.junit.extensions.cpsuite.ClasspathSuite.*;
 @RunWith(PaxExamClasspathSuite.class)
 @SuiteTypes(TEST_CLASSES)
 @ClassnameFilters({
-        "!io.sphere.sdk.subscriptions.*",
-        "!io.sphere.sdk.products.search.*",
-        "!io.sphere.sdk.reviews.___ReviewProductProjectionSearchIntegrationTest",
-        "!io.sphere.sdk.products.queries.___SuggestQueryIntegrationTest",
-        "!io.sphere.sdk.products.___ProductCategoryOrderHintIntegrationTest",
-        "!io.sphere.sdk.payments.commands.___ProductCreateCommandIntegrationTest",
-        "!io.sphere.sdk.products.commands.___ProductCreateCommandIntegrationTest",
-        "!io.sphere.sdk.queries.___IsInQueryPredicateTest",
-        "!io.sphere.sdk.search.___PagedSearchResultTest",
-        "!io.sphere.sdk.client.___TokensSupplierTest",
-        "!io.sphere.sdk.client.___SphereClientTest",
         "io.sphere.sdk.*"
 })
 @IncludeJars(true)
-@MinimumTestClassesInSuite(250)
+@MinimumTestClassesInSuite(0)
 public class OSGiTestSuite {
 
 }
