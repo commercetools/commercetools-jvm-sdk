@@ -19,9 +19,11 @@ import java.util.List;
  * @see DiscountCodeDraftDsl
  */
 @JsonDeserialize(as = DiscountCodeDraftDsl.class)
-@ResourceDraftValue(factoryMethods = {@FactoryMethod(parameterNames = {"code", "cartDiscounts"})},
+@ResourceDraftValue(
+        gettersForBuilder = true,
         abstractBuilderClass = true,
-        abstractResourceDraftValueClass = true)
+        abstractResourceDraftValueClass = true,
+        factoryMethods = {@FactoryMethod(parameterNames = {"code", "cartDiscounts"})})
 public interface DiscountCodeDraft {
     @Nullable
     LocalizedString getName();

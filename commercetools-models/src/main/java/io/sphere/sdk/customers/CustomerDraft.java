@@ -23,10 +23,12 @@ import java.util.Locale;
  * @see CustomerDraftBuilder
  */
 @JsonDeserialize(as = CustomerDraftDsl.class)
-@ResourceDraftValue(factoryMethods = {
-        @FactoryMethod(parameterNames = {"email", "password"})},
+@ResourceDraftValue(
+        gettersForBuilder = true,
         abstractBuilderClass = true,
-        abstractResourceDraftValueClass = true)
+        abstractResourceDraftValueClass = true,
+        factoryMethods = {
+            @FactoryMethod(parameterNames = {"email", "password"})})
 public interface CustomerDraft extends CustomDraft, WithKey {
     @Nullable
     String getCustomerNumber();

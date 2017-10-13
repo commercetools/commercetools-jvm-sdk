@@ -16,6 +16,7 @@ import java.util.Optional;
 
 @JsonDeserialize(as = InventoryEntryDraftDsl.class)
 @ResourceDraftValue(
+        gettersForBuilder = true,
         copyFactoryMethods = @CopyFactoryMethod(InventoryEntry.class),
         factoryMethods = {
             @FactoryMethod(parameterNames = {"sku", "quantityOnStock"}),

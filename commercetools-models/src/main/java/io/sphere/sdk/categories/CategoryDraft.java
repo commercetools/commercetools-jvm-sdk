@@ -17,7 +17,10 @@ import java.util.List;
  * <p>For construction see {@link CategoryDraftBuilder}.</p>
  */
 @JsonDeserialize(as = CategoryDraftDsl.class)
-@ResourceDraftValue(copyFactoryMethods = @CopyFactoryMethod(Category.class), factoryMethods = @FactoryMethod(parameterNames = {"name", "slug"}))
+@ResourceDraftValue(
+        gettersForBuilder = true,
+        copyFactoryMethods = @CopyFactoryMethod(Category.class),
+        factoryMethods = @FactoryMethod(parameterNames = {"name", "slug"}))
 public interface CategoryDraft extends CustomDraft, WithLocalizedSlug, MetaAttributes {
 
     @Nullable
