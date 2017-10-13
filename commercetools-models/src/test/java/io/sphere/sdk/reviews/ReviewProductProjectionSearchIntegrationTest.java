@@ -1,5 +1,6 @@
 package io.sphere.sdk.reviews;
 
+import io.sphere.sdk.annotations.NotOSGiCompatible;
 import io.sphere.sdk.client.SphereClientUtils;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
@@ -41,6 +42,7 @@ import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@NotOSGiCompatible
 public class ReviewProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     public static final String PRODUCT_TYPE_KEY = ReviewProductProjectionSearchIntegrationTest.class.getSimpleName().substring(0, 36);//currently type keys have a max length of 36
