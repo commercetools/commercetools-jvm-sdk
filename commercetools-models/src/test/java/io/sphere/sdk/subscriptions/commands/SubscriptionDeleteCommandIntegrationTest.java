@@ -3,8 +3,8 @@ package io.sphere.sdk.subscriptions.commands;
 import io.sphere.sdk.subscriptions.Subscription;
 import io.sphere.sdk.subscriptions.SubscriptionDraftBuilder;
 import io.sphere.sdk.subscriptions.SubscriptionFixtures;
+import io.sphere.sdk.subscriptions.SubscriptionIntegrationTest;
 import io.sphere.sdk.subscriptions.queries.SubscriptionQuery;
-import io.sphere.sdk.test.IntegrationTest;
 import org.junit.AfterClass;
 import org.junit.Test;
 
@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Integration tests for {@link SubscriptionDeleteCommand}.
  */
-public class SubscriptionDeleteCommandIntegrationTest extends IntegrationTest {
+public class SubscriptionDeleteCommandIntegrationTest extends SubscriptionIntegrationTest {
 
     @Test
     public void deleteByKeyAzureQueue() throws Exception {
