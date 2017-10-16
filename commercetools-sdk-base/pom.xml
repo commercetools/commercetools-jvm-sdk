@@ -147,7 +147,7 @@
                             osgi.serviceloader;
                             osgi.serviceloader="org.javamoney.moneta.spi.LoaderService"
                         </Provide-Capability>
-                        <Embed-Dependency>scope=compile|runtime;inline=!META-INF/services/javax.money.spi.ServiceProvider;artifactId=money-api|moneta</Embed-Dependency>
+                        <Embed-Dependency>scope=compile|runtime;inline=!javamoney.properties;artifactId=money-api|moneta</Embed-Dependency>
                     </instructions>
                 </configuration>
             </plugin>
