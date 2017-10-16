@@ -5,6 +5,7 @@ import io.sphere.sdk.models.CreationTimestamped;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
+import java.util.List;
 
 @JsonDeserialize(as = ParcelImpl.class)
 public interface Parcel extends CreationTimestamped {
@@ -22,4 +23,7 @@ public interface Parcel extends CreationTimestamped {
 
     @Nullable
     TrackingData getTrackingData();
+
+    @Nullable
+    List<DeliveryItem> getItems();
 }
