@@ -21,6 +21,12 @@ public class DraftBuilderGeneratorTest extends AbstractGeneratorTest {
     }
 
     @Test
+    public void generateDraftBuilderClassWithNoAttribute() throws Exception {
+        final String content = generateAsString(ExampleDraftWithNoAttribute.class);
+        assertThat(content).isEqualTo(expectedContent(ExampleDraftWithNoAttribute.class));
+    }
+
+    @Test
     public void generateDraftWithAbstractBaseClass() throws Exception {
         final String content = generateAsString(ExampleWithAbstractBaseClassDraft.class);
 
