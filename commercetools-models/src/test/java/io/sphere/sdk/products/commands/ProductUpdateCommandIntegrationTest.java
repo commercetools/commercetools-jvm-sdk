@@ -111,7 +111,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                     .stream()
                     .map(image -> image.getUrl())
                     .collect(toList());
-            assertThat(urls).containsExactlyElementsOf(IMAGE_URLS);
+            assertThat(urls).containsExactly(URL_2, URL_1, URL_3);
             assertThat(updatedProduct.getMasterData().hasStagedChanges()).isTrue();
 
             return updatedProduct;
@@ -143,7 +143,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                     .stream()
                     .map(image -> image.getUrl())
                     .collect(toList());
-            assertThat(urls).containsExactlyElementsOf(IMAGE_URLS);
+            assertThat(urls).containsExactly(URL_2, URL_1, URL_3);
             assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
 
             return updatedProduct;
@@ -171,7 +171,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                     .stream()
                     .map(image -> image.getUrl())
                     .collect(toList());
-            assertThat(urls).containsExactlyElementsOf(IMAGE_URLS);
+            assertThat(urls).containsExactly(URL_2, URL_1, URL_3);
             assertThat(updatedProduct.getMasterData().hasStagedChanges()).isTrue();
 
             return updatedProduct;
@@ -224,7 +224,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                     .stream()
                     .map(image -> image.getUrl())
                     .collect(toList());
-            assertThat(urls).containsExactlyElementsOf(IMAGE_URLS);
+            assertThat(urls).containsExactly(URL_2, URL_1, URL_3);
             assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
 
             return updatedProduct;
