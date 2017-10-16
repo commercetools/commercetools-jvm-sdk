@@ -10,8 +10,11 @@ import java.time.ZonedDateTime;
 public final class CartDiscountDraftDsl extends CartDiscountDraftDslBase<CartDiscountDraftDsl> {
 
     @JsonCreator
-    CartDiscountDraftDsl(@JsonProperty("isActive") final Boolean active, final String cartPredicate, @Nullable final LocalizedString description, final LocalizedString name, @JsonProperty("requiresDiscountCode") final Boolean requiresDiscountCode, final String sortOrder, final CartDiscountTarget target, @Nullable final ZonedDateTime validFrom, @Nullable final ZonedDateTime validUntil, final CartDiscountValue value) {
-        super(active, cartPredicate, description, name, requiresDiscountCode, sortOrder, target, validFrom, validUntil, value);
+    CartDiscountDraftDsl(final @JsonProperty("isActive") @Nullable Boolean active, final String cartPredicate, final @Nullable LocalizedString description,
+                         final LocalizedString name, final @JsonProperty("requiresDiscountCode") Boolean requiresDiscountCode,
+                         final String sortOrder, final StackingMode stackingMode, final @Nullable CartDiscountTarget target, final @Nullable ZonedDateTime validFrom,
+                         final @Nullable ZonedDateTime validUntil, final CartDiscountValue value) {
+        super(active, cartPredicate, description, name, requiresDiscountCode, sortOrder, stackingMode, target, validFrom, validUntil, value);
     }
 
     /**

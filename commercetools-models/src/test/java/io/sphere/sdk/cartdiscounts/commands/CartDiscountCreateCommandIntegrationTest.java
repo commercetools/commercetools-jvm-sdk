@@ -51,6 +51,7 @@ public class CartDiscountCreateCommandIntegrationTest extends IntegrationTest {
                 .validUntil(validUntil)
                 .description(description)
                 .isActive(false)
+                .stackingMode(StackingMode.STOP_AFTER_THIS_DISCOUNT)
                 .build();
 
         cartDiscount = client().executeBlocking(CartDiscountCreateCommand.of(discountDraft));
@@ -64,6 +65,7 @@ public class CartDiscountCreateCommandIntegrationTest extends IntegrationTest {
         assertThat(cartDiscount.getValidUntil()).isEqualTo(validUntil);
         assertThat(cartDiscount.getDescription()).isEqualTo(description);
         assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
+        assertThat(cartDiscount.getStackingMode()).isEqualTo(StackingMode.STOP_AFTER_THIS_DISCOUNT);
     }
 
     @After

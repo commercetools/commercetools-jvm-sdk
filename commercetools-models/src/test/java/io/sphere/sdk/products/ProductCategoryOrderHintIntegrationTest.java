@@ -1,5 +1,6 @@
 package io.sphere.sdk.products;
 
+import io.sphere.sdk.annotations.NotOSGiCompatible;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryFixtures;
 import io.sphere.sdk.categories.commands.CategoryDeleteCommand;
@@ -28,6 +29,8 @@ import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
+
+@NotOSGiCompatible
 public class ProductCategoryOrderHintIntegrationTest extends IntegrationTest {
 
     /*
