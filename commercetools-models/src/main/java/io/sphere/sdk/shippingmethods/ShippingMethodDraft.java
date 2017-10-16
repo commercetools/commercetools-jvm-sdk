@@ -12,10 +12,12 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 @JsonDeserialize(as = ShippingMethodDraftDsl.class)
-@ResourceDraftValue(abstractBuilderClass = true, factoryMethods = {
+@ResourceDraftValue(
+        gettersForBuilder = true,
+        abstractBuilderClass = true,
+        factoryMethods = {
             @FactoryMethod(parameterNames = {"name", "description", "taxCategory", "zoneRates", "default"}),
-            @FactoryMethod(parameterNames = {"name", "taxCategory", "zoneRates", "default"})
-})
+            @FactoryMethod(parameterNames = {"name", "taxCategory", "zoneRates", "default"})})
 public interface ShippingMethodDraft {
 
     @Nullable

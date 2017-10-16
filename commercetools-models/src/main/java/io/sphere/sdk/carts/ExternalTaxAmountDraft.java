@@ -6,7 +6,9 @@ import io.sphere.sdk.taxcategories.ExternalTaxRateDraft;
 
 import javax.money.MonetaryAmount;
 
-@ResourceDraftValue(factoryMethods = @FactoryMethod(parameterNames = { "totalGross", "taxRate" }))
+@ResourceDraftValue(
+        gettersForBuilder = true,
+        factoryMethods = @FactoryMethod(parameterNames = { "totalGross", "taxRate" }))
 public interface ExternalTaxAmountDraft {
     /**
      * @return The total gross amount of the item (totalNet + taxes).

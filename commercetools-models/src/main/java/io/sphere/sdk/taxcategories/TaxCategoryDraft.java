@@ -15,9 +15,9 @@ import java.util.List;
  * If you need to create a TaxCategory without tax rates, just provide an empty list as parameter for {@code taxRates}.
  */
 @JsonDeserialize(as = TaxCategoryDraftDsl.class)
-@ResourceDraftValue(factoryMethods = {
-        @FactoryMethod(parameterNames = {"name", "taxRates", "description"})
-})
+@ResourceDraftValue(
+        gettersForBuilder = true,
+        factoryMethods = {@FactoryMethod(parameterNames = {"name", "taxRates", "description"})})
 public interface TaxCategoryDraft extends WithKey {
     String getName();
 

@@ -23,7 +23,8 @@ import java.util.Set;
  */
 
 
-@ResourceDraftValue(gettersForBuilder = true,
+@ResourceDraftValue(
+        gettersForBuilder = true,
         factoryMethods = {@FactoryMethod(parameterNames = {"productType", "name", "slug", "masterVariant"})},
         abstractBuilderClass = true)
 @JsonDeserialize(as = ProductDraftDsl.class)
