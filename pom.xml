@@ -597,5 +597,28 @@
                 </plugins>
             </build>
         </profile>
+        <profile>
+            <id>dependency-check</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.owasp</groupId>
+                        <artifactId>dependency-check-maven</artifactId>
+                        <version>2.1.0</version>
+                        <configuration>
+                            <failBuildOnCVSS>8</failBuildOnCVSS>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 </project>

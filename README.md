@@ -5,7 +5,6 @@
 [![][travis img]][travis]
 [![][maven img]][maven]
 [![][license img]][license]
-[![Known Vulnerabilities](https://snyk.io/test/github/commercetools/commercetools-jvm-sdk/70e270c9af135ed2d22e1a7a2e384409b041fafe/badge.svg)](https://snyk.io/test/github/commercetools/commercetools-jvm-sdk/70e270c9af135ed2d22e1a7a2e384409b041fafe)
 
 [](the link definitions are at the bottom)
 
