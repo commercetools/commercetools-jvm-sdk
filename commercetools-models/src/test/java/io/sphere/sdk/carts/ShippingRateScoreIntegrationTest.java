@@ -11,7 +11,6 @@ import io.sphere.sdk.projects.commands.ProjectIntegrationTest;
 import io.sphere.sdk.projects.commands.ProjectUpdateCommand;
 import io.sphere.sdk.projects.commands.updateactions.SetShippingRateInputType;
 import io.sphere.sdk.projects.queries.ProjectGet;
-import io.sphere.sdk.shippingmethods.PriceFunction;
 import io.sphere.sdk.shippingmethods.PriceFunctionBuilder;
 import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.taxcategories.ExternalTaxRateDraft;
