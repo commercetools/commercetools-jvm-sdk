@@ -3,18 +3,17 @@ package io.sphere.sdk.subscriptions.commands;
 import com.microsoft.azure.servicebus.*;
 import com.microsoft.azure.servicebus.primitives.ConnectionStringBuilder;
 import com.microsoft.azure.servicebus.primitives.ServiceBusException;
-import io.sphere.sdk.test.IntegrationTest;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import io.sphere.sdk.subscriptions.SubscriptionIntegrationTest;
 
 import java.time.Duration;
 import java.util.concurrent.CompletableFuture;
 
-import static io.sphere.sdk.subscriptions.SubscriptionFixtures.*;
+import static io.sphere.sdk.subscriptions.SubscriptionFixtures.assumeHasAzureSBEnv;
+import static io.sphere.sdk.subscriptions.SubscriptionFixtures.azureSBConnectionStringFromEnv;
 import static org.junit.Assume.assumeNotNull;
 
 
-public abstract class AzureSBUtils  {
+public abstract class AzureSBUtils  extends SubscriptionIntegrationTest{
 
 
     public static String AZURE_CONSUME_MESSAGES_TIMEOUT_IN_SECONDS = "AZURE_CONSUME_MESSAGES_TIMEOUT_IN_SECONDS";

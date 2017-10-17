@@ -3,8 +3,6 @@ package io.sphere.sdk.cartdiscounts;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.FactoryMethod;
-import io.sphere.sdk.annotations.HasUpdateAction;
-import io.sphere.sdk.annotations.IgnoreInQueryModel;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.models.LocalizedString;
 
@@ -17,10 +15,11 @@ import java.time.ZonedDateTime;
  */
 @JsonDeserialize(as = CartDiscountDraftDsl.class)
 @ResourceDraftValue(
-        factoryMethods = @FactoryMethod(parameterNames = {"name", "cartPredicate", "value", "target", "sortOrder", "requiresDiscountCode"},
-        useLowercaseBooleans = true),
+        gettersForBuilder = true,
         abstractResourceDraftValueClass = true,
-        abstractBuilderClass = true)
+        abstractBuilderClass = true,
+        factoryMethods = @FactoryMethod(parameterNames = {"name", "cartPredicate", "value", "target", "sortOrder", "requiresDiscountCode"},
+                                        useLowercaseBooleans = true))
 public interface CartDiscountDraft {
     String getCartPredicate();
 

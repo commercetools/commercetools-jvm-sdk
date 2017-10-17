@@ -12,6 +12,7 @@ import java.time.ZonedDateTime;
  * @see TransactionDraftBuilder
  */
 @ResourceDraftValue(
+        gettersForBuilder = true,
         abstractResourceDraftValueClass = true,
         factoryMethods = {
             @FactoryMethod(parameterNames = {"type", "amount"}),
