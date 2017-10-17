@@ -9,7 +9,7 @@ import io.sphere.sdk.queries.MetaModelGetDslBuilder;
 import io.sphere.sdk.queries.MetaModelGetDslImpl;
 
 final class OrderByOrderNumberGetImpl extends MetaModelGetDslImpl<Order, Order, OrderByOrderNumberGet, OrderExpansionModel<Order>> implements OrderByOrderNumberGet {
-    static final UriTemplate GET_BY_ORDER_NUMBER = UriTemplate.of("/orders/orderNumber={orderNumber}");
+    static final UriTemplate GET_BY_ORDER_NUMBER = UriTemplate.of("/orders/order-number={orderNumber}");
 
     OrderByOrderNumberGetImpl(final String orderNumber) {
         super("", buildEndpoint(orderNumber), OrderExpansionModel.of(), OrderByOrderNumberGetImpl::new);
