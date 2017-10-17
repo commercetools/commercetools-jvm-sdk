@@ -1,5 +1,6 @@
 package io.sphere.sdk.carts.expansion;
 
+import io.sphere.sdk.carts.ShippingRateInput;
 import io.sphere.sdk.customergroups.expansion.CustomerGroupExpansionModel;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
 

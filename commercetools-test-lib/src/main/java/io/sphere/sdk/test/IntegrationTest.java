@@ -44,12 +44,13 @@ import java.util.function.Consumer;
 import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public abstract class IntegrationTest {
+public abstract class
+IntegrationTest {
 
     private static final int MAX_DEPTH_LEVEL = 3;
 
     @Rule
-    public Timeout globalTimeout = Timeout.seconds(180);
+    public Timeout globalTimeout = Timeout.seconds(1000);
 
     protected static final Logger logger = LoggerFactory.getLogger(IntegrationTest.class);
 

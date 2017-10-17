@@ -36,10 +36,7 @@ import org.junit.Test;
 
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static io.sphere.sdk.carts.CartFixtures.*;
@@ -414,7 +411,7 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
             final Cart cart = createCartWithShippingAddress(client());
             assertThat(cart.getShippingInfo()).isNull();
             final MonetaryAmount price = MoneyImpl.of(new BigDecimal("23.50"), EUR);
-            final ShippingRate shippingRate = ShippingRate.of(price);
+            final ShippingRate shippingRate = ShippingRate.of(price, null, Collections.emptyList());
             final String shippingMethodName = "custom-shipping";
             final SetCustomShippingMethod action = SetCustomShippingMethod.of(shippingMethodName, shippingRate, taxCategory);
             final Cart cartWithShippingMethod = client().executeBlocking(CartUpdateCommand.of(cart, action));

@@ -204,6 +204,14 @@ public interface CartLike<T> extends Resource<T>, Custom {
     @Nullable
     Locale getLocale();
 
+
+    /**
+     *  The shippingRateInput is used as an input to select a shipping rate price tier
+     * @return shippingRateInput
+     */
+    @Nullable
+    ShippingRateInput getShippingRateInput();
+
     /**
      * When calculating taxes in {@code taxedPrice}, the tax rounding mode is used for decimal values.
      * @return the tax rounding mode

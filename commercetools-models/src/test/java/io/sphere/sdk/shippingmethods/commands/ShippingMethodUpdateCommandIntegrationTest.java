@@ -17,6 +17,7 @@ import io.sphere.sdk.zones.ZoneFixtures;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.Collections;
 import java.util.Optional;
 
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withUpdateableShippingMethod;
@@ -127,7 +128,7 @@ public class ShippingMethodUpdateCommandIntegrationTest extends IntegrationTest 
                 assertThat(zoneRate.getShippingRates()).isEmpty();
 
                 //addShippingRate
-                final ShippingRate shippingRate = ShippingRate.of(MoneyImpl.of(30, USD));
+                final ShippingRate shippingRate = ShippingRate.of(MoneyImpl.of(30, USD),null, Collections.EMPTY_LIST);
                 final ShippingMethod shippingMethodWithShippingRate =
                         client().executeBlocking(ShippingMethodUpdateCommand.of(shippingMethodWithZone, AddShippingRate.of(shippingRate, zone)));
                 assertThat(shippingMethodWithShippingRate.getShippingRatesForZone(zone)).isEqualTo(asList(shippingRate));

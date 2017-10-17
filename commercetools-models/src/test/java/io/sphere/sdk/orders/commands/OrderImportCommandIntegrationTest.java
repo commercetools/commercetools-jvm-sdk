@@ -26,6 +26,7 @@ import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -221,7 +222,7 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
             withTransientTaxCategory(client(), taxCategory -> {
                 final MonetaryAmount price = EURO_5;
                 final MonetaryAmount freeAbove = EURO_30;
-                final ShippingRate shippingRate = ShippingRate.of(price, freeAbove);
+                final ShippingRate shippingRate = ShippingRate.of(price, freeAbove, Collections.EMPTY_LIST);
                 final TaxRate taxRate = taxCategory.getTaxRates().get(0);
                 final Reference<TaxCategory> taxCategoryRef = taxCategory.toReference();
                 final Reference<ShippingMethod> shippingMethodRef = shippingMethod.toReference();

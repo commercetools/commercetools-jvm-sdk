@@ -92,10 +92,16 @@ public interface Project extends CreationTimestamped, WithKey {
                 .map(Monetary::getCurrency)
                 .collect(toList());
     }
-
     @HasUpdateAction
     @HasUpdateAction(value = "changeMessagesEnabled", fields = {@PropertySpec(name = "messagesEnabled", fieldType = Boolean.class)})
     MessagesConfiguration getMessages();
+
+    /**
+     * The shippingRateInput is used as an input to select a shipping rate price tier at the project level
+     *@return shippingRateInput
+     */
+    @Nullable
+    ShippingRateInputType getShippingRateInputType();
 
     /**
      * Creates a container which contains the full Java type information to deserialize this class from JSON.
