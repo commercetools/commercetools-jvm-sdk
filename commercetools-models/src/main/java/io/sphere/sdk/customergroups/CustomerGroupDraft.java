@@ -15,7 +15,9 @@ import javax.annotation.Nullable;
  * @see CustomerGroup
  */
 @JsonDeserialize(as = CustomerGroupDraftDsl.class)
-@ResourceDraftValue(factoryMethods = @FactoryMethod(parameterNames = "groupName"))
+@ResourceDraftValue(
+        gettersForBuilder = true,
+        factoryMethods = @FactoryMethod(parameterNames = "groupName"))
 public interface CustomerGroupDraft extends WithKey {
 
     @Override

@@ -15,10 +15,11 @@ import java.time.ZonedDateTime;
  */
 @JsonDeserialize(as = CartDiscountDraftDsl.class)
 @ResourceDraftValue(
-        factoryMethods = @FactoryMethod(parameterNames = {"name", "cartPredicate", "value", "target", "sortOrder", "requiresDiscountCode"},
-        useLowercaseBooleans = true),
+        gettersForBuilder = true,
         abstractResourceDraftValueClass = true,
-        abstractBuilderClass = true)
+        abstractBuilderClass = true,
+        factoryMethods = @FactoryMethod(parameterNames = {"name", "cartPredicate", "value", "target", "sortOrder", "requiresDiscountCode"},
+                                        useLowercaseBooleans = true))
 public interface CartDiscountDraft {
     String getCartPredicate();
 
@@ -46,4 +47,13 @@ public interface CartDiscountDraft {
     ZonedDateTime getValidUntil();
 
     CartDiscountValue getValue();
+
+    /**
+     * Specify whether the application of this discount causes the following discounts to be ignored.
+     * Defaults to {@link StackingMode#STACKING}.
+     *
+     * @return the stacking mode of this object
+     */
+    @Nullable
+    StackingMode getStackingMode();
 }

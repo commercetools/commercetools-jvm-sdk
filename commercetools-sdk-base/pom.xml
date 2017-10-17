@@ -7,7 +7,7 @@
     </parent>
     <groupId>com.commercetools.sdk.jvm.core</groupId>
     <artifactId>commercetools-sdk-base</artifactId>
-    <packaging>jar</packaging>
+    <packaging>bundle</packaging>
     <version>1.24.1-SNAPSHOT</version>
     <licenses>
         <license>
@@ -53,9 +53,104 @@
             <artifactId>jackson-annotations</artifactId>
             <version>${jackson.version}</version>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>${felix.maven.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+
+                    <instructions>
+                        <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
+                        <Export-Package>
+                            io.sphere.sdk,
+                            io.sphere.sdk.annotations,
+                            io.sphere.sdk.client,
+                            io.sphere.sdk.commands,
+                            io.sphere.sdk.expansion,
+                            io.sphere.sdk.json,
+                            io.sphere.sdk.http,
+                            io.sphere.sdk.meta,
+                            io.sphere.sdk.models,
+                            io.sphere.sdk.models.errors,
+                            io.sphere.sdk.queries,
+                            io.sphere.sdk.retry,
+                            io.sphere.sdk.search,
+                            io.sphere.sdk.search.model,
+                            io.sphere.sdk.search.tokenizer,
+                            io.sphere.sdk.utils,
+                            javax.money.*,
+                            org.javamoney.*
+                        </Export-Package>
+                        <Import-Package>*</Import-Package>
+                        <Bundle-Version>${project.version}</Bundle-Version>
+                        <Require-Capability>
+                            osgi.extender;
+                            filter:="(osgi.extender=osgi.serviceloader.registrar)",
+                            osgi.extender;
+                            filter:="(osgi.extender=osgi.serviceloader.processor)",
+                            osgi.serviceloader;
+                            filter:="(osgi.serviceloader=javax.money.convert.ExchangeRateProvider)"; cardinality:=multiple,
+                            osgi.serviceloader;
+                            filter:="(osgi.serviceloader=javax.money.spi.CurrencyProviderSpi)"; cardinality:=multiple,
+                            osgi.serviceloader;
+                            filter:="(osgi.serviceloader=javax.money.spi.MonetaryAmountFactoryProviderSpi)"; cardinality:=multiple,
+                            osgi.serviceloader;
+                            filter:="(osgi.serviceloader=javax.money.spi.MonetaryAmountFormatProviderSpi)"; cardinality:=multiple,
+                            osgi.serviceloader;
+                            filter:="(osgi.serviceloader=javax.money.spi.MonetaryAmountsSingletonQuerySpi)"; cardinality:=multiple,
+                            osgi.serviceloader;
+                            filter:="(osgi.serviceloader=javax.money.spi.MonetaryAmountsSingletonSpi)"; cardinality:=multiple,
+                            osgi.serviceloader;
+                            filter:="(osgi.serviceloader=javax.money.spi.MonetaryConversionsSingletonSpi)"; cardinality:=multiple,
+                            osgi.serviceloader;
+                            filter:="(osgi.serviceloader=javax.money.spi.MonetaryCurrenciesSingletonSpi)"; cardinality:=multiple,
+                            osgi.serviceloader;
+                            filter:="(osgi.serviceloader=javax.money.spi.RoundingProviderSpi)"; cardinality:=multiple,
+                            osgi.serviceloader;
+                            filter:="(osgi.serviceloader=javax.money.spi.ServiceProvider)"; cardinality:=multiple,
+                            osgi.serviceloader;
+                            filter:="(osgi.serviceloader=org.javamoney.moneta.spi.LoaderService)"; cardinality:=multiple,
+                        </Require-Capability>
+                        <Provide-Capability>
+                            osgi.serviceloader,
+                            osgi.serviceloader;
+                            osgi.serviceloader="io.sphere.sdk.client.SphereClientModule",
+                            osgi.serviceloader;
+                            osgi.serviceloader="javax.money.convert.ExchangeRateProvider",
+                            osgi.serviceloader;
+                            osgi.serviceloader="javax.money.spi.CurrencyProviderSpi",
+                            osgi.serviceloader;
+                            osgi.serviceloader="javax.money.spi.MonetaryAmountFactoryProviderSpi",
+                            osgi.serviceloader;
+                            osgi.serviceloader="javax.money.spi.MonetaryAmountFormatProviderSpi",
+                            osgi.serviceloader;
+                            osgi.serviceloader="javax.money.spi.MonetaryAmountsSingletonQuerySpi",
+                            osgi.serviceloader;
+                            osgi.serviceloader="javax.money.spi.MonetaryAmountsSingletonSpi",
+                            osgi.serviceloader;
+                            osgi.serviceloader="javax.money.spi.MonetaryConversionsSingletonSpi",
+                            osgi.serviceloader;
+                            osgi.serviceloader="javax.money.spi.MonetaryCurrenciesSingletonSpi",
+                            osgi.serviceloader;
+                            osgi.serviceloader="javax.money.spi.RoundingProviderSpi",
+                            osgi.serviceloader;
+                            osgi.serviceloader="javax.money.spi.ServiceProvider",
+                            osgi.serviceloader;
+                            osgi.serviceloader="org.javamoney.moneta.spi.LoaderService"
+                        </Provide-Capability>
+                        <Embed-Dependency>scope=compile|runtime;inline=!javamoney.properties;artifactId=money-api|moneta</Embed-Dependency>
+                    </instructions>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>com.google.code.maven-replacer-plugin</groupId>
                 <artifactId>maven-replacer-plugin</artifactId>

@@ -20,11 +20,13 @@ import java.util.Locale;
  * @see io.sphere.sdk.reviews.commands.ReviewCreateCommand
  */
 @JsonDeserialize(as = ReviewDraftDsl.class)
-@ResourceDraftValue(factoryMethods = {
-        @FactoryMethod(methodName = "ofTitle", parameterNames = "title"),
-        @FactoryMethod(methodName = "ofText", parameterNames = "text"),
-        @FactoryMethod(methodName = "ofRating", parameterNames = "rating")
-}, abstractBuilderClass = true)
+@ResourceDraftValue(
+        gettersForBuilder = true,
+        abstractBuilderClass = true,
+        factoryMethods = {
+            @FactoryMethod(methodName = "ofTitle", parameterNames = "title"),
+            @FactoryMethod(methodName = "ofText", parameterNames = "text"),
+            @FactoryMethod(methodName = "ofRating", parameterNames = "rating")})
 public interface ReviewDraft extends WithKey {
     @Nullable
     String getAuthorName();

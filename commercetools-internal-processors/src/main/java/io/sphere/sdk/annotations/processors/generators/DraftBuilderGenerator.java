@@ -80,12 +80,14 @@ public class DraftBuilderGenerator extends AbstractBuilderGenerator<ResourceDraf
         }
         builder.addFields(fieldSpecs)
                 .addMethod(createDefaultConstructor(constructorModifiers))
-                .addMethod(createConstructor(properties, constructorModifiers))
                 .addMethods(builderMethodSpecs)
                 .addMethods(createListPluser(resourceDraftValueType,properties))
                 .addMethods(createListElementPluser(resourceDraftValueType,properties))
                 .addMethods(createSetPluser(resourceDraftValueType,properties))
                 .addMethods(createSetElementPluser(resourceDraftValueType,properties));
+        if(!properties.isEmpty()){
+            builder.addMethod(createConstructor(properties, constructorModifiers));
+        }
         if (resourceDraftValue.gettersForBuilder()) {
             List<MethodSpec> getMethods = properties.stream()
                     .map(this::createGetMethod)
