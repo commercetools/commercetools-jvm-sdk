@@ -18,7 +18,6 @@ import java.util.Set;
  */
 @JsonDeserialize(as = StateDraftDsl.class)
 @ResourceDraftValue(
-        gettersForBuilder = true,
         abstractBuilderClass = true,
         abstractResourceDraftValueClass = true,
         factoryMethods = @FactoryMethod(parameterNames = {"key", "type"}))

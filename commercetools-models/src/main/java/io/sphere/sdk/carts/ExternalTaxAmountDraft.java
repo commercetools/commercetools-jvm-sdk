@@ -7,7 +7,6 @@ import io.sphere.sdk.taxcategories.ExternalTaxRateDraft;
 import javax.money.MonetaryAmount;
 
 @ResourceDraftValue(
-        gettersForBuilder = true,
         factoryMethods = @FactoryMethod(parameterNames = { "totalGross", "taxRate" }))
 public interface ExternalTaxAmountDraft {
     /**

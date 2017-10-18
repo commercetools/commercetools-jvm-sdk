@@ -16,7 +16,6 @@ import java.util.List;
  */
 @JsonDeserialize(as = TaxCategoryDraftDsl.class)
 @ResourceDraftValue(
-        gettersForBuilder = true,
         factoryMethods = {@FactoryMethod(parameterNames = {"name", "taxRates", "description"})})
 public interface TaxCategoryDraft extends WithKey {
     String getName();

@@ -15,7 +15,6 @@ import java.time.ZonedDateTime;
  */
 @JsonDeserialize(as = CartDiscountDraftDsl.class)
 @ResourceDraftValue(
-        gettersForBuilder = true,
         abstractResourceDraftValueClass = true,
         abstractBuilderClass = true,
         factoryMethods = @FactoryMethod(parameterNames = {"name", "cartPredicate", "value", "target", "sortOrder", "requiresDiscountCode"},

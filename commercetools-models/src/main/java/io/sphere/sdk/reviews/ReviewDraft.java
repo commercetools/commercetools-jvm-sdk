@@ -21,7 +21,6 @@ import java.util.Locale;
  */
 @JsonDeserialize(as = ReviewDraftDsl.class)
 @ResourceDraftValue(
-        gettersForBuilder = true,
         abstractBuilderClass = true,
         factoryMethods = {
             @FactoryMethod(methodName = "ofTitle", parameterNames = "title"),

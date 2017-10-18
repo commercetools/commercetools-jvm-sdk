@@ -20,7 +20,6 @@ import java.util.List;
  */
 @JsonDeserialize(as = DiscountCodeDraftDsl.class)
 @ResourceDraftValue(
-        gettersForBuilder = true,
         abstractBuilderClass = true,
         abstractResourceDraftValueClass = true,
         factoryMethods = {@FactoryMethod(parameterNames = {"code", "cartDiscounts"})})

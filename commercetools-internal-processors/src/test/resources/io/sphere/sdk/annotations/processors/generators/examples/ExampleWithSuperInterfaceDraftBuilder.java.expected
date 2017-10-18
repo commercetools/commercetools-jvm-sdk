@@ -47,6 +47,14 @@ public final class ExampleWithSuperInterfaceDraftBuilder extends Base implements
     return this;
   }
 
+  public String getName() {
+    return name;
+  }
+
+  public String getSku() {
+    return sku;
+  }
+
   /**
    * Creates a new instance of {@code ExampleWithSuperInterfaceDraftDsl} with the values of this builder.
    *

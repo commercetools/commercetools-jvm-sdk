@@ -22,7 +22,6 @@ import java.util.Set;
  */
 @JsonDeserialize(as = ChannelDraftDsl.class)
 @ResourceDraftValue(
-        gettersForBuilder = true,
         abstractResourceDraftValueClass = true,
         factoryMethods = @FactoryMethod(parameterNames = {"key"}))
 public interface ChannelDraft extends WithKey {
