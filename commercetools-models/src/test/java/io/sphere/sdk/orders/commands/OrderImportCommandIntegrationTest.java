@@ -271,12 +271,13 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
                 final String deliveryId = randomUUID();
                 final TrackingData trackingData = TrackingData.of().withTrackingId("tracking id")
                         .withCarrier("carrier").withProvider("provider").withProviderTransaction("prov transaction").withIsReturn(true);
-                final Parcel parcel = Parcel.of(randomUUID(), createdAt, parcelMeasurements, trackingData);
+                final Parcel parcel = Parcel.of(createdAt, randomUUID(),asList(), parcelMeasurements, trackingData);
                 final List<Delivery> deliveries = asList(Delivery.of(deliveryId, createdAt, asList(deliveryItem), asList(parcel)));
                 final OrderShippingInfo shippingInfo = OrderShippingInfo.of(randomString(), price, shippingRate, taxRate, taxCategoryRef, shippingMethodRef, deliveries);
                 testOrderAspect(
                         builder -> builder.shippingInfo(shippingInfo),
-                        order -> assertThat(order.getShippingInfo()).isEqualToIgnoringGivenFields(shippingInfo, "taxedPrice", "shippingMethodState")
+                        order -> assertThat(order.getShippingInfo()).
+                                isEqualToIgnoringGivenFields(shippingInfo, "taxedPrice", "shippingMethodState")
                 );
             });
         });

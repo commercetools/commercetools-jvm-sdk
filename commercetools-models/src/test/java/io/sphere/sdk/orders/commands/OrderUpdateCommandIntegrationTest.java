@@ -38,6 +38,7 @@ import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.SphereInternalUtils.asSet;
 import static io.sphere.sdk.utils.SphereInternalUtils.setOf;
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.condition.Not.not;
 
@@ -532,6 +533,29 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
             final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, SetLocale.of(Locale.GERMAN)));
             assertThat(updatedOrder.getLocale()).isEqualTo(GERMAN);
             return updatedOrder;
+        });
+    }
+
+    @Test
+    public void testDeliveriesAndParcels() {
+
+        withOrder(client(), order -> {
+            assertThat(order.getLineItems()).hasSize(1);
+            assertThat(order.getShippingInfo().getDeliveries()).isEmpty();
+            final LineItem lineItem = order.getLineItems().get(0);
+            Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, AddDelivery.of(asList(DeliveryItem.of(lineItem)))));
+            assertThat(updatedOrder.getShippingInfo().getDeliveries()).hasSize(1);
+
+            Delivery delivery = updatedOrder.getShippingInfo().getDeliveries().get(0);
+            assertThat(delivery.getParcels()).isEmpty();
+
+            final ParcelMeasurements parcelMeasurements = ParcelMeasurements.of(2, 3, 1, 3);
+            Order updatedOrder2 = client().executeBlocking(OrderUpdateCommand.of(updatedOrder, AddParcelToDelivery.of(delivery, ParcelDraft.of(parcelMeasurements))));
+            assertThat(updatedOrder2.getShippingInfo().getDeliveries().get(0).getParcels()).hasSize(1);
+            Parcel parcel = updatedOrder2.getShippingInfo().getDeliveries().get(0).getParcels().get(0);
+            assertThat(parcel.getMeasurements()).isEqualTo(parcelMeasurements);
+            return updatedOrder2;
+
         });
     }
 }
