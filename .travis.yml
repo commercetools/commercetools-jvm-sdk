@@ -9,13 +9,11 @@ jobs:
     - stage: compile
       script: mvn clean install  javadoc:aggregate -DskipTests
     - stage: staticInspection
-      script:
-        - mvn exec:java -pl commercetools-internal-docs -Dexec.mainClass="introspection.rules.RulesMain" -Dexec.classpathScope="test"
-        - mvn exec:java -pl commercetools-models -Dexec.mainClass="io.sphere.sdk.client.MainMethodThreadLeakTest" -Dexec.classpathScope="test"
+      script: mvn exec:java -pl commercetools-internal-docs -Dexec.mainClass="introspection.rules.RulesMain" -Dexec.classpathScope="test"
+      script: mvn exec:java -pl commercetools-models -Dexec.mainClass="io.sphere.sdk.client.MainMethodThreadLeakTest" -Dexec.classpathScope="test"
     - stage: test
-      script:
-        - mvn test verify -pl commercetools-convenience,commercetools-internal-docs,commercetools-internal-processors,commercetools-java-client-ahc-1_8,commercetools-java-client-ahc-1_9,commercetools-java-client-ahc-2_0
-        - mvn test verify -pl osgi-support/sdk-osgi-test-campaign/ -Dtest=OSGiTestSuite
+      script: mvn test verify -pl commercetools-convenience,commercetools-internal-docs,commercetools-internal-processors,commercetools-java-client-ahc-1_8,commercetools-java-client-ahc-1_9,commercetools-java-client-ahc-2_0
+      script: mvn test verify -pl osgi-support/sdk-osgi-test-campaign/ -Dtest=OSGiTestSuite
 
 #specifiying stages order
 stages:
