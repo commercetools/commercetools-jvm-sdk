@@ -19,7 +19,6 @@ import javax.money.MonetaryAmount;
  */
 @JsonDeserialize(as = LineItemDraftDsl.class)
 @ResourceDraftValue(
-        gettersForBuilder = true,
         abstractBuilderClass = true,
         factoryMethods = {
                 @FactoryMethod(methodName = "ofSku", parameterNames = {"sku", "quantity"}),

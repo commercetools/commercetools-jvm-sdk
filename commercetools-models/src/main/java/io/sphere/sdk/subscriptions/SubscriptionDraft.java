@@ -7,7 +7,6 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 @ResourceDraftValue(
-        gettersForBuilder = true,
         factoryMethods = @FactoryMethod(parameterNames = {"destination"}))
 public interface SubscriptionDraft {
 

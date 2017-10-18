@@ -15,7 +15,6 @@ import java.util.List;
  */
 @JsonDeserialize(as = ProductTypeDraftDsl.class)
 @ResourceDraftValue(
-        gettersForBuilder = true,
         copyFactoryMethods = { @CopyFactoryMethod(ProductType.class)},
         factoryMethods = { @FactoryMethod(parameterNames = {"key", "name", "description", "attributes"})
 })

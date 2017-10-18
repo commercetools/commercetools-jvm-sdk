@@ -14,7 +14,6 @@ import java.util.List;
  * @see ProductVariantDraftBuilder
  */
 @ResourceDraftValue(
-        gettersForBuilder = true,
         abstractBuilderClass = true,
         copyFactoryMethods = @CopyFactoryMethod(ProductVariant.class),
         factoryMethods = @FactoryMethod(parameterNames = {}))

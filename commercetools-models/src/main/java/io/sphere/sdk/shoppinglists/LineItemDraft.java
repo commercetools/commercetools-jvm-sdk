@@ -16,7 +16,6 @@ import java.time.ZonedDateTime;
  */
 @JsonDeserialize(as = LineItemDraftDsl.class)
 @ResourceDraftValue(
-        gettersForBuilder = true,
         abstractBuilderClass = true,
         factoryMethods = {@FactoryMethod(parameterNames = {"productId"})})
 public interface LineItemDraft {

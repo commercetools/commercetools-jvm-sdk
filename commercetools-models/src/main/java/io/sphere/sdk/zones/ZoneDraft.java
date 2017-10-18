@@ -12,7 +12,6 @@ import static java.util.stream.Collectors.toSet;
 
 @JsonDeserialize(as = ZoneDraftDsl.class)
 @ResourceDraftValue(
-        gettersForBuilder = true,
         factoryMethods = {
             @FactoryMethod(parameterNames = {"name", "locations", "description"}),
             @FactoryMethod(parameterNames = {"name", "locations"})})

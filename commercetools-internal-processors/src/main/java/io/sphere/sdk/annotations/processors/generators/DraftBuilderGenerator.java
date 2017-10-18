@@ -81,18 +81,13 @@ public class DraftBuilderGenerator extends AbstractBuilderGenerator<ResourceDraf
         builder.addFields(fieldSpecs)
                 .addMethod(createDefaultConstructor(constructorModifiers))
                 .addMethods(builderMethodSpecs)
+                .addMethods(createGettersForBuilders(properties))
                 .addMethods(createListPluser(resourceDraftValueType,properties))
                 .addMethods(createListElementPluser(resourceDraftValueType,properties))
                 .addMethods(createSetPluser(resourceDraftValueType,properties))
                 .addMethods(createSetElementPluser(resourceDraftValueType,properties));
         if(!properties.isEmpty()){
             builder.addMethod(createConstructor(properties, constructorModifiers));
-        }
-        if (resourceDraftValue.gettersForBuilder()) {
-            List<MethodSpec> getMethods = properties.stream()
-                    .map(this::createGetMethod)
-                    .collect(Collectors.toList());
-            builder.addMethods(getMethods);
         }
         final TypeName draftImplType = typeUtils.getDraftImplType(resourceDraftValueType);
         final TypeName buildMethodReturnType = builderReturnType;
@@ -107,6 +102,13 @@ public class DraftBuilderGenerator extends AbstractBuilderGenerator<ResourceDraf
         final TypeSpec draftBuilderBaseClass = builder.build();
 
         return draftBuilderBaseClass;
+    }
+
+    private List<MethodSpec> createGettersForBuilders(final List<PropertyGenModel> properties){
+        final List<MethodSpec> getMethods = properties.stream()
+                .map(this::createGetMethod)
+                .collect(Collectors.toList());
+        return getMethods;
     }
 
     /**

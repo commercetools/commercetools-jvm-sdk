@@ -9,13 +9,6 @@ public @interface ResourceDraftValue {
     CopyFactoryMethod[] copyFactoryMethods() default {};
 
     /**
-     * If set to true, the generated builder will also provide getter methods.
-     *
-     * @return true iff. getter methods should be generated for the builder
-     */
-    boolean gettersForBuilder() default false;
-
-    /**
      * If set to true, the builder will return the concrete implementation.
      *
      * We switched the default to true because our previous generator always returned a concrete type,

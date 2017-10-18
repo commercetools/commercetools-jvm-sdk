@@ -13,7 +13,6 @@ import java.util.List;
 
 @JsonDeserialize(as = ShippingMethodDraftDsl.class)
 @ResourceDraftValue(
-        gettersForBuilder = true,
         abstractBuilderClass = true,
         factoryMethods = {
             @FactoryMethod(parameterNames = {"name", "description", "taxCategory", "zoneRates", "default"}),

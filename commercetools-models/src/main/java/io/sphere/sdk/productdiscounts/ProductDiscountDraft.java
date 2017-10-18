@@ -10,7 +10,6 @@ import javax.annotation.Nullable;
 
 @JsonDeserialize(as = ProductDiscountDraftDsl.class)
 @ResourceDraftValue(
-        gettersForBuilder = true,
         factoryMethods = {@FactoryMethod(parameterNames = {}),
                           @FactoryMethod(parameterNames = {"active", "description", "name", "predicate", "sortOrder", "value"})
 }, abstractBuilderClass = true)

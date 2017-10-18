@@ -24,7 +24,6 @@ import java.util.Locale;
  */
 @JsonDeserialize(as = CustomerDraftDsl.class)
 @ResourceDraftValue(
-        gettersForBuilder = true,
         abstractBuilderClass = true,
         abstractResourceDraftValueClass = true,
         factoryMethods = {
