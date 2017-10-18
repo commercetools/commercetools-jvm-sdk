@@ -1,6 +1,8 @@
 # commercetools JVM SDK
 
-![SPHERE.IO icon](http://dev.commercetools.com/assets/img/CT-logo.svg)
+
+
+<img src="http://dev.commercetools.com/assets/img/CT-logo.svg" width="400px" alt="CT-logo"></img>
 
 [![][travis img]][travis]
 [![][maven img]][maven]
