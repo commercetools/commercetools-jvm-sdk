@@ -7,7 +7,7 @@ cache:
 jobs:
   include:
     - stage: compile
-      script: mvn clean install  javadoc:aggregate -DskipTests
+      script: mvn clean install  javadoc:aggregate -DskipTests -T 20
     - stage: staticInspection
       script:
         - mvn exec:java -pl commercetools-internal-docs -Dexec.mainClass="introspection.rules.RulesMain" -Dexec.classpathScope="test"
