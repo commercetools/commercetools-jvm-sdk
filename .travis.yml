@@ -3,11 +3,11 @@ jdk:
   - oraclejdk8
 cache:
   directories:
-  - $HOME/.m2
+  - $HOME
 jobs:
   include:
     - stage: compile
-      script: mvn clean install  javadoc:aggregate -DskipTests -T 20
+      script: mvn clean install  javadoc:aggregate -DskipTests
     - stage: staticInspection
       script:
         - mvn exec:java -pl commercetools-internal-docs -Dexec.mainClass="introspection.rules.RulesMain" -Dexec.classpathScope="test"
