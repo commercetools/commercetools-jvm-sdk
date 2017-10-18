@@ -32,6 +32,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.lang.reflect.Modifier;
 import java.nio.file.Paths;
 import java.security.cert.X509Certificate;
 import java.util.LinkedList;
@@ -44,8 +45,7 @@ import java.util.function.Consumer;
 import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public abstract class
-IntegrationTest {
+public abstract class IntegrationTest {
 
     private static final int MAX_DEPTH_LEVEL = 3;
 
@@ -59,6 +59,9 @@ IntegrationTest {
     @Before
     public void classNameCheck() {
         assertThat(getClass().getSimpleName()).endsWith("IntegrationTest");
+        assertThat(Modifier.isFinal(getClass().getModifiers()))
+                .as(String.format("Class '%s' should not be final since it might be subject to extension for OSGi test",getClass().getName()))
+                .isFalse();
     }
 
     @BeforeClass
