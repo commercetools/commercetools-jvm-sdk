@@ -36,6 +36,10 @@ public final class ExampleWithReferenceDraftBuilder extends Base implements Buil
     return this;
   }
 
+  public Reference<String> getName() {
+    return name;
+  }
+
   /**
    * Creates a new instance of {@code ExampleWithReferenceDraftDsl} with the values of this builder.
    *

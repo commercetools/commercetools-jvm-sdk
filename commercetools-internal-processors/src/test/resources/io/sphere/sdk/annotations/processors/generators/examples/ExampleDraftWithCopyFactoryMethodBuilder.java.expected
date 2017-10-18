@@ -33,6 +33,10 @@ public final class ExampleDraftWithCopyFactoryMethodBuilder extends Base impleme
     return this;
   }
 
+  public String getName() {
+    return name;
+  }
+
   /**
    * Creates a new instance of {@code ExampleDraftWithCopyFactoryMethodDsl} with the values of this builder.
    *

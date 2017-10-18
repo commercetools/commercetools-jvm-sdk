@@ -44,6 +44,10 @@ public final class ExampleWithLowerCaseBooleanDraftBuilder extends Base implemen
     return this;
   }
 
+  public Boolean isLowerCased() {
+    return lowerCased;
+  }
+
   /**
    * Creates a new instance of {@code ExampleWithLowerCaseBooleanDraftDsl} with the values of this builder.
    *

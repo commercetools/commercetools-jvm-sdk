@@ -1,5 +1,6 @@
 package io.sphere.sdk.annotations.processors.generators.examples;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.utils.SphereInternalUtils;
@@ -153,6 +154,41 @@ public final class ExampleDraftBuilder extends Base implements Builder<ExampleDr
   public ExampleDraftBuilder values(final Set<String> values) {
     this.values = values;
     return this;
+  }
+
+  public Boolean isDefault() {
+    return _default;
+  }
+
+  @JsonProperty("isActive")
+  public Boolean isActive() {
+    return active;
+  }
+
+  /**
+   *
+   * @deprecated This method will be removed with the next major SDK update.
+   */
+  @Deprecated
+  public String getDeprecatedField() {
+    return deprecatedField;
+  }
+
+  public List<String> getNames() {
+    return names;
+  }
+
+  @Nullable
+  public String getOptional() {
+    return optional;
+  }
+
+  public String getSku() {
+    return sku;
+  }
+
+  public Set<String> getValues() {
+    return values;
   }
 
   /**
