@@ -1,6 +1,5 @@
 package io.sphere.sdk.test;
 
-import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.client.SphereAuthConfig;
 import io.sphere.sdk.client.SphereAuthConfigBuilder;
 import io.sphere.sdk.client.SphereProjectScope;
@@ -31,8 +30,6 @@ import static org.ops4j.pax.exam.CoreOptions.*;
  */
 @RunWith(PaxExam.class)
 public class DemoOSGiMinimalConfigTest {
-
-    private static BlockingSphereClient client;
 
     @Configuration
     public Option[] createConfiguration() {
