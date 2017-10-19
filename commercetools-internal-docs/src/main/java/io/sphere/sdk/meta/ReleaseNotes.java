@@ -51,9 +51,7 @@ import io.sphere.sdk.inventory.InventoryEntryDraft;
 import io.sphere.sdk.inventory.InventoryEntryDraftBuilder;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.*;
-import io.sphere.sdk.orders.LineItemImportDraft;
-import io.sphere.sdk.orders.Order;
-import io.sphere.sdk.orders.OrderImportDraft;
+import io.sphere.sdk.orders.*;
 import io.sphere.sdk.orders.expansion.OrderExpansionModel;
 import io.sphere.sdk.orders.messages.OrderPaymentStateChangedMessage;
 import io.sphere.sdk.payments.*;
@@ -142,6 +140,9 @@ import java.util.function.Function;
  <li class=new-in-release>
     Added new shipping rate input property in {@link Order#getShippingRateInput()} and {@link Project#getShippingRateInputType()}.
     Added new tiered shipping rates property in {@link ShippingRate#getTiers()}.
+ </li>
+ <li class=new-in-release>
+    Added support for new parcel items property in {@link Parcel#getItems()} and {@link ParcelMeasurements#getItems()}.
  </li>
  <li class=new-in-release>Added new product type update action {@link RemoveEnumValues}.</li>
  <li class=new-in-release>Added new product update action {@link SetImageLabel}.</li>
