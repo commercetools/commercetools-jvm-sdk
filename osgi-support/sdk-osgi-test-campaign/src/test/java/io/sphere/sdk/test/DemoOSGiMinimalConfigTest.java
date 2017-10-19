@@ -17,8 +17,10 @@ import org.ops4j.pax.exam.options.UrlProvisionOption;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import static java.util.Arrays.asList;
@@ -99,13 +101,9 @@ public class DemoOSGiMinimalConfigTest {
 
 
     private static CompositeOption getBundlesFromNames(final List<String> plugins,final  List<String> fragments) {
-        final Stream<UrlProvisionOption> pluginsUrlProvisionOptionsStream = plugins == null ? Stream.empty() : plugins.stream()
-                .map(CoreOptions::linkBundle);
-        final Stream<UrlProvisionOption> fragmentsUrlProvisionOptionStream = fragments == null ? Stream.empty() : fragments.stream()
-                .map(CoreOptions::linkBundle)
-                .map(UrlProvisionOption::noStart);
-        UrlProvisionOption[] urlProvisionOptions = Stream.concat(pluginsUrlProvisionOptionsStream, fragmentsUrlProvisionOptionStream)
-                .toArray(UrlProvisionOption[]::new);
+        final Stream<UrlProvisionOption> pluginsUrlProvisionOptionsStream = Optional.ofNullable(plugins).orElseGet(ArrayList::new).stream().map(CoreOptions::linkBundle);
+        final Stream<UrlProvisionOption> fragmentsUrlProvisionOptionStream = Optional.ofNullable(fragments).orElseGet(ArrayList::new).stream().map(CoreOptions::linkBundle).map(UrlProvisionOption::noStart);
+        UrlProvisionOption[] urlProvisionOptions = Stream.concat(pluginsUrlProvisionOptionsStream, fragmentsUrlProvisionOptionStream).toArray(UrlProvisionOption[]::new);
         return new DefaultCompositeOption(urlProvisionOptions);
     }
 
