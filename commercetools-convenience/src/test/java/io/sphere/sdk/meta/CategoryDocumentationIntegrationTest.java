@@ -181,6 +181,11 @@ public class CategoryDocumentationIntegrationTest extends IntegrationTest {
         assertThat(jeansWomenOptional).isPresent();
         assertThat(categoryTree.findBySlug(ENGLISH, "not-existing-slug")).isEmpty();
 
+        //find by Key
+        final Optional<Category> jeansWomenOptionalByKey = categoryTree.findByKey(jeansWomenOptional.get().getKey());
+        assertThat(jeansWomenOptionalByKey).isPresent();
+        assertThat(jeansWomenOptionalByKey.get().getSlug().get(ENGLISH)).contains("jeans-women");
+
         //find by ID
         final Reference<Category> clothingWomenReference = jeansWomenOptional.get().getParent();
         final Optional<Category> clothingWomenOptional = categoryTree.findById(clothingWomenReference.getId());
@@ -411,7 +416,7 @@ public class CategoryDocumentationIntegrationTest extends IntegrationTest {
                                 final LocalizedString name = LocalizedString.of(GERMAN, columns[2]).plus(ENGLISH, columns[4]);
                                 final LocalizedString slug = LocalizedString.of(GERMAN, columns[3]).plus(ENGLISH, columns[5]);
                                 final String externalId = columns[0];
-                                final CategoryDraftBuilder categoryDraftBuilder = CategoryDraftBuilder.of(name, slug).externalId(externalId);
+                                final CategoryDraftBuilder categoryDraftBuilder = CategoryDraftBuilder.of(name, slug).externalId(externalId).key(randomKey());
                                 final String externalIdParent = columns[1];
                                 if (!"".equals(externalIdParent)) {
                                     final Category parent = externalIdToCategoryMap.get(externalIdParent);
