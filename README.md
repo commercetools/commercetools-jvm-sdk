@@ -105,7 +105,9 @@ Useful code from external developers
         * `commercetools-java-client-core`
         * `commercetools-java-client-apache-async` with the previous fragment, it allow to publish a service describing the http client implementation for our API.
         * `commercetools-models` contains a description model of the commercetools backend and the different actions that alows interaction with it.
-
+* A demo test that shows a minimum configuration for use in production in an OSGi setup can be found here: 
+[DemoOSGiMinimalConfigTest](https://github.com/commercetools/commercetools-jvm-sdk/blob/master/sdk-osgi-test-campaign/src/test/java/io/sphere/sdk/test/DemoOSGiMinimalConfigTest.java)
+ 
 ## Stability
 
 1. Experimental features in the API are also experimental features of the SDK.
