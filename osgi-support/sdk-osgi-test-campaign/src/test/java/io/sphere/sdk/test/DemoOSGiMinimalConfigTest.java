@@ -1,12 +1,20 @@
 package io.sphere.sdk.test;
 
-
-import org.ops4j.pax.exam.ConfigurationFactory;
+import io.sphere.sdk.client.SphereAuthConfig;
+import io.sphere.sdk.client.SphereAuthConfigBuilder;
+import io.sphere.sdk.client.SphereProjectScope;
+import io.sphere.sdk.retry.AsyncRetrySupervisor;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.ops4j.pax.exam.Configuration;
 import org.ops4j.pax.exam.CoreOptions;
 import org.ops4j.pax.exam.Option;
+import org.ops4j.pax.exam.junit.PaxExam;
 import org.ops4j.pax.exam.options.CompositeOption;
 import org.ops4j.pax.exam.options.DefaultCompositeOption;
 import org.ops4j.pax.exam.options.UrlProvisionOption;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,30 +22,22 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+import static java.util.Arrays.asList;
 import static org.ops4j.pax.exam.CoreOptions.*;
 
 /**
- * This class contains the {@link CoreOptions#options(Option...)} that will be used to set the OSGi environment for the tests
+ * This is a demo test that shows a minimum configuration for use in production in an OSGi setup
  */
-public class JvmSdkConfigurationFactory implements ConfigurationFactory {
+@RunWith(PaxExam.class)
+public class DemoOSGiMinimalConfigTest {
 
-    ///Disabling annoying outputs
-    static{
-        System.setProperty("org.ops4j.pax.logging.DefaultServiceLog.level","WARN");
-    }
-
-
-    @Override
+    @Configuration
     public Option[] createConfiguration() {
-
-
         return options(
                 workingDirectory("target/paxexam/"),
                 cleanCaches(true),
                 getBundles(),
-                junitBundles(),
-                //disabling noisy logs from apache http
-                systemProperty("org.ops4j.pax.logging.DefaultServiceLog.level").value("INFO")
+                junitBundles()
         );
     }
 
@@ -65,20 +65,10 @@ public class JvmSdkConfigurationFactory implements ConfigurationFactory {
                 "org.apache.httpcomponents.httpasyncclient",
                 "org.apache.httpcomponents.httpclient",
                 "org.apache.httpcomponents.httpcore",
-                "org.assertj.core",
                 "org.objectweb.asm",
                 "org.objectweb.asm.commons",
                 "org.objectweb.asm.tree",
-                "org.objenesis",
-                "net.bytebuddy.byte-buddy",
-                "net.bytebuddy.byte-buddy-agent",
-                "org.mockito.mockito-core",
-                "org.ops4j.pax.logging.pax-logging-api",
-                "org.ops4j.pax.logging.pax-logging-service",
-                //dependencies for tests
-                "ch.qos.logback.classic",
-                "ch.qos.logback.core"
-
+                "org.objenesis"
         );
 
         List<String> fragementsList = Arrays.asList(
@@ -86,15 +76,23 @@ public class JvmSdkConfigurationFactory implements ConfigurationFactory {
                 "com.commercetools.sdk.jvm.core.commercetools-java-client-core",
                 "com.commercetools.sdk.jvm.core.sdk-http-apache-async",
                 "com.commercetools.sdk.jvm.core.commercetools-java-client-apache-async",
-                "com.commercetools.sdk.jvm.core.commercetools-models",
-                "com.commercetools.sdk.jvm.core.commercetools-test-lib",
-
-                //Test Fragments
-                "com.commercetools.sdk.jvm.core.commercetools-tests-fragment"
+                "com.commercetools.sdk.jvm.core.commercetools-models"
 
         );
 
         return getBundlesFromNames(dependencies, fragementsList);
+
+    }
+
+    @Test
+    public void test(){
+
+        final Logger logger = LoggerFactory.getLogger(AsyncRetrySupervisor.class);
+        final SphereAuthConfig config = SphereAuthConfigBuilder
+                .ofKeyIdSecret("projectKey", "clientId", "clientSecret")
+                .scopes(asList(SphereProjectScope.MANAGE_CUSTOMERS, SphereProjectScope.VIEW_ORDERS))
+                .build();
+        logger.info(config.toString());
 
     }
 
