@@ -15,7 +15,10 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.orders.commands.OrderDeleteCommand;
 import io.sphere.sdk.orders.commands.OrderFromCartCreateCommand;
 import io.sphere.sdk.orders.commands.OrderUpdateCommand;
-import io.sphere.sdk.orders.commands.updateactions.*;
+import io.sphere.sdk.orders.commands.updateactions.AddDelivery;
+import io.sphere.sdk.orders.commands.updateactions.AddReturnInfo;
+import io.sphere.sdk.orders.commands.updateactions.ChangePaymentState;
+import io.sphere.sdk.orders.commands.updateactions.ChangeShipmentState;
 import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
@@ -79,8 +82,7 @@ public class OrderFixtures {
 
         return client.executeBlocking(OrderUpdateCommand.of(order, asList(
                 ChangeShipmentState.of(ShipmentState.READY),
-                ChangePaymentState.of(PaymentState.PENDING),
-                SetOrderNumber.of(randomKey())
+                ChangePaymentState.of(PaymentState.PENDING)
         )));
     }
 

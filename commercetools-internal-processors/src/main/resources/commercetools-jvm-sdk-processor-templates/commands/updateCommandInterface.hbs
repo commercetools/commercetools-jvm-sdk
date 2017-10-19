@@ -11,6 +11,8 @@ import {{package}}.expansion.{{resourceName}}ExpansionModel;
 import java.util.Collections;
 import java.util.List;
 
+import static io.sphere.sdk.client.SphereRequestUtils.urlEncode;
+
 /**
     {{#if javadocSummary}}{{{javadocSummary}}}{{else}}Command object to update a {@link {{resourceName}}{{!}}}.{{/if}}
 
@@ -57,7 +59,7 @@ public interface {{resourceName}}UpdateCommand extends UpdateCommandDsl<{{resour
         @return the update command for {{resourceName}}
     */
     static {{resourceName}}UpdateCommand of{{capitalizedName}}(final String {{name}}, final Long version, final List<? extends UpdateAction<{{resourceName}}>> updateActions) {
-        final Versioned<{{resourceName}}> versioned = Versioned.of("{{name}}=" + {{name}}, version);//hack for simple reuse
+        final Versioned<{{resourceName}}> versioned = Versioned.of("{{hyphenizedName}}=" + urlEncode({{name}}), version);//hack for simple reuse
         return new {{resourceName}}UpdateCommandImpl(versioned, updateActions);
     }
 

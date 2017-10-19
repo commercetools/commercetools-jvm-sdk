@@ -65,7 +65,11 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
     public void changeOrderStateByOrderNumber() throws Exception {
         withOrder(client(), order -> {
             assertThat(order.getOrderState()).isEqualTo(OrderState.OPEN);
-            final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.ofOrderNumber(order.getOrderNumber(), order.getVersion(), ChangeOrderState.of(OrderState.COMPLETE)));
+            final String orderNumber = randomString();
+            final Order orderWithOrderNumber = client().executeBlocking(OrderUpdateCommand.of(order, SetOrderNumber.of(orderNumber)));
+
+            final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.ofOrderNumber(orderNumber, orderWithOrderNumber.getVersion(),
+                    ChangeOrderState.of(OrderState.COMPLETE)));
             assertThat(updatedOrder.getOrderState()).isEqualTo(OrderState.COMPLETE);
 
             return updatedOrder;

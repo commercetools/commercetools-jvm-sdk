@@ -1,5 +1,7 @@
 package io.sphere.sdk.annotations.processors;
 
+import com.google.common.base.CaseFormat;
+import com.google.common.base.Converter;
 import io.sphere.sdk.annotations.HasUpdateCommand;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -43,11 +45,13 @@ public class UpdateCommandEndpointAnnotationProcessor<A extends Annotation> exte
 
     @Override
     protected void additions(final HasUpdateCommand annotation, final HashMap<String, Object> map) {
+        final Converter<String, String> hyphenizer = CaseFormat.UPPER_CAMEL.converterTo(CaseFormat.LOWER_HYPHEN);
         final List<Map<String, String>> updateWith = new ArrayList<>();
         for (final String property : annotation.updateWith()) {
             final Map<String, String> updateWithProperties = new HashMap<>();
             updateWithProperties.put("name", property);
             updateWithProperties.put("capitalizedName", capitalize(property));
+            updateWithProperties.put("hyphenizedName", hyphenizer.convert(property));
             updateWith.add(updateWithProperties);
         }
         map.put("updateWith", updateWith);

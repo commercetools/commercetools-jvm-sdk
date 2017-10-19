@@ -7,6 +7,8 @@ import io.sphere.sdk.models.Versioned;
 import {{package}}.{{resourceName}};
 import {{package}}.expansion.{{resourceName}}ExpansionModel;
 
+import static io.sphere.sdk.client.SphereRequestUtils.urlEncode;
+
 /**
 {{#if javadocSummary}}{{{javadocSummary}}}{{else}}Command object to delete a {@link {{resourceName}}{{!}}}.{{/if}}
 {{#if includeExamples}}
@@ -35,7 +37,7 @@ public interface {{resourceName}}DeleteCommand extends MetaModelReferenceExpansi
         @return delete command
     */
     static {{resourceName}}DeleteCommand of{{capitalizedName}}(final String {{name}}, final Long version) {
-        final Versioned<{{resourceName}}> versioned = Versioned.of("{{name}}=" + {{name}}, version);//hack for simple reuse
+        final Versioned<{{resourceName}}> versioned = Versioned.of("{{hyphenizedName}}=" + urlEncode({{name}}), version);//hack for simple reuse
         return of(versioned);
     }
 {{/each}}
