@@ -1,8 +1,6 @@
 package io.sphere.sdk.meta;
 
-import io.sphere.sdk.cartdiscounts.CartDiscountDraft;
-import io.sphere.sdk.cartdiscounts.CartDiscountDraftBuilder;
-import io.sphere.sdk.cartdiscounts.GiftLineItemCartDiscountValue;
+import io.sphere.sdk.cartdiscounts.*;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.carts.commands.updateactions.SetShippingMethod;
 import io.sphere.sdk.carts.expansion.CartExpansionModel;
@@ -12,6 +10,7 @@ import io.sphere.sdk.carts.queries.CartQueryModel;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryDraft;
 import io.sphere.sdk.categories.CategoryDraftBuilder;
+import io.sphere.sdk.categories.CategoryTree;
 import io.sphere.sdk.categories.commands.updateactions.SetKey;
 import io.sphere.sdk.categories.queries.CategoryQueryModel;
 import io.sphere.sdk.channels.Channel;
@@ -67,10 +66,7 @@ import io.sphere.sdk.products.attributes.Attribute;
 import io.sphere.sdk.products.attributes.AttributeAccess;
 import io.sphere.sdk.products.attributes.AttributeDefinition;
 import io.sphere.sdk.products.commands.ProductImageUploadCommand;
-import io.sphere.sdk.products.commands.updateactions.SetAttribute;
-import io.sphere.sdk.products.commands.updateactions.SetMetaDescription;
-import io.sphere.sdk.products.commands.updateactions.SetMetaKeywords;
-import io.sphere.sdk.products.commands.updateactions.SetMetaTitle;
+import io.sphere.sdk.products.commands.updateactions.*;
 import io.sphere.sdk.products.expansion.ProductDataExpansionModel;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
 import io.sphere.sdk.products.messages.ProductDeletedMessage;
@@ -84,6 +80,7 @@ import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.ProductTypeDraftBuilder;
 import io.sphere.sdk.producttypes.ProductTypeLocalRepository;
 import io.sphere.sdk.producttypes.commands.updateactions.ChangeInputHint;
+import io.sphere.sdk.producttypes.commands.updateactions.RemoveEnumValues;
 import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.reviews.ReviewDraft;
@@ -117,6 +114,7 @@ import java.util.concurrent.CompletionStage;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 import java.util.function.BiFunction;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
@@ -137,6 +135,25 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+ <h3 class=released-version id="v1_25_0">1.25.0 (19.10.2017)</h3>
+ <ul>
+ <li class=new-in-release>Added support for OSGi.</li>
+ <li class=new-in-release>Added support for keys in {@link CategoryTree} with {@link CategoryTree#findByKey(String)}.</li>
+ <li class=new-in-release>
+    Added new shipping rate input property in {@link Order#getShippingRateInput()} and {@link Project#getShippingRateInputType()}.
+    Added new tiered shipping rates property in {@link ShippingRate#getTiers()}.
+ </li>
+ <li class=new-in-release>Added new product type update action {@link RemoveEnumValues}.</li>
+ <li class=new-in-release>Added new product update action {@link SetImageLabel}.</li>
+ <li class=new-in-release>Added getter methods for our generated draft builder classes.</li>
+ <li class=new-in-release>Added new property {@link CartDiscount#getStackingMode()}, {@link CartDiscountDraft#getStackingMode()} and enum {@link StackingMode}.</li>
+ <li class=new-in-release>
+    Improved performance of {@link QueryExecutionUtils} helper class by providing the query method
+    {@link QueryExecutionUtils#queryAll(SphereClient, QueryDsl, Consumer)} .
+ </li>
+ <li class=change-in-release>Marked {@link ProductDraft#getMasterVariant()} as nullable.</li>
+ </ul>
+
  <h3 class=released-version id="v1_24_0">1.24.0 (29.09.2017)</h3>
  <ul>
  <li class=change-in-release>Changed type of {@link io.sphere.sdk.shoppinglists.LineItemDraft#getCustom()} to {@link CustomFieldsDraft}.
@@ -678,10 +695,10 @@ import java.util.function.Function;
  <li class=new-in-release>{@link io.sphere.sdk.producttypes.commands.updateactions.ChangeIsSearchable}</li>
  <li class=new-in-release>improved Exception classes documentation</li>
  <li class=new-in-release>
- {@link io.sphere.sdk.categories.CategoryTree#findSiblings(Collection)},
- {@link io.sphere.sdk.categories.CategoryTree#getSubtree(Collection)},
- {@link io.sphere.sdk.categories.CategoryTree#getSubtreeRoots()} and
- {@link io.sphere.sdk.categories.CategoryTree#getRootAncestor(Identifiable)}</li>
+ {@link CategoryTree#findSiblings(Collection)},
+ {@link CategoryTree#getSubtree(Collection)},
+ {@link CategoryTree#getSubtreeRoots()} and
+ {@link CategoryTree#getRootAncestor(Identifiable)}</li>
  <li class=new-in-release>set default timeout for HTTP client in {@code commercetools-java-client} to 121 seconds so {@link io.sphere.sdk.client.GatewayTimeoutException} can occur</li>
  <li class=new-in-release>{@link io.sphere.sdk.payments.commands.updateactions.ChangeAmountPlanned}</li>
  <li class=new-in-release>{@link io.sphere.sdk.types.commands.TypeDeleteCommand#ofKey(String, Long)} and {@link io.sphere.sdk.types.commands.TypeUpdateCommand#ofKey(String, Long, List)} </li>
@@ -1150,7 +1167,7 @@ PagedSearchResult<ProductProjection> result = client.execute(search);
  <li class=change-in-release>The product attributes have been refactored, look at the {@link ProductAttributeDocumentation} how it works now.</li>
  <li class=change-in-release>{@link io.sphere.sdk.client.SphereClient} implements {@link AutoCloseable} instead of {@link java.io.Closeable}.</li>
  <li class=change-in-release>For timestamps we moved from {@link java.time.Instant} to {@link java.time.ZonedDateTime} since the latter also contains a timezone which better reflects the platforms date time data.</li>
- <li class=change-in-release>Getting the child categories of a category is not in category anymore but in {@link io.sphere.sdk.categories.CategoryTree#findChildren(Identifiable)}.</li>
+ <li class=change-in-release>Getting the child categories of a category is not in category anymore but in {@link CategoryTree#findChildren(Identifiable)}.</li>
  <li class=fixed-in-release>Sphere client does not shutdown actors properly.  See <a target="_blank" href="https://github.com/commercetools/commercetools-jvm-sdk/issues/491">#491</a>.</li>
  <li class=removed-in-release>{@code Category#getPathInTree()}</li>
  <li class=removed-in-release>{@code ExperimentalProductImageUploadCommand}, but you can find a similar command here: <a href="https://github.com/commercetools/commercetools-jvm-sdk-experimental-java-add-ons">https://github.com/commercetools/commercetools-jvm-sdk-experimental-java-add-ons</a></li>
@@ -1411,7 +1428,7 @@ PagedSearchResult<ProductProjection> result = client.execute(search);
  <li>Added {@link io.sphere.sdk.products.PriceBuilder}.</li>
  <li>Further null checks.</li>
  <li>Add a lot of a Javadoc, in general for the packages.</li>
- <li>{@link io.sphere.sdk.categories.CategoryTree#of(java.util.List)} instead of CategoryTreeFactory is to be used for creating a category tree.</li>
+ <li>{@link CategoryTree#of(java.util.List)} instead of CategoryTreeFactory is to be used for creating a category tree.</li>
  <li>Move {@link io.sphere.sdk.models.AddressBuilder} out of the {@link io.sphere.sdk.models.Address} class.</li>
  <li>Performed a lot of renamings like the {@code requests} package to {@code http}</li>
  <li>Moved commands and queries to own packages for easier discovery.</li>
