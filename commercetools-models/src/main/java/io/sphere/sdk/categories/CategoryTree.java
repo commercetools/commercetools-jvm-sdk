@@ -22,7 +22,7 @@ public interface CategoryTree {
      * @return root categories
      */
     List<Category> getRoots();
-
+                                 
     /**
      * Finds a category by id.
      *
@@ -55,6 +55,13 @@ public interface CategoryTree {
      * @return a category matching the criteria
      */
     Optional<Category> findBySlug(Locale locale, String slug);
+
+    /**
+     * Finds a category by the key.
+     * @param key the category key
+     * @return a category matching the criteria
+     */
+    Optional<Category> findByKey(String key);
 
     /**
      * All categories as a flat list.
