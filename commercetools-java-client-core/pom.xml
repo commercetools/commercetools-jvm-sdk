@@ -3,12 +3,12 @@
     <parent>
         <groupId>com.commercetools.sdk.jvm.core</groupId>
         <artifactId>commercetools-jvm-sdk</artifactId>
-        <version>1.24.1-SNAPSHOT</version>
+        <version>1.25.0</version>
     </parent>
     <groupId>com.commercetools.sdk.jvm.core</groupId>
     <artifactId>commercetools-java-client-core</artifactId>
     <packaging>bundle</packaging>
-    <version>1.24.1-SNAPSHOT</version>
+    <version>1.25.0</version>
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
@@ -38,7 +38,7 @@
                         <Export-Package>
                             io.sphere.sdk.client
                         </Export-Package>
-                        <Import-Package></Import-Package>
+                        <Import-Package />
                         <Bundle-Version>${project.version}</Bundle-Version>
                         <Require-Capability>
                             osgi.extender;filter:="(osgi.extender=osgi.serviceloader.processor)"</Require-Capability>
