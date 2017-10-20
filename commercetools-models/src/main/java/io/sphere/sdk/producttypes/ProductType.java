@@ -48,13 +48,13 @@ import java.util.Optional;
         "  {@include.example io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier}\n" +
         "\n" +
         "  <p>To create attribute definitions refer to {@link io.sphere.sdk.products.attributes.AttributeDefinition}.</p>")
-@HasUpdateCommand(updateWithKey = true)
+@HasUpdateCommand(updateWith = "key")
 @HasDeleteCommand(javadocSummary = "Deletes a product type.\n" +
         "\n" +
         " <p>Delete by ID:</p>\n" +
         " {@include.example io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommandIntegrationTest#execution()}\n" +
         " <p>Delete by key:</p>\n" +
-        " {@include.example io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommandIntegrationTest#executionByKey()}", deleteWithKey = true)
+        " {@include.example io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommandIntegrationTest#executionByKey()}", deleteWith = "key")
 @HasQueryModel
 public interface ProductType extends Resource<ProductType>, AttributeDefinitionContainer, WithKey {
 

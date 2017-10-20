@@ -9,5 +9,5 @@ public @interface HasDeleteCommand {
 
     String[] includeExamples() default {};
 
-    boolean deleteWithKey() default false;
+    String[] deleteWith() default {};
 }

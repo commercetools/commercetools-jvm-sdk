@@ -46,8 +46,11 @@ import java.util.Set;
         "    }"})
 @ResourceInfo(pluralName = "orders", pathElement = "orders")
 @HasByIdGetEndpoint(javadocSummary = "Gets an order by ID.", includeExamples = "io.sphere.sdk.orders.commands.OrderFromCartCreateCommandIntegrationTest#execution()")
-@HasUpdateCommand
-@HasDeleteCommand
+@HasUpdateCommand(updateWith = "orderNumber")
+@HasDeleteCommand(deleteWith = "orderNumber",
+        includeExamples = {
+            "io.sphere.sdk.orders.commands.OrderDeleteCommandIntegrationTest#deleteById()",
+            "io.sphere.sdk.orders.commands.OrderDeleteCommandIntegrationTest#deleteByOrderNumber()"})
 @HasQueryModel(implBaseClass = "io.sphere.sdk.carts.queries.CartLikeQueryModelImpl<Order>", baseInterfaces = {"CartLikeQueryModel<Order>"})
 public interface Order extends CartLike<Order> {
     /**

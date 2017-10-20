@@ -5,8 +5,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.customers.Customer;
-import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.WithKey;
 
 import javax.annotation.Nullable;
@@ -36,8 +36,8 @@ import javax.annotation.Nullable;
 @HasCreateCommand(javadocSummary = "Creates a new customer group", includeExamples = "io.sphere.sdk.customergroups.commands.CustomerGroupCreateCommandIntegrationTest#execution()", interfaceContents = "static CustomerGroupCreateCommand of(final String groupName) {\n" +
         "        return of(CustomerGroupDraft.of(groupName));\n" +
         "    }")
-@HasUpdateCommand(javadocSummary = "Updates a customer group.",updateWithKey = true)
-@HasDeleteCommand(javadocSummary = "Deletes a customer group.", includeExamples = "io.sphere.sdk.customergroups.commands.CustomerGroupDeleteCommandByIdIntegrationTest#execution()", deleteWithKey = true)
+@HasUpdateCommand(javadocSummary = "Updates a customer group.", updateWith = "key")
+@HasDeleteCommand(javadocSummary = "Deletes a customer group.", includeExamples = "io.sphere.sdk.customergroups.commands.CustomerGroupDeleteCommandByIdIntegrationTest#execution()", deleteWith = "key")
 @HasQueryModel
 public interface CustomerGroup extends Resource<CustomerGroup>, WithKey {
 

@@ -1,5 +1,7 @@
 package io.sphere.sdk.annotations.processors;
 
+import com.google.common.base.CaseFormat;
+import com.google.common.base.Converter;
 import io.sphere.sdk.annotations.HasDeleteCommand;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
@@ -8,10 +10,13 @@ import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
 import java.lang.annotation.Annotation;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static java.util.Arrays.asList;
+import static org.apache.commons.lang3.text.WordUtils.capitalize;
 
 @SupportedAnnotationTypes({"io.sphere.sdk.annotations.HasDeleteCommand"})
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
@@ -40,6 +45,15 @@ public class DeleteCommandEndpointAnnotationProcessor<A extends Annotation> exte
 
     @Override
     protected void additions(final HasDeleteCommand annotation, final HashMap<String, Object> map) {
-        map.put("deleteWithKey", annotation.deleteWithKey());
+        final Converter<String, String> hyphenizer = CaseFormat.UPPER_CAMEL.converterTo(CaseFormat.LOWER_HYPHEN);
+        final List<Map<String, String>> deleteWith = new ArrayList<>();
+        for (final String property : annotation.deleteWith()) {
+            final Map<String, String> deleteWithProperties = new HashMap<>();
+            deleteWithProperties.put("name", property);
+            deleteWithProperties.put("capitalizedName", capitalize(property));
+            deleteWithProperties.put("hyphenizedName", hyphenizer.convert(property));
+            deleteWith.add(deleteWithProperties);
+        }
+        map.put("deleteWith", deleteWith);
     }
 }
