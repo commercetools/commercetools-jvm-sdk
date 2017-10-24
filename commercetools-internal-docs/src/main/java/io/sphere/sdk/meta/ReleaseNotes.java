@@ -133,6 +133,13 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+ <h3 class=released-version id="v1_25_0">1.26.0 (19.10.2017)</h3>
+ <ul>
+ <li class=new-in-release>Added support for creating multi buy discounts for custom line items{@link io.sphere.sdk.cartdiscounts.MultiBuyCustomLineItemsTarget},
+ {@link io.sphere.sdk.cartdiscounts.SelectionMode}.
+ </li>
+ </ul>
+
  <h3 class=released-version id="v1_25_0">1.25.0 (19.10.2017)</h3>
  <ul>
  <li class=new-in-release>Added support for OSGi.</li>
