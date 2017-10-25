@@ -1,5 +1,6 @@
 package io.sphere.sdk.products.attributes;
 
+import io.sphere.sdk.annotations.NotOSGiCompatible;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductsScenario1Fixtures;
 import io.sphere.sdk.producttypes.ProductType;
@@ -19,6 +20,7 @@ import static java.util.Collections.singletonList;
 import static io.sphere.sdk.products.ProductsScenario1Fixtures.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@NotOSGiCompatible
 public class DefaultProductAttributeFormatterIntegrationTest extends IntegrationTest {
 
     private static ProductsScenario1Fixtures.Data data;

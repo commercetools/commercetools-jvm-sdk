@@ -120,6 +120,14 @@ public class CartDiscountCreateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void multiBuyCustomLineItemsTarget() throws Exception {
+        final RelativeCartDiscountValue value = RelativeCartDiscountValue.of(500);
+        final MultiBuyCustomLineItemsTarget target = MultiBuyCustomLineItemsTarget.of("1 = 1", 3L, 1L,
+                SelectionMode.CHEAPEST, 10L);
+        checkTargetSerialization(value, target);
+    }
+
+    @Test
     public void createByJson() {
         final CartDiscountDraft cartDiscountDraft = SphereJsonUtils.readObjectFromResource("drafts-tests/cartDiscount.json", CartDiscountDraft.class);
 
