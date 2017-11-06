@@ -58,7 +58,7 @@ public class CartDiscountFixtures {
         client.executeBlocking(CartDiscountDeleteCommand.of(cartDiscount));
     }
 
-    public static void withCartDiscount(final BlockingSphereClient client, final UnaryOperator<CartDiscountDraftBuilder> builderUnaryOperator, final Function<CartDiscount, CartDiscount> update) {
+    public static void withCartDiscount(final BlockingSphereClient client, final UnaryOperator<CartDiscountDraftBuilder> builderUnaryOperator, final UnaryOperator<CartDiscount> update) {
         final CartDiscountDraft draft = builderUnaryOperator.apply(newCartDiscountDraftBuilder()).build();
         final CartDiscount cartDiscount = client.executeBlocking(CartDiscountCreateCommand.of(draft));
         final CartDiscount updatedCartDiscount = update.apply(cartDiscount);
