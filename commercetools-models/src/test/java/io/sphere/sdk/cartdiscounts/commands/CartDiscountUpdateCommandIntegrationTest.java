@@ -15,6 +15,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.UnaryOperator;
 
 import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.withCartDiscount;
 import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.withPersistentCartDiscount;
@@ -128,16 +129,20 @@ public class CartDiscountUpdateCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void changeRequiresDiscountCode() throws Exception {
-        withPersistentCartDiscount(client(), cartDiscount -> {
-            final boolean newRequiresDiscountCode = !cartDiscount.isRequiringDiscountCode();
+        withCartDiscount(
+            client(),
+            cartDiscountDraftBuilder -> cartDiscountDraftBuilder.requiresDiscountCode(true),
+            cartDiscount -> {
+                final boolean newRequiresDiscountCode = !cartDiscount.isRequiringDiscountCode();
 
-            assertThat(cartDiscount.isRequiringDiscountCode()).isNotEqualTo(newRequiresDiscountCode);
+                assertThat(cartDiscount.isRequiringDiscountCode()).isNotEqualTo(newRequiresDiscountCode);
 
-            final CartDiscount updatedDiscount =
-                    client().executeBlocking(CartDiscountUpdateCommand.of(cartDiscount, ChangeRequiresDiscountCode.of(newRequiresDiscountCode)));
+                final CartDiscount updatedDiscount =
+                        client().executeBlocking(CartDiscountUpdateCommand.of(cartDiscount, ChangeRequiresDiscountCode.of(newRequiresDiscountCode)));
 
-            assertThat(updatedDiscount.isRequiringDiscountCode()).isEqualTo(newRequiresDiscountCode);
-        });
+                assertThat(updatedDiscount.isRequiringDiscountCode()).isEqualTo(newRequiresDiscountCode);
+                return updatedDiscount;
+            });
     }
 
     @Test
