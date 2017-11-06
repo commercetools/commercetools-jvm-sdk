@@ -44,6 +44,7 @@ public class CartDiscountFixtures {
         final Query<CartDiscount> query = CartDiscountQuery.of().withPredicates(m -> m.name().lang(ENGLISH).is(name));
         return client.executeBlocking(query).head().orElseGet(() -> {
             final CartDiscountDraft draft = newCartDiscountDraftBuilder()
+                    .requiresDiscountCode(true)
                     .name(LocalizedString.ofEnglish(name))
                     .build();
             return client.executeBlocking(CartDiscountCreateCommand.of(draft));
