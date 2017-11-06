@@ -128,16 +128,20 @@ public class CartDiscountUpdateCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void changeRequiresDiscountCode() throws Exception {
-        withPersistentCartDiscount(client(), cartDiscount -> {
-            final boolean newRequiresDiscountCode = !cartDiscount.isRequiringDiscountCode();
+        withCartDiscount(
+            client(),
+            cartDiscountDraftBuilder -> cartDiscountDraftBuilder.requiresDiscountCode(true),
+            cartDiscount -> {
+                final boolean newRequiresDiscountCode = !cartDiscount.isRequiringDiscountCode();
 
-            assertThat(cartDiscount.isRequiringDiscountCode()).isNotEqualTo(newRequiresDiscountCode);
+                assertThat(cartDiscount.isRequiringDiscountCode()).isNotEqualTo(newRequiresDiscountCode);
 
-            final CartDiscount updatedDiscount =
-                    client().executeBlocking(CartDiscountUpdateCommand.of(cartDiscount, ChangeRequiresDiscountCode.of(newRequiresDiscountCode)));
+                final CartDiscount updatedDiscount =
+                        client().executeBlocking(CartDiscountUpdateCommand.of(cartDiscount, ChangeRequiresDiscountCode.of(newRequiresDiscountCode)));
 
-            assertThat(updatedDiscount.isRequiringDiscountCode()).isEqualTo(newRequiresDiscountCode);
-        });
+                assertThat(updatedDiscount.isRequiringDiscountCode()).isEqualTo(newRequiresDiscountCode);
+                return updatedDiscount;
+            });
     }
 
     @Test

@@ -239,6 +239,7 @@ public class CartFixtures {
         withCustomerAndCart(client, (customer, cart) -> {
             final CartDiscountDraft draft = CartDiscountFixtures.newCartDiscountDraftBuilder()
                     .cartPredicate(CartPredicate.of(format("customer.id = \"%s\"", customer.getId())))
+                    .requiresDiscountCode(true)
                     .isActive(true)
                     .validFrom(null)
                     .validUntil(null)
