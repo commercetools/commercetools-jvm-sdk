@@ -31,6 +31,7 @@ import io.sphere.sdk.customers.CustomerDraft;
 import io.sphere.sdk.customers.CustomerDraftBuilder;
 import io.sphere.sdk.customers.commands.CustomerCreateEmailTokenCommand;
 import io.sphere.sdk.customers.commands.CustomerPasswordResetCommand;
+import io.sphere.sdk.customers.commands.CustomerSignInCommand;
 import io.sphere.sdk.customers.commands.CustomerVerifyEmailCommand;
 import io.sphere.sdk.customers.commands.updateactions.AddShippingAddressId;
 import io.sphere.sdk.customers.commands.updateactions.SetSalutation;
@@ -137,6 +138,13 @@ import java.util.function.Function;
  <ul>
  <li class=new-in-release>Added support for creating multi buy discounts for custom line items{@link io.sphere.sdk.cartdiscounts.MultiBuyCustomLineItemsTarget},
  {@link io.sphere.sdk.cartdiscounts.SelectionMode}.
+ </li>
+ <li class=new-in-release>Added support for getting {@link io.sphere.sdk.orders.queries.OrderByOrderNumberGet},
+ updating {@link io.sphere.sdk.orders.commands.OrderUpdateCommand#ofOrderNumber(String, Long, UpdateAction)} and
+ deleting {@link io.sphere.sdk.orders.commands.OrderDeleteCommand#ofOrderNumber(String, Long)} of an order by order number.
+ </li>
+ <li class=new-in-release>
+ Added new {@link CustomerSignInCommand#updateProductData} property to {@link CustomerSignInCommand}.
  </li>
  </ul>
 
