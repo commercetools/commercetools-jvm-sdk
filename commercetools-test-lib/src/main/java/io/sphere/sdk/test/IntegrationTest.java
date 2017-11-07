@@ -124,7 +124,7 @@ public abstract class IntegrationTest {
 
     protected static HttpClient newHttpClient() {
         //NO SSL Client: this client doesn't perform ssl certification check, which is a necessity to run tests on CI
-        CloseableHttpAsyncClient asyncClient = !"false".equals(System.getenv("JVM_SDK_IT_SSL_VALIDATION")) ? createNoSSLClient() : HttpAsyncClients.createDefault();
+        CloseableHttpAsyncClient asyncClient = createNoSSLClient();
         return IntegrationTestHttpClient.of(asyncClient);
     }
 

@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         @JsonSubTypes.Type(value = LineItemsTarget.class, name = "lineItems"),
         @JsonSubTypes.Type(value = CustomLineItemsTarget.class, name = "customLineItems"),
         @JsonSubTypes.Type(value = ShippingCostTarget.class, name = "shipping"),
+        @JsonSubTypes.Type(value = MultiBuyCustomLineItemsTarget.class, name = "multiBuyCustomLineItems"),
         @JsonSubTypes.Type(value = MultiBuyLineItemsTarget.class, name = "multiBuyLineItems")})
 public interface CartDiscountTarget {
 }
