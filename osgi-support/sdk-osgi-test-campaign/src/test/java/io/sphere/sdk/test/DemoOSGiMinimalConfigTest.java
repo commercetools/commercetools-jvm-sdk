@@ -54,7 +54,6 @@ public class DemoOSGiMinimalConfigTest {
                 "com.fasterxml.jackson.module.jackson-module-parameter-names",
                 "com.neovisionaries.i18n",
                 "com.google.gson",
-                "com.neovisionaries.i18n",
                 "org.apache.aries.spifly.dynamic.bundle",
                 "org.apache.aries.util",
                 "org.apache.commons.codec",
@@ -67,8 +66,7 @@ public class DemoOSGiMinimalConfigTest {
                 "org.apache.httpcomponents.httpcore",
                 "org.objectweb.asm",
                 "org.objectweb.asm.commons",
-                "org.objectweb.asm.tree",
-                "org.objenesis"
+                "org.objectweb.asm.tree"
         );
 
         List<String> fragementsList = Arrays.asList(
