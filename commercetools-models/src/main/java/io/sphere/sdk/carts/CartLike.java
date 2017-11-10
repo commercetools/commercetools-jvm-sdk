@@ -191,7 +191,7 @@ public interface CartLike<T> extends Resource<T>, Custom {
      *
      * @see io.sphere.sdk.carts.commands.updateactions.ChangeTaxCalculationMode
      *
-     * @return tax mode
+     * @return TaxCalculationMode
      */
     @IgnoreInQueryModel
     TaxCalculationMode getTaxCalculationMode();
