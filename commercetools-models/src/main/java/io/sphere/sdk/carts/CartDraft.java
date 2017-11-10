@@ -79,6 +79,9 @@ public interface CartDraft extends CustomDraft {
     @Nullable
     ShippingRateInputDraft getShippingRateInput();
 
+    @Nullable
+    TaxCalculationMode getTaxCalculationMode();
+
     static CartDraftDsl of(final CurrencyUnit currency) {
         return CartDraftDsl.of(currency);
     }
