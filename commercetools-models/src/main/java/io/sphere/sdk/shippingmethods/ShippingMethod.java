@@ -89,7 +89,6 @@ public interface ShippingMethod extends Resource<ShippingMethod> {
     Boolean isDefault();
 
     @IgnoreInQueryModel
-    @HasNoUpdateAction
     @Nullable
     String getPredicate();
 
