@@ -17,12 +17,16 @@ import java.time.ZonedDateTime;
 @JsonDeserialize(as = LineItemDraftDsl.class)
 @ResourceDraftValue(
         abstractBuilderClass = true,
-        factoryMethods = {@FactoryMethod(parameterNames = {"productId"})})
+        factoryMethods = {
+                @FactoryMethod(methodName = "ofSku", parameterNames = {"sku", "quantity"}),
+                @FactoryMethod(parameterNames = {"productId"})})
 public interface LineItemDraft {
     String getProductId();
 
     @Nullable
     Integer getVariantId();
+
+    String getSku();
 
     @Nullable
     Long getQuantity();
