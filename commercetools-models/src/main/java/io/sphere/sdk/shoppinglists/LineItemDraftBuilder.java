@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
 public final class LineItemDraftBuilder extends LineItemDraftBuilderBase<LineItemDraftBuilder> {
-    public LineItemDraftBuilder(@Nullable ZonedDateTime addedAt, @Nullable CustomFieldsDraft custom, String productId, @Nullable Long quantity, String sku, @Nullable Integer variantId) {
+    LineItemDraftBuilder(@Nullable ZonedDateTime addedAt, @Nullable CustomFieldsDraft custom, String productId, @Nullable Long quantity, String sku, @Nullable Integer variantId) {
         super(addedAt, custom, productId, quantity, sku, variantId);
     }
 
