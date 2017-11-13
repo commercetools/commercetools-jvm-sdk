@@ -158,6 +158,10 @@ public interface Cart extends CartLike<Cart> {
     TaxedPrice getTaxedPrice();
 
     @Override
+    @HasUpdateAction
+    TaxCalculationMode getTaxCalculationMode();
+
+    @Override
     MonetaryAmount getTotalPrice();
 
     @Override
