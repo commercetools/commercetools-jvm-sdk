@@ -7,6 +7,7 @@ import io.sphere.sdk.products.commands.updateactions.SetSku;
 import io.sphere.sdk.shoppinglists.*;
 import io.sphere.sdk.shoppinglists.queries.ShoppingListQuery;
 import io.sphere.sdk.test.IntegrationTest;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,6 +23,7 @@ public class ShoppingListCreateCommandIntegrationTest extends IntegrationTest {
     private static final String DEMO_SHOPPING_LIST_KEY = "demo-shopping-list-key";
 
     @Before
+    @After
     public void clean() {
         List<ShoppingList> results = client().executeBlocking(ShoppingListQuery.of()
                 .withPredicates(l -> l.key().is(DEMO_SHOPPING_LIST_KEY)))
