@@ -57,7 +57,7 @@ then
         echo "Release branch wasn't provided and patch is not allowed on master"
         exit 1
     else
-        git checkout ${RELEASE_BRANCH} || {echo "Provided branch does not exits!" && exit 1}
+        git checkout ${RELEASE_BRANCH} || {/bin/echo "Provided branch does not exits!" && exit 1}
     fi
 fi
 
