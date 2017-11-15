@@ -59,6 +59,7 @@ then
         echo "Release branch wasn't provided and patch is not allowed on master"
         exit 1
     else
+        git fetch
         if ! git checkout ${RELEASE_BRANCH}
         then
             echo "Provided branch does not exits!"
