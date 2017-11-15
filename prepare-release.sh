@@ -82,6 +82,7 @@ then
     git checkout -b ${BRANCH_NAME}
     git commit -am"TASK Prepare release ${RELEASE_VERSION}"
 
+    git push origin ${BRANCH_NAME}
     git checkout ${CURRENT_BRANCH}
 
     updateSnapshotVersion ${TYPE}
@@ -98,4 +99,8 @@ then
     fi
 fi
 
+git pull -r
+git push
+
 echo Build directory ${TMPDIR}
+
