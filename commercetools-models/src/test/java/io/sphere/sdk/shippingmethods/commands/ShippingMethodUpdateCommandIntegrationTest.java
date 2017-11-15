@@ -69,6 +69,18 @@ public class ShippingMethodUpdateCommandIntegrationTest extends IntegrationTest 
     }
 
     @Test
+    public void setPredicate() throws Exception {
+        withUpdateableShippingMethod(client(), shippingMethod -> {
+            final String predicate = "1=1";
+            final ShippingMethod updatedShippingMethod = client().executeBlocking(ShippingMethodUpdateCommand.of(shippingMethod, SetPredicate.of(predicate)));
+
+            assertThat(updatedShippingMethod.getPredicate()).isEqualTo(predicate);
+
+            return updatedShippingMethod;
+        });
+    }
+
+    @Test
     public void changeName() throws Exception {
         withUpdateableShippingMethod(client(), shippingMethod -> {
             final String newName = randomString();
