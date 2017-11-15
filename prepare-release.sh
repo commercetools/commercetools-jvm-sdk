@@ -49,13 +49,15 @@ fi
 CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD`
 TYPE=$1
 
-
 if [[ ${TYPE} == "PATCH" ]]
 then
-if [[ ${CURRENT_BRANCH} == "master" ]]
+    RELEASE_BRANCH=$2
+    if [ -z ${RELEASE_BRANCH} ]
     then
-        echo "Patch not allowed at this branch"
+        echo "Release branch wasn't provided and patch is not allowed on master"
         exit 1
+    else
+        git checkout ${RELEASE_BRANCH} || {echo "Provided branch does not exits!" && exit 1}
     fi
 fi
 
