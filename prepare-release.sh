@@ -102,15 +102,14 @@ then
 
     git commit -am"Set next development version ${DEVELOPMENT_VERSION}"
     git pull -r
-    git push
 elif [[ ${TYPE} == "PATCH" ]]
 then
     if [[ ${CURRENT_BRANCH} != "master" ]]
     then
         git commit -am"TASK Prepare release ${RELEASE_VERSION}"
-        git push origin ${RELEASE_BRANCH}
     fi
 fi
 
+git push origin ${CURRENT_BRANCH}
 echo Build directory ${TMPDIR}
 
