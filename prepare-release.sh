@@ -82,7 +82,7 @@ updateReleaseVersion ${TYPE}
 RELEASE_VERSION=$(getVersion)
 echo Build release ${RELEASE_VERSION} without running tests
 
-./mvnw clean install -DskipTests
+./mvnw clean install -DskipTests -Pjavadoc-jdk-8u121
 
 if [[ ${TYPE} != "PATCH" ]]
 then
