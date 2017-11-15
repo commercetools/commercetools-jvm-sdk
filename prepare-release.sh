@@ -65,6 +65,7 @@ then
             echo "Provided branch does not exits!"
             exit 1
         fi
+        CURRENT_BRANCH=${RELEASE_BRANCH}
     fi
 fi
 
@@ -82,7 +83,7 @@ updateReleaseVersion ${TYPE}
 RELEASE_VERSION=$(getVersion)
 echo Build release ${RELEASE_VERSION} without running tests
 
-./mvnw clean install -DskipTests -Pjavadoc-jdk-8u121
+./mvnw clean install -DskipTests
 
 if [[ ${TYPE} != "PATCH" ]]
 then
