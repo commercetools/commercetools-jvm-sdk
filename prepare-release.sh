@@ -69,6 +69,7 @@ then
     fi
 fi
 
+WORKDIR=`pwd`
 TMPDIR=`mktemp -d`
 echo "Copying to ${TMPDIR}"
 
@@ -112,4 +113,7 @@ fi
 
 git push origin ${CURRENT_BRANCH}
 echo Build directory ${TMPDIR}
+cd ${WORKDIR}
 
+git fetch
+git checkout ${BRANCH_NAME}
