@@ -23,4 +23,4 @@ echo "Deploying release ${RELEASE_VERSION}"
 ./mvnw clean deploy -pl "!osgi-support, !osgi-support/mirror-subclass-plugin, !osgi-support/sdk-osgi-test-campaign, !osgi-support/commercetools-tests-fragment" -DskipTests -Prelease,javadoc-jdk-8u121
 
 echo "Publish release javadoc  ${RELEASE_VERSION}"
-# ./mvnw javadoc:aggregate scm-publish:publish-scm -Ppublish-site,javadoc-jdk-8u121
+./mvnw javadoc:aggregate scm-publish:publish-scm -Ppublish-site,javadoc-jdk-8u121
