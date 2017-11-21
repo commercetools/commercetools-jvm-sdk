@@ -3,7 +3,7 @@
     <parent>
         <artifactId>commercetools-jvm-sdk</artifactId>
         <groupId>com.commercetools.sdk.jvm.core</groupId>
-        <version>1.25.1-SNAPSHOT</version>
+        <version>1.26.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>osgi-support</artifactId>
