@@ -3,11 +3,11 @@
     <parent>
         <groupId>com.commercetools.sdk.jvm.core</groupId>
         <artifactId>commercetools-jvm-sdk</artifactId>
-        <version>1.26.0-SNAPSHOT</version>
+        <version>1.25.1-SNAPSHOT</version>
     </parent>
     <artifactId>commercetools-models</artifactId>
     <packaging>bundle</packaging>
-    <version>1.26.0-SNAPSHOT</version>
+    <version>1.25.1-SNAPSHOT</version>
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
