@@ -3,6 +3,7 @@ package io.sphere.sdk.cartdiscounts;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.types.CustomFields;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
@@ -10,11 +11,11 @@ import java.time.ZonedDateTime;
 public final class CartDiscountDraftDsl extends CartDiscountDraftDslBase<CartDiscountDraftDsl> {
 
     @JsonCreator
-    CartDiscountDraftDsl(final @JsonProperty("isActive") @Nullable Boolean active, final String cartPredicate, final @Nullable LocalizedString description,
+    CartDiscountDraftDsl(final @JsonProperty("isActive") @Nullable Boolean active, final String cartPredicate, @Nullable final CustomFields custom, final @Nullable LocalizedString description,
                          final LocalizedString name, final @JsonProperty("requiresDiscountCode") Boolean requiresDiscountCode,
                          final String sortOrder, final StackingMode stackingMode, final @Nullable CartDiscountTarget target, final @Nullable ZonedDateTime validFrom,
                          final @Nullable ZonedDateTime validUntil, final CartDiscountValue value) {
-        super(active, cartPredicate, description, name, requiresDiscountCode, sortOrder, stackingMode, target, validFrom, validUntil, value);
+        super(active, cartPredicate,custom, description, name, requiresDiscountCode, sortOrder, stackingMode, target, validFrom, validUntil, value);
     }
 
     /**

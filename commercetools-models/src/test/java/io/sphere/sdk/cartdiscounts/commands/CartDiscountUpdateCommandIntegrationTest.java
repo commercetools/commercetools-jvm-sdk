@@ -13,12 +13,15 @@ import org.junit.Test;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
 import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.withCartDiscount;
 import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.withPersistentCartDiscount;
 import static io.sphere.sdk.test.SphereTestUtils.*;
+import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
+import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -189,6 +192,38 @@ public class CartDiscountUpdateCommandIntegrationTest extends IntegrationTest {
 
             return updatedDiscount;
         });
+    }
+
+
+    @Test
+    public void setCustomType(){
+        withUpdateableType(client(), type -> {
+            withCartDiscount(client(), cartDiscount -> {
+                final HashMap<String, Object> fields = new HashMap<>();
+                fields.put(STRING_FIELD_NAME, "hello");
+                final CartDiscountUpdateCommand updateCommand =
+                        CartDiscountUpdateCommand.of(cartDiscount, SetCustomType.ofTypeIdAndObjects(type.getId(), fields));
+                final CartDiscount updatedDiscount = client().executeBlocking(updateCommand);
+
+                assertThat(updatedDiscount.getCustom().getType()).isEqualTo(type.toReference());
+                assertThat(updatedDiscount.getCustom().getFieldAsString(STRING_FIELD_NAME)).isEqualTo("hello");
+
+                final CartDiscountUpdateCommand updateCommand2 =
+                        CartDiscountUpdateCommand.of(updatedDiscount,SetCustomField.ofObject(STRING_FIELD_NAME, "a new value"));
+                final CartDiscount updatedDiscount2 = client().executeBlocking(updateCommand2);
+
+                assertThat(updatedDiscount2.getCustom()
+                        .getFieldAsString(STRING_FIELD_NAME)).isEqualTo("a new value");
+
+
+                final CartDiscount updated2 =
+                        client().executeBlocking(CartDiscountUpdateCommand.of(updatedDiscount2, SetCustomType.ofRemoveType()));
+                assertThat(updated2.getCustom()).isNull();
+                return updated2;
+            });
+            return type;
+        });
+
     }
 
     private ZonedDateTime dateTimeAfterValidFromAndOldValidUntil(final CartDiscount cartDiscount) {

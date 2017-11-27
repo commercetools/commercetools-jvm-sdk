@@ -6,9 +6,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.discountcodes.DiscountCode;
-import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Resource;
+import io.sphere.sdk.types.CustomFields;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
@@ -118,6 +119,16 @@ public interface CartDiscount extends Resource<CartDiscount> {
     @IgnoreInQueryModel
     @HasUpdateAction(value = "changeTarget",className = "ChangeTarget")
     CartDiscountTarget getTarget();
+
+
+    /**
+     * Allow to add {@link CustomFields} to the {@link CartDiscount}
+     * @return the {@link CustomFields} defined at this {@link CartDiscount}
+     */
+    @Nullable
+    @IgnoreInQueryModel
+    CustomFields getCustom();
+
 
     /**
      * Lower bound of the validity period.

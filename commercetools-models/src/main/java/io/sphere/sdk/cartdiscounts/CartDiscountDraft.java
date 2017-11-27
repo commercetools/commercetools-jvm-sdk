@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.types.CustomFields;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
@@ -47,6 +48,8 @@ public interface CartDiscountDraft {
 
     CartDiscountValue getValue();
 
+    @Nullable
+    CustomFields getCustom();
     /**
      * Specify whether the application of this discount causes the following discounts to be ignored.
      * Defaults to {@link StackingMode#STACKING}.
