@@ -37,5 +37,10 @@ public @interface HasUpdateAction {
     Class[] superInterfaces() default {};
     boolean makeAbstract() default false;
 
+    /**
+     * Specifies whether there should be a default factory method generated.
+     */
+    boolean generateDefaultFactory() default true;
+
 
 }

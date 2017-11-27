@@ -22,11 +22,13 @@ public final class ChangeAssetName extends StagedProductUpdateActionImpl<Product
     @Nullable
     private final String sku;
     private final String assetId;
+    private final String assetKey;
     private final LocalizedString name;
 
-    private ChangeAssetName(final String assetId, @Nullable final Integer variantId, @Nullable final String sku, final LocalizedString name, @Nullable final Boolean staged) {
+    private ChangeAssetName(@Nullable final String assetId,@Nullable final String assetKey, @Nullable final Integer variantId, @Nullable final String sku, final LocalizedString name, @Nullable final Boolean staged) {
         super("changeAssetName", staged);
         this.assetId = assetId;
+        this.assetKey = assetKey;
         this.variantId = variantId;
         this.sku = sku;
         this.name = name;
@@ -55,7 +57,7 @@ public final class ChangeAssetName extends StagedProductUpdateActionImpl<Product
     }
 
     public static ChangeAssetName ofVariantId(final Integer variantId, final String assetId, final LocalizedString name, @Nullable final Boolean staged) {
-        return new ChangeAssetName(assetId, variantId, null, name, staged);
+        return new ChangeAssetName(assetId,null, variantId, null, name, staged);
     }
 
     public static ChangeAssetName ofSku(final String sku, final String assetId, final LocalizedString name) {
@@ -63,6 +65,24 @@ public final class ChangeAssetName extends StagedProductUpdateActionImpl<Product
     }
 
     public static ChangeAssetName ofSku(final String sku, final String assetId, final LocalizedString name, @Nullable final Boolean staged) {
-        return new ChangeAssetName(assetId, null, sku, name, staged);
+        return new ChangeAssetName(assetId,null,  null, sku, name, staged);
     }
+
+    public static ChangeAssetName ofAssetKeyAndVariantId(final Integer variantId, final String assetKey, final LocalizedString name) {
+        return ofAssetKeyAndVariantId(variantId, assetKey, name, null);
+    }
+
+    public static ChangeAssetName ofAssetKeyAndVariantId(final Integer variantId, final String assetKey, final LocalizedString name, @Nullable final Boolean staged) {
+        return new ChangeAssetName(null,assetKey, variantId, null, name, staged);
+    }
+
+    public static ChangeAssetName ofAssetKeyAndSku(final String sku, final String assetKey, final LocalizedString name) {
+        return ofAssetKeyAndSku(sku, assetKey, name, null);
+    }
+
+    public static ChangeAssetName ofAssetKeyAndSku(final String sku, final String assetKey, final LocalizedString name, @Nullable final Boolean staged) {
+        return new ChangeAssetName(null
+                ,assetKey,  null, sku, name, staged);
+    }
+
 }

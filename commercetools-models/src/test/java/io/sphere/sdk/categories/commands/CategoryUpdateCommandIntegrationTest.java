@@ -10,6 +10,7 @@ import io.sphere.sdk.types.CustomFieldsDraft;
 import io.sphere.sdk.types.CustomFieldsDraftBuilder;
 import io.sphere.sdk.types.Type;
 import net.jcip.annotations.NotThreadSafe;
+import org.assertj.core.api.Condition;
 import org.junit.Test;
 
 import java.util.*;
@@ -181,7 +182,7 @@ public class CategoryUpdateCommandIntegrationTest extends IntegrationTest {
                     .description(description)
                     .tags("desktop-sized", "jpg-format", "REWE", "awesome")
                     .build();
-            final CategoryUpdateCommand command = CategoryUpdateCommand.of(category, AddAsset.of(assetDraft));
+            final CategoryUpdateCommand command = CategoryUpdateCommand.of(category, AddAsset.of(assetDraft,0));
 
             final Category updatedCategory = client().executeBlocking(command);
             final List<Asset> assets = updatedCategory.getAssets();
@@ -200,11 +201,25 @@ public class CategoryUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void changeAssetName() {
+    public void changeAssetNameById() {
         withCategoryHavingAssets(client(), category -> {
             final LocalizedString newName = LocalizedString.ofEnglish("new name");
             final String assetId = category.getAssets().get(0).getId();
             final CategoryUpdateCommand command = CategoryUpdateCommand.of(category, ChangeAssetName.of(assetId, newName));
+
+            final Category updatedCategory = client().executeBlocking(command);
+
+            final Asset updatedAsset = updatedCategory.getAssets().get(0);
+            assertThat(updatedAsset.getName()).isEqualTo(newName);
+        });
+    }
+
+    @Test
+    public void changeAssetNameByKey() {
+        withCategoryHavingAssets(client(), category -> {
+            final LocalizedString newName = LocalizedString.ofEnglish("new name");
+            final String assetKey = category.getAssets().get(0).getKey();
+            final CategoryUpdateCommand command = CategoryUpdateCommand.of(category, ChangeAssetName.ofKey(assetKey, newName));
 
             final Category updatedCategory = client().executeBlocking(command);
 
@@ -231,13 +246,47 @@ public class CategoryUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void removeAsset() {
+    public void removeAssetById() {
         withCategoryHavingAssets(client(), category -> {
             final String assetId = category.getAssets().get(0).getId();
             final Category updatedCategory = client().executeBlocking(CategoryUpdateCommand.of(category, RemoveAsset.of(assetId)));
 
             final List<Asset> assets = updatedCategory.getAssets();
             assertThat(assets).allMatch(asset -> !asset.getId().equals(assetId));
+        });
+    }
+
+    @Test
+    public void removeAssetByKey() {
+        withCategoryHavingAssets(client(), category -> {
+            final String assetKey = category.getAssets().get(0).getKey();
+            final Category updatedCategory = client().executeBlocking(CategoryUpdateCommand.of(category, RemoveAsset.ofKey(assetKey)));
+
+            final List<Asset> assets = updatedCategory.getAssets();
+            assertThat(assets).allMatch(asset -> !asset.getKey().equals(assetKey));
+        });
+    }
+
+    @Test
+    public void setAssetKey() {
+        withCategoryHavingAssets(client(), category -> {
+            final String assetid = category.getAssets().get(0).getId();
+            final String newAssetKey = randomKey();
+            final Category updatedCategory = client().executeBlocking(CategoryUpdateCommand.of(category, SetAssetKey.of(assetid,newAssetKey)));
+
+            final List<Asset> assets = updatedCategory.getAssets();
+            assertThat(assets).haveAtLeastOne(new Condition<>(asset -> asset.getKey().equals(newAssetKey),"Check if key is updated"));
+        });
+    }
+
+    @Test
+    public void removeAssetKey() {
+        withCategoryHavingAssets(client(), category -> {
+            final String assetid = category.getAssets().get(0).getId();
+            final Category updatedCategory = client().executeBlocking(CategoryUpdateCommand.of(category, SetAssetKey.of(assetid,null)));
+
+            final List<Asset> assets = updatedCategory.getAssets();
+            assertThat(assets).haveAtLeastOne(new Condition<>(asset -> asset.getKey() == null,"Check if key is removed"));
         });
     }
 

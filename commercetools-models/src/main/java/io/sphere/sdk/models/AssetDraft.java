@@ -21,7 +21,11 @@ import java.util.Set;
         abstractBuilderClass = true,
         copyFactoryMethods = @CopyFactoryMethod(Asset.class),
         factoryMethods = @FactoryMethod(parameterNames = { "sources", "name"}))
-public interface AssetDraft extends CustomDraft {
+public interface AssetDraft extends CustomDraft, WithKey{
+
+    @Override
+    String getKey();
+
     List<AssetSource> getSources();
 
     LocalizedString getName();

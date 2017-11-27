@@ -14,6 +14,7 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Categories are used to organize products in a hierarchical structure.
@@ -185,6 +186,15 @@ public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAtt
 
     @Nonnull
     @IgnoreInQueryModel
+    @HasUpdateAction(value = "setAssetKey", fields = {@PropertySpec(name = "assetId", fieldType = String.class), @PropertySpec(name = "assetKey", fieldType = String.class, isOptional = true)})
+    @HasUpdateAction(value = "addAsset", fields = {@PropertySpec(name = "asset", fieldType = AssetDraft.class), @PropertySpec(name = "position", fieldType = Integer.class)},
+            factoryMethods = {@FactoryMethod(parameterNames = {"asset"})})
+    @HasUpdateAction(value = "removeAsset", fields = {@PropertySpec(name = "assetId", fieldType = String.class), @PropertySpec(name = "assetKey", fieldType = String.class)},
+            factoryMethods = {@FactoryMethod(parameterNames = {"assetId"}), @FactoryMethod(methodName = "ofKey", parameterNames = {"assetKey"})}, generateDefaultFactory = false)
+    @HasUpdateAction(value = "changeAssetName", fields = {@PropertySpec(name = "assetId", fieldType = String.class), @PropertySpec(name = "assetKey", fieldType = String.class), @PropertySpec(name = "name", fieldType = LocalizedString.class)},
+            factoryMethods = {@FactoryMethod(parameterNames = {"assetId", "name"}), @FactoryMethod(methodName = "ofKey", parameterNames = {"assetKey", "name"})}, generateDefaultFactory = false)
+    @HasUpdateAction(value = "setAssetDescription", fields = {@PropertySpec(name = "assetId", fieldType = String.class), @PropertySpec(name = "assetKey", fieldType = String.class), @PropertySpec(name = "name", fieldType = LocalizedString.class)},
+            factoryMethods = {@FactoryMethod(parameterNames = {"assetId", "name"}), @FactoryMethod(methodName = "ofKey", parameterNames = {"assetKey", "name"})}, generateDefaultFactory = false)
     List<Asset> getAssets();
 
     @Override

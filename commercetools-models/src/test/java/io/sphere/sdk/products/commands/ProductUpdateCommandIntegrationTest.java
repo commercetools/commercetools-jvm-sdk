@@ -4,6 +4,7 @@ import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.messages.queries.MessageQuery;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.productdiscounts.DiscountedPrice;
@@ -1153,6 +1154,9 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
 
             final ProductProjection productProjection = client().executeBlocking(ProductProjectionByIdGet.of(product, STAGED));
 
+            SphereJsonUtils.toJsonString(productProjection);
+            SphereJsonUtils.toJsonNode(productProjection).forEach(System.out::println);
+
             final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(productProjection, updateActions));
 
             final ProductData productData = updatedProduct.getMasterData().getStaged();
@@ -2053,7 +2057,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             final AssetDraft assetDraft = AssetDraftBuilder.of(singletonList(assetSource), name)
                     .build();
             final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
-            final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, AddAsset.ofSku(sku, assetDraft));
+            final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, AddAsset.ofSku(sku, assetDraft).withPosition(0).withStaged(false));
             final Product updatedProduct = client().executeBlocking(cmd);
 
             final List<Asset> assets = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets();

@@ -17,18 +17,22 @@ import javax.annotation.Nullable;
  * <p>By SKU (attention, SKU is optional field in a variant):</p>
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#addAssetBySku()}
  */
-public final class AddAsset extends UpdateActionImpl<Product> {
+public final class AddAsset extends StagedProductUpdateActionImpl<Product> {
     @Nullable
     private final Integer variantId;
     @Nullable
     private final String sku;
     private final AssetDraft asset;
 
-    private AddAsset(final AssetDraft asset, @Nullable final Integer variantId, @Nullable final String sku) {
-        super("addAsset");
+    @Nullable
+    private final Integer position;
+
+    private AddAsset(final AssetDraft asset, @Nullable final Integer variantId, @Nullable final String sku,@Nullable Boolean staged,@Nullable Integer position) {
+        super("addAsset",staged);
         this.asset = asset;
         this.variantId = variantId;
         this.sku = sku;
+        this.position = position;
     }
 
     public AssetDraft getAsset() {
@@ -45,11 +49,29 @@ public final class AddAsset extends UpdateActionImpl<Product> {
         return sku;
     }
 
+    @Nullable
+    public Boolean getStaged() {
+        return staged;
+    }
+
+    @Nullable
+    public Integer getPosition() {
+        return position;
+    }
+
     public static AddAsset ofVariantId(final Integer variantId, final AssetDraft asset) {
-        return new AddAsset(asset, variantId, null);
+        return new AddAsset(asset, variantId, null, null, null);
     }
 
     public static AddAsset ofSku(final String sku, final AssetDraft asset) {
-        return new AddAsset(asset, null, sku);
+        return new AddAsset(asset, null, sku, null, null);
+    }
+
+    public AddAsset withPosition(@Nullable final Integer position){
+        return new AddAsset(getAsset(),getVariantId(),getSku(),getStaged(),position);
+    }
+
+    public AddAsset withStaged(@Nullable final Boolean staged){
+        return new AddAsset(getAsset(),getVariantId(),getSku(),staged ,getPosition());
     }
 }
