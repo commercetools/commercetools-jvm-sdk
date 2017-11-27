@@ -193,8 +193,8 @@ public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAtt
             factoryMethods = {@FactoryMethod(parameterNames = {"assetId"}), @FactoryMethod(methodName = "ofKey", parameterNames = {"assetKey"})}, generateDefaultFactory = false)
     @HasUpdateAction(value = "changeAssetName", fields = {@PropertySpec(name = "assetId", fieldType = String.class), @PropertySpec(name = "assetKey", fieldType = String.class), @PropertySpec(name = "name", fieldType = LocalizedString.class)},
             factoryMethods = {@FactoryMethod(parameterNames = {"assetId", "name"}), @FactoryMethod(methodName = "ofKey", parameterNames = {"assetKey", "name"})}, generateDefaultFactory = false)
-    @HasUpdateAction(value = "setAssetDescription", fields = {@PropertySpec(name = "assetId", fieldType = String.class), @PropertySpec(name = "assetKey", fieldType = String.class), @PropertySpec(name = "name", fieldType = LocalizedString.class)},
-            factoryMethods = {@FactoryMethod(parameterNames = {"assetId", "name"}), @FactoryMethod(methodName = "ofKey", parameterNames = {"assetKey", "name"})}, generateDefaultFactory = false)
+    @HasUpdateAction(value = "setAssetDescription", fields = {@PropertySpec(name = "assetId", fieldType = String.class), @PropertySpec(name = "assetKey", fieldType = String.class), @PropertySpec(name = "description", fieldType = LocalizedString.class)},
+            factoryMethods = {@FactoryMethod(parameterNames = {"assetId", "description"}), @FactoryMethod(methodName = "ofKey", parameterNames = {"assetKey", "description"})}, generateDefaultFactory = false)
     List<Asset> getAssets();
 
     @Override
