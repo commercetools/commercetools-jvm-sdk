@@ -52,6 +52,11 @@
                         </Export-Package>
                         <Bundle-Version>${project.version}</Bundle-Version>
                         <Fragment-Host>${project.groupId}.commercetools-sdk-base</Fragment-Host>
+                        <Provide-Capability>
+                            osgi.serviceloader,
+                            osgi.serviceloader;
+                            osgi.serviceloader="io.sphere.sdk.client.SphereHttpClientFactory"
+                        </Provide-Capability>
                     </instructions>
                 </configuration>
             </plugin>
