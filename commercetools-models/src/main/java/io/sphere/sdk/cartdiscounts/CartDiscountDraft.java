@@ -48,6 +48,10 @@ public interface CartDiscountDraft {
 
     CartDiscountValue getValue();
 
+    /**
+     * Allow to add {@link CustomFields} to a {@link CartDiscount}
+     * @return the {@link CustomFields} defined at this {@link CartDiscountDraft}
+     */
     @Nullable
     CustomFields getCustom();
     /**
