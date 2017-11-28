@@ -1,5 +1,6 @@
 package io.sphere.sdk.types;
 
+import io.sphere.sdk.cartdiscounts.CartDiscount;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.CustomLineItem;
 import io.sphere.sdk.carts.LineItem;
@@ -49,7 +50,7 @@ public class TypeFixtures {
     public static final Set<String> TYPE_IDS = new HashSet<>(asList(Category.resourceTypeId(), Customer.resourceTypeId(), Cart.resourceTypeId(),
             Order.resourceTypeId(), LineItem.resourceTypeId(), CustomLineItem.resourceTypeId(), Payment.resourceTypeId(), AddInterfaceInteraction.resourceTypeId(),
             Price.resourceTypeId(), Review.resourceTypeId(), Channel.referenceTypeId(), InventoryEntry.resourceTypeId(), Asset.resourceTypeId(), ShoppingList.referenceTypeId(),
-            TextLineItem.resourceTypeId(), DiscountCode.referenceTypeId()));
+            TextLineItem.resourceTypeId(), DiscountCode.referenceTypeId(), CartDiscount.referenceTypeId()));
     public static final String STRING_FIELD_NAME = "string-field-name";
     public static final String STRING_SET_FIELD_NAME = "string-set-field-name";
     public static final String TYPE_NAME = "name of the custom type";
