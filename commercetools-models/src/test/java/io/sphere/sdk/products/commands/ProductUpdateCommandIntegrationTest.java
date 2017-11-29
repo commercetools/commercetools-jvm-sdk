@@ -1153,10 +1153,6 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                     MetaAttributesUpdateActions.of(metaAttributes);
 
             final ProductProjection productProjection = client().executeBlocking(ProductProjectionByIdGet.of(product, STAGED));
-
-            SphereJsonUtils.toJsonString(productProjection);
-            SphereJsonUtils.toJsonNode(productProjection).forEach(System.out::println);
-
             final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(productProjection, updateActions));
 
             final ProductData productData = updatedProduct.getMasterData().getStaged();

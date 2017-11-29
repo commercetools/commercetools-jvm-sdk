@@ -41,11 +41,11 @@ public final class SetAssetCustomType extends SetCustomTypeBase<Category> {
         return of(null,assetKey, customFieldsDraft);
     }
 
-    private static SetAssetCustomType of(final String assetId,final String key, @Nullable final CustomFieldsDraft customFieldsDraft) {
+    private static SetAssetCustomType of(final String assetId,final String assetKey, @Nullable final CustomFieldsDraft customFieldsDraft) {
         final Optional<CustomFieldsDraft> draft = Optional.ofNullable(customFieldsDraft);
         final String typeId = draft.map(CustomFieldsDraft::getType).map(ResourceIdentifier::getId).orElse(null);
         final String typeKey = draft.map(CustomFieldsDraft::getType).map(ResourceIdentifier::getKey).orElse(null);
         final Map<String, JsonNode> fields = draft.map(CustomFieldsDraft::getFields).orElse(null);
-        return new SetAssetCustomType(assetId,key, typeId, typeKey, fields);
+        return new SetAssetCustomType(assetId,assetKey, typeId, typeKey, fields);
     }
 }
