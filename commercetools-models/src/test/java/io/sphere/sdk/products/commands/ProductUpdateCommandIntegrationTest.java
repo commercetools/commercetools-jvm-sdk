@@ -1362,6 +1362,47 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void revertStagedVariantChanges() throws Exception {
+        final NamedAttributeAccess<MonetaryAmount> moneyAttribute =
+                AttributeAccess.ofMoney().ofName(MONEY_ATTRIBUTE_NAME);
+        final AttributeDraft moneyAttributeValue = AttributeDraft.of(moneyAttribute, EURO_10);
+
+        final NamedAttributeAccess<LocalizedEnumValue> colorAttribute = Colors.ATTRIBUTE;
+        final LocalizedEnumValue color = Colors.RED;
+        final AttributeDraft colorAttributeValue = AttributeDraft.of(colorAttribute, color);
+
+        final NamedAttributeAccess<EnumValue> sizeAttribute = Sizes.ATTRIBUTE;
+        final AttributeDraft sizeValue = AttributeDraft.of(sizeAttribute, Sizes.M);
+
+
+        withUpdateableProduct(client(), product -> {
+            assertThat(product.getMasterData().getStaged().getVariants()).isEmpty();
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+
+            final PriceDraft price = PriceDraft.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE);
+            final List<PriceDraft> prices = asList(price);
+            final List<AttributeDraft> attributeValues = asList(moneyAttributeValue, colorAttributeValue, sizeValue);
+            final ProductUpdateCommand addVariantCommand =
+                    ProductUpdateCommand.of(product, AddVariant.of(attributeValues, prices, randomKey(), false));
+
+            final Product productWithVariant = client().executeBlocking(addVariantCommand);
+            final ProductVariant variant = productWithVariant.getMasterData().getStaged().getVariants().get(0);
+            assertThat(productWithVariant.getMasterData().hasStagedChanges()).isFalse();
+
+            final Product productWithoutVariant = client().executeBlocking(ProductUpdateCommand.of(productWithVariant, RemoveVariant.ofVariantId(variant.getId())));
+            assertThat(productWithoutVariant.getMasterData().getStaged().getVariants()).isEmpty();
+            assertThat(productWithoutVariant.getMasterData().hasStagedChanges()).isTrue();
+
+            final Product revertedProduct = client().executeBlocking(ProductUpdateCommand.of(productWithoutVariant,RevertStagedVariantChanges.of(variant.getId())));
+            assertThat(revertedProduct.getMasterData().getStaged().getVariants()).isNotEmpty();
+            assertThat(revertedProduct.getMasterData().hasStagedChanges()).isTrue();
+
+
+            return productWithoutVariant;
+        });
+    }
+
+    @Test
     public void setTaxCategory() throws Exception {
         TaxCategoryFixtures.withTransientTaxCategory(client(), taxCategory ->
                 withUpdateableProduct(client(), product -> {
