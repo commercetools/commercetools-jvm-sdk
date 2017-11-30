@@ -1,5 +1,6 @@
 package io.sphere.sdk.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.types.Custom;
@@ -25,8 +26,12 @@ import java.util.Set;
  * @see io.sphere.sdk.products.commands.updateactions.SetAssetCustomField
  */
 @JsonDeserialize(as = AssetImpl.class)
-public interface Asset extends Custom {
+public interface Asset extends Custom , WithKey{
+
     String getId();
+
+    @Override
+    String getKey();
 
     List<AssetSource> getSources();
 

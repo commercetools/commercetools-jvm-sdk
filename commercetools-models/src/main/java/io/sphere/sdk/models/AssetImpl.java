@@ -18,8 +18,13 @@ final class AssetImpl extends Base implements Asset {
     @Nullable
     private final CustomFields custom;
 
-    AssetImpl(final String id, final List<AssetSource> sources, final LocalizedString name, @Nullable final LocalizedString description, @Nullable final Set<String> tags, @Nullable final CustomFields custom) {
+    @Nullable
+    private final String key;
+
+
+    AssetImpl(final String id, final String key, final List<AssetSource> sources, final LocalizedString name, @Nullable final LocalizedString description, @Nullable final Set<String> tags, @Nullable final CustomFields custom) {
         this.id = id;
+        this.key = key;
         this.sources = sources;
         this.name = name;
         this.description = description;
@@ -30,6 +35,12 @@ final class AssetImpl extends Base implements Asset {
     @Override
     public String getId() {
         return id;
+    }
+
+    @Override
+    @Nullable
+    public String getKey() {
+        return key;
     }
 
     @Override

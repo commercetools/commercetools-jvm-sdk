@@ -21,10 +21,12 @@ public final class RemoveAsset extends StagedProductUpdateActionImpl<Product> {
     @Nullable
     private final String sku;
     private final String assetId;
+    private final String assetKey;
 
-    private RemoveAsset(final String assetId, @Nullable final Integer variantId, @Nullable final String sku, @Nullable final Boolean staged) {
+    private RemoveAsset(final String assetId,final String assetKey, @Nullable final Integer variantId, @Nullable final String sku, @Nullable final Boolean staged) {
         super("removeAsset", staged);
         this.assetId = assetId;
+        this.assetKey = assetKey;
         this.variantId = variantId;
         this.sku = sku;
     }
@@ -43,12 +45,15 @@ public final class RemoveAsset extends StagedProductUpdateActionImpl<Product> {
         return sku;
     }
 
+    public String getAssetKey() {
+        return assetKey;
+    }
     public static RemoveAsset ofVariantId(final Integer variantId, final String assetId) {
         return ofVariantId(variantId, assetId, null);
     }
 
     public static RemoveAsset ofVariantId(final Integer variantId, final String assetId, @Nullable final Boolean staged) {
-        return new RemoveAsset(assetId, variantId, null, staged);
+        return new RemoveAsset(assetId,null, variantId, null, staged);
     }
 
     public static RemoveAsset ofSku(final String sku, final String assetId) {
@@ -56,6 +61,24 @@ public final class RemoveAsset extends StagedProductUpdateActionImpl<Product> {
     }
 
     public static RemoveAsset ofSku(final String sku, final String assetId, @Nullable final Boolean staged) {
-        return new RemoveAsset(assetId, null, sku, staged);
+        return new RemoveAsset(assetId,null, null, sku, staged);
     }
+
+    public static RemoveAsset ofVariantIdWithKey(final Integer variantId, final String assetKey) {
+        return ofVariantIdWithKey(variantId, assetKey, null);
+    }
+
+    public static RemoveAsset ofVariantIdWithKey(final Integer variantId, final String assetKey, @Nullable final Boolean staged) {
+        return new RemoveAsset(null,assetKey, variantId, null, staged);
+    }
+
+    public static RemoveAsset ofSkuWithKey(final String sku, final String assetKey) {
+        return ofSku(null, assetKey, null);
+    }
+
+    public static RemoveAsset ofSkuWithKey(final String sku, final String assetKey, @Nullable final Boolean staged) {
+        return new RemoveAsset(null,assetKey, null, sku, staged);
+    }
+
+
 }

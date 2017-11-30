@@ -17,24 +17,31 @@ import javax.annotation.Nullable;
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandIntegrationTest#setAssetDescriptionBySku()}
  */
 public final class SetAssetDescription extends StagedProductUpdateActionImpl<Product> {
+
     @Nullable
     private final Integer variantId;
     @Nullable
     private final String sku;
     private final String assetId;
+    private final String assetKey;
     @Nullable
     private final LocalizedString description;
 
-    private SetAssetDescription(final String assetId, @Nullable final Integer variantId, @Nullable final String sku, @Nullable final LocalizedString description, @Nullable final Boolean staged) {
+    private SetAssetDescription(final String assetId,final String assetKey, @Nullable final Integer variantId, @Nullable final String sku, @Nullable final LocalizedString description, @Nullable final Boolean staged) {
         super("setAssetDescription", staged);
         this.assetId = assetId;
         this.variantId = variantId;
         this.sku = sku;
         this.description = description;
+        this.assetKey = assetKey;
     }
 
     public String getAssetId() {
         return assetId;
+    }
+
+    public String getAssetKey() {
+        return assetKey;
     }
 
     @Nullable
@@ -57,7 +64,7 @@ public final class SetAssetDescription extends StagedProductUpdateActionImpl<Pro
     }
 
     public static SetAssetDescription ofVariantId(final Integer variantId, final String assetId, @Nullable final LocalizedString description, @Nullable final Boolean staged) {
-        return new SetAssetDescription(assetId, variantId, null, description, staged);
+        return new SetAssetDescription(assetId,null, variantId, null, description, staged);
     }
 
     public static SetAssetDescription ofSku(final String sku, final String assetId, @Nullable final LocalizedString description) {
@@ -65,6 +72,22 @@ public final class SetAssetDescription extends StagedProductUpdateActionImpl<Pro
     }
 
     public static SetAssetDescription ofSku(final String sku, final String assetId, @Nullable final LocalizedString description, @Nullable final Boolean staged) {
-        return new SetAssetDescription(assetId, null, sku, description, staged);
+        return new SetAssetDescription(assetId,null, null, sku, description, staged);
+    }
+
+    public static SetAssetDescription ofVariantIdAndAssetKey(final Integer variantId, final String assetId, @Nullable final LocalizedString description) {
+        return ofVariantIdAndAssetKey(variantId, assetId, description, null);
+    }
+
+    public static SetAssetDescription ofVariantIdAndAssetKey(final Integer variantId, final String assetKey, @Nullable final LocalizedString description, @Nullable final Boolean staged) {
+        return new SetAssetDescription(null,assetKey , variantId, null, description, staged);
+    }
+
+    public static SetAssetDescription ofSkuAndAssetKey(final String sku, final String assetId, @Nullable final LocalizedString description) {
+        return ofSkuAndAssetKey(sku, assetId, description, null);
+    }
+
+    public static SetAssetDescription ofSkuAndAssetKey(final String sku, final String assetKey, @Nullable final LocalizedString description, @Nullable final Boolean staged) {
+        return new SetAssetDescription(null,assetKey , null, sku, description, staged);
     }
 }

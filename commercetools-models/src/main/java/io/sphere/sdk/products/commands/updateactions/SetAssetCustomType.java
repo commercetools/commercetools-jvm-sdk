@@ -29,19 +29,25 @@ public final class SetAssetCustomType extends SetCustomTypeBase<Product> {
     @Nullable
     private final String sku;
     private final String assetId;
+    private final String assetKey;
     @Nullable
     private final Boolean staged;
 
-    private SetAssetCustomType(final String assetId, @Nullable final Integer variantId, @Nullable final String sku, @Nullable final String typeId, @Nullable final String typeKey, @Nullable final Map<String, JsonNode> fields, final Boolean staged) {
+    private SetAssetCustomType(final String assetId,final String assetKey, @Nullable final Integer variantId, @Nullable final String sku, @Nullable final String typeId, @Nullable final String typeKey, @Nullable final Map<String, JsonNode> fields, final Boolean staged) {
         super("setAssetCustomType", typeId, typeKey, fields);
         this.assetId = assetId;
         this.variantId = variantId;
         this.sku = sku;
         this.staged = staged;
+        this.assetKey = assetKey;
     }
 
     public String getAssetId() {
         return assetId;
+    }
+
+    public String getAssetKey() {
+        return assetKey;
     }
 
     @Nullable
@@ -54,16 +60,16 @@ public final class SetAssetCustomType extends SetCustomTypeBase<Product> {
         return sku;
     }
 
-    private static SetAssetCustomType of(final String assetId, @Nullable final Integer variantId, @Nullable final String sku, @Nullable final CustomFieldsDraft customFieldsDraft) {
-        return of(assetId, variantId, sku, customFieldsDraft, null);
+    private static SetAssetCustomType of(final String assetId,final String assetKey, @Nullable final Integer variantId, @Nullable final String sku, @Nullable final CustomFieldsDraft customFieldsDraft) {
+        return of(assetId,assetKey , variantId, sku, customFieldsDraft, null);
     }
 
-    private static SetAssetCustomType of(final String assetId, @Nullable final Integer variantId, @Nullable final String sku, @Nullable final CustomFieldsDraft customFieldsDraft, @Nullable final Boolean staged) {
+    private static SetAssetCustomType of(final String assetId,final String assetKey, @Nullable final Integer variantId, @Nullable final String sku, @Nullable final CustomFieldsDraft customFieldsDraft, @Nullable final Boolean staged) {
         final Optional<CustomFieldsDraft> draft = Optional.ofNullable(customFieldsDraft);
         final String typeId = draft.map(CustomFieldsDraft::getType).map(ResourceIdentifier::getId).orElse(null);
         final String typeKey = draft.map(CustomFieldsDraft::getType).map(ResourceIdentifier::getKey).orElse(null);
         final Map<String, JsonNode> fields = draft.map(CustomFieldsDraft::getFields).orElse(null);
-        return new SetAssetCustomType(assetId, variantId, sku, typeId, typeKey, fields, staged);
+        return new SetAssetCustomType(assetId,assetKey, variantId, sku, typeId, typeKey, fields, staged);
 
     }
 
@@ -72,7 +78,7 @@ public final class SetAssetCustomType extends SetCustomTypeBase<Product> {
     }
 
     public static SetAssetCustomType ofVariantId(final Integer variantId, final String assetId, @Nullable final CustomFieldsDraft customFieldsDraft, @Nullable final Boolean staged) {
-        return of(assetId, variantId, null, customFieldsDraft, staged);
+        return of(assetId,null, variantId, null, customFieldsDraft, staged);
     }
 
     public static SetAssetCustomType ofSku(final String sku, final String assetId, @Nullable final CustomFieldsDraft customFieldsDraft) {
@@ -80,7 +86,26 @@ public final class SetAssetCustomType extends SetCustomTypeBase<Product> {
     }
 
     public static SetAssetCustomType ofSku(final String sku, final String assetId, @Nullable final CustomFieldsDraft customFieldsDraft, @Nullable final Boolean staged) {
-        return of(assetId, null, sku, customFieldsDraft, staged);
+        return of(assetId, null, null, sku, customFieldsDraft, staged);
+    }
+
+
+
+
+    public static SetAssetCustomType ofVariantIdAndAssetKey(final Integer variantId, final String assetKey, @Nullable final CustomFieldsDraft customFieldsDraft) {
+        return ofVariantIdAndAssetKey(variantId, assetKey, customFieldsDraft, null);
+    }
+
+    public static SetAssetCustomType ofVariantIdAndAssetKey(final Integer variantId, final String assetKey, @Nullable final CustomFieldsDraft customFieldsDraft, @Nullable final Boolean staged) {
+        return of(null,assetKey, variantId, null, customFieldsDraft, staged);
+    }
+
+    public static SetAssetCustomType ofSkuAndAssetKeyAndAssetKey(final String sku, final String assetKey, @Nullable final CustomFieldsDraft customFieldsDraft) {
+        return ofSkuAndAssetKey(sku, assetKey, customFieldsDraft, null);
+    }
+
+    public static SetAssetCustomType ofSkuAndAssetKey(final String sku, final String assetKey, @Nullable final CustomFieldsDraft customFieldsDraft, @Nullable final Boolean staged) {
+        return of(null, assetKey, null, sku, customFieldsDraft, staged);
     }
 
     @Nullable

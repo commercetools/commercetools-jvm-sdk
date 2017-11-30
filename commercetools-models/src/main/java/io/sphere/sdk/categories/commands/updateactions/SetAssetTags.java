@@ -11,17 +11,23 @@ import java.util.Set;
  */
 public final class SetAssetTags extends UpdateActionImpl<Category> {
     private final String assetId;
+    private final String assetKey;
     @Nullable
     private final Set<String> tags;
 
-    private SetAssetTags(final String assetId, @Nullable final Set<String> tags) {
+    private SetAssetTags(final String assetId, final String assetKey,@Nullable final Set<String> tags) {
         super("setAssetTags");
         this.assetId = assetId;
+        this.assetKey = assetKey;
         this.tags = tags;
     }
 
     public String getAssetId() {
         return assetId;
+    }
+
+    public String getAssetKey() {
+        return assetKey;
     }
 
     @Nullable
@@ -30,6 +36,12 @@ public final class SetAssetTags extends UpdateActionImpl<Category> {
     }
 
     public static SetAssetTags of(final String assetId, @Nullable final Set<String> tags) {
-        return new SetAssetTags(assetId, tags);
+        return new SetAssetTags(assetId, null, tags);
     }
+
+    public static SetAssetTags ofKey(final String assetKey, @Nullable final Set<String> tags) {
+        return new SetAssetTags(null, assetKey, tags);
+    }
+
+
 }

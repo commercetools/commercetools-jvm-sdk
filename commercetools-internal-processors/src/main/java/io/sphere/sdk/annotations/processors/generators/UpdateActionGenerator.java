@@ -73,6 +73,7 @@ public class UpdateActionGenerator extends AbstractGenerator<ExecutableElement> 
         final String updateActionClassName = getFirstNonEmpty(hasUpdateActionInstance.className(),StringUtils.capitalize(actionName));
 
         final String includeExample = hasUpdateActionInstance.exampleBaseClass();
+        final boolean generateDefaultFactory = hasUpdateActionInstance.generateDefaultFactory();
         final PropertySpec[] properties = hasUpdateActionInstance.fields();
         final FactoryMethod[] factoryMethods = hasUpdateActionInstance.factoryMethods();
         final CopyFactoryMethod[] copyFactoryMethods = hasUpdateActionInstance.copyFactoryMethods();
@@ -111,13 +112,14 @@ public class UpdateActionGenerator extends AbstractGenerator<ExecutableElement> 
                 .addFields(fields)
                 .addMethods(getters)
                 .addMethod(createConstructor(propertyGenModelList, concreteClassName, actionName, isAbstract ? Modifier.PROTECTED : Modifier.PRIVATE))
-                .addMethod(createFactoryMethod(propertyGenModelList, concreteClassName, Arrays.asList(allParamsNames), "of", false))
                 .addMethods(createFactoryMethods(factoryMethods, propertyGenModelList, concreteClassName))
                 .addMethods(createCopyFactoryMethods(copyFactoryMethods, concreteClassName, propertyGenModelList))
                 .addSuperinterfaces(superInterfaces);
-
         copyDeprecatedAnnotation(property, typeSpecBuilder);
 
+        if(generateDefaultFactory){
+            typeSpecBuilder.addMethod(createFactoryMethod(propertyGenModelList, concreteClassName, Arrays.asList(allParamsNames), "of", false));
+        }
         if (allAttributesOptional) {
             typeSpecBuilder.addMethod(createFactoryMethod(propertyGenModelList, concreteClassName, Arrays.asList(), "ofUnset", false));
         }
