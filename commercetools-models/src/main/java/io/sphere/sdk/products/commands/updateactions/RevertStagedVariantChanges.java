@@ -4,7 +4,7 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.products.Product;
 
 /**
- * evert changes of a variant, which were made to the staged version of a product and reset to the
+ * Revert changes of a variant, which were made to the staged version of a product and reset to the
  +current version.
  *
  * {@doc.gen intro}
