@@ -216,7 +216,7 @@ public class UpdateActionGenerator extends AbstractGenerator<ExecutableElement> 
 
         TypeMirror typeMirror = null;
         try {
-            propertySpec.fieldType();
+            propertySpec.type();
         } catch (MirroredTypeException e) {
             typeMirror = e.getTypeMirror();
         }

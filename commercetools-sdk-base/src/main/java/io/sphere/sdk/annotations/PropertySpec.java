@@ -8,8 +8,12 @@ import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.CLASS)
 public @interface PropertySpec {
-
-    Class<?> fieldType();
+    /**
+     * The type for the field. An array type will be converted to a paramaterized list type.
+     *
+     * @return the type of this property
+     */
+    Class<?> type();
 
     String name();
 

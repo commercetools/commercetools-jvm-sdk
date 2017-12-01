@@ -93,7 +93,7 @@ public interface Project extends CreationTimestamped, WithKey {
                 .collect(toList());
     }
     @HasUpdateAction
-    @HasUpdateAction(value = "changeMessagesEnabled", fields = {@PropertySpec(name = "messagesEnabled", fieldType = Boolean.class)})
+    @HasUpdateAction(value = "changeMessagesEnabled", fields = {@PropertySpec(name = "messagesEnabled", type = Boolean.class)})
     MessagesConfiguration getMessages();
 
     /**
