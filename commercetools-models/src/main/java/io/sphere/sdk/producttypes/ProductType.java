@@ -7,6 +7,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.WithKey;
 import io.sphere.sdk.products.Product;
+import io.sphere.sdk.products.attributes.AttributeConstraint;
 import io.sphere.sdk.products.attributes.AttributeDefinition;
 
 import javax.annotation.Nullable;
@@ -67,6 +68,8 @@ public interface ProductType extends Resource<ProductType>, AttributeDefinitionC
     @QueryModelHint(type = "AttributeDefinitionQueryModel<ProductType>", impl = "return new AttributeDefinitionQueryModelImpl<>(this, fieldName);")
     List<AttributeDefinition> getAttributes();
 
+    @HasUpdateAction(value = "changeAttributeConstraint",
+            fields = {@PropertySpec(name = "attributeName",fieldType = String.class),@PropertySpec(name = "newValue",fieldType = AttributeConstraint.class)})
     @Nullable
     default AttributeDefinition getAttribute(final String attributeName) {
         return AttributeDefinitionContainer.super.getAttribute(attributeName);

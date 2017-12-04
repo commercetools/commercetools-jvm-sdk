@@ -96,6 +96,31 @@ public class ProductTypeUpdateCommandIntegrationTest extends IntegrationTest {
         });
     }
 
+
+    @Test
+    public void changeAttributeConstraintUpdateActionTest() throws Exception {
+        withUpdateableProductType(client(), productType -> {
+            //add
+            final String attributeName = "foostring";
+            final AttributeDefinition foostring =
+                    AttributeDefinitionBuilder.of(attributeName, LocalizedString.of(ENGLISH, "foo string"), StringAttributeType.of()).attributeConstraint(AttributeConstraint.SAME_FOR_ALL).build();
+            final ProductType withFoostring = client().executeBlocking(ProductTypeUpdateCommand.of(productType, AddAttributeDefinition.of(foostring)));
+            final AttributeDefinition loadedDefinition = withFoostring.getAttribute(attributeName);
+            assertThat(loadedDefinition.getAttributeType()).isEqualTo(StringAttributeType.of());
+            assertThat(loadedDefinition.getAttributeConstraint()).isEqualTo(AttributeConstraint.SAME_FOR_ALL);
+
+            final ProductType updatedProductType = client().executeBlocking(ProductTypeUpdateCommand.of(withFoostring, ChangeAttributeConstraint.of("foostring",AttributeConstraint.NONE)));
+            final AttributeDefinition updatedDefinition = updatedProductType.getAttribute(attributeName);
+            assertThat(updatedDefinition.getAttributeConstraint()).isEqualTo(AttributeConstraint.NONE);
+
+
+            //remove
+            final ProductType withoutFoostring = client().executeBlocking(ProductTypeUpdateCommand.of(updatedProductType, RemoveAttributeDefinition.of(attributeName)));
+            assertThat(withoutFoostring.findAttribute(attributeName)).isEmpty();
+            return withoutFoostring;
+        });
+    }
+
     @Test
     public void changeLabel() throws Exception {
         withUpdateableProductType(client(), productType -> {
