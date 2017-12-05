@@ -98,6 +98,8 @@
                             osgi.extender;
                             filter:="(osgi.extender=osgi.serviceloader.processor)",
                             osgi.serviceloader;
+                            filter:="(osgi.serviceloader=io.sphere.sdk.client.SphereClientModule)"; cardinality:=multiple,
+                            osgi.serviceloader;
                             filter:="(osgi.serviceloader=javax.money.convert.ExchangeRateProvider)"; cardinality:=multiple,
                             osgi.serviceloader;
                             filter:="(osgi.serviceloader=javax.money.spi.CurrencyProviderSpi)"; cardinality:=multiple,
