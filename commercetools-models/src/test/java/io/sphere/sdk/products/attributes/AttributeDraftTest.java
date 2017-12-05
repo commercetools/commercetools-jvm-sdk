@@ -1,6 +1,7 @@
 package io.sphere.sdk.products.attributes;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.models.LocalizedEnumValue;
@@ -8,6 +9,7 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import org.junit.Test;
 
+import java.util.Locale;
 import java.util.Set;
 
 import static io.sphere.sdk.utils.SphereInternalUtils.asSet;
@@ -71,5 +73,16 @@ public class AttributeDraftTest {
     public void doesNotTouchOtherValueLikeEnumsForReferenceSet() throws Exception {
         final AttributeDraft draft = AttributeDraft.of("foo", asSet(Reference.of("type-id", "id")));
         assertThat(draft.getValue().toString()).isEqualTo("[{\"typeId\":\"type-id\",\"id\":\"id\"}]");
+    }
+
+    @Test
+    public void shouldSerializeLocalizedEnumValueCorrectly() {
+        final LocalizedString localizedString = LocalizedString.of(Locale.GERMAN, "german-text");
+        final LocalizedEnumValue localizedEnumValue = LocalizedEnumValue.of("key", localizedString);
+        final AttributeDraft attributeDraft = AttributeDraft.of(AttributeAccess.ofLocalizedEnumValue().ofName("name"), localizedEnumValue);
+        final JsonNode jsonValue = attributeDraft.getValue();
+        assertThat(jsonValue.get("key").asText()).isEqualTo(localizedEnumValue.getKey());
+        final JsonNode jsonLabel = jsonValue.get("label");
+        assertThat(jsonLabel.get("de").asText()).isEqualTo(localizedEnumValue.getLabel().get(Locale.GERMAN));
     }
 }
