@@ -41,7 +41,35 @@
                         <Import-Package />
                         <Bundle-Version>${project.version}</Bundle-Version>
                         <Require-Capability>
-                            osgi.extender;filter:="(osgi.extender=osgi.serviceloader.processor)"</Require-Capability>
+                            osgi.extender;
+                            filter:="(osgi.extender=osgi.serviceloader.registrar)",
+                            osgi.extender;
+                            filter:="(osgi.extender=osgi.serviceloader.processor)",
+                            osgi.serviceloader;
+                            filter:="(osgi.serviceloader=io.sphere.sdk.client.SphereClientModule)"; cardinality:=multiple,
+                            osgi.serviceloader;
+                            filter:="(osgi.serviceloader=javax.money.convert.ExchangeRateProvider)"; cardinality:=multiple,
+                            osgi.serviceloader;
+                            filter:="(osgi.serviceloader=javax.money.spi.CurrencyProviderSpi)"; cardinality:=multiple,
+                            osgi.serviceloader;
+                            filter:="(osgi.serviceloader=javax.money.spi.MonetaryAmountFactoryProviderSpi)"; cardinality:=multiple,
+                            osgi.serviceloader;
+                            filter:="(osgi.serviceloader=javax.money.spi.MonetaryAmountFormatProviderSpi)"; cardinality:=multiple,
+                            osgi.serviceloader;
+                            filter:="(osgi.serviceloader=javax.money.spi.MonetaryAmountsSingletonQuerySpi)"; cardinality:=multiple,
+                            osgi.serviceloader;
+                            filter:="(osgi.serviceloader=javax.money.spi.MonetaryAmountsSingletonSpi)"; cardinality:=multiple,
+                            osgi.serviceloader;
+                            filter:="(osgi.serviceloader=javax.money.spi.MonetaryConversionsSingletonSpi)"; cardinality:=multiple,
+                            osgi.serviceloader;
+                            filter:="(osgi.serviceloader=javax.money.spi.MonetaryCurrenciesSingletonSpi)"; cardinality:=multiple,
+                            osgi.serviceloader;
+                            filter:="(osgi.serviceloader=javax.money.spi.RoundingProviderSpi)"; cardinality:=multiple,
+                            osgi.serviceloader;
+                            filter:="(osgi.serviceloader=javax.money.spi.ServiceProvider)"; cardinality:=multiple,
+                            osgi.serviceloader;
+                            filter:="(osgi.serviceloader=org.javamoney.moneta.spi.LoaderService)"; cardinality:=multiple,
+                        </Require-Capability>
                         <Fragment-Host>${project.groupId}.commercetools-sdk-base</Fragment-Host>
                         <split-package>-merge-last</split-package>
                     </instructions>
