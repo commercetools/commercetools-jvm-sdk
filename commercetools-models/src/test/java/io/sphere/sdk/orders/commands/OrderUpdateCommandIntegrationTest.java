@@ -139,6 +139,21 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
         });
     }
 
+    public void setDeliveryItems() throws Exception {
+        withOrder(client(), order -> {
+            final List<ParcelDraft> parcels = asList(ParcelDraft.of(PARCEL_MEASUREMENTS, TRACKING_DATA));
+            final LineItem lineItem = order.getLineItems().get(0);
+            final long availableItemsToShip = 1;
+            final List<DeliveryItem> initialItems = asList(DeliveryItem.of(lineItem, availableItemsToShip));
+            final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, AddDelivery.of(initialItems, parcels)));
+            final Delivery delivery = updatedOrder.getShippingInfo().getDeliveries().get(0);
+
+            final List<DeliveryItem> items = asList(DeliveryItem.of(lineItem, 2L));
+
+            final Order updatedOrder1 = client().executeBlocking(OrderUpdateCommand.of(updatedOrder, SetDeliveryItems.of(delivery.getId(), items)));
+        });
+    }
+
     @Test
     public void addParcelToDelivery() throws Exception {
         withOrder(client(), order -> {
