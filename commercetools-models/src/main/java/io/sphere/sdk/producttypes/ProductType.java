@@ -69,7 +69,7 @@ public interface ProductType extends Resource<ProductType>, AttributeDefinitionC
     List<AttributeDefinition> getAttributes();
 
     @HasUpdateAction(value = "changeAttributeConstraint",
-            fields = {@PropertySpec(name = "attributeName",fieldType = String.class),@PropertySpec(name = "newValue",fieldType = AttributeConstraint.class)})
+            fields = {@PropertySpec(name = "attributeName", type = String.class),@PropertySpec(name = "newValue", type = AttributeConstraint.class)})
     @Nullable
     default AttributeDefinition getAttribute(final String attributeName) {
         return AttributeDefinitionContainer.super.getAttribute(attributeName);
