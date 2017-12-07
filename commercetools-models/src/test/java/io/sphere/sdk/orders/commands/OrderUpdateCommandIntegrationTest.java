@@ -85,6 +85,18 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
             final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, ChangeShipmentState.of(newState)));
             assertThat(updatedOrder.getShipmentState()).isEqualTo(newState);
 
+            //you can observe a message
+            final Query<OrderShipmentStateChangedMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(order))
+                    .forMessageType(OrderShipmentStateChangedMessage.MESSAGE_HINT);
+            assertEventually(() -> {
+                final Optional<OrderShipmentStateChangedMessage> orderShipmentStateChangedMessageOptional =
+                        client().executeBlocking(messageQuery).head();
+                assertThat(orderShipmentStateChangedMessageOptional).isPresent();
+                final OrderShipmentStateChangedMessage orderShipmentStateChangedMessage = orderShipmentStateChangedMessageOptional.get();
+                assertThat(orderShipmentStateChangedMessage.getShipmentState()).isNotNull();
+            });
+
             return updatedOrder;
         });
     }
@@ -252,6 +264,18 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
             final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, action));
             final ReturnShipmentState updatedReturnItem = updatedOrder.getReturnInfo().get(0).getItems().get(0).getShipmentState();
             assertThat(updatedReturnItem).isEqualTo(newShipmentState);
+
+            //you can observe a message
+            final Query<OrderReturnShipmentStateChangedMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(order))
+                    .forMessageType(OrderReturnShipmentStateChangedMessage.MESSAGE_HINT);
+            assertEventually(() -> {
+                final Optional<OrderReturnShipmentStateChangedMessage> orderReturnShipmentStateChangedMessageOptional = client().executeBlocking(messageQuery).head();
+                assertThat(orderReturnShipmentStateChangedMessageOptional).isPresent();
+                final OrderReturnShipmentStateChangedMessage orderReturnShipmentStateChangedMessage = orderReturnShipmentStateChangedMessageOptional.get();
+                assertThat(orderReturnShipmentStateChangedMessage.getReturnItemId()).isEqualTo(returnItem.getId());
+                assertThat(orderReturnShipmentStateChangedMessage.getReturnShipmentState()).isEqualTo(newShipmentState);
+            });
 
             return updatedOrder;
         });
