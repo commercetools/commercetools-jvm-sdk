@@ -165,6 +165,19 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
             final DeliveryItem deliveryItem = updatedDelivery.getItems().get(0);
             assertThat(deliveryItem.getId()).isEqualTo(lineItem.getId());
             assertThat(deliveryItem.getQuantity()).isEqualTo(2L);
+
+            //you can observe a message
+            final Query<DeliveryItemsUpdatedMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(order))
+                    .forMessageType(DeliveryItemsUpdatedMessage.MESSAGE_HINT);
+            assertEventually(() -> {
+                final Optional<DeliveryItemsUpdatedMessage> deliveryItemsUpdatedMessageOptional =
+                        client().executeBlocking(messageQuery).head();
+                assertThat(deliveryItemsUpdatedMessageOptional).isPresent();
+                final DeliveryItemsUpdatedMessage deliveryItemsUpdatedMessage = deliveryItemsUpdatedMessageOptional.get();
+                assertThat(deliveryItemsUpdatedMessage.getDeliveryId()).isEqualTo(delivery.getId());
+                assertThat(deliveryItemsUpdatedMessage.getItems()).isEqualTo(items);
+            });
         });
     }
 
@@ -186,6 +199,19 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(orderWithoutParcel.getShippingInfo().getDeliveries()).hasSize(1);
             final Delivery deliveryWithoutParcel = orderWithoutParcel.getShippingInfo().getDeliveries().get(0);
             assertThat(deliveryWithoutParcel.getParcels()).isEmpty();
+
+            //you can observe a message
+            final Query<ParcelRemovedFromDeliveryMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(order))
+                    .forMessageType(ParcelRemovedFromDeliveryMessage.MESSAGE_HINT);
+            assertEventually(() -> {
+                final Optional<ParcelRemovedFromDeliveryMessage> parcelRemovedFromDeliveryMessageOptional =
+                        client().executeBlocking(messageQuery).head();
+                assertThat(parcelRemovedFromDeliveryMessageOptional).isPresent();
+                final ParcelRemovedFromDeliveryMessage parcelRemovedFromDeliveryMessage = parcelRemovedFromDeliveryMessageOptional.get();
+                assertThat(parcelRemovedFromDeliveryMessage.getDeliveryId()).isEqualTo(delivery.getId());
+                assertThat(parcelRemovedFromDeliveryMessage.getParcel()).isEqualTo(parcel);
+            });
         });
     }
 
@@ -203,6 +229,20 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
 
             final Order orderWithoutDelivery = client().executeBlocking(OrderUpdateCommand.of(orderWithDelivery, RemoveDelivery.of(delivery.getId())));
             assertThat(orderWithoutDelivery.getShippingInfo().getDeliveries()).isEmpty();
+
+            //you can observe a message
+            final Query<DeliveryRemovedMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(order))
+                    .forMessageType(DeliveryRemovedMessage.MESSAGE_HINT);
+            assertEventually(() -> {
+                final Optional<DeliveryRemovedMessage> deliveryRemovedMessageOptional =
+                        client().executeBlocking(messageQuery).head();
+                assertThat(deliveryRemovedMessageOptional).isPresent();
+                final DeliveryRemovedMessage deliveryRemovedMessage = deliveryRemovedMessageOptional.get();
+                final Delivery deliveryFromMessage = deliveryRemovedMessage.getDelivery();
+                assertThat(deliveryFromMessage.getId()).isEqualTo(delivery.getId());
+                assertThat(deliveryFromMessage.getCreatedAt()).isEqualTo(delivery.getCreatedAt());
+            });
         });
     }
 
@@ -219,6 +259,19 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
             final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(orderWithDelivery, SetParcelMeasurements.of(parcel.getId(), PARCEL_MEASUREMENTS)));
             final Parcel updatedParcel = updatedOrder.getShippingInfo().getDeliveries().get(0).getParcels().get(0);
             assertThat(updatedParcel.getMeasurements()).isEqualTo(PARCEL_MEASUREMENTS);
+
+            //you can observe a message
+            final Query<ParcelMeasurementsUpdatedMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(order))
+                    .forMessageType(ParcelMeasurementsUpdatedMessage.MESSAGE_HINT);
+            assertEventually(() -> {
+                final Optional<ParcelMeasurementsUpdatedMessage> parcelMeasurementsUpdatedMessageOptional =
+                        client().executeBlocking(messageQuery).head();
+                assertThat(parcelMeasurementsUpdatedMessageOptional).isPresent();
+                final ParcelMeasurementsUpdatedMessage parcelMeasurementsUpdatedMessage = parcelMeasurementsUpdatedMessageOptional.get();
+                assertThat(parcelMeasurementsUpdatedMessage.getParcelId()).isEqualTo(parcel.getId());
+                assertThat(parcelMeasurementsUpdatedMessage.getMeasurements()).isEqualTo(PARCEL_MEASUREMENTS);
+            });
         });
     }
 
@@ -235,6 +288,19 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
             final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(orderWithDelivery, SetParcelTrackingData.of(parcel.getId(), OTHER_TRACKING_DATA)));
             final Parcel updatedParcel = updatedOrder.getShippingInfo().getDeliveries().get(0).getParcels().get(0);
             assertThat(updatedParcel.getTrackingData()).isEqualTo(OTHER_TRACKING_DATA);
+
+            //you can observe a message
+            final Query<ParcelTrackingDataUpdatedMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(order))
+                    .forMessageType(ParcelTrackingDataUpdatedMessage.MESSAGE_HINT);
+            assertEventually(() -> {
+                final Optional<ParcelTrackingDataUpdatedMessage> parcelTrackingDataUpdatedMessageOptional =
+                        client().executeBlocking(messageQuery).head();
+                assertThat(parcelTrackingDataUpdatedMessageOptional).isPresent();
+                final ParcelTrackingDataUpdatedMessage parcelTrackingDataUpdatedMessage = parcelTrackingDataUpdatedMessageOptional.get();
+                assertThat(parcelTrackingDataUpdatedMessage.getParcelId()).isEqualTo(parcel.getId());
+                assertThat(parcelTrackingDataUpdatedMessage.getTrackingData()).isEqualTo(OTHER_TRACKING_DATA);
+            });
         });
     }
 
@@ -253,6 +319,18 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
             final Parcel updatedParcel = updatedOrder.getShippingInfo().getDeliveries().get(0).getParcels().get(0);
             assertThat(updatedParcel.getItems()).hasSize(1);
             assertThat(updatedParcel.getItems()).isEqualTo(parcelItems);
+
+            //you can observe a message
+            final Query<ParcelItemsUpdatedMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(order))
+                    .forMessageType(ParcelItemsUpdatedMessage.MESSAGE_HINT);
+            assertEventually(() -> {
+                final Optional<ParcelItemsUpdatedMessage> parcelItemsUpdatedMessageOptional = client().executeBlocking(messageQuery).head();
+                assertThat(parcelItemsUpdatedMessageOptional).isPresent();
+                final ParcelItemsUpdatedMessage parcelItemsUpdatedMessage = parcelItemsUpdatedMessageOptional.get();
+                assertThat(parcelItemsUpdatedMessage.getParcelId()).isEqualTo(updatedParcel.getId());
+                assertThat(parcelItemsUpdatedMessage.getItems()).isEqualTo(parcelItems);
+            });
         });
     }
 
