@@ -1,19 +1,40 @@
 package io.sphere.sdk.utils;
 
+import com.neovisionaries.i18n.CurrencyCode;
 import io.sphere.sdk.models.Base;
+import io.sphere.sdk.models.DefaultCurrencyUnits;
 import org.javamoney.moneta.FastMoney;
 import org.javamoney.moneta.function.MonetaryQueries;
 
 import javax.annotation.Nonnull;
 import javax.money.*;
+import javax.money.format.MonetaryFormats;
 import java.math.BigDecimal;
 import java.util.Optional;
 
 public final class MoneyImpl extends Base implements MonetaryAmount {
     private final MonetaryAmount money;
 
+    private static volatile boolean initialized = false;
+
     private MoneyImpl(final MonetaryAmount money) {
         this.money = money;
+
+        //fixes https://github.com/commercetools/commercetools-sunrise-java/issues/404
+        //exception play.api.http.HttpErrorHandlerExceptions$$anon$1: Execution exception[[CompletionException: java.lang.IllegalArgumentException: java.util.concurrent.CompletionException: io.sphere.sdk.json.JsonException: detailMessage: com.fasterxml.jackson.databind.JsonMappingException: Operator failed: javax.money.DefaultMonetaryRoundingsSingletonSpi$DefaultCurrencyRounding@1655879e (through reference chain: io.sphere.sdk.payments.PaymentDraftImpl["amountPlanned"])
+        CurrencyUnit currencyUnit = DefaultCurrencyUnits.EUR;
+        if(!initialized){
+            try{
+                Monetary.getDefaultRounding();
+                Monetary.getDefaultAmountType();
+                MonetaryFormats.getDefaultFormatProviderChain();
+                Monetary.getDefaultCurrencyProviderChain();
+                initialized = true;
+            }catch(Exception e){
+
+            }
+        }
+
     }
 
     @Override
