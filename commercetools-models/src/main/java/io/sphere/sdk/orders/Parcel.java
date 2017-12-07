@@ -29,7 +29,7 @@ public interface Parcel extends CreationTimestamped {
 
     @HasUpdateAction(value = "setParcelMeasurements", fields = {
             @PropertySpec(name = "parcelId", type = String.class),
-            @PropertySpec(name = "measurements", type = ParcelMeasurements[].class, isOptional = true)
+            @PropertySpec(name = "measurements", type = ParcelMeasurements.class, isOptional = true)
     })
     @Nullable
     ParcelMeasurements getMeasurements();
@@ -41,6 +41,10 @@ public interface Parcel extends CreationTimestamped {
     @Nullable
     TrackingData getTrackingData();
 
+    @HasUpdateAction(value = "setParcelItems", fields = {
+            @PropertySpec(name = "parcelId", type = String.class),
+            @PropertySpec(name = "items", type = DeliveryItem[].class, isOptional = true)
+    })
     @Nullable
     List<DeliveryItem> getItems();
 }
