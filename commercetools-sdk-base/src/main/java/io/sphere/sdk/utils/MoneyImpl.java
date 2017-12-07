@@ -15,19 +15,26 @@ import java.util.Optional;
 public final class MoneyImpl extends Base implements MonetaryAmount {
     private final MonetaryAmount money;
 
-    //fixes https://github.com/commercetools/commercetools-sunrise-java/issues/404
-    //exception play.api.http.HttpErrorHandlerExceptions$$anon$1: Execution exception[[CompletionException: java.lang.IllegalArgumentException: java.util.concurrent.CompletionException: io.sphere.sdk.json.JsonException: detailMessage: com.fasterxml.jackson.databind.JsonMappingException: Operator failed: javax.money.DefaultMonetaryRoundingsSingletonSpi$DefaultCurrencyRounding@1655879e (through reference chain: io.sphere.sdk.payments.PaymentDraftImpl["amountPlanned"])
-    static {
-        CurrencyUnit currencyUnit = DefaultCurrencyUnits.EUR;
-        Monetary.getDefaultRounding();
-        Monetary.getDefaultRounding().apply(MoneyImpl.ofCents(123, "EUR"));
-        Monetary.getDefaultAmountType();
-        MonetaryFormats.getDefaultFormatProviderChain();
-        Monetary.getDefaultCurrencyProviderChain();
-    }
+    private static volatile boolean initialized = false;
 
     private MoneyImpl(final MonetaryAmount money) {
         this.money = money;
+
+        //fixes https://github.com/commercetools/commercetools-sunrise-java/issues/404
+        //exception play.api.http.HttpErrorHandlerExceptions$$anon$1: Execution exception[[CompletionException: java.lang.IllegalArgumentException: java.util.concurrent.CompletionException: io.sphere.sdk.json.JsonException: detailMessage: com.fasterxml.jackson.databind.JsonMappingException: Operator failed: javax.money.DefaultMonetaryRoundingsSingletonSpi$DefaultCurrencyRounding@1655879e (through reference chain: io.sphere.sdk.payments.PaymentDraftImpl["amountPlanned"])
+        CurrencyUnit currencyUnit = DefaultCurrencyUnits.EUR;
+        if(!initialized){
+            try{
+                Monetary.getDefaultRounding();
+                Monetary.getDefaultAmountType();
+                MonetaryFormats.getDefaultFormatProviderChain();
+                Monetary.getDefaultCurrencyProviderChain();
+                initialized = true;
+            }catch(Exception e){
+
+            }
+        }
+
     }
 
     @Override
