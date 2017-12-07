@@ -64,10 +64,10 @@ public abstract class IntegrationTest {
                 .isFalse();
     }
 
-    @BeforeClass
-    public static void warmUpJavaMoney() throws Exception {
-        final CurrencyUnit eur = DefaultCurrencyUnits.EUR;//workaround for https://github.com/commercetools/commercetools-jvm-sdk/issues/779
-    }
+//    @BeforeClass
+//    public static void warmUpJavaMoney() throws Exception {
+//        final CurrencyUnit eur = DefaultCurrencyUnits.EUR;//workaround for https://github.com/commercetools/commercetools-jvm-sdk/issues/779
+//    }
 
     public static void setupClient() {
         if (client == null) {
