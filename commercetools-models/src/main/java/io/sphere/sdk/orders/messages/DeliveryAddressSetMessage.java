@@ -11,9 +11,7 @@ import io.sphere.sdk.orders.Order;
 import java.time.ZonedDateTime;
 
 /**
- * his message is the result of the {@link io.sphere.sdk.orders.commands.updateactions.SetDeliveryAddress} update action.
- * In addition to the common Message fields, {@link DeliveryAddressSetMessage} {@code message}
- * contains the following fields:
+ * This message is the result of the {@link io.sphere.sdk.orders.commands.updateactions.SetDeliveryAddress} update action.
  */
 @JsonDeserialize(as = DeliveryAddressSetMessage.class)//important to override annotation in Message class
 public final class DeliveryAddressSetMessage extends GenericMessageImpl<Order> {
