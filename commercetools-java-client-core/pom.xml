@@ -40,8 +40,6 @@
                         </Export-Package>
                         <Import-Package />
                         <Bundle-Version>${project.version}</Bundle-Version>
-                        <Require-Capability>
-                            osgi.extender;filter:="(osgi.extender=osgi.serviceloader.processor)"</Require-Capability>
                         <Fragment-Host>${project.groupId}.commercetools-sdk-base</Fragment-Host>
                         <split-package>-merge-last</split-package>
                     </instructions>

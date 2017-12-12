@@ -3,15 +3,20 @@ package io.sphere.sdk.json;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.javamoney.moneta.function.MonetaryQueries;
+import org.javamoney.moneta.internal.DefaultRoundingProvider;
 
 import javax.money.Monetary;
 import javax.money.MonetaryAmount;
+import javax.money.MonetaryRounding;
+import javax.money.RoundingQueryBuilder;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 final class MoneyRepresentation {
     private final Long centAmount;
     private final String currencyCode;
+
+    private static final DefaultRoundingProvider ROUNDING_PROVIDER = new DefaultRoundingProvider();
 
     @JsonCreator
     private MoneyRepresentation(final Long centAmount, final String currencyCode) {
@@ -47,8 +52,11 @@ final class MoneyRepresentation {
     }
 
     public static long amountToCents(final MonetaryAmount monetaryAmount) {
+        final MonetaryRounding ROUNDING =
+                ROUNDING_PROVIDER.getRounding(RoundingQueryBuilder.of().setRoundingName("default").setCurrency(monetaryAmount.getCurrency())
+                .build());
         return monetaryAmount
-                .with(Monetary.getDefaultRounding())
+                .with(ROUNDING)
                 .query(MonetaryQueries.convertMinorPart());
     }
 }
