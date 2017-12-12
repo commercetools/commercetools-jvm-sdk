@@ -52,7 +52,9 @@ final class MoneyRepresentation {
     }
 
     public static long amountToCents(final MonetaryAmount monetaryAmount) {
-        final MonetaryRounding ROUNDING = ROUNDING_PROVIDER.getRounding(RoundingQueryBuilder.of().setRoundingName("default").setCurrency(monetaryAmount.getCurrency()).build());
+        final MonetaryRounding ROUNDING =
+                ROUNDING_PROVIDER.getRounding(RoundingQueryBuilder.of().setRoundingName("default").setCurrency(monetaryAmount.getCurrency())
+                .build());
         return monetaryAmount
                 .with(ROUNDING)
                 .query(MonetaryQueries.convertMinorPart());
