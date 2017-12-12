@@ -115,5 +115,8 @@ git push origin ${CURRENT_BRANCH}
 echo Build directory ${TMPDIR}
 cd ${WORKDIR}
 
-git fetch
-git checkout ${BRANCH_NAME}
+if [[ ${TYPE} != "PATCH" ]]
+then
+    git fetch
+    git checkout ${BRANCH_NAME}
+fi
