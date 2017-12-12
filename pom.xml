@@ -3,7 +3,7 @@
     <groupId>com.commercetools.sdk.jvm.core</groupId>
     <artifactId>commercetools-jvm-sdk</artifactId>
     <packaging>pom</packaging>
-    <version>1.26.1</version>
+    <version>1.26.0</version>
     <name>commercetools JVM SDK</name>
     <description>Java bindings for the commercetools platform</description>
     <url>https://github.com/commercetools/commercetools-jvm-sdk</url>
