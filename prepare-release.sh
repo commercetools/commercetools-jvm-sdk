@@ -11,7 +11,7 @@ function updateReleaseVersion() {
     then
         ./mvnw build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion} -DgenerateBackupPoms=false
     else
-        ./mvnw build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.0 -DgenerateBackupPoms=false
+        ./mvnw build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.0 -DgenerateBackupPoms=false
     fi
 }
 
@@ -69,6 +69,7 @@ then
     fi
 fi
 
+WORKDIR=`pwd`
 TMPDIR=`mktemp -d`
 echo "Copying to ${TMPDIR}"
 
@@ -102,15 +103,17 @@ then
 
     git commit -am"Set next development version ${DEVELOPMENT_VERSION}"
     git pull -r
-    git push
 elif [[ ${TYPE} == "PATCH" ]]
 then
     if [[ ${CURRENT_BRANCH} != "master" ]]
     then
         git commit -am"TASK Prepare release ${RELEASE_VERSION}"
-        git push origin ${RELEASE_BRANCH}
     fi
 fi
 
+git push origin ${CURRENT_BRANCH}
 echo Build directory ${TMPDIR}
+cd ${WORKDIR}
 
+git fetch
+git checkout ${BRANCH_NAME}

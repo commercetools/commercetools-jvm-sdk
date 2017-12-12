@@ -3,12 +3,17 @@
 1. use the new version as snapshot dependency for sunrise and run it: `sbt clean fullClasspath run`, the categories and the products should appear with prices
 
 ## Release without rerunning the tests
-1. `./mvnw release:prepare -Darguments="-DskipTests" -DskipTests`
-    * ~ 2 min
-1. `./mvnw release:perform -Darguments="-DskipTests" -DskipTests`
-    * ~ 10 min
+1. `./preapre-release.sh <RELEASE_TYPE> <RELEASE_BRANCH>`
+    * <RELEASE_BRANCH> required for PATCH releases
+    * <RELEASE_TYPE> is MAJOR, MINOR, PATCH
+      * a MAJOR release creates a new branch (v<MAJOR+1>.0), increments the major version and pushes the changes to the branch
+      * a MINOR release creates a new branch (v<MAJOR>.<MINOR+1>), increments the minor version and pushes the changes to the branch
+      * a PATCH release increments the minor version and pushes changes to the current branch
+    
+1. `./perform-release.sh`
+    * deploys the version from the current branch and publishes the javadoc to github pages
+    
 1. https://oss.sonatype.org/ click "release" for commercetools/sphere stuff in "Staging Repositories"
-1. publish the Javadoc to GitHub pages: `git checkout $(git describe --abbrev=0 --tags) && ./mvnw clean compile javadoc:aggregate scm-publish:publish-scm -P publish-site && git checkout master`
 1. update GitHub release on https://github.com/commercetools/commercetools-jvm-sdk/releases
 1. add version badges to http://dev.commercetools.com/release-notes.html
 1. update version in the GitHub README

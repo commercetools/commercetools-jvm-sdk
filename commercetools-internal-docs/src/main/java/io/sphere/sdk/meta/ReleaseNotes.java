@@ -134,8 +134,16 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
- <h3 class=released-version id="v1_26_0">1.26.0 (19.10.2017)</h3>
+ <h3 class=released-version id="v1_26_0">1.26.0 (20.11.2017)</h3>
  <ul>
+ <li class=new-in-release>Added update action for setting the predicate of a shipping method {@link io.sphere.sdk.shippingmethods.commands.updateactions.SetPredicate}.
+ </li>
+ <li class=new-in-release>Added shopping list item sku {@link io.sphere.sdk.shoppinglists.LineItemDraft#getSku()}.
+ </li>
+ <li class=new-in-release>Added support for new cart tax calculation mode {@link Cart#getTaxCalculationMode()}, {@link CartDraft#getTaxCalculationMode()}
+ and the corresponding update action {@link io.sphere.sdk.carts.commands.updateactions.ChangeTaxCalculationMode}.
+ </li>
+
  <li class=new-in-release>Added support for creating multi buy discounts for custom line items{@link io.sphere.sdk.cartdiscounts.MultiBuyCustomLineItemsTarget},
  {@link io.sphere.sdk.cartdiscounts.SelectionMode}.
  </li>
