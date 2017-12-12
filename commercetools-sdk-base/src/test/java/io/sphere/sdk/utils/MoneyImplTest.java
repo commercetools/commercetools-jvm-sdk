@@ -18,7 +18,7 @@ public class MoneyImplTest {
 
     @Test
     public void toStringShowsUsableInput() {
-        assertThat(MoneyImpl.ofCents(123456, "EUR").toString()).isEqualTo("EUR 1234.56000");
-        assertThat(MoneyImpl.of(MoneyImpl.ofCents(123456, "EUR")).toString()).isEqualTo("EUR 1234.56000");
+        assertThat(MoneyImpl.ofCents(123456, "EUR").toString()).isEqualTo("EUR 1234.56");
+        assertThat(MoneyImpl.of(MoneyImpl.ofCents(123456, "EUR")).toString()).isEqualTo("EUR 1234.56");
     }
 }
