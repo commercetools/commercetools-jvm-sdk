@@ -82,7 +82,7 @@ public final class OSGiPriorityAwareServiceProvider implements ServiceProvider {
     private <T> List<T> loadServices(final Class<T> serviceType) {
         List<T> services = new ArrayList<>();
         try {
-            for (T t : ServiceLoader.load(serviceType, MoneyImpl.class.getClassLoader())) {
+            for (T t : ServiceLoader.load(serviceType, OSGiPriorityAwareServiceProvider.class.getClassLoader())) {
                 services.add(t);
             }
             services.sort(OSGiPriorityAwareServiceProvider::compareServices);
