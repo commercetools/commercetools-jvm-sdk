@@ -10,6 +10,7 @@ import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
 
 import javax.annotation.Nullable;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 /**
@@ -51,6 +52,14 @@ public interface ProductDiscount extends Resource<ProductDiscount> {
 
     @JsonProperty("isActive")
     Boolean isActive();
+
+    @Nullable
+    @HasUpdateAction
+    ZonedDateTime getValidFrom();
+
+    @Nullable
+    @HasUpdateAction
+    ZonedDateTime getValidUntil();
 
     @IgnoreInQueryModel
     List<Reference<JsonNode>> getReferences();
