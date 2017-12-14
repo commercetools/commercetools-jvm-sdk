@@ -53,6 +53,7 @@ import io.sphere.sdk.inventory.InventoryEntryDraftBuilder;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.orders.*;
+import io.sphere.sdk.orders.commands.updateactions.AddDelivery;
 import io.sphere.sdk.orders.expansion.OrderExpansionModel;
 import io.sphere.sdk.orders.messages.OrderPaymentStateChangedMessage;
 import io.sphere.sdk.payments.*;
@@ -134,6 +135,36 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+ <h3 class=released-version id="v1_27_0">1.27.0 (14.12.2017)</h3>
+ <ul>
+ <li class=new-in-release>Added {@link OrderImportDraft#getTaxCalculationMode()}.</li>
+ <li class=new-in-release>Added new {@link io.sphere.sdk.orders.messages.OrderReturnShipmentStateChangedMessage}
+ and {@link io.sphere.sdk.orders.messages.OrderShipmentStateChangedMessage}.</li>
+ <li class=new-in-release>Added {@link OrderImportDraft#getTaxCalculationMode()}.</li>
+ <li class=new-in-release>Added {@link AddDelivery#getAddress()}.</li>
+ <li class=fixed-in-release>Fixed bug in serialization of {@link LocalizedEnumValue}.</li>
+ <li class=new-in-release>Added new update action to change the attribute constraint of a product type
+ {@link io.sphere.sdk.producttypes.commands.updateactions.ChangeAttributeConstraint}.</li>
+ <li class=new-in-release>The following product variant update actions can now use the {@link Asset#getKey()} property to identify an asset:
+ {@link RemoveAsset}, {@link SetAssetTags}, {@link ChangeAssetName}, {@link SetAssetDescription}, {@link SetAssetSources}, {@link SetAssetCustomType},
+ {@link SetAssetCustomField}.
+ </li>
+ <li class=new-in-release>The following category update actions can now use the {@link Asset#getKey()} property to identify an asset:
+ {@link io.sphere.sdk.categories.commands.updateactions.RemoveAsset}, {@link io.sphere.sdk.categories.commands.updateactions.SetAssetTags},
+ {@link io.sphere.sdk.categories.commands.updateactions.ChangeAssetName}, {@link io.sphere.sdk.categories.commands.updateactions.SetAssetDescription},
+ {@link io.sphere.sdk.categories.commands.updateactions.SetAssetSources}, {@link io.sphere.sdk.categories.commands.updateactions.SetAssetCustomType},
+ {@link io.sphere.sdk.categories.commands.updateactions.SetAssetCustomField}.
+ </li>
+ <li class=new-in-release>
+ Added optional property position on update actions {@link AddAsset#getPosition()} and {@link io.sphere.sdk.categories.commands.updateactions.AddAsset#getPosition()}
+ </li>
+ <li class=new-in-release>Added new product update action {@link RevertStagedVariantChanges}.</li>
+ <li class=new-in-release>Added custom fields for cart discounts {@link CartDiscount#getCustom()}, {@link CartDiscountDraft#getCustom()} and the
+ update action {@link io.sphere.sdk.cartdiscounts.commands.updateactions.SetCustomField} and
+ {@link io.sphere.sdk.cartdiscounts.commands.updateactions.SetCustomType}.</li>
+ </ul>
+
+
  <h3 class=released-version id="v1_26_0">1.26.0 (20.11.2017)</h3>
  <ul>
  <li class=new-in-release>Added update action for setting the predicate of a shipping method {@link io.sphere.sdk.shippingmethods.commands.updateactions.SetPredicate}.
