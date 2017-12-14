@@ -11,6 +11,8 @@ import io.sphere.sdk.test.JsonNodeReferenceResolver;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.time.ZonedDateTime;
+
 import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.withCartDiscount;
 import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.withPersistentCartDiscount;
 import static io.sphere.sdk.discountcodes.DiscountCodeFixtures.withDiscountCode;
@@ -30,6 +32,9 @@ public class DiscountCodeCreateCommandIntegrationTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
         withPersistentCartDiscount(client(), cartDiscount -> {
+            final ZonedDateTime start = ZonedDateTime.parse("2015-07-09T07:46:40.230Z");
+            final ZonedDateTime end = start.plusMonths(3);
+
             final String code = randomKey();
             final DiscountCodeDraft draft = DiscountCodeDraft.of(code, cartDiscount)
                     .withName(en(DiscountCodeCreateCommandIntegrationTest.class.getName()))
@@ -37,6 +42,8 @@ public class DiscountCodeCreateCommandIntegrationTest extends IntegrationTest {
                     .withCartPredicate(CartPredicate.of("1 = 1"))
                     .withIsActive(false)
                     .withMaxApplications(5L)
+                    .withValidFrom(start)
+                    .withValidUntil(end)
                     .withMaxApplicationsPerCustomer(1L);
             final DiscountCodeCreateCommand createCommand = DiscountCodeCreateCommand.of(draft)
                     .plusExpansionPaths(m -> m.cartDiscounts());
@@ -44,6 +51,8 @@ public class DiscountCodeCreateCommandIntegrationTest extends IntegrationTest {
             assertThat(discountCode.getCode()).isEqualTo(code);
             assertThat(discountCode.getName()).isEqualTo(en(DiscountCodeCreateCommandIntegrationTest.class.getName()));
             assertThat(discountCode.getDescription()).isEqualTo(en("sample discount code descr."));
+            assertThat(discountCode.getValidFrom()).isEqualTo(start);
+            assertThat(discountCode.getValidUntil()).isEqualTo(end);
             final Reference<CartDiscount> cartDiscountReference = discountCode.getCartDiscounts().get(0);
             assertThat(cartDiscountReference)
                     .isEqualTo(cartDiscount.toReference())
