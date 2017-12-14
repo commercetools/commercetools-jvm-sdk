@@ -365,16 +365,18 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
             final Price price = Price.of(EURO_10);
             final OrderState orderState = OrderState.COMPLETE;
             final MonetaryAmount amount = EURO_10;
-
+            final TaxCalculationMode taxCalculationMode = TaxCalculationMode.LINE_ITEM_LEVEL;
             final ProductVariantImportDraft variant = ProductVariantImportDraftBuilder.of(productId, variantId, sku).build();
             final LineItemImportDraft lineItemImportDraft = LineItemImportDraftBuilder.of(variant, quantity, price, name).build();
             final OrderImportDraft orderImportDraft = OrderImportDraftBuilder.ofLineItems(amount, orderState, asList(lineItemImportDraft))
-                    .inventoryMode(InventoryMode.TRACK_ONLY).build();
+                    .inventoryMode(InventoryMode.TRACK_ONLY)
+                    .taxCalculationMode(taxCalculationMode)
+                    .build();
             final OrderImportCommand cmd = OrderImportCommand.of(orderImportDraft);
 
             final Order order = client().executeBlocking(cmd);
             assertThat(order.getInventoryMode()).isEqualTo(InventoryMode.TRACK_ONLY);
-
+            assertThat(order.getTaxCalculationMode()).isEqualTo(taxCalculationMode);
             client().executeBlocking(OrderDeleteCommand.of(order));
         });
     }
