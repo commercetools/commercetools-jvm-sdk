@@ -102,6 +102,6 @@ public class PagedSearchResultTest {
     }
 
     private <T> PagedSearchResult<T> pagedSearchResult(final Map<String, FacetResult> facets) {
-        return new PagedSearchResultImpl<>(0L, 0L, emptyList(), facets, 0L);
+        return new PagedSearchResultImpl<>(0L, 0L, 0L, emptyList(), facets, 0L);
     }
 }

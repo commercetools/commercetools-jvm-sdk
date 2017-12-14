@@ -13,13 +13,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PagedQueryResultTest {
 
     public static final Long TOTAL = 100L;
-    public static final int PAGE_SIZE = 25;
-    final PagedQueryResult<Integer> a = PagedQueryResult.of(listOfSize(1));
-    final PagedQueryResult<Integer> b = PagedQueryResult.of(listOfSize(2));
+    public static final Long PAGE_SIZE = 25L;
+    final PagedQueryResult<Integer> a = PagedQueryResult.of(listOfSize(1L));
+    final PagedQueryResult<Integer> b = PagedQueryResult.of(listOfSize(2L));
 
     @Test
     public void oneFilledResult() throws Exception {
-        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(listOfSize(4));
+        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(listOfSize(4L));
         assertThat(queryResult.isFirst()).isTrue();
         assertThat(queryResult.isLast()).isTrue();
     }
@@ -33,77 +33,79 @@ public class PagedQueryResultTest {
 
     @Test
     public void firstOfManyResult() throws Exception {
-        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(0L, TOTAL, listOfSize(PAGE_SIZE));
+        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(0L, PAGE_SIZE, TOTAL, listOfSize(PAGE_SIZE));
         assertThat(queryResult.isFirst()).isTrue();
         assertThat(queryResult.isLast()).isFalse();
     }
 
     @Test
     public void middleOfManyResult() throws Exception {
-        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of( (long)PAGE_SIZE, TOTAL, listOfSize(PAGE_SIZE));
+        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(PAGE_SIZE, PAGE_SIZE, TOTAL, listOfSize(PAGE_SIZE));
         assertThat(queryResult.isFirst()).isFalse();
         assertThat(queryResult.isLast()).isFalse();
     }
 
     @Test
     public void pagesIndexingResults() throws Exception {
-        {
-            final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(0L, 0l, listOfSize(0));
+        { // empty results
+            final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(0L, PAGE_SIZE, 0L, listOfSize(0L));
             assertThat(queryResult.getPageIndex()).isEqualTo(0);
             assertThat(queryResult.getTotalPages()).isEqualTo(0);
 
         }
-        {
-            final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(0L, 106l, listOfSize(25));
+        { // first page
+            final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(0L, PAGE_SIZE, 106L, listOfSize(PAGE_SIZE));
             assertThat(queryResult.getPageIndex()).isEqualTo(0);
             assertThat(queryResult.getTotalPages()).isEqualTo(5);
         }
         {
-            final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(75L, 106l, listOfSize(25));
+            final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(75L, PAGE_SIZE, 106L, listOfSize(PAGE_SIZE));
             assertThat(queryResult.getPageIndex()).isEqualTo(3);
             assertThat(queryResult.getTotalPages()).isEqualTo(5);
         }
 
-        {
-            final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(100L, 106l, listOfSize(25));
+        { // last page with few products
+            final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(100L, PAGE_SIZE, 106L, listOfSize(6L));
+            assertThat(queryResult.getPageIndex()).isEqualTo(4);
+            assertThat(queryResult.getTotalPages()).isEqualTo(5);
+        }
+        { // last page with max products
+            final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(100L, PAGE_SIZE, 125L, listOfSize(PAGE_SIZE));
             assertThat(queryResult.getPageIndex()).isEqualTo(4);
             assertThat(queryResult.getTotalPages()).isEqualTo(5);
         }
     }
 
-
-
-
     @Test
     public void getPagesCountForEmptyResults() throws Exception {
-        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of( 80L, TOTAL, listOfSize(0));
+        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of( 80L, PAGE_SIZE, 0L, listOfSize(0L));
         assertThat(queryResult.getTotalPages()).isEqualTo(0);
     }
 
     @Test
     public void lastFilledOfManyResult() throws Exception {
-        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(TOTAL - PAGE_SIZE, TOTAL, listOfSize(PAGE_SIZE));
+        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(TOTAL - PAGE_SIZE, PAGE_SIZE, TOTAL, listOfSize(PAGE_SIZE));
         assertThat(queryResult.isFirst()).isFalse();
         assertThat(queryResult.isLast()).isTrue();
     }
 
     @Test
     public void lastNotFullyFilledOfManyResult() throws Exception {
-        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(95L - PAGE_SIZE, 95L, listOfSize(PAGE_SIZE));
+        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(95L - PAGE_SIZE, PAGE_SIZE, 95L, listOfSize(PAGE_SIZE));
         assertThat(queryResult.isFirst()).isFalse();
         assertThat(queryResult.isLast()).isTrue();
     }
 
     @Test
     public void lastOneResult() throws Exception {
-        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(100L, 101L, listOfSize(1));
+        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(100L, PAGE_SIZE, 101L, listOfSize(1L));
         assertThat(queryResult.isFirst()).isFalse();
         assertThat(queryResult.isLast()).isTrue();
     }
 
     @Test
     public void beforeLastOneResult() throws Exception {
-        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(99L, 101L, listOfSize(1));
+        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(99L, PAGE_SIZE, 101L, listOfSize(1L));
         assertThat(queryResult.isFirst()).isFalse();
         assertThat(queryResult.isLast()).isFalse();
     }
@@ -112,7 +114,7 @@ public class PagedQueryResultTest {
     public void testEquals() throws Exception {
         assertThat(a).isEqualTo(a);
         assertThat(a).isNotEqualTo(b);
-        assertThat(PagedQueryResult.of(listOfSize(1))).isEqualTo(PagedQueryResult.of(listOfSize(1)));
+        assertThat(PagedQueryResult.of(listOfSize(1L))).isEqualTo(PagedQueryResult.of(listOfSize(1L)));
     }
 
     @Test
@@ -128,8 +130,8 @@ public class PagedQueryResultTest {
 
     @Test
     public void withOffset() throws Exception {
-        assertThat(PagedQueryResult.of(0L, 500L, listOfSize(25)).withOffset(5L)).
-                isEqualTo(PagedQueryResult.of(5L, 500L, listOfSize(25)));
+        assertThat(PagedQueryResult.of(0L, PAGE_SIZE, 500L, listOfSize(PAGE_SIZE)).withOffset(5L)).
+                isEqualTo(PagedQueryResult.of(5L, PAGE_SIZE, 500L, listOfSize(PAGE_SIZE)));
     }
 
     @Test
@@ -150,11 +152,11 @@ public class PagedQueryResultTest {
         assertThat(result.getTotal()).isEqualTo(500);
     }
 
-    private List<Integer> listOfSize(final int size) {
+    private List<Integer> listOfSize(final Long size) {
         if (size <= 0) {
             return Collections.emptyList();
         } else {
-            return IntStream.range(0, size).boxed().collect(Collectors.toList());
+            return IntStream.range(0, size.intValue()).boxed().collect(Collectors.toList());
         }
     }
 }
