@@ -1,8 +1,9 @@
 package io.sphere.sdk.utils;
 
 import io.sphere.sdk.models.Base;
-import org.javamoney.moneta.FastMoney;
+import org.javamoney.moneta.Money;
 import org.javamoney.moneta.function.MonetaryQueries;
+import org.javamoney.moneta.internal.JDKCurrencyProvider;
 
 import javax.annotation.Nonnull;
 import javax.money.*;
@@ -11,6 +12,7 @@ import java.util.Optional;
 
 public final class MoneyImpl extends Base implements MonetaryAmount {
     private final MonetaryAmount money;
+    private static final JDKCurrencyProvider CURRENCY_PROVIDER = new JDKCurrencyProvider();
 
     private MoneyImpl(final MonetaryAmount money) {
         this.money = money;
@@ -248,11 +250,11 @@ public final class MoneyImpl extends Base implements MonetaryAmount {
     }
 
     public static MonetaryAmount of(BigDecimal amount, CurrencyUnit currency) {
-        return of(FastMoney.of(amount, currency));
+        return of(Money.of(amount, currency));
     }
 
-    private FastMoney asMoney() {
-        return FastMoney.of(getNumber(), getCurrency());
+    private Money asMoney() {
+        return Money.of(getNumber(), getCurrency());
     }
 
     public static MonetaryAmount of(final int amount, final CurrencyUnit currencyUnit) {
@@ -264,8 +266,9 @@ public final class MoneyImpl extends Base implements MonetaryAmount {
         return MoneyImpl.of(amount, currency);
     }
 
-    private static CurrencyUnit createCurrencyByCode(final String currencyCode) {
-        return Monetary.getCurrency(currencyCode);
+    public static CurrencyUnit createCurrencyByCode(final String currencyCode) {
+        CurrencyQuery query = CurrencyQueryBuilder.of().setCurrencyCodes(currencyCode).build();
+        return CURRENCY_PROVIDER.getCurrencies(query).stream().findFirst().orElseThrow(() -> new UnknownCurrencyException(currencyCode));
     }
 
     public static MonetaryAmount of(final String amount, final CurrencyUnit currencyUnit) {
