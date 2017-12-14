@@ -29,7 +29,7 @@ Users gain type-safety, encapsulation, IDE auto completion and an internal domai
 <dependency>
   <groupId>com.commercetools.sdk.jvm.core</groupId>
   <artifactId>commercetools-models</artifactId>
-  <version>1.26.0</version>
+  <version>1.27.0</version>
 </dependency>
 <dependency>
   <groupId>com.commercetools.sdk.jvm.core</groupId>
