@@ -1395,7 +1395,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
 
             final Product revertedProduct = client().executeBlocking(ProductUpdateCommand.of(productWithoutVariant,RevertStagedVariantChanges.of(variant.getId())));
             assertThat(revertedProduct.getMasterData().getStaged().getVariants()).isNotEmpty();
-            assertThat(revertedProduct.getMasterData().hasStagedChanges()).isTrue();
+            assertThat(revertedProduct.getMasterData().hasStagedChanges()).isFalse();
 
 
             return productWithoutVariant;
