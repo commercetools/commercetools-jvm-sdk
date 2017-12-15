@@ -6,9 +6,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.discountcodes.DiscountCode;
-import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Resource;
+import io.sphere.sdk.types.CustomFields;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
@@ -38,7 +39,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      * Predicate where the discounts should be applied to.
      *
      * @see #isRequiringDiscountCode()
-     * @see CartDiscountPredicate
+     * @see CartPredicate
      *
      * @return predicate
      */
@@ -119,6 +120,16 @@ public interface CartDiscount extends Resource<CartDiscount> {
     @HasUpdateAction(value = "changeTarget",className = "ChangeTarget")
     CartDiscountTarget getTarget();
 
+
+    /**
+     * Allow to add {@link CustomFields} to the {@link CartDiscount}
+     * @return the {@link CustomFields} defined at this {@link CartDiscount}
+     */
+    @Nullable
+    @IgnoreInQueryModel
+    CustomFields getCustom();
+
+
     /**
      * Lower bound of the validity period.
      *
@@ -153,6 +164,16 @@ public interface CartDiscount extends Resource<CartDiscount> {
     @IgnoreInQueryModel
     @HasUpdateAction("changeValue")
     CartDiscountValue getValue();
+
+    /**
+     * Specify whether the application of this discount causes the following discounts to be ignored.
+     * Defaults to {@link StackingMode#STACKING}.
+     *
+     * @return the stacking mode of this object
+     */
+    @IgnoreInQueryModel
+    @HasUpdateAction
+    StackingMode getStackingMode();
 
     /**
      * A type hint for references which resource type is linked in a reference.

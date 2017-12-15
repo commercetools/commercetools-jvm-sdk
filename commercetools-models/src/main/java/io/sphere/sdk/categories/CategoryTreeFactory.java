@@ -29,8 +29,9 @@ final class CategoryTreeFactory {
         final List<Category> allAsFlatList = allCategoriesAsFlatList;
         final Map<LocalizedStringEntry, Category> categoriesByLocaleAndSlug = getLocalizedStringEntryCategoryMap(allCategoriesAsFlatList);
         final Map<String, Category> categoriesById = allCategoriesAsFlatList.stream().collect(toMap(Category::getId, Function.<Category>identity()));
+        final Map<String, Category> categoriesByKey = allCategoriesAsFlatList.stream().filter(category -> category.getKey() != null).collect(toMap(Category::getKey, Function.<Category>identity()));
         final Map<String, List<Category>> childrenByParentId = getChildrenByParentIdMap(allCategoriesAsFlatList);
-        return new CategoryTreeImpl(roots, allAsFlatList, categoriesByLocaleAndSlug, categoriesById, childrenByParentId, subtreeRoots);
+        return new CategoryTreeImpl(roots, allAsFlatList, categoriesByLocaleAndSlug, categoriesById, categoriesByKey ,childrenByParentId, subtreeRoots);
     }
 
     private Map<String, List<Category>> getChildrenByParentIdMap(final List<Category> allCategoriesAsFlatList) {

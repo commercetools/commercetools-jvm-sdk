@@ -3,12 +3,12 @@
     <parent>
         <groupId>com.commercetools.sdk.jvm.core</groupId>
         <artifactId>commercetools-jvm-sdk</artifactId>
-        <version>1.21.1-SNAPSHOT</version>
+        <version>1.28.0-SNAPSHOT</version>
     </parent>
     <groupId>com.commercetools.sdk.jvm.core</groupId>
     <artifactId>commercetools-java-client-apache-async</artifactId>
-    <packaging>jar</packaging>
-    <version>1.21.1-SNAPSHOT</version>
+    <packaging>bundle</packaging>
+    <version>1.28.0-SNAPSHOT</version>
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
@@ -38,6 +38,27 @@
     </dependencies>
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>${felix.maven.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+
+                    <instructions>
+                        <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
+                        <Export-Package>
+                            io.sphere.sdk.client
+                        </Export-Package>
+                        <Bundle-Version>${project.version}</Bundle-Version>
+                        <Fragment-Host>${project.groupId}.commercetools-sdk-base</Fragment-Host>
+                        <Provide-Capability>
+                            osgi.serviceloader;
+                            osgi.serviceloader="io.sphere.sdk.client.SphereHttpClientFactory"
+                        </Provide-Capability>
+                    </instructions>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

@@ -39,9 +39,9 @@ import java.util.List;
 @HasQueryEndpoint
 @HasByIdGetEndpoint(javadocSummary = "Fetches a shopping list by ID.", includeExamples = "io.sphere.sdk.shoppinglists.queries.ShoppingListByIdGetIntegrationTest#byIdGet()")
 @HasByKeyGetEndpoint
-@HasUpdateCommand(javadocSummary = "Updates a shopping list.", updateWithKey = true)
+@HasUpdateCommand(javadocSummary = "Updates a shopping list.", updateWith = "key")
 @HasCreateCommand(javadocSummary = "Creates a {@link io.sphere.sdk.shoppinglists.ShoppingList}.", includeExamples = "io.sphere.sdk.shoppinglists.commands.ShoppingListCreateCommandIntegrationTest#execution()")
-@HasDeleteCommand(javadocSummary = "Deletes a shopping list.", deleteWithKey = true)
+@HasDeleteCommand(javadocSummary = "Deletes a shopping list.", deleteWith = "key")
 @HasQueryModel
 public interface ShoppingList extends Resource<ShoppingList>, Custom {
 

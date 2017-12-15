@@ -17,6 +17,7 @@ import io.sphere.sdk.zones.ZoneFixtures;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.Collections;
 import java.util.Optional;
 
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withUpdateableShippingMethod;
@@ -28,6 +29,19 @@ public class ShippingMethodUpdateCommandIntegrationTest extends IntegrationTest 
     @BeforeClass
     public static void deleteRemainingZone() throws Exception {
         ZoneFixtures.deleteZonesForCountries(client(), CountryCode.EA);
+    }
+
+    @Test
+    public void updateByKey() throws Exception {
+        final String key = randomKey();
+        withUpdateableShippingMethod(client(), builder -> builder.key(key), shippingMethod -> {
+            final String newDescription = randomString();
+            assertThat(shippingMethod.getDescription()).isNotEqualTo(newDescription);
+            final ShippingMethodUpdateCommand cmd = ShippingMethodUpdateCommand.ofKey(key, shippingMethod.getVersion(), SetDescription.of(newDescription));
+            final ShippingMethod updatedShippingMethod = client().executeBlocking(cmd);
+            assertThat(updatedShippingMethod.getDescription()).isEqualTo(newDescription);
+            return updatedShippingMethod;
+        });
     }
 
     @Test
@@ -50,6 +64,18 @@ public class ShippingMethodUpdateCommandIntegrationTest extends IntegrationTest 
             final ShippingMethodUpdateCommand cmd = ShippingMethodUpdateCommand.of(shippingMethod, SetKey.of(newKey));
             final ShippingMethod updatedShippingMethod = client().executeBlocking(cmd);
             assertThat(updatedShippingMethod.getKey()).isEqualTo(newKey);
+            return updatedShippingMethod;
+        });
+    }
+
+    @Test
+    public void setPredicate() throws Exception {
+        withUpdateableShippingMethod(client(), shippingMethod -> {
+            final String predicate = "1=1";
+            final ShippingMethod updatedShippingMethod = client().executeBlocking(ShippingMethodUpdateCommand.of(shippingMethod, SetPredicate.of(predicate)));
+
+            assertThat(updatedShippingMethod.getPredicate()).isEqualTo(predicate);
+
             return updatedShippingMethod;
         });
     }
@@ -114,7 +140,7 @@ public class ShippingMethodUpdateCommandIntegrationTest extends IntegrationTest 
                 assertThat(zoneRate.getShippingRates()).isEmpty();
 
                 //addShippingRate
-                final ShippingRate shippingRate = ShippingRate.of(MoneyImpl.of(30, USD));
+                final ShippingRate shippingRate = ShippingRate.of(MoneyImpl.of(30, USD),null, Collections.EMPTY_LIST);
                 final ShippingMethod shippingMethodWithShippingRate =
                         client().executeBlocking(ShippingMethodUpdateCommand.of(shippingMethodWithZone, AddShippingRate.of(shippingRate, zone)));
                 assertThat(shippingMethodWithShippingRate.getShippingRatesForZone(zone)).isEqualTo(asList(shippingRate));

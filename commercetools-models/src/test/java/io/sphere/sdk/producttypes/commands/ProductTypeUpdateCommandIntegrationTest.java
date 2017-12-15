@@ -11,10 +11,13 @@ import io.sphere.sdk.producttypes.commands.updateactions.*;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
 import static io.sphere.sdk.producttypes.ProductTypeFixtures.withUpdateableProductType;
+import static io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Colors;
+import static io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Sizes;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.SphereInternalUtils.reverse;
 import static java.util.Collections.singletonList;
@@ -93,6 +96,31 @@ public class ProductTypeUpdateCommandIntegrationTest extends IntegrationTest {
         });
     }
 
+
+    @Test
+    public void changeAttributeConstraintUpdateActionTest() throws Exception {
+        withUpdateableProductType(client(), productType -> {
+            //add
+            final String attributeName = "foostring";
+            final AttributeDefinition foostring =
+                    AttributeDefinitionBuilder.of(attributeName, LocalizedString.of(ENGLISH, "foo string"), StringAttributeType.of()).attributeConstraint(AttributeConstraint.SAME_FOR_ALL).build();
+            final ProductType withFoostring = client().executeBlocking(ProductTypeUpdateCommand.of(productType, AddAttributeDefinition.of(foostring)));
+            final AttributeDefinition loadedDefinition = withFoostring.getAttribute(attributeName);
+            assertThat(loadedDefinition.getAttributeType()).isEqualTo(StringAttributeType.of());
+            assertThat(loadedDefinition.getAttributeConstraint()).isEqualTo(AttributeConstraint.SAME_FOR_ALL);
+
+            final ProductType updatedProductType = client().executeBlocking(ProductTypeUpdateCommand.of(withFoostring, ChangeAttributeConstraint.of("foostring",AttributeConstraint.NONE)));
+            final AttributeDefinition updatedDefinition = updatedProductType.getAttribute(attributeName);
+            assertThat(updatedDefinition.getAttributeConstraint()).isEqualTo(AttributeConstraint.NONE);
+
+
+            //remove
+            final ProductType withoutFoostring = client().executeBlocking(ProductTypeUpdateCommand.of(updatedProductType, RemoveAttributeDefinition.of(attributeName)));
+            assertThat(withoutFoostring.findAttribute(attributeName)).isEmpty();
+            return withoutFoostring;
+        });
+    }
+
     @Test
     public void changeLabel() throws Exception {
         withUpdateableProductType(client(), productType -> {
@@ -126,6 +154,7 @@ public class ProductTypeUpdateCommandIntegrationTest extends IntegrationTest {
         });
     }
 
+
     @Test
     public void addLocalizedEnumValue() throws Exception {
         withUpdateableProductType(client(), productType -> {
@@ -141,6 +170,54 @@ public class ProductTypeUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(updatedProductType.getAttribute(attributeName).getAttributeType())
                     .isInstanceOf(LocalizedEnumAttributeType.class)
                     .matches(type -> ((LocalizedEnumAttributeType) type).getValues().contains(value));
+
+            return updatedProductType;
+        });
+    }
+
+    @Test
+    public void removeEnumValuesByKey() throws Exception {
+        withUpdateableProductType(client(), productType -> {
+            final String attributeName = "size";
+
+            final ProductType updatedProductType = client().executeBlocking(ProductTypeUpdateCommand.of(productType,
+                    RemoveEnumValues.of(attributeName, Arrays.asList("S", "X"))));
+
+            assertThat(updatedProductType.getAttribute(attributeName).getAttributeType())
+                    .isInstanceOf(EnumAttributeType.class)
+                    .matches(type -> ((EnumAttributeType) type).getValues().size() == 1);
+
+            return updatedProductType;
+        });
+    }
+
+    @Test
+    public void removeEnumValues() throws Exception {
+        withUpdateableProductType(client(), productType -> {
+            final String attributeName = Sizes.ATTRIBUTE.getName();
+
+            final ProductType updatedProductType = client().executeBlocking(ProductTypeUpdateCommand.of(productType,
+                    RemoveEnumValues.ofEnumValue(attributeName, Arrays.asList(Sizes.S, Sizes.X))));
+
+            assertThat(updatedProductType.getAttribute(attributeName).getAttributeType())
+                    .isInstanceOf(EnumAttributeType.class)
+                    .matches(type -> ((EnumAttributeType) type).getValues().size() == 1);
+
+            return updatedProductType;
+        });
+    }
+
+    @Test
+    public void removeLocalizedEnumValues() throws Exception {
+        withUpdateableProductType(client(), productType -> {
+            final String attributeName = Colors.ATTRIBUTE.getName();
+
+            final ProductType updatedProductType = client().executeBlocking(ProductTypeUpdateCommand.of(productType,
+                    RemoveEnumValues.ofLocalizedEnumValue(attributeName, Arrays.asList(Colors.GREEN, Colors.RED))));
+
+            assertThat(updatedProductType.getAttribute(attributeName).getAttributeType())
+                    .isInstanceOf(LocalizedEnumAttributeType.class)
+                    .matches(type -> ((LocalizedEnumAttributeType) type).getValues().isEmpty());
 
             return updatedProductType;
         });

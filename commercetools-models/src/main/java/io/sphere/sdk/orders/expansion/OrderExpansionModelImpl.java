@@ -59,4 +59,5 @@ final class OrderExpansionModelImpl<T> extends CartLikeExpansionModelImpl<T> imp
     public ShippingInfoExpansionModel<T> shippingInfo() {
         return super.shippingInfo();
     }
+
 }

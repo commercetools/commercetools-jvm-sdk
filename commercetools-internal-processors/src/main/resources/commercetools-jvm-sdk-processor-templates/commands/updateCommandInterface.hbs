@@ -11,6 +11,8 @@ import {{package}}.expansion.{{resourceName}}ExpansionModel;
 import java.util.Collections;
 import java.util.List;
 
+import static io.sphere.sdk.client.SphereRequestUtils.urlEncode;
+
 /**
     {{#if javadocSummary}}{{{javadocSummary}}}{{else}}Command object to update a {@link {{resourceName}}{{!}}}.{{/if}}
 
@@ -47,31 +49,30 @@ public interface {{resourceName}}UpdateCommand extends UpdateCommandDsl<{{resour
         return new {{resourceName}}UpdateCommandImpl(versioned, Collections.singletonList(updateAction));
     }
 
-{{#if updateWithKey}}
-
+{{#each updateWith}}
     /**
-        Creates a command to update a {{resourceName}} selected by its key using several update actions.
+        Creates a command to update a {{resourceName}} selected by its {{name}} using several update actions.
 
-        @param key the key of the {{resourceName}} to update, see {@link {{resourceName}}#getKey()}
+        @param {{name}} the {{name}} of the {{resourceName}} to update, see {@link {{resourceName}}#get{{capitalizedName}}()}
         @param version the current version of the {{resourceName}}, see {@link {{resourceName}}#getVersion()}
         @param updateActions the updates
         @return the update command for {{resourceName}}
     */
-    static {{resourceName}}UpdateCommand ofKey(final String key, final Long version, final List<? extends UpdateAction<{{resourceName}}>> updateActions) {
-        final Versioned<{{resourceName}}> versioned = Versioned.of("key=" + key, version);//hack for simple reuse
+    static {{resourceName}}UpdateCommand of{{capitalizedName}}(final String {{name}}, final Long version, final List<? extends UpdateAction<{{resourceName}}>> updateActions) {
+        final Versioned<{{resourceName}}> versioned = Versioned.of("{{hyphenizedName}}=" + urlEncode({{name}}), version);//hack for simple reuse
         return new {{resourceName}}UpdateCommandImpl(versioned, updateActions);
     }
 
     /**
-        Creates a command to update a {{resourceName}} selected by its key using one update action.
+        Creates a command to update a {{resourceName}} selected by its {{name}} using one update action.
 
-        @param key the key of the {{resourceName}} to update, see {@link {{resourceName}}#getKey()}
+        @param {{name}} the {{name}} of the {{resourceName}} to update, see {@link {{resourceName}}#get{{capitalizedName}}()}
         @param version the current version of the {{resourceName}}, see {@link {{resourceName}}#getVersion()}
         @param updateAction the update to perform
         @return the update command for {{resourceName}}
     */
-    static {{resourceName}}UpdateCommand ofKey(final String key, final Long version, final UpdateAction<{{resourceName}}> updateAction) {
-        return ofKey(key, version, Collections.singletonList(updateAction));
+    static {{resourceName}}UpdateCommand of{{capitalizedName}}(final String {{name}}, final Long version, final UpdateAction<{{resourceName}}> updateAction) {
+        return of{{capitalizedName}}({{name}}, version, Collections.singletonList(updateAction));
     }
-{{/if}}
+{{/each}}
 }

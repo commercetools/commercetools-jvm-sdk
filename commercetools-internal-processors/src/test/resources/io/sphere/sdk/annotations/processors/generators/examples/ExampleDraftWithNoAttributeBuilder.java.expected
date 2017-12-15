@@ -1,0 +1,45 @@
+package io.sphere.sdk.annotations.processors.generators.examples;
+
+import io.sphere.sdk.models.Base;
+import io.sphere.sdk.models.Builder;
+import javax.annotation.Generated;
+
+/**
+ * Builder for {@link ExampleDraftWithNoAttribute}.
+ */
+@Generated(
+    value = "io.sphere.sdk.annotations.processors.generators.DraftBuilderGenerator",
+    comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.ExampleDraftWithNoAttribute"
+)
+public final class ExampleDraftWithNoAttributeBuilder extends Base implements Builder<ExampleDraftWithNoAttributeDsl> {
+  ExampleDraftWithNoAttributeBuilder() {
+  }
+
+  /**
+   * Creates a new instance of {@code ExampleDraftWithNoAttributeDsl} with the values of this builder.
+   *
+   * @return the instance
+   */
+  public ExampleDraftWithNoAttributeDsl build() {
+    return new ExampleDraftWithNoAttributeDsl();
+  }
+
+  /**
+   * Creates a new object initialized with the given values.
+   *
+   * @return new object initialized with the given values
+   */
+  public static ExampleDraftWithNoAttributeBuilder of() {
+    return new ExampleDraftWithNoAttributeBuilder();
+  }
+
+  /**
+   * Creates a new object initialized with the fields of the template parameter.
+   *
+   * @param template the template
+   * @return a new object initialized from the template
+   */
+  public static ExampleDraftWithNoAttributeBuilder of(final ExampleDraftWithNoAttribute template) {
+    return new ExampleDraftWithNoAttributeBuilder();
+  }
+}

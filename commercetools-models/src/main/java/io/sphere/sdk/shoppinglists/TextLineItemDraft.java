@@ -15,9 +15,8 @@ import java.time.ZonedDateTime;
  * @see TextLineItemDraftBuilder
  */
 @JsonDeserialize(as = TextLineItemDraftDsl.class)
-@ResourceDraftValue(factoryMethods = {
-        @FactoryMethod(parameterNames = {"name", "quantity"}),
-})
+@ResourceDraftValue(
+        factoryMethods = {@FactoryMethod(parameterNames = {"name", "quantity"})})
 public interface TextLineItemDraft
 {
     LocalizedString getName();

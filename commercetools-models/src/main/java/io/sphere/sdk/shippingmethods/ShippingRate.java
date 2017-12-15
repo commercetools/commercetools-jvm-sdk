@@ -8,6 +8,7 @@ import io.sphere.sdk.shippingmethods.queries.ShippingMethodsByLocationGet;
 
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
+import java.util.List;
 
 @JsonDeserialize(as = ShippingRateImpl.class)
 @ResourceValue
@@ -33,12 +34,29 @@ public interface ShippingRate {
     @Nullable
     Boolean isMatching();
 
+
+    /**
+     * A list of shipping rate price tiers.
+     * @return List of shippingRatePriceTier
+     */
+    @Nullable
+    List<ShippingRatePriceTier> getTiers();
+
     static ShippingRate of(final MonetaryAmount price, @Nullable final MonetaryAmount freeAbove) {
-        return of(price, freeAbove, null);
+        return of(price, freeAbove, null,null);
     }
 
     static ShippingRate of(final MonetaryAmount price, @Nullable final MonetaryAmount freeAbove, @Nullable final Boolean isMatching) {
-        return new ShippingRateImpl(freeAbove, isMatching, price);
+        return of(price, freeAbove, isMatching,null);
+    }
+
+
+    static ShippingRate of(final MonetaryAmount price, @Nullable final MonetaryAmount freeAbove, @Nullable final List<ShippingRatePriceTier> tiers) {
+        return of(price, freeAbove, null,tiers);
+    }
+
+    static ShippingRate of(final MonetaryAmount price, @Nullable final MonetaryAmount freeAbove, @Nullable final Boolean isMatching, @Nullable final List<ShippingRatePriceTier> tiers) {
+        return new ShippingRateImpl(freeAbove, isMatching, price,tiers);
     }
 
     static ShippingRate of(final MonetaryAmount price) {

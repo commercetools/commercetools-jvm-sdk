@@ -15,11 +15,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class QueueSphereClientDecoratorTest {
 
-    private static final String DUMMY_RESULT = "hello";
-    private static final SphereClient FAKE_SPHERE_CLIENT = new FakeSphereClient();
-    private static final int MAX_PARALLEL_REQUESTS = 100;
-    private static final DummySphereRequest SPHERE_REQUEST_SUCCESS = DummySphereRequest.of("success");
-    private static final DummySphereRequest SPHERE_REQUEST_FINISH_ON_COMMAND = DummySphereRequest.of("wait");
+     static final String DUMMY_RESULT = "hello";
+     static final SphereClient FAKE_SPHERE_CLIENT = new FakeSphereClient();
+     static final int MAX_PARALLEL_REQUESTS = 100;
+     static final DummySphereRequest SPHERE_REQUEST_SUCCESS = DummySphereRequest.of("success");
+     static final DummySphereRequest SPHERE_REQUEST_FINISH_ON_COMMAND = DummySphereRequest.of("wait");
 
     @Test
     public void worksAtAll() throws Exception {

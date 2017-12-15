@@ -1,13 +1,14 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.commercetools.sdk.jvm.core</groupId>
         <artifactId>commercetools-jvm-sdk</artifactId>
-        <version>1.21.1-SNAPSHOT</version>
+        <version>1.28.0-SNAPSHOT</version>
     </parent>
     <artifactId>commercetools-models</artifactId>
-    <packaging>jar</packaging>
-    <version>1.21.1-SNAPSHOT</version>
+    <packaging>bundle</packaging>
+    <version>1.28.0-SNAPSHOT</version>
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
@@ -69,6 +70,170 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>${felix.maven.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <niceManifest>true</niceManifest>
+                    <instructions>
+                        <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
+                        <Export-Package>
+
+                            io.sphere.sdk,
+                            io.sphere.sdk.cartdiscounts,
+                            io.sphere.sdk.cartdiscounts.commands,
+                            io.sphere.sdk.cartdiscounts.commands.updateactions,
+                            io.sphere.sdk.cartdiscounts.expansion,
+                            io.sphere.sdk.cartdiscounts.queries,
+                            io.sphere.sdk.carts,
+                            io.sphere.sdk.carts.commands,
+                            io.sphere.sdk.carts.commands.updateactions,
+                            io.sphere.sdk.carts.expansion,
+                            io.sphere.sdk.carts.queries,
+                            io.sphere.sdk.categories,
+                            io.sphere.sdk.categories.commands,
+                            io.sphere.sdk.categories.commands.updateactions,
+                            io.sphere.sdk.categories.expansion,
+                            io.sphere.sdk.categories.messages,
+                            io.sphere.sdk.categories.queries,
+                            io.sphere.sdk.channels,
+                            io.sphere.sdk.channels.commands,
+                            io.sphere.sdk.channels.commands.updateactions,
+                            io.sphere.sdk.channels.expansion,
+                            io.sphere.sdk.channels.queries,
+                            io.sphere.sdk.customergroups,
+                            io.sphere.sdk.customergroups.commands,
+                            io.sphere.sdk.customergroups.commands.updateactions,
+                            io.sphere.sdk.customergroups.expansion,
+                            io.sphere.sdk.customergroups.queries,
+                            io.sphere.sdk.customers,
+                            io.sphere.sdk.customers.commands,
+                            io.sphere.sdk.customers.commands.updateactions,
+                            io.sphere.sdk.customers.errors,
+                            io.sphere.sdk.customers.expansion,
+                            io.sphere.sdk.customers.messages,
+                            io.sphere.sdk.customers.queries,
+                            io.sphere.sdk.customobjects,
+                            io.sphere.sdk.customobjects.commands,
+                            io.sphere.sdk.customobjects.expansion,
+                            io.sphere.sdk.customobjects.queries,
+                            io.sphere.sdk.discountcodes,
+                            io.sphere.sdk.discountcodes.commands,
+                            io.sphere.sdk.discountcodes.commands.updateactions,
+                            io.sphere.sdk.discountcodes.expansion,
+                            io.sphere.sdk.discountcodes.queries,
+                            io.sphere.sdk.inventory,
+                            io.sphere.sdk.inventory.commands,
+                            io.sphere.sdk.inventory.commands.updateactions,
+                            io.sphere.sdk.inventory.expansion,
+                            io.sphere.sdk.inventory.messages,
+                            io.sphere.sdk.inventory.queries,
+                            io.sphere.sdk.jsonnodes,
+                            io.sphere.sdk.jsonnodes.expansion,
+                            io.sphere.sdk.jsonnodes.queries,
+                            io.sphere.sdk.messages,
+                            io.sphere.sdk.messages.expansion,
+                            io.sphere.sdk.messages.queries,
+                            io.sphere.sdk.models,
+                            io.sphere.sdk.orders,
+                            io.sphere.sdk.orders.commands,
+                            io.sphere.sdk.orders.commands.updateactions,
+                            io.sphere.sdk.orders.errors,
+                            io.sphere.sdk.orders.expansion,
+                            io.sphere.sdk.orders.messages,
+                            io.sphere.sdk.orders.queries,
+                            io.sphere.sdk.payments,
+                            io.sphere.sdk.payments.commands,
+                            io.sphere.sdk.payments.commands.updateactions,
+                            io.sphere.sdk.payments.expansion,
+                            io.sphere.sdk.payments.messages,
+                            io.sphere.sdk.payments.queries,
+                            io.sphere.sdk.productdiscounts,
+                            io.sphere.sdk.productdiscounts.commands,
+                            io.sphere.sdk.productdiscounts.commands.updateactions,
+                            io.sphere.sdk.productdiscounts.expansion,
+                            io.sphere.sdk.productdiscounts.queries,
+                            io.sphere.sdk.products,
+                            io.sphere.sdk.products.attributes,
+                            io.sphere.sdk.products.commands,
+                            io.sphere.sdk.products.commands.updateactions,
+                            io.sphere.sdk.products.expansion,
+                            io.sphere.sdk.products.messages,
+                            io.sphere.sdk.products.queries,
+                            io.sphere.sdk.products.search,
+                            io.sphere.sdk.producttypes,
+                            io.sphere.sdk.producttypes.commands,
+                            io.sphere.sdk.producttypes.commands.updateactions,
+                            io.sphere.sdk.producttypes.expansion,
+                            io.sphere.sdk.producttypes.queries,
+                            io.sphere.sdk.projects,
+                            io.sphere.sdk.projects.queries,
+                            io.sphere.sdk.reviews,
+                            io.sphere.sdk.reviews.commands,
+                            io.sphere.sdk.reviews.commands.updateactions,
+                            io.sphere.sdk.reviews.expansion,
+                            io.sphere.sdk.reviews.messages,
+                            io.sphere.sdk.reviews.queries,
+                            io.sphere.sdk.reviews.search,
+                            io.sphere.sdk.shippingmethods,
+                            io.sphere.sdk.shippingmethods.commands,
+                            io.sphere.sdk.shippingmethods.commands.updateactions,
+                            io.sphere.sdk.shippingmethods.expansion,
+                            io.sphere.sdk.shippingmethods.queries,
+                            io.sphere.sdk.shoppinglists,
+                            io.sphere.sdk.shoppinglists.commands,
+                            io.sphere.sdk.shoppinglists.commands.updateactions,
+                            io.sphere.sdk.shoppinglists.expansion,
+                            io.sphere.sdk.shoppinglists.queries,
+                            io.sphere.sdk.states,
+                            io.sphere.sdk.states.commands,
+                            io.sphere.sdk.states.commands.updateactions,
+                            io.sphere.sdk.states.expansion,
+                            io.sphere.sdk.states.queries,
+                            io.sphere.sdk.states.relatedupdateactions,
+                            io.sphere.sdk.subscriptions,
+                            io.sphere.sdk.subscriptions.commands,
+                            io.sphere.sdk.subscriptions.commands.updateactions,
+                            io.sphere.sdk.subscriptions.expansion,
+                            io.sphere.sdk.subscriptions.queries,
+                            io.sphere.sdk.taxcategories,
+                            io.sphere.sdk.taxcategories.commands,
+                            io.sphere.sdk.taxcategories.commands.updateactions,
+                            io.sphere.sdk.taxcategories.expansion,
+                            io.sphere.sdk.taxcategories.queries,
+                            io.sphere.sdk.types,
+                            io.sphere.sdk.types.commands,
+                            io.sphere.sdk.types.commands.updateactions,
+                            io.sphere.sdk.types.customupdateactions,
+                            io.sphere.sdk.types.expansion,
+                            io.sphere.sdk.types.queries,
+                            io.sphere.sdk.zones,
+                            io.sphere.sdk.zones.commands,
+                            io.sphere.sdk.zones.commands.updateactions,
+                            io.sphere.sdk.zones.expansion,
+                            io.sphere.sdk.zones.queries
+
+                        </Export-Package>
+                        <Import-Package>
+                            org.apache.*,
+                            org.junit.*
+                        </Import-Package>
+                        <Require-Capability>
+                            osgi.extender;
+                            filter:="(osgi.extender=osgi.serviceloader.registrar)",
+                            osgi.extender;
+                            filter:="(osgi.extender=osgi.serviceloader.processor)",
+                            osgi.serviceloader;
+                            filter:="(osgi.serviceloader=io.sphere.sdk.client.SphereHttpClientFactory)";
+                            cardinality:=multiple
+                        </Require-Capability>
+                        <Bundle-Version>${project.version}</Bundle-Version>
+                        <Fragment-Host>${project.groupId}.commercetools-sdk-base</Fragment-Host>
+                    </instructions>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
@@ -87,6 +252,9 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>${maven-failsafe-plugin.version}</version>
+                <configuration>
+                    <excludedGroups>io.sphere.sdk.subscriptions.SubscriptionMessagingIntegrationTest</excludedGroups>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.jacoco</groupId>

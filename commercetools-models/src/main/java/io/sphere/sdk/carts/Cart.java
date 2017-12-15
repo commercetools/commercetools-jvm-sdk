@@ -86,6 +86,10 @@ public interface Cart extends CartLike<Cart> {
         return Reference.of(referenceTypeId(), getId(), this);
     }
 
+    @HasUpdateAction
+    @Nullable
+    String getAnonymousId();
+
     /**
      * State in the perspective if the cart is active, merged with another cart or ordered.
      *
@@ -154,6 +158,10 @@ public interface Cart extends CartLike<Cart> {
     TaxedPrice getTaxedPrice();
 
     @Override
+    @HasUpdateAction
+    TaxCalculationMode getTaxCalculationMode();
+
+    @Override
     MonetaryAmount getTotalPrice();
 
     @Override
@@ -181,6 +189,15 @@ public interface Cart extends CartLike<Cart> {
     @Nullable
     @IgnoreInQueryModel
     List<Reference<CartDiscount>> getRefusedGifts();
+
+    /**
+     *  The shippingRateInput is used as an input to select a shipping rate price tier
+     * @return shippingRateInput
+     */
+    @Override
+    @Nullable
+    @QueryModelHint(type = "ShippingRateInputQueryModel<Cart>")
+    ShippingRateInput getShippingRateInput();
 
     /**
      * Creates a reference for one item of this class by a known ID.

@@ -14,14 +14,16 @@ class CategoryTreeImpl extends Base implements CategoryTree {
     private final List<Category> roots;
     private final List<Category> subtreeRoots;
     private final List<Category> allAsFlatList;
-    final Map<LocalizedStringEntry, Category> categoriesByLocaleAndSlug;
-    final Map<String, Category> categoriesById;
+    private final Map<LocalizedStringEntry, Category> categoriesByLocaleAndSlug;
+    private final Map<String, Category> categoriesById;
+    private final Map<String, Category> categoriesByKey;
     private final Map<String, List<Category>> childrenByParentId;
 
     CategoryTreeImpl(final List<Category> roots,
                      final List<Category> allAsFlatList,
                      final Map<LocalizedStringEntry, Category> categoriesByLocaleAndSlug,
                      final Map<String, Category> categoriesById,
+                     final Map<String, Category> categoriesByKey,
                      final Map<String, List<Category>> childrenByParentId, final List<Category> subtreeRoots) {
         this.childrenByParentId = childrenByParentId;
         this.roots = immutableCopyOf(roots);
@@ -29,6 +31,7 @@ class CategoryTreeImpl extends Base implements CategoryTree {
         this.allAsFlatList = immutableCopyOf(allAsFlatList);
         this.categoriesByLocaleAndSlug = immutableCopyOf(categoriesByLocaleAndSlug);
         this.categoriesById = immutableCopyOf(categoriesById);
+        this.categoriesByKey = immutableCopyOf(categoriesByKey);
     }
 
     @Override
@@ -46,6 +49,11 @@ class CategoryTreeImpl extends Base implements CategoryTree {
         return getAllAsFlatList().parallelStream()
                 .filter(cat -> Optional.ofNullable(cat.getExternalId()).map(extIdElement -> extIdElement.equals(externalId)).orElse(false))
                 .findAny();//should be okay, since the externalId should be unique
+    }
+
+    @Override
+    public Optional<Category> findByKey(String key) {
+        return Optional.ofNullable(categoriesByKey.get(key));
     }
 
     @Override

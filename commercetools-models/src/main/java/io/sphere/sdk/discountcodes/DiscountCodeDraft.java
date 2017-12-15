@@ -8,6 +8,7 @@ import io.sphere.sdk.cartdiscounts.CartDiscount;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
@@ -18,9 +19,10 @@ import java.util.List;
  * @see DiscountCodeDraftDsl
  */
 @JsonDeserialize(as = DiscountCodeDraftDsl.class)
-@ResourceDraftValue(factoryMethods = {@FactoryMethod(parameterNames = {"code", "cartDiscounts"})},
+@ResourceDraftValue(
         abstractBuilderClass = true,
-        abstractResourceDraftValueClass = true)
+        abstractResourceDraftValueClass = true,
+        factoryMethods = {@FactoryMethod(parameterNames = {"code", "cartDiscounts"})})
 public interface DiscountCodeDraft {
     @Nullable
     LocalizedString getName();
@@ -43,6 +45,9 @@ public interface DiscountCodeDraft {
 
     @Nullable
     Long getMaxApplicationsPerCustomer();
+
+    @Nullable
+    CustomFieldsDraft getCustom();
 
     static DiscountCodeDraftDsl of(final String code, final Referenceable<CartDiscount> cartDiscount) {
         return DiscountCodeDraft.of(code, Collections.singletonList(cartDiscount.toReference()));

@@ -4,6 +4,7 @@ import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.messages.queries.MessageQuery;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.productdiscounts.DiscountedPrice;
@@ -52,7 +53,6 @@ import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
 import static io.sphere.sdk.states.StateType.PRODUCT_STATE;
 import static io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.MONEY_ATTRIBUTE_NAME;
 import static io.sphere.sdk.test.SphereTestUtils.*;
-import static io.sphere.sdk.test.SphereTestUtils.MASTER_VARIANT_ID;
 import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
 import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
 import static java.util.Collections.*;
@@ -63,6 +63,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     public static final Random RANDOM = new Random();
+    private static final String URL_1 = "http://www.commercetools.com/ct_logo_farbe_1.gif";
+    private static final String URL_2 = "http://www.commercetools.com/ct_logo_farbe_2.gif";
+    private static final String URL_3 = "http://www.commercetools.com/ct_logo_farbe_3.gif";
+    private static final List<String> IMAGE_URLS = Arrays.asList(URL_1, URL_2, URL_3);
 
     @Test
     public void updateCommandPlusUpdateActions() {
@@ -90,15 +94,12 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void moveImageToPositionByVariantId() throws Exception {
-        final String url1 = "http://www.commercetools.com/ct_logo_farbe_1.gif";
-        final String url2 = "http://www.commercetools.com/ct_logo_farbe_2.gif";
-        final String url3 = "http://www.commercetools.com/ct_logo_farbe_3.gif";
-        withProductWithImages(client(), url1, url2, url3, (Product product) -> {
+        withProductWithImages(client(), IMAGE_URLS, (Product product) -> {
             final List<String> oldImageOrderUrls = product.getMasterData().getStaged().getMasterVariant().getImages()
                     .stream()
                     .map(image -> image.getUrl())
                     .collect(toList());
-            assertThat(oldImageOrderUrls).containsExactly(url1, url2, url3);
+            assertThat(oldImageOrderUrls).containsExactlyElementsOf(IMAGE_URLS);
             assertThat(product.getMasterData().hasStagedChanges()).isFalse();
 
             final Integer position = 0;
@@ -111,7 +112,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                     .stream()
                     .map(image -> image.getUrl())
                     .collect(toList());
-            assertThat(urls).containsExactly(url2, url1, url3);
+            assertThat(urls).containsExactly(URL_2, URL_1, URL_3);
             assertThat(updatedProduct.getMasterData().hasStagedChanges()).isTrue();
 
             return updatedProduct;
@@ -125,15 +126,12 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     public void moveImageToPositionByVariantIdWithStaged(final Boolean staged) {
-        final String url1 = "http://www.commercetools.com/ct_logo_farbe_1.gif";
-        final String url2 = "http://www.commercetools.com/ct_logo_farbe_2.gif";
-        final String url3 = "http://www.commercetools.com/ct_logo_farbe_3.gif";
-        withProductWithImages(client(), url1, url2, url3, (Product product) -> {
+        withProductWithImages(client(), IMAGE_URLS, (Product product) -> {
             final List<String> oldImageOrderUrls = product.getMasterData().getStaged().getMasterVariant().getImages()
                     .stream()
                     .map(image -> image.getUrl())
                     .collect(toList());
-            assertThat(oldImageOrderUrls).containsExactly(url1, url2, url3);
+            assertThat(oldImageOrderUrls).containsExactlyElementsOf(IMAGE_URLS);
             assertThat(product.getMasterData().hasStagedChanges()).isFalse();
 
             final Integer position = 0;
@@ -146,7 +144,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                     .stream()
                     .map(image -> image.getUrl())
                     .collect(toList());
-            assertThat(urls).containsExactly(url2, url1, url3);
+            assertThat(urls).containsExactly(URL_2, URL_1, URL_3);
             assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
 
             return updatedProduct;
@@ -155,15 +153,12 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void moveImageToPositionBySku() throws Exception {
-        final String url1 = "http://www.commercetools.com/ct_logo_farbe_1.gif";
-        final String url2 = "http://www.commercetools.com/ct_logo_farbe_2.gif";
-        final String url3 = "http://www.commercetools.com/ct_logo_farbe_3.gif";
-        withProductWithImages(client(), url1, url2, url3, (Product product) -> {
+        withProductWithImages(client(), IMAGE_URLS, (Product product) -> {
             final List<String> oldImageOrderUrls = product.getMasterData().getStaged().getMasterVariant().getImages()
                     .stream()
                     .map(image -> image.getUrl())
                     .collect(toList());
-            assertThat(oldImageOrderUrls).containsExactly(url1, url2, url3);
+            assertThat(oldImageOrderUrls).containsExactlyElementsOf(IMAGE_URLS);
             assertThat(product.getMasterData().hasStagedChanges()).isFalse();
 
             final Integer position = 0;
@@ -177,8 +172,28 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                     .stream()
                     .map(image -> image.getUrl())
                     .collect(toList());
-            assertThat(urls).containsExactly(url2, url1, url3);
+            assertThat(urls).containsExactly(URL_2, URL_1, URL_3);
             assertThat(updatedProduct.getMasterData().hasStagedChanges()).isTrue();
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void setImageLabel() throws Exception {
+        withProductWithImages(client(), Arrays.asList(URL_1), (Product product) -> {
+            final String changeToImageLabel = "New image label";
+            final ProductUpdateCommand updateCommand = ProductUpdateCommand.of(product, SetImageLabel.of(1, URL_1, changeToImageLabel, null));
+
+            final Product updatedProduct = client().executeBlocking(updateCommand);
+
+            final Optional<Image> changedImage = updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()
+                    .stream()
+                    .findFirst();
+
+            assertThat(changedImage).isPresent();
+            final String updatedImageLabel = changedImage.get().getLabel();
+            assertThat(updatedImageLabel).isEqualTo(changeToImageLabel);
 
             return updatedProduct;
         });
@@ -191,15 +206,12 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     public void moveImageToPositionBySkuWithStaged(final Boolean staged) {
-        final String url1 = "http://www.commercetools.com/ct_logo_farbe_1.gif";
-        final String url2 = "http://www.commercetools.com/ct_logo_farbe_2.gif";
-        final String url3 = "http://www.commercetools.com/ct_logo_farbe_3.gif";
-        withProductWithImages(client(), url1, url2, url3, (Product product) -> {
+        withProductWithImages(client(), IMAGE_URLS, (Product product) -> {
             final List<String> oldImageOrderUrls = product.getMasterData().getStaged().getMasterVariant().getImages()
                     .stream()
                     .map(image -> image.getUrl())
                     .collect(toList());
-            assertThat(oldImageOrderUrls).containsExactly(url1, url2, url3);
+            assertThat(oldImageOrderUrls).containsExactlyElementsOf(IMAGE_URLS);
             assertThat(product.getMasterData().hasStagedChanges()).isFalse();
 
             final Integer position = 0;
@@ -213,8 +225,67 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                     .stream()
                     .map(image -> image.getUrl())
                     .collect(toList());
-            assertThat(urls).containsExactly(url2, url1, url3);
+            assertThat(urls).containsExactly(URL_2, URL_1, URL_3);
             assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void publishWithPriceScope() throws Exception {
+        withUpdateableProduct(client(), (Product product) -> {
+            final ProductData stagedData = product.getMasterData().getStaged();
+            final Product publishedProduct = client().executeBlocking(ProductUpdateCommand.of(product, Publish.of()));
+            final ProductData currentData = publishedProduct.getMasterData().getCurrent();
+            assertThat(stagedData.getMasterVariant().getImages()).hasSize(0);
+            assertThat(stagedData.getMasterVariant().getPrices()).hasSize(0);
+            assertThat(currentData).isEqualTo(stagedData);
+
+            final PriceDraft expectedPrice = PriceDraft.of(EURO_10);
+            final Image image = createExternalImage();
+            final List<UpdateAction<Product>> updateActions = asList(
+                    AddExternalImage.of(image, MASTER_VARIANT_ID),
+                    AddPrice.of(MASTER_VARIANT_ID, expectedPrice),
+                    Publish.ofScope(PublishScope.PRICES)
+            );
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(publishedProduct, updateActions));
+            List<Price> prices = updatedProduct.getMasterData().getCurrent().getMasterVariant().getPrices();
+
+            //Verify published price in the current product
+            assertThat(prices).hasSize(1);
+            assertThat(expectedPrice).isEqualTo(PriceDraft.of(prices.get(0)));
+
+            //Verify that the image has not been published
+            assertThat(updatedProduct.getMasterData().getCurrent().getMasterVariant().getImages()).hasSize(0);
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void publishWithAllScope() throws Exception {
+        withUpdateableProduct(client(), (Product product) -> {
+            final ProductData stagedData = product.getMasterData().getStaged();
+            final Product publishedProduct = client().executeBlocking(ProductUpdateCommand.of(product, Publish.of()));
+            final ProductData currentData = publishedProduct.getMasterData().getCurrent();
+            assertThat(stagedData.getMasterVariant().getImages()).hasSize(0);
+            assertThat(stagedData.getMasterVariant().getPrices()).hasSize(0);
+            assertThat(currentData).isEqualTo(stagedData);
+
+            final PriceDraft expectedPrice = PriceDraft.of(EURO_10);
+            final Image image = createExternalImage();
+            final List<UpdateAction<Product>> updateActions = asList(
+                    AddExternalImage.of(image, MASTER_VARIANT_ID),
+                    AddPrice.of(MASTER_VARIANT_ID, expectedPrice),
+                    Publish.ofScope(PublishScope.ALL)
+            );
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(publishedProduct, updateActions));
+            List<Price> prices = updatedProduct.getMasterData().getCurrent().getMasterVariant().getPrices();
+
+            assertThat(prices).hasSize(1);
+            assertThat(expectedPrice).isEqualTo(PriceDraft.of(prices.get(0)));
+            assertThat(updatedProduct.getMasterData().getCurrent().getMasterVariant().getImages()).isEqualTo(asList(image));
 
             return updatedProduct;
         });
@@ -1082,7 +1153,6 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                     MetaAttributesUpdateActions.of(metaAttributes);
 
             final ProductProjection productProjection = client().executeBlocking(ProductProjectionByIdGet.of(product, STAGED));
-
             final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(productProjection, updateActions));
 
             final ProductData productData = updatedProduct.getMasterData().getStaged();
@@ -1288,6 +1358,47 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(revertedProduct.getMasterData().getCurrent().getDescription()).isEqualTo(oldDescriptionOption);
 
             return revertedProduct;
+        });
+    }
+
+    @Test
+    public void revertStagedVariantChanges() throws Exception {
+        final NamedAttributeAccess<MonetaryAmount> moneyAttribute =
+                AttributeAccess.ofMoney().ofName(MONEY_ATTRIBUTE_NAME);
+        final AttributeDraft moneyAttributeValue = AttributeDraft.of(moneyAttribute, EURO_10);
+
+        final NamedAttributeAccess<LocalizedEnumValue> colorAttribute = Colors.ATTRIBUTE;
+        final LocalizedEnumValue color = Colors.RED;
+        final AttributeDraft colorAttributeValue = AttributeDraft.of(colorAttribute, color);
+
+        final NamedAttributeAccess<EnumValue> sizeAttribute = Sizes.ATTRIBUTE;
+        final AttributeDraft sizeValue = AttributeDraft.of(sizeAttribute, Sizes.M);
+
+
+        withUpdateableProduct(client(), product -> {
+            assertThat(product.getMasterData().getStaged().getVariants()).isEmpty();
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+
+            final PriceDraft price = PriceDraft.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE);
+            final List<PriceDraft> prices = asList(price);
+            final List<AttributeDraft> attributeValues = asList(moneyAttributeValue, colorAttributeValue, sizeValue);
+            final ProductUpdateCommand addVariantCommand =
+                    ProductUpdateCommand.of(product, AddVariant.of(attributeValues, prices, randomKey(), false));
+
+            final Product productWithVariant = client().executeBlocking(addVariantCommand);
+            final ProductVariant variant = productWithVariant.getMasterData().getStaged().getVariants().get(0);
+            assertThat(productWithVariant.getMasterData().hasStagedChanges()).isFalse();
+
+            final Product productWithoutVariant = client().executeBlocking(ProductUpdateCommand.of(productWithVariant, RemoveVariant.ofVariantId(variant.getId())));
+            assertThat(productWithoutVariant.getMasterData().getStaged().getVariants()).isEmpty();
+            assertThat(productWithoutVariant.getMasterData().hasStagedChanges()).isTrue();
+
+            final Product revertedProduct = client().executeBlocking(ProductUpdateCommand.of(productWithoutVariant,RevertStagedVariantChanges.of(variant.getId())));
+            assertThat(revertedProduct.getMasterData().getStaged().getVariants()).isNotEmpty();
+            assertThat(revertedProduct.getMasterData().hasStagedChanges()).isFalse();
+
+
+            return productWithoutVariant;
         });
     }
 
@@ -1983,7 +2094,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             final AssetDraft assetDraft = AssetDraftBuilder.of(singletonList(assetSource), name)
                     .build();
             final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
-            final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, AddAsset.ofSku(sku, assetDraft));
+            final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, AddAsset.ofSku(sku, assetDraft).withPosition(0).withStaged(false));
             final Product updatedProduct = client().executeBlocking(cmd);
 
             final List<Asset> assets = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets();
@@ -2795,12 +2906,12 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         });
     }
 
-    private void withProductWithImages(final BlockingSphereClient client, final String url1, final String url2, final String url3, final Function<Product, Product> productProductFunction) {
+    private void withProductWithImages(final BlockingSphereClient client, final List<String> imageUrls, final Function<Product, Product> productProductFunction) {
         withUpdateableProduct(client, builder -> {
-            List<Image> imagesList = new LinkedList<>();
-            imagesList.add(Image.ofWidthAndHeight(url1, 460, 102, "commercetools logo"));
-            imagesList.add(Image.ofWidthAndHeight(url2, 460, 102, "commercetools logo"));
-            imagesList.add(Image.ofWidthAndHeight(url3, 460, 102, "commercetools logo"));
+            final List<Image> imagesList = new LinkedList<>();
+            for (final String imageUrl : imageUrls) {
+                imagesList.add(Image.ofWidthAndHeight(imageUrl, 460, 102, "commercetools logo"));
+            }
             final ProductVariantDraft oldMasterVariant = builder.getMasterVariant();
             final ProductVariantDraftBuilder variantDraftBuilder = ProductVariantDraftBuilder.of(oldMasterVariant);
             variantDraftBuilder.images(imagesList);

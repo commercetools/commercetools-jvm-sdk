@@ -74,6 +74,13 @@ public final class SphereInternalUtils {
         return result;
     }
 
+    public static <T> Set<T> setOf(final Set<T> first, final Set<T> second) {
+        final Set<T> result = new HashSet<>(first.size() + second.size());
+        result.addAll(first);
+        result.addAll(second);
+        return result;
+    }
+
     public static <T> Set<T> setOf(final T element, final T[] array) {
         return setOf(element, asSet(array));
     }

@@ -67,9 +67,18 @@ public enum TaxMode implements SphereEnumeration {
     EXTERNAL,
 
     /**
+     * The tax amounts and the tax rates as well as the tax portions are set externally per {@link ExternalTaxAmountDraft}.
+     *
+     * A cart with this tax mode can only be ordered if the cart itself and all line items,
+     * all custom line items and the shipping method have an external tax amount and rate set.
+     */
+    EXTERNAL_AMOUNT,
+
+    /**
      * No taxes are added to the cart.
      */
     DISABLED;
+
     @JsonCreator
     public static TaxMode ofSphereValue(final String value) {
         return SphereEnumeration.findBySphereName(values(), value).get();

@@ -3,12 +3,12 @@
     <parent>
         <groupId>com.commercetools.sdk.jvm.core</groupId>
         <artifactId>commercetools-jvm-sdk</artifactId>
-        <version>1.21.1-SNAPSHOT</version>
+        <version>1.28.0-SNAPSHOT</version>
     </parent>
     <groupId>com.commercetools.sdk.jvm.core</groupId>
     <artifactId>commercetools-convenience</artifactId>
     <packaging>jar</packaging>
-    <version>1.21.1-SNAPSHOT</version>
+    <version>1.28.0-SNAPSHOT</version>
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
@@ -18,10 +18,14 @@
     </licenses>
     <dependencies>
         <dependency>
+            <groupId>com.commercetools.sdk.jvm.core</groupId>
+            <artifactId>commercetools-java-client-apache-async</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>commercetools-java-client-core</artifactId>
             <version>${project.version}</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>

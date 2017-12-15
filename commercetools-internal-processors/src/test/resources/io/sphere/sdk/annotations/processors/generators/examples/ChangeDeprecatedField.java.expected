@@ -1,0 +1,42 @@
+package io.sphere.sdk.annotations.processors.generators.examples.commands.updateactions;
+
+import io.sphere.sdk.annotations.processors.generators.examples.ExampleResourceWithUpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
+import java.lang.Deprecated;
+import java.lang.String;
+import javax.annotation.Generated;
+
+/**
+ * Updates the {@code deprecatedField} property of a {@link ExampleResourceWithUpdateAction}.
+ *
+ * @see ExampleResourceWithUpdateAction#getDeprecatedField()
+ *
+ * @deprecated This type will be removed with the next major SDK update.
+ */
+@Generated(
+    value = "io.sphere.sdk.annotations.processors.generators.UpdateActionGenerator",
+    comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.ExampleResourceWithUpdateAction"
+)
+@Deprecated
+public final class ChangeDeprecatedField extends UpdateActionImpl<ExampleResourceWithUpdateAction> {
+  private final String deprecatedField;
+
+  private ChangeDeprecatedField(final String deprecatedField) {
+    super("changeDeprecatedField");
+    this.deprecatedField = deprecatedField;
+  }
+
+  public String getDeprecatedField() {
+    return deprecatedField;
+  }
+
+  /**
+   * Creates a new object initialized with the given values.
+   *
+   * @param deprecatedField initial value for the {@link ExampleResourceWithUpdateAction#getDeprecatedField()} property
+   * @return new object initialized with the given values
+   */
+  public static ChangeDeprecatedField of(final String deprecatedField) {
+    return new ChangeDeprecatedField(deprecatedField);
+  }
+}

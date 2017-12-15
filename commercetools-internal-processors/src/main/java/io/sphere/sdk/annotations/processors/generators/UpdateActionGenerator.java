@@ -73,6 +73,7 @@ public class UpdateActionGenerator extends AbstractGenerator<ExecutableElement> 
         final String updateActionClassName = getFirstNonEmpty(hasUpdateActionInstance.className(),StringUtils.capitalize(actionName));
 
         final String includeExample = hasUpdateActionInstance.exampleBaseClass();
+        final boolean generateDefaultFactory = hasUpdateActionInstance.generateDefaultFactory();
         final PropertySpec[] properties = hasUpdateActionInstance.fields();
         final FactoryMethod[] factoryMethods = hasUpdateActionInstance.factoryMethods();
         final CopyFactoryMethod[] copyFactoryMethods = hasUpdateActionInstance.copyFactoryMethods();
@@ -111,11 +112,14 @@ public class UpdateActionGenerator extends AbstractGenerator<ExecutableElement> 
                 .addFields(fields)
                 .addMethods(getters)
                 .addMethod(createConstructor(propertyGenModelList, concreteClassName, actionName, isAbstract ? Modifier.PROTECTED : Modifier.PRIVATE))
-                .addMethod(createFactoryMethod(propertyGenModelList, concreteClassName, Arrays.asList(allParamsNames), "of", false))
                 .addMethods(createFactoryMethods(factoryMethods, propertyGenModelList, concreteClassName))
                 .addMethods(createCopyFactoryMethods(copyFactoryMethods, concreteClassName, propertyGenModelList))
                 .addSuperinterfaces(superInterfaces);
+        copyDeprecatedAnnotation(property, typeSpecBuilder);
 
+        if(generateDefaultFactory){
+            typeSpecBuilder.addMethod(createFactoryMethod(propertyGenModelList, concreteClassName, Arrays.asList(allParamsNames), "of", false));
+        }
         if (allAttributesOptional) {
             typeSpecBuilder.addMethod(createFactoryMethod(propertyGenModelList, concreteClassName, Arrays.asList(), "ofUnset", false));
         }
@@ -172,13 +176,11 @@ public class UpdateActionGenerator extends AbstractGenerator<ExecutableElement> 
     }
 
 
-    private MethodSpec createGetMethod(final PropertyGenModel propertyGenModel) {
-
-        String prefix = propertyGenModel.getType().equals(BOXED_BOOLEAN)? "is" : "get";
-        MethodSpec.Builder specBuilder = MethodSpec.methodBuilder(prefix + StringUtils.capitalize(propertyGenModel.getName()))
+    protected MethodSpec createGetMethod(final PropertyGenModel propertyGenModel) {
+        final MethodSpec.Builder specBuilder = MethodSpec.methodBuilder(propertyGenModel.getMethodName())
                 .addModifiers(Modifier.PUBLIC)
                 .returns(propertyGenModel.getType())
-                .addCode("return $L;\n", propertyGenModel.getName());
+                .addCode("return $L;\n", propertyGenModel.getJavaIdentifier());
 
         if (propertyGenModel.isOptional()) {
             specBuilder.addAnnotation(Nullable.class);
@@ -196,7 +198,7 @@ public class UpdateActionGenerator extends AbstractGenerator<ExecutableElement> 
     protected MethodSpec createWithMethod(final List<PropertyGenModel> properties, final PropertyGenModel propertyGenModel, final ClassName returnType) {
 
         final String callArguments = properties.stream()
-                .map(p -> propertyGenModel.getName().equals(p.getName()) ? p.getJavaIdentifier() : "get" + StringUtils.capitalize(p.getName()) + "()")
+                .map(p -> propertyGenModel.getName().equals(p.getName()) ? p.getJavaIdentifier() : p.getMethodName() + "()")
                 .collect(Collectors.joining(", "));
 
         final MethodSpec.Builder builder = MethodSpec.methodBuilder("with" + StringUtils.capitalize(propertyGenModel.getName())).addModifiers(Modifier.PUBLIC)
@@ -219,7 +221,8 @@ public class UpdateActionGenerator extends AbstractGenerator<ExecutableElement> 
             typeMirror = e.getTypeMirror();
         }
         final String jsonName = StringUtils.isEmpty(propertySpec.jsonName()) ? null : propertySpec.jsonName();
-        return PropertyGenModel.of(escapeJavaKeyword(propertySpec.name()), jsonName, typeMirror, propertySpec.docLinkTaglet(), propertySpec.isOptional(), propertySpec.useReference());
+        return PropertyGenModel.of(escapeJavaKeyword(propertySpec.name()), jsonName, typeMirror, propertySpec.docLinkTaglet(),
+                propertySpec.isOptional(), propertySpec.useReference());
 
     }
 

@@ -185,6 +185,19 @@ public interface CartLike<T> extends Resource<T>, Custom {
     @IgnoreInQueryModel
     TaxMode getTaxMode();
 
+
+    /**
+     * Tax calculation mode of this cart.
+     *
+     * @see io.sphere.sdk.carts.commands.updateactions.ChangeTaxCalculationMode
+     *
+     * @return TaxCalculationMode
+     */
+    @IgnoreInQueryModel
+    TaxCalculationMode getTaxCalculationMode();
+
+
+
     /**
      * The currency of this cart/order.
      * @return currency
@@ -203,6 +216,14 @@ public interface CartLike<T> extends Resource<T>, Custom {
 
     @Nullable
     Locale getLocale();
+
+
+    /**
+     *  The shippingRateInput is used as an input to select a shipping rate price tier
+     * @return shippingRateInput
+     */
+    @Nullable
+    ShippingRateInput getShippingRateInput();
 
     /**
      * When calculating taxes in {@code taxedPrice}, the tax rounding mode is used for decimal values.

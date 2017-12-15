@@ -49,11 +49,12 @@ import static java.util.stream.Collectors.toList;
         "    }")
 @ResourceInfo(pluralName = "shipping methods", pathElement = "shipping-methods")
 @HasByIdGetEndpoint(javadocSummary = "Fetches a shipping method by ID.", includeExamples = "io.sphere.sdk.shippingmethods.queries.ShippingMethodByIdGetIntegrationTest#execution()")
+@HasByKeyGetEndpoint(javadocSummary = "Fetches a shipping method by key.", includeExamples = "io.sphere.sdk.shippingmethods.queries.ShippingMethodByKeyGetIntegrationTest#execution()")
 @HasCreateCommand(javadocSummary = "Creates a {@link io.sphere.sdk.shippingmethods.ShippingMethod}.", includeExamples = "io.sphere.sdk.shippingmethods.commands.ShippingMethodCreateCommandIntegrationTest#execution()")
-@HasUpdateCommand
+@HasUpdateCommand(updateWith = "key")
 @HasQueryModel(additionalContents = "BooleanQueryModel<ShippingMethod> isDefault();")
 @HasUpdateActions
-@HasDeleteCommand(deleteWithKey = true)
+@HasDeleteCommand(deleteWith = "key")
 public interface ShippingMethod extends Resource<ShippingMethod> {
 
     @Nullable
@@ -86,6 +87,10 @@ public interface ShippingMethod extends Resource<ShippingMethod> {
     @IgnoreInQueryModel
     @HasNoUpdateAction
     Boolean isDefault();
+
+    @IgnoreInQueryModel
+    @Nullable
+    String getPredicate();
 
     @Override
     default Reference<ShippingMethod> toReference() {

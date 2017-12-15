@@ -17,9 +17,10 @@ import java.util.Set;
  * @see StateDraftBuilder
  */
 @JsonDeserialize(as = StateDraftDsl.class)
-@ResourceDraftValue(factoryMethods = @FactoryMethod(parameterNames = {"key", "type"}),
+@ResourceDraftValue(
         abstractBuilderClass = true,
-        abstractResourceDraftValueClass = true)
+        abstractResourceDraftValueClass = true,
+        factoryMethods = @FactoryMethod(parameterNames = {"key", "type"}))
 public interface StateDraft extends WithKey {
     String getKey();
 

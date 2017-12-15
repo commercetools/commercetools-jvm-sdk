@@ -20,13 +20,17 @@ import java.util.List;
  * @see PaymentDraftDsl
  */
 @JsonDeserialize(as = PaymentDraftDsl.class)
-@ResourceDraftValue(gettersForBuilder = true, factoryMethods = {
-        @FactoryMethod(parameterNames = {"amountPlanned"})
-}, additionalBuilderInterfaces = "io.sphere.sdk.types.CustomDraft")
+@ResourceDraftValue(
+        factoryMethods = {@FactoryMethod(parameterNames = {"amountPlanned"})},
+        additionalBuilderInterfaces = "io.sphere.sdk.types.CustomDraft")
 public interface PaymentDraft extends CustomDraft {
     @Nullable
     Reference<Customer> getCustomer();
 
+    /**
+     * @deprecated This field will be removed with the next major SDK update.
+     */
+    @Deprecated
     @Nullable
     String getExternalId();
 
@@ -35,15 +39,31 @@ public interface PaymentDraft extends CustomDraft {
 
     MonetaryAmount getAmountPlanned();
 
+    /**
+     * @deprecated This field will be removed with the next major SDK update.
+     */
+    @Deprecated
     @Nullable
     MonetaryAmount getAmountAuthorized();
 
+    /**
+     * @deprecated This field will be removed with the next major SDK update.
+     */
+    @Deprecated
     @Nullable
     ZonedDateTime getAuthorizedUntil();
 
+    /**
+     * @deprecated This field will be removed with the next major SDK update.
+     */
+    @Deprecated
     @Nullable
     MonetaryAmount getAmountPaid();
 
+    /**
+     * @deprecated This field will be removed with the next major SDK update.
+     */
+    @Deprecated
     @Nullable
     MonetaryAmount getAmountRefunded();
 

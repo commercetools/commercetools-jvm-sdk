@@ -18,6 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Integration tests for {@link ChangeSubscription} and {@link SqsDestination}.
  */
+@org.junit.experimental.categories.Category(SubscriptionMessagingIntegrationTest.class)
 public class ChangeSubscriptionSqsIntegrationTest extends SqsIntegrationTest {
 
     @Test

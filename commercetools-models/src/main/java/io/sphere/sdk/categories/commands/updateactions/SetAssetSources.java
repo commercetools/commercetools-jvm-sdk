@@ -11,11 +11,13 @@ import java.util.List;
  */
 public final class SetAssetSources extends UpdateActionImpl<Category> {
     private final String assetId;
+    private final String assetKey;
     private final List<AssetSource> sources;
 
-    private SetAssetSources(final String assetId, final List<AssetSource> sources) {
+    private SetAssetSources(final String assetId, final String assetKey, final List<AssetSource> sources) {
         super("setAssetSources");
         this.assetId = assetId;
+        this.assetKey = assetKey;
         this.sources = sources;
     }
 
@@ -27,7 +29,17 @@ public final class SetAssetSources extends UpdateActionImpl<Category> {
         return sources;
     }
 
-    public static SetAssetSources of(final String assetId, final List<AssetSource> sources) {
-        return new SetAssetSources(assetId, sources);
+    public String getAssetKey() {
+        return assetKey;
     }
+
+    public static SetAssetSources of(final String assetId, final List<AssetSource> sources) {
+        return new SetAssetSources(assetId,null, sources);
+    }
+
+    public static SetAssetSources ofKey(final String assetKey, final List<AssetSource> sources) {
+        return new SetAssetSources(null ,assetKey, sources);
+    }
+
+
 }

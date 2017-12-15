@@ -10,7 +10,7 @@ final class SolutionInfoService extends Base {
     private ServiceLoader<SolutionInfo> loader;
 
     private SolutionInfoService() {
-        loader = ServiceLoader.load(SolutionInfo.class);
+        loader = ServiceLoader.load(SolutionInfo.class,SolutionInfoService.class.getClassLoader());
     }
 
     public static synchronized SolutionInfoService getInstance() {
@@ -22,7 +22,8 @@ final class SolutionInfoService extends Base {
 
     public List<SolutionInfo> getSolutionInfos() {
         final List<SolutionInfo> solutions = new LinkedList<>();
-        loader.iterator().forEachRemaining(solution -> solutions.add(solution));
+        loader.iterator()
+                .forEachRemaining(solution -> solutions.add(solution));
         Collections.sort(solutions, Comparator.comparing(SolutionInfo::getName));
         return Collections.unmodifiableList(solutions);
     }

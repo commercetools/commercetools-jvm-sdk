@@ -11,6 +11,6 @@ class EnumLikeAttributeMapperImpl<T extends WithKey> extends AttributeMapperImpl
 
     @Override
     public JsonNode serialize(final T t) {
-        return mapper().valueToTree(t.getKey());
+        return mapper().valueToTree(t);
     }
 }

@@ -5,8 +5,6 @@ import io.sphere.sdk.cartdiscounts.queries.CartDiscountQuery;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.ByIdVariantIdentifier;
-import io.sphere.sdk.products.ProductCatalogData;
-import io.sphere.sdk.products.ProductData;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.utils.MoneyImpl;
@@ -24,9 +22,8 @@ import java.util.function.Function;
 
 import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.newCartDiscountDraftBuilder;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
-import static io.sphere.sdk.products.ProductFixtures.withUpdateableProduct;
-import static org.assertj.core.api.Assertions.*;
 import static io.sphere.sdk.test.SphereTestUtils.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CartDiscountCreateCommandIntegrationTest extends IntegrationTest {
     private CartDiscount cartDiscount;
@@ -48,12 +45,13 @@ public class CartDiscountCreateCommandIntegrationTest extends IntegrationTest {
         final LineItemsTarget target = LineItemsTarget.of("1 = 1");
         final String sortOrder = "0.54";
         final boolean requiresDiscountCode = false;
-        final CartDiscountDraft discountDraft = CartDiscountDraftBuilder.of(name, CartDiscountPredicate.of(predicate),
+        final CartDiscountDraft discountDraft = CartDiscountDraftBuilder.of(name, CartPredicate.of(predicate),
                 value, target, sortOrder, requiresDiscountCode)
                 .validFrom(validFrom)
                 .validUntil(validUntil)
                 .description(description)
                 .isActive(false)
+                .stackingMode(StackingMode.STOP_AFTER_THIS_DISCOUNT)
                 .build();
 
         cartDiscount = client().executeBlocking(CartDiscountCreateCommand.of(discountDraft));
@@ -67,6 +65,7 @@ public class CartDiscountCreateCommandIntegrationTest extends IntegrationTest {
         assertThat(cartDiscount.getValidUntil()).isEqualTo(validUntil);
         assertThat(cartDiscount.getDescription()).isEqualTo(description);
         assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
+        assertThat(cartDiscount.getStackingMode()).isEqualTo(StackingMode.STOP_AFTER_THIS_DISCOUNT);
     }
 
     @After
@@ -113,6 +112,22 @@ public class CartDiscountCreateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void multiBuyLineItemsTarget() throws Exception {
+        final RelativeCartDiscountValue value = RelativeCartDiscountValue.of(500);
+        final MultiBuyLineItemsTarget target = MultiBuyLineItemsTarget.of("1 = 1", 3L, 1L,
+                SelectionMode.CHEAPEST, 10L);
+        checkTargetSerialization(value, target);
+    }
+
+    @Test
+    public void multiBuyCustomLineItemsTarget() throws Exception {
+        final RelativeCartDiscountValue value = RelativeCartDiscountValue.of(500);
+        final MultiBuyCustomLineItemsTarget target = MultiBuyCustomLineItemsTarget.of("1 = 1", 3L, 1L,
+                SelectionMode.CHEAPEST, 10L);
+        checkTargetSerialization(value, target);
+    }
+
+    @Test
     public void createByJson() {
         final CartDiscountDraft cartDiscountDraft = SphereJsonUtils.readObjectFromResource("drafts-tests/cartDiscount.json", CartDiscountDraft.class);
 
@@ -133,6 +148,11 @@ public class CartDiscountCreateCommandIntegrationTest extends IntegrationTest {
 
     private void checkTargetSerialization(final CartDiscountTarget target) {
         checkCreation(builder -> builder.target(target), discount -> assertThat(discount.getTarget()).isEqualTo(target));
+    }
+
+
+    private void checkTargetSerialization(final CartDiscountValue value, final CartDiscountTarget target) {
+        checkCreation(builder -> builder.target(target).value(value), discount -> assertThat(discount.getTarget()).isEqualTo(target));
     }
 
     private void checkCreation(final Function<CartDiscountDraftBuilder, CartDiscountDraftBuilder> f, final Consumer<CartDiscount> assertions) {

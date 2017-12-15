@@ -36,6 +36,10 @@ abstract class ExampleWithAbstractBaseClassDraftBuilderBase<T extends ExampleWit
     return (T) this;
   }
 
+  public String getName() {
+    return name;
+  }
+
   /**
    * Creates a new instance of {@code ExampleWithAbstractBaseClassDraftDsl} with the values of this builder.
    *

@@ -23,7 +23,8 @@ import java.util.Locale;
  * @see CartDraftBuilder
  */
 @JsonDeserialize(as = CartDraftDsl.class)
-@ResourceDraftValue(factoryMethods = @FactoryMethod(parameterNames = "currency"), gettersForBuilder = true)
+@ResourceDraftValue(
+        factoryMethods = @FactoryMethod(parameterNames = "currency"))
 public interface CartDraft extends CustomDraft {
     CurrencyUnit getCurrency();
 
@@ -74,6 +75,12 @@ public interface CartDraft extends CustomDraft {
 
     @Nullable
     RoundingMode getTaxRoundingMode();
+
+    @Nullable
+    ShippingRateInputDraft getShippingRateInput();
+
+    @Nullable
+    TaxCalculationMode getTaxCalculationMode();
 
     static CartDraftDsl of(final CurrencyUnit currency) {
         return CartDraftDsl.of(currency);

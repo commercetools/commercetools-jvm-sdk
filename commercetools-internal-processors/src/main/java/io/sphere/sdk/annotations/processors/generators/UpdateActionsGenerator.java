@@ -45,7 +45,7 @@ public class UpdateActionsGenerator extends AbstractMultipleFileGenerator<TypeEl
 
     protected TypeSpec generateUpdateAction(final TypeElement annotatedTypeElement, final ExecutableElement propertyMethod) {
         final PropertyGenModel property = PropertyGenModel.of(propertyMethod);
-        final MethodSpec getMethod = createGetMethodBuilder(propertyMethod).build();
+        final MethodSpec getMethod = createGetMethod(property);
         final FieldSpec fieldSpec = createFieldBuilder(property, Modifier.PRIVATE)
                 .addModifiers(Modifier.FINAL)
                 .build();
@@ -75,6 +75,9 @@ public class UpdateActionsGenerator extends AbstractMultipleFileGenerator<TypeEl
                 .addMethod(createConstructor(property, updateAction))
                 .addMethod(getMethod)
                 .addMethod(createFactoryMethod(property, updateActionClassName));
+
+        copyDeprecatedAnnotation(property, typeSpecBuilder);
+
         if (property.isOptional()) {
             typeSpecBuilder.addMethod(createUnsetMethod(updateActionClassName, property));
         }

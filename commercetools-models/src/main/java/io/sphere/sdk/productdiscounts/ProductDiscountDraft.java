@@ -9,9 +9,9 @@ import io.sphere.sdk.models.LocalizedString;
 import javax.annotation.Nullable;
 
 @JsonDeserialize(as = ProductDiscountDraftDsl.class)
-@ResourceDraftValue(factoryMethods = {
-        @FactoryMethod(parameterNames = {}),
-        @FactoryMethod(parameterNames = {"active", "description", "name", "predicate", "sortOrder", "value"})
+@ResourceDraftValue(
+        factoryMethods = {@FactoryMethod(parameterNames = {}),
+                          @FactoryMethod(parameterNames = {"active", "description", "name", "predicate", "sortOrder", "value"})
 }, abstractBuilderClass = true)
 public interface ProductDiscountDraft {
     @JsonProperty("isActive")

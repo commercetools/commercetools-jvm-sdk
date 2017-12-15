@@ -27,6 +27,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTest {
 
     @Test
+    public void setKey() {
+        withCustomer(client(), customer -> {
+            String newKey = randomKey();
+            assertThat(customer.getKey()).isNotEqualTo(newKey);
+            final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, SetKey.of(newKey)));
+            assertThat(updatedCustomer.getKey()).isEqualTo(newKey);
+        });
+    }
+
+    @Test
     public void setFirstName() {
         withCustomer(client(), customer -> {
             String newFirstName = "Jane";

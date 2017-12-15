@@ -17,7 +17,7 @@ import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public final class NestedAttributeIntegrationTest extends IntegrationTest {
+public class NestedAttributeIntegrationTest extends IntegrationTest {
 
     static class NutrientInfo {
         static NamedAttributeAccess<String> quantityContainedUOM = AttributeAccess.ofString().ofName("quantityContainedUOM");

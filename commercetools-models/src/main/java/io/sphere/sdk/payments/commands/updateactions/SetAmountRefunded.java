@@ -18,7 +18,7 @@ import javax.money.MonetaryAmount;
  *
  * @see Payment
  *
- *
+ * @deprecated This update action will be removed with the next major SDK update.
  */
 public final class SetAmountRefunded extends UpdateActionImpl<Payment> {
     @Nullable

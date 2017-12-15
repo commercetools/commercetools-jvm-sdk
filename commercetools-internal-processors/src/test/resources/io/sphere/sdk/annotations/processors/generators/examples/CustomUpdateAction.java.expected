@@ -57,20 +57,6 @@ public final class CustomUpdateAction extends UpdateActionImpl<ExampleResourceWi
    * Creates a new object initialized with the given values.
    *
    * @param name initial value for the  property
-   * @param quantity initial value for the  property
-   * @param slug initial value for the  property
-   * @param taxCategory initial value for the  property
-   * @return new object initialized with the given values
-   */
-  public static CustomUpdateAction of(final String name, final Long quantity, final String slug,
-      @Nullable final Reference<String> taxCategory) {
-    return new CustomUpdateAction(name, quantity, slug, taxCategory);
-  }
-
-  /**
-   * Creates a new object initialized with the given values.
-   *
-   * @param name initial value for the  property
    * @param slug initial value for the  property
    * @return new object initialized with the given values
    */
@@ -86,6 +72,20 @@ public final class CustomUpdateAction extends UpdateActionImpl<ExampleResourceWi
    */
   public static CustomUpdateAction of(final String name) {
     return new CustomUpdateAction(name, null, null, null);
+  }
+
+  /**
+   * Creates a new object initialized with the given values.
+   *
+   * @param name initial value for the  property
+   * @param quantity initial value for the  property
+   * @param slug initial value for the  property
+   * @param taxCategory initial value for the  property
+   * @return new object initialized with the given values
+   */
+  public static CustomUpdateAction of(final String name, final Long quantity, final String slug,
+      @Nullable final Reference<String> taxCategory) {
+    return new CustomUpdateAction(name, quantity, slug, taxCategory);
   }
 
   /**

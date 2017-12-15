@@ -84,6 +84,19 @@ public class PaymentUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void setCustomerByKey() {
+        withCustomer(client(), customer -> {
+            withPayment(client(), paymentDraftBuilder -> paymentDraftBuilder.key(randomKey()) ,payment -> {
+                final Payment updatedPayment =
+                        client().executeBlocking(PaymentUpdateCommand.ofKey(payment.getKey(), payment.getVersion(), SetCustomer.of(customer)));
+                assertThat(updatedPayment.getCustomer()).isEqualTo(customer.toReference());
+
+                return updatedPayment;
+            });
+        });
+    }
+
+    @Test
     public void refunded() {
         withPayment(client(), payment -> {
 

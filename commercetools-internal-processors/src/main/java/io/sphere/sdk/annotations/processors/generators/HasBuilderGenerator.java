@@ -60,7 +60,7 @@ public class HasBuilderGenerator extends AbstractBuilderGenerator<HasBuilder> {
                 .addMethod(createConstructor(properties, Collections.emptyList()))
                 .addMethods(builderMethodSpecs);
         if (hasBuilder.gettersForBuilder()) {
-            List<MethodSpec> getMethods = propertyMethods.stream()
+            List<MethodSpec> getMethods = properties.stream()
                     .map(this::createGetMethod)
                     .collect(Collectors.toList());
             builder.addMethods(getMethods);

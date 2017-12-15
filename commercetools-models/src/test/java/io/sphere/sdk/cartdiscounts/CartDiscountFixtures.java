@@ -29,7 +29,7 @@ public class CartDiscountFixtures {
         final LineItemsTarget target = LineItemsTarget.of("1 = 1");
         final String sortOrder = randomSortOrder();
         final boolean requiresDiscountCode = false;
-        return CartDiscountDraftBuilder.of(name, CartDiscountPredicate.of(predicate),
+        return CartDiscountDraftBuilder.of(name, CartPredicate.of(predicate),
                 value, target, sortOrder, requiresDiscountCode)
                 .validFrom(validFrom)
                 .validUntil(validUntil)
@@ -44,6 +44,7 @@ public class CartDiscountFixtures {
         final Query<CartDiscount> query = CartDiscountQuery.of().withPredicates(m -> m.name().lang(ENGLISH).is(name));
         return client.executeBlocking(query).head().orElseGet(() -> {
             final CartDiscountDraft draft = newCartDiscountDraftBuilder()
+                    .requiresDiscountCode(true)
                     .name(LocalizedString.ofEnglish(name))
                     .build();
             return client.executeBlocking(CartDiscountCreateCommand.of(draft));
@@ -55,6 +56,13 @@ public class CartDiscountFixtures {
         final CartDiscount cartDiscount = client.executeBlocking(CartDiscountCreateCommand.of(draft));
         consumer.accept(cartDiscount);
         client.executeBlocking(CartDiscountDeleteCommand.of(cartDiscount));
+    }
+
+    public static void withCartDiscount(final BlockingSphereClient client, final UnaryOperator<CartDiscountDraftBuilder> builderUnaryOperator, final UnaryOperator<CartDiscount> update) {
+        final CartDiscountDraft draft = builderUnaryOperator.apply(newCartDiscountDraftBuilder()).build();
+        final CartDiscount cartDiscount = client.executeBlocking(CartDiscountCreateCommand.of(draft));
+        final CartDiscount updatedCartDiscount = update.apply(cartDiscount);
+        client.executeBlocking(CartDiscountDeleteCommand.of(updatedCartDiscount));
     }
 
     public static void withCartDiscount(final BlockingSphereClient client, final String name, final Consumer<CartDiscount> consumer) {

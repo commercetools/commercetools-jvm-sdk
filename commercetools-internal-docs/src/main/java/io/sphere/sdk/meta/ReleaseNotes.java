@@ -1,8 +1,6 @@
 package io.sphere.sdk.meta;
 
-import io.sphere.sdk.cartdiscounts.CartDiscountDraft;
-import io.sphere.sdk.cartdiscounts.CartDiscountDraftBuilder;
-import io.sphere.sdk.cartdiscounts.GiftLineItemCartDiscountValue;
+import io.sphere.sdk.cartdiscounts.*;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.carts.commands.updateactions.SetShippingMethod;
 import io.sphere.sdk.carts.expansion.CartExpansionModel;
@@ -12,6 +10,7 @@ import io.sphere.sdk.carts.queries.CartQueryModel;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryDraft;
 import io.sphere.sdk.categories.CategoryDraftBuilder;
+import io.sphere.sdk.categories.CategoryTree;
 import io.sphere.sdk.categories.commands.updateactions.SetKey;
 import io.sphere.sdk.categories.queries.CategoryQueryModel;
 import io.sphere.sdk.channels.Channel;
@@ -21,6 +20,7 @@ import io.sphere.sdk.client.SphereApiConfig;
 import io.sphere.sdk.client.SphereAuthConfig;
 import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.client.SphereRequest;
+import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.commands.UpdateCommand;
 import io.sphere.sdk.customergroups.CustomerGroup;
@@ -31,6 +31,7 @@ import io.sphere.sdk.customers.CustomerDraft;
 import io.sphere.sdk.customers.CustomerDraftBuilder;
 import io.sphere.sdk.customers.commands.CustomerCreateEmailTokenCommand;
 import io.sphere.sdk.customers.commands.CustomerPasswordResetCommand;
+import io.sphere.sdk.customers.commands.CustomerSignInCommand;
 import io.sphere.sdk.customers.commands.CustomerVerifyEmailCommand;
 import io.sphere.sdk.customers.commands.updateactions.AddShippingAddressId;
 import io.sphere.sdk.customers.commands.updateactions.SetSalutation;
@@ -42,6 +43,8 @@ import io.sphere.sdk.customobjects.commands.CustomObjectDeleteCommand;
 import io.sphere.sdk.customobjects.queries.CustomObjectByKeyGet;
 import io.sphere.sdk.customobjects.queries.CustomObjectQuery;
 import io.sphere.sdk.customobjects.queries.CustomObjectQueryModel;
+import io.sphere.sdk.discountcodes.DiscountCode;
+import io.sphere.sdk.discountcodes.DiscountCodeDraft;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.http.*;
 import io.sphere.sdk.inventory.InventoryEntry;
@@ -49,9 +52,8 @@ import io.sphere.sdk.inventory.InventoryEntryDraft;
 import io.sphere.sdk.inventory.InventoryEntryDraftBuilder;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.*;
-import io.sphere.sdk.orders.LineItemImportDraft;
-import io.sphere.sdk.orders.Order;
-import io.sphere.sdk.orders.OrderImportDraft;
+import io.sphere.sdk.orders.*;
+import io.sphere.sdk.orders.commands.updateactions.AddDelivery;
 import io.sphere.sdk.orders.expansion.OrderExpansionModel;
 import io.sphere.sdk.orders.messages.OrderPaymentStateChangedMessage;
 import io.sphere.sdk.payments.*;
@@ -64,10 +66,7 @@ import io.sphere.sdk.products.attributes.Attribute;
 import io.sphere.sdk.products.attributes.AttributeAccess;
 import io.sphere.sdk.products.attributes.AttributeDefinition;
 import io.sphere.sdk.products.commands.ProductImageUploadCommand;
-import io.sphere.sdk.products.commands.updateactions.SetAttribute;
-import io.sphere.sdk.products.commands.updateactions.SetMetaDescription;
-import io.sphere.sdk.products.commands.updateactions.SetMetaKeywords;
-import io.sphere.sdk.products.commands.updateactions.SetMetaTitle;
+import io.sphere.sdk.products.commands.updateactions.*;
 import io.sphere.sdk.products.expansion.ProductDataExpansionModel;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
 import io.sphere.sdk.products.messages.ProductDeletedMessage;
@@ -81,6 +80,7 @@ import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.ProductTypeDraftBuilder;
 import io.sphere.sdk.producttypes.ProductTypeLocalRepository;
 import io.sphere.sdk.producttypes.commands.updateactions.ChangeInputHint;
+import io.sphere.sdk.producttypes.commands.updateactions.RemoveEnumValues;
 import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.reviews.ReviewDraft;
@@ -90,6 +90,8 @@ import io.sphere.sdk.search.PagedSearchResult;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.search.model.ExistsFilterSearchModelSupport;
 import io.sphere.sdk.search.model.MissingFilterSearchModelSupport;
+import io.sphere.sdk.shippingmethods.ShippingMethod;
+import io.sphere.sdk.shippingmethods.ShippingMethodDraft;
 import io.sphere.sdk.shippingmethods.ShippingMethodDraftBuilder;
 import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.shoppinglists.ShoppingList;
@@ -98,13 +100,11 @@ import io.sphere.sdk.shoppinglists.expansion.LineItemExpansionModel;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.states.StateDraftDsl;
 import io.sphere.sdk.subscriptions.AzureServiceBusDestination;
+import io.sphere.sdk.taxcategories.TaxCategory;
+import io.sphere.sdk.taxcategories.TaxCategoryDraft;
 import io.sphere.sdk.taxcategories.TaxCategoryDraftBuilder;
 import io.sphere.sdk.taxcategories.TaxRate;
-import io.sphere.sdk.types.CustomFields;
-import io.sphere.sdk.types.CustomFieldsDraftBuilder;
-import io.sphere.sdk.types.FieldType;
-import io.sphere.sdk.types.TypeDraft;
-import io.sphere.sdk.types.TypeDraftBuilder;
+import io.sphere.sdk.types.*;
 import io.sphere.sdk.zones.ZoneDraftBuilder;
 
 import javax.money.CurrencyUnit;
@@ -114,6 +114,7 @@ import java.util.concurrent.CompletionStage;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 import java.util.function.BiFunction;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
@@ -134,6 +135,167 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+ <h3 class=released-version id="v1_27_0">1.27.0 (14.12.2017)</h3>
+ <ul>
+ <li class=new-in-release>Added {@link OrderImportDraft#getTaxCalculationMode()}.</li>
+ <li class=new-in-release>Added new {@link io.sphere.sdk.orders.messages.OrderReturnShipmentStateChangedMessage}
+ and {@link io.sphere.sdk.orders.messages.OrderShipmentStateChangedMessage}.</li>
+ <li class=new-in-release>Added {@link OrderImportDraft#getTaxCalculationMode()}.</li>
+ <li class=new-in-release>Added {@link AddDelivery#getAddress()}.</li>
+ <li class=fixed-in-release>Fixed bug in serialization of {@link LocalizedEnumValue}.</li>
+ <li class=new-in-release>Added new update action to change the attribute constraint of a product type
+ {@link io.sphere.sdk.producttypes.commands.updateactions.ChangeAttributeConstraint}.</li>
+ <li class=new-in-release>The following product variant update actions can now use the {@link Asset#getKey()} property to identify an asset:
+ {@link RemoveAsset}, {@link SetAssetTags}, {@link ChangeAssetName}, {@link SetAssetDescription}, {@link SetAssetSources}, {@link SetAssetCustomType},
+ {@link SetAssetCustomField}.
+ </li>
+ <li class=new-in-release>The following category update actions can now use the {@link Asset#getKey()} property to identify an asset:
+ {@link io.sphere.sdk.categories.commands.updateactions.RemoveAsset}, {@link io.sphere.sdk.categories.commands.updateactions.SetAssetTags},
+ {@link io.sphere.sdk.categories.commands.updateactions.ChangeAssetName}, {@link io.sphere.sdk.categories.commands.updateactions.SetAssetDescription},
+ {@link io.sphere.sdk.categories.commands.updateactions.SetAssetSources}, {@link io.sphere.sdk.categories.commands.updateactions.SetAssetCustomType},
+ {@link io.sphere.sdk.categories.commands.updateactions.SetAssetCustomField}.
+ </li>
+ <li class=new-in-release>
+ Added optional property position on update actions {@link AddAsset#getPosition()} and {@link io.sphere.sdk.categories.commands.updateactions.AddAsset#getPosition()}
+ </li>
+ <li class=new-in-release>Added new product update action {@link RevertStagedVariantChanges}.</li>
+ <li class=new-in-release>Added custom fields for cart discounts {@link CartDiscount#getCustom()}, {@link CartDiscountDraft#getCustom()} and the
+ update action {@link io.sphere.sdk.cartdiscounts.commands.updateactions.SetCustomField} and
+ {@link io.sphere.sdk.cartdiscounts.commands.updateactions.SetCustomType}.</li>
+ </ul>
+
+
+ <h3 class=released-version id="v1_26_0">1.26.0 (20.11.2017)</h3>
+ <ul>
+ <li class=new-in-release>Added update action for setting the predicate of a shipping method {@link io.sphere.sdk.shippingmethods.commands.updateactions.SetPredicate}.
+ </li>
+ <li class=new-in-release>Added shopping list item sku {@link io.sphere.sdk.shoppinglists.LineItemDraft#getSku()}.
+ </li>
+ <li class=new-in-release>Added support for new cart tax calculation mode {@link Cart#getTaxCalculationMode()}, {@link CartDraft#getTaxCalculationMode()}
+ and the corresponding update action {@link io.sphere.sdk.carts.commands.updateactions.ChangeTaxCalculationMode}.
+ </li>
+
+ <li class=new-in-release>Added support for creating multi buy discounts for custom line items{@link io.sphere.sdk.cartdiscounts.MultiBuyCustomLineItemsTarget},
+ {@link io.sphere.sdk.cartdiscounts.SelectionMode}.
+ </li>
+ <li class=new-in-release>Added support for getting {@link io.sphere.sdk.orders.queries.OrderByOrderNumberGet},
+ updating {@link io.sphere.sdk.orders.commands.OrderUpdateCommand#ofOrderNumber(String, Long, UpdateAction)} and
+ deleting {@link io.sphere.sdk.orders.commands.OrderDeleteCommand#ofOrderNumber(String, Long)} of an order by order number.
+ </li>
+ <li class=new-in-release>
+ Added new {@link CustomerSignInCommand#updateProductData} property to {@link CustomerSignInCommand}.
+ </li>
+ </ul>
+
+ <h3 class=released-version id="v1_25_0">1.25.0 (19.10.2017)</h3>
+ <ul>
+ <li class=new-in-release>Added support for OSGi.</li>
+ <li class=new-in-release>Added support for keys in {@link CategoryTree} with {@link CategoryTree#findByKey(String)}.</li>
+ <li class=new-in-release>
+    Added new shipping rate input property in {@link Order#getShippingRateInput()} and {@link Project#getShippingRateInputType()}.
+    Added new tiered shipping rates property in {@link ShippingRate#getTiers()}.
+ </li>
+ <li class=new-in-release>
+    Added support for new parcel items property in {@link Parcel#getItems()} and {@link ParcelMeasurements#getItems()}.
+ </li>
+ <li class=new-in-release>Added new product type update action {@link RemoveEnumValues}.</li>
+ <li class=new-in-release>Added new product update action {@link SetImageLabel}.</li>
+ <li class=new-in-release>Added getter methods for our generated draft builder classes.</li>
+ <li class=new-in-release>Added new property {@link CartDiscount#getStackingMode()}, {@link CartDiscountDraft#getStackingMode()} and enum {@link StackingMode}.</li>
+ <li class=new-in-release>
+    Improved performance of {@link QueryExecutionUtils} helper class by providing the query method
+    {@link QueryExecutionUtils#queryAll(SphereClient, QueryDsl, Consumer)} .
+ </li>
+ <li class=change-in-release>Marked {@link ProductDraft#getMasterVariant()} as nullable.</li>
+ </ul>
+
+ <h3 class=released-version id="v1_24_0">1.24.0 (29.09.2017)</h3>
+ <ul>
+ <li class=change-in-release>Changed type of {@link io.sphere.sdk.shoppinglists.LineItemDraft#getCustom()} to {@link CustomFieldsDraft}.
+ This breaking change might require changes in your source code.
+ </li>
+ <li class=change-in-release>Update com.fasterxml.jackson.core plugins group from 2.6.5 to 2.8.9</li>
+ <li class=fixed-in-release>Added missing {@link io.sphere.sdk.shoppinglists.LineItemDraftBuilder#custom(CustomFieldsDraft)} builder method
+ to replace now deprecated {@link io.sphere.sdk.shoppinglists.LineItemDraftBuilder#custom(CustomFields)} builder method.
+ </li>
+ <li class=change-in-release>Deprecated several payment properties and update actions:
+    <ul>
+        <li>{@link Payment#getAmountAuthorized()}, {@link Payment#getAmountPaid()}, {@link Payment#getAmountRefunded()},
+            {@link Payment#getAuthorizedUntil()} and {@link Payment#getExternalId()}
+        </li>
+        <li>{@link PaymentDraft#getAmountAuthorized()}, {@link PaymentDraft#getAmountPaid()}, {@link PaymentDraft#getAmountRefunded()},
+        {@link PaymentDraft#getAuthorizedUntil()} and {@link PaymentDraft#getExternalId()}
+        </li>
+        <li>{@link io.sphere.sdk.payments.commands.updateactions.SetAmountPaid}, {@link io.sphere.sdk.payments.commands.updateactions.SetAmountRefunded},
+        {@link io.sphere.sdk.payments.commands.updateactions.SetAuthorization} and {@link io.sphere.sdk.payments.commands.updateactions.SetExternalId}
+        </li>
+    </ul>
+ </li>
+ <li class=fixed-in-release>Fixed {@link NullPointerException} in {@link TypeDraftBuilder#plusFieldDefinitions(FieldDefinition)}.</li>
+ <li class=new-in-release>Added new custom fields on discount code {@link DiscountCode#getCustom()}, {@link DiscountCodeDraft#getCustom()} and
+    corresponding update actions {@link io.sphere.sdk.discountcodes.commands.updateactions.SetCustomType}, {@link io.sphere.sdk.discountcodes.commands.updateactions.SetCustomField}
+ </li>
+ <li class=new-in-release>Added new project update actions {@link io.sphere.sdk.projects.commands.updateactions.ChangeCountries},
+ {@link io.sphere.sdk.projects.commands.updateactions.ChangeCurrencies}, {@link io.sphere.sdk.projects.commands.updateactions.ChangeLanguages},
+ {@link io.sphere.sdk.projects.commands.updateactions.ChangeMessages}, {@link io.sphere.sdk.projects.commands.updateactions.ChangeMessagesEnabled}
+ and {@link io.sphere.sdk.products.commands.updateactions.ChangeName}.
+ </li>
+ <li class=new-in-release>Added {@code plus*} methods to generated draft builder to ease working with list properties
+ (e.g. {@link io.sphere.sdk.shoppinglists.ShoppingListDraftBuilder#plusLineItems(io.sphere.sdk.shoppinglists.LineItemDraft)},
+ {@link io.sphere.sdk.shoppinglists.ShoppingListDraftBuilder#plusLineItems(List)}).
+ </li>
+ <li class=new-in-release>Added missing {@link io.sphere.sdk.payments.queries.PaymentByKeyGet} query,
+ {@link io.sphere.sdk.payments.commands.PaymentDeleteCommand#ofKey(String, Long)} and<
+ {@link io.sphere.sdk.payments.commands.PaymentUpdateCommand#ofKey(String, Long, UpdateAction)} commands.
+ </li>
+ <li class=new-in-release>Added support for creating multi buy discounts {@link io.sphere.sdk.cartdiscounts.MultiBuyLineItemsTarget},
+ {@link io.sphere.sdk.cartdiscounts.SelectionMode}.
+ </li>
+ </ul>
+ <h3 class=released-version id="v1_23_1">1.23.1 (26.09.2017)</h3>
+ <ul>
+ <li class=fixed-in-release>Fixed NullPointerException in {@link PriceDraftBuilder#of(Price)}.</li>
+ </ul>
+ <h3 class=released-version id="v1_23_0">1.23.0 (11.09.2017)</h3>
+ <ul>
+ <li class=new-in-releas>Added new shipping method predicate {@link ShippingMethod#getPredicate()}, {@link ShippingMethodDraft#getPredicate()}.</li>
+ <li class=new-in-release>Added new shipping info method state {@link CartShippingInfo#getShippingMethodState()}.</li>
+ <li class=new-in-release>Introduced new {@link io.sphere.sdk.cartdiscounts.CartPredicate} which generalizes and deprecates the
+ {@link io.sphere.sdk.cartdiscounts.CartDiscountPredicate}.</li>
+ <li class=new-in-release>Added new tax mode {@link TaxMode#EXTERNAL_AMOUNT}. Added new {@link ExternalTaxAmountDraft} type, which can be used to set the external tax amount
+ with the new update actions {@link io.sphere.sdk.carts.commands.updateactions.SetLineItemTaxAmount}, {@link io.sphere.sdk.carts.commands.updateactions.SetCustomLineItemTaxAmount},
+ {@link io.sphere.sdk.carts.commands.updateactions.SetShippingMethodTaxAmount} and {@link io.sphere.sdk.carts.commands.updateactions.SetCartTotalTax}.</li>
+ <li class=new-in-release>Add support for getting {@link io.sphere.sdk.shippingmethods.queries.ShippingMethodByKeyGet} and updating {@link io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommand#ofKey(String, Long, UpdateAction)}
+ a shipping method by key.</li>
+ <li class=new-in-release>Added correlation id to oauth requests.</li>
+ <li class=new-in-release>Added new {@link io.sphere.sdk.carts.commands.updateactions.SetAnonymousId} cart update action.</li>
+ <li class=new-in-release>Added new key property to customer {@link Customer#getKey()}, {@link CustomerDraft#getKey()} and corresponding update action {@link io.sphere.sdk.customers.commands.updateactions.SetKey}.
+ Added {@link io.sphere.sdk.customers.queries.CustomerByKeyGet}, {@link io.sphere.sdk.customers.commands.CustomerDeleteCommand#ofKey(String, Long)} and {@link io.sphere.sdk.customers.commands.CustomerUpdateCommand#ofKey(String, Long, UpdateAction)}.</li>
+ <li class=new-in-release><Added support for publish prices only {@link PublishScope}, {@link io.sphere.sdk.products.commands.updateactions.Publish#ofScope(PublishScope)} and {@link ProductPublishedMessage#getScope()}.</li>
+ </ul>
+ <h3 class=released-version id="v1_22_0">1.22.0 (09.08.2017)</h3>
+ <ul>
+ <li class=new-in-release>A correlation id is now generated for each {@link SphereRequest}.</li>
+ <li class=new-in-release>Added {@link TaxCategory#getKey()}, {@link TaxCategoryDraft#getKey()} and
+ corresponding update action {@link io.sphere.sdk.taxcategories.commands.updateactions.SetKey}.
+ </li>
+ <li class=new-in-release>
+ Added {@link io.sphere.sdk.taxcategories.queries.TaxCategoryByKeyGet} and
+ {@link io.sphere.sdk.taxcategories.commands.TaxCategoryDeleteCommand#ofKey(String, Long)}.
+ </li>
+ <li class=new-in-release>Add {@link LineItemDraft#getSku()}.</li>
+ <li class=new-in-release>Add {@link io.sphere.sdk.shippingmethods.ShippingMethod#getKey()},
+ {@link io.sphere.sdk.shippingmethods.ShippingMethodDraft#getKey()} and update action
+ {@link io.sphere.sdk.shippingmethods.commands.updateactions.SetKey}.
+ </li>
+ <li class=new-in-release>
+ Added {@link io.sphere.sdk.shippingmethods.commands.ShippingMethodDeleteCommand#ofKey(String, Long)}.
+ </li>
+ <li class=new-in-release>Add {@link CartDraft#getCustomerGroup()} and update action
+ {@link io.sphere.sdk.carts.commands.updateactions.SetCustomerGroup}.</li>
+ </ul>
+
+
  <h3 class=released-version id="v1_21_0">1.21.0 (18.07.2017)</h3>
  <ul>
  <li class=new-in-release>Added {@link CustomerGroup#getKey()} and {@link CustomerGroupDraft#getKey()}.</li>
@@ -166,7 +328,7 @@ import java.util.function.Function;
  <li class=new-in-release>Added new messages {@link OrderPaymentStateChangedMessage}, {@link PaymentStatusInterfaceCodeSetMessage},
  {@link ProductRevertedStagedChangesMessage}, {@link ProductVariantDeletedMessage} and {@link ProductDeletedMessage}.</li>
  <li class=new-in-release>Added new cart discount value {@link GiftLineItemCartDiscountValue} for gift line items {@link LineItem#getLineItemMode()},
-    {@link LineItemMode#GIFT_LINE_ITEM}.</li>
+ {@link LineItemMode#GIFT_LINE_ITEM}.</li>
  <li class=new-in-release>Added new key property for category {@link Category#getKey()}, {@link CategoryDraft#getKey()} and corresponding update action {@link SetKey}.</li>
  <li class=new-in-release>Added new salutation for customer {@link Customer#getSalutation()}, {@link CustomerDraft#getSalutation()} and
  corresponding update action {@link SetSalutation ()}.</li>
@@ -238,31 +400,31 @@ import java.util.function.Function;
  <li class=new-in-release>{@link ProductVariantSortSearchModel} now provides sorting by {@code sku} {@link ProductVariantSortSearchModel#sku()}</li>
  <li class=new-in-release>Product update actions now support {@code staged} parameter</li>
  <li class=change-in-release>Some of our draft builder now return the more specific {@code <Draft>Dsl} types.
-    This change doesn't require you to change your source code, but requires a recompilation of all projects that depend on these classes.
-    The following classes changed:
-    <ul>
-        <li>{@link CartDiscountDraftBuilder}</li>
-        <li>{@link CategoryDraftBuilder}</li>
-        <li>{@link CustomerGroupDraftBuilder}</li>
-        <li>{@link InventoryEntryDraftBuilder}</li>
-        <li>{@link PaymentDraftBuilder}</li>
-        <li>{@link ProductDiscountDraftBuilder}</li>
-        <li>{@link ProductVariantDraftBuilder}</li>
-        <li>{@link ProductTypeDraftBuilder}</li>
-        <li>{@link ReviewDraftBuilder}</li>
-        <li>{@link ShippingMethodDraftBuilder}</li>
-        <li>{@link TaxCategoryDraftBuilder}</li>
-        <li>{@link TypeDraftBuilder}</li>
-        <li>{@link ZoneDraftBuilder}</li>
-        <li>{@link ZoneDraftBuilder}</li>
-    </ul>
+ This change doesn't require you to change your source code, but requires a recompilation of all projects that depend on these classes.
+ The following classes changed:
+ <ul>
+ <li>{@link CartDiscountDraftBuilder}</li>
+ <li>{@link CategoryDraftBuilder}</li>
+ <li>{@link CustomerGroupDraftBuilder}</li>
+ <li>{@link InventoryEntryDraftBuilder}</li>
+ <li>{@link PaymentDraftBuilder}</li>
+ <li>{@link ProductDiscountDraftBuilder}</li>
+ <li>{@link ProductVariantDraftBuilder}</li>
+ <li>{@link ProductTypeDraftBuilder}</li>
+ <li>{@link ReviewDraftBuilder}</li>
+ <li>{@link ShippingMethodDraftBuilder}</li>
+ <li>{@link TaxCategoryDraftBuilder}</li>
+ <li>{@link TypeDraftBuilder}</li>
+ <li>{@link ZoneDraftBuilder}</li>
+ <li>{@link ZoneDraftBuilder}</li>
+ </ul>
  <li class=change-in-release>The missing and exists filter support is now using separate interfaces.
-    This change doesn't require you to change your source code, but requires a recompilation of all projects that depend on these classes.
-    The following classes changed:
-    <ul>
-        <li>{@link ProductAttributeFilterSearchModel}</li>
-        <li>{@link ProductVariantFilterSearchModel}</li>
-    </ul>
+ This change doesn't require you to change your source code, but requires a recompilation of all projects that depend on these classes.
+ The following classes changed:
+ <ul>
+ <li>{@link ProductAttributeFilterSearchModel}</li>
+ <li>{@link ProductVariantFilterSearchModel}</li>
+ </ul>
  </li>
  <li class=fixed-in-release>{@link ProductVariantDraftBuilder#of(ProductVariantDraft)} now correctly copies all attributes of the given {@code template}</li>
  </ul>
@@ -270,7 +432,7 @@ import java.util.function.Function;
  <h3 class=released-version id="v1_12_0">1.12.0 (27.02.2017)</h3>
  <ul>
  <li class=new-in-release>Added {@link Channel#getGeoLocation()}, added support for it in {@link ChannelQueryModel#geoLocation()} and support for {@code withinCircle}
-    predicate {@link GeoJSONQueryModel#withinCircle(Point, Double)}.</li>
+ predicate {@link GeoJSONQueryModel#withinCircle(Point, Double)}.</li>
  <li class=new-in-release>Added shopping list resource {@link io.sphere.sdk.shoppinglists.ShoppingList} with new cart update action {@link io.sphere.sdk.carts.commands.updateactions.AddShoppingList}.</li>
  <li class=change-in-release>Improved recovery strategy for {@link io.sphere.sdk.sequencegenerators.CustomObjectBigIntegerNumberGenerator} so that it retries when the id already exists.</li>
  <li class=change-in-release>Updated {@code org.asynchttpclient:async-http-client} version of the {@code sdk-http-ahc-2_0} module to version {@code 2.0.28}.</li>
@@ -425,35 +587,35 @@ import java.util.function.Function;
  <li class=new-in-release>{@link ProductProjectionSearch#withFuzzyLevel(java.lang.Integer)} to configure the fuzzy level in the product search</li>
  <li class=change-in-release>a lot of classes without public available constructors have been converted to interfaces
  <ul>
-  <li>{@link io.sphere.sdk.client.Tokens}</li>
-  <li>{@link io.sphere.sdk.cartdiscounts.DiscountedLineItemPortion}</li>
-  <li>{@link io.sphere.sdk.cartdiscounts.DiscountedLineItemPrice}</li>
-  <li>{@link io.sphere.sdk.cartdiscounts.DiscountedLineItemPriceForQuantity}</li>
-  <li>{@link io.sphere.sdk.carts.ItemState}</li>
-  <li>{@link io.sphere.sdk.carts.PaymentInfo}</li>
-  <li>{@link io.sphere.sdk.carts.TaxPortion}</li>
-  <li>{@link io.sphere.sdk.discountcodes.DiscountCodeInfo}</li>
-  <li>{@link io.sphere.sdk.orders.Parcel}</li>
-  <li>{@link io.sphere.sdk.orders.ReturnInfo}</li>
-  <li>{@link io.sphere.sdk.orders.ReturnItem}</li>
-  <li>{@link io.sphere.sdk.orders.SyncInfo}</li>
-  <li>{@link io.sphere.sdk.orders.TrackingData}</li>
-  <li>{@link io.sphere.sdk.payments.PaymentMethodInfo}</li>
-  <li>{@link io.sphere.sdk.payments.PaymentStatus}</li>
-  <li>{@link Transaction}</li>
-  <li>{@link io.sphere.sdk.productdiscounts.DiscountedPrice}</li>
-  <li>{@link Project}</li>
-  <li>{@link io.sphere.sdk.shippingmethods.ZoneRate}</li>
-  <li>{@link io.sphere.sdk.types.FieldDefinition}</li>
-  <li>{@link io.sphere.sdk.zones.Location}</li>
-  <li>{@link EnumValue}</li>
-  <li>{@link LocalizedEnumValue}</li>
-  <li>{@link PagedQueryResult}</li>
-  <li>{@link PagedResult}</li>
-  <li>{@link io.sphere.sdk.search.PagedSearchResult}</li>
-  <li>{@link io.sphere.sdk.search.SearchKeyword}</li>
-  <li>{@link SearchKeywords}</li>
-  <li>{@link io.sphere.sdk.search.TermStats}</li>
+ <li>{@link io.sphere.sdk.client.Tokens}</li>
+ <li>{@link io.sphere.sdk.cartdiscounts.DiscountedLineItemPortion}</li>
+ <li>{@link io.sphere.sdk.cartdiscounts.DiscountedLineItemPrice}</li>
+ <li>{@link io.sphere.sdk.cartdiscounts.DiscountedLineItemPriceForQuantity}</li>
+ <li>{@link io.sphere.sdk.carts.ItemState}</li>
+ <li>{@link io.sphere.sdk.carts.PaymentInfo}</li>
+ <li>{@link io.sphere.sdk.carts.TaxPortion}</li>
+ <li>{@link io.sphere.sdk.discountcodes.DiscountCodeInfo}</li>
+ <li>{@link io.sphere.sdk.orders.Parcel}</li>
+ <li>{@link io.sphere.sdk.orders.ReturnInfo}</li>
+ <li>{@link io.sphere.sdk.orders.ReturnItem}</li>
+ <li>{@link io.sphere.sdk.orders.SyncInfo}</li>
+ <li>{@link io.sphere.sdk.orders.TrackingData}</li>
+ <li>{@link io.sphere.sdk.payments.PaymentMethodInfo}</li>
+ <li>{@link io.sphere.sdk.payments.PaymentStatus}</li>
+ <li>{@link Transaction}</li>
+ <li>{@link io.sphere.sdk.productdiscounts.DiscountedPrice}</li>
+ <li>{@link Project}</li>
+ <li>{@link io.sphere.sdk.shippingmethods.ZoneRate}</li>
+ <li>{@link io.sphere.sdk.types.FieldDefinition}</li>
+ <li>{@link io.sphere.sdk.zones.Location}</li>
+ <li>{@link EnumValue}</li>
+ <li>{@link LocalizedEnumValue}</li>
+ <li>{@link PagedQueryResult}</li>
+ <li>{@link PagedResult}</li>
+ <li>{@link io.sphere.sdk.search.PagedSearchResult}</li>
+ <li>{@link io.sphere.sdk.search.SearchKeyword}</li>
+ <li>{@link SearchKeywords}</li>
+ <li>{@link io.sphere.sdk.search.TermStats}</li>
  </ul>
 
  </li>
@@ -542,9 +704,9 @@ import java.util.function.Function;
  <li class=new-in-release>product search filters for product availability, see {@link io.sphere.sdk.products.search.ProductVariantAvailabilityFilterSearchModel#isOnStock()} and  {@link io.sphere.sdk.products.search.ProductVariantAvailabilityFilterSearchModel#availableQuantity()}</li>
  <li class=new-in-release>product search sort expressions for product availability, see {@link ProductVariantAvailabilitySortSearchModel#restockableInDays()} and {@link ProductVariantAvailabilitySortSearchModel#availableQuantity()}</li>
  <li class=change-in-release>The class {@link io.sphere.sdk.products.commands.updateactions.SetSku} executes the action {@code setSku} which is staged,
-  previous to this version it was {@code setSKU} (upper case 'K' and 'U')
-  which updates in staged and current and has been moved to the deprecated class {@code LegacySetSku}.
-  See also <a href="http://dev.commercetools.com/http-api-projects-products.html#set-sku" target="_blank">the HTTP API doc of SetSku.</a></li>
+ previous to this version it was {@code setSKU} (upper case 'K' and 'U')
+ which updates in staged and current and has been moved to the deprecated class {@code LegacySetSku}.
+ See also <a href="http://dev.commercetools.com/http-api-projects-products.html#set-sku" target="_blank">the HTTP API doc of SetSku.</a></li>
  <li class=change-in-release>{@link io.sphere.sdk.customers.commands.CustomerCreateEmailTokenCommand}, {@link io.sphere.sdk.customers.commands.CustomerVerifyEmailCommand} and {@link io.sphere.sdk.customers.commands.CustomerPasswordResetCommand} do not use anymore optimistic concurrency control,
  so it won't fail with {@link io.sphere.sdk.client.ConcurrentModificationException} and it is not necessary to load the customer version.
  <br>Deprecated methods:
@@ -588,10 +750,10 @@ import java.util.function.Function;
  <li class=new-in-release>{@link io.sphere.sdk.producttypes.commands.updateactions.ChangeIsSearchable}</li>
  <li class=new-in-release>improved Exception classes documentation</li>
  <li class=new-in-release>
- {@link io.sphere.sdk.categories.CategoryTree#findSiblings(Collection)},
- {@link io.sphere.sdk.categories.CategoryTree#getSubtree(Collection)},
- {@link io.sphere.sdk.categories.CategoryTree#getSubtreeRoots()} and
- {@link io.sphere.sdk.categories.CategoryTree#getRootAncestor(Identifiable)}</li>
+ {@link CategoryTree#findSiblings(Collection)},
+ {@link CategoryTree#getSubtree(Collection)},
+ {@link CategoryTree#getSubtreeRoots()} and
+ {@link CategoryTree#getRootAncestor(Identifiable)}</li>
  <li class=new-in-release>set default timeout for HTTP client in {@code commercetools-java-client} to 121 seconds so {@link io.sphere.sdk.client.GatewayTimeoutException} can occur</li>
  <li class=new-in-release>{@link io.sphere.sdk.payments.commands.updateactions.ChangeAmountPlanned}</li>
  <li class=new-in-release>{@link io.sphere.sdk.types.commands.TypeDeleteCommand#ofKey(String, Long)} and {@link io.sphere.sdk.types.commands.TypeUpdateCommand#ofKey(String, Long, List)} </li>
@@ -604,18 +766,18 @@ import java.util.function.Function;
 
  <ul>
  <li class=new-in-release>create DraftBuilders from Draft objects:
-   <ul>
-     <li>{@link io.sphere.sdk.cartdiscounts.CartDiscountDraftBuilder#of(CartDiscountDraft)}</li>
-     <li>{@link io.sphere.sdk.carts.CartDraftBuilder#of(CartDraft)}</li>
-     <li>{@link io.sphere.sdk.categories.CategoryDraftBuilder#of(CategoryDraft)}</li>
-     <li>{@link io.sphere.sdk.payments.PaymentDraftBuilder#of(PaymentDraft)}</li>
-     <li>{@link io.sphere.sdk.payments.TransactionDraftBuilder#of(TransactionDraft)}</li>
-     <li>{@link ProductDraftBuilder#of(ProductDraft)}</li>
-     <li>{@link ProductVariantDraftBuilder#of(ProductVariantDraft)}</li>
-     <li>{@link io.sphere.sdk.reviews.ReviewDraftBuilder#of(ReviewDraft)}</li>
-     <li>{@link CustomFieldsDraftBuilder}</li>
-     <li>{@link io.sphere.sdk.types.TypeDraftBuilder#of(TypeDraft)}</li>
-   </ul>
+ <ul>
+ <li>{@link io.sphere.sdk.cartdiscounts.CartDiscountDraftBuilder#of(CartDiscountDraft)}</li>
+ <li>{@link io.sphere.sdk.carts.CartDraftBuilder#of(CartDraft)}</li>
+ <li>{@link io.sphere.sdk.categories.CategoryDraftBuilder#of(CategoryDraft)}</li>
+ <li>{@link io.sphere.sdk.payments.PaymentDraftBuilder#of(PaymentDraft)}</li>
+ <li>{@link io.sphere.sdk.payments.TransactionDraftBuilder#of(TransactionDraft)}</li>
+ <li>{@link ProductDraftBuilder#of(ProductDraft)}</li>
+ <li>{@link ProductVariantDraftBuilder#of(ProductVariantDraft)}</li>
+ <li>{@link io.sphere.sdk.reviews.ReviewDraftBuilder#of(ReviewDraft)}</li>
+ <li>{@link CustomFieldsDraftBuilder}</li>
+ <li>{@link io.sphere.sdk.types.TypeDraftBuilder#of(TypeDraft)}</li>
+ </ul>
  </li>
  <li class=new-in-release>{@link CustomObject}s can be queried by value, see {@link CustomObjectQueryModel#value()}</li>
  <li class=new-in-release>{@link io.sphere.sdk.client.metrics.ObservedTotalDuration#getErrorResult()},
@@ -685,7 +847,7 @@ import java.util.function.Function;
  <li class=removed-in-release>{@code CustomObjectDraft#withVersion(String, String, JsonNode)}</li>
  <li class=removed-in-release>{@code HttpQueryParameter} class</li>
  <li class=removed-in-release>{@code InvalidQueryOffsetException}</li>
- 
+
  <li class=change-in-release>align {@link io.sphere.sdk.products.search.ProductProjectionSearchModel} methods with the Query DSL, e.g. {@code is} instead of {@code by}, {@code isIn} instead of {@code byAny} and {@code isBetween} instead of {@code byRange}</li>
  <li class=change-in-release>unify methods to extract {@code TermFacetResult}, {@code RangeFacetResult} and {@code FilteredFacetResult} into the same method name {@code getFacetResult}</li>
  <li class=change-in-release>{@code FacetAndFilter} Expression and its Search Model have been renamed to {@code FacetedSearch} to better reflect the use case</li>
@@ -832,11 +994,11 @@ import java.util.function.Function;
  <li class=change-in-release>For custom fields in prices the HTTP API and hence the SDK differentiate now between {@link Price} and {@link io.sphere.sdk.products.PriceDraft}.
  <p>Places where {@link io.sphere.sdk.products.PriceDraft} has to be used:</p>
  <ul>
-   <li>{@link io.sphere.sdk.products.commands.updateactions.AddPrice}</li>
-   <li>{@link io.sphere.sdk.products.commands.updateactions.ChangePrice}</li>
-   <li>{@link io.sphere.sdk.products.ProductVariantDraftBuilder#price(PriceDraft)}</li>
-   <li>{@link io.sphere.sdk.products.ProductVariantDraftBuilder#prices(List)}</li>
-   <li>{@link io.sphere.sdk.products.commands.updateactions.AddVariant}</li>
+ <li>{@link io.sphere.sdk.products.commands.updateactions.AddPrice}</li>
+ <li>{@link io.sphere.sdk.products.commands.updateactions.ChangePrice}</li>
+ <li>{@link io.sphere.sdk.products.ProductVariantDraftBuilder#price(PriceDraft)}</li>
+ <li>{@link io.sphere.sdk.products.ProductVariantDraftBuilder#prices(List)}</li>
+ <li>{@link io.sphere.sdk.products.commands.updateactions.AddVariant}</li>
  </ul>
  <p>To roughly compare a {@link Price} with a {@link io.sphere.sdk.products.PriceDraft}, use {@link PriceDraft#of(Price)} to create a draft out of the price and then compare the drafts.</p>
  </li>
@@ -845,11 +1007,11 @@ import java.util.function.Function;
 
  <h3 class=released-version id="v1_0_0_M20">1.0.0-M20 (02.11.2015)</h3>
  <ul>
-  <li class=change-in-release>{@code query.withSort(m -> m.createdAt().sort(DESC));} is deprecated, use it with {@code query.withSort(m -> m.createdAt().sort().desc());}</li>
-  <li class=fixed-in-release>Duplicates with {@code io.sphere.sdk.queries.ExperimentalReactiveStreamUtils#publisherOf(QueryDsl, SphereClient)} on multiple parallel request(n) calls. See <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/809">809</a>.</li>
-  <li class=fixed-in-release>Logger name shows query string. See <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/802">802</a>.</li>
-  <li class=fixed-in-release>Missing Content-Length header in Async HTTP Client. See <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/799">799</a>.</li>
-  <li class=fixed-in-release>variantIdentifier in {@link LineItem} is null. See <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/771">771</a>.</li>
+ <li class=change-in-release>{@code query.withSort(m -> m.createdAt().sort(DESC));} is deprecated, use it with {@code query.withSort(m -> m.createdAt().sort().desc());}</li>
+ <li class=fixed-in-release>Duplicates with {@code io.sphere.sdk.queries.ExperimentalReactiveStreamUtils#publisherOf(QueryDsl, SphereClient)} on multiple parallel request(n) calls. See <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/809">809</a>.</li>
+ <li class=fixed-in-release>Logger name shows query string. See <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/802">802</a>.</li>
+ <li class=fixed-in-release>Missing Content-Length header in Async HTTP Client. See <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/799">799</a>.</li>
+ <li class=fixed-in-release>variantIdentifier in {@link LineItem} is null. See <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/771">771</a>.</li>
  </ul>
 
 
@@ -873,17 +1035,17 @@ import java.util.function.Function;
  <div class="rn-hidden">
  Before it looked like:
  <pre>{@code
- ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
- .plusQueryFilters(product -> product.name().locale(ENGLISH).filtered().by("shoes"));
- PagedSearchResult<ProductProjection> result = client.execute(search);
- }</pre>
+ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
+.plusQueryFilters(product -> product.name().locale(ENGLISH).filtered().by("shoes"));
+PagedSearchResult<ProductProjection> result = client.execute(search);
+}</pre>
 
  Now it is built as follows:
  <pre>{@code
- ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
- .plusQueryFilters(filter -> filter.name().locale(ENGLISH).by("shoes"));
- PagedSearchResult<ProductProjection> result = client.execute(search);
- }</pre>
+ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
+.plusQueryFilters(filter -> filter.name().locale(ENGLISH).by("shoes"));
+PagedSearchResult<ProductProjection> result = client.execute(search);
+}</pre>
  </div>
  </li>
  <li class=change-in-release>Renamed {@code SearchSort} to {@link io.sphere.sdk.search.SortExpression}, which now shares the same properties as {@link io.sphere.sdk.search.FacetExpression} and {@link io.sphere.sdk.search.FilterExpression} under the {@link io.sphere.sdk.search.SearchExpression} interface.</li>
@@ -891,7 +1053,7 @@ import java.util.function.Function;
  <li class=change-in-release>Moved related Search Model classes from {@code io.sphere.sdk.search} to {@code io.sphere.sdk.search.model} package, to clearly separate the Search Model from the Search API classes.</li>
  <li class=removed-in-release>Removed type parameters from {@link io.sphere.sdk.search.TermFacetResult}, {@link io.sphere.sdk.search.RangeFacetResult} and {@link io.sphere.sdk.search.FilteredFacetResult}, which now return simple strings as they are received from the platform.</li>
  <li class=new-in-release>Added {@link ProductProjection#getCategoryOrderHints()} and {@link ProductProjectionQueryModel#categoryOrderHints()}. It can be used for search as shown in the following example, but the meta model comes in a later release.
-  <div class="rn-hidden">{@include.example io.sphere.sdk.products.ProductCategoryOrderHintIntegrationTest#searchForCategoryAndSort()}</div>
+ <div class="rn-hidden">{@include.example io.sphere.sdk.products.ProductCategoryOrderHintIntegrationTest#searchForCategoryAndSort()}</div>
  </li>
  <li class=new-in-release>Added states and update actions for Orders, Reviews and Products: {@link Order#getState()}, {@link io.sphere.sdk.products.Product#getState()}, {@code io.sphere.sdk.reviews.Review#getState()}</li>
  <li class=new-in-release>Added {@link LineItem#getTotalPrice()}, {@link LineItem#getDiscountedPricePerQuantity()}, {@link CustomLineItem#getTotalPrice()} and {@link CustomLineItem#getDiscountedPricePerQuantity()}</li>
@@ -963,7 +1125,7 @@ import java.util.function.Function;
  <p>This release is intended to be the last release before 1.0.0-RC1.</p>
 
  <ul>
-    <li class=new-in-release>{@link io.sphere.sdk.productdiscounts.commands.ProductDiscountCreateCommand},
+ <li class=new-in-release>{@link io.sphere.sdk.productdiscounts.commands.ProductDiscountCreateCommand},
  {@link io.sphere.sdk.productdiscounts.commands.ProductDiscountUpdateCommand},
  {@link io.sphere.sdk.productdiscounts.commands.ProductDiscountDeleteCommand},
  {@link ProductDiscountByIdGet},
@@ -996,12 +1158,12 @@ import java.util.function.Function;
  <li class=change-in-release>Product type creation has been refactored. Have a look at {@link ProductAttributeDocumentation product attribute tutorial}.</li>
  <li class=change-in-release>Product prices have an ID and price updates need to be performed via the price ID: {@link io.sphere.sdk.products.commands.updateactions.ChangePrice}, {@link io.sphere.sdk.products.commands.updateactions.RemovePrice}. Keep in mind that {@code io.sphere.sdk.products.Price#equals(Object)} includes the ID.</li>
  <li class=change-in-release>The naming conventions in the commercetools platform have been changed:
-   <ul>
-   <li>PlainEnumValue is now EnumValue</li>
-   <li>LocalizedStrings is now LocalizedString</li>
-   <li>LocalizedStringsEntry is now LocalizedStringEntry</li>
-   <li>Fetch is now Get (e.g. {@code ProductProjectionByIdFetch} is now {@link ProductProjectionByIdGet}</li>
-   </ul>
+ <ul>
+ <li>PlainEnumValue is now EnumValue</li>
+ <li>LocalizedStrings is now LocalizedString</li>
+ <li>LocalizedStringsEntry is now LocalizedStringEntry</li>
+ <li>Fetch is now Get (e.g. {@code ProductProjectionByIdFetch} is now {@link ProductProjectionByIdGet}</li>
+ </ul>
  </li>
 
  <li class=change-in-release>{@code JsonUtils} have been renamed to {@link io.sphere.sdk.json.SphereJsonUtils}, this is an internal utility class working for the commercetools platform context, it is not intended to build apps or libs on it.</li>
@@ -1060,7 +1222,7 @@ import java.util.function.Function;
  <li class=change-in-release>The product attributes have been refactored, look at the {@link ProductAttributeDocumentation} how it works now.</li>
  <li class=change-in-release>{@link io.sphere.sdk.client.SphereClient} implements {@link AutoCloseable} instead of {@link java.io.Closeable}.</li>
  <li class=change-in-release>For timestamps we moved from {@link java.time.Instant} to {@link java.time.ZonedDateTime} since the latter also contains a timezone which better reflects the platforms date time data.</li>
- <li class=change-in-release>Getting the child categories of a category is not in category anymore but in {@link io.sphere.sdk.categories.CategoryTree#findChildren(Identifiable)}.</li>
+ <li class=change-in-release>Getting the child categories of a category is not in category anymore but in {@link CategoryTree#findChildren(Identifiable)}.</li>
  <li class=fixed-in-release>Sphere client does not shutdown actors properly.  See <a target="_blank" href="https://github.com/commercetools/commercetools-jvm-sdk/issues/491">#491</a>.</li>
  <li class=removed-in-release>{@code Category#getPathInTree()}</li>
  <li class=removed-in-release>{@code ExperimentalProductImageUploadCommand}, but you can find a similar command here: <a href="https://github.com/commercetools/commercetools-jvm-sdk-experimental-java-add-ons">https://github.com/commercetools/commercetools-jvm-sdk-experimental-java-add-ons</a></li>
@@ -1101,38 +1263,38 @@ import java.util.function.Function;
 
  <h3 class=released-version id=v1_0_0_M13>1.0.0-M13 (21.04.2015)</h3>
  <ul>
-     <li class=new-in-release>{@link LocalizedString#mapValue(BiFunction)} and {@link LocalizedString#stream()}
-     can be used transform {@link LocalizedString}, for example for creating slugs or formatting.</li>
-     <li class=new-in-release>Experimental {@link io.sphere.sdk.utils.CompletableFutureUtils} to work with Java 8 Futures.</li>
-     <li class=new-in-release>{@link AsyncDocumentation} documents how to work with {@link java.util.concurrent.CompletableFuture} and {@link java.util.concurrent.CompletionStage}.</li>
+ <li class=new-in-release>{@link LocalizedString#mapValue(BiFunction)} and {@link LocalizedString#stream()}
+ can be used transform {@link LocalizedString}, for example for creating slugs or formatting.</li>
+ <li class=new-in-release>Experimental {@link io.sphere.sdk.utils.CompletableFutureUtils} to work with Java 8 Futures.</li>
+ <li class=new-in-release>{@link AsyncDocumentation} documents how to work with {@link java.util.concurrent.CompletableFuture} and {@link java.util.concurrent.CompletionStage}.</li>
 
-     <li class=new-in-release>{@link io.sphere.sdk.models.SphereException}s may give hint to developers how to recover from errors. For example on typical elasticsearch related problems it suggests to reindex the product index.</li>
-     <li class=new-in-release>The JVM SDK is available for Ning Async HTTP Client 1.8 and 1.9 (incompatible to 1.8).</li>
-     <li class=new-in-release>State update actions and {@code io.sphere.sdk.states.StateBuilder} contributed by <a href="https://github.com/abrauner">Ansgar Brauner</a></li>
-     <li class=new-in-release>Embedded predicates (as used in 'where'-clauses) now support lambda syntax: {@code ProductVariantQueryModel#where(java.util.function.Function)}.</li>
-     <li class=new-in-release>{@link io.sphere.sdk.orders.queries.OrderQuery#byCustomerId(java.lang.String)} and {@link io.sphere.sdk.orders.queries.OrderQuery#byCustomerEmail(java.lang.String)}</li>
-     <li class=new-in-release>{@link io.sphere.sdk.channels.commands.ChannelUpdateCommand}</li>
-     <li class=new-in-release>{@link ChannelByIdGet}</li>
-     <li class=new-in-release>{@link io.sphere.sdk.customers.queries.CustomerQuery#byEmail(java.lang.String)}</li>
-     <li class=change-in-release>{@link io.sphere.sdk.client.SphereRequest} has been refactored:<ul>
-         <li>{@code Function<HttpResponse, T> resultMapper()} is now {@link io.sphere.sdk.client.SphereRequest#deserialize(HttpResponse)}</li>
-         <li>{@code boolean canHandleResponse(final HttpResponse response)} is now {@link io.sphere.sdk.client.SphereRequest#canDeserialize(HttpResponse)}</li>
-       </ul>
-     </li>
-     <li class=change-in-release>Artifact IDs start now with "sphere-".</li>
-     <li class=change-in-release> {@link java.util.concurrent.CompletableFuture} has been replaced with {@link java.util.concurrent.CompletionStage}.
+ <li class=new-in-release>{@link io.sphere.sdk.models.SphereException}s may give hint to developers how to recover from errors. For example on typical elasticsearch related problems it suggests to reindex the product index.</li>
+ <li class=new-in-release>The JVM SDK is available for Ning Async HTTP Client 1.8 and 1.9 (incompatible to 1.8).</li>
+ <li class=new-in-release>State update actions and {@code io.sphere.sdk.states.StateBuilder} contributed by <a href="https://github.com/abrauner">Ansgar Brauner</a></li>
+ <li class=new-in-release>Embedded predicates (as used in 'where'-clauses) now support lambda syntax: {@code ProductVariantQueryModel#where(java.util.function.Function)}.</li>
+ <li class=new-in-release>{@link io.sphere.sdk.orders.queries.OrderQuery#byCustomerId(java.lang.String)} and {@link io.sphere.sdk.orders.queries.OrderQuery#byCustomerEmail(java.lang.String)}</li>
+ <li class=new-in-release>{@link io.sphere.sdk.channels.commands.ChannelUpdateCommand}</li>
+ <li class=new-in-release>{@link ChannelByIdGet}</li>
+ <li class=new-in-release>{@link io.sphere.sdk.customers.queries.CustomerQuery#byEmail(java.lang.String)}</li>
+ <li class=change-in-release>{@link io.sphere.sdk.client.SphereRequest} has been refactored:<ul>
+ <li>{@code Function<HttpResponse, T> resultMapper()} is now {@link io.sphere.sdk.client.SphereRequest#deserialize(HttpResponse)}</li>
+ <li>{@code boolean canHandleResponse(final HttpResponse response)} is now {@link io.sphere.sdk.client.SphereRequest#canDeserialize(HttpResponse)}</li>
+ </ul>
+ </li>
+ <li class=change-in-release>Artifact IDs start now with "sphere-".</li>
+ <li class=change-in-release> {@link java.util.concurrent.CompletableFuture} has been replaced with {@link java.util.concurrent.CompletionStage}.
 
-       You can convert from {@link java.util.concurrent.CompletionStage} to {@link java.util.concurrent.CompletableFuture} with {@link CompletionStage#toCompletableFuture()}.
+ You can convert from {@link java.util.concurrent.CompletionStage} to {@link java.util.concurrent.CompletableFuture} with {@link CompletionStage#toCompletableFuture()}.
 
-       The opposite direction can be achieved with assigning {@link java.util.concurrent.CompletableFuture} (implementation) to {@link java.util.concurrent.CompletionStage} (interface).</li>
-     <li class=change-in-release>Refactoring of {@link io.sphere.sdk.client.SphereClient}, {@code <T> CompletionStage<T> execute(final SphereRequest<T> sphereRequest)}
-     is now {@link io.sphere.sdk.client.SphereClient#execute(SphereRequest)} which returns {@link java.util.concurrent.CompletionStage} instead of {@link java.util.concurrent.CompletableFuture}.
-     </li>
-     <li class=change-in-release>{@link  io.sphere.sdk.carts.LineItem#getTaxRate()} is optional.</li>
-     <li class=change-in-release>{@link io.sphere.sdk.carts.LineItem#getState()} now returns a set instead of a list.</li>
-     <li class=change-in-release>{@link io.sphere.sdk.products.ProductProjection#getCategories()} now returns a set instead of a list.</li>
+ The opposite direction can be achieved with assigning {@link java.util.concurrent.CompletableFuture} (implementation) to {@link java.util.concurrent.CompletionStage} (interface).</li>
+ <li class=change-in-release>Refactoring of {@link io.sphere.sdk.client.SphereClient}, {@code <T> CompletionStage<T> execute(final SphereRequest<T> sphereRequest)}
+ is now {@link io.sphere.sdk.client.SphereClient#execute(SphereRequest)} which returns {@link java.util.concurrent.CompletionStage} instead of {@link java.util.concurrent.CompletableFuture}.
+ </li>
+ <li class=change-in-release>{@link  io.sphere.sdk.carts.LineItem#getTaxRate()} is optional.</li>
+ <li class=change-in-release>{@link io.sphere.sdk.carts.LineItem#getState()} now returns a set instead of a list.</li>
+ <li class=change-in-release>{@link io.sphere.sdk.products.ProductProjection#getCategories()} now returns a set instead of a list.</li>
 
-    <li class=fixed-in-release>URL encoding of parameters. See <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/240">#240</a>.</li>
+ <li class=fixed-in-release>URL encoding of parameters. See <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/240">#240</a>.</li>
  </ul>
 
  <h3 class=released-version id=v1_0_0_M12>1.0.0-M12 (19.03.2015)</h3>
@@ -1157,35 +1319,35 @@ import java.util.function.Function;
  <h3 class=released-version id=v1_0_0_M11>1.0.0-M11 (03.03.2015)</h3>
  <h4>Overall</h4>
  <ul>
-    <li class=new-in-release>Code examples contain the links to the GitHub source code.</li>
-    <li class=new-in-release>The {@link io.sphere.sdk.client.SphereClient} architecture has been refactored, so it is now possible to inject access token suppliers and custom HTTP clients.
-        <ul>
-            <li>{@link AsyncHttpClientAdapter} enables to use a custom underlying Ning HTTP client for settings like proxies or max connections per host.</li>
-            <li>The new module {@code java-client-apache-async} contains an {@link ApacheHttpClientAdapter adapter} to use the Apache HTTP client instead of the current default client Ning.</li>
-            <li>The {@link io.sphere.sdk.client.QueueSphereClientDecorator} enables to limit the amount of concurrent requests to the platform with a task queue.</li>
-            <li>{@code io.sphere.sdk.client.SphereAccessTokenSupplierFactory} is a starting point to create custom access token suppliers for one token (either fetched from commercetools or as String) or auto refreshing for online shops.</li>
-        </ul>
-    </li>
-    <li class=new-in-release>Added {@link io.sphere.sdk.client.SphereRequestDecorator} to decorate {@link io.sphere.sdk.client.SphereRequest}s.</li>
-    <li class=change-in-release>{@link io.sphere.sdk.meta.ExceptionDocumentation Exception hierarchy}, relocated some exceptions and deleted some.
-        <ul>
-            <li>Removed SphereBackendException, SphereClientException, JavaConcurrentUtils, Requestable</li>
-            <li>Removed ReferenceExistsException, usage as {@code SphereError} from a {@link io.sphere.sdk.client.ErrorResponseException}</li>
-            <li>JsonParseException is now {@link io.sphere.sdk.json.JsonException}.</li>
-            <li>InvalidQueryOffsetException is replaced with {@link java.lang.IllegalArgumentException}.</li>
-        </ul>
-    </li>
-    <li class=change-in-release>For SDK devs: {@link io.sphere.sdk.http.HttpRequest} has changed tasks and structure, now it contains the full information for a HTTP request whereas now {@link io.sphere.sdk.client.HttpRequestIntent} is an element to describe an endpoint of sphere project independent.</li>
-    <li class=change-in-release>For SDK devs: {@link io.sphere.sdk.client.JsonEndpoint} moved to the client package</li>
-    <li class=change-in-release>{@link Get} class names end now with Fetch for consistency, so for example {@code CartFetchById} is now {@link CartByIdGet}.</li>
-    <li class=change-in-release>{@link io.sphere.sdk.commands.DeleteCommand} implementations don't have {@code ById} or {@code ByKey} in the class name and the {@code of} factory method returns the interface, not the implementation, example {@link io.sphere.sdk.categories.commands.CategoryDeleteCommand#of(io.sphere.sdk.models.Versioned)}.</li>
-    <li class=change-in-release>LocalizedText* classes have been renamed to LocalizedString.</li>
-    <li class=fixed-in-release>Fixed: UnknownCurrencyException <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/264">#264</a>.</li>
+ <li class=new-in-release>Code examples contain the links to the GitHub source code.</li>
+ <li class=new-in-release>The {@link io.sphere.sdk.client.SphereClient} architecture has been refactored, so it is now possible to inject access token suppliers and custom HTTP clients.
+ <ul>
+ <li>{@link AsyncHttpClientAdapter} enables to use a custom underlying Ning HTTP client for settings like proxies or max connections per host.</li>
+ <li>The new module {@code java-client-apache-async} contains an {@link ApacheHttpClientAdapter adapter} to use the Apache HTTP client instead of the current default client Ning.</li>
+ <li>The {@link io.sphere.sdk.client.QueueSphereClientDecorator} enables to limit the amount of concurrent requests to the platform with a task queue.</li>
+ <li>{@code io.sphere.sdk.client.SphereAccessTokenSupplierFactory} is a starting point to create custom access token suppliers for one token (either fetched from commercetools or as String) or auto refreshing for online shops.</li>
+ </ul>
+ </li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.client.SphereRequestDecorator} to decorate {@link io.sphere.sdk.client.SphereRequest}s.</li>
+ <li class=change-in-release>{@link io.sphere.sdk.meta.ExceptionDocumentation Exception hierarchy}, relocated some exceptions and deleted some.
+ <ul>
+ <li>Removed SphereBackendException, SphereClientException, JavaConcurrentUtils, Requestable</li>
+ <li>Removed ReferenceExistsException, usage as {@code SphereError} from a {@link io.sphere.sdk.client.ErrorResponseException}</li>
+ <li>JsonParseException is now {@link io.sphere.sdk.json.JsonException}.</li>
+ <li>InvalidQueryOffsetException is replaced with {@link java.lang.IllegalArgumentException}.</li>
+ </ul>
+ </li>
+ <li class=change-in-release>For SDK devs: {@link io.sphere.sdk.http.HttpRequest} has changed tasks and structure, now it contains the full information for a HTTP request whereas now {@link io.sphere.sdk.client.HttpRequestIntent} is an element to describe an endpoint of sphere project independent.</li>
+ <li class=change-in-release>For SDK devs: {@link io.sphere.sdk.client.JsonEndpoint} moved to the client package</li>
+ <li class=change-in-release>{@link Get} class names end now with Fetch for consistency, so for example {@code CartFetchById} is now {@link CartByIdGet}.</li>
+ <li class=change-in-release>{@link io.sphere.sdk.commands.DeleteCommand} implementations don't have {@code ById} or {@code ByKey} in the class name and the {@code of} factory method returns the interface, not the implementation, example {@link io.sphere.sdk.categories.commands.CategoryDeleteCommand#of(io.sphere.sdk.models.Versioned)}.</li>
+ <li class=change-in-release>LocalizedText* classes have been renamed to LocalizedString.</li>
+ <li class=fixed-in-release>Fixed: UnknownCurrencyException <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/264">#264</a>.</li>
  </ul>
 
  <h4>States</h4>
  <ul>
-    <li class=new-in-release>{@link io.sphere.sdk.states.State} models, creation and deletion contributed by <a href="https://github.com/abrauner">Ansgar Brauner</a></li>
+ <li class=new-in-release>{@link io.sphere.sdk.states.State} models, creation and deletion contributed by <a href="https://github.com/abrauner">Ansgar Brauner</a></li>
  </ul>
 
  <h4>Products</h4>
@@ -1321,7 +1483,7 @@ import java.util.function.Function;
  <li>Added {@link io.sphere.sdk.products.PriceBuilder}.</li>
  <li>Further null checks.</li>
  <li>Add a lot of a Javadoc, in general for the packages.</li>
- <li>{@link io.sphere.sdk.categories.CategoryTree#of(java.util.List)} instead of CategoryTreeFactory is to be used for creating a category tree.</li>
+ <li>{@link CategoryTree#of(java.util.List)} instead of CategoryTreeFactory is to be used for creating a category tree.</li>
  <li>Move {@link io.sphere.sdk.models.AddressBuilder} out of the {@link io.sphere.sdk.models.Address} class.</li>
  <li>Performed a lot of renamings like the {@code requests} package to {@code http}</li>
  <li>Moved commands and queries to own packages for easier discovery.</li>

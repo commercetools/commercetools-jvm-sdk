@@ -23,7 +23,7 @@ import java.util.Set;
  */
 
 
-@ResourceDraftValue(gettersForBuilder = true,
+@ResourceDraftValue(
         factoryMethods = {@FactoryMethod(parameterNames = {"productType", "name", "slug", "masterVariant"})},
         abstractBuilderClass = true)
 @JsonDeserialize(as = ProductDraftDsl.class)
@@ -53,6 +53,7 @@ public interface ProductDraft extends WithLocalizedSlug, MetaAttributes {
     @Override
     LocalizedString getMetaKeywords();
 
+    @Nullable
     ProductVariantDraft getMasterVariant();
 
     List<ProductVariantDraft> getVariants();
