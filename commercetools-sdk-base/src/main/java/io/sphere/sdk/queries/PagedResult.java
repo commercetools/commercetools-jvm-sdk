@@ -11,6 +11,12 @@ public interface PagedResult<T> {
      Long getOffset();
 
     /**
+     * The limit supplied by the client or the server default.
+     * @return the maximum amount of items allowed to be included in the results
+     */
+    Long getLimit();
+
+    /**
      * The actual number of results returned.
      * @return the number of elements in this container
      * @deprecated use {@link #getCount()} instead
@@ -36,7 +42,7 @@ public interface PagedResult<T> {
       * to {@link io.sphere.sdk.queries.PagedResult#getTotal()} the container contains only a subset of all
       * elements that match the request.
       * @return {@link io.sphere.sdk.queries.PagedResult#getCount()} elements matching the request
-      */
+      */ 
      List<T> getResults();
 
     /**
@@ -48,6 +54,31 @@ public interface PagedResult<T> {
         final List<T> results = getResults();
         return results.isEmpty() ? Optional.empty() : Optional.of(results.get(0));
      }
+
+    /**
+     * Calculates the page number of the result, the pages are indexed staring 0, which means that {@code getPageIndex()}
+     * returns a value in [0,n) , given 'n' is the total number of pages
+     *
+     * @return the page number of the result
+     */
+    default Long getPageIndex() {
+        if (getTotal() == null || getLimit() == null || getLimit() == 0) {
+            throw new UnsupportedOperationException("Can only be used if the limit & total are known and limit is non-zero.");
+        }
+        return (long) Math.floor(getOffset() / getLimit().doubleValue());
+    }
+
+    /**
+     * Calculates the total number of pages matching the request.
+     *
+     * @return the total number of pages
+     */
+    default Long getTotalPages() {
+        if (getTotal() == null || getLimit() == null || getLimit() == 0) {
+            throw new UnsupportedOperationException("Can only be used if the limit & total are known and limit is non-zero.");
+        }
+        return (long) Math.ceil(getTotal() / getLimit().doubleValue());
+    }
 
     /**
       * Checks if this is the first page of a result.
@@ -66,7 +97,7 @@ public interface PagedResult<T> {
       */
      default boolean isLast() {
          if (getOffset() == null || getTotal() == null) {
-             throw new UnsupportedOperationException("Can only be used if the offset & total is known.");
+             throw new UnsupportedOperationException("Can only be used if the offset & total are known.");
          }
          //currently counting the total amount is performed in a second database call, so it is possible
          //that the left side can be greater than total

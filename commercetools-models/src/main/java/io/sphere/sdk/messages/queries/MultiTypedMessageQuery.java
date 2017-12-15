@@ -52,7 +52,7 @@ final class MultiTypedMessageQuery extends SphereRequestDecorator<PagedQueryResu
                     }
                 })
                 .collect(Collectors.toList());
-        return PagedQueryResult.of(pagedQueryResult.getOffset(), pagedQueryResult.getTotal(), results);
+        return PagedQueryResult.of(pagedQueryResult.getOffset(), pagedQueryResult.getLimit(), pagedQueryResult.getTotal(), results);
     }
 
     @SuppressWarnings("unchecked")

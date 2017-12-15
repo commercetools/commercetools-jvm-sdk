@@ -21,15 +21,16 @@ public interface PagedQueryResult<T> extends PagedResult<T> {
      * @return an empty {@code PagedQueryResult}
      */
     static <T> PagedQueryResultDsl<T> empty() {
-        return new PagedQueryResultDsl<>(0L, 0L, Collections.<T>emptyList(), 0L);
+        return new PagedQueryResultDsl<>(0L, 0L, 0L, Collections.<T>emptyList(), 0L);
     }
 
-    static <T> PagedQueryResultDsl<T> of(final Long offset, final Long total, final List<T> results) {
-        return new PagedQueryResultDsl<>(offset, total, results, (long) results.size());
+    static <T> PagedQueryResultDsl<T> of(final Long offset, final Long limit, final Long total, final List<T> results) {
+        return new PagedQueryResultDsl<>(offset, limit, total, results, (long) results.size());
     }
 
     static <T> PagedQueryResultDsl<T> of(final List<T> results) {
-        return of(0L, (long) results.size(), results);
+        final long size = results.size();
+        return of(0L, size, size, results);
     }
 
     @JsonIgnore
@@ -42,6 +43,9 @@ public interface PagedQueryResult<T> extends PagedResult<T> {
 
     @Override
     Long getOffset();
+
+    @Override
+    Long getLimit();
 
     @Override
     List<T> getResults();
