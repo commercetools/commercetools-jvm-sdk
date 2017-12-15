@@ -56,7 +56,7 @@ public class ProductDiscountUpdateCommandIntegrationTest extends IntegrationTest
     public void changeValidFromUntil() throws Exception {
         withUpdateableProductDiscount(client(), discount -> {
             final ZonedDateTime start = ZonedDateTime.parse("2015-07-09T07:46:40.230Z");
-            final ZonedDateTime end = start.plusMonths(3);
+            final ZonedDateTime end = start.plusYears(100);
 
             final ProductDiscount updatedDiscount = client().executeBlocking(ProductDiscountUpdateCommand.of(discount, asList(SetValidFrom.of(start),SetValidUntil.of(end))));
 

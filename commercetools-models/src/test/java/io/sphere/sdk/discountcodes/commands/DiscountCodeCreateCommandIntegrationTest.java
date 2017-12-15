@@ -33,7 +33,7 @@ public class DiscountCodeCreateCommandIntegrationTest extends IntegrationTest {
     public void execution() throws Exception {
         withPersistentCartDiscount(client(), cartDiscount -> {
             final ZonedDateTime start = ZonedDateTime.parse("2015-07-09T07:46:40.230Z");
-            final ZonedDateTime end = start.plusMonths(3);
+            final ZonedDateTime end = start.plusYears(100);
 
             final String code = randomKey();
             final DiscountCodeDraft draft = DiscountCodeDraft.of(code, cartDiscount)
