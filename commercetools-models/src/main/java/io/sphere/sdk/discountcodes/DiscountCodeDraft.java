@@ -3,6 +3,7 @@ package io.sphere.sdk.discountcodes;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.FactoryMethod;
+import io.sphere.sdk.annotations.IgnoreInQueryModel;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.cartdiscounts.CartDiscount;
 import io.sphere.sdk.models.LocalizedString;
@@ -11,6 +12,7 @@ import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
+import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.List;
 
@@ -39,6 +41,14 @@ public interface DiscountCodeDraft {
 
     @JsonProperty("isActive")
     Boolean isActive();
+
+    @Nullable
+    @IgnoreInQueryModel
+    ZonedDateTime getValidFrom();
+
+    @Nullable
+    @IgnoreInQueryModel
+    ZonedDateTime getValidUntil();
 
     @Nullable
     Long getMaxApplications();

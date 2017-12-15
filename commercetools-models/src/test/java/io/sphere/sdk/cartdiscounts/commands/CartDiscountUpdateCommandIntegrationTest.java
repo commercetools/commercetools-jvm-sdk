@@ -56,6 +56,21 @@ public class CartDiscountUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void changeValidFromUntil() throws Exception {
+
+        withPersistentCartDiscount(client(), cartDiscount -> {
+            final ZonedDateTime start = ZonedDateTime.parse("2015-07-09T07:46:40.230Z");
+            final ZonedDateTime end = start.plusMonths(3);
+
+            final CartDiscount updatedDiscount =
+                    client().executeBlocking(CartDiscountUpdateCommand.of(cartDiscount, asList(SetValidFrom.of(start),SetValidUntil.of(end))));
+            assertThat(updatedDiscount.getValidFrom()).isEqualTo(start);
+            assertThat(updatedDiscount.getValidUntil()).isEqualTo(end);
+        });
+
+    }
+
+    @Test
     public void changeTarget() throws Exception {
         withPersistentCartDiscount(client(), cartDiscount -> {
             final CartDiscountTarget newTarget = cartDiscount.getTarget() instanceof LineItemsTarget ?

@@ -14,6 +14,7 @@ import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.TypeDraft;
 
 import javax.annotation.Nullable;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 /**
@@ -79,6 +80,22 @@ public interface DiscountCode extends Resource<DiscountCode>, Custom {
     @JsonProperty("isActive")
     @IgnoreInQueryModel
     Boolean isActive();
+
+    /**
+     * Start date for discount code validity
+     */
+    @Nullable
+    @IgnoreInQueryModel
+    @HasUpdateAction
+    ZonedDateTime getValidFrom();
+
+    /**
+     * End date for discount code validity
+     */
+    @HasUpdateAction
+    @Nullable
+    @IgnoreInQueryModel
+    ZonedDateTime getValidUntil();
 
     /**
      * The discount code can only be applied maxApplications times.
