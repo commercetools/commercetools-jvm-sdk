@@ -24,7 +24,7 @@ public final class ParcelMeasurementsUpdatedMessage extends GenericMessageImpl<O
     private final String parcelId;
     private final ParcelMeasurements measurements;
 
-    public ParcelMeasurementsUpdatedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type,
+    ParcelMeasurementsUpdatedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type,
                                             final String deliveryId, final String parcelId, final ParcelMeasurements measurements) {
         super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, Order.class);
         this.deliveryId = deliveryId;
