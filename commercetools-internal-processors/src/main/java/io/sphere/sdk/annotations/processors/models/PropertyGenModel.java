@@ -11,9 +11,11 @@ import javax.annotation.Nullable;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
+import javax.lang.model.type.ArrayType;
 import javax.lang.model.type.DeclaredType;
 import javax.lang.model.type.TypeKind;
 import javax.lang.model.type.TypeMirror;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -51,14 +53,14 @@ public class PropertyGenModel {
         this.javadocLinkTag = javaDocLinkTag;
         this.optional = optional;
         this.deprecated = deprecated;
-        this.useReference =useReference;
+        this.useReference = useReference;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getCapitalizedName(){
+    public String getCapitalizedName() {
         return StringUtils.capitalize(getName());
     }
 
@@ -76,10 +78,12 @@ public class PropertyGenModel {
     }
 
     public TypeName getType() {
-        if(useReference){
-            return ParameterizedTypeName.get(ClassName.get(Reference.class),TypeName.get(type));
-        }
-        else {
+        if (useReference) {
+            return ParameterizedTypeName.get(ClassName.get(Reference.class), TypeName.get(type));
+        } else if (type.getKind() == TypeKind.ARRAY) {
+            final ArrayType arrayType = (ArrayType) type;
+            return ParameterizedTypeName.get(ClassName.get(List.class), TypeName.get(arrayType.getComponentType()));
+        } else {
             return TypeName.get(type);
         }
     }
@@ -137,7 +141,7 @@ public class PropertyGenModel {
 
     /**
      * Replaces the parameterized type of this type with the given replacement type.
-     *
+     * <p>
      * This is useful to replace a reference type {@code Reference<Example>} with a
      * referenceable type {@type Referenceable<Example>}.
      *
@@ -184,7 +188,6 @@ public class PropertyGenModel {
      * Creates an instance from the given getter method.
      *
      * @param getterMethod the getter method
-     *
      * @return new property model
      */
     public static PropertyGenModel of(final ExecutableElement getterMethod) {
@@ -195,16 +198,17 @@ public class PropertyGenModel {
                 String.format("{@link %s#%s()}", getterMethod.getEnclosingElement().getSimpleName(), getterMethod.getSimpleName());
         final boolean deprecated = getterMethod.getAnnotation(Deprecated.class) != null;
         return new PropertyGenModel(getPropertyName(getterMethod), getterMethod.getSimpleName().toString(), jsonName, getterMethod.getReturnType(), javadocLinkTag,
-                optional,false, deprecated);
+                optional, false, deprecated);
     }
 
 
-    public static PropertyGenModel of(final String name, final String jsonName, final TypeMirror type, final String javaDocLinkTag, final boolean optional ,boolean useReference) {
+    public static PropertyGenModel of(final String name, final String jsonName, final TypeMirror type, final String javaDocLinkTag, final boolean optional, boolean useReference) {
         final TypeName typeName = TypeName.get(type);
-        final String methodNamePrefix = typeName.equals(BOXED_BOOLEAN)? "is" : "get";
+        final String methodNamePrefix = typeName.equals(BOXED_BOOLEAN) ? "is" : "get";
         final String methodName = methodNamePrefix + StringUtils.capitalize(name);
-        return new PropertyGenModel(name, methodName, jsonName, type, javaDocLinkTag, optional,useReference, false);
+        return new PropertyGenModel(name, methodName, jsonName, type, javaDocLinkTag, optional, useReference, false);
     }
+
     /**
      * Returns the property name of the given property method.
      *

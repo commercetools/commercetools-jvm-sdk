@@ -1,6 +1,8 @@
 package io.sphere.sdk.orders;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.HasUpdateAction;
+import io.sphere.sdk.annotations.PropertySpec;
 import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.CreationTimestamped;
@@ -25,12 +27,19 @@ public interface Delivery extends Identifiable<Delivery>, CreationTimestamped {
     @Override
     ZonedDateTime getCreatedAt();
 
+    @HasUpdateAction(value = "setDeliveryItems", fields = {
+            @PropertySpec(name = "deliveryId", type = String.class),
+            @PropertySpec(name = "items", type = DeliveryItem[].class),
+    })
     List<DeliveryItem> getItems();
 
+    @HasUpdateAction(value = "removeParcelFromDelivery", fields = {
+            @PropertySpec(name = "parcelId", type = String.class)
+    })
     List<Parcel> getParcels();
 
     @Nullable
-    io.sphere.sdk.models.Address getAddress();
+    Address getAddress();
 
     static Delivery of(final String id, final ZonedDateTime createdAt, final List<DeliveryItem> items, final List<Parcel> parcels) {
         return new DeliveryImpl(null,createdAt,id,items,parcels);

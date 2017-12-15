@@ -66,7 +66,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
      * @return true if active
      */
     @JsonProperty("isActive")
-    @HasUpdateAction(value = "changeIsActive",fields = {@PropertySpec(name = "active",fieldType = Boolean.class,jsonName = "isActive")})
+    @HasUpdateAction(value = "changeIsActive",fields = {@PropertySpec(name = "active", type = Boolean.class,jsonName = "isActive")})
     @IgnoreInQueryModel
     Boolean isActive();
 

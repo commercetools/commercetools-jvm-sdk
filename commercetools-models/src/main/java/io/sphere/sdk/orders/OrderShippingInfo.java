@@ -1,6 +1,8 @@
 package io.sphere.sdk.orders;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.HasUpdateAction;
+import io.sphere.sdk.annotations.PropertySpec;
 import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.carts.CartShippingInfo;
 import io.sphere.sdk.models.Reference;
@@ -16,6 +18,9 @@ import java.util.List;
 @JsonDeserialize(as = OrderShippingInfoImpl.class)
 @ResourceValue
 public interface OrderShippingInfo extends CartShippingInfo {
+    @HasUpdateAction(value = "removeDelivery", fields = {
+            @PropertySpec(name = "deliveryId", type = String.class)
+    })
     List<Delivery> getDeliveries();
 
     @Override

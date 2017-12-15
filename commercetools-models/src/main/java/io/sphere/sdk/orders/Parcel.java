@@ -1,6 +1,8 @@
 package io.sphere.sdk.orders;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.HasUpdateAction;
+import io.sphere.sdk.annotations.PropertySpec;
 import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.models.CreationTimestamped;
 
@@ -25,12 +27,24 @@ public interface Parcel extends CreationTimestamped {
     @Override
     ZonedDateTime getCreatedAt();
 
+    @HasUpdateAction(value = "setParcelMeasurements", fields = {
+            @PropertySpec(name = "parcelId", type = String.class),
+            @PropertySpec(name = "measurements", type = ParcelMeasurements.class, isOptional = true)
+    })
     @Nullable
     ParcelMeasurements getMeasurements();
 
+    @HasUpdateAction(value = "setParcelTrackingData", fields = {
+            @PropertySpec(name = "parcelId", type = String.class),
+            @PropertySpec(name = "trackingData", type = TrackingData.class, isOptional = true)
+    })
     @Nullable
     TrackingData getTrackingData();
 
+    @HasUpdateAction(value = "setParcelItems", fields = {
+            @PropertySpec(name = "parcelId", type = String.class),
+            @PropertySpec(name = "items", type = DeliveryItem[].class, isOptional = true)
+    })
     @Nullable
     List<DeliveryItem> getItems();
 }

@@ -2,10 +2,7 @@ package io.sphere.sdk.annotations.processors.generators;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.squareup.javapoet.*;
-import io.sphere.sdk.annotations.CopyFactoryMethod;
-import io.sphere.sdk.annotations.FactoryMethod;
-import io.sphere.sdk.annotations.HasUpdateAction;
-import io.sphere.sdk.annotations.PropertySpec;
+import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.annotations.processors.models.PropertyGenModel;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import org.apache.commons.lang3.StringUtils;
@@ -26,6 +23,7 @@ import javax.tools.Diagnostic;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -67,6 +65,10 @@ public class UpdateActionGenerator extends AbstractGenerator<ExecutableElement> 
         }
 
         final TypeElement annotatedEnclosingElement = (TypeElement) propertyMethod.getEnclosingElement();
+        final Element packageElement = annotatedEnclosingElement.getEnclosingElement();
+        final TypeMirror resourceType = typeUtils.getAnnotationValue(packageElement, PackageResourceInfo.class, "type")
+                .flatMap(v -> Optional.ofNullable((TypeMirror) v.getValue()))
+                .orElseGet(() -> types.getDeclaredType(annotatedEnclosingElement));
         final PropertyGenModel property = PropertyGenModel.of(propertyMethod);
         final String actionNameDerivedFromField = (property.isOptional() ? "set" : "change") + StringUtils.capitalize(property.getName());
         final String actionName = getFirstNonEmpty(hasUpdateActionInstance.value(),actionNameDerivedFromField);
@@ -79,8 +81,6 @@ public class UpdateActionGenerator extends AbstractGenerator<ExecutableElement> 
         final CopyFactoryMethod[] copyFactoryMethods = hasUpdateActionInstance.copyFactoryMethods();
         boolean isAbstract = hasUpdateActionInstance.makeAbstract();
         final List<TypeName> superInterfaces = getSuperInterfaces(hasUpdateActionInstance);
-
-
 
         final String includeExampleJavaDoc = includeExample.isEmpty() ?
                 "" :
@@ -98,17 +98,17 @@ public class UpdateActionGenerator extends AbstractGenerator<ExecutableElement> 
                 .collect(Collectors.toList());
         final boolean allAttributesOptional = propertyGenModelList.stream().map(PropertyGenModel::isOptional).reduce(Boolean::logicalAnd).get();
 
-
+        final ClassName annotatedTypeName = ClassName.get(annotatedEnclosingElement);
         final TypeSpec.Builder typeSpecBuilder = TypeSpec.classBuilder(className)
-                .addJavadoc("Updates the {@code $L} property of a {@link $T}.\n", property.getName(), ClassName.get(annotatedEnclosingElement))
+                .addJavadoc("Updates the {@code $L} property of a {@link $T}.\n", property.getName(), ClassName.get(resourceType))
                 .addJavadoc("\n")
                 .addJavadoc(includeExampleJavaDoc)
-                .addJavadoc("@see $T#$L()\n", ClassName.get(annotatedEnclosingElement), propertyMethod.getSimpleName())
-                .superclass(ParameterizedTypeName.get(ClassName.get(UpdateActionImpl.class), ClassName.get(annotatedEnclosingElement)))
+                .addJavadoc("@see $T#$L()\n", annotatedTypeName, propertyMethod.getSimpleName())
+                .superclass(ParameterizedTypeName.get(ClassName.get(UpdateActionImpl.class), ClassName.get(resourceType)))
                 .addModifiers(isAbstract ? new Modifier[]{Modifier.ABSTRACT} : new Modifier[]{Modifier.PUBLIC, Modifier.FINAL})
                 .addAnnotation(AnnotationSpec.builder(Generated.class)
                         .addMember("value", "$S", getClass().getCanonicalName())
-                        .addMember("comments", "$S", "Generated from: " + annotatedEnclosingElement.getQualifiedName().toString()).build())
+                        .addMember("comments", "$S", "Generated from: " + annotatedTypeName).build())
                 .addFields(fields)
                 .addMethods(getters)
                 .addMethod(createConstructor(propertyGenModelList, concreteClassName, actionName, isAbstract ? Modifier.PROTECTED : Modifier.PRIVATE))
@@ -216,7 +216,7 @@ public class UpdateActionGenerator extends AbstractGenerator<ExecutableElement> 
 
         TypeMirror typeMirror = null;
         try {
-            propertySpec.fieldType();
+            propertySpec.type();
         } catch (MirroredTypeException e) {
             typeMirror = e.getTypeMirror();
         }
@@ -238,7 +238,6 @@ public class UpdateActionGenerator extends AbstractGenerator<ExecutableElement> 
 
         builder.addModifiers(Modifier.FINAL);
 
-
         return builder.build();
     }
 
@@ -252,9 +251,6 @@ public class UpdateActionGenerator extends AbstractGenerator<ExecutableElement> 
     }
 
     private static String getFirstNonEmpty(final String... args) {
-
         return Arrays.stream(args).filter(((Predicate<String>) StringUtils::isEmpty).negate()).findFirst().orElseGet(String::new);
-
     }
-
 }

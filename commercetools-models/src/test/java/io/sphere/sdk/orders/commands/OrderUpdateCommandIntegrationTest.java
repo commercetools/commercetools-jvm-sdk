@@ -49,7 +49,13 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
             .withCarrier("carrier xyz")
             .withProvider("provider foo")
             .withProviderTransaction("prov trans 56");
-    public static final ParcelMeasurements PARCEL_MEASUREMENTS = ParcelMeasurements.of(2, 3, 1, 4);
+    public static final TrackingData OTHER_TRACKING_DATA = TrackingData.of()
+            .withTrackingId("tracking-id-11")
+            .withCarrier("carrier")
+            .withProvider("provider")
+            .withProviderTransaction("prov trans 5");
+    public static final ParcelMeasurements SMALL_PARCEL_MEASUREMENTS = ParcelMeasurements.of(2, 3, 1, 4);
+    public static final ParcelMeasurements PARCEL_MEASUREMENTS = ParcelMeasurements.of(200, 300, 100, 4000);
     public static final ZonedDateTime ZonedDateTime_IN_PAST = SphereTestUtils.now().minusSeconds(500);
 
     @Test
@@ -118,7 +124,7 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
     public void addDelivery() throws Exception {
         withOrder(client(), order -> {
             assertThat(order.getShippingInfo().getDeliveries()).isEmpty();
-            final List<ParcelDraft> parcels = asList(ParcelDraft.of(PARCEL_MEASUREMENTS, TRACKING_DATA));
+            final List<ParcelDraft> parcels = asList(ParcelDraft.of(SMALL_PARCEL_MEASUREMENTS, TRACKING_DATA));
             final LineItem lineItem = order.getLineItems().get(0);
             final long availableItemsToShip = 1;
             final List<DeliveryItem> items = asList(DeliveryItem.of(lineItem, availableItemsToShip));
@@ -128,7 +134,7 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(delivery.getItems()).isEqualTo(items);
             assertThat(delivery.getAddress()).isEqualTo(deliveryAddress);
             final Parcel parcel = delivery.getParcels().get(0);
-            assertThat(parcel.getMeasurements()).isEqualTo(PARCEL_MEASUREMENTS);
+            assertThat(parcel.getMeasurements()).isEqualTo(SMALL_PARCEL_MEASUREMENTS);
             assertThat(parcel.getTrackingData()).isEqualTo(TRACKING_DATA);
 
             //you can observe a message
@@ -191,6 +197,195 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void setDeliveryItems() throws Exception {
+        withOrder(client(), order -> {
+            final List<ParcelDraft> parcels = asList(ParcelDraft.of(SMALL_PARCEL_MEASUREMENTS, TRACKING_DATA));
+            final LineItem lineItem = order.getLineItems().get(0);
+            final long availableItemsToShip = 1;
+            final List<DeliveryItem> initialItems = asList(DeliveryItem.of(lineItem, availableItemsToShip));
+            final Order orderWithDelivery = client().executeBlocking(OrderUpdateCommand.of(order, AddDelivery.of(initialItems, parcels)));
+            final Delivery delivery = orderWithDelivery.getShippingInfo().getDeliveries().get(0);
+
+            final List<DeliveryItem> items = asList(DeliveryItem.of(lineItem, 2L));
+            final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(orderWithDelivery, SetDeliveryItems.of(delivery.getId(), items)));
+
+            final List<Delivery> deliveries = updatedOrder.getShippingInfo().getDeliveries();
+            assertThat(deliveries).hasSize(1);
+            final Delivery updatedDelivery = deliveries.get(0);
+            assertThat(updatedDelivery.getItems()).hasSize(1);
+            final DeliveryItem deliveryItem = updatedDelivery.getItems().get(0);
+            assertThat(deliveryItem.getId()).isEqualTo(lineItem.getId());
+            assertThat(deliveryItem.getQuantity()).isEqualTo(2L);
+
+            //you can observe a message
+            final Query<DeliveryItemsUpdatedMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(order))
+                    .forMessageType(DeliveryItemsUpdatedMessage.MESSAGE_HINT);
+            assertEventually(() -> {
+                final Optional<DeliveryItemsUpdatedMessage> deliveryItemsUpdatedMessageOptional =
+                        client().executeBlocking(messageQuery).head();
+                assertThat(deliveryItemsUpdatedMessageOptional).isPresent();
+                final DeliveryItemsUpdatedMessage deliveryItemsUpdatedMessage = deliveryItemsUpdatedMessageOptional.get();
+                assertThat(deliveryItemsUpdatedMessage.getDeliveryId()).isEqualTo(delivery.getId());
+                assertThat(deliveryItemsUpdatedMessage.getItems()).isEqualTo(items);
+            });
+        });
+    }
+
+    @Test
+    public void removeParcelFromDelivery() throws Exception {
+        withOrder(client(), order -> {
+            final List<ParcelDraft> parcels = asList(ParcelDraft.of(SMALL_PARCEL_MEASUREMENTS, TRACKING_DATA));
+            final LineItem lineItem = order.getLineItems().get(0);
+            final long availableItemsToShip = 1;
+            final List<DeliveryItem> initialItems = asList(DeliveryItem.of(lineItem, availableItemsToShip));
+            final Order orderWithDelivery = client().executeBlocking(OrderUpdateCommand.of(order, AddDelivery.of(initialItems, parcels)));
+
+            assertThat(orderWithDelivery.getShippingInfo().getDeliveries()).hasSize(1);
+            final Delivery delivery = orderWithDelivery.getShippingInfo().getDeliveries().get(0);
+            assertThat(delivery.getParcels()).hasSize(1);
+            final Parcel parcel = delivery.getParcels().get(0);
+
+            final Order orderWithoutParcel = client().executeBlocking(OrderUpdateCommand.of(orderWithDelivery, RemoveParcelFromDelivery.of(parcel.getId())));
+            assertThat(orderWithoutParcel.getShippingInfo().getDeliveries()).hasSize(1);
+            final Delivery deliveryWithoutParcel = orderWithoutParcel.getShippingInfo().getDeliveries().get(0);
+            assertThat(deliveryWithoutParcel.getParcels()).isEmpty();
+
+            //you can observe a message
+            final Query<ParcelRemovedFromDeliveryMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(order))
+                    .forMessageType(ParcelRemovedFromDeliveryMessage.MESSAGE_HINT);
+            assertEventually(() -> {
+                final Optional<ParcelRemovedFromDeliveryMessage> parcelRemovedFromDeliveryMessageOptional =
+                        client().executeBlocking(messageQuery).head();
+                assertThat(parcelRemovedFromDeliveryMessageOptional).isPresent();
+                final ParcelRemovedFromDeliveryMessage parcelRemovedFromDeliveryMessage = parcelRemovedFromDeliveryMessageOptional.get();
+                assertThat(parcelRemovedFromDeliveryMessage.getDeliveryId()).isEqualTo(delivery.getId());
+                assertThat(parcelRemovedFromDeliveryMessage.getParcel()).isEqualTo(parcel);
+            });
+        });
+    }
+
+    @Test
+    public void removeDelivery() throws Exception {
+        withOrder(client(), order -> {
+            final List<ParcelDraft> parcels = asList(ParcelDraft.of(SMALL_PARCEL_MEASUREMENTS, TRACKING_DATA));
+            final LineItem lineItem = order.getLineItems().get(0);
+            final long availableItemsToShip = 1;
+            final List<DeliveryItem> initialItems = asList(DeliveryItem.of(lineItem, availableItemsToShip));
+            final Order orderWithDelivery = client().executeBlocking(OrderUpdateCommand.of(order, AddDelivery.of(initialItems, parcels)));
+
+            assertThat(orderWithDelivery.getShippingInfo().getDeliveries()).hasSize(1);
+            final Delivery delivery = orderWithDelivery.getShippingInfo().getDeliveries().get(0);
+
+            final Order orderWithoutDelivery = client().executeBlocking(OrderUpdateCommand.of(orderWithDelivery, RemoveDelivery.of(delivery.getId())));
+            assertThat(orderWithoutDelivery.getShippingInfo().getDeliveries()).isEmpty();
+
+            //you can observe a message
+            final Query<DeliveryRemovedMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(order))
+                    .forMessageType(DeliveryRemovedMessage.MESSAGE_HINT);
+            assertEventually(() -> {
+                final Optional<DeliveryRemovedMessage> deliveryRemovedMessageOptional =
+                        client().executeBlocking(messageQuery).head();
+                assertThat(deliveryRemovedMessageOptional).isPresent();
+                final DeliveryRemovedMessage deliveryRemovedMessage = deliveryRemovedMessageOptional.get();
+                final Delivery deliveryFromMessage = deliveryRemovedMessage.getDelivery();
+                assertThat(deliveryFromMessage.getId()).isEqualTo(delivery.getId());
+                assertThat(deliveryFromMessage.getCreatedAt()).isEqualTo(delivery.getCreatedAt());
+            });
+        });
+    }
+
+    @Test
+    public void setParcelMeasurements() throws Exception {
+        withOrder(client(), order -> {
+            final List<ParcelDraft> parcels = asList(ParcelDraft.of(SMALL_PARCEL_MEASUREMENTS, TRACKING_DATA));
+            final LineItem lineItem = order.getLineItems().get(0);
+            final long availableItemsToShip = 1;
+            final List<DeliveryItem> initialItems = asList(DeliveryItem.of(lineItem, availableItemsToShip));
+            final Order orderWithDelivery = client().executeBlocking(OrderUpdateCommand.of(order, AddDelivery.of(initialItems, parcels)));
+            final Parcel parcel = orderWithDelivery.getShippingInfo().getDeliveries().get(0).getParcels().get(0);
+
+            final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(orderWithDelivery, SetParcelMeasurements.of(parcel.getId(), PARCEL_MEASUREMENTS)));
+            final Parcel updatedParcel = updatedOrder.getShippingInfo().getDeliveries().get(0).getParcels().get(0);
+            assertThat(updatedParcel.getMeasurements()).isEqualTo(PARCEL_MEASUREMENTS);
+
+            //you can observe a message
+            final Query<ParcelMeasurementsUpdatedMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(order))
+                    .forMessageType(ParcelMeasurementsUpdatedMessage.MESSAGE_HINT);
+            assertEventually(() -> {
+                final Optional<ParcelMeasurementsUpdatedMessage> parcelMeasurementsUpdatedMessageOptional =
+                        client().executeBlocking(messageQuery).head();
+                assertThat(parcelMeasurementsUpdatedMessageOptional).isPresent();
+                final ParcelMeasurementsUpdatedMessage parcelMeasurementsUpdatedMessage = parcelMeasurementsUpdatedMessageOptional.get();
+                assertThat(parcelMeasurementsUpdatedMessage.getParcelId()).isEqualTo(parcel.getId());
+                assertThat(parcelMeasurementsUpdatedMessage.getMeasurements()).isEqualTo(PARCEL_MEASUREMENTS);
+            });
+        });
+    }
+
+    @Test
+    public void setParcelTrackingData() throws Exception {
+        withOrder(client(), order -> {
+            final List<ParcelDraft> parcels = asList(ParcelDraft.of(SMALL_PARCEL_MEASUREMENTS, TRACKING_DATA));
+            final LineItem lineItem = order.getLineItems().get(0);
+            final long availableItemsToShip = 1;
+            final List<DeliveryItem> initialItems = asList(DeliveryItem.of(lineItem, availableItemsToShip));
+            final Order orderWithDelivery = client().executeBlocking(OrderUpdateCommand.of(order, AddDelivery.of(initialItems, parcels)));
+            final Parcel parcel = orderWithDelivery.getShippingInfo().getDeliveries().get(0).getParcels().get(0);
+
+            final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(orderWithDelivery, SetParcelTrackingData.of(parcel.getId(), OTHER_TRACKING_DATA)));
+            final Parcel updatedParcel = updatedOrder.getShippingInfo().getDeliveries().get(0).getParcels().get(0);
+            assertThat(updatedParcel.getTrackingData()).isEqualTo(OTHER_TRACKING_DATA);
+
+            //you can observe a message
+            final Query<ParcelTrackingDataUpdatedMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(order))
+                    .forMessageType(ParcelTrackingDataUpdatedMessage.MESSAGE_HINT);
+            assertEventually(() -> {
+                final Optional<ParcelTrackingDataUpdatedMessage> parcelTrackingDataUpdatedMessageOptional =
+                        client().executeBlocking(messageQuery).head();
+                assertThat(parcelTrackingDataUpdatedMessageOptional).isPresent();
+                final ParcelTrackingDataUpdatedMessage parcelTrackingDataUpdatedMessage = parcelTrackingDataUpdatedMessageOptional.get();
+                assertThat(parcelTrackingDataUpdatedMessage.getParcelId()).isEqualTo(parcel.getId());
+                assertThat(parcelTrackingDataUpdatedMessage.getTrackingData()).isEqualTo(OTHER_TRACKING_DATA);
+            });
+        });
+    }
+
+    @Test
+    public void setParcelItems() throws Exception {
+        withOrder(client(), order -> {
+            final List<ParcelDraft> parcels = asList(ParcelDraft.of(SMALL_PARCEL_MEASUREMENTS, TRACKING_DATA));
+            final LineItem lineItem = order.getLineItems().get(0);
+            final long availableItemsToShip = 1;
+            final List<DeliveryItem> initialItems = asList(DeliveryItem.of(lineItem, availableItemsToShip));
+            final Order orderWithDelivery = client().executeBlocking(OrderUpdateCommand.of(order, AddDelivery.of(initialItems, parcels)));
+            final Parcel parcel = orderWithDelivery.getShippingInfo().getDeliveries().get(0).getParcels().get(0);
+
+            final List<DeliveryItem> parcelItems = asList(DeliveryItem.of(lineItem, availableItemsToShip));
+            final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(orderWithDelivery, SetParcelItems.of(parcel.getId(), parcelItems)));
+            final Parcel updatedParcel = updatedOrder.getShippingInfo().getDeliveries().get(0).getParcels().get(0);
+            assertThat(updatedParcel.getItems()).hasSize(1);
+            assertThat(updatedParcel.getItems()).isEqualTo(parcelItems);
+
+            //you can observe a message
+            final Query<ParcelItemsUpdatedMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(order))
+                    .forMessageType(ParcelItemsUpdatedMessage.MESSAGE_HINT);
+            assertEventually(() -> {
+                final Optional<ParcelItemsUpdatedMessage> parcelItemsUpdatedMessageOptional = client().executeBlocking(messageQuery).head();
+                assertThat(parcelItemsUpdatedMessageOptional).isPresent();
+                final ParcelItemsUpdatedMessage parcelItemsUpdatedMessage = parcelItemsUpdatedMessageOptional.get();
+                assertThat(parcelItemsUpdatedMessage.getParcelId()).isEqualTo(updatedParcel.getId());
+                assertThat(parcelItemsUpdatedMessage.getItems()).isEqualTo(parcelItems);
+            });
+        });
+    }
+
+    @Test
     public void addParcelToDelivery() throws Exception {
         withOrder(client(), order -> {
             final LineItem lineItem = order.getLineItems().get(0);
@@ -198,11 +393,11 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
             final Order orderWithDelivery = client().executeBlocking(OrderUpdateCommand.of(order, AddDelivery.of(items)));
             final Delivery delivery = orderWithDelivery.getShippingInfo().getDeliveries().get(0);
             assertThat(delivery.getParcels()).isEmpty();
-            final ParcelDraft parcelDraft = ParcelDraft.of(PARCEL_MEASUREMENTS, TRACKING_DATA);
+            final ParcelDraft parcelDraft = ParcelDraft.of(SMALL_PARCEL_MEASUREMENTS, TRACKING_DATA);
             final AddParcelToDelivery action = AddParcelToDelivery.of(delivery, parcelDraft);
             final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(orderWithDelivery, action));
             final Parcel actualParcel = updatedOrder.getShippingInfo().getDeliveries().get(0).getParcels().get(0);
-            assertThat(actualParcel.getMeasurements()).isEqualTo(PARCEL_MEASUREMENTS);
+            assertThat(actualParcel.getMeasurements()).isEqualTo(SMALL_PARCEL_MEASUREMENTS);
             assertThat(actualParcel.getTrackingData()).isEqualTo(TRACKING_DATA);
 
             //you can observe a message
