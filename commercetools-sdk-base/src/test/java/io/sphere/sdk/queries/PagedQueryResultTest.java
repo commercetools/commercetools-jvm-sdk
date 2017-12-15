@@ -58,7 +58,7 @@ public class PagedQueryResultTest {
             assertThat(queryResult.getPageIndex()).isEqualTo(0);
             assertThat(queryResult.getTotalPages()).isEqualTo(5);
         }
-        {
+        { // middle page
             final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(75L, PAGE_SIZE, 106L, listOfSize(PAGE_SIZE));
             assertThat(queryResult.getPageIndex()).isEqualTo(3);
             assertThat(queryResult.getTotalPages()).isEqualTo(5);
