@@ -31,7 +31,7 @@ public class ProductDiscountCreateCommandIntegrationTest extends IntegrationTest
     @Test
     public void execution() throws Exception {
         final ZonedDateTime start = ZonedDateTime.parse("2015-07-09T07:46:40.230Z");
-        final ZonedDateTime end = start.plusMonths(3);
+        final ZonedDateTime end = start.plusYears(100);
         final Product product = referenceableProduct(client());
         final ProductDiscountPredicate predicate =
                 ProductDiscountPredicate.of("product.id = \"" + product.getId() + "\"");
