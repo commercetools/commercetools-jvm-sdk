@@ -100,7 +100,7 @@ public class QueryExecutionUtilsTest {
                 final long total = totalResults + deviation;
                 final long count = min(PAGE_SIZE, max(totalResults - offset, 0));
                 final List<T> results = (List<T>) generateSortedResultList(offset, count);
-                return PagedQueryResult.of(offset, total, results);
+                return PagedQueryResult.of(offset, (long) PAGE_SIZE, total, results);
             }
 
             private List<Category> generateSortedResultList(final long offset, final long count) {
