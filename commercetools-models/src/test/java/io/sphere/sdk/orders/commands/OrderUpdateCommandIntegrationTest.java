@@ -1,5 +1,6 @@
 package io.sphere.sdk.orders.commands;
 
+import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.carts.CustomLineItem;
 import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.carts.LineItem;
@@ -91,6 +92,18 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
             final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, ChangeShipmentState.of(newState)));
             assertThat(updatedOrder.getShipmentState()).isEqualTo(newState);
 
+            //you can observe a message
+            final Query<OrderShipmentStateChangedMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(order))
+                    .forMessageType(OrderShipmentStateChangedMessage.MESSAGE_HINT);
+            assertEventually(() -> {
+                final Optional<OrderShipmentStateChangedMessage> orderShipmentStateChangedMessageOptional =
+                        client().executeBlocking(messageQuery).head();
+                assertThat(orderShipmentStateChangedMessageOptional).isPresent();
+                final OrderShipmentStateChangedMessage orderShipmentStateChangedMessage = orderShipmentStateChangedMessageOptional.get();
+                assertThat(orderShipmentStateChangedMessage.getShipmentState()).isNotNull();
+            });
+
             return updatedOrder;
         });
     }
@@ -115,9 +128,11 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
             final LineItem lineItem = order.getLineItems().get(0);
             final long availableItemsToShip = 1;
             final List<DeliveryItem> items = asList(DeliveryItem.of(lineItem, availableItemsToShip));
-            final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, AddDelivery.of(items, parcels)));
+            final Address deliveryAddress = Address.of(CountryCode.DE);
+            final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, AddDelivery.of(items, parcels).withAddress(deliveryAddress)));
             final Delivery delivery = updatedOrder.getShippingInfo().getDeliveries().get(0);
             assertThat(delivery.getItems()).isEqualTo(items);
+            assertThat(delivery.getAddress()).isEqualTo(deliveryAddress);
             final Parcel parcel = delivery.getParcels().get(0);
             assertThat(parcel.getMeasurements()).isEqualTo(SMALL_PARCEL_MEASUREMENTS);
             assertThat(parcel.getTrackingData()).isEqualTo(TRACKING_DATA);
@@ -142,6 +157,42 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
             });
 
             return updatedOrder;
+        });
+    }
+
+
+    @Test
+    public void setDeliveryAddress() throws Exception {
+        withOrder(client(), order -> {
+            assertThat(order.getShippingInfo().getDeliveries()).isEmpty();
+            final List<ParcelDraft> parcels = asList(ParcelDraft.of(PARCEL_MEASUREMENTS, TRACKING_DATA));
+            final LineItem lineItem = order.getLineItems().get(0);
+            final long availableItemsToShip = 1;
+            final List<DeliveryItem> items = asList(DeliveryItem.of(lineItem, availableItemsToShip));
+            final Address deliveryAddress = Address.of(CountryCode.DE);
+            final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, AddDelivery.of(items, parcels).withAddress(deliveryAddress)));
+            final Delivery delivery = updatedOrder.getShippingInfo().getDeliveries().get(0);
+            assertThat(delivery.getItems()).isEqualTo(items);
+            assertThat(delivery.getAddress()).isEqualTo(deliveryAddress);
+            final Address newDeliveryAddress = Address.of(CountryCode.FR);
+            Order orderWithNewAddress = client().executeBlocking(OrderUpdateCommand.of(updatedOrder,SetDeliveryAddress.of(delivery.getId(),newDeliveryAddress)));
+            assertThat(orderWithNewAddress.getShippingInfo().getDeliveries().get(0).getAddress()).isEqualTo(newDeliveryAddress);
+
+            //you can observe a message
+            final Query<DeliveryAddressSetMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(orderWithNewAddress))
+                    .forMessageType(DeliveryAddressSetMessage.MESSAGE_HINT);
+            assertEventually(() -> {
+                final Optional<DeliveryAddressSetMessage> deliveryAddressMessageOptional =
+                        client().executeBlocking(messageQuery).head();
+                assertThat(deliveryAddressMessageOptional).isPresent();
+                final DeliveryAddressSetMessage deliveryAddressMessage = deliveryAddressMessageOptional.get();
+                final Address deliveryAddressFromMessage = deliveryAddressMessage.getAddress();
+                assertThat(deliveryAddressFromMessage).isEqualTo(newDeliveryAddress);
+
+            });
+
+            return orderWithNewAddress;
         });
     }
 
@@ -447,6 +498,18 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
             final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, action));
             final ReturnShipmentState updatedReturnItem = updatedOrder.getReturnInfo().get(0).getItems().get(0).getShipmentState();
             assertThat(updatedReturnItem).isEqualTo(newShipmentState);
+
+            //you can observe a message
+            final Query<OrderReturnShipmentStateChangedMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(order))
+                    .forMessageType(OrderReturnShipmentStateChangedMessage.MESSAGE_HINT);
+            assertEventually(() -> {
+                final Optional<OrderReturnShipmentStateChangedMessage> orderReturnShipmentStateChangedMessageOptional = client().executeBlocking(messageQuery).head();
+                assertThat(orderReturnShipmentStateChangedMessageOptional).isPresent();
+                final OrderReturnShipmentStateChangedMessage orderReturnShipmentStateChangedMessage = orderReturnShipmentStateChangedMessageOptional.get();
+                assertThat(orderReturnShipmentStateChangedMessage.getReturnItemId()).isEqualTo(returnItem.getId());
+                assertThat(orderReturnShipmentStateChangedMessage.getReturnShipmentState()).isEqualTo(newShipmentState);
+            });
 
             return updatedOrder;
         });

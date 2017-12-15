@@ -8,6 +8,7 @@ import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
+import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.List;
 
@@ -15,8 +16,8 @@ public final class DiscountCodeDraftDsl extends DiscountCodeDraftDslBase<Discoun
 
     DiscountCodeDraftDsl(final Boolean active, final List<Reference<CartDiscount>> cartDiscounts, final @Nullable String cartPredicate,
                          final String code, final @Nullable CustomFieldsDraft custom, final @Nullable LocalizedString description,
-                         final @Nullable Long maxApplications, final @Nullable Long maxApplicationsPerCustomer, final @Nullable LocalizedString name) {
-        super(active, cartDiscounts, cartPredicate, code, custom, description, maxApplications, maxApplicationsPerCustomer, name);
+                         final @Nullable Long maxApplications, final @Nullable Long maxApplicationsPerCustomer, final @Nullable LocalizedString name,@Nullable final ZonedDateTime validFrom, @Nullable final ZonedDateTime validUntil) {
+        super(active, cartDiscounts, cartPredicate, code, custom, description, maxApplications, maxApplicationsPerCustomer, name,validFrom,validUntil);
     }
 
     public DiscountCodeDraftDsl withCartDiscounts(final Referenceable<CartDiscount> cartDiscount) {

@@ -11,7 +11,7 @@ function updateReleaseVersion() {
     then
         ./mvnw build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion} -DgenerateBackupPoms=false
     else
-        ./mvnw build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.0 -DgenerateBackupPoms=false
+        ./mvnw build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.0 -DgenerateBackupPoms=false
     fi
 }
 
@@ -115,5 +115,8 @@ git push origin ${CURRENT_BRANCH}
 echo Build directory ${TMPDIR}
 cd ${WORKDIR}
 
-git fetch
-git checkout ${BRANCH_NAME}
+if [[ ${TYPE} != "PATCH" ]]
+then
+    git fetch
+    git checkout ${BRANCH_NAME}
+fi
