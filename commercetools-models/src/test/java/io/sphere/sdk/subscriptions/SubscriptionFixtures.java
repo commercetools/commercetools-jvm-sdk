@@ -28,6 +28,8 @@ public class SubscriptionFixtures {
 
     private final static String AWS_REGION = "AWS_REGION";
 
+    private final static String AZUREFUNCTION_URL = "AZUREFUNCTION_URL";
+
     private final static String AZURE_SERVICE_BUS_CONNECTION_STRING_ENV = "AZURE_SERVICE_BUS_CONNECTION_STRING_ENV";
 
     public static SubscriptionDraftBuilder ironMqSubscriptionDraftBuilder() {
@@ -67,6 +69,25 @@ public class SubscriptionFixtures {
         final String azureSBConnectionString = azureSBConnectionStringFromEnv();
 
         assumeNotNull(azureSBConnectionString);
+    }
+
+    /**
+     * Check if azure url is defined
+     */
+    public static void assumeHasAzureFunctionUrl(){
+        final String url = azureFunctionUrl();
+        assumeNotNull(url);
+    }
+
+
+    /**
+     *
+     * @return The azure function used to validate the resource lifecycle (create, delete ....)
+     * @see io.sphere.sdk.extensions.Extension
+     */
+    public static String azureFunctionUrl(){
+        final String ironMqUriEnv = System.getenv(AZUREFUNCTION_URL);
+        return ironMqUriEnv;
     }
 
 
