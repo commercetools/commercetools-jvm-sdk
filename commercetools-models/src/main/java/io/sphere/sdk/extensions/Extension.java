@@ -23,12 +23,13 @@ import java.util.List;
 @HasDeleteCommand(javadocSummary = "Deletes an extension.", deleteWith = {"key","id"})
 public interface Extension extends Resource<Extension>, WithKey {
 
+
     @IgnoreInQueryModel
-    @HasUpdateAction
+    @HasUpdateAction("setTriggers")
     List<Trigger> getTriggers();
 
     @IgnoreInQueryModel
-    @HasUpdateAction
+    @HasUpdateAction("setDestination")
     Destination getDestination();
 
     @Override

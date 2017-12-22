@@ -3,8 +3,6 @@ package io.sphere.sdk.extensions;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
-import io.sphere.sdk.cartdiscounts.CartDiscountDraftDsl;
-import io.sphere.sdk.extensions.commands.updateactions.ChangeDestination;
 import io.sphere.sdk.models.WithKey;
 
 import javax.annotation.Nullable;

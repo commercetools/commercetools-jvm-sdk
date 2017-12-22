@@ -9,12 +9,12 @@ import java.util.List;
 
 @ResourceValue
 @JsonDeserialize(as = TriggerImpl.class)
-@HasBuilder(factoryMethods = @FactoryMethod(parameterNames = {"resourceTypeId","triggers"}))
+@HasBuilder(factoryMethods = @FactoryMethod(parameterNames = {"resourceTypeId","actions"}))
 public interface Trigger {
 
 
     String getResourceTypeId();
 
-    List<TriggerType> getTriggers();
+    List<TriggerType> getActions();
 
 }
