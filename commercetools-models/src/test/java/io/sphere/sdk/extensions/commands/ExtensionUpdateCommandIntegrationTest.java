@@ -25,17 +25,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ExtensionUpdateCommandIntegrationTest extends IntegrationTest {
 
 
-    private static String URL;
+    private static String AZURE_FUNCTION_URL;
 
     @BeforeClass
     public static void deleteAllExtensions() {
         assumeHasAzureFunctionUrl();
-        URL = azureFunctionUrl();
+        AZURE_FUNCTION_URL = azureFunctionUrl();
         PagedQueryResult<Extension> results = client().executeBlocking(ExtensionQuery.of());
         results.getResults()
                 .stream()
                 .map(ExtensionDeleteCommand::of)
-                .map(client()::executeBlocking);
+                .forEach(client()::executeBlocking);
     }
 
     @Test
@@ -67,7 +67,7 @@ public class ExtensionUpdateCommandIntegrationTest extends IntegrationTest {
     public void changeDestination(){
 
         withExtension(client(), extension -> {
-            Destination destination = HttpDestinationBuilder.of(URL, AzureFunctionsAuthenticationBuilder.of(randomKey()).build()).build();
+            Destination destination = HttpDestinationBuilder.of(AZURE_FUNCTION_URL, AzureFunctionsAuthenticationBuilder.of(randomKey()).build()).build();
             Extension updatedExtension = client().executeBlocking(ExtensionUpdateCommand.of(extension, SetDestination.of(destination)));
             assertThat(updatedExtension.getDestination()).isEqualTo(destination);
             return updatedExtension;
@@ -86,7 +86,7 @@ public class ExtensionUpdateCommandIntegrationTest extends IntegrationTest {
     public void withExtension(final BlockingSphereClient client, UnaryOperator<Extension> mapper) {
 
         List<Trigger> triggers = asList(TriggerBuilder.of(Cart.referenceTypeId(), asList(TriggerType.CREATE, TriggerType.UPDATE)).build());
-        Destination destination = HttpDestinationBuilder.of(URL, AzureFunctionsAuthenticationBuilder.of(randomKey()).build()).build();
+        Destination destination = HttpDestinationBuilder.of(AZURE_FUNCTION_URL, AzureFunctionsAuthenticationBuilder.of(randomKey()).build()).build();
         withExtension(client, ExtensionDraftBuilder.of(randomKey(), destination, triggers).build(), mapper);
 
     }
