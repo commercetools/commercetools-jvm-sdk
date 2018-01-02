@@ -3,9 +3,9 @@ package io.sphere.sdk.extensions.commands;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.extensions.*;
-import io.sphere.sdk.extensions.commands.updateactions.SetDestination;
+import io.sphere.sdk.extensions.commands.updateactions.ChangeDestination;
+import io.sphere.sdk.extensions.commands.updateactions.ChangeTriggers;
 import io.sphere.sdk.extensions.commands.updateactions.SetKey;
-import io.sphere.sdk.extensions.commands.updateactions.SetTriggers;
 import io.sphere.sdk.extensions.queries.ExtensionQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
@@ -55,7 +55,7 @@ public class ExtensionUpdateCommandIntegrationTest extends IntegrationTest {
 
         withExtension(client(), extension -> {
             final List<Trigger> triggers = asList(TriggerBuilder.of(Cart.referenceTypeId(), asList(TriggerType.CREATE)).build());
-            Extension updatedExtension = client().executeBlocking(ExtensionUpdateCommand.of(extension, SetTriggers.of(triggers)));
+            Extension updatedExtension = client().executeBlocking(ExtensionUpdateCommand.of(extension, ChangeTriggers.of(triggers)));
             assertThat(updatedExtension.getTriggers()).containsAll(triggers);
             return updatedExtension;
         });
@@ -68,7 +68,7 @@ public class ExtensionUpdateCommandIntegrationTest extends IntegrationTest {
 
         withExtension(client(), extension -> {
             Destination destination = HttpDestinationBuilder.of(AZURE_FUNCTION_URL, AzureFunctionsAuthenticationBuilder.of(randomKey()).build()).build();
-            Extension updatedExtension = client().executeBlocking(ExtensionUpdateCommand.of(extension, SetDestination.of(destination)));
+            Extension updatedExtension = client().executeBlocking(ExtensionUpdateCommand.of(extension, ChangeDestination.of(destination)));
             assertThat(updatedExtension.getDestination()).isEqualTo(destination);
             return updatedExtension;
         });

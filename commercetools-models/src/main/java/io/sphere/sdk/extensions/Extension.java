@@ -25,11 +25,11 @@ public interface Extension extends Resource<Extension>, WithKey {
 
 
     @IgnoreInQueryModel
-    @HasUpdateAction("setTriggers")
+    @HasUpdateAction
     List<Trigger> getTriggers();
 
     @IgnoreInQueryModel
-    @HasUpdateAction("setDestination")
+    @HasUpdateAction
     Destination getDestination();
 
     @Override
