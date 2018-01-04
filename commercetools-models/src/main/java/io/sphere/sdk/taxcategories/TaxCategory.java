@@ -33,6 +33,10 @@ import java.util.List;
 @HasQueryEndpoint(additionalContentsQueryInterface = "\n" +
         "    default TaxCategoryQuery byName(final String name) {\n" +
         "        return withPredicates(m -> m.name().is(name));\n" +
+        "    }\n" +
+        "    \n" +
+        "    default TaxCategoryQuery byKey(final String key) { \n" +
+        "        return withPredicates(m -> m.key().is(key));\n" +
         "    }")
 @ResourceInfo(pluralName = "tax categories", pathElement = "tax-categories")
 @HasByIdGetEndpoint(javadocSummary = "Fetches a tax category by a known ID.", includeExamples = "io.sphere.sdk.taxcategories.queries.TaxCategoryByIdGetIntegrationTest#execution()")
