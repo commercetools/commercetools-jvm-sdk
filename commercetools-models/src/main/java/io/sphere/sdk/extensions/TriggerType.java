@@ -11,7 +11,7 @@ public enum TriggerType implements SphereEnumeration {
     UPDATE;
 
     @JsonCreator
-    public static TriggerType TriggerType(final String value) {
+    public static TriggerType ofTriggerType(final String value) {
         return SphereEnumeration.findBySphereName(values(), StringUtils.capitalize(value)).get();
     }
 
