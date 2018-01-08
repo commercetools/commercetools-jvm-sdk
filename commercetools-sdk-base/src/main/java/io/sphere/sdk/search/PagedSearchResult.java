@@ -6,6 +6,7 @@ import io.sphere.sdk.search.model.RangeTermFacetedSearchSearchModel;
 import io.sphere.sdk.search.model.SimpleRangeStats;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,17 @@ public interface PagedSearchResult<T> extends PagedResult<T> {
 
     Map<String, FacetResult> getFacetsResults();
 
+
+    /**
+     * Creates a {@code {@link PagedSearchResult}} for search with no matching values.
+     *
+     * @param <T> the type of the underlying model
+     * @return an empty {@code PagedSearchResult}
+     */
+    static <T> PagedSearchResultImpl<T> empty() {
+        return new PagedSearchResultImpl<T>(0L, 0L, 0L, Collections.emptyList(), Collections.emptyMap(),0L);
+    }
+    
     /**
      * Obtains the {@link FacetResult} of the facet with the given result path.
      *
