@@ -76,14 +76,14 @@ public class ExtensionUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
 
-    public void withExtension(final BlockingSphereClient client, final ExtensionDraft extensionDraft, UnaryOperator<Extension> mapper) {
+    public void withExtension(final BlockingSphereClient client, final ExtensionDraft extensionDraft,final UnaryOperator<Extension> mapper) {
 
         Extension extension = client.executeBlocking(ExtensionCreateCommand.of(extensionDraft));
         Extension result = mapper.apply(extension);
         client.executeBlocking(ExtensionDeleteCommand.of(result));
     }
 
-    public void withExtension(final BlockingSphereClient client, UnaryOperator<Extension> mapper) {
+    public void withExtension(final BlockingSphereClient client,final UnaryOperator<Extension> mapper) {
 
         List<Trigger> triggers = asList(TriggerBuilder.of(Cart.referenceTypeId(), asList(TriggerType.CREATE, TriggerType.UPDATE)).build());
         Destination destination = HttpDestinationBuilder.of(AZURE_FUNCTION_URL, AzureFunctionsAuthenticationBuilder.of(randomKey()).build()).build();

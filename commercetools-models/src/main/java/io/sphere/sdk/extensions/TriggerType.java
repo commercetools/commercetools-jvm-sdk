@@ -1,13 +1,22 @@
 package io.sphere.sdk.extensions;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import io.sphere.sdk.models.SphereEnumeration;
+import org.apache.commons.lang3.StringUtils;
 
-public enum TriggerType {
+public enum TriggerType implements SphereEnumeration {
 
-    @JsonProperty("create")
     CREATE,
 
-    @JsonProperty("update")
-    UPDATE
+    UPDATE;
 
+    @JsonCreator
+    public static TriggerType TriggerType(final String value) {
+        return SphereEnumeration.findBySphereName(values(), StringUtils.capitalize(value)).get();
+    }
+
+    @Override
+    public String toSphereName() {
+        return name().toLowerCase();
+    }
 }

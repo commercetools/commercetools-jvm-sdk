@@ -34,7 +34,6 @@ public interface Extension extends Resource<Extension>, WithKey {
 
     @Override
     @Nullable
-    @IgnoreInQueryModel
     @HasUpdateAction
     String getKey();
 
