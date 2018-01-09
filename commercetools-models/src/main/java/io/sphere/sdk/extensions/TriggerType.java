@@ -12,11 +12,7 @@ public enum TriggerType implements SphereEnumeration {
 
     @JsonCreator
     public static TriggerType ofTriggerType(final String value) {
-        return SphereEnumeration.findBySphereName(values(), StringUtils.capitalize(value)).get();
+        return SphereEnumeration.findBySphereName(values(), value).get();
     }
 
-    @Override
-    public String toSphereName() {
-        return name().toLowerCase();
-    }
 }
