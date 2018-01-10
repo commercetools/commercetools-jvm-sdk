@@ -50,7 +50,7 @@ public abstract class IntegrationTest {
     private static final int MAX_DEPTH_LEVEL = 3;
 
     @Rule
-    public Timeout globalTimeout = Timeout.seconds(1000);
+    public Timeout globalTimeout = Timeout.seconds(1500);
 
     protected static final Logger logger = LoggerFactory.getLogger(IntegrationTest.class);
 
