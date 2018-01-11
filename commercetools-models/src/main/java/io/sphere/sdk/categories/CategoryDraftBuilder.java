@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 
-public class CategoryDraftBuilder extends CategoryDraftBuilderBase<CategoryDraftBuilder>{
+public final class CategoryDraftBuilder extends CategoryDraftBuilderBase<CategoryDraftBuilder>{
 
     protected CategoryDraftBuilder(@Nullable final List<AssetDraft> assets,
                                    @Nullable final CustomFieldsDraft custom, @Nullable final LocalizedString description,
