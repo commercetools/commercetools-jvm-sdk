@@ -17,7 +17,6 @@ public class TaxCategoryIntegrationTest extends IntegrationTest {
 
     public static final String KEY = "RANDOM_KEY";
 
-    @After
     @Before
     public void setUp() throws Exception {
         client().executeBlocking(TaxCategoryQuery.of().byName("German tax")).getResults()
