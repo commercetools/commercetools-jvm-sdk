@@ -18,6 +18,7 @@ public class TaxCategoryIntegrationTest extends IntegrationTest {
     public static final String KEY = "RANDOM_KEY";
 
     @Before
+    @After
     public void setUp() throws Exception {
         client().executeBlocking(TaxCategoryQuery.of().byName("German tax")).getResults()
                 .forEach(taxCategory -> client().executeBlocking(TaxCategoryDeleteCommand.of(taxCategory)));
@@ -29,12 +30,6 @@ public class TaxCategoryIntegrationTest extends IntegrationTest {
         final PagedQueryResult<TaxCategory> taxCategoryPagedQueryResult = client().executeBlocking(TaxCategoryQuery.of().byKey(KEY));
         assertThat(taxCategoryPagedQueryResult.getResults()).containsExactly(taxCategory);
         client().executeBlocking(TaxCategoryDeleteCommand.of(taxCategory));
-    }
-
-    @Test
-    public void demoForDeletion() throws Exception {
-        final TaxCategory taxCategory = createTaxCategory();
-        final TaxCategory deletedTaxCategory = client().executeBlocking(TaxCategoryDeleteCommand.of(taxCategory));
     }
 
     private TaxCategory createTaxCategory() {
