@@ -46,8 +46,7 @@ import java.util.List;
 @HasUpdateActions
 @HasDeleteCommand(
         deleteWith = "key",
-        javadocSummary = "Deletes a tax category.", includeExamples = "io.sphere.sdk.taxcategories.TaxCategoryIntegrationTest#demoForDeletion()"
-)
+        javadocSummary = "Deletes a tax category.")
 @HasQueryModel
 public interface TaxCategory extends Resource<TaxCategory>, WithKey {
     String getName();
