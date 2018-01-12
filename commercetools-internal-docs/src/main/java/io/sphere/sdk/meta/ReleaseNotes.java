@@ -135,6 +135,11 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+ <h3 class=released-version id="v1_28_0">1.28.0</h3>
+ <li class=change-in-release>{@link CategoryDraft#getParent()} changed return type from {@link Reference<Category>} to {@link ResourceIdentifier<Category>}</li>
+ <li class=change-in-release>{@link CategoryDraftBuilder#parent(Referenceable)} is now deprecated and should be replaced by the new method {@link CategoryDraftBuilder#parent(ResourceIdentifier)}</li>
+
+
  <h3 class=released-version id="v1_27_0">1.27.0 (14.12.2017)</h3>
  <ul>
  <li class=new-in-release>Added {@link OrderImportDraft#getTaxCalculationMode()}.</li>

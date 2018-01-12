@@ -21,6 +21,11 @@ public final class CategoryDraftBuilder extends CategoryDraftBuilderBase<Categor
 
     }
 
+
+    /**
+     * @deprecated use {@link CategoryDraftBuilder#parent(ResourceIdentifier)} instead
+     */
+    @Deprecated
     public CategoryDraftBuilder parent(@Nullable final Referenceable<Category> parent) {
         this.parent = Optional.ofNullable(parent).map(Referenceable::toReference).orElse(null);
         return this;
