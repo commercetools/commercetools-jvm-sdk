@@ -28,6 +28,7 @@ public class TaxCategoryIntegrationTest extends IntegrationTest {
         final TaxCategory taxCategory = createTaxCategory();
         final PagedQueryResult<TaxCategory> taxCategoryPagedQueryResult = client().executeBlocking(TaxCategoryQuery.of().byKey(KEY));
         assertThat(taxCategoryPagedQueryResult.getResults()).containsExactly(taxCategory);
+        client().executeBlocking(TaxCategoryDeleteCommand.of(taxCategory));
     }
 
     @Test
