@@ -4,6 +4,7 @@ import io.sphere.sdk.carts.expansion.*;
 import io.sphere.sdk.customergroups.expansion.CustomerGroupExpansionModel;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.orders.Order;
+import io.sphere.sdk.states.expansion.StateExpansionModel;
 
 /**
  DSL class to create expansion path expressions.
@@ -14,6 +15,8 @@ public interface OrderExpansionModel<T> extends ExpansionPathContainer<T>, CartL
     SyncInfoExpansionModel<T> syncInfo();
 
     CartExpansionModel<T> cart();
+
+    StateExpansionModel<T> state();
 
     @Override
     CustomerGroupExpansionModel<T> customerGroup();
