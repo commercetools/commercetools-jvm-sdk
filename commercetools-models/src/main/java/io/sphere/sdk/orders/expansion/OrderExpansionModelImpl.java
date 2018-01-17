@@ -2,6 +2,7 @@ package io.sphere.sdk.orders.expansion;
 
 import io.sphere.sdk.carts.expansion.*;
 import io.sphere.sdk.customergroups.expansion.CustomerGroupExpansionModel;
+import io.sphere.sdk.states.expansion.StateExpansionModel;
 
 import java.util.List;
 
@@ -23,6 +24,11 @@ final class OrderExpansionModelImpl<T> extends CartLikeExpansionModelImpl<T> imp
     @Override
     public CartExpansionModel<T> cart() {
         return CartExpansionModel.of(pathExpression(), "cart");
+    }
+
+    @Override
+    public StateExpansionModel<T> state() {
+        return StateExpansionModel.of(pathExpression(), "state");
     }
 
     @Override
