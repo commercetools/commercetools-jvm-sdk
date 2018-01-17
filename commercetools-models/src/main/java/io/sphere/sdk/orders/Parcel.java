@@ -13,11 +13,19 @@ import java.util.List;
 @JsonDeserialize(as = ParcelImpl.class)
 @ResourceValue
 public interface Parcel extends CreationTimestamped {
+
+    /**
+     * @deprecated use {@link ParcelDraft} and {@link ParcelDraftBuilder} for the write model instead.
+     */
     @Deprecated
     static Parcel of(final String id, final ZonedDateTime createdAt, @Nullable final ParcelMeasurements measurements, @Nullable final TrackingData trackingData) {
         return of(createdAt,id,null, measurements,trackingData);
     }
 
+    /**
+     * @deprecated use {@link ParcelDraft} and {@link ParcelDraftBuilder} for the write model instead.
+     */
+    @Deprecated
     static Parcel of(final ZonedDateTime createdAt, final String id,@Nullable final List<DeliveryItem> items, @Nullable final ParcelMeasurements measurements,@Nullable final TrackingData trackingData){
         return new ParcelImpl(createdAt,id,items, measurements,trackingData);
     }
