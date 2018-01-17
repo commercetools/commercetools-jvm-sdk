@@ -147,7 +147,8 @@ import java.util.function.Function;
  <li class=new-in-release>Added {@link io.sphere.sdk.orders.messages.OrderShipmentStateChangedMessage}</li>
  <li class=new-in-release>Added {@link io.sphere.sdk.taxcategories.queries.TaxCategoryQuery#byKey(String)} to {@link io.sphere.sdk.taxcategories.queries.TaxCategoryQuery}</li>
  <li class=new-in-release>Added {@link PagedSearchResult#empty()} for API consistency reasons</li>
-
+ <li class=new-in-release>Added {@link OrderExpansionModel#state()} for API consistency reasons</li>
+ <li class=new-in-release>Added a new endpoint {@link io.sphere.sdk.extensions.Extension} and query, delete, update actions all listed in the new in {@link io.sphere.sdk.extensions} package.</li>
  </ul>
 
  <h3 class=released-version id="v1_27_0">1.27.0 (14.12.2017)</h3>
@@ -324,7 +325,7 @@ import java.util.function.Function;
  that is not available from {@link ResourceIdentifier}. If you relied on the {@link Reference#getObj()} method to retrieve the id or key of the referenced object, you now have
  to use the {@link ResourceIdentifier#getId()} and {@link ResourceIdentifier#getKey()} as exposed by the {@link ResourceIdentifier} interface.
  <li class=change-in-release>Updated <a href="http://javamoney.github.io/ri.html#welcome-to-moneta---the-jsr-354-reference-implementation">moneta</a> to version 1.1</li>
- <li class=change-in-release>Changed {@link SphereProjectScope} from an enum to a class and added missing scopes. This change doesn't require changes to your source code,
+ <li class=change-in-release>Changed {@link io.sphere.sdk.client.SphereProjectScope} from an enum to a class and added missing scopes. This change doesn't require changes to your source code,
  but requires a recompilation of all projects that depend on this class.</li>
  </ul>
 
