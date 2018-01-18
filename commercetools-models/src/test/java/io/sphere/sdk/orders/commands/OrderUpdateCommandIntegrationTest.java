@@ -124,7 +124,8 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
     public void addDelivery() throws Exception {
         withOrder(client(), order -> {
             assertThat(order.getShippingInfo().getDeliveries()).isEmpty();
-            final List<ParcelDraft> parcels = asList(ParcelDraft.of(SMALL_PARCEL_MEASUREMENTS, TRACKING_DATA));
+            final String lineItemId = order.getLineItems().get(0).getId();
+            final List<ParcelDraft> parcels = asList(ParcelDraftBuilder.of().measurements(SMALL_PARCEL_MEASUREMENTS).trackingData(TRACKING_DATA).plusItems(DeliveryItem.of(lineItemId,1)).build());
             final LineItem lineItem = order.getLineItems().get(0);
             final long availableItemsToShip = 1;
             final List<DeliveryItem> items = asList(DeliveryItem.of(lineItem, availableItemsToShip));
