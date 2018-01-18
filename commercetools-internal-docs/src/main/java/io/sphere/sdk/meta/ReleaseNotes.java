@@ -136,11 +136,12 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
- <h3 class=released-version id="v1_28_0">1.28.0</h3>
+ <h3 class=released-version id="v1_28_0">1.28.0 (18.01.2018)</h3>
  <ul>
  <li class=change-in-release>{@link CategoryDraft#getParent()} changed return type from {@link Reference<Category>} to {@link ResourceIdentifier<Category>}</li>
  <li class=change-in-release>{@link CategoryDraftBuilder#parent(Referenceable)} is now deprecated and should be replaced by the new method {@link CategoryDraftBuilder#parent(ResourceIdentifier)}</li>
  <li class=change-in-release>Updated Asynchronous Http Client to 2.0.38</li>
+ <li class=change-in-release>Added member {@link ParcelDraft#getItems()}</li>
  <li class=new-in-release>Added {@link DiscountCode#getValidFrom()} and {@link DiscountCode#getValidUntil()}</li>
  <li class=new-in-release>Added {@link ProductDiscount#getValidFrom()} and {@link ProductDiscount#getValidUntil()}</li>
  <li class=new-in-release>Added {@link io.sphere.sdk.orders.messages.OrderReturnShipmentStateChangedMessage}</li>
@@ -149,6 +150,7 @@ import java.util.function.Function;
  <li class=new-in-release>Added {@link PagedSearchResult#empty()} for API consistency reasons</li>
  <li class=new-in-release>Added {@link OrderExpansionModel#state()} for API consistency reasons</li>
  <li class=new-in-release>Added a new endpoint {@link io.sphere.sdk.extensions.Extension} and query, delete, update actions all listed in the new in {@link io.sphere.sdk.extensions} package.</li>
+ <li class=new-in-release>Added {@link ParcelDraftBuilder}</li>
  </ul>
 
  <h3 class=released-version id="v1_27_0">1.27.0 (14.12.2017)</h3>
