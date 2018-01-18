@@ -37,6 +37,8 @@ io.sphere.sdk.discountcodes
 io.sphere.sdk.discountcodes.commands.updateactions
 io.sphere.sdk.discountcodes.expansion
 io.sphere.sdk.expansion
+io.sphere.sdk.extensions
+io.sphere.sdk.extensions.expansion
 io.sphere.sdk.http
 io.sphere.sdk.inventory
 io.sphere.sdk.inventory.commands.updateactions
