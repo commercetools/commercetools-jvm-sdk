@@ -20,7 +20,7 @@ public interface PagedQueryResult<T> extends PagedResult<T> {
      * @param <T> the type of the underlying model
      * @return an empty {@code PagedQueryResult}
      */
-    static <T> PagedQueryResult<T> empty() {
+    static <T> PagedQueryResultDsl<T> empty() {
         return new PagedQueryResultDsl<>(0L, 0L, 0L, Collections.<T>emptyList(), 0L);
     }
 
@@ -28,7 +28,7 @@ public interface PagedQueryResult<T> extends PagedResult<T> {
      * @deprecated PagedQueryResult should remain as a read model, and be constructed only by deserialization.
      */
     @Deprecated
-    static <T> PagedQueryResult<T> of(final Long offset, final Long limit, final Long total, final List<T> results) {
+    static <T> PagedQueryResultDsl<T> of(final Long offset, final Long limit, final Long total, final List<T> results) {
         return new PagedQueryResultDsl<>(offset, limit, total, results, (long) results.size());
     }
 
@@ -36,7 +36,7 @@ public interface PagedQueryResult<T> extends PagedResult<T> {
      * @deprecated PagedQueryResult should remain as a read model, and be constructed only by deserialization.
      */
     @Deprecated
-    static <T> PagedQueryResult<T> of(final Long offset, final Long total, final List<T> results) {
+    static <T> PagedQueryResultDsl<T> of(final Long offset, final Long total, final List<T> results) {
         return of(offset, -1L, total, results);
     }
 
@@ -44,7 +44,7 @@ public interface PagedQueryResult<T> extends PagedResult<T> {
      * @deprecated PagedQueryResult should remain as a read model, and be constructed only by deserialization.
      */
     @Deprecated
-    static <T> PagedQueryResult<T> of(final List<T> results) {
+    static <T> PagedQueryResultDsl<T> of(final List<T> results) {
         final long size = results.size();
         return of(0L, size, size, results);
     }
@@ -53,7 +53,7 @@ public interface PagedQueryResult<T> extends PagedResult<T> {
      * @deprecated PagedQueryResult should remain as a read model, and be constructed only by deserialization.
      */
     @JsonIgnore
-    static <T> PagedQueryResult<T> of(final T singleResult) {
+    static <T> PagedQueryResultDsl<T> of(final T singleResult) {
         return of(Collections.singletonList(singleResult));
     }
 
