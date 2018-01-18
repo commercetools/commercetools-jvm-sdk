@@ -19,14 +19,14 @@ public interface ParcelDraft {
     List<DeliveryItem> getItems();
 
     static ParcelDraft of(final ParcelMeasurements measurements, final TrackingData trackingData) {
-        return new ParcelDraftImpl(measurements, trackingData,null);
+        return new ParcelDraftDsl(null ,measurements, trackingData);
     }
 
     static ParcelDraft of(final ParcelMeasurements measurements) {
-        return new ParcelDraftImpl(measurements, null,null);
+        return new ParcelDraftDsl(null, measurements, null);
     }
 
     static ParcelDraft of(final TrackingData trackingData) {
-        return new ParcelDraftImpl(null, trackingData, null);
+        return new ParcelDraftDsl(null, null, trackingData);
     }
 }
