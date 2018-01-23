@@ -586,7 +586,9 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
     public void transitionCustomLineItemState() throws Exception {
         withStandardStates(client(), (final State initialState,final State nextState) ->
             withOrderOfCustomLineItems(client(), order -> {
-                final State newState = client().executeBlocking(StateUpdateCommand.of(nextState, asList(RemoveRoles.of(Collections.singleton(StateRole.RETURN)) , AddRoles.of(Collections.singleton(StateRole.RETURN)))));
+
+                final State intermediateState = client().executeBlocking(StateUpdateCommand.of(nextState, asList(RemoveRoles.of(Collections.singleton(StateRole.RETURN)))));
+                final State newState = client().executeBlocking(StateUpdateCommand.of(intermediateState, asList(AddRoles.of(Collections.singleton(StateRole.RETURN)))));
 
                 final CustomLineItem customLineItem = order.getCustomLineItems().get(0);
                 assertThat(customLineItem).has(state(initialState)).has(not(state(newState)));
