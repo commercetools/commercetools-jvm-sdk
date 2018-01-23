@@ -14,7 +14,8 @@ import io.sphere.sdk.models.SphereEnumeration;
  * @see State#getRoles()
  */
 public enum StateRole implements SphereEnumeration {
-    REVIEW_INCLUDED_IN_STATISTICS;
+    REVIEW_INCLUDED_IN_STATISTICS,
+    RETURN;
 
     @JsonCreator
     public static StateRole ofSphereValue(final String value) {

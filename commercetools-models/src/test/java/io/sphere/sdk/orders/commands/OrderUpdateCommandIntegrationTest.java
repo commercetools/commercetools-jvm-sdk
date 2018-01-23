@@ -18,7 +18,11 @@ import io.sphere.sdk.payments.Payment;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.states.State;
+import io.sphere.sdk.states.StateRole;
 import io.sphere.sdk.states.StateType;
+import io.sphere.sdk.states.commands.StateUpdateCommand;
+import io.sphere.sdk.states.commands.updateactions.AddRoles;
+import io.sphere.sdk.states.commands.updateactions.RemoveRoles;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
 import net.jcip.annotations.NotThreadSafe;
@@ -580,14 +584,16 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void transitionCustomLineItemState() throws Exception {
-        withStandardStates(client(), (State initialState, State nextState) ->
+        withStandardStates(client(), (final State initialState,final State nextState) ->
             withOrderOfCustomLineItems(client(), order -> {
+                final State newState = client().executeBlocking(StateUpdateCommand.of(nextState, asList(RemoveRoles.of(Collections.singleton(StateRole.RETURN)) , AddRoles.of(Collections.singleton(StateRole.RETURN)))));
+
                 final CustomLineItem customLineItem = order.getCustomLineItems().get(0);
-                assertThat(customLineItem).has(state(initialState)).has(not(state(nextState)));
+                assertThat(customLineItem).has(state(initialState)).has(not(state(newState)));
                 final long quantity = 1;
                 final ZonedDateTime actualTransitionDate = ZonedDateTime_IN_PAST;
-                final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, TransitionCustomLineItemState.of(customLineItem, quantity, initialState, nextState, actualTransitionDate)));
-                assertThat(updatedOrder.getCustomLineItems().get(0)).has(itemStates(ItemState.of(nextState, quantity)));
+                final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, TransitionCustomLineItemState.of(customLineItem, quantity, initialState, newState, actualTransitionDate)));
+                assertThat(updatedOrder.getCustomLineItems().get(0)).has(itemStates(ItemState.of(newState, quantity)));
 
                 //you can observe a message
                 final Query<CustomLineItemStateTransitionMessage> messageQuery = MessageQuery.of()
