@@ -4,6 +4,7 @@ import io.sphere.sdk.cartdiscounts.CartDiscount;
 import io.sphere.sdk.cartdiscounts.CartPredicate;
 import io.sphere.sdk.discountcodes.DiscountCode;
 import io.sphere.sdk.discountcodes.DiscountCodeDraft;
+import io.sphere.sdk.discountcodes.DiscountCodeDraftBuilder;
 import io.sphere.sdk.discountcodes.queries.DiscountCodeQuery;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.test.IntegrationTest;
@@ -36,15 +37,17 @@ public class DiscountCodeCreateCommandIntegrationTest extends IntegrationTest {
             final ZonedDateTime end = start.plusYears(100);
 
             final String code = randomKey();
-            final DiscountCodeDraft draft = DiscountCodeDraft.of(code, cartDiscount)
-                    .withName(en(DiscountCodeCreateCommandIntegrationTest.class.getName()))
-                    .withDescription(en("sample discount code descr."))
-                    .withCartPredicate(CartPredicate.of("1 = 1"))
-                    .withIsActive(false)
-                    .withMaxApplications(5L)
-                    .withValidFrom(start)
-                    .withValidUntil(end)
-                    .withMaxApplicationsPerCustomer(1L);
+            final DiscountCodeDraft draft = DiscountCodeDraftBuilder.of(code, cartDiscount)
+                    .name(en(DiscountCodeCreateCommandIntegrationTest.class.getName()))
+                    .description(en("sample discount code descr."))
+                    .cartPredicate(CartPredicate.of("1 = 1"))
+                    .isActive(false)
+                    .maxApplications(5L)
+                    .validFrom(start)
+                    .validUntil(end)
+                    .maxApplicationsPerCustomer(1L)
+                    .groups(asList("DiscountGroup1"))
+                    .build();
             final DiscountCodeCreateCommand createCommand = DiscountCodeCreateCommand.of(draft)
                     .plusExpansionPaths(m -> m.cartDiscounts());
             final DiscountCode discountCode = client().executeBlocking(createCommand);
@@ -61,6 +64,7 @@ public class DiscountCodeCreateCommandIntegrationTest extends IntegrationTest {
             assertThat(discountCode.isActive()).isEqualTo(false);
             assertThat(discountCode.getMaxApplications()).isEqualTo(5L);
             assertThat(discountCode.getMaxApplicationsPerCustomer()).isEqualTo(1L);
+            assertThat(discountCode.getGroups()).containsExactly("DiscountGroup1");
             //clean up
             client().executeBlocking(DiscountCodeDeleteCommand.of(discountCode));
         });

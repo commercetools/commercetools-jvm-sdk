@@ -66,7 +66,6 @@ public interface DiscountCode extends Resource<DiscountCode>, Custom {
      * This field is used to signal to which groups the {@link DiscountCode} belongs to.
      * @return the groups, the discount code belongs to.
      */
-    @Nullable
     @HasUpdateAction
     List<String> getGroups();
 

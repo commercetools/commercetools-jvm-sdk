@@ -75,6 +75,18 @@ public class DiscountCodeUpdateCommandIntegrationTest extends IntegrationTest {
         });
     }
 
+
+    @Test
+    public void setGroups() throws Exception {
+        withPersistentDiscountCode(client(), discountCode -> {
+            final long maxApplications = randomLong();
+            final String GROUP_NAME = "GroupName";
+            final DiscountCode updatedDiscountCode =
+                    client().executeBlocking(DiscountCodeUpdateCommand.of(discountCode, ChangeGroups.of(asList(GROUP_NAME))));
+            assertThat(updatedDiscountCode.getGroups()).containsExactly(GROUP_NAME);
+        });
+    }
+
     @SuppressWarnings("unchecked")
     @Test
     public void changeCartDiscounts() throws Exception {
