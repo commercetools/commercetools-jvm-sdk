@@ -31,6 +31,7 @@ public class CustomerGroupUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(customerGroup.getName()).isNotEqualTo(newName);
             final CustomerGroup updatedCustomerGroup = client().executeBlocking(CustomerGroupUpdateCommand.of(customerGroup, ChangeName.of(newName)));
             assertThat(updatedCustomerGroup.getName()).isEqualTo(newName);
+            return updatedCustomerGroup;
         });
     }
 
@@ -41,30 +42,30 @@ public class CustomerGroupUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(customerGroup.getKey()).isNotEqualTo(newKey);
             final CustomerGroup updatedCustomerGroup = client().executeBlocking(CustomerGroupUpdateCommand.of(customerGroup, SetKey.of(newKey)));
             assertThat(updatedCustomerGroup.getKey()).isEqualTo(newKey);
+            return updatedCustomerGroup;
         });
     }
 
     @Test
     public void setCustomField() throws Exception {
-        withCustomerGroup(client(), customerGroup -> {
-            withUpdateableType(client(), type -> {
 
+        withUpdateableType(client(), type -> {
+            withCustomerGroup(client(), customerGroup -> {
                 final Map<String, Object> fields = new HashMap<>();
                 fields.put(STRING_FIELD_NAME, "foo");
                 fields.put(LOC_STRING_FIELD_NAME, LocalizedString.of(ENGLISH, "bar"));
                 final CustomerGroupUpdateCommand customerGroupUpdateCommand = CustomerGroupUpdateCommand.of(customerGroup, SetCustomType.ofTypeIdAndObjects(type.getId(), fields));
                 final CustomerGroup updatedCustomerGroup = client().executeBlocking(customerGroupUpdateCommand);
-//
-//                final CustomerGroupQuery categoryQuery = CustomerGroupQuery.of()
-//                        .plusPredicates(m -> m.is(customerGroup))
-//                        .plusPredicates(m -> m.custom().fields().ofString(STRING_FIELD_NAME).is("foo"))
-//                        .plusPredicates(m -> m.custom().fields().ofString("njetpresent").isNotPresent())
-//                        .plusPredicates(m -> m.custom().fields().ofLocalizedString(LOC_STRING_FIELD_NAME).locale(ENGLISH).is("bar"));
-//
-//                assertThat(client().executeBlocking(categoryQuery).head()).contains(updatedCustomerGroup);
+                final CustomerGroupQuery categoryQuery = CustomerGroupQuery.of()
+                        .plusPredicates(m -> m.is(customerGroup))
+                        .plusPredicates(m -> m.custom().fields().ofString(STRING_FIELD_NAME).is("foo"))
+                        .plusPredicates(m -> m.custom().fields().ofString("njetpresent").isNotPresent())
+                        .plusPredicates(m -> m.custom().fields().ofLocalizedString(LOC_STRING_FIELD_NAME).locale(ENGLISH).is("bar"));
 
-                return type;
+                assertThat(client().executeBlocking(categoryQuery).head()).contains(updatedCustomerGroup);
+                return updatedCustomerGroup;
             });
+            return type;
         });
 
     }

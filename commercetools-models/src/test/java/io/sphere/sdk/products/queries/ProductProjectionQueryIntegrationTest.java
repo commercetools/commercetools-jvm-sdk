@@ -90,18 +90,19 @@ public class ProductProjectionQueryIntegrationTest extends IntegrationTest {
 
     @Test
     public void expandCustomerGroupInPrice() throws Exception {
-        withCustomerGroup(client(), customerGroup ->
-            withUpdateablePricedProduct(client(), PriceDraft.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE).withCustomerGroup(customerGroup), product -> {
-                final Query<ProductProjection> query = ProductProjectionQuery.of(STAGED)
+        withCustomerGroup(client(), customerGroup -> {
+                    withUpdateablePricedProduct(client(), PriceDraft.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE).withCustomerGroup(customerGroup), product -> {
+                        final Query<ProductProjection> query = ProductProjectionQuery.of(STAGED)
                                 .withPredicates(m -> m.id().is(product.getId()))
                                 .withExpansionPaths(m -> m.masterVariant().prices().customerGroup());
-                final List<Price> prices = client().executeBlocking(query).head().get().getMasterVariant().getPrices();
-                assertThat(prices
-                        .stream()
-                        .anyMatch(price ->  Optional.ofNullable(price.getCustomerGroup()).map(customerGroupReference -> customerGroupReference.getObj() != null).orElse(false)))
-                        .isTrue();
-                return product;
-            })
+                        final List<Price> prices = client().executeBlocking(query).head().get().getMasterVariant().getPrices();
+                        assertThat(prices
+                                .stream()
+                                .anyMatch(price -> Optional.ofNullable(price.getCustomerGroup()).map(customerGroupReference -> customerGroupReference.getObj() != null).orElse(false)))
+                                .isTrue();
+                        return product;
+                    });
+                }
         );
     }
 
