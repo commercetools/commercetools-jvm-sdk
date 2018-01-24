@@ -15,9 +15,9 @@ import java.util.List;
 public final class DiscountCodeDraftDsl extends DiscountCodeDraftDslBase<DiscountCodeDraftDsl> {
 
     DiscountCodeDraftDsl(final Boolean active, final List<Reference<CartDiscount>> cartDiscounts, final @Nullable String cartPredicate,
-                         final String code, final @Nullable CustomFieldsDraft custom, final @Nullable LocalizedString description,
+                         final String code, final @Nullable CustomFieldsDraft custom, final @Nullable LocalizedString description,@Nullable final List<String> groups,
                          final @Nullable Long maxApplications, final @Nullable Long maxApplicationsPerCustomer, final @Nullable LocalizedString name,@Nullable final ZonedDateTime validFrom, @Nullable final ZonedDateTime validUntil) {
-        super(active, cartDiscounts, cartPredicate, code, custom, description, maxApplications, maxApplicationsPerCustomer, name,validFrom,validUntil);
+        super(active, cartDiscounts, cartPredicate, code, custom, description,groups, maxApplications, maxApplicationsPerCustomer, name,validFrom,validUntil);
     }
 
     public DiscountCodeDraftDsl withCartDiscounts(final Referenceable<CartDiscount> cartDiscount) {
