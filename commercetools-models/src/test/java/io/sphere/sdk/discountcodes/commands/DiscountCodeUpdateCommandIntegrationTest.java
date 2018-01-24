@@ -77,7 +77,7 @@ public class DiscountCodeUpdateCommandIntegrationTest extends IntegrationTest {
 
 
     @Test
-    public void setGroups() throws Exception {
+    public void changeGroups() throws Exception {
         withPersistentDiscountCode(client(), discountCode -> {
             final long maxApplications = randomLong();
             final String GROUP_NAME = "GroupName";
