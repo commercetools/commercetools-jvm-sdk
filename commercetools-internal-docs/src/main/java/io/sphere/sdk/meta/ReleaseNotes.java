@@ -136,12 +136,12 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
- <h3 class=released-version id="v1_29_0">1.28.0 </h3>
+ <h3 class=released-version id="v1_29_0">1.29.0 </h3>
  <ul>
  <li class=change-in-release>added {@link CustomFields} to {@link CustomerGroup}</li>
  <li class=change-in-release>added  {@link io.sphere.sdk.states.StateRole#RETURN}  to {@link io.sphere.sdk.states.StateRole} enumeration</li>
  <li class=change-in-release>added {@link DiscountCode#getGroups()} to {@link DiscountCode}</li>
-
+ <li class=change-in-release>added field origin of type {@link CartOrigin} to {@link Cart} and {@link Order} with the associated import actions and drafts</li>
  </ul>
 
 
