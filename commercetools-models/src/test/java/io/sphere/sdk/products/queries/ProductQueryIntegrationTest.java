@@ -80,17 +80,19 @@ public class ProductQueryIntegrationTest extends IntegrationTest {
 
     @Test
     public void canExpandCustomerGroupOfPrices() throws Exception {
-        withCustomerGroup(client(), customerGroup ->
-                        withUpdateablePricedProduct(client(), PriceDraft.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE).withCustomerGroup(customerGroup), product -> {
-                            final ExpansionPath<Product> expansionPath = ProductExpansionModel.of().masterData().staged().masterVariant().prices().customerGroup().expansionPaths().get(0);
-                            final Query<Product> query = query(product).withExpansionPaths(expansionPath);
-                            final List<Price> prices = client().executeBlocking(query).head().get().getMasterData().getStaged().getMasterVariant().getPrices();
-                            assertThat(prices
-                                    .stream()
-                                    .anyMatch(price -> Optional.ofNullable(price.getCustomerGroup()).map(customerGroupReference -> customerGroupReference.getObj() != null).orElse(false)))
-                                    .isTrue();
-                            return product;
-                        })
+        withCustomerGroup(client(), customerGroup -> {
+                    withUpdateablePricedProduct(client(), PriceDraft.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE).withCustomerGroup(customerGroup), product -> {
+                        final ExpansionPath<Product> expansionPath = ProductExpansionModel.of().masterData().staged().masterVariant().prices().customerGroup().expansionPaths().get(0);
+                        final Query<Product> query = query(product).withExpansionPaths(expansionPath);
+                        final List<Price> prices = client().executeBlocking(query).head().get().getMasterData().getStaged().getMasterVariant().getPrices();
+                        assertThat(prices
+                                .stream()
+                                .anyMatch(price -> Optional.ofNullable(price.getCustomerGroup()).map(customerGroupReference -> customerGroupReference.getObj() != null).orElse(false)))
+                                .isTrue();
+                        return product;
+                    });
+                }
+
         );
     }
 

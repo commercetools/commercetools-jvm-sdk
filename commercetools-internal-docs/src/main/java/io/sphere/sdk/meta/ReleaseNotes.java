@@ -138,7 +138,10 @@ import java.util.function.Function;
  -->
  <h3 class=released-version id="v1_29_0">1.28.0 </h3>
  <ul>
- <li class=change-in-release>added field deliveryId (referring delivery) to {@link io.sphere.sdk.orders.messages.ParcelItemsUpdatedMessage}</li>
+ <li class=change-in-release>added {@link CustomFields} to {@link CustomerGroup}</li>
+ <li class=change-in-release>added  {@link io.sphere.sdk.states.StateRole#RETURN}  to {@link io.sphere.sdk.states.StateRole} enumeration</li>
+ <li class=change-in-release>added {@link DiscountCode#getGroups()} to {@link DiscountCode}</li>
+<li class=change-in-release>added field deliveryId (referring delivery) to {@link io.sphere.sdk.orders.messages.ParcelItemsUpdatedMessage}</li>
  </ul>
 
  <h3 class=released-version id="v1_28_0">1.28.0 (18.01.2018)</h3>
