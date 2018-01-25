@@ -26,7 +26,7 @@ public class CustomerGroupFixtures {
         final String key = randomKey();
         final CustomerGroupDraft customerGroupDraft = CustomerGroupDraft.of(name,key);
         final CustomerGroup customerGroup = client.executeBlocking(CustomerGroupCreateCommand.of(customerGroupDraft));
-        CustomerGroup updatedCustomerGroup = consumer.apply(customerGroup);
+        final CustomerGroup updatedCustomerGroup = consumer.apply(customerGroup);
         final Optional<CustomerGroup> customerGroupOptional = Optional.ofNullable(client.executeBlocking(CustomerGroupByIdGet.of(updatedCustomerGroup.getId())));
         customerGroupOptional.ifPresent(group -> client.executeBlocking(CustomerGroupDeleteCommand.of(updatedCustomerGroup)));
     }
