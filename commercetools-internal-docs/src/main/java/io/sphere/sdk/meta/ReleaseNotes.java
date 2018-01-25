@@ -136,6 +136,11 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+ <h3 class=released-version id="v1_29_0">1.28.0 </h3>
+ <ul>
+ <li class=change-in-release>added field deliveryId (referring delivery) to {@link io.sphere.sdk.orders.messages.ParcelItemsUpdatedMessage}</li>
+ </ul>
+
  <h3 class=released-version id="v1_28_0">1.28.0 (18.01.2018)</h3>
  <ul>
  <li class=change-in-release>{@link CategoryDraft#getParent()} changed return type from {@link Reference<Category>} to {@link ResourceIdentifier<Category>}</li>
