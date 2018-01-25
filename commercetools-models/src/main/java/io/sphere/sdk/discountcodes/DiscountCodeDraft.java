@@ -43,6 +43,9 @@ public interface DiscountCodeDraft {
     Boolean isActive();
 
     @Nullable
+    List<String> getGroups();
+
+    @Nullable
     @IgnoreInQueryModel
     ZonedDateTime getValidFrom();
 

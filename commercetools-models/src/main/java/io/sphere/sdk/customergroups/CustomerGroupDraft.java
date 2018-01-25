@@ -5,6 +5,7 @@ import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.models.WithKey;
 import io.sphere.sdk.types.CustomDraft;
+import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
 
@@ -17,13 +18,17 @@ import javax.annotation.Nullable;
 @JsonDeserialize(as = CustomerGroupDraftDsl.class)
 @ResourceDraftValue(
         factoryMethods = @FactoryMethod(parameterNames = "groupName"))
-public interface CustomerGroupDraft extends WithKey {
+public interface CustomerGroupDraft extends WithKey ,CustomDraft{
 
     @Override
     @Nullable
     String getKey();
 
     String getGroupName();
+
+    @Nullable
+    @Override
+    CustomFieldsDraft getCustom();
 
     static CustomerGroupDraft of(final String groupName) {
         return CustomerGroupDraftDsl.of(groupName);

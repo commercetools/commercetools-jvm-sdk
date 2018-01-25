@@ -18,6 +18,7 @@ public class CustomerGroupByKeyUpdateCommandIntegrationTest extends IntegrationT
             assertThat(customerGroup.getName()).isNotEqualTo(newName);
             final CustomerGroup updatedCustomerGroup = client().executeBlocking(CustomerGroupUpdateCommand.ofKey(customerGroup.getKey(), customerGroup.getVersion(), ChangeName.of(newName)));
             assertThat(updatedCustomerGroup.getName()).isEqualTo(newName);
+            return updatedCustomerGroup;
         });
     }
 
