@@ -8,6 +8,8 @@ import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.WithKey;
+import io.sphere.sdk.types.Custom;
+import io.sphere.sdk.types.CustomFields;
 
 import javax.annotation.Nullable;
 
@@ -39,7 +41,7 @@ import javax.annotation.Nullable;
 @HasUpdateCommand(javadocSummary = "Updates a customer group.", updateWith = "key")
 @HasDeleteCommand(javadocSummary = "Deletes a customer group.", includeExamples = "io.sphere.sdk.customergroups.commands.CustomerGroupDeleteCommandByIdIntegrationTest#execution()", deleteWith = "key")
 @HasQueryModel
-public interface CustomerGroup extends Resource<CustomerGroup>, WithKey {
+public interface CustomerGroup extends Resource<CustomerGroup>, WithKey,Custom {
 
     /**
      * The name of the customer group.
@@ -55,6 +57,11 @@ public interface CustomerGroup extends Resource<CustomerGroup>, WithKey {
     @Nullable
     @HasUpdateAction
     String getKey();
+
+
+    @Nullable
+    @Override
+    CustomFields getCustom();
 
     @Override
     default Reference<CustomerGroup> toReference() {
