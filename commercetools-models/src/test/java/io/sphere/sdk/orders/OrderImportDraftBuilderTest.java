@@ -55,6 +55,7 @@ public class OrderImportDraftBuilderTest {
         final RoundingMode taxRoundingMode = RoundingMode.HALF_UP;
         final InventoryMode inventoryMode = InventoryMode.NONE;
         final TaxCalculationMode taxCalculationMode = TaxCalculationMode.LINE_ITEM_LEVEL;
+        final CartOrigin cartOrigin = CartOrigin.MERCHANT;
         final OrderImportDraftBuilder orderImportDraftBuilder = OrderImportDraftBuilder
                 .ofLineItems(lineItemsTotalPrice, lineItemsOrderState, lineItems)
                 .orderNumber(orderNumber)
@@ -74,7 +75,9 @@ public class OrderImportDraftBuilderTest {
                 .custom(custom)
                 .taxRoundingMode(taxRoundingMode)
                 .inventoryMode(inventoryMode)
-                .taxCalculationMode(taxCalculationMode);
+                .taxCalculationMode(taxCalculationMode)
+                .origin(cartOrigin)
+                ;
         final OrderImportDraft orderImportDraft = orderImportDraftBuilder.build();
         assertThat(orderImportDraft.getLineItems()).isEqualTo(lineItems);
         assertThat(orderImportDraft.getOrderNumber()).isEqualTo(orderNumber);
@@ -95,5 +98,6 @@ public class OrderImportDraftBuilderTest {
         assertThat(orderImportDraft.getTaxRoundingMode()).isEqualTo(taxRoundingMode);
         assertThat(orderImportDraft.getInventoryMode()).isEqualTo(inventoryMode);
         assertThat(orderImportDraft.getTaxCalculationMode()).isEqualTo(taxCalculationMode);
+        assertThat(orderImportDraft.getOrigin()).isEqualTo(cartOrigin);
     }
 }

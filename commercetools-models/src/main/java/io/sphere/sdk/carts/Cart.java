@@ -199,6 +199,10 @@ public interface Cart extends CartLike<Cart> {
     @QueryModelHint(type = "ShippingRateInputQueryModel<Cart>")
     ShippingRateInput getShippingRateInput();
 
+
+    @IgnoreInQueryModel
+    CartOrigin getOrigin();
+
     /**
      * Creates a reference for one item of this class by a known ID.
      *
