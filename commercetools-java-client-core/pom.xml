@@ -41,7 +41,15 @@
                         <Import-Package />
                         <Bundle-Version>${project.version}</Bundle-Version>
                         <Fragment-Host>${project.groupId}.commercetools-sdk-base</Fragment-Host>
-                        <split-package>-merge-last</split-package>
+                        <Require-Capability>
+                            osgi.extender;
+                            filter:="(osgi.extender=osgi.serviceloader.registrar)",
+                            osgi.extender;
+                            filter:="(osgi.extender=osgi.serviceloader.processor)",
+                            osgi.serviceloader;
+                            filter:="(osgi.serviceloader=io.sphere.sdk.client.SolutionInfo)";
+                            cardinality:=multiple,
+                        </Require-Capability>
                     </instructions>
                 </configuration>
             </plugin>

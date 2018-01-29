@@ -20,15 +20,16 @@ import java.util.List;
 public final class ParcelItemsUpdatedMessage extends GenericMessageImpl<Order> {
     public static final String MESSAGE_TYPE = "ParcelItemsUpdated";
     public static final MessageDerivateHint<ParcelItemsUpdatedMessage> MESSAGE_HINT = MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, ParcelItemsUpdatedMessage.class, Order.referenceTypeId());
-
+    private final String deliveryId;
     private final String parcelId;
     private final List<DeliveryItem> items;
 
     ParcelItemsUpdatedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type,
-                                     final String parcelId, final List<DeliveryItem> items) {
+                                     final String parcelId,final String deliveryId, final List<DeliveryItem> items) {
         super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, Order.class);
         this.parcelId = parcelId;
         this.items = items;
+        this.deliveryId = deliveryId;
     }
 
     public String getParcelId() {
@@ -37,5 +38,9 @@ public final class ParcelItemsUpdatedMessage extends GenericMessageImpl<Order> {
 
     public List<DeliveryItem> getItems() {
         return items;
+    }
+
+    public String getDeliveryId() {
+        return deliveryId;
     }
 }

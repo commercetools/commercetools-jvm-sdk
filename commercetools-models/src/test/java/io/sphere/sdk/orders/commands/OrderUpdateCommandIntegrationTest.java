@@ -382,6 +382,7 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
                 final ParcelItemsUpdatedMessage parcelItemsUpdatedMessage = parcelItemsUpdatedMessageOptional.get();
                 assertThat(parcelItemsUpdatedMessage.getParcelId()).isEqualTo(updatedParcel.getId());
                 assertThat(parcelItemsUpdatedMessage.getItems()).isEqualTo(parcelItems);
+                assertThat(parcelItemsUpdatedMessage.getDeliveryId()).isEqualTo(updatedOrder.getShippingInfo().getDeliveries().get(0).getId());
             });
         });
     }
