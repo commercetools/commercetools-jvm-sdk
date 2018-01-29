@@ -120,7 +120,7 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
     @Test
     public void findMatchingVariantByFulltextSearch() throws Exception {
         final Condition<ProductVariant> allMatchingVariants = new Condition<>(variant -> variant.isMatchingVariant(), "all are matching variants");
-        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withText(ENGLISH, "shoe");
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withMarkingMatchingVariants(true).withText(ENGLISH, "shoe");
         assertThat(executeSearch(search).getResults())
                 .flatExtracting(p -> p.getAllVariants())
                 .are(allMatchingVariants);

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.messages.Message;
 
 /**
@@ -13,7 +12,6 @@ import io.sphere.sdk.messages.Message;
  * @param <T> the resource type {@link MessageSubscription#getResourceTypeId()}
  */
 @JsonDeserialize(as = MessageSubscriptionPayloadImpl.class)
-@ResourceValue
 public interface MessageSubscriptionPayload<T> extends Payload<T> {
     /**
      * The message payload will always contain the common fields:
