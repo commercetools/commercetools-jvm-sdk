@@ -1,10 +1,7 @@
 package io.sphere.sdk.orders;
 
 import com.neovisionaries.i18n.CountryCode;
-import io.sphere.sdk.carts.InventoryMode;
-import io.sphere.sdk.carts.RoundingMode;
-import io.sphere.sdk.carts.TaxCalculationMode;
-import io.sphere.sdk.carts.TaxedPrice;
+import io.sphere.sdk.carts.*;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.types.CustomFieldsDraft;
@@ -54,6 +51,9 @@ public final class OrderImportDraftBuilder extends Base implements Builder<Order
     private InventoryMode inventoryMode;
     @Nullable
     private TaxCalculationMode taxCalculationMode;
+
+    @Nullable
+    private CartOrigin origin;
 
     private OrderImportDraftBuilder(final MonetaryAmount totalPrice, final OrderState orderState) {
         this.totalPrice = totalPrice;
@@ -166,6 +166,11 @@ public final class OrderImportDraftBuilder extends Base implements Builder<Order
         return this;
     }
 
+    public OrderImportDraftBuilder origin(@Nullable CartOrigin origin) {
+        this.origin = origin;
+        return  this;
+    }
+
     /**
      * Creates a builder for {@link OrderImportDraft} with at least one line item.
      * You can add {@link io.sphere.sdk.carts.CustomLineItem}s with {@link #customLineItems(java.util.List)}.
@@ -194,6 +199,6 @@ public final class OrderImportDraftBuilder extends Base implements Builder<Order
 
     @Override
     public OrderImportDraft build() {
-        return new OrderImportDraftImpl(billingAddress, orderNumber, customerId, customerEmail, lineItems, customLineItems, totalPrice, taxedPrice, shippingAddress, customerGroup, country, orderState, shipmentState, paymentState, shippingInfo, completedAt, custom, taxRoundingMode, inventoryMode,taxCalculationMode);
+        return new OrderImportDraftImpl(billingAddress, orderNumber, customerId, customerEmail, lineItems, customLineItems, totalPrice, taxedPrice, shippingAddress, customerGroup, country, orderState, shipmentState, paymentState, shippingInfo, completedAt, custom, taxRoundingMode, inventoryMode,taxCalculationMode,origin);
     }
 }

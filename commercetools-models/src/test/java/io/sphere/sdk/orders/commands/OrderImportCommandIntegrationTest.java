@@ -405,6 +405,23 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void originCustomer() throws Exception {
+        CartOrigin origin = CartOrigin.CUSTOMER;
+        testOrderAspect(orderImportDraftBuilder -> orderImportDraftBuilder.origin(origin),
+                order -> assertThat(order.getOrigin()).isEqualTo(origin)
+        );
+    }
+
+    @Test
+    public void originMerchant() throws Exception {
+        CartOrigin origin = CartOrigin.MERCHANT;
+        testOrderAspect(orderImportDraftBuilder -> orderImportDraftBuilder.origin(origin),
+                order -> assertThat(order.getOrigin()).isEqualTo(origin)
+        );
+    }
+
+
+    @Test
     public void getCompletedAt() throws Exception {
         final ZonedDateTime completedAt = SphereTestUtils.now().minusSeconds(5555);
         testOrderAspect(builder -> builder.completedAt(completedAt),
