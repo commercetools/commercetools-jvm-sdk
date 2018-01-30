@@ -110,7 +110,8 @@
                             filter:="(osgi.extender=osgi.serviceloader.processor)"
                         </Require-Capability>
                         <Provide-Capability>
-                            osgi.serviceloader
+                            osgi.serviceloader;
+                            osgi.serviceloader="io.sphere.sdk.client.SolutionInfo"
                         </Provide-Capability>
 
                     </instructions>
