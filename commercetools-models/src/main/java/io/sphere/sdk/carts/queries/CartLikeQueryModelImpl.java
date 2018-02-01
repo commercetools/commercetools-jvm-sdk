@@ -92,4 +92,9 @@ public abstract class CartLikeQueryModelImpl<T> extends CustomResourceQueryModel
     public LocaleQueryModel<T> locale() {
         return localeQuerySortingModel("locale");
     }
+
+    @Override
+    public AddressCollectionQueryModel<T> itemShippingAddresses() {
+        return addressCollectionQueryModel("itemShippingAddresses");
+    }
 }

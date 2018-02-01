@@ -85,6 +85,17 @@ public interface CartDraft extends CustomDraft {
     @Nullable
     CartOrigin getOrigin();
 
+    /**
+     *  Contains addresses for carts with multiple shipping addresses.
+     *  Each address must contain a key which is unique in this cart.
+     *  Line items will use these keys to reference the addresses under
+     *  their `shippingDetails`
+     * @return
+     */
+    @Nullable
+    List<Address> getItemShippingAddresses();
+
+
     static CartDraftDsl of(final CurrencyUnit currency) {
         return CartDraftDsl.of(currency);
     }

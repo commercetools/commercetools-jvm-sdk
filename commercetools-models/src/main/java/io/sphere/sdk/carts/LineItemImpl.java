@@ -33,11 +33,12 @@ final class LineItemImpl extends LineItemImplBase {
                  final LineItemPriceMode priceMode, final String productId,
                  @Nullable final LocalizedString productSlug,
                  @Nullable final Reference<ProductType> productType, final Long quantity,
+                 @Nullable final ItemShippingDetails shippingDetails,
                  final Set<ItemState> state, @Nullable final Reference<Channel> supplyChannel,
                  @Nullable final TaxRate taxRate, @Nullable final TaxedItemPrice taxedPrice,
                  final MonetaryAmount totalPrice, final ObjectNode variant) {
         super(custom, discountedPricePerQuantity, distributionChannel, id, lineItemMode, name, price, priceMode, productId, productSlug,
-                productType, quantity, state, supplyChannel, taxRate, taxedPrice, totalPrice, asVariant(variant, productId));
+                productType, quantity, shippingDetails, state, supplyChannel, taxRate, taxedPrice, totalPrice, asVariant(variant, productId));
 
     }
 

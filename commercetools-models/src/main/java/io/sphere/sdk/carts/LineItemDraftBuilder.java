@@ -12,8 +12,8 @@ import javax.money.MonetaryAmount;
 
 public final class LineItemDraftBuilder extends LineItemDraftBuilderBase<LineItemDraftBuilder> {
 
-    LineItemDraftBuilder(@Nullable CustomFieldsDraft custom, @Nullable Reference<Channel> distributionChannel, @Nullable MonetaryAmount externalPrice, @Nullable ExternalTaxRateDraft externalTaxRate, @Nullable ExternalLineItemTotalPrice externalTotalPrice, String productId, @Nullable Long quantity, @Nullable String sku, @Nullable Reference<Channel> supplyChannel, @Nullable Integer variantId) {
-        super(custom, distributionChannel, externalPrice, externalTaxRate, externalTotalPrice, productId, quantity, sku, supplyChannel, variantId);
+    LineItemDraftBuilder(@Nullable CustomFieldsDraft custom, @Nullable Reference<Channel> distributionChannel, @Nullable MonetaryAmount externalPrice, @Nullable ExternalTaxRateDraft externalTaxRate, @Nullable ExternalLineItemTotalPrice externalTotalPrice, String productId, @Nullable Long quantity,@Nullable final ItemShippingDetailsDraft shippingDetails, @Nullable String sku, @Nullable Reference<Channel> supplyChannel, @Nullable Integer variantId) {
+        super(custom, distributionChannel, externalPrice, externalTaxRate, externalTotalPrice, productId, quantity,shippingDetails, sku, supplyChannel, variantId);
     }
 
     /**
