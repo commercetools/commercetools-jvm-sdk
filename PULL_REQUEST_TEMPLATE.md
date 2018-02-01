@@ -1,6 +1,6 @@
-# Issue Description
+# Description
 
-# How to reproduce
+Closes #
 
 # Checklist
 
