@@ -13,6 +13,6 @@ public interface AddressCollectionQueryModel<T> extends QueryModel<T>, Collectio
     @Override
     QueryPredicate<T> isNotEmpty();
 
-    AddressQueryModel<T> itemShippingAddresses();
+    AddressQueryModel<T> address();
 
 }
