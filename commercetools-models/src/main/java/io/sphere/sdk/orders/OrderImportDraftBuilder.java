@@ -52,6 +52,7 @@ public final class OrderImportDraftBuilder extends Base implements Builder<Order
     @Nullable
     private TaxCalculationMode taxCalculationMode;
 
+    @Nullable private List<Address> itemShippingAddresses;
     @Nullable
     private CartOrigin origin;
 
@@ -171,6 +172,11 @@ public final class OrderImportDraftBuilder extends Base implements Builder<Order
         return  this;
     }
 
+    public OrderImportDraftBuilder itemShippingAddresses(@Nullable final List<Address> itemShippingAddresses) {
+        this.itemShippingAddresses = itemShippingAddresses;
+        return  this;
+    }
+
     /**
      * Creates a builder for {@link OrderImportDraft} with at least one line item.
      * You can add {@link io.sphere.sdk.carts.CustomLineItem}s with {@link #customLineItems(java.util.List)}.
@@ -199,6 +205,6 @@ public final class OrderImportDraftBuilder extends Base implements Builder<Order
 
     @Override
     public OrderImportDraft build() {
-        return new OrderImportDraftImpl(billingAddress, orderNumber, customerId, customerEmail, lineItems, customLineItems, totalPrice, taxedPrice, shippingAddress, customerGroup, country, orderState, shipmentState, paymentState, shippingInfo, completedAt, custom, taxRoundingMode, inventoryMode,taxCalculationMode,origin);
+        return new OrderImportDraftImpl(billingAddress, orderNumber, customerId, customerEmail, lineItems, customLineItems, totalPrice, taxedPrice, shippingAddress, customerGroup, country, orderState, shipmentState, paymentState, shippingInfo, completedAt, custom, taxRoundingMode, inventoryMode,taxCalculationMode,origin, itemShippingAddresses);
     }
 }

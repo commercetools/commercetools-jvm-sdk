@@ -1,5 +1,6 @@
 package io.sphere.sdk.orders;
 
+import io.sphere.sdk.carts.ItemShippingDetailsDraft;
 import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.Base;
@@ -28,7 +29,9 @@ final class LineItemImportDraftImpl extends Base implements LineItemImportDraft 
     @Nullable
     private final CustomFieldsDraft custom;
 
-    public LineItemImportDraftImpl(final LocalizedString name, @Nullable final String productId, final ProductVariantImportDraft variant, final Price price, final Long quantity, @Nullable final Set<ItemState> state, @Nullable final Reference<Channel> supplyChannel, @Nullable final TaxRate taxRate, @Nullable final CustomFieldsDraft custom) {
+    @Nullable private final ItemShippingDetailsDraft shippingDetails;
+
+    public LineItemImportDraftImpl(final LocalizedString name, @Nullable final String productId, final ProductVariantImportDraft variant, final Price price, final Long quantity, @Nullable final Set<ItemState> state, @Nullable final Reference<Channel> supplyChannel, @Nullable final TaxRate taxRate, @Nullable final CustomFieldsDraft custom,@Nullable final ItemShippingDetailsDraft shippingDetails) {
         this.name = name;
         this.productId = productId;
         this.variant = variant;
@@ -38,6 +41,7 @@ final class LineItemImportDraftImpl extends Base implements LineItemImportDraft 
         this.supplyChannel = supplyChannel;
         this.taxRate = taxRate;
         this.custom = custom;
+        this.shippingDetails = shippingDetails;
     }
 
     @Override
@@ -88,5 +92,11 @@ final class LineItemImportDraftImpl extends Base implements LineItemImportDraft 
     @Override
     public ProductVariantImportDraft getVariant() {
         return variant;
+    }
+
+    @Nullable
+    @Override
+    public ItemShippingDetailsDraft getShippingDetails() {
+        return shippingDetails;
     }
 }

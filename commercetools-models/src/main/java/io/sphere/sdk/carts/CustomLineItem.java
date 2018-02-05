@@ -75,6 +75,14 @@ public interface CustomLineItem extends LineItemLike {
     @Override
     TaxedItemPrice getTaxedPrice();
 
+
+    /**
+     *  Container for the sub-quantity of the line item quantity for the specific address when multiple shipping addresses are required
+     * @return ItemShippingDetails
+     */
+    @Nullable
+    ItemShippingDetails getShippingDetails();
+
     /**
      * An identifier for this resource which supports {@link CustomFields}.
      * @see TypeDraft#getResourceTypeIds()

@@ -60,6 +60,13 @@ public interface LineItemDraft {
     @Nullable
     ExternalLineItemTotalPrice getExternalTotalPrice();
 
+    /**
+     * Container for the sub-quantity of the line item quantity for the specific address
+     * when multiple shipping addresses are required.
+     */
+    @Nullable
+    ItemShippingDetailsDraft getShippingDetails();
+
     static LineItemDraftDsl of(final ProductIdentifiable product, final Integer variantId, final long quantity) {
         return of(product.getId(), variantId, quantity);
     }

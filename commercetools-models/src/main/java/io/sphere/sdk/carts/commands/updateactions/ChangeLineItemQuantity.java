@@ -10,7 +10,13 @@ import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 
 /**
- Sets the quantity of the given line item. If quantity is 0, line item is removed from the cart.
+ Sets the quantity of the given line item. If quantity is 0, line item is removed from the cart.<br/>
+
+ In case of multiple shipping addresses, {@link ChangeLineItemQuantity} does not support changing the shipping details
+ like {@link RemoveLineItem} and {@link AddLineItem} because in the case of not sending the {@code shippingDetails} field
+ it would not be clear if the shipping details should be removed at all (possible data loss) or remain unchanged.
+ Use {@link SetLineItemShippingDetails} in combination with this update action in one
+ cart update command to change the line item quantity and shipping details altogether.
 
  {@doc.gen intro}
 

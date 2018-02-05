@@ -189,7 +189,7 @@ final class QueryModelImplRules extends GenerationRules {
                     .filter(StringUtils::isNotEmpty)
                     .map(baseClass -> {
                         builder.setBaseClassName(baseClass);
-                        methodRules.addFirst(new IgnoreFields("customerId", "customerEmail", "totalPrice", "taxedPrice", "country", "customerGroup", "lineItems", "customLineItems", "shippingAddress", "billingAddress", "shippingInfo", "discountCodes", "paymentInfo", "anonymousId", "locale", "custom", "shippingRateInput"));
+                        methodRules.addFirst(new IgnoreFields("itemShippingAddresses","customerId", "customerEmail", "totalPrice", "taxedPrice", "country", "customerGroup", "lineItems", "customLineItems", "shippingAddress", "billingAddress", "shippingInfo", "discountCodes", "paymentInfo", "anonymousId", "locale", "custom", "shippingRateInput"));
                         return true;
                     })
                     .orElse(false);

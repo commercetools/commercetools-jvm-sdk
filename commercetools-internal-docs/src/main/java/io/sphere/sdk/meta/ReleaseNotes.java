@@ -145,6 +145,9 @@ import java.util.function.Function;
  <li class=change-in-release>updated jackson version to 2.9.3</li>
  <li class=change-in-release>added {@link io.sphere.sdk.discountcodes.DiscountCodeState#APPLICATION_STOPPED_BY_PREVIOUS_DISCOUNT} and {@link io.sphere.sdk.discountcodes.DiscountCodeState#NOT_VALID} to {@link io.sphere.sdk.discountcodes.DiscountCodeState} </li>
  <li class=change-in-release>added field origin of type {@link CartOrigin} to {@link Cart} and {@link Order} with the associated import actions and drafts</li>
+ <li class=change-in-release>added {@link Cart#getItemShippingAddresses()} field to {@link Cart} and {@link Order} and associated drafts </li>
+ <li class=change-in-release>added {@link ItemShippingDetails} to {@link CustomLineItem} and {@link LineItem} and associated drafts </li>
+ <li class=new-in-release>added {@link ItemShippingDetails} and {@link ItemShippingTarget} as support for new multiple shipping addresses feature from backend.</li>
  </ul>
 
  <h3 class=released-version id="v1_28_0">1.28.0 (18.01.2018)</h3>

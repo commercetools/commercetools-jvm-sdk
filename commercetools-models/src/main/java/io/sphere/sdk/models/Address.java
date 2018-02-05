@@ -33,12 +33,14 @@ import java.util.Objects;
  * @see io.sphere.sdk.carts.commands.updateactions.SetBillingAddress
  * @see io.sphere.sdk.carts.commands.updateactions.SetShippingAddress
  */
-public final class Address extends Base {
+public final class Address extends Base implements WithKey{
 
     @Nullable
     final CountryCode country;
     @Nullable
     final String id;
+    @Nullable
+    final String key;
     @Nullable
     final String title;
     @Nullable
@@ -85,9 +87,10 @@ public final class Address extends Base {
     final String externalId;
 
     @JsonCreator
-    private Address(final CountryCode country, @Nullable final String id, @Nullable final String title, @Nullable final String salutation, @Nullable final String firstName, @Nullable final String lastName, @Nullable final String streetName, @Nullable final String streetNumber, @Nullable final String additionalStreetInfo, @Nullable final String postalCode, @Nullable final String city, @Nullable final String region, @Nullable final String state, @Nullable final String company, @Nullable final String department, @Nullable final String building, @Nullable final String apartment, @Nullable final String poBox, @Nullable final String phone, @Nullable final String mobile, @Nullable final String email, @Nullable final String additionalAddressInfo, @Nullable final String fax, @Nullable final String externalId) {
+    private Address(final CountryCode country, @Nullable final String id,@Nullable final String key, @Nullable final String title, @Nullable final String salutation, @Nullable final String firstName, @Nullable final String lastName, @Nullable final String streetName, @Nullable final String streetNumber, @Nullable final String additionalStreetInfo, @Nullable final String postalCode, @Nullable final String city, @Nullable final String region, @Nullable final String state, @Nullable final String company, @Nullable final String department, @Nullable final String building, @Nullable final String apartment, @Nullable final String poBox, @Nullable final String phone, @Nullable final String mobile, @Nullable final String email, @Nullable final String additionalAddressInfo, @Nullable final String fax, @Nullable final String externalId) {
         this.country = country;
         this.id = id;
+        this.key = key;
         this.title = title;
         this.salutation = salutation;
         this.firstName = firstName;
@@ -116,6 +119,7 @@ public final class Address extends Base {
     Address(final AddressBuilder builder) {
         this.country = builder.country;
         this.id = builder.id;
+        this.key = builder.key;
         this.title = builder.title;
         this.salutation = builder.salutation;
         this.firstName = builder.firstName;
@@ -259,12 +263,22 @@ public final class Address extends Base {
         return externalId;
     }
 
+    @Override
+    @Nullable
+    public String getKey() {
+        return key;
+    }
+
     public Address withCountry(final CountryCode country) {
         return AddressBuilder.of(this).country(country).build();
     }
 
     public Address withId(@Nullable final String id) {
         return AddressBuilder.of(this).id(id).build();
+    }
+
+    public Address withKey(@Nullable final String key) {
+        return AddressBuilder.of(this).key(key).build();
     }
 
     public Address withTitle(@Nullable final String title) {
@@ -365,6 +379,7 @@ public final class Address extends Base {
         return "Address{" +
                 "country=" + country +
                 ", id=" + id +
+                ", key=" + key +
                 ", title=" + title +
                 ", salutation=" + salutation +
                 ", firstName=" + firstName +

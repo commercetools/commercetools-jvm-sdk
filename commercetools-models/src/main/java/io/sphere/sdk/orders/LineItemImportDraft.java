@@ -1,6 +1,7 @@
 package io.sphere.sdk.orders;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.carts.ItemShippingDetailsDraft;
 import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.LocalizedString;
@@ -39,4 +40,7 @@ public interface LineItemImportDraft {
     CustomFieldsDraft getCustom();
 
     ProductVariantImportDraft getVariant();
+
+    @Nullable
+    ItemShippingDetailsDraft getShippingDetails();
 }

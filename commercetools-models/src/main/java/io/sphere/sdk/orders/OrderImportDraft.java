@@ -78,4 +78,8 @@ public interface OrderImportDraft {
 
     @Nullable
     CartOrigin getOrigin();
+
+    @Nullable
+    List<Address> getItemShippingAddresses();
+
 }

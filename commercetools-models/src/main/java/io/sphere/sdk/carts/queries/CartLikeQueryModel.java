@@ -36,4 +36,6 @@ public interface CartLikeQueryModel<T> extends ResourceQueryModel<T>, WithCustom
     StringQuerySortingModel<T> anonymousId();
 
     LocaleQueryModel<T> locale();
+
+    AddressCollectionQueryModel<T> itemShippingAddresses();
 }

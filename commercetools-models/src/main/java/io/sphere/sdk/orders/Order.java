@@ -253,6 +253,14 @@ public interface Order extends CartLike<Order> {
     @QueryModelHint(type = "ShippingRateInputQueryModel<Order>")
     ShippingRateInput getShippingRateInput();
 
+
+    /**
+     * @return  addresses for orders with multiple shipping addresses.
+     */
+    @Override
+    @QueryModelHint(type = "AddressCollectionQueryModel<Order>")
+    List<Address> getItemShippingAddresses();
+
     /**
      * Creates a reference for one item of this class by a known ID.
      *
