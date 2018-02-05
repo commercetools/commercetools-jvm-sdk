@@ -3,10 +3,13 @@ package io.sphere.sdk.carts;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.*;
+import io.sphere.sdk.carts.queries.CartQuery;
+import io.sphere.sdk.carts.queries.CartQueryModel;
 import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.DefaultCurrencyUnits;
+import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
 import org.assertj.core.api.Assertions;
@@ -43,15 +46,8 @@ public class MultipleShippingAddressesIntegrationTest extends IntegrationTest {
                 final LineItemDraft lineItemDraft = LineItemDraft.of(product, master_variant_id, 25).withShippingDetails(itemShippingDetailsDraft);
                 final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, AddLineItem.of(lineItemDraft)));
 
-                /**
-                 * Te problem here is that shipping details are not taken from LineItemDraft
-                 */
-//                assertThat(updatedCart.getLineItems().get(0).getShippingDetails().getTargets()).isNotEmpty();
-                /**
-                 * The query using `itemShippingAddresses` doesent seem to work
-                 */
-//                PagedQueryResult<Cart> result = client().executeBlocking(CartQuery.of().plusPredicates(CartQueryModel.of().itemShippingAddresses().address().country().is(CountryCode.DE)));
-//                Assertions.assertThat(result.getResults()).isNotEmpty();
+                PagedQueryResult<Cart> result = client().executeBlocking(CartQuery.of().plusPredicates(CartQueryModel.of().itemShippingAddresses().address().country().is(CountryCode.DE)));
+                Assertions.assertThat(result.getResults()).isNotEmpty();
 
                 return updatedCart;
             });

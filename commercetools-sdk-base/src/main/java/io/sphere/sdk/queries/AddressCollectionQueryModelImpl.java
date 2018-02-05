@@ -21,6 +21,6 @@ final class AddressCollectionQueryModelImpl<T> extends QueryModelImpl<T> impleme
 
     @Override
     public AddressQueryModel<T> address() {
-        return addressQueryModel("itemShippingAddresses");
+        return addressQueryModel("");
     }
 }
