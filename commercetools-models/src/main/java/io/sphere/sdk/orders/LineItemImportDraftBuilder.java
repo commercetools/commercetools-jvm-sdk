@@ -68,10 +68,11 @@ public final class LineItemImportDraftBuilder extends Base implements Builder<Li
         return this;
     }
 
-    public LineItemImportDraftBuilder custom(@Nullable final ItemShippingDetailsDraft shippingDetails) {
+    public LineItemImportDraftBuilder shippingDetails(@Nullable final ItemShippingDetailsDraft shippingDetails) {
         this.shippingDetails = shippingDetails;
         return this;
     }
+
     public static LineItemImportDraftBuilder of(final ProductVariantImportDraft variant, final long quantity, final Price price, final LocalizedString name) {
         return new LineItemImportDraftBuilder(variant, quantity, price, variant.getProductId(), name);
     }

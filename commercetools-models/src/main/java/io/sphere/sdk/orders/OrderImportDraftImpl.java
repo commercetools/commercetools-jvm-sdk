@@ -205,6 +205,6 @@ final class OrderImportDraftImpl extends Base implements OrderImportDraft {
     @Nullable
     @Override
     public List<Address> getItemShippingAddresses() {
-        return null;
+        return itemShippingAddresses;
     }
 }

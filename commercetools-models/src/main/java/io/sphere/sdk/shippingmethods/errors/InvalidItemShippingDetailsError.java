@@ -24,7 +24,7 @@ public final class InvalidItemShippingDetailsError extends SphereError {
     }
 
     /**
-     * @return Either {@code LineItem} or {@code CustomLineItem} to mark if it is about a line item or a custom line item.
+     * @return Either {@code 'LineItem'} or {@code 'CustomLineItem'} to mark if it is about a line item or a custom line item.
      */
     public String getSubject() {
         return subject;
