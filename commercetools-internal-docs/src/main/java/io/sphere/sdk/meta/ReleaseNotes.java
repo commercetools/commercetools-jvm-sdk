@@ -147,6 +147,7 @@ import java.util.function.Function;
  <li class=change-in-release>added field origin of type {@link CartOrigin} to {@link Cart} and {@link Order} with the associated import actions and drafts</li>
  <li class=change-in-release>added {@link Cart#getItemShippingAddresses()} field to {@link Cart} and {@link Order} and associated drafts </li>
  <li class=change-in-release>added {@link ItemShippingDetails} to {@link CustomLineItem} and {@link LineItem} and associated drafts </li>
+ <li class=change-in-release>added {@link ProductVariantQueryModel#key()} to {@link ProductVariantQueryModel} </li>
  <li class=new-in-release>added {@link ItemShippingDetails} and {@link ItemShippingTarget} as support for new multiple shipping addresses feature from backend.</li>
  </ul>
 
