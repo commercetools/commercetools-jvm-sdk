@@ -136,7 +136,7 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
- <h3 class=released-version id="v1_29_0">1.29.0 </h3>
+ <h3 class=released-version id="v1_29_0">1.29.0 (08.02.2018)</h3>
  <ul>
  <li class=change-in-release>added {@link CustomFields} to {@link CustomerGroup}</li>
  <li class=change-in-release>added  {@link io.sphere.sdk.states.StateRole#RETURN}  to {@link io.sphere.sdk.states.StateRole} enumeration</li>
