@@ -21,6 +21,7 @@ io.sphere.sdk.client
 io.sphere.sdk.client.metrics
 io.sphere.sdk.commands
 io.sphere.sdk.customergroups
+io.sphere.sdk.customergroups.commands.updateactions
 io.sphere.sdk.customergroups.expansion
 io.sphere.sdk.customers
 io.sphere.sdk.customers.commands
@@ -99,6 +100,7 @@ io.sphere.sdk.search.tokenizer
 io.sphere.sdk.sequencegenerators
 io.sphere.sdk.shippingmethods
 io.sphere.sdk.shippingmethods.commands.updateactions
+io.sphere.sdk.shippingmethods.errors
 io.sphere.sdk.shippingmethods.expansion
 io.sphere.sdk.shippingmethods.queries
 io.sphere.sdk.shoppinglists
