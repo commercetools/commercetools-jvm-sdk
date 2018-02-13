@@ -9,8 +9,6 @@
 [![][snyk img]][snyk]
 [![][license img]][license]
 
-[](the link definitions are at the bottom)
-
 The JVM SDK enables developers to use Java 8 methods and objects to communicate with the [commercetools platform](http://www.commercetools.com/) (formerly SPHERE.IO) rather than using plain HTTP calls.
 Users gain type-safety, encapsulation, IDE auto completion and an internal domain specific language to discover and formulate valid requests.
 
