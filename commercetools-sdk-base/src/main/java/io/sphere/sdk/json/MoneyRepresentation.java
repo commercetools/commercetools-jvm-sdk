@@ -2,13 +2,15 @@ package io.sphere.sdk.json;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.javamoney.moneta.function.MonetaryQueries;
 import org.javamoney.moneta.internal.DefaultRoundingProvider;
 
-import javax.money.Monetary;
+import javax.money.CurrencyUnit;
 import javax.money.MonetaryAmount;
 import javax.money.MonetaryRounding;
 import javax.money.RoundingQueryBuilder;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Objects;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
@@ -57,6 +59,18 @@ final class MoneyRepresentation {
                 .build());
         return monetaryAmount
                 .with(ROUNDING)
-                .query(MonetaryQueries.convertMinorPart());
+                .query(MoneyRepresentation::queryFrom);
+    }
+
+    private static Long queryFrom(MonetaryAmount amount) {
+        Objects.requireNonNull(amount, "Amount required.");
+        BigDecimal number = amount.getNumber().numberValue(BigDecimal.class);
+        CurrencyUnit cur = amount.getCurrency();
+        int scale = cur.getDefaultFractionDigits();
+        if(scale<0){
+            scale = 0;
+        }
+        number = number.setScale(scale, RoundingMode.DOWN);
+        return number.movePointRight(number.scale()).longValueExact();
     }
 }
