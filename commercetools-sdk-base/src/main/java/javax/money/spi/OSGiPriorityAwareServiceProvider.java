@@ -1,9 +1,8 @@
-package io.sphere.sdk.utils;
+package javax.money.spi;
 
 import org.javamoney.moneta.internal.PriorityAwareServiceProvider;
 
 import javax.annotation.Priority;
-import javax.money.spi.ServiceProvider;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

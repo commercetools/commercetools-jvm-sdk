@@ -9,8 +9,6 @@
 [![][snyk img]][snyk]
 [![][license img]][license]
 
-[](the link definitions are at the bottom)
-
 The JVM SDK enables developers to use Java 8 methods and objects to communicate with the [commercetools platform](http://www.commercetools.com/) (formerly SPHERE.IO) rather than using plain HTTP calls.
 Users gain type-safety, encapsulation, IDE auto completion and an internal domain specific language to discover and formulate valid requests.
 
@@ -29,24 +27,24 @@ Users gain type-safety, encapsulation, IDE auto completion and an internal domai
 <dependency>
   <groupId>com.commercetools.sdk.jvm.core</groupId>
   <artifactId>commercetools-models</artifactId>
-  <version>1.28.0</version>
+  <version>1.29.0</version>
 </dependency>
 <dependency>
   <groupId>com.commercetools.sdk.jvm.core</groupId>
   <artifactId>commercetools-java-client</artifactId>
-  <version>1.28.0</version>
+  <version>1.29.0</version>
 </dependency>
 
 <!-- experimental -->
 <dependency>
   <groupId>com.commercetools.sdk.jvm.core</groupId>
   <artifactId>commercetools-convenience</artifactId>
-  <version>1.28.0</version>
+  <version>1.29.0</version>
 </dependency>
 ````
-* http://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-models%7C1.28.0%7Cjar
-* http://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-java-client%7C1.28.0%7Cjar
-* http://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-convenience%7C1.28.0%7Cjar
+* http://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-models%7C1.29.0%7Cjar
+* http://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-java-client%7C1.29.0%7Cjar
+* http://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-convenience%7C1.29.0%7Cjar
 
 ### Modules
 * `commercetools-java-client`: alias for commercetools-java-client-ahc-2_0
@@ -64,7 +62,7 @@ repositories {
 }
 
 dependencies {
-    def jvmSdkVersion = "1.28.0"
+    def jvmSdkVersion = "1.29.0"
     compile "com.commercetools.sdk.jvm.core:commercetools-models:$jvmSdkVersion"
     compile "com.commercetools.sdk.jvm.core:commercetools-java-client:$jvmSdkVersion"    
     compile "com.commercetools.sdk.jvm.core:commercetools-convenience:$jvmSdkVersion"

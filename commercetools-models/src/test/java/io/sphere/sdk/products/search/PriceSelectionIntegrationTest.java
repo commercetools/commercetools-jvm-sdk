@@ -1,6 +1,7 @@
 package io.sphere.sdk.products.search;
 
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.cartdiscounts.CartDiscountFixtures;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.ChannelRole;
 import io.sphere.sdk.customergroups.CustomerGroup;
@@ -37,6 +38,7 @@ public class PriceSelectionIntegrationTest extends IntegrationTest {
 
     @AfterClass
     public static void delete() {
+        CartDiscountFixtures.deleteDiscountCodesAndCartDiscounts(client());
         ProductFixtures.deleteProductsAndProductTypes(client());
         productType = null;
     }
