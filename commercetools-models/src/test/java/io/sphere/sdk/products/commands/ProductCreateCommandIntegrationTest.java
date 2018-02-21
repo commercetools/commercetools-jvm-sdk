@@ -41,7 +41,7 @@ public class ProductCreateCommandIntegrationTest extends IntegrationTest {
 
     @BeforeClass
     public static void cleanUp() throws Exception {
-        CartDiscountFixtures.deleteDiscountCodes(client());
+        CartDiscountFixtures.deleteCartDiscounts(client());
         ProductFixtures.deleteProductsAndProductTypes(client());
     }
 

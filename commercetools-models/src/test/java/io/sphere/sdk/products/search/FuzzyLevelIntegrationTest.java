@@ -17,7 +17,7 @@ import static java.util.Locale.ENGLISH;
 public class FuzzyLevelIntegrationTest extends IntegrationTest {
     @BeforeClass
     public static void setUp() throws Exception {
-        CartDiscountFixtures.deleteDiscountCodes(client());
+        CartDiscountFixtures.deleteCartDiscounts(client());
         ProductFixtures.deleteProductsAndProductTypes(client());
     }
 

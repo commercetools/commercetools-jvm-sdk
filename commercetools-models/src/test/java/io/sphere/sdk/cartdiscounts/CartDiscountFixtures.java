@@ -20,8 +20,8 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 public class CartDiscountFixtures {
 
 
-    public static void deleteDiscountCodes(final BlockingSphereClient client){
-        client.executeBlocking(DiscountCodeQuery.of()).getResults().forEach(discountCode -> client.executeBlocking(DiscountCodeDeleteCommand.of(discountCode)));
+    public static void deleteCartDiscounts(final BlockingSphereClient client){
+        client.executeBlocking(CartDiscountQuery.of()).getResults().forEach(cartDiscount -> client.executeBlocking(CartDiscountDeleteCommand.of(cartDiscount)));
     }
 
     public static CartDiscountDraftBuilder newCartDiscountDraftBuilder() {

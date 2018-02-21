@@ -2,8 +2,6 @@ package io.sphere.sdk.cartdiscounts.commands;
 
 import io.sphere.sdk.cartdiscounts.*;
 import io.sphere.sdk.cartdiscounts.queries.CartDiscountQuery;
-import io.sphere.sdk.discountcodes.commands.DiscountCodeDeleteCommand;
-import io.sphere.sdk.discountcodes.queries.DiscountCodeQuery;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.ByIdVariantIdentifier;
@@ -22,7 +20,7 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.deleteDiscountCodes;
+import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.deleteCartDiscounts;
 import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.newCartDiscountDraftBuilder;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -33,7 +31,7 @@ public class CartDiscountCreateCommandIntegrationTest extends IntegrationTest {
 
     @BeforeClass
     public static void clean() {
-        deleteDiscountCodes(client());
+        deleteCartDiscounts(client());
         client().executeBlocking(CartDiscountQuery.of().withPredicates(m -> m.name().locale(ENGLISH).is("sample cart discount")))
                 .getResults().forEach(discount -> client().executeBlocking(CartDiscountDeleteCommand.of(discount)));
     }
