@@ -2,6 +2,8 @@ package io.sphere.sdk.cartdiscounts.commands;
 
 import io.sphere.sdk.cartdiscounts.*;
 import io.sphere.sdk.cartdiscounts.queries.CartDiscountQuery;
+import io.sphere.sdk.discountcodes.commands.DiscountCodeDeleteCommand;
+import io.sphere.sdk.discountcodes.queries.DiscountCodeQuery;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.ByIdVariantIdentifier;
@@ -30,6 +32,8 @@ public class CartDiscountCreateCommandIntegrationTest extends IntegrationTest {
 
     @BeforeClass
     public static void clean() {
+        client().executeBlocking(DiscountCodeQuery.of())
+                .getResults().forEach(discountCode -> client().executeBlocking(DiscountCodeDeleteCommand.of(discountCode)));
         client().executeBlocking(CartDiscountQuery.of().withPredicates(m -> m.name().locale(ENGLISH).is("sample cart discount")))
                 .getResults().forEach(discount -> client().executeBlocking(CartDiscountDeleteCommand.of(discount)));
     }
