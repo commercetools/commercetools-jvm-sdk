@@ -54,7 +54,7 @@ public class ReviewProductProjectionSearchIntegrationTest extends IntegrationTes
 
     @AfterClass
     public static void cleanUp() {
-        CartDiscountFixtures.deleteCartDiscounts(client());
+        CartDiscountFixtures.deleteDiscountCodesAndCartDiscounts(client());
         ReviewFixtures.deleteReviews(client());
         ProductFixtures.deleteProductsAndProductTypes(client());
     }

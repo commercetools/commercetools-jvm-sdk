@@ -38,7 +38,7 @@ public class ScopedPriceSearchIntegrationTest extends IntegrationTest {
 
     @AfterClass
     public static void delete() {
-        CartDiscountFixtures.deleteCartDiscounts(client());
+        CartDiscountFixtures.deleteDiscountCodesAndCartDiscounts(client());
         ProductFixtures.deleteProductsAndProductTypes(client());
         productType = null;
     }

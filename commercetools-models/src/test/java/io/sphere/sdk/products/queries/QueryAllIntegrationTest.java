@@ -22,7 +22,7 @@ public class QueryAllIntegrationTest extends QueryAllBase {
 
     @BeforeClass
     public static void clean(){
-        CartDiscountFixtures.deleteCartDiscounts(client());
+        CartDiscountFixtures.deleteDiscountCodesAndCartDiscounts(client());
     }
 
     @Test
