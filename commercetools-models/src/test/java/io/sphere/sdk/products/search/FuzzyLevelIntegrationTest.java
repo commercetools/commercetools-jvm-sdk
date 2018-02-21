@@ -1,5 +1,6 @@
 package io.sphere.sdk.products.search;
 
+import io.sphere.sdk.cartdiscounts.CartDiscountFixtures;
 import io.sphere.sdk.products.ProductFixtures;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.search.PagedSearchResult;
@@ -16,6 +17,7 @@ import static java.util.Locale.ENGLISH;
 public class FuzzyLevelIntegrationTest extends IntegrationTest {
     @BeforeClass
     public static void setUp() throws Exception {
+        CartDiscountFixtures.deleteDiscountCodes(client());
         ProductFixtures.deleteProductsAndProductTypes(client());
     }
 

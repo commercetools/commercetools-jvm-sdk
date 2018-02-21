@@ -1,5 +1,6 @@
 package io.sphere.sdk.products.search;
 
+import io.sphere.sdk.cartdiscounts.CartDiscountFixtures;
 import io.sphere.sdk.models.ResourceView;
 import io.sphere.sdk.productdiscounts.AbsoluteProductDiscountValue;
 import io.sphere.sdk.productdiscounts.ProductDiscountDraft;
@@ -37,6 +38,7 @@ public class ScopedPriceSearchIntegrationTest extends IntegrationTest {
 
     @AfterClass
     public static void delete() {
+        CartDiscountFixtures.deleteDiscountCodes(client());
         ProductFixtures.deleteProductsAndProductTypes(client());
         productType = null;
     }

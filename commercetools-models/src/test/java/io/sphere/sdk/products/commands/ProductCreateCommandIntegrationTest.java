@@ -1,5 +1,6 @@
 package io.sphere.sdk.products.commands;
 
+import io.sphere.sdk.cartdiscounts.CartDiscountFixtures;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.ResourceIdentifiable;
 import io.sphere.sdk.products.*;
@@ -40,6 +41,7 @@ public class ProductCreateCommandIntegrationTest extends IntegrationTest {
 
     @BeforeClass
     public static void cleanUp() throws Exception {
+        CartDiscountFixtures.deleteDiscountCodes(client());
         ProductFixtures.deleteProductsAndProductTypes(client());
     }
 

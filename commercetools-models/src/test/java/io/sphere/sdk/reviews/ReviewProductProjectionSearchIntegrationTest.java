@@ -1,6 +1,7 @@
 package io.sphere.sdk.reviews;
 
 import io.sphere.sdk.annotations.NotOSGiCompatible;
+import io.sphere.sdk.cartdiscounts.CartDiscountFixtures;
 import io.sphere.sdk.client.SphereClientUtils;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
@@ -53,6 +54,7 @@ public class ReviewProductProjectionSearchIntegrationTest extends IntegrationTes
 
     @AfterClass
     public static void cleanUp() {
+        CartDiscountFixtures.deleteDiscountCodes(client());
         ReviewFixtures.deleteReviews(client());
         ProductFixtures.deleteProductsAndProductTypes(client());
     }
