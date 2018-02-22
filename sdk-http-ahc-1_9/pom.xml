@@ -4,6 +4,7 @@
         <groupId>com.commercetools.sdk.jvm.core</groupId>
         <artifactId>commercetools-jvm-sdk</artifactId>
         <version>1.30.0-SNAPSHOT</version>
+        <relativePath>..</relativePath>
     </parent>
     <groupId>com.commercetools.sdk.jvm.core</groupId>
     <artifactId>sdk-http-ahc-1_9</artifactId>
