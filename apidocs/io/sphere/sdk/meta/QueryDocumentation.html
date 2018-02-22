@@ -408,10 +408,12 @@ assertThat(queryForProductId04to07).isEqualTo(ProductQuery.of().withLimit(4L).wi
 
  <p>For some cases, like iterating through a whole collection for imports/exports the offset parameter can be avoided by using a predicate id &gt; $lastId.</p>
 
- <div id="io-sphere-sdk-products-queries-QueryAllIntegrationTest%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.models.Identifiable;
+ <div id="io-sphere-sdk-products-queries-QueryAllIntegrationTest%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.cartdiscounts.CartDiscountFixtures;
+import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.PagedResult;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import java.util.LinkedList;
 import java.util.List;
@@ -422,6 +424,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 </code></pre><pre><code class='java'>public class QueryAllIntegrationTest extends QueryAllBase {
     //in production code it would higher #smalltestset
     private static final long PAGE_SIZE = 5;
+
+    @BeforeClass
+    public static void clean(){
+        CartDiscountFixtures.deleteDiscountCodesAndCartDiscounts(client());
+    }
 
     @Test
     public void useIdPredicateInsteadOfOffset() throws Exception {

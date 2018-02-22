@@ -795,6 +795,11 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/json/TypeReferences.html#booleanTypeReference--">booleanTypeReference()</a></span> - Static method in class io.sphere.sdk.json.<a href="io/sphere/sdk/json/TypeReferences.html" title="class in io.sphere.sdk.json">TypeReferences</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="javax/money/spi/Bootstrap.html" title="class in javax.money.spi"><span class="typeNameLink">Bootstrap</span></a> - Class in <a href="javax/money/spi/package-summary.html">javax.money.spi</a></dt>
+<dd>
+<div class="block">This class was overriding from the javamoney library in order to alter the classloader behavior, though it might not be signaled as used by the ide,
+ it will replace the one provided from the library after the compilation, as long as the canonical class names are kept identical.</div>
+</dd>
 <dt><a href="io/sphere/sdk/search/model/Bound.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">Bound</span></a>&lt;<a href="io/sphere/sdk/search/model/Bound.html" title="type parameter in Bound">T</a> extends <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html?is-external=true" title="class or interface in java.lang">Comparable</a>&lt;? super <a href="io/sphere/sdk/search/model/Bound.html" title="type parameter in Bound">T</a>&gt;&gt; - Class in <a href="io/sphere/sdk/search/model/package-summary.html">io.sphere.sdk.search.model</a></dt>
 <dd>
 <div class="block">Represents one of the two possible bounds of a range or interval.</div>
@@ -1593,7 +1598,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/AddressQueryModel.html#company--">company()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/AddressQueryModel.html" title="interface in io.sphere.sdk.queries">AddressQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/OSGiPriorityAwareServiceProvider.html#compareServices-java.lang.Object-java.lang.Object-">compareServices(Object, Object)</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/OSGiPriorityAwareServiceProvider.html" title="class in io.sphere.sdk.utils">OSGiPriorityAwareServiceProvider</a></dt>
+<dt><span class="memberNameLink"><a href="javax/money/spi/OSGiPriorityAwareServiceProvider.html#compareServices-java.lang.Object-java.lang.Object-">compareServices(Object, Object)</a></span> - Static method in class javax.money.spi.<a href="javax/money/spi/OSGiPriorityAwareServiceProvider.html" title="class in javax.money.spi">OSGiPriorityAwareServiceProvider</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/MoneyImpl.html#compareTo-javax.money.MonetaryAmount-">compareTo(MonetaryAmount)</a></span> - Method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/MoneyImpl.html" title="class in io.sphere.sdk.utils">MoneyImpl</a></dt>
 <dd>&nbsp;</dd>
@@ -6341,7 +6346,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/search/ProductProjectionSearch.html#getPriceSelection--">getPriceSelection()</a></span> - Method in interface io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/OSGiPriorityAwareServiceProvider.html#getPriority--">getPriority()</a></span> - Method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/OSGiPriorityAwareServiceProvider.html" title="class in io.sphere.sdk.utils">OSGiPriorityAwareServiceProvider</a></dt>
+<dt><span class="memberNameLink"><a href="javax/money/spi/OSGiPriorityAwareServiceProvider.html#getPriority--">getPriority()</a></span> - Method in class javax.money.spi.<a href="javax/money/spi/OSGiPriorityAwareServiceProvider.html" title="class in javax.money.spi">OSGiPriorityAwareServiceProvider</a></dt>
 <dd>
 <div class="block">Returns a priority value of 10.</div>
 </dd>
@@ -6745,7 +6750,11 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/Message.html#getSequenceNumber--">getSequenceNumber()</a></span> - Method in interface io.sphere.sdk.messages.<a href="io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/OSGiPriorityAwareServiceProvider.html#getServices-java.lang.Class-">getServices(Class&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/OSGiPriorityAwareServiceProvider.html" title="class in io.sphere.sdk.utils">OSGiPriorityAwareServiceProvider</a></dt>
+<dt><span class="memberNameLink"><a href="javax/money/spi/Bootstrap.html#getService-java.lang.Class-">getService(Class&lt;T&gt;)</a></span> - Static method in class javax.money.spi.<a href="javax/money/spi/Bootstrap.html" title="class in javax.money.spi">Bootstrap</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="javax/money/spi/Bootstrap.html#getServices-java.lang.Class-">getServices(Class&lt;T&gt;)</a></span> - Static method in class javax.money.spi.<a href="javax/money/spi/Bootstrap.html" title="class in javax.money.spi">Bootstrap</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="javax/money/spi/OSGiPriorityAwareServiceProvider.html#getServices-java.lang.Class-">getServices(Class&lt;T&gt;)</a></span> - Method in class javax.money.spi.<a href="javax/money/spi/OSGiPriorityAwareServiceProvider.html" title="class in javax.money.spi">OSGiPriorityAwareServiceProvider</a></dt>
 <dd>
 <div class="block">Loads and registers services.</div>
 </dd>
@@ -8309,6 +8318,8 @@
 </dd>
 <dt><a href="io/sphere/sdk/queries/InequalityQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">InequalityQueryModel</span></a>&lt;<a href="io/sphere/sdk/queries/InequalityQueryModel.html" title="type parameter in InequalityQueryModel">T</a>,<a href="io/sphere/sdk/queries/InequalityQueryModel.html" title="type parameter in InequalityQueryModel">V</a>&gt; - Interface in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="javax/money/spi/Bootstrap.html#init-javax.money.spi.ServiceProvider-">init(ServiceProvider)</a></span> - Static method in class javax.money.spi.<a href="javax/money/spi/Bootstrap.html" title="class in javax.money.spi">Bootstrap</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/sequencegenerators/CustomObjectBigIntegerNumberGeneratorConfigBuilder.html#initialValue-java.math.BigInteger-">initialValue(BigInteger)</a></span> - Method in class io.sphere.sdk.sequencegenerators.<a href="io/sphere/sdk/sequencegenerators/CustomObjectBigIntegerNumberGeneratorConfigBuilder.html" title="class in io.sphere.sdk.sequencegenerators">CustomObjectBigIntegerNumberGeneratorConfigBuilder</a></dt>
 <dd>
 <div class="block">Sets the first number generated if the underlying <a href="io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects"><code>CustomObject</code></a> does not exist.</div>
@@ -9696,6 +9707,8 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/annotations/processors/UpdateCommandEndpointAnnotationProcessor.html#javadocSummaryExtraction-io.sphere.sdk.annotations.HasUpdateCommand-">javadocSummaryExtraction(HasUpdateCommand)</a></span> - Method in class io.sphere.sdk.annotations.processors.<a href="io/sphere/sdk/annotations/processors/UpdateCommandEndpointAnnotationProcessor.html" title="class in io.sphere.sdk.annotations.processors">UpdateCommandEndpointAnnotationProcessor</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/MessageDerivateHint.html#javaType--">javaType()</a></span> - Method in class io.sphere.sdk.messages.<a href="io/sphere/sdk/messages/MessageDerivateHint.html" title="class in io.sphere.sdk.messages">MessageDerivateHint</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="javax/money/spi/package-summary.html">javax.money.spi</a> - package javax.money.spi</dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/SphereInternalUtils.html#join-java.util.List-">join(List&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/SphereInternalUtils.html" title="class in io.sphere.sdk.utils">SphereInternalUtils</a></dt>
 <dd>&nbsp;</dd>
@@ -14298,13 +14311,13 @@ withProductInCategories(client(),  categoryIds1, (Product product1) -&gt; {
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html#origin-io.sphere.sdk.carts.CartOrigin-">origin(CartOrigin)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html" title="class in io.sphere.sdk.orders">OrderImportDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/utils/OSGiPriorityAwareServiceProvider.html" title="class in io.sphere.sdk.utils"><span class="typeNameLink">OSGiPriorityAwareServiceProvider</span></a> - Class in <a href="io/sphere/sdk/utils/package-summary.html">io.sphere.sdk.utils</a></dt>
+<dt><a href="javax/money/spi/OSGiPriorityAwareServiceProvider.html" title="class in javax.money.spi"><span class="typeNameLink">OSGiPriorityAwareServiceProvider</span></a> - Class in <a href="javax/money/spi/package-summary.html">javax.money.spi</a></dt>
 <dd>
 <div class="block">This class replaces the <code>PriorityAwareServiceProvider</code> provided since the latest
  contains some bug that doesen't allow using it with OSGi, these bugs are mainly due to not specifying
  the <a href="http://docs.oracle.com/javase/8/docs/api/java/lang/ClassLoader.html?is-external=true" title="class or interface in java.lang"><code>ClassLoader</code></a> when using <a href="http://docs.oracle.com/javase/8/docs/api/java/util/ServiceLoader.html?is-external=true#load-java.lang.Class-java.lang.ClassLoader-" title="class or interface in java.util"><code>ServiceLoader.load(Class, ClassLoader)</code></a></div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/OSGiPriorityAwareServiceProvider.html#OSGiPriorityAwareServiceProvider--">OSGiPriorityAwareServiceProvider()</a></span> - Constructor for class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/OSGiPriorityAwareServiceProvider.html" title="class in io.sphere.sdk.utils">OSGiPriorityAwareServiceProvider</a></dt>
+<dt><span class="memberNameLink"><a href="javax/money/spi/OSGiPriorityAwareServiceProvider.html#OSGiPriorityAwareServiceProvider--">OSGiPriorityAwareServiceProvider()</a></span> - Constructor for class javax.money.spi.<a href="javax/money/spi/OSGiPriorityAwareServiceProvider.html" title="class in javax.money.spi">OSGiPriorityAwareServiceProvider</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/orders/errors/OutOfStockError.html" title="class in io.sphere.sdk.orders.errors"><span class="typeNameLink">OutOfStockError</span></a> - Class in <a href="io/sphere/sdk/orders/errors/package-summary.html">io.sphere.sdk.orders.errors</a></dt>
 <dd>
