@@ -108,11 +108,11 @@ then
     if [[ ${CURRENT_BRANCH} != "master" ]]
     then
         git commit -am"TASK Prepare release ${RELEASE_VERSION}"
-        git tag -a v${RELEASE_VERSION} -m 'Patch release v${RELEASE_VERSION}'
     fi
 fi
 
-git push origin ${CURRENT_BRANCH}
+git tag -a v${RELEASE_VERSION} -m 'TASK Release v${RELEASE_VERSION}'
+git push origin ${CURRENT_BRANCH} --tags
 echo Build directory ${TMPDIR}
 cd ${WORKDIR}
 
