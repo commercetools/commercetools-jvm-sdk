@@ -3,12 +3,13 @@
     <parent>
         <artifactId>osgi-support</artifactId>
         <groupId>com.commercetools.sdk.jvm.core</groupId>
-        <version>1.29.2</version>
+        <version>1.30.0-SNAPSHOT</version>
         <relativePath>..</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <properties>
         <org.ops4j.pax.logging.DefaultServiceLog.level>ERROR</org.ops4j.pax.logging.DefaultServiceLog.level>
+        <!-- the tests version was set to 2.8.4 to check that the tests pass in compatibility with Available AEM plugins -->
         <jackson.test.version>2.8.4</jackson.test.version>
     </properties>
     <artifactId>sdk-osgi-test-campaign</artifactId>
