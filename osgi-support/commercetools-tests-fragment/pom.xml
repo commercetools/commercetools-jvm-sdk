@@ -66,7 +66,12 @@
             <plugin>
                 <groupId>com.commercetools.sdk.jvm.core</groupId>
                 <artifactId>mirror-subclass-plugin</artifactId>
-                <version>${project.version}</version>
+                <!--
+                    We removed the version here so that it will use the current version.
+                    This fixes bootstrapping of our project.
+
+                    <version>${project.version}</version>
+                  -->
                 <configuration>
                     <artifactsToProcess>
                         <process>commercetools-java-client-apache-async</process>
