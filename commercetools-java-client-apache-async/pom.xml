@@ -57,6 +57,10 @@
                             osgi.serviceloader;
                             osgi.serviceloader="io.sphere.sdk.client.SphereHttpClientFactory"
                         </Provide-Capability>
+                        <Import-Package>
+                            com.fasterxml.jackson.*;version="[2.3.0,3.0.0)" ,
+                            *
+                        </Import-Package>
                     </instructions>
                 </configuration>
             </plugin>

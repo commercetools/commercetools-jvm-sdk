@@ -35,7 +35,11 @@
                     <instructions>
                         <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
                         <Export-Package>io.sphere.sdk.http</Export-Package>
-                        <Import-Package>!javax.annotation,*</Import-Package>
+                        <Import-Package>
+                            !javax.annotation,
+                            com.fasterxml.jackson.*;version="[2.3.0,3.0.0)" ,
+                            *
+                    </Import-Package>
                         <Bundle-Version>${project.version}</Bundle-Version>
                     </instructions>
                 </configuration>

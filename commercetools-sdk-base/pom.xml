@@ -91,7 +91,10 @@
                             javax.money.*,
                             org.javamoney.*
                         </Export-Package>
-                        <Import-Package>*</Import-Package>
+                        <Import-Package>
+                            com.fasterxml.jackson.*;version="[2.3.0,3.0.0)" ,
+                            *
+                        </Import-Package>
                         <Bundle-Version>${project.version}</Bundle-Version>
 
                         <Embed-Dependency>scope=compile|runtime;artifactId=money-api|moneta</Embed-Dependency>
