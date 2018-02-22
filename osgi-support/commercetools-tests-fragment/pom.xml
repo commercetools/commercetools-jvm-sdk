@@ -66,7 +66,6 @@
             <plugin>
                 <groupId>com.commercetools.sdk.jvm.core</groupId>
                 <artifactId>mirror-subclass-plugin</artifactId>
-                <version>${project.version}</version>
                 <configuration>
                     <artifactsToProcess>
                         <process>commercetools-java-client-apache-async</process>
