@@ -108,6 +108,7 @@ then
     if [[ ${CURRENT_BRANCH} != "master" ]]
     then
         git commit -am"TASK Prepare release ${RELEASE_VERSION}"
+        git tag -a v${RELEASE_VERSION} -m 'Patch release v${RELEASE_VERSION}'
     fi
 fi
 
@@ -115,8 +116,5 @@ git push origin ${CURRENT_BRANCH}
 echo Build directory ${TMPDIR}
 cd ${WORKDIR}
 
-if [[ ${TYPE} != "PATCH" ]]
-then
-    git fetch
-    git checkout ${BRANCH_NAME}
-fi
+git fetch
+git checkout ${BRANCH_NAME}
