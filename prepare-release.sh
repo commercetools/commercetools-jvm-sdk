@@ -111,8 +111,7 @@ then
     fi
 fi
 
-git tag -a v${RELEASE_VERSION} -m 'TASK Release v${RELEASE_VERSION}'
-git push origin ${CURRENT_BRANCH} --tags
+git push origin ${CURRENT_BRANCH}
 echo Build directory ${TMPDIR}
 cd ${WORKDIR}
 
