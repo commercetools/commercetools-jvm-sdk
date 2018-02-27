@@ -4,6 +4,9 @@ import io.sphere.sdk.cartdiscounts.commands.CartDiscountCreateCommand;
 import io.sphere.sdk.cartdiscounts.commands.CartDiscountDeleteCommand;
 import io.sphere.sdk.cartdiscounts.queries.CartDiscountQuery;
 import io.sphere.sdk.client.BlockingSphereClient;
+import io.sphere.sdk.discountcodes.DiscountCode;
+import io.sphere.sdk.discountcodes.commands.DiscountCodeDeleteCommand;
+import io.sphere.sdk.discountcodes.queries.DiscountCodeQuery;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.utils.MoneyImpl;
@@ -16,6 +19,13 @@ import java.util.function.UnaryOperator;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 
 public class CartDiscountFixtures {
+
+
+    public static void deleteDiscountCodesAndCartDiscounts(final BlockingSphereClient client){
+        client.executeBlocking(DiscountCodeQuery.of()).getResults().forEach(discountCode -> client.executeBlocking(DiscountCodeDeleteCommand.of(discountCode)));
+        client.executeBlocking(CartDiscountQuery.of()).getResults().forEach(cartDiscount -> client.executeBlocking(CartDiscountDeleteCommand.of(cartDiscount)));
+    }
+
     public static CartDiscountDraftBuilder newCartDiscountDraftBuilder() {
         return newCartDiscountDraftBuilder("totalPrice > \"800.00 EUR\"");
     }

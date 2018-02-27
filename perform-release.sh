@@ -22,5 +22,9 @@ echo "Performing release ${RELEASE_VERSION}"
 echo "Deploying release ${RELEASE_VERSION}"
 ./mvnw clean deploy -pl "!osgi-support, !osgi-support/mirror-subclass-plugin, !osgi-support/sdk-osgi-test-campaign, !osgi-support/commercetools-tests-fragment" -DskipTests -Prelease,javadoc-jdk-8u121
 
+git tag -a v${RELEASE_VERSION} -m 'TASK Release v${RELEASE_VERSION}'
+CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD`
+git push origin ${CURRENT_BRANCH} --tags
+
 echo "Publish release javadoc  ${RELEASE_VERSION}"
 ./mvnw javadoc:aggregate scm-publish:publish-scm -Ppublish-site,javadoc-jdk-8u121
