@@ -1,6 +1,5 @@
 package io.sphere.sdk.extensions.commands;
 
-import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.extensions.*;
 import io.sphere.sdk.extensions.commands.updateactions.ChangeDestination;
@@ -38,6 +37,45 @@ public class ExtensionUpdateCommandIntegrationTest extends IntegrationTest {
                 .forEach(client()::executeBlocking);
     }
 
+
+    @Test
+    public void testExtensionForCart(){
+        ExtendedResourceType extendedResourceType = ExtendedResourceType.CART;
+        final List<Trigger> triggers = asList(TriggerBuilder.of(extendedResourceType, asList(TriggerType.CREATE, TriggerType.UPDATE)).build());
+        final Destination destination = HttpDestinationBuilder.of(AZURE_FUNCTION_URL, AzureFunctionsAuthenticationBuilder.of(randomKey()).build()).build();
+        withExtensionDraft(client(), ExtensionDraftBuilder.of(randomKey(), destination, triggers).build(), extension -> {
+            assertThat(extension.getTriggers()).hasSize(1);
+            assertThat(extension.getTriggers().get(0).getResourceTypeId()).isEqualByComparingTo(extendedResourceType);
+            return extension;
+        });
+    }
+
+    @Test
+    public void testExtensionForCustomer(){
+        ExtendedResourceType extendedResourceType = ExtendedResourceType.CUSTOMER;
+        final List<Trigger> triggers = asList(TriggerBuilder.of(extendedResourceType, asList(TriggerType.CREATE, TriggerType.UPDATE)).build());
+        final Destination destination = HttpDestinationBuilder.of(AZURE_FUNCTION_URL, AzureFunctionsAuthenticationBuilder.of(randomKey()).build()).build();
+        withExtensionDraft(client(), ExtensionDraftBuilder.of(randomKey(), destination, triggers).build(), extension -> {
+            assertThat(extension.getTriggers()).hasSize(1);
+            assertThat(extension.getTriggers().get(0).getResourceTypeId()).isEqualByComparingTo(extendedResourceType);
+            return extension;
+        });
+    }
+
+    @Test
+    public void testExtensionForPayment(){
+        ExtendedResourceType extendedResourceType = ExtendedResourceType.PAYMENT;
+        final List<Trigger> triggers = asList(TriggerBuilder.of(extendedResourceType, asList(TriggerType.CREATE, TriggerType.UPDATE)).build());
+        final Destination destination = HttpDestinationBuilder.of(AZURE_FUNCTION_URL, AzureFunctionsAuthenticationBuilder.of(randomKey()).build()).build();
+        withExtensionDraft(client(), ExtensionDraftBuilder.of(randomKey(), destination, triggers).build(), extension -> {
+            assertThat(extension.getTriggers()).hasSize(1);
+            assertThat(extension.getTriggers().get(0).getResourceTypeId()).isEqualByComparingTo(extendedResourceType);
+            return extension;
+        });
+    }
+
+
+
     @Test
     public void setKey() {
 
@@ -54,7 +92,7 @@ public class ExtensionUpdateCommandIntegrationTest extends IntegrationTest {
     public void changeTriggers(){
 
         withExtension(client(), extension -> {
-            final List<Trigger> triggers = asList(TriggerBuilder.of(Cart.referenceTypeId(), asList(TriggerType.CREATE)).build());
+            final List<Trigger> triggers = asList(TriggerBuilder.of(ExtendedResourceType.CART, asList(TriggerType.CREATE)).build());
             Extension updatedExtension = client().executeBlocking(ExtensionUpdateCommand.of(extension, ChangeTriggers.of(triggers)));
             assertThat(updatedExtension.getTriggers()).containsAll(triggers);
             return updatedExtension;
@@ -76,7 +114,7 @@ public class ExtensionUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
 
-    public void withExtension(final BlockingSphereClient client, final ExtensionDraft extensionDraft,final UnaryOperator<Extension> mapper) {
+    public void withExtensionDraft(final BlockingSphereClient client, final ExtensionDraft extensionDraft, final UnaryOperator<Extension> mapper) {
 
         Extension extension = client.executeBlocking(ExtensionCreateCommand.of(extensionDraft));
         Extension result = mapper.apply(extension);
@@ -85,9 +123,9 @@ public class ExtensionUpdateCommandIntegrationTest extends IntegrationTest {
 
     public void withExtension(final BlockingSphereClient client,final UnaryOperator<Extension> mapper) {
 
-        List<Trigger> triggers = asList(TriggerBuilder.of(Cart.referenceTypeId(), asList(TriggerType.CREATE, TriggerType.UPDATE)).build());
+        List<Trigger> triggers = asList(TriggerBuilder.of(ExtendedResourceType.CART, asList(TriggerType.CREATE, TriggerType.UPDATE)).build());
         Destination destination = HttpDestinationBuilder.of(AZURE_FUNCTION_URL, AzureFunctionsAuthenticationBuilder.of(randomKey()).build()).build();
-        withExtension(client, ExtensionDraftBuilder.of(randomKey(), destination, triggers).build(), mapper);
+        withExtensionDraft(client, ExtensionDraftBuilder.of(randomKey(), destination, triggers).build(), mapper);
 
     }
 
