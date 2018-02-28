@@ -149,6 +149,7 @@ import java.util.function.Function;
  {@link io.sphere.sdk.customers.messages.CustomerEmailVerifiedMessage},
  {@link io.sphere.sdk.customers.messages.CustomerGroupSetMessage}
  </li>
+ <li class=new-in-release>Cart replication feature with {@link io.sphere.sdk.carts.commands.CartReplicationCommand} and {@link io.sphere.sdk.carts.commands.CartReplicationDraft}</li>
  </ul>
 
  <h3 class=released-version id="v1_29_1">1.29.1 (22.02.2018)</h3>
