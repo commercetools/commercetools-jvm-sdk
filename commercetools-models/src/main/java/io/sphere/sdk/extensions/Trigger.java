@@ -13,6 +13,9 @@ import java.util.List;
 public interface Trigger {
 
 
+    /**
+     * The resource id for the behaviour extended resource. fr the moment it supports "cart", "customer" and "payment".
+     */
     String getResourceTypeId();
 
     List<TriggerType> getActions();

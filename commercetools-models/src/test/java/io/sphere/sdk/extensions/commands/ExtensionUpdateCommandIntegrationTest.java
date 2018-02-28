@@ -2,11 +2,13 @@ package io.sphere.sdk.extensions.commands;
 
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.client.BlockingSphereClient;
+import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.extensions.*;
 import io.sphere.sdk.extensions.commands.updateactions.ChangeDestination;
 import io.sphere.sdk.extensions.commands.updateactions.ChangeTriggers;
 import io.sphere.sdk.extensions.commands.updateactions.SetKey;
 import io.sphere.sdk.extensions.queries.ExtensionQuery;
+import io.sphere.sdk.payments.Payment;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.BeforeClass;
@@ -36,6 +38,25 @@ public class ExtensionUpdateCommandIntegrationTest extends IntegrationTest {
                 .stream()
                 .map(ExtensionDeleteCommand::of)
                 .forEach(client()::executeBlocking);
+    }
+
+
+    @Test
+    public void createPaymentExtension(){
+        List<Trigger> triggers = asList(TriggerBuilder.of(Payment.referenceTypeId(), asList(TriggerType.CREATE, TriggerType.UPDATE)).build());
+        Destination destination = HttpDestinationBuilder.of(AZURE_FUNCTION_URL, AzureFunctionsAuthenticationBuilder.of(randomKey()).build()).build();
+        final ExtensionDraft extensionDraft = ExtensionDraftBuilder.of(randomKey(), destination, triggers).build();
+        Extension extension = client().executeBlocking(ExtensionCreateCommand.of(extensionDraft));
+        client().executeBlocking(ExtensionDeleteCommand.of(extension));
+    }
+
+    @Test
+    public void createCustomerExtension(){
+        List<Trigger> triggers = asList(TriggerBuilder.of(Customer.referenceTypeId(), asList(TriggerType.CREATE, TriggerType.UPDATE)).build());
+        Destination destination = HttpDestinationBuilder.of(AZURE_FUNCTION_URL, AzureFunctionsAuthenticationBuilder.of(randomKey()).build()).build();
+        final ExtensionDraft extensionDraft = ExtensionDraftBuilder.of(randomKey(), destination, triggers).build();
+        Extension extension = client().executeBlocking(ExtensionCreateCommand.of(extensionDraft));
+        client().executeBlocking(ExtensionDeleteCommand.of(extension));
     }
 
     @Test
