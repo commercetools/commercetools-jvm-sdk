@@ -150,7 +150,8 @@ import java.util.function.Function;
  {@link io.sphere.sdk.customers.messages.CustomerEmailVerifiedMessage},
  {@link io.sphere.sdk.customers.messages.CustomerGroupSetMessage}
  </li>
- <li class=new-in-release> Added {@link io.sphere.sdk.extensions.ExtendedResourceType} in order to add type check while creating {@link Trigger#getResourceTypeId()} field.</li>
+ <li class=change-in-release> Added {@link io.sphere.sdk.extensions.ExtendedResourceType} in order to add type check while creating {@link Trigger#getResourceTypeId()} field, instead of using string laterals.</li>
+
  </ul>
 
  <h3 class=released-version id="v1_29_1">1.29.1 (22.02.2018)</h3>
