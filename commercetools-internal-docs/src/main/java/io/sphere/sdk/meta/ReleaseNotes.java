@@ -136,6 +136,21 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+ <h3 class=released-version id="v1_30_0">1.30.0</h3>
+ <ul>
+ <li class=new-in-release>
+ Added customer change messages:
+ {@link io.sphere.sdk.customers.messages.CustomerAddressAddedMessage},
+ {@link io.sphere.sdk.customers.messages.CustomerAddressChangedMessage},
+ {@link io.sphere.sdk.customers.messages.CustomerAddressRemovedMessage},
+ {@link io.sphere.sdk.customers.messages.CustomerCompanyNameSetMessage},
+ {@link io.sphere.sdk.customers.messages.CustomerDateOfBirthSetMessage},
+ {@link io.sphere.sdk.customers.messages.CustomerEmailChangedMessage},
+ {@link io.sphere.sdk.customers.messages.CustomerEmailVerifiedMessage},
+ {@link io.sphere.sdk.customers.messages.CustomerGroupSetMessage}
+ </li>
+ </ul>
+
  <h3 class=released-version id="v1_29_1">1.29.1 (22.02.2018)</h3>
  <ul>
  <li class=fixed-in-release>Javamoney issue with class loader.</li>

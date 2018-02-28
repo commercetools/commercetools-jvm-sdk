@@ -6,8 +6,12 @@ import io.sphere.sdk.customers.CustomerDraft;
 import io.sphere.sdk.customers.CustomerIntegrationTest;
 import io.sphere.sdk.customers.CustomerName;
 import io.sphere.sdk.customers.commands.updateactions.*;
+import io.sphere.sdk.customers.messages.*;
+import io.sphere.sdk.messages.queries.MessageQuery;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.AddressBuilder;
+import io.sphere.sdk.queries.PagedQueryResult;
+import io.sphere.sdk.queries.Query;
 import net.jcip.annotations.NotThreadSafe;
 import org.junit.Test;
 
@@ -120,6 +124,19 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
             assertThat(customer.getEmail()).isNotEqualTo(newEmail);
             final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, ChangeEmail.of(newEmail)));
             assertThat(updatedCustomer.getEmail()).isEqualTo(newEmail);
+
+            Query<CustomerEmailChangedMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(customer))
+                    .withSort(m -> m.createdAt().sort().desc())
+                    .withLimit(1L)
+                    .forMessageType(CustomerEmailChangedMessage.MESSAGE_HINT);
+
+            assertEventually(() -> {
+                final PagedQueryResult<CustomerEmailChangedMessage> queryResult = client().executeBlocking(messageQuery);
+                assertThat(queryResult.head()).isPresent();
+                final CustomerEmailChangedMessage message = queryResult.head().get();
+                assertThat(message.getEmail()).isEqualTo(newEmail);
+            });
         });
     }
 
@@ -146,6 +163,17 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
             final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, AddAddress.of(newAddress)));
             assertThat(updatedCustomer.getAddresses().stream()
                     .anyMatch(containsNewAddressPredicate)).isTrue();
+
+            Query<CustomerAddressAddedMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(customer))
+                    .withSort(m -> m.createdAt().sort().desc())
+                    .withLimit(1L)
+                    .forMessageType(CustomerAddressAddedMessage.MESSAGE_HINT);
+
+            assertEventually(() -> {
+                final PagedQueryResult<CustomerAddressAddedMessage> queryResult = client().executeBlocking(messageQuery);
+                assertThat(queryResult.head()).isPresent();
+            });
         });
     }
 
@@ -167,6 +195,19 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
 
             assertThat(customerWithReplacedAddress.getAddresses()).hasSize(1);
             assertThat(customerWithReplacedAddress.getAddresses().get(0).getCity()).contains(city);
+
+            Query<CustomerAddressChangedMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(customer))
+                    .withSort(m -> m.createdAt().sort().desc())
+                    .withLimit(1L)
+                    .forMessageType(CustomerAddressChangedMessage.MESSAGE_HINT);
+
+            assertEventually(() -> {
+                final PagedQueryResult<CustomerAddressChangedMessage> queryResult = client().executeBlocking(messageQuery);
+                assertThat(queryResult.head()).isPresent();
+                final CustomerAddressChangedMessage message = queryResult.head().get();
+                assertThat(message.getAddress()).isEqualTo(newAddress);
+            });
         });
     }
 
@@ -183,6 +224,19 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
                     client().executeBlocking(CustomerUpdateCommand.of(customer, action));
 
             assertThat(customerWithoutAddresses.getAddresses()).isEmpty();
+
+            Query<CustomerAddressRemovedMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(customer))
+                    .withSort(m -> m.createdAt().sort().desc())
+                    .withLimit(1L)
+                    .forMessageType(CustomerAddressRemovedMessage.MESSAGE_HINT);
+
+            assertEventually(() -> {
+                final PagedQueryResult<CustomerAddressRemovedMessage> queryResult = client().executeBlocking(messageQuery);
+                assertThat(queryResult.head()).isPresent();
+                final CustomerAddressRemovedMessage message = queryResult.head().get();
+                assertThat(message.getAddress()).isEqualTo(oldAddress);
+            });
         });
     }
 
@@ -256,8 +310,21 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
             final String companyName = "Big coorp";
             final Customer updatedCustomer =
                     client().executeBlocking(CustomerUpdateCommand.of(customer, SetCompanyName.of(companyName)));
-
             assertThat(updatedCustomer.getCompanyName()).isEqualTo(companyName);
+
+            Query<CustomerCompanyNameSetMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(customer))
+                    .withSort(m -> m.createdAt().sort().desc())
+                    .withLimit(1L)
+                    .forMessageType(CustomerCompanyNameSetMessage.MESSAGE_HINT);
+
+            assertEventually(() -> {
+                final PagedQueryResult<CustomerCompanyNameSetMessage> queryResult = client().executeBlocking(messageQuery);
+                assertThat(queryResult.head()).isPresent();
+                final CustomerCompanyNameSetMessage message = queryResult.head().get();
+                assertThat(message.getCompanyName()).isEqualTo(companyName);
+            });
+
         });
     }
 
@@ -284,6 +351,19 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
                     client().executeBlocking(CustomerUpdateCommand.of(customer, SetDateOfBirth.of(dateOfBirth)));
 
             assertThat(updatedCustomer.getDateOfBirth()).isEqualTo(dateOfBirth);
+
+            Query<CustomerDateOfBirthSetMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(customer))
+                    .withSort(m -> m.createdAt().sort().desc())
+                    .withLimit(1L)
+                    .forMessageType(CustomerDateOfBirthSetMessage.MESSAGE_HINT);
+
+            assertEventually(() -> {
+                final PagedQueryResult<CustomerDateOfBirthSetMessage> queryResult = client().executeBlocking(messageQuery);
+                assertThat(queryResult.head()).isPresent();
+                final CustomerDateOfBirthSetMessage message = queryResult.head().get();
+                assertThat(message.getDateOfBirth()).isEqualTo(dateOfBirth);
+            });
         });
     }
 
@@ -294,6 +374,19 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
                 assertThat(customer.getCustomerGroup()).isNull();
                 final Customer updateCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, SetCustomerGroup.of(customerGroup)));
                 assertThat(updateCustomer.getCustomerGroup()).isEqualTo(customerGroup.toReference());
+
+                Query<CustomerGroupSetMessage> messageQuery = MessageQuery.of()
+                        .withPredicates(m -> m.resource().is(customer))
+                        .withSort(m -> m.createdAt().sort().desc())
+                        .withLimit(1L)
+                        .forMessageType(CustomerGroupSetMessage.MESSAGE_HINT);
+
+                assertEventually(() -> {
+                    final PagedQueryResult<CustomerGroupSetMessage> queryResult = client().executeBlocking(messageQuery);
+                    assertThat(queryResult.head()).isPresent();
+                    final CustomerGroupSetMessage message = queryResult.head().get();
+                    assertThat(message.getCustomerGroup()).isEqualTo(customerGroup.toReference());
+                });
             });
         });
     }
