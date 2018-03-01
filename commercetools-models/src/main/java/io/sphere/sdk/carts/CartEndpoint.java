@@ -7,5 +7,5 @@ public final class CartEndpoint {
     public static final JsonEndpoint<Cart> ENDPOINT = JsonEndpoint.of(Cart.typeReference(), "/carts");
 
     private CartEndpoint(){}
-    
+
 }
