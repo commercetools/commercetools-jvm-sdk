@@ -7,6 +7,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.client.methods.RequestBuilder;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.FileEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
@@ -16,6 +17,8 @@ import javax.annotation.Nullable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -97,7 +100,10 @@ final class ApacheHttpClientAdapterImpl extends HttpClientAdapterBase {
             final HttpRequestBody body = httpRequest.getBody();
             final HttpEntity httpEntity;
             if (body instanceof StringHttpRequestBody) {
-                httpEntity = stringEntityOf(((StringHttpRequestBody) body).getString());
+                final StringEntity stringEntity = new StringEntity(((StringHttpRequestBody) body).getString(), StandardCharsets.UTF_8);
+                stringEntity.setContentType(ContentType.APPLICATION_JSON.toString());
+                httpEntity = stringEntity;
+
             } else if (body instanceof FileHttpRequestBody) {
                 httpEntity = new FileEntity(((FileHttpRequestBody)body).getFile());
             } else if (body instanceof FormUrlEncodedHttpRequestBody) {
@@ -116,10 +122,6 @@ final class ApacheHttpClientAdapterImpl extends HttpClientAdapterBase {
                 .map(entry -> new BasicNameValuePair(entry.getName(), entry.getValue()))
                 .collect(Collectors.toList());
         return new UrlEncodedFormEntity(values);
-    }
-
-    private static HttpEntity stringEntityOf(final String body) throws UnsupportedEncodingException {
-        return new StringEntity(body);
     }
 
     @Nullable

@@ -9,6 +9,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.annotation.processing.Messager;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
@@ -23,11 +24,11 @@ import java.util.stream.Collectors;
 /**
  * Abstract base class for builder generators.
  */
-abstract class AbstractBuilderGenerator<A extends Annotation> extends AbstractGenerator {
+abstract class AbstractBuilderGenerator<A extends Annotation> extends AbstractGenerator<TypeElement> {
     protected final Class<A> annotationType;
 
-    AbstractBuilderGenerator(final Elements elements, final Types types, final Class<A> annotationType) {
-        super(elements, types);
+    AbstractBuilderGenerator(final Elements elements, final Types types, Messager messager, final Class<A> annotationType) {
+        super(elements, types, messager);
         this.annotationType = annotationType;
     }
 
@@ -111,6 +112,9 @@ abstract class AbstractBuilderGenerator<A extends Annotation> extends AbstractGe
         } else {
             builder.addCode("this.$L = $N;\n", fieldName, parameter);
         }
+
+        copyDeprecatedAnnotation(property, builder);
+
         return addBuilderMethodReturn(builderType, builder).build();
     }
 }

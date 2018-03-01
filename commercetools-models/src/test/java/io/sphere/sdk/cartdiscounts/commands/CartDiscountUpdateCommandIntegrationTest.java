@@ -12,11 +12,16 @@ import org.junit.Test;
 
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
+import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.withCartDiscount;
 import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.withPersistentCartDiscount;
 import static io.sphere.sdk.test.SphereTestUtils.*;
+import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
+import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -48,6 +53,21 @@ public class CartDiscountUpdateCommandIntegrationTest extends IntegrationTest {
 
             assertThat(updatedDiscount.getCartPredicate()).isEqualTo(newPredicate);
         });
+    }
+
+    @Test
+    public void changeValidFromUntil() throws Exception {
+
+        withPersistentCartDiscount(client(), cartDiscount -> {
+            final ZonedDateTime start = ZonedDateTime.parse("2015-07-09T07:46:40.230Z");
+            final ZonedDateTime end = start.plusYears(100);
+
+            final CartDiscount updatedDiscount =
+                    client().executeBlocking(CartDiscountUpdateCommand.of(cartDiscount, asList(SetValidFrom.of(start),SetValidUntil.of(end))));
+            assertThat(updatedDiscount.getValidFrom()).isEqualTo(start);
+            assertThat(updatedDiscount.getValidUntil()).isEqualTo(end);
+        });
+
     }
 
     @Test
@@ -126,16 +146,20 @@ public class CartDiscountUpdateCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void changeRequiresDiscountCode() throws Exception {
-        withPersistentCartDiscount(client(), cartDiscount -> {
-            final boolean newRequiresDiscountCode = !cartDiscount.isRequiringDiscountCode();
+        withCartDiscount(
+            client(),
+            cartDiscountDraftBuilder -> cartDiscountDraftBuilder.requiresDiscountCode(true),
+            cartDiscount -> {
+                final boolean newRequiresDiscountCode = !cartDiscount.isRequiringDiscountCode();
 
-            assertThat(cartDiscount.isRequiringDiscountCode()).isNotEqualTo(newRequiresDiscountCode);
+                assertThat(cartDiscount.isRequiringDiscountCode()).isNotEqualTo(newRequiresDiscountCode);
 
-            final CartDiscount updatedDiscount =
-                    client().executeBlocking(CartDiscountUpdateCommand.of(cartDiscount, ChangeRequiresDiscountCode.of(newRequiresDiscountCode)));
+                final CartDiscount updatedDiscount =
+                        client().executeBlocking(CartDiscountUpdateCommand.of(cartDiscount, ChangeRequiresDiscountCode.of(newRequiresDiscountCode)));
 
-            assertThat(updatedDiscount.isRequiringDiscountCode()).isEqualTo(newRequiresDiscountCode);
-        });
+                assertThat(updatedDiscount.isRequiringDiscountCode()).isEqualTo(newRequiresDiscountCode);
+                return updatedDiscount;
+            });
     }
 
     @Test
@@ -152,6 +176,7 @@ public class CartDiscountUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(updatedDiscount.getValidFrom()).isEqualTo(dateTime);
         });
     }
+
     @Test
     public void setValidUntil() throws Exception {
         withPersistentCartDiscount(client(), cartDiscount -> {
@@ -165,6 +190,55 @@ public class CartDiscountUpdateCommandIntegrationTest extends IntegrationTest {
 
             assertThat(updatedDiscount.getValidUntil()).isEqualTo(dateTime);
         });
+    }
+
+    @Test
+    public void changeStackingMode() throws Exception {
+        withCartDiscount(client(), cartDiscount -> {
+            CartDiscount updatedDiscount = cartDiscount;
+            for (final StackingMode stackingMode : Arrays.asList(StackingMode.STOP_AFTER_THIS_DISCOUNT, StackingMode.STACKING, StackingMode.STOP_AFTER_THIS_DISCOUNT)) {
+                assertThat(updatedDiscount.getStackingMode()).isNotEqualTo(stackingMode);
+
+                updatedDiscount =
+                        client().executeBlocking(CartDiscountUpdateCommand.of(updatedDiscount, ChangeStackingMode.of(stackingMode)));
+
+                assertThat(updatedDiscount.getStackingMode()).isEqualTo(stackingMode);
+            }
+
+            return updatedDiscount;
+        });
+    }
+
+
+    @Test
+    public void setCustomType(){
+        withUpdateableType(client(), type -> {
+            withCartDiscount(client(), cartDiscount -> {
+                final HashMap<String, Object> fields = new HashMap<>();
+                fields.put(STRING_FIELD_NAME, "hello");
+                final CartDiscountUpdateCommand updateCommand =
+                        CartDiscountUpdateCommand.of(cartDiscount, SetCustomType.ofTypeIdAndObjects(type.getId(), fields));
+                final CartDiscount updatedDiscount = client().executeBlocking(updateCommand);
+
+                assertThat(updatedDiscount.getCustom().getType()).isEqualTo(type.toReference());
+                assertThat(updatedDiscount.getCustom().getFieldAsString(STRING_FIELD_NAME)).isEqualTo("hello");
+
+                final CartDiscountUpdateCommand updateCommand2 =
+                        CartDiscountUpdateCommand.of(updatedDiscount,SetCustomField.ofObject(STRING_FIELD_NAME, "a new value"));
+                final CartDiscount updatedDiscount2 = client().executeBlocking(updateCommand2);
+
+                assertThat(updatedDiscount2.getCustom()
+                        .getFieldAsString(STRING_FIELD_NAME)).isEqualTo("a new value");
+
+
+                final CartDiscount updated2 =
+                        client().executeBlocking(CartDiscountUpdateCommand.of(updatedDiscount2, SetCustomType.ofRemoveType()));
+                assertThat(updated2.getCustom()).isNull();
+                return updated2;
+            });
+            return type;
+        });
+
     }
 
     private ZonedDateTime dateTimeAfterValidFromAndOldValidUntil(final CartDiscount cartDiscount) {

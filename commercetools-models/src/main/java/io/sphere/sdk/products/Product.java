@@ -38,7 +38,7 @@ import java.util.Optional;
 @JsonDeserialize(as=ProductImpl.class)
 @ResourceValue(abstractResourceClass = true)
 @ResourceInfo(pluralName = "products", pathElement = "products")
-@HasDeleteCommand(includeExamples = "io.sphere.sdk.products.ProductDeleteExample#delete()", deleteWithKey = true)
+@HasDeleteCommand(includeExamples = "io.sphere.sdk.products.ProductDeleteExample#delete()", deleteWith = "key")
 public interface Product extends ProductLike<Product, Product>, Resource<Product> {
 
     ProductCatalogData getMasterData();

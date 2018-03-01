@@ -20,13 +20,13 @@ import io.sphere.sdk.test.JsonNodeReferenceResolver;
 import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.utils.MoneyImpl;
-import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.junit.Test;
 
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -222,7 +222,7 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
             withTransientTaxCategory(client(), taxCategory -> {
                 final MonetaryAmount price = EURO_5;
                 final MonetaryAmount freeAbove = EURO_30;
-                final ShippingRate shippingRate = ShippingRate.of(price, freeAbove);
+                final ShippingRate shippingRate = ShippingRate.of(price, freeAbove, Collections.EMPTY_LIST);
                 final TaxRate taxRate = taxCategory.getTaxRates().get(0);
                 final Reference<TaxCategory> taxCategoryRef = taxCategory.toReference();
                 final Reference<ShippingMethod> shippingMethodRef = shippingMethod.toReference();
@@ -271,12 +271,13 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
                 final String deliveryId = randomUUID();
                 final TrackingData trackingData = TrackingData.of().withTrackingId("tracking id")
                         .withCarrier("carrier").withProvider("provider").withProviderTransaction("prov transaction").withIsReturn(true);
-                final Parcel parcel = Parcel.of(randomUUID(), createdAt, parcelMeasurements, trackingData);
+                final Parcel parcel = Parcel.of(createdAt, randomUUID(),asList(), parcelMeasurements, trackingData);
                 final List<Delivery> deliveries = asList(Delivery.of(deliveryId, createdAt, asList(deliveryItem), asList(parcel)));
                 final OrderShippingInfo shippingInfo = OrderShippingInfo.of(randomString(), price, shippingRate, taxRate, taxCategoryRef, shippingMethodRef, deliveries);
                 testOrderAspect(
                         builder -> builder.shippingInfo(shippingInfo),
-                        order -> assertThat(order).matches(o -> EqualsBuilder.reflectionEquals(o.getShippingInfo(), shippingInfo, "taxedPrice"))
+                        order -> assertThat(order.getShippingInfo()).
+                                isEqualToIgnoringGivenFields(shippingInfo, "taxedPrice", "shippingMethodState")
                 );
             });
         });
@@ -364,16 +365,18 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
             final Price price = Price.of(EURO_10);
             final OrderState orderState = OrderState.COMPLETE;
             final MonetaryAmount amount = EURO_10;
-
+            final TaxCalculationMode taxCalculationMode = TaxCalculationMode.LINE_ITEM_LEVEL;
             final ProductVariantImportDraft variant = ProductVariantImportDraftBuilder.of(productId, variantId, sku).build();
             final LineItemImportDraft lineItemImportDraft = LineItemImportDraftBuilder.of(variant, quantity, price, name).build();
             final OrderImportDraft orderImportDraft = OrderImportDraftBuilder.ofLineItems(amount, orderState, asList(lineItemImportDraft))
-                    .inventoryMode(InventoryMode.TRACK_ONLY).build();
+                    .inventoryMode(InventoryMode.TRACK_ONLY)
+                    .taxCalculationMode(taxCalculationMode)
+                    .build();
             final OrderImportCommand cmd = OrderImportCommand.of(orderImportDraft);
 
             final Order order = client().executeBlocking(cmd);
             assertThat(order.getInventoryMode()).isEqualTo(InventoryMode.TRACK_ONLY);
-
+            assertThat(order.getTaxCalculationMode()).isEqualTo(taxCalculationMode);
             client().executeBlocking(OrderDeleteCommand.of(order));
         });
     }
@@ -400,6 +403,23 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
         testOrderAspect(builder -> builder.billingAddress(billingAddress),
                 order -> assertThat(order.getBillingAddress()).isEqualTo(billingAddress));
     }
+
+    @Test
+    public void originCustomer() throws Exception {
+        CartOrigin origin = CartOrigin.CUSTOMER;
+        testOrderAspect(orderImportDraftBuilder -> orderImportDraftBuilder.origin(origin),
+                order -> assertThat(order.getOrigin()).isEqualTo(origin)
+        );
+    }
+
+    @Test
+    public void originMerchant() throws Exception {
+        CartOrigin origin = CartOrigin.MERCHANT;
+        testOrderAspect(orderImportDraftBuilder -> orderImportDraftBuilder.origin(origin),
+                order -> assertThat(order.getOrigin()).isEqualTo(origin)
+        );
+    }
+
 
     @Test
     public void getCompletedAt() throws Exception {

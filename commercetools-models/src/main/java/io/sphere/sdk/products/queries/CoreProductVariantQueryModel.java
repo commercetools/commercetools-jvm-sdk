@@ -9,5 +9,7 @@ import io.sphere.sdk.queries.StringQueryModel;
 interface CoreProductVariantQueryModel<T> {
     StringQueryModel<T> sku();
 
+    StringQueryModel<T> key();
+
     PriceCollectionQueryModel<T> prices();
 }

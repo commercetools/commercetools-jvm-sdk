@@ -22,9 +22,11 @@ final class CustomLineItemDraftImpl extends Base implements CustomLineItemDraft 
     private final CustomFieldsDraft custom;
     @Nullable
     private final ExternalTaxRateDraft externalTaxRate;
+    @Nullable
+    private final ItemShippingDetailsDraft shippingDetails;
 
     @JsonCreator
-    CustomLineItemDraftImpl(final LocalizedString name, final String slug, final MonetaryAmount money, @Nullable final Reference<TaxCategory> taxCategory, final Long quantity, @Nullable final CustomFieldsDraft custom, final ExternalTaxRateDraft externalTaxRate) {
+    CustomLineItemDraftImpl(final LocalizedString name, final String slug, final MonetaryAmount money, @Nullable final Reference<TaxCategory> taxCategory, final Long quantity, @Nullable final CustomFieldsDraft custom, final ExternalTaxRateDraft externalTaxRate,@Nullable final ItemShippingDetailsDraft shippingDetails) {
         this.name = name;
         this.money = money;
         this.slug = slug;
@@ -32,6 +34,7 @@ final class CustomLineItemDraftImpl extends Base implements CustomLineItemDraft 
         this.taxCategory = taxCategory;
         this.quantity = quantity;
         this.externalTaxRate = externalTaxRate;
+        this.shippingDetails = shippingDetails;
     }
 
     @Override
@@ -69,5 +72,10 @@ final class CustomLineItemDraftImpl extends Base implements CustomLineItemDraft 
     @Nullable
     public ExternalTaxRateDraft getExternalTaxRate() {
         return externalTaxRate;
+    }
+
+    @Override
+    public ItemShippingDetailsDraft getShippingDetails() {
+        return shippingDetails;
     }
 }

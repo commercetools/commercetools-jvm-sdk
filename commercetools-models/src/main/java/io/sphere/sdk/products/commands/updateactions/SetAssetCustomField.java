@@ -26,12 +26,14 @@ public final class SetAssetCustomField extends SetCustomFieldBase<Product> {
     @Nullable
     private final String sku;
     private final String assetId;
+    private final String assetKey;
     @Nullable
     private final Boolean staged;
 
-    private SetAssetCustomField(final String assetId, @Nullable final Integer variantId, @Nullable final String sku, final String name, final JsonNode value, @Nullable final Boolean staged) {
+    private SetAssetCustomField(final String assetId,final String assetKey, @Nullable final Integer variantId, @Nullable final String sku, final String name, final JsonNode value, @Nullable final Boolean staged) {
         super("setAssetCustomField", name, value);
         this.assetId = assetId;
+        this.assetKey = assetKey;
         this.variantId = variantId;
         this.sku = sku;
         this.staged = staged;
@@ -56,7 +58,7 @@ public final class SetAssetCustomField extends SetCustomFieldBase<Product> {
     }
 
     public static SetAssetCustomField ofVariantIdUsingJson(final Integer variantId, final String assetId, final String name, final JsonNode value, @Nullable final Boolean staged) {
-        return new SetAssetCustomField(assetId, variantId, null, name, value, staged);
+        return new SetAssetCustomField(assetId,null, variantId, null, name, value, staged);
     }
 
     public static SetAssetCustomField ofSkuUsingJson(final String sku, final String assetId, final String name, final JsonNode value) {
@@ -64,7 +66,7 @@ public final class SetAssetCustomField extends SetCustomFieldBase<Product> {
     }
 
     public static SetAssetCustomField ofSkuUsingJson(final String sku, final String assetId, final String name, final JsonNode value, @Nullable final Boolean staged) {
-        return new SetAssetCustomField(assetId, null, sku, name, value, staged);
+        return new SetAssetCustomField(assetId,null, null, sku, name, value, staged);
     }
 
     public static SetAssetCustomField ofVariantId(final Integer variantId, final String assetId, final String name, final Object value) {
@@ -81,6 +83,39 @@ public final class SetAssetCustomField extends SetCustomFieldBase<Product> {
 
     public static SetAssetCustomField ofSku(final String sku, final String assetId, final String name, final Object value, @Nullable final Boolean staged) {
         return ofSkuUsingJson(sku, assetId, name, SphereJsonUtils.toJsonNode(value), staged);
+    }
+    
+    
+    public static SetAssetCustomField ofVariantIdUsingJsonAndAssetKey(final Integer variantId, final String assetKey, final String name, final JsonNode value) {
+        return ofVariantIdUsingJsonAndAssetKey(variantId, assetKey, name, value, null);
+    }
+
+    public static SetAssetCustomField ofVariantIdUsingJsonAndAssetKey(final Integer variantId, final String assetKey, final String name, final JsonNode value, @Nullable final Boolean staged) {
+        return new SetAssetCustomField(null, assetKey, variantId, null, name, value, staged);
+    }
+
+    public static SetAssetCustomField ofSkuUsingJsonAndAssetKey(final String sku, final String assetKey, final String name, final JsonNode value) {
+        return ofSkuUsingJsonAndAssetKey(sku, assetKey, name, value, null);
+    }
+
+    public static SetAssetCustomField ofSkuUsingJsonAndAssetKey(final String sku, final String assetKey, final String name, final JsonNode value, @Nullable final Boolean staged) {
+        return new SetAssetCustomField(null,assetKey, null, sku, name, value, staged);
+    }
+
+    public static SetAssetCustomField ofVariantIdAndAssetKey(final Integer variantId, final String assetKey, final String name, final Object value) {
+        return ofVariantIdAndAssetKey(variantId, assetKey, name, value, null);
+    }
+
+    public static SetAssetCustomField ofVariantIdAndAssetKey(final Integer variantId, final String assetKey, final String name, final Object value, @Nullable final Boolean staged) {
+        return ofVariantIdUsingJsonAndAssetKey(variantId, assetKey, name, SphereJsonUtils.toJsonNode(value), staged);
+    }
+
+    public static SetAssetCustomField ofSkuAndAssetKey(final String sku, final String assetKey, final String name, final Object value) {
+        return ofSkuAndAssetKey(sku, assetKey, name, value, null);
+    }
+
+    public static SetAssetCustomField ofSkuAndAssetKey(final String sku, final String assetKey, final String name, final Object value, @Nullable final Boolean staged) {
+        return ofSkuUsingJsonAndAssetKey(sku, assetKey, name, SphereJsonUtils.toJsonNode(value), staged);
     }
 
     @Nullable

@@ -1,9 +1,7 @@
 package io.sphere.sdk.orders;
 
 import com.neovisionaries.i18n.CountryCode;
-import io.sphere.sdk.carts.InventoryMode;
-import io.sphere.sdk.carts.RoundingMode;
-import io.sphere.sdk.carts.TaxedPrice;
+import io.sphere.sdk.carts.*;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Base;
@@ -50,8 +48,14 @@ final class OrderImportDraftImpl extends Base implements OrderImportDraft {
     private final RoundingMode taxRoundingMode;
     @Nullable
     private final InventoryMode inventoryMode;
+    @Nullable
+    private final TaxCalculationMode taxCalculationMode;
+    @Nullable
+    private final CartOrigin origin;
 
-    public OrderImportDraftImpl(@Nullable final Address billingAddress, @Nullable final String orderNumber, @Nullable final String customerId, @Nullable final String customerEmail, final List<LineItemImportDraft> lineItems, final List<CustomLineItemImportDraft> customLineItems, final MonetaryAmount totalPrice, @Nullable final TaxedPrice taxedPrice, @Nullable final Address shippingAddress, @Nullable final Reference<CustomerGroup> customerGroup, @Nullable final CountryCode country, final OrderState orderState, @Nullable final ShipmentState shipmentState, @Nullable final PaymentState paymentState, @Nullable final OrderShippingInfo shippingInfo, @Nullable final ZonedDateTime completedAt, @Nullable final CustomFieldsDraft custom, @Nullable final RoundingMode taxRoundingMode, @Nullable final InventoryMode inventoryMode) {
+    @Nullable private final List<Address> itemShippingAddresses;
+
+    public OrderImportDraftImpl(@Nullable final Address billingAddress, @Nullable final String orderNumber, @Nullable final String customerId, @Nullable final String customerEmail, final List<LineItemImportDraft> lineItems, final List<CustomLineItemImportDraft> customLineItems, final MonetaryAmount totalPrice, @Nullable final TaxedPrice taxedPrice, @Nullable final Address shippingAddress, @Nullable final Reference<CustomerGroup> customerGroup, @Nullable final CountryCode country, final OrderState orderState, @Nullable final ShipmentState shipmentState, @Nullable final PaymentState paymentState, @Nullable final OrderShippingInfo shippingInfo, @Nullable final ZonedDateTime completedAt, @Nullable final CustomFieldsDraft custom, @Nullable final RoundingMode taxRoundingMode, @Nullable final InventoryMode inventoryMode,@Nullable TaxCalculationMode taxCalculationMode, @Nullable CartOrigin origin,@Nullable final List<Address> itemShippingAddresses) {
         this.billingAddress = billingAddress;
         this.orderNumber = orderNumber;
         this.customerId = customerId;
@@ -71,6 +75,9 @@ final class OrderImportDraftImpl extends Base implements OrderImportDraft {
         this.custom = custom;
         this.taxRoundingMode = taxRoundingMode;
         this.inventoryMode = inventoryMode;
+        this.taxCalculationMode = taxCalculationMode;
+        this.origin = origin;
+        this.itemShippingAddresses = itemShippingAddresses;
     }
 
     @Override
@@ -181,5 +188,23 @@ final class OrderImportDraftImpl extends Base implements OrderImportDraft {
     @Nullable
     public InventoryMode getInventoryMode() {
         return inventoryMode;
+    }
+
+    @Override
+    @Nullable
+    public TaxCalculationMode getTaxCalculationMode() {
+        return taxCalculationMode;
+    }
+
+    @Override
+    @Nullable
+    public CartOrigin getOrigin() {
+        return origin;
+    }
+
+    @Nullable
+    @Override
+    public List<Address> getItemShippingAddresses() {
+        return itemShippingAddresses;
     }
 }

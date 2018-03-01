@@ -12,6 +12,11 @@ class ProductVariantQueryModelImpl<T> extends QueryModelImpl<T> implements Produ
     }
 
     @Override
+    public StringQueryModel<T> key() {
+        return stringQuerySortingModel("key");
+    }
+
+    @Override
     public StringQueryModel<T> sku() {
         return stringModel("sku");
     }

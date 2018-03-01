@@ -40,7 +40,7 @@ public class OrderPaymentStateChangedMessageIntegrationTest extends IntegrationT
                 final Optional<OrderPaymentStateChangedMessage> optMessage = pagedQueryResult.head();
                 assertThat(optMessage).isPresent();
                 OrderPaymentStateChangedMessage message = optMessage.get();
-                assertThat(message.getId()).isEqualTo(updatedOrder.getId());
+                assertThat(message.getResource().getId()).isEqualTo(updatedOrder.getId());
                 assertThat(message.getPaymentState()).isEqualTo(newState);
             });
 

@@ -1,7 +1,7 @@
 package io.sphere.sdk.meta;
 
 import org.javamoney.moneta.format.CurrencyStyle;
-import org.javamoney.moneta.function.MonetaryUtil;
+import org.javamoney.moneta.function.MonetaryQueries;
 
 import java.time.format.DateTimeFormatter;
 
@@ -59,17 +59,17 @@ import java.time.format.DateTimeFormatter;
  *
  * <h4 id="obtain-minor-unit-amount">Obtain the cent amounts</h4>
  *
- * Use {@link MonetaryUtil#minorUnits()} to get the <em>whole amount</em> as cents:
+ * Use {@link MonetaryQueries#convertMinorPart()} to get the <em>whole amount</em> as cents:
  *
  * {@include.example io.sphere.sdk.meta.FormattingDocumentationTest#getAmountInCents()}
  *
- * Use {@link MonetaryUtil#minorPart()} and {@link MonetaryUtil#minorUnits()} to get the <em>minor unit (cent) part</em>:
+ * Use {@link MonetaryQueries#extractMinorPart()} to get the <em>minor unit (cent) part</em>:
  *
  * {@include.example io.sphere.sdk.meta.FormattingDocumentationTest#getCents()}
  *
  * <h4 id="major-unit-amount">Obtain the smooth amount</h4>
  *
- * Use {@link MonetaryUtil#majorUnits()} to get the smooth amount:
+ * Use {@link MonetaryQueries#extractMajorPart()} to get the smooth amount:
  *
  * {@include.example io.sphere.sdk.meta.FormattingDocumentationTest#getMajorUnitAmount()}
  *

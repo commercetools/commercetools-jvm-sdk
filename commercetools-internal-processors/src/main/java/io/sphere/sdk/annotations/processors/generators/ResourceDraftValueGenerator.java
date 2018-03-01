@@ -9,6 +9,7 @@ import io.sphere.sdk.models.Referenceable;
 
 import javax.annotation.Generated;
 import javax.annotation.Nullable;
+import javax.annotation.processing.Messager;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
@@ -21,10 +22,10 @@ import java.util.stream.Collectors;
 import static com.squareup.javapoet.MethodSpec.methodBuilder;
 import static org.apache.commons.lang3.StringUtils.capitalize;
 
-public class ResourceDraftValueGenerator extends AbstractGenerator {
+public class ResourceDraftValueGenerator extends AbstractGenerator<TypeElement> {
 
-    public ResourceDraftValueGenerator(final Elements elements, final Types types) {
-        super(elements, types);
+    public ResourceDraftValueGenerator(final Elements elements, final Types types,final Messager messager) {
+        super(elements, types,messager);
     }
 
     @Override
@@ -32,9 +33,9 @@ public class ResourceDraftValueGenerator extends AbstractGenerator {
 
         final ResourceDraftValue resourceDraftValue = resourceValueTypeElement.getAnnotation(ResourceDraftValue.class);
         final List<ExecutableElement> propertyMethods = getAllPropertyMethodsSorted(resourceValueTypeElement);
-        final List<PropertyGenModel> propertyGenModels = getPropertyGenModels(propertyMethods);
-        final List<FieldSpec> fields = propertyGenModels.stream().map(this::createField).collect(Collectors.toList());
-        final List<MethodSpec> getMethods = propertyMethods.stream().map(this::createGetMethod).collect(Collectors.toList());
+        final List<PropertyGenModel> properties = getPropertyGenModels(propertyMethods);
+        final List<FieldSpec> fields = properties.stream().map(this::createField).collect(Collectors.toList());
+        final List<MethodSpec> getMethods = properties.stream().map(this::createGetMethod).collect(Collectors.toList());
 
         final ClassName concreteDraftType = typeUtils.getDraftImplType(resourceValueTypeElement);
         final ClassName draftImplType = getDraftImplType(resourceValueTypeElement);
@@ -56,12 +57,12 @@ public class ResourceDraftValueGenerator extends AbstractGenerator {
                 .addMember("value", "$S", getClass().getCanonicalName())
                 .addMember("comments", "$S", "Generated from: " + resourceValueTypeElement.getQualifiedName().toString()).build())
                 .addFields(fields)
-                .addMethod(createConstructor(propertyGenModels))
+                .addMethod(createConstructor(properties))
                 .addMethods(getMethods)
                 .addMethod(createBuilderMethod(builderType, propertyMethods))
-                .addMethods(createWithMethods(resourceValueTypeElement, propertyGenModels))
-                .addMethods(createWithMethodsWithJsonName(resourceValueTypeElement, propertyGenModels))
-                .addMethods(createFactoryMethods(resourceDraftValue.factoryMethods(), propertyGenModels, concreteDraftType))
+                .addMethods(createWithMethods(resourceValueTypeElement, properties))
+                .addMethods(createWithMethodsWithJsonName(resourceValueTypeElement, properties))
+                .addMethods(createFactoryMethods(resourceDraftValue.factoryMethods(), properties, concreteDraftType))
                 .addMethod(createCopyFactoryMethod(resourceValueTypeElement, concreteDraftType, propertyMethods));
 
         return builder.build();
@@ -80,13 +81,6 @@ public class ResourceDraftValueGenerator extends AbstractGenerator {
                 .returns(type)
                 .addCode("return new $T($L);\n", type, callArguments)
                 .build();
-    }
-
-    @Override
-    protected MethodSpec.Builder createGetMethodBuilder(final ExecutableElement propertyMethod) {
-        final MethodSpec.Builder builder = super.createGetMethodBuilder(propertyMethod);
-        copyJsonAnnotation(propertyMethod, builder);
-        return builder;
     }
 
     private Iterable<MethodSpec> createWithMethods(final TypeElement typeElement, final List<PropertyGenModel> propertyGenModels) {
@@ -139,6 +133,8 @@ public class ResourceDraftValueGenerator extends AbstractGenerator {
             builder.returns(typeUtils.getDraftImplType(typeElement))
                     .addCode("return newBuilder().$L($N).build();\n", fieldName, parameter);
         }
+
+        copyDeprecatedAnnotation(property, builder);
 
         return builder.build();
     }

@@ -1,18 +1,22 @@
 package io.sphere.sdk.types.queries;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
+import io.sphere.sdk.categories.commands.updateactions.SetCustomType;
 import io.sphere.sdk.categories.queries.CategoryQuery;
+import io.sphere.sdk.expansion.ExpansionPath;
+import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.types.TypeFixtureRule;
 import org.junit.ClassRule;
 import org.junit.Test;
 
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.function.Function;
 
+import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.types.TypeFixtureRule.*;
 import static io.sphere.sdk.types.TypeFixtures.*;
 import static java.util.Collections.singletonList;
@@ -79,11 +83,27 @@ public class WithCustomQueryModelIntegrationTest extends IntegrationTest {
 
     @Test
     public void queryByReference() {
-        final CategoryQuery categoryQuery = CategoryQuery.of()
-                .plusPredicates(m -> m.is(typeFixtureRule.getCategory()))
-                .plusPredicates(m -> m.custom().fields().ofReference(CAT_REFERENCE_FIELD_NAME).id().is("x"));
-        final List<Category> results = client().executeBlocking(categoryQuery).getResults();
-        assertThat(results).hasSize(0);
+
+            withUpdateableType(client(), type -> {
+                withCategory(client(), referencedCategory -> {
+                    withCategory(client(), category -> {
+                        final TypeReference<Reference<Category>> TYPE_REFERENCE = new TypeReference<Reference<Category>>() {};
+                        final Map<String, Object> fields = new HashMap<>();
+                        fields.put(CAT_REFERENCE_FIELD_NAME, referencedCategory.toReference());
+                        final CategoryUpdateCommand categoryUpdateCommand = CategoryUpdateCommand.of(category, SetCustomType.ofTypeIdAndObjects(type.getId(), fields));
+                        final ExpansionPath<Category> expansionPath = ExpansionPath.of("custom.fields." + CAT_REFERENCE_FIELD_NAME);
+                        final Category updatedCategory = client().executeBlocking(categoryUpdateCommand.withExpansionPaths(expansionPath));
+                        final Reference<Category> createdReference = updatedCategory.getCustom().getField(CAT_REFERENCE_FIELD_NAME, TYPE_REFERENCE);
+                        final CategoryQuery categoryQuery = CategoryQuery.of()
+                                .plusExpansionPaths(expansionPath)
+                                .plusPredicates(m -> m.is(updatedCategory))
+                                .plusPredicates(m -> m.custom().fields().ofReference(CAT_REFERENCE_FIELD_NAME).id().is(createdReference.getId()));
+                        final List<Category> results = client().executeBlocking(categoryQuery).getResults();
+                        assertThat(results).hasSize(1);
+                    });
+                });
+                return type;
+            });
     }
 
     private void checkQuery(final Function<FieldsQueryModel<Category>, QueryPredicate<Category>> f) {

@@ -14,7 +14,6 @@ import java.util.Locale;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 import java.util.concurrent.CompletionStage;
-import java.util.function.Consumer;
 import java.util.stream.LongStream;
 
 import static java.lang.Math.max;
@@ -28,33 +27,82 @@ public class QueryExecutionUtilsTest {
 
     @Test
     public void onEmptyResult() throws Exception {
-        withClient(clientWithResults(0), list -> assertThat(list).isSortedAccordingTo(categoryComparator).isEmpty());
+        assertThat(withClientWithoutFunction(clientWithResults(0))).isSortedAccordingTo(categoryComparator).isEmpty();
+        assertThat(withClientAndFunction(clientWithResults(0))).isSortedAccordingTo(categoryComparator).isEmpty();
     }
 
     @Test
     public void onOnePageResult() throws Exception {
-        withClient(clientWithResults(3), list -> assertThat(list).isSortedAccordingTo(categoryComparator).hasSize(3));
+        assertThat(withClientWithoutFunction(clientWithResults(3))).isSortedAccordingTo(categoryComparator).hasSize(3);
+        assertThat(withClientAndFunction(clientWithResults(3))).isSortedAccordingTo(categoryComparator).hasSize(3);
     }
 
     @Test
     public void onMultiplePagesResult() throws Exception {
-        withClient(clientWithResults(16), list -> assertThat(list).isSortedAccordingTo(categoryComparator).hasSize(16));
+        assertThat(withClientWithoutFunction(clientWithResults(16))).isSortedAccordingTo(categoryComparator).hasSize(16);
+        assertThat(withClientAndFunction(clientWithResults(16))).isSortedAccordingTo(categoryComparator).hasSize(16);
     }
 
     @Test
     public void onWrongTotalResult() throws Exception {
-        withClient(clientWithWrongResults(16), list -> assertThat(list).isSortedAccordingTo(categoryComparator).hasSize(16));
+        assertThat(withClientWithoutFunction(clientWithWrongResults(16))).isSortedAccordingTo(categoryComparator).hasSize(16);
+        assertThat(withClientAndFunction(clientWithWrongResults(16))).isSortedAccordingTo(categoryComparator).hasSize(16);
     }
 
     @Test
     public void onUnsortedResponses() throws Exception {
-        withClient(clientWithDelays(16), list -> assertThat(list).isSortedAccordingTo(categoryComparator).hasSize(16));
+        assertThat(withClientWithoutFunction(clientWithDelays(16))).isSortedAccordingTo(categoryComparator).hasSize(16);
+        assertThat(withClientAndFunction(clientWithDelays(16))).isSortedAccordingTo(categoryComparator).hasSize(16);
     }
 
-    private void withClient(final SphereClient client, final Consumer<List<Category>> test) {
-        final List<Category> elements = QueryExecutionUtils.queryAll(client, CategoryQuery.of(), PAGE_SIZE)
+    @Test
+    public void onGetTotalNumberOfPages() {
+        final QueryAllImpl query1 = QueryAllImpl.of(CategoryQuery.of(), 1);
+        assertThat(query1.getTotalNumberOfPages(0)).isEqualTo(0);
+        assertThat(query1.getTotalNumberOfPages(1)).isEqualTo(1);
+        assertThat(query1.getTotalNumberOfPages(2)).isEqualTo(2);
+        assertThat(query1.getTotalNumberOfPages(3)).isEqualTo(3);
+        assertThat(query1.getTotalNumberOfPages(4)).isEqualTo(4);
+
+        final QueryAllImpl query2 = QueryAllImpl.of(CategoryQuery.of(), 2);
+        assertThat(query2.getTotalNumberOfPages(0)).isEqualTo(0);
+        assertThat(query2.getTotalNumberOfPages(1)).isEqualTo(1);
+        assertThat(query2.getTotalNumberOfPages(2)).isEqualTo(1);
+        assertThat(query2.getTotalNumberOfPages(3)).isEqualTo(2);
+        assertThat(query2.getTotalNumberOfPages(7)).isEqualTo(4);
+        assertThat(query2.getTotalNumberOfPages(9)).isEqualTo(5);
+        assertThat(query2.getTotalNumberOfPages(10)).isEqualTo(5);
+        assertThat(query2.getTotalNumberOfPages(11)).isEqualTo(6);
+
+        final QueryAllImpl query7  = QueryAllImpl.of(CategoryQuery.of(), 7);
+        assertThat(query7.getTotalNumberOfPages(0)).isEqualTo(0);
+        assertThat(query7.getTotalNumberOfPages(1)).isEqualTo(1);
+        assertThat(query7.getTotalNumberOfPages(6)).isEqualTo(1);
+        assertThat(query7.getTotalNumberOfPages(7)).isEqualTo(1);
+        assertThat(query7.getTotalNumberOfPages(8)).isEqualTo(2);
+        assertThat(query7.getTotalNumberOfPages(9)).isEqualTo(2);
+        assertThat(query7.getTotalNumberOfPages(699)).isEqualTo(100);
+        assertThat(query7.getTotalNumberOfPages(700)).isEqualTo(100);
+        assertThat(query7.getTotalNumberOfPages(701)).isEqualTo(101);
+        assertThat(query7.getTotalNumberOfPages(702)).isEqualTo(101);
+
+
+        final QueryAllImpl queryMax  = QueryAllImpl.of(CategoryQuery.of(), Integer.MAX_VALUE);
+        assertThat(queryMax.getTotalNumberOfPages(0)).isEqualTo(0);
+        assertThat(queryMax.getTotalNumberOfPages(1)).isEqualTo(1);
+        assertThat(queryMax.getTotalNumberOfPages(Integer.MAX_VALUE - 1)).isEqualTo(1);
+        assertThat(queryMax.getTotalNumberOfPages(Integer.MAX_VALUE)).isEqualTo(1);
+
+    }
+
+    private List<Category> withClientWithoutFunction(final SphereClient client) {
+        return QueryExecutionUtils.queryAll(client, CategoryQuery.of(), PAGE_SIZE)
                 .toCompletableFuture().join();
-        test.accept(elements);
+    }
+
+    private List<Category> withClientAndFunction(final SphereClient client) {
+        return QueryExecutionUtils.queryAll(client, CategoryQuery.of(), (category -> category), PAGE_SIZE)
+                .toCompletableFuture().join();
     }
 
     private SphereClient clientWithResults(final int totalResults) {
@@ -100,7 +148,7 @@ public class QueryExecutionUtilsTest {
                 final long total = totalResults + deviation;
                 final long count = min(PAGE_SIZE, max(totalResults - offset, 0));
                 final List<T> results = (List<T>) generateSortedResultList(offset, count);
-                return PagedQueryResult.of(offset, total, results);
+                return PagedQueryResult.of(offset, (long) PAGE_SIZE, total, results);
             }
 
             private List<Category> generateSortedResultList(final long offset, final long count) {

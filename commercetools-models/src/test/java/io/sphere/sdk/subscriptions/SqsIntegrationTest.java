@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Base class for aws sqs integration tests.
  */
-public abstract class SqsIntegrationTest extends IntegrationTest {
+public abstract class SqsIntegrationTest extends SubscriptionIntegrationTest {
     protected AmazonSQS sqsClient;
     protected String queueUrl;
     protected Subscription subscription;

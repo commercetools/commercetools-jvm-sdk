@@ -1,0 +1,49 @@
+package io.sphere.sdk.annotations.processors.generators.examples.commands.updateactions;
+
+import io.sphere.sdk.annotations.processors.generators.examples.ExampleResourceWithUpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
+import java.lang.String;
+import javax.annotation.Generated;
+import javax.annotation.Nullable;
+
+/**
+ * Sets the {@code optionalUserName} property of a {@link ExampleResourceWithUpdateAction}.
+ *
+ * @see ExampleResourceWithUpdateAction#getOptionalUserName()
+ */
+@Generated(
+    value = "io.sphere.sdk.annotations.processors.generators.UpdateActionGenerator",
+    comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.ExampleResourceWithUpdateAction"
+)
+public final class SetOptionalUserName extends UpdateActionImpl<ExampleResourceWithUpdateAction> {
+  @Nullable
+  private final String optionalUserName;
+
+  private SetOptionalUserName(@Nullable final String optionalUserName) {
+    super("customName");
+    this.optionalUserName = optionalUserName;
+  }
+
+  @Nullable
+  public String getOptionalUserName() {
+    return optionalUserName;
+  }
+
+  /**
+   * Creates a new update action from the given parameters.
+   *
+   * @param optionalUserName the {@code optionalUserName} property {@link ExampleResourceWithUpdateAction#getOptionalUserName()}.
+   * @return the {@code SetOptionalUserName} update action.
+   */
+  public static SetOptionalUserName of(@Nullable final String optionalUserName) {
+    return new SetOptionalUserName(optionalUserName);
+  }
+
+  /**
+   * Creates a new update action to unset the {@code optionalUserName} property.
+   * @return the {@code SetOptionalUserName} update action.
+   */
+  public static SetOptionalUserName ofUnset() {
+    return new SetOptionalUserName(null);
+  }
+}

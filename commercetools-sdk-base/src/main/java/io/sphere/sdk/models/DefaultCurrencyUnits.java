@@ -1,5 +1,7 @@
 package io.sphere.sdk.models;
 
+import io.sphere.sdk.utils.MoneyImpl;
+
 import javax.money.CurrencyUnit;
 import javax.money.Monetary;
 
@@ -11,6 +13,6 @@ public final class DefaultCurrencyUnits {
     public static final CurrencyUnit USD = ofCode("USD");
 
     private static CurrencyUnit ofCode(final String currencyCode) {
-        return Monetary.getCurrency(currencyCode);
+        return MoneyImpl.createCurrencyByCode(currencyCode);
     }
 }

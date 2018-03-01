@@ -60,7 +60,7 @@ import java.util.List;
 @HasByKeyGetEndpoint(javadocSummary = "Retrieves a category by a known Key.", includeExamples = "io.sphere.sdk.categories.queries.CategoryByKeydGetIntegrationTest#execution()")
 @HasCreateCommand(includeExamples = "io.sphere.sdk.categories.commands.CategoryCreateCommandIntegrationTest#execution()")
 @HasUpdateCommand(javadocSummary = "Updates a category.")
-@HasDeleteCommand(javadocSummary = "Deletes a category.", includeExamples = "io.sphere.sdk.categories.commands.CategoryDeleteCommandIntegrationTest#execution()",deleteWithKey = true)
+@HasDeleteCommand(javadocSummary = "Deletes a category.", includeExamples = "io.sphere.sdk.categories.commands.CategoryDeleteCommandIntegrationTest#execution()", deleteWith = "key")
 @HasQueryModel(baseInterfaces = {"io.sphere.sdk.queries.QueryModel<io.sphere.sdk.categories.Category>"})
 public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAttributes, Custom {
 
@@ -185,6 +185,15 @@ public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAtt
 
     @Nonnull
     @IgnoreInQueryModel
+    @HasUpdateAction(value = "setAssetKey", fields = {@PropertySpec(name = "assetId", type = String.class), @PropertySpec(name = "assetKey", type = String.class, isOptional = true)})
+    @HasUpdateAction(value = "addAsset", fields = {@PropertySpec(name = "asset", type = AssetDraft.class), @PropertySpec(name = "position", type = Integer.class)},
+            factoryMethods = {@FactoryMethod(parameterNames = {"asset"})})
+    @HasUpdateAction(value = "removeAsset", fields = {@PropertySpec(name = "assetId", type = String.class), @PropertySpec(name = "assetKey", type = String.class)},
+            factoryMethods = {@FactoryMethod(parameterNames = {"assetId"}), @FactoryMethod(methodName = "ofKey", parameterNames = {"assetKey"})}, generateDefaultFactory = false)
+    @HasUpdateAction(value = "changeAssetName", fields = {@PropertySpec(name = "assetId", type = String.class), @PropertySpec(name = "assetKey", type = String.class), @PropertySpec(name = "name", type = LocalizedString.class)},
+            factoryMethods = {@FactoryMethod(parameterNames = {"assetId", "name"}), @FactoryMethod(methodName = "ofKey", parameterNames = {"assetKey", "name"})}, generateDefaultFactory = false)
+    @HasUpdateAction(value = "setAssetDescription", fields = {@PropertySpec(name = "assetId", type = String.class), @PropertySpec(name = "assetKey", type = String.class), @PropertySpec(name = "description", type = LocalizedString.class)},
+            factoryMethods = {@FactoryMethod(parameterNames = {"assetId", "description"}), @FactoryMethod(methodName = "ofKey", parameterNames = {"assetKey", "description"})}, generateDefaultFactory = false)
     List<Asset> getAssets();
 
     @Override

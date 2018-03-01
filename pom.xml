@@ -3,7 +3,7 @@
     <groupId>com.commercetools.sdk.jvm.core</groupId>
     <artifactId>commercetools-jvm-sdk</artifactId>
     <packaging>pom</packaging>
-    <version>1.20.1-SNAPSHOT</version>
+    <version>1.30.0-SNAPSHOT</version>
     <name>commercetools JVM SDK</name>
     <description>Java bindings for the commercetools platform</description>
     <url>https://github.com/commercetools/commercetools-jvm-sdk</url>
@@ -29,6 +29,11 @@
             <id>matthiaskoester</id>
             <name>Matthias Köster</name>
             <url>https://github.com/katmatt</url>
+        </developer>
+        <developer>
+            <id>achrafbeniasaad</id>
+            <name>Achraf Beniasaad</name>
+            <url>https://github.com/acbeni</url>
         </developer>
     </developers>
     <distributionManagement>
@@ -60,36 +65,41 @@
         <module>sdk-http-ahc-1_9</module>
         <module>sdk-http-ahc-2_0</module>
         <module>sdk-http-apache-async</module>
+        <module>osgi-support</module>
     </modules>
     <scm>
         <url>git@github.com:commercetools/commercetools-jvm-sdk.git</url>
         <connection>scm:git:git@github.com:commercetools/commercetools-jvm-sdk.git</connection>
-      <tag>HEAD</tag>
-  </scm>
+        <tag>HEAD</tag>
+    </scm>
     <properties>
-        <jackson.version>2.6.5</jackson.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.major.version>8</java.major.version>
+        <java.version>1.${java.major.version}</java.version>
+
+        <jackson.version>2.9.3</jackson.version>
         <gson.version>2.5</gson.version>
         <asynchttpclient18.version>1.8.16</asynchttpclient18.version>
         <asynchttpclient19.version>1.9.33</asynchttpclient19.version>
-        <asynchttpclient20.version>2.0.28</asynchttpclient20.version>
+        <asynchttpclient20.version>2.0.38</asynchttpclient20.version>
         <httpasyncclient.version>4.1.1</httpasyncclient.version>
-        <netty.version>4.0.44.Final</netty.version>
+        <netty.version>4.0.54.Final</netty.version>
         <nv-i18n.version>1.18</nv-i18n.version>
         <commons-lang3>3.4</commons-lang3>
         <commons-io.version>2.4</commons-io.version>
-        <moneta.version>1.0</moneta.version>
+        <moneta.version>1.1</moneta.version>
         <slf4j.version>1.7.21</slf4j.version>
         <logback.version>1.1.7</logback.version>
         <jsr305.version>3.0.1</jsr305.version>
         <junit.version>4.12</junit.version>
-        <assertj.version>3.3.0</assertj.version>
+        <assertj.version>3.8.0</assertj.version>
+        <mockito.version>2.9.0</mockito.version>
         <commercetools-taglets.version>0.8.4</commercetools-taglets.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.major.version>8</java.major.version>
-        <java.version>1.${java.major.version}</java.version>
         <jacoco.version>0.7.5.201505241946</jacoco.version>
         <maven-scm-publish-plugin.version>1.1</maven-scm-publish-plugin.version>
-        <maven-scm-publish-plugin.scm.url>scm:git:git@github.com:commercetools/commercetools-jvm-sdk.git</maven-scm-publish-plugin.scm.url>
+        <maven-scm-publish-plugin.scm.url>scm:git:git@github.com:commercetools/commercetools-jvm-sdk.git
+        </maven-scm-publish-plugin.scm.url>
         <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
         <maven-javadoc-plugin.version>2.10.3</maven-javadoc-plugin.version>
         <maven-failsafe-plugin.version>2.19.1</maven-failsafe-plugin.version>
@@ -100,6 +110,15 @@
         <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
         <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
         <handlebars.version>4.0.6</handlebars.version>
+        <maven-jar-plugin.version>2.6</maven-jar-plugin.version>
+        <money-api.version>1.0.1</money-api.version>
+        <moneta.version>1.1</moneta.version>
+        <apache.httpclient.version>4.1.3</apache.httpclient.version>
+        <pax-exam.version>4.11.0</pax-exam.version>
+        <pax-exam.logging.version>1.10.1</pax-exam.logging.version>
+        <maven-jar-plugin.version>2.6</maven-jar-plugin.version>
+        <felix.maven.version>3.3.0</felix.maven.version>
+        <felix.version>5.6.2</felix.version>
         <javadoc.additionalparams />
     </properties>
     <dependencyManagement>
@@ -117,6 +136,51 @@
         </dependencies>
     </dependencyManagement>
     <dependencies>
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-parameter-names</artifactId>
+            <version>${jackson.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-annotations</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-annotations</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-annotations</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${jackson.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-annotations</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -153,6 +217,12 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <scope>test</scope>
@@ -167,6 +237,7 @@
     <build>
         <pluginManagement>
             <plugins>
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
@@ -215,7 +286,8 @@
                         <encoding>${project.build.sourceEncoding}</encoding>
                         <charset>${project.build.sourceEncoding}</charset>
                         <docencoding>${project.build.sourceEncoding}</docencoding>
-                        <additionalparam>-Xdoclint:missing,syntax,accessibility,reference ${javadoc.additionalparams}</additionalparam>
+                        <additionalparam>-Xdoclint:missing,syntax,accessibility,reference ${javadoc.additionalparams}
+                        </additionalparam>
                         <taglets>
                             <!-- see https://github.com/commercetools/commercetools-taglets -->
                             <taglet>
@@ -243,7 +315,9 @@
                                 </tagletArtifact>
                             </taglet>
                         </taglets>
-                        <excludedocfilessubdir>commercetools-internal-docs:commercetools-java-client-internal-test:commercetools-test-lib</excludedocfilessubdir>
+                        <excludedocfilessubdir>
+                            commercetools-internal-docs:commercetools-java-client-internal-test:commercetools-test-lib
+                        </excludedocfilessubdir>
                         <excludePackageNames>test</excludePackageNames>
                         <sourceFileExcludes>
                             <sourceFileExclude>**/*Test.java</sourceFileExclude>
@@ -320,7 +394,9 @@
                         </execution>
                         <execution>
                             <id>default-prepare-agent</id>
-                            <goals><goal>prepare-agent</goal></goals>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
                         </execution>
                         <execution>
                             <id>default-prepare-agent-integration</id>
@@ -353,6 +429,20 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven-jar-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>
+                                test-jar
+                            </goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
                 <version>${maven-release-plugin.version}</version>
                 <configuration>
@@ -362,6 +452,40 @@
                     <goals>deploy</goals>
                     <tagNameFormat>v@{project.version}</tagNameFormat>
                 </configuration>
+            </plugin>
+            <plugin>
+                <!--
+                http://revapi.org/modules/revapi-maven-plugin/examples/comparing-specific-artifacts.html
+
+                mvn clean package -Darguments="-DskipTests" -DskipTests -Pjavadoc-jdk-8u121
+
+                mvn revapi:report-aggregate -Darguments="-DskipTests" -DskipTests -Pjavadoc-jdk-8u121
+
+                open target/site/revapi-aggregate-report.html
+                -->
+                <groupId>org.revapi</groupId>
+                <artifactId>revapi-maven-plugin</artifactId>
+                <version>0.9.1</version>
+                <configuration>
+                    <newArtifacts>
+                        <artifact>${project.groupId}:${project.artifactId}:${project.version}</artifact>
+                    </newArtifacts>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.revapi</groupId>
+                        <artifactId>revapi-java</artifactId>
+                        <version>0.14.0</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
@@ -423,7 +547,8 @@
                         <version>${maven-scm-publish-plugin.version}</version>
                         <configuration>
                             <checkoutDirectory>${project.build.directory}/javadoc-stage</checkoutDirectory>
-                            <checkinComment>publishing Javadoc for ${project.artifactId}:${project.version}</checkinComment>
+                            <checkinComment>publishing Javadoc for ${project.artifactId}:${project.version}
+                            </checkinComment>
                             <content>${project.build.directory}/site</content>
                             <skipDeletedFiles>false</skipDeletedFiles>
                             <pubScmUrl>${maven-scm-publish-plugin.scm.url}</pubScmUrl>
@@ -435,11 +560,8 @@
         </profile>
         <profile>
             <id>javadoc-jdk-8u121</id>
-            <!--
-                This profile is currently only activated for the given JDK, but can be manually activated by passing
-                the -Pjavadoc-jdk-8u121 option to maven.
-            -->
             <activation>
+                <activeByDefault>true</activeByDefault>
                 <jdk>1.8.0_121</jdk>
             </activation>
             <properties>
@@ -462,7 +584,9 @@
                         <artifactId>license-maven-plugin</artifactId>
                         <configuration>
                             <licenseMerges>
-                                <licenseMerge>Apache License 2.0|The Apache Software License, Version 2.0|Apache License, Version 2.0|Apache 2 License|Apache 2.0|Apache 2</licenseMerge>
+                                <licenseMerge>Apache License 2.0|The Apache Software License, Version 2.0|Apache
+                                    License, Version 2.0|Apache 2 License|Apache 2.0|Apache 2
+                                </licenseMerge>
                                 <licenseMerge>Eclipse Public License 1.0|Eclipse Public License - v 1.0</licenseMerge>
                             </licenseMerges>
                             <excludedScopes>test,provided</excludedScopes>

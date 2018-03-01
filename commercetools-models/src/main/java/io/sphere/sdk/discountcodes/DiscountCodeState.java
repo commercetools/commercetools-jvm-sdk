@@ -1,5 +1,6 @@
 package io.sphere.sdk.discountcodes;
 
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.SphereEnumeration;
 
@@ -19,8 +20,13 @@ public enum DiscountCodeState implements SphereEnumeration {
     MATCHES_CART,
 
     /** maxApplications or maxApplicationsPerCustomer for discountCode has been reached. */
-    MAX_APPLICATION_REACHED;
+    MAX_APPLICATION_REACHED,
 
+    /** The discount code is active and none of the discounts were applied and at least one of them was not applied because it was stopped by a previous discount that had the {@link io.sphere.sdk.cartdiscounts.StackingMode} */
+    APPLICATION_STOPPED_BY_PREVIOUS_DISCOUNT,
+
+    /** The discount code is not valid or it does not contain any valid cart discounts. Validity is determined based on the {@code 'validFrom'} and {@code 'validUntil'} dates. */
+    NOT_VALID;
 
     @JsonCreator
     public static DiscountCodeState ofSphereValue(final String value) {

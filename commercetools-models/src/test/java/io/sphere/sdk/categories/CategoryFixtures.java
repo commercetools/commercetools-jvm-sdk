@@ -124,6 +124,7 @@ public class CategoryFixtures {
         final LocalizedString description = LocalizedString.ofEnglish("screenshot of the REWE webshop on a mobile and a notebook");
         return AssetDraftBuilder.of(singletonList(assetSource1), name)
                 .description(description)
+                .key(randomKey())
                 .tags("desktop-sized", "jpg-format", "REWE", "awesome")
                 .build();
     }
@@ -136,6 +137,7 @@ public class CategoryFixtures {
         final LocalizedString name = LocalizedString.ofEnglish("commercetools logo");
         return AssetDraftBuilder.of(singletonList(assetSource1), name)
                 .tags("desktop-sized", "svg-format", "commercetools", "awesome")
+                .key(randomKey())
                 .build();
     }
 }

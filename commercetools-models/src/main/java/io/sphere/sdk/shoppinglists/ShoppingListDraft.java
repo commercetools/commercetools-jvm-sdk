@@ -17,9 +17,8 @@ import java.util.List;
  * @see ShoppingListDraftBuilder
  */
 @JsonDeserialize(as = ShoppingListDraftDsl.class)
-@ResourceDraftValue(factoryMethods = {
-        @FactoryMethod(parameterNames = {"name"}),
-})
+@ResourceDraftValue(
+        factoryMethods = {@FactoryMethod(parameterNames = {"name"})})
 public interface ShoppingListDraft {
 
     LocalizedString getName();

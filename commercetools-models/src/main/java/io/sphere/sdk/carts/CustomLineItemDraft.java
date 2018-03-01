@@ -55,6 +55,11 @@ public interface CustomLineItemDraft extends CustomDraft {
     CustomFieldsDraft getCustom();
 
     /**
+     * Container for the sub-quantity of the line item quantity for the specific address when multiple shipping addresses are required.
+     * @return ItemShippingDetailsDraft
+     */
+    ItemShippingDetailsDraft getShippingDetails();
+    /**
      * Creates a draft having a standard tax category and no custom fields.
      * @param name the display name of the custom line item (corresponds to a product name)
      * @param slug unique field in the cart which is intended to identify the custom line item (not translated)
@@ -81,7 +86,7 @@ public interface CustomLineItemDraft extends CustomDraft {
     static CustomLineItemDraft of(final LocalizedString name, final String slug, final MonetaryAmount money,
                                   final Referenceable<TaxCategory> taxCategory, final long quantity,
                                   @Nullable final CustomFieldsDraft custom) {
-        return new CustomLineItemDraftImpl(name, slug, money, taxCategory.toReference(), quantity, custom, null);
+        return new CustomLineItemDraftImpl(name, slug, money, taxCategory.toReference(), quantity, custom, null,null);
     }
 
     /**
@@ -95,7 +100,7 @@ public interface CustomLineItemDraft extends CustomDraft {
      */
     static CustomLineItemDraft ofExternalTaxCalculation(final LocalizedString name, final String slug, final MonetaryAmount money,
                                                         final ExternalTaxRateDraft externalTaxRate, final long quantity) {
-        return new CustomLineItemDraftImpl(name, slug, money, null, quantity, null, externalTaxRate);
+        return new CustomLineItemDraftImpl(name, slug, money, null, quantity, null, externalTaxRate,null);
     }
 
     /**
@@ -108,7 +113,7 @@ public interface CustomLineItemDraft extends CustomDraft {
      */
     static CustomLineItemDraft ofExternalTaxCalculation(final LocalizedString name, final String slug, final MonetaryAmount money,
                                                         final long quantity) {
-        return new CustomLineItemDraftImpl(name, slug, money, null, quantity, null, null);
+        return new CustomLineItemDraftImpl(name, slug, money, null, quantity, null, null,null);
     }
 
     /**
@@ -124,7 +129,7 @@ public interface CustomLineItemDraft extends CustomDraft {
     static CustomLineItemDraft ofExternalTaxCalculation(final LocalizedString name, final String slug, final MonetaryAmount money,
                                                         final ExternalTaxRateDraft externalTaxRate, final long quantity,
                                                         @Nullable final CustomFieldsDraft custom) {
-        return new CustomLineItemDraftImpl(name, slug, money, null, quantity, custom, externalTaxRate);
+        return new CustomLineItemDraftImpl(name, slug, money, null, quantity, custom, externalTaxRate,null);
     }
 
     /**
@@ -142,6 +147,6 @@ public interface CustomLineItemDraft extends CustomDraft {
     static CustomLineItemDraft ofExternalTaxCalculation(final LocalizedString name, final String slug, final MonetaryAmount money,
                                                         final long quantity,
                                                         @Nullable final CustomFieldsDraft custom) {
-        return new CustomLineItemDraftImpl(name, slug, money, null, quantity, custom, null);
+        return new CustomLineItemDraftImpl(name, slug, money, null, quantity, custom, null,null);
     }
 }

@@ -33,4 +33,5 @@ final class CartShippingInfoQueryModelImpl<T> extends QueryModelImpl<T> implemen
     public ReferenceOptionalQueryModel<T, ShippingMethod> shippingMethod() {
         return referenceOptionalModel("shippingMethod");
     }
+
 }

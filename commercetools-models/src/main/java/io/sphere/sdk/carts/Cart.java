@@ -86,6 +86,10 @@ public interface Cart extends CartLike<Cart> {
         return Reference.of(referenceTypeId(), getId(), this);
     }
 
+    @HasUpdateAction
+    @Nullable
+    String getAnonymousId();
+
     /**
      * State in the perspective if the cart is active, merged with another cart or ordered.
      *
@@ -137,10 +141,14 @@ public interface Cart extends CartLike<Cart> {
      * @see Order#getCustomLineItems()
      */
     @Override
+    @HasUpdateAction(value = "applyDeltaToCustomLineItemShippingDetailsTargets", fields = {@PropertySpec(name = "customLineItemId",type = String.class),@PropertySpec(name = "targetsDelta",type = ItemShippingTarget[].class)})
+    @HasUpdateAction(value = "setCustomLineItemShippingDetails", fields = {@PropertySpec(name = "customLineItemId",type = String.class),@PropertySpec(name = "shippingDetails",type = ItemShippingDetailsDraft.class)})
     @QueryModelHint(type = "CustomLineItemCollectionQueryModel<Cart>")
     List<CustomLineItem> getCustomLineItems();
 
     @Override
+    @HasUpdateAction(value = "applyDeltaToLineItemShippingDetailsTargets", fields = {@PropertySpec(name = "lineItemId",type = String.class),@PropertySpec(name = "targetsDelta",type = ItemShippingTarget[].class)})
+    @HasUpdateAction(value = "setLineItemShippingDetails", fields = {@PropertySpec(name = "lineItemId",type = String.class),@PropertySpec(name = "shippingDetails",type = ItemShippingDetailsDraft.class)})
     @QueryModelHint(type = "LineItemCollectionQueryModel<Cart>")
     List<LineItem> getLineItems();
 
@@ -152,6 +160,10 @@ public interface Cart extends CartLike<Cart> {
     @Nullable
     @QueryModelHint(type = "TaxedPriceOptionalQueryModel<Cart>")
     TaxedPrice getTaxedPrice();
+
+    @Override
+    @HasUpdateAction
+    TaxCalculationMode getTaxCalculationMode();
 
     @Override
     MonetaryAmount getTotalPrice();
@@ -181,6 +193,29 @@ public interface Cart extends CartLike<Cart> {
     @Nullable
     @IgnoreInQueryModel
     List<Reference<CartDiscount>> getRefusedGifts();
+
+    /**
+     *  The shippingRateInput is used as an input to select a shipping rate price tier
+     * @return shippingRateInput
+     */
+    @Override
+    @Nullable
+    @QueryModelHint(type = "ShippingRateInputQueryModel<Cart>")
+    ShippingRateInput getShippingRateInput();
+
+
+    @IgnoreInQueryModel
+    CartOrigin getOrigin();
+
+    /**
+     * @return  addresses for orders with multiple shipping addresses.
+     */
+    @Override
+    @QueryModelHint(type = "AddressCollectionQueryModel<Cart>")
+    @HasUpdateAction(value = "addItemShippingAddress", fields = {@PropertySpec(name = "address",type = Address.class)})
+    @HasUpdateAction(value = "updateItemShippingAddress", fields = {@PropertySpec(name = "address",type = Address.class)})
+    @HasUpdateAction(value = "removeItemShippingAddress", fields = {@PropertySpec(name = "addressKey",type = String.class)})
+    List<Address> getItemShippingAddresses();
 
     /**
      * Creates a reference for one item of this class by a known ID.

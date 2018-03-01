@@ -46,8 +46,11 @@ import java.util.Set;
         "    }"})
 @ResourceInfo(pluralName = "orders", pathElement = "orders")
 @HasByIdGetEndpoint(javadocSummary = "Gets an order by ID.", includeExamples = "io.sphere.sdk.orders.commands.OrderFromCartCreateCommandIntegrationTest#execution()")
-@HasUpdateCommand
-@HasDeleteCommand
+@HasUpdateCommand(updateWith = "orderNumber")
+@HasDeleteCommand(deleteWith = "orderNumber",
+        includeExamples = {
+            "io.sphere.sdk.orders.commands.OrderDeleteCommandIntegrationTest#deleteById()",
+            "io.sphere.sdk.orders.commands.OrderDeleteCommandIntegrationTest#deleteByOrderNumber()"})
 @HasQueryModel(implBaseClass = "io.sphere.sdk.carts.queries.CartLikeQueryModelImpl<Order>", baseInterfaces = {"CartLikeQueryModel<Order>"})
 public interface Order extends CartLike<Order> {
     /**
@@ -240,6 +243,23 @@ public interface Order extends CartLike<Order> {
     @Override
     @QueryModelHint(type = "PaymentInfoQueryModel<Order>")
     PaymentInfo getPaymentInfo();
+
+    /**
+     *  The shippingRateInput is used as an input to select a shipping rate price tier
+     * @return shippingRateInput
+     */
+    @Nullable
+    @Override
+    @QueryModelHint(type = "ShippingRateInputQueryModel<Order>")
+    ShippingRateInput getShippingRateInput();
+
+
+    /**
+     * @return  addresses for orders with multiple shipping addresses.
+     */
+    @Override
+    @QueryModelHint(type = "AddressCollectionQueryModel<Order>")
+    List<Address> getItemShippingAddresses();
 
     /**
      * Creates a reference for one item of this class by a known ID.

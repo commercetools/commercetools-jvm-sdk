@@ -13,7 +13,8 @@ import java.util.List;
 /**
  * @see ProductVariantDraftBuilder
  */
-@ResourceDraftValue(abstractBuilderClass = true,
+@ResourceDraftValue(
+        abstractBuilderClass = true,
         copyFactoryMethods = @CopyFactoryMethod(ProductVariant.class),
         factoryMethods = @FactoryMethod(parameterNames = {}))
 @JsonDeserialize(as = ProductVariantDraftDsl.class)

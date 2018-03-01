@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
+import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
@@ -22,7 +23,8 @@ import java.util.Locale;
  * @see CartDraftBuilder
  */
 @JsonDeserialize(as = CartDraftDsl.class)
-@ResourceDraftValue(factoryMethods = @FactoryMethod(parameterNames = "currency"), gettersForBuilder = true)
+@ResourceDraftValue(
+        factoryMethods = @FactoryMethod(parameterNames = "currency"))
 public interface CartDraft extends CustomDraft {
     CurrencyUnit getCurrency();
 
@@ -37,6 +39,9 @@ public interface CartDraft extends CustomDraft {
 
     @Nullable
     String getCustomerEmail();
+
+    @Nullable
+    Reference<CustomerGroup> getCustomerGroup();
 
     @Nullable
     Address getBillingAddress();
@@ -70,6 +75,26 @@ public interface CartDraft extends CustomDraft {
 
     @Nullable
     RoundingMode getTaxRoundingMode();
+
+    @Nullable
+    ShippingRateInputDraft getShippingRateInput();
+
+    @Nullable
+    TaxCalculationMode getTaxCalculationMode();
+
+    @Nullable
+    CartOrigin getOrigin();
+
+    /**
+     *  Contains addresses for carts with multiple shipping addresses.
+     *  Each address must contain a key which is unique in this cart.
+     *  Line items will use these keys to reference the addresses under
+     *  their `shippingDetails`
+     * @return
+     */
+    @Nullable
+    List<Address> getItemShippingAddresses();
+
 
     static CartDraftDsl of(final CurrencyUnit currency) {
         return CartDraftDsl.of(currency);

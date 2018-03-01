@@ -1,5 +1,6 @@
 package io.sphere.sdk.search;
 
+import io.sphere.sdk.annotations.NotOSGiCompatible;
 import io.sphere.sdk.search.model.RangeStats;
 import io.sphere.sdk.search.model.SimpleRangeStats;
 import org.junit.Test;
@@ -15,6 +16,7 @@ import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+@NotOSGiCompatible
 public class PagedSearchResultTest {
     private static final TermFacetExpression<Object> TERM_FACET_EXPR = TermFacetExpression.of("foo as termFacet");
     private static final RangeFacetExpression<Object> RANGE_FACET_EXPR = RangeFacetExpression.of("foo:range(0 to *) as rangeFacet");
@@ -102,6 +104,6 @@ public class PagedSearchResultTest {
     }
 
     private <T> PagedSearchResult<T> pagedSearchResult(final Map<String, FacetResult> facets) {
-        return new PagedSearchResultImpl<>(0L, 0L, emptyList(), facets, 0L);
+        return new PagedSearchResultImpl<>(0L, 0L, 0L, emptyList(), facets, 0L);
     }
 }

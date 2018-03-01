@@ -43,13 +43,17 @@ public final class CustomerSignInCommand extends CommandImpl<CustomerSignInResul
     private final String anonymousId;
     @Nullable
     private final AnonymousCartSignInMode anonymousCartSignInMode;
+    @Nullable
+    private final Boolean updateProductData;
 
-    private CustomerSignInCommand(final String email, final String password, @Nullable final String anonymousCartId, @Nullable final String anonymousId, final AnonymousCartSignInMode anonymousCartSignInMode) {
+    private CustomerSignInCommand(final String email, final String password, @Nullable final String anonymousCartId, @Nullable final String anonymousId, final AnonymousCartSignInMode anonymousCartSignInMode,
+                                  @Nullable final Boolean updateProductData) {
         this.email = email;
         this.password = password;
         this.anonymousCartId = anonymousCartId;
         this.anonymousId = anonymousId;
         this.anonymousCartSignInMode = anonymousCartSignInMode;
+        this.updateProductData = updateProductData;
     }
 
     public static CustomerSignInCommand of(final String email, final String password) {
@@ -57,15 +61,19 @@ public final class CustomerSignInCommand extends CommandImpl<CustomerSignInResul
     }
 
     public static CustomerSignInCommand of(final String email, final String password, @Nullable final String anonymousCartId) {
-        return new CustomerSignInCommand(email, password, anonymousCartId, null, null);
+        return new CustomerSignInCommand(email, password, anonymousCartId, null, null, null);
     }
 
     public CustomerSignInCommand withAnonymousId(@Nullable final String anonymousId) {
-        return new CustomerSignInCommand(email, password, anonymousCartId, anonymousId, anonymousCartSignInMode);
+        return new CustomerSignInCommand(email, password, anonymousCartId, anonymousId, anonymousCartSignInMode, updateProductData);
     }
 
     public CustomerSignInCommand withAnonymousCartSignInMode(@Nullable final AnonymousCartSignInMode anonymousCartSignInMode) {
-        return new CustomerSignInCommand(email, password, anonymousCartId, anonymousId, anonymousCartSignInMode);
+        return new CustomerSignInCommand(email, password, anonymousCartId, anonymousId, anonymousCartSignInMode, updateProductData);
+    }
+
+    public CustomerSignInCommand withUpdateProductData(@Nullable final Boolean updateProductData) {
+        return new CustomerSignInCommand(email, password, anonymousCartId, anonymousId, anonymousCartSignInMode, updateProductData);
     }
 
     @Override

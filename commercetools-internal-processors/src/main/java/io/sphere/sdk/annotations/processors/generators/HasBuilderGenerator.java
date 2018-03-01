@@ -7,6 +7,7 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 
 import javax.annotation.Generated;
+import javax.annotation.processing.Messager;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
@@ -21,8 +22,8 @@ import java.util.stream.Collectors;
  */
 public class HasBuilderGenerator extends AbstractBuilderGenerator<HasBuilder> {
 
-    public HasBuilderGenerator(final Elements elements, final Types types) {
-        super(elements, types, HasBuilder.class);
+    public HasBuilderGenerator(final Elements elements, final Types types, final Messager messager) {
+        super(elements, types, messager, HasBuilder.class);
     }
 
     public TypeSpec generateType(final TypeElement builderType) {
@@ -59,7 +60,7 @@ public class HasBuilderGenerator extends AbstractBuilderGenerator<HasBuilder> {
                 .addMethod(createConstructor(properties, Collections.emptyList()))
                 .addMethods(builderMethodSpecs);
         if (hasBuilder.gettersForBuilder()) {
-            List<MethodSpec> getMethods = propertyMethods.stream()
+            List<MethodSpec> getMethods = properties.stream()
                     .map(this::createGetMethod)
                     .collect(Collectors.toList());
             builder.addMethods(getMethods);

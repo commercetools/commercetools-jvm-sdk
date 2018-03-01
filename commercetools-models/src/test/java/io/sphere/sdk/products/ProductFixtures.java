@@ -107,8 +107,8 @@ public class ProductFixtures {
         withUpdateableProduct(client, randomString(), f);
     }
 
-    public static void withProduct(final BlockingSphereClient client, final Consumer<Product> user) {
-        withProduct(client, randomString(), user);
+    public static void withProduct(final BlockingSphereClient client, final Consumer<Product> productConsumer) {
+        withProduct(client, randomString(), productConsumer);
     }
 
     public static void withTaxedProduct(final BlockingSphereClient client, final Consumer<Product> user) {

@@ -5,8 +5,13 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.customers.Customer;
-import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Resource;
+import io.sphere.sdk.models.WithKey;
+import io.sphere.sdk.types.Custom;
+import io.sphere.sdk.types.CustomFields;
+
+import javax.annotation.Nullable;
 
 /**
  * <p>A Customer can be a member of a customer group (e.g. reseller, gold member). Special prices can be assigned to specific products based on a customer group.</p>
@@ -29,13 +34,14 @@ import io.sphere.sdk.models.Reference;
         "    }")
 @ResourceInfo(pluralName = "customer groups", pathElement = "customer-groups")
 @HasByIdGetEndpoint(javadocSummary = "Fetches a customer group based on a known ID.", includeExamples = "io.sphere.sdk.customergroups.queries.CustomerGroupByIdGetIntegrationTest#execution()")
+@HasByKeyGetEndpoint(javadocSummary = "Fetches a customer group based on a known key.", includeExamples = "io.sphere.sdk.customergroups.queries.CustomerGroupByKeyGetIntegrationTest#execution()")
 @HasCreateCommand(javadocSummary = "Creates a new customer group", includeExamples = "io.sphere.sdk.customergroups.commands.CustomerGroupCreateCommandIntegrationTest#execution()", interfaceContents = "static CustomerGroupCreateCommand of(final String groupName) {\n" +
         "        return of(CustomerGroupDraft.of(groupName));\n" +
         "    }")
-@HasUpdateCommand(javadocSummary = "Updates a customer group.")
-@HasDeleteCommand(javadocSummary = "Deletes a customer group.", includeExamples = "io.sphere.sdk.customergroups.commands.CustomerGroupDeleteCommandIntegrationTest#execution()")
+@HasUpdateCommand(javadocSummary = "Updates a customer group.", updateWith = "key")
+@HasDeleteCommand(javadocSummary = "Deletes a customer group.", includeExamples = "io.sphere.sdk.customergroups.commands.CustomerGroupDeleteCommandByIdIntegrationTest#execution()", deleteWith = "key")
 @HasQueryModel
-public interface CustomerGroup extends Resource<CustomerGroup> {
+public interface CustomerGroup extends Resource<CustomerGroup>, WithKey,Custom {
 
     /**
      * The name of the customer group.
@@ -44,7 +50,18 @@ public interface CustomerGroup extends Resource<CustomerGroup> {
      *
      * @return name
      */
+    @HasUpdateAction
     String getName();
+
+    @Override
+    @Nullable
+    @HasUpdateAction
+    String getKey();
+
+
+    @Nullable
+    @Override
+    CustomFields getCustom();
 
     @Override
     default Reference<CustomerGroup> toReference() {

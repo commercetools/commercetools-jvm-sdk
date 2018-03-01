@@ -3,7 +3,6 @@ package io.sphere.sdk.test;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import io.sphere.sdk.client.*;
-import io.sphere.sdk.http.AsyncHttpClientAdapter;
 import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpResponse;
@@ -12,22 +11,30 @@ import io.sphere.sdk.models.DefaultCurrencyUnits;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
+import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
+import org.apache.http.impl.nio.client.HttpAsyncClients;
+import org.apache.http.ssl.SSLContexts;
+import org.apache.http.ssl.TrustStrategy;
 import org.assertj.core.api.Condition;
 import org.assertj.core.api.SoftAssertions;
-import org.asynchttpclient.AsyncHttpClient;
-import org.asynchttpclient.DefaultAsyncHttpClient;
-import org.asynchttpclient.DefaultAsyncHttpClientConfig;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.rules.Timeout;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nullable;
 import javax.money.CurrencyUnit;
+import javax.net.ssl.SSLContext;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UncheckedIOException;
+import java.lang.reflect.Modifier;
+import java.nio.file.Paths;
+import java.security.cert.X509Certificate;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
@@ -39,14 +46,22 @@ import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class IntegrationTest {
+
+    private static final int MAX_DEPTH_LEVEL = 3;
+
     @Rule
-    public Timeout globalTimeout = Timeout.seconds(180);
+    public Timeout globalTimeout = Timeout.seconds(1500);
+
+    protected static final Logger logger = LoggerFactory.getLogger(IntegrationTest.class);
 
     private static BlockingSphereClient client;
 
     @Before
     public void classNameCheck() {
         assertThat(getClass().getSimpleName()).endsWith("IntegrationTest");
+        assertThat(Modifier.isFinal(getClass().getModifiers()))
+                .as(String.format("Class '%s' should not be final since it might be subject to extension for OSGi test",getClass().getName()))
+                .isFalse();
     }
 
     @BeforeClass
@@ -108,8 +123,22 @@ public abstract class IntegrationTest {
     }
 
     protected static HttpClient newHttpClient() {
-        final AsyncHttpClient asyncHttpClient = new DefaultAsyncHttpClient(new DefaultAsyncHttpClientConfig.Builder().setAcceptAnyCertificate(true).build());
-        return AsyncHttpClientAdapter.of(asyncHttpClient);
+        //NO SSL Client: this client doesn't perform ssl certification check, which is a necessity to run tests on CI
+        CloseableHttpAsyncClient asyncClient = createNoSSLClient();
+        return IntegrationTestHttpClient.of(asyncClient);
+    }
+
+    private static CloseableHttpAsyncClient createNoSSLClient() {
+        final TrustStrategy acceptingTrustStrategy = (X509Certificate[] chain, String authType) ->  true;
+        try {
+            final SSLContext sslContext = SSLContexts.custom().loadTrustMaterial(null, acceptingTrustStrategy).build();
+            return HttpAsyncClients.custom()
+                    .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE)
+                    .setSSLContext(sslContext).build();
+        } catch (Exception e) {
+            logger.error("Could not create SSLContext",e);
+            return null;
+        }
     }
 
     protected static String accessToken() {
@@ -120,10 +149,17 @@ public abstract class IntegrationTest {
     }
 
     public static SphereClientConfig getSphereClientConfig() {
-        File file = new File("integrationtest.properties");
-        file = file.exists() ? file : new File("../integrationtest.properties");//test runner is maybe in subproject
-        return file.exists() ? loadViaProperties(file) : loadViaEnvironmentArgs();
+        String propertiesFile = "integrationtest.properties";
+        String parentDir = ".";
+        for (int i = 0; i < MAX_DEPTH_LEVEL; i++) {
+            if (Paths.get(parentDir, propertiesFile).toFile().exists()) {
+                return loadViaProperties(Paths.get(parentDir, propertiesFile).toFile());
+            }
+            parentDir = "../" + parentDir;
+        }
+        return loadViaEnvironmentArgs();
     }
+
 
     private static SphereClientConfig loadViaEnvironmentArgs() {
         return SphereClientConfig.ofEnvironmentVariables("JVM_SDK_IT");

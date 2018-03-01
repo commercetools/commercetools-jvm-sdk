@@ -1,12 +1,13 @@
 # commercetools JVM SDK
 
-![SPHERE.IO icon](https://admin.sphere.io/assets/images/sphere_logo_rgb_long.png)
+
+
+<img src="http://dev.commercetools.com/assets/img/CT-logo.svg" width="550px" alt="CT-logo"></img>
 
 [![][travis img]][travis]
 [![][maven img]][maven]
+[![][snyk img]][snyk]
 [![][license img]][license]
-
-[](the link definitions are at the bottom)
 
 The JVM SDK enables developers to use Java 8 methods and objects to communicate with the [commercetools platform](http://www.commercetools.com/) (formerly SPHERE.IO) rather than using plain HTTP calls.
 Users gain type-safety, encapsulation, IDE auto completion and an internal domain specific language to discover and formulate valid requests.
@@ -26,24 +27,24 @@ Users gain type-safety, encapsulation, IDE auto completion and an internal domai
 <dependency>
   <groupId>com.commercetools.sdk.jvm.core</groupId>
   <artifactId>commercetools-models</artifactId>
-  <version>1.20.0</version>
+  <version>1.29.1</version>
 </dependency>
 <dependency>
   <groupId>com.commercetools.sdk.jvm.core</groupId>
   <artifactId>commercetools-java-client</artifactId>
-  <version>1.20.0</version>
+  <version>1.29.1</version>
 </dependency>
 
 <!-- experimental -->
 <dependency>
   <groupId>com.commercetools.sdk.jvm.core</groupId>
   <artifactId>commercetools-convenience</artifactId>
-  <version>1.20.0</version>
+  <version>1.29.1</version>
 </dependency>
 ````
-* http://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-models%7C1.20.0%7Cjar
-* http://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-java-client%7C1.20.0%7Cjar
-* http://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-convenience%7C1.20.0%7Cjar
+* http://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-models%7C1.29.0%7Cjar
+* http://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-java-client%7C1.29.0%7Cjar
+* http://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-convenience%7C1.29.0%7Cjar
 
 ### Modules
 * `commercetools-java-client`: alias for commercetools-java-client-ahc-2_0
@@ -52,6 +53,21 @@ Users gain type-safety, encapsulation, IDE auto completion and an internal domai
 * `commercetools-java-client-ahc-1_9`: uses async HTTP client 1.9 (AHC 1.9 is incompatible to AHC 1.8)
 * `commercetools-java-client-ahc-2_0`: uses async HTTP client 2.0 (do not mix it with the other AHC modules)
 * `commercetools-models`: models which do not depend to a client implementation
+
+### Java SDK with gradle
+
+````
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    def jvmSdkVersion = "1.29.1"
+    compile "com.commercetools.sdk.jvm.core:commercetools-models:$jvmSdkVersion"
+    compile "com.commercetools.sdk.jvm.core:commercetools-java-client:$jvmSdkVersion"    
+    compile "com.commercetools.sdk.jvm.core:commercetools-convenience:$jvmSdkVersion"
+}
+````
 
 ### Play/Scala SDK with SBT
 
@@ -78,6 +94,18 @@ Useful code from external developers
 * [commercetools Spring MVC archetype](https://github.com/commercetools/commercetools-spring-mvc-archetype) - template integrating the SDK with Spring DI and Spring MVC and showing just some products, thymeleaf template engine
 * [Reproducer Example](https://github.com/commercetools/commercetools-jvm-sdk-reproducer-example) - a demo which shows how to reproduce errors
 
+## OSGi support
+
+* The JVM SDK is OSGi compatible, the module structure is as follows:
+    * Bundle `sdk-http` responsible for http client features, this bundle has the following fragments 
+        * Fragment `sdk-htt-apache-async` which provide an implementation of the http clients.
+    * Bundle `commercetools-sdk-base` that contains the base types used for the sdk models, this bundle has the following fragments
+        * `commercetools-java-client-core`
+        * `commercetools-java-client-apache-async` with the previous fragment, it allow to publish a service describing the http client implementation for our API.
+        * `commercetools-models` contains a description model of the commercetools backend and the different actions that alows interaction with it.
+* A demo test that shows a minimum configuration for use in production in an OSGi setup can be found here: 
+[DemoOSGiMinimalConfigTest](https://github.com/commercetools/commercetools-jvm-sdk/blob/master/osgi-support/sdk-osgi-test-campaign/src/test/java/io/sphere/sdk/test/DemoOSGiMinimalConfigTest.java)
+ 
 ## Stability
 
 1. Experimental features in the API are also experimental features of the SDK.
@@ -109,9 +137,9 @@ apiUrl=https://api.sphere.io
 authUrl=https://auth.sphere.io
 ```
 
-1. use `mvn verify` to execute all integration tests
-1. use `mvn -Dit.test=*Product* -DfailIfNoTests=false verify` to execute all integration test classes which have "Product" in the class name
-1. for running the unit tests use `mvn test`
+1. use `./mvnw verify` to execute all integration tests
+1. use `./mvnw -Dit.test=*Product* -DfailIfNoTests=false verify` to execute all integration test classes which have "Product" in the class name
+1. for running the unit tests use `./mvnw test`
 1. alternatively use your IDE to execute the tests
 1. for some IDEs like IntelliJ IDEA you need to add the Javac flag "-parameters", then also rebuild the whole project to apply the change
 
@@ -120,6 +148,9 @@ authUrl=https://auth.sphere.io
 
 [travis]:https://travis-ci.org/commercetools/commercetools-jvm-sdk
 [travis img]:https://travis-ci.org/commercetools/commercetools-jvm-sdk.svg?branch=master
+
+[snyk]:https://snyk.io/test/github/commercetools/commercetools-jvm-sdk/70e270c9af135ed2d22e1a7a2e384409b041fafe
+[snyk img]:https://snyk.io/test/github/commercetools/commercetools-jvm-sdk/70e270c9af135ed2d22e1a7a2e384409b041fafe/badge.svg
 
 [maven]:http://search.maven.org/#search|gav|1|g:"com.commercetools.sdk.jvm.core"%20AND%20a:"commercetools-models"
 [maven img]:https://maven-badges.herokuapp.com/maven-central/com.commercetools.sdk.jvm.core/commercetools-models/badge.svg

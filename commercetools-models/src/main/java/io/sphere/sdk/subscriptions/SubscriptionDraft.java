@@ -6,7 +6,8 @@ import io.sphere.sdk.annotations.ResourceDraftValue;
 import javax.annotation.Nullable;
 import java.util.List;
 
-@ResourceDraftValue(factoryMethods = @FactoryMethod(parameterNames = {"destination"}))
+@ResourceDraftValue(
+        factoryMethods = @FactoryMethod(parameterNames = {"destination"}))
 public interface SubscriptionDraft {
 
     @Nullable

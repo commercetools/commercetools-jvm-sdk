@@ -34,8 +34,8 @@ public class TypeUtils {
     }
 
 
-    public String getPackageName(final TypeElement typeElement) {
-        return elements.getPackageOf(typeElement).getQualifiedName().toString();
+    public String getPackageName(final Element element) {
+        return elements.getPackageOf(element).getQualifiedName().toString();
     }
 
     public String getSimpleName(final Element element) {
@@ -160,27 +160,33 @@ public class TypeUtils {
                 && !modifiers.contains(Modifier.DEFAULT);
     }
 
-    public AnnotationMirror getAnnotationMirror(final TypeElement typeElement, final Class<? extends Annotation> clazz) {
+    public Optional<? extends AnnotationMirror> getAnnotationMirror(final Element element, final Class<? extends Annotation> clazz) {
         final String className = clazz.getName();
-        final Optional<? extends AnnotationMirror> annotationMirror = typeElement.getAnnotationMirrors()
+        final Optional<? extends AnnotationMirror> annotationMirror = element.getAnnotationMirrors()
                 .stream()
                 .filter(am -> am.getAnnotationType().toString().equals(className))
                 .findFirst();
-        return annotationMirror.get();
+        return annotationMirror;
     }
 
-    public Optional<AnnotationValue> getAnnotationValue(final TypeElement typeElement, final Class<? extends Annotation> clazz, final String name) {
-        final AnnotationMirror annotationMirror = getAnnotationMirror(typeElement, clazz);
-        final Map<? extends ExecutableElement, ? extends AnnotationValue> elementValues = elements.getElementValuesWithDefaults(annotationMirror);
+    public Optional<AnnotationValue> getAnnotationValue(final Element element, final Class<? extends Annotation> clazz, final String name) {
+        final Optional<? extends AnnotationMirror> optionalAnnotationMirror = getAnnotationMirror(element, clazz);
 
-        final Optional<? extends Map.Entry<? extends ExecutableElement, ? extends AnnotationValue>> first = elementValues.entrySet()
-                .stream()
-                .filter(e -> e.getKey().getSimpleName().toString().equals(name))
-                .findFirst();
+        if (optionalAnnotationMirror.isPresent()) {
+            final AnnotationMirror annotationMirror = optionalAnnotationMirror.get();
+            final Map<? extends ExecutableElement, ? extends AnnotationValue> elementValues = elements.getElementValuesWithDefaults(annotationMirror);
 
-        final Optional<AnnotationValue> annotationValue = first.map(Map.Entry::getValue);
+            final Optional<? extends Map.Entry<? extends ExecutableElement, ? extends AnnotationValue>> first = elementValues.entrySet()
+                    .stream()
+                    .filter(e -> e.getKey().getSimpleName().toString().equals(name))
+                    .findFirst();
 
-        return annotationValue;
+            final Optional<AnnotationValue> annotationValue = first.map(Map.Entry::getValue);
+
+            return annotationValue;
+        } else {
+            return Optional.empty();
+        }
     }
 
     /**

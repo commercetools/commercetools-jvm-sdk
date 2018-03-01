@@ -21,11 +21,16 @@ public class CustomFieldsDraftBuilderIntegrationTest extends IntegrationTest {
             final CategoryDraftBuilder categoryDraftBuilder = CategoryDraftBuilder.of(en("category-name"), en("category-slug"))
                     .custom(CustomFieldsDraft.ofTypeIdAndObjects(id, singletonMap(STRING_FIELD_NAME, value)));
             withCategory(client(), categoryDraftBuilder, category -> {
+                //Test builder
                 final CustomFieldsDraft customFieldsDraft = CustomFieldsDraftBuilder.of(category.getCustom()).build();
-
                 assertThat(customFieldsDraft.getType().getId()).isEqualTo(id);
+
+                //Test factory method from draft
+                final CustomFieldsDraft customFieldsDraft2 = CustomFieldsDraft.ofCustomFields(category.getCustom());
+                assertThat(customFieldsDraft2.getType().getId()).isEqualTo(id);
             });
             return type;
         });
     }
+
 }

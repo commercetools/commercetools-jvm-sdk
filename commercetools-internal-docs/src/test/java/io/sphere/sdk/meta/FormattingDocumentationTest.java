@@ -4,7 +4,8 @@ import io.sphere.sdk.models.DefaultCurrencyUnits;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.javamoney.moneta.format.CurrencyStyle;
 import org.javamoney.moneta.function.MonetaryFunctions;
-import org.javamoney.moneta.function.MonetaryUtil;
+import org.javamoney.moneta.function.MonetaryOperators;
+import org.javamoney.moneta.function.MonetaryQueries;
 import org.junit.Test;
 
 import javax.money.Monetary;
@@ -199,21 +200,21 @@ public class FormattingDocumentationTest {
     @Test
     public void getAmountInCents() throws Exception {
         final MonetaryAmount amount = MoneyImpl.of(new BigDecimal("1234.56"), "EUR");
-        final Long centAmount = amount.query(MonetaryUtil.minorUnits());
+        final Long centAmount = amount.query(MonetaryQueries.convertMinorPart());
         assertThat(centAmount).isEqualTo(123456);
     }
 
     @Test
     public void getCents() throws Exception {
         final MonetaryAmount amount = MoneyImpl.of(new BigDecimal("1234.56"), "EUR");
-        final Long centPart = amount.with(MonetaryUtil.minorPart()).query(MonetaryUtil.minorUnits());
+        final Long centPart = amount.with(MonetaryOperators.minorPart()).query(MonetaryQueries.extractMinorPart());
         assertThat(centPart).isEqualTo(56);
     }
 
     @Test
     public void getMajorUnitAmount() throws Exception {
         final MonetaryAmount amount = MoneyImpl.of(new BigDecimal("1234.56"), "EUR");
-        final Long centAmount = amount.query(MonetaryUtil.majorUnits());
+        final Long centAmount = amount.query(MonetaryQueries.extractMajorPart());
         assertThat(centAmount).isEqualTo(1234);
     }
 

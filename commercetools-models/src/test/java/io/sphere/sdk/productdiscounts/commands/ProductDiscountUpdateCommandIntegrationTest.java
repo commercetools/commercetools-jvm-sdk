@@ -6,6 +6,8 @@ import io.sphere.sdk.productdiscounts.commands.updateactions.*;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.*;
 
+import java.time.ZonedDateTime;
+
 import static io.sphere.sdk.productdiscounts.ProductDiscountFixtures.withUpdateableProductDiscount;
 import static org.assertj.core.api.Assertions.*;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -46,6 +48,20 @@ public class ProductDiscountUpdateCommandIntegrationTest extends IntegrationTest
             final ProductDiscount updatedDiscount = client().executeBlocking(ProductDiscountUpdateCommand.of(discount, ChangeIsActive.of(newIsActive)));
 
             assertThat(updatedDiscount.isActive()).isEqualTo(newIsActive);
+            return updatedDiscount;
+        });
+    }
+
+    @Test
+    public void changeValidFromUntil() throws Exception {
+        withUpdateableProductDiscount(client(), discount -> {
+            final ZonedDateTime start = ZonedDateTime.parse("2015-07-09T07:46:40.230Z");
+            final ZonedDateTime end = start.plusYears(100);
+
+            final ProductDiscount updatedDiscount = client().executeBlocking(ProductDiscountUpdateCommand.of(discount, asList(SetValidFrom.of(start),SetValidUntil.of(end))));
+
+            assertThat(updatedDiscount.getValidFrom()).isEqualTo(start);
+            assertThat(updatedDiscount.getValidUntil()).isEqualTo(end);
             return updatedDiscount;
         });
     }

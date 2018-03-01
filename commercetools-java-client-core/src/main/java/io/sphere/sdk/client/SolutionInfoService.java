@@ -7,10 +7,9 @@ import java.util.*;
 //for architecture see https://docs.oracle.com/javase/tutorial/ext/basics/spi.html
 final class SolutionInfoService extends Base {
     private static SolutionInfoService instance;
-    private ServiceLoader<SolutionInfo> loader;
 
     private SolutionInfoService() {
-        loader = ServiceLoader.load(SolutionInfo.class);
+
     }
 
     public static synchronized SolutionInfoService getInstance() {
@@ -21,8 +20,20 @@ final class SolutionInfoService extends Base {
     }
 
     public List<SolutionInfo> getSolutionInfos() {
-        final List<SolutionInfo> solutions = new LinkedList<>();
-        loader.iterator().forEachRemaining(solution -> solutions.add(solution));
+        List<SolutionInfo> solutions  ;
+        ServiceLoader<SolutionInfo> loader;
+        // workaroud for play framework, since the overloaded version of ServiceLoader seems to cause some errors there, here we try bot until we get a working classloader
+        try{
+            loader = ServiceLoader.load(SolutionInfo.class);
+            solutions = new ArrayList<>();
+            loader.forEach(solutions::add);
+
+        }catch(Throwable e){
+            loader = ServiceLoader.load(SolutionInfo.class,SolutionInfo.class.getClassLoader());
+            solutions = new ArrayList<>();
+            loader.forEach(solutions::add);
+        }
+
         Collections.sort(solutions, Comparator.comparing(SolutionInfo::getName));
         return Collections.unmodifiableList(solutions);
     }

@@ -1,5 +1,7 @@
 package io.sphere.sdk.carts.commands;
 
+import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.cartdiscounts.CartPredicate;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.carts.commands.updateactions.*;
 import io.sphere.sdk.carts.queries.CartByIdGet;
@@ -7,6 +9,7 @@ import io.sphere.sdk.carts.queries.CartQuery;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.ChannelFixtures;
 import io.sphere.sdk.channels.ChannelRole;
+import io.sphere.sdk.client.ErrorResponseException;
 import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.*;
@@ -24,21 +27,24 @@ import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.shoppinglists.LineItemDraftBuilder;
 import io.sphere.sdk.shoppinglists.ShoppingListDraftDsl;
+import io.sphere.sdk.taxcategories.ExternalTaxRateDraft;
+import io.sphere.sdk.taxcategories.ExternalTaxRateDraftBuilder;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static io.sphere.sdk.carts.CartFixtures.*;
 import static io.sphere.sdk.carts.CustomLineItemFixtures.createCustomLineItemDraft;
+import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withB2cCustomerGroup;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.payments.PaymentFixtures.withPayment;
+import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withDynamicShippingMethodForGermany;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethodForGermany;
 import static io.sphere.sdk.shoppinglists.ShoppingListFixtures.newShoppingListDraftBuilder;
 import static io.sphere.sdk.shoppinglists.ShoppingListFixtures.withShoppingList;
@@ -47,9 +53,20 @@ import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CartUpdateCommandIntegrationTest extends IntegrationTest {
     public static final int MASTER_VARIANT_ID = 1;
+
+    @Test
+    public void setAnonymousId() throws Exception {
+        withEmptyCartAndProduct(client(), (cart, product) -> {
+            final String anonymousId = randomString();
+            final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, SetAnonymousId.of(anonymousId)));
+
+            assertThat(updatedCart.getAnonymousId()).isEqualTo(anonymousId);
+        });
+    }
 
     @Test
     public void addLineItem() throws Exception {
@@ -66,6 +83,66 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(lineItem.getQuantity()).isEqualTo(quantity);
             assertThat(lineItem.getProductSlug()).isEqualTo(product.getMasterData().getStaged().getSlug());
             assertThat(lineItem.getVariant().getIdentifier()).isEqualTo(ByIdVariantIdentifier.of(lineItem.getProductId(), lineItem.getVariant().getId()));
+            assertThat(lineItem.getDiscountedPricePerQuantity()).isNotNull().isEmpty();
+        });
+    }
+
+    @Test
+    public void addLineItemOfDraftOfSku() throws Exception {
+        withEmptyCartAndProduct(client(), (cart, product) -> {
+            assertThat(cart.getLineItems()).isEmpty();
+            final long quantity = 3;
+            final Channel inventorySupplyChannel = ChannelFixtures.persistentChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY);
+            final Channel distributionChannel = ChannelFixtures.persistentChannelOfRole(client(), ChannelRole.PRODUCT_DISTRIBUTION);
+
+            final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
+            final LineItemDraft lineItemDraft =
+                    io.sphere.sdk.carts.LineItemDraftBuilder.ofSku(sku, quantity)
+                            .distributionChannel(distributionChannel)
+                            .supplyChannel(inventorySupplyChannel)
+                            .build();
+
+            final AddLineItem action = AddLineItem.of(lineItemDraft);
+
+            final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, action));
+            assertThat(updatedCart.getLineItems()).hasSize(1);
+            final LineItem lineItem = updatedCart.getLineItems().get(0);
+            assertThat(lineItem.getName()).isEqualTo(product.getMasterData().getStaged().getName());
+            assertThat(lineItem.getQuantity()).isEqualTo(quantity);
+            assertThat(lineItem.getProductSlug()).isEqualTo(product.getMasterData().getStaged().getSlug());
+            assertThat(lineItem.getVariant().getIdentifier()).isEqualTo(ByIdVariantIdentifier.of(lineItem.getProductId(), lineItem.getVariant().getId()));
+            assertThat(lineItem.getSupplyChannel().toReference()).isEqualTo(inventorySupplyChannel.toReference());
+            assertThat(lineItem.getDistributionChannel().toReference()).isEqualTo(distributionChannel.toReference());
+            assertThat(lineItem.getDiscountedPricePerQuantity()).isNotNull().isEmpty();
+        });
+    }
+
+    @Test
+    public void addLineItemOfDraftOfVariantIdentifier() throws Exception {
+        withEmptyCartAndProduct(client(), (cart, product) -> {
+            assertThat(cart.getLineItems()).isEmpty();
+            final long quantity = 3;
+            final Channel inventorySupplyChannel = ChannelFixtures.persistentChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY);
+            final Channel distributionChannel = ChannelFixtures.persistentChannelOfRole(client(), ChannelRole.PRODUCT_DISTRIBUTION);
+
+            ByIdVariantIdentifier variantIdentifier = product.getMasterData().getStaged().getMasterVariant().getIdentifier();
+            final LineItemDraft lineItemDraft =
+                    io.sphere.sdk.carts.LineItemDraftBuilder.ofVariantIdentifier(variantIdentifier, quantity)
+                            .distributionChannel(distributionChannel)
+                            .supplyChannel(inventorySupplyChannel)
+                            .build();
+
+            final AddLineItem action = AddLineItem.of(lineItemDraft);
+
+            final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, action));
+            assertThat(updatedCart.getLineItems()).hasSize(1);
+            final LineItem lineItem = updatedCart.getLineItems().get(0);
+            assertThat(lineItem.getName()).isEqualTo(product.getMasterData().getStaged().getName());
+            assertThat(lineItem.getQuantity()).isEqualTo(quantity);
+            assertThat(lineItem.getProductSlug()).isEqualTo(product.getMasterData().getStaged().getSlug());
+            assertThat(lineItem.getVariant().getIdentifier()).isEqualTo(ByIdVariantIdentifier.of(lineItem.getProductId(), lineItem.getVariant().getId()));
+            assertThat(lineItem.getSupplyChannel().toReference()).isEqualTo(inventorySupplyChannel.toReference());
+            assertThat(lineItem.getDistributionChannel().toReference()).isEqualTo(distributionChannel.toReference());
             assertThat(lineItem.getDiscountedPricePerQuantity()).isNotNull().isEmpty();
         });
     }
@@ -182,6 +259,37 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Ignore
+    @Test
+    public void addMergesSameCustomLineItems() throws Exception {
+        withTaxCategory(client(), taxCategory -> {
+            final Cart cart = createCartWithCountry(client());
+            assertThat(cart.getCustomLineItems()).isEmpty();
+            final MonetaryAmount money = MoneyImpl.of("23.50", EUR);
+            final String slug = "thing-slug";//you handle to identify the custom line item
+            final LocalizedString name = en("thing");
+            final long quantity = 5;
+            final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, taxCategory, quantity, null);
+
+            final Cart cartWith5 = client().executeBlocking(CartUpdateCommand.of(cart, Arrays.asList(AddCustomLineItem.of(item), AddCustomLineItem.of(item))));
+            assertThat(cartWith5.getCustomLineItems()).hasSize(1);
+            final CustomLineItem customLineItem = cartWith5.getCustomLineItems().get(0);
+            assertThat(customLineItem.getMoney()).isEqualTo(money);
+            assertThat(customLineItem.getName()).isEqualTo(name);
+            assertThat(customLineItem.getQuantity()).isEqualTo(quantity * 2);
+            assertThat(customLineItem.getSlug()).isEqualTo(slug);
+            final Set<ItemState> state = customLineItem.getState();
+            assertThat(state).hasSize(1);
+            assertThat(state).extracting("quantity").containsOnly(quantity * 2);
+            assertThat(customLineItem.getTaxCategory()).isEqualTo(taxCategory.toReference());
+
+            final CartQuery cartQuery = CartQuery.of()
+                    .withPredicates(m -> m.customLineItems().slug().is(customLineItem.getSlug())
+                            .and(m.id().is(cart.getId())));
+            assertThat(client().executeBlocking(cartQuery).head().get().getId()).isEqualTo(cart.getId());
+        });
+    }
+
     @Test
     public void changeCustomLineItemQuantity() throws Exception {
         withTaxCategory(client(), taxCategory -> {
@@ -243,6 +351,17 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void setCustomerGroup() throws Exception {
+        withB2cCustomerGroup(client(), customerGroup -> {
+            final Cart cart = createCartWithCountry(client());
+            assertThat(cart.getCustomerGroup()).isNull();
+            Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, SetCustomerGroup.of(customerGroup)));
+            assertThat(updatedCart.getCustomerGroup().toReference()).isEqualTo(customerGroup.toReference());
+            client().executeBlocking(CartDeleteCommand.of(updatedCart));
+        });
+    }
+
+    @Test
     public void setShippingAddress() throws Exception {
         final Cart cart = createCartWithCountry(client());
         assertThat(cart.getShippingAddress()).isNull();
@@ -292,7 +411,7 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
             final Cart cart = createCartWithShippingAddress(client());
             assertThat(cart.getShippingInfo()).isNull();
             final MonetaryAmount price = MoneyImpl.of(new BigDecimal("23.50"), EUR);
-            final ShippingRate shippingRate = ShippingRate.of(price);
+            final ShippingRate shippingRate = ShippingRate.of(price, null, Collections.emptyList());
             final String shippingMethodName = "custom-shipping";
             final SetCustomShippingMethod action = SetCustomShippingMethod.of(shippingMethodName, shippingRate, taxCategory);
             final Cart cartWithShippingMethod = client().executeBlocking(CartUpdateCommand.of(cart, action));
@@ -317,6 +436,7 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
                                 .plusExpansionPaths(m -> m.shippingInfo().shippingMethod().taxCategory())
                                 .plusExpansionPaths(m -> m.shippingInfo().taxCategory());
                 final Cart cartWithShippingMethod = client().executeBlocking(updateCommand);
+                assertThat(cartWithShippingMethod.getShippingInfo().getShippingMethodState()).isEqualTo(ShippingMethodState.MATCHES_CART);
                 assertThat(cartWithShippingMethod.getShippingInfo().getShippingMethod()).isEqualTo(shippingMethod.toReference());
                 assertThat(cartWithShippingMethod.getShippingInfo().getShippingMethod().getObj())
                         .as("reference expansion shippingMethod")
@@ -331,6 +451,19 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
                 assertThat(cartWithoutShippingMethod.getShippingInfo()).isNull();
 
                 return cartWithoutShippingMethod;
+            });
+        });
+    }
+
+    @Test
+    public void setShippingMethodDoesNotMatchCart() throws Exception {
+        withDynamicShippingMethodForGermany(client(), CartPredicate.of("customer.email=\"john@example.com\""), shippingMethod -> {
+            withCart(client(), createCartWithShippingAddress(client()), cart -> {
+                final CartUpdateCommand updateCommand =
+                        CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod));
+                assertThatThrownBy(() -> client().executeBlocking(updateCommand)).isInstanceOf(ErrorResponseException.class).hasMessageContaining("does not match");
+
+                return cart;
             });
         });
     }
@@ -517,6 +650,83 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(lineItem.getPrice().getValue()).isEqualTo(itemPrice);
             assertThat(lineItem.getTotalPrice()).isEqualTo(totalPrice);
             assertThat(lineItem.getPriceMode()).isEqualTo(LineItemPriceMode.EXTERNAL_TOTAL);
+        });
+    }
+
+    @Test
+    public void setCartTotalTax() throws Exception {
+        withFilledCartWithTaxMode(client(), TaxMode.EXTERNAL_AMOUNT, cart -> {
+            final MonetaryAmount externalTotalGross = MoneyImpl.ofCents(1000, EUR);
+            final SetCartTotalTax setCartTotalTax = SetCartTotalTax.of(externalTotalGross);
+            final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, setCartTotalTax));
+
+            assertThat(updatedCart.getTaxedPrice().getTotalGross()).isEqualTo(externalTotalGross);
+        });
+    }
+
+    @Test
+    public void setShippingMethodTaxAmount() throws Exception {
+        withShippingMethodForGermany(client(), shippingMethod -> {
+            withCustomLineItemFilledCartWithTaxMode(client(), TaxMode.EXTERNAL_AMOUNT, cart -> {
+                final Cart cartWithShippingMethod = client().executeBlocking(CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod)));
+                assertThat(cartWithShippingMethod.getShippingInfo()).isNotNull();
+                assertThat(cartWithShippingMethod.getShippingInfo().getTaxedPrice()).isNull();
+
+                final ExternalTaxRateDraft taxRate = ExternalTaxRateDraftBuilder
+                        .ofAmount(1.0, "Test Tax", CountryCode.DE)
+                        .build();
+                final MonetaryAmount totalGross = MoneyImpl.ofCents(100000, EUR);
+                final ExternalTaxAmountDraftDsl taxAmountDraft = ExternalTaxAmountDraftBuilder
+                        .of(totalGross, taxRate)
+                        .build();
+                final SetShippingMethodTaxAmount setShippingMethodTaxAmount = SetShippingMethodTaxAmount.of(taxAmountDraft);
+
+                final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cartWithShippingMethod, setShippingMethodTaxAmount));
+
+                final TaxedItemPrice taxedPrice = updatedCart.getShippingInfo().getTaxedPrice();
+
+                assertThat(taxedPrice.getTotalGross()).isEqualTo(totalGross);
+
+                return updatedCart;
+            });
+        });
+    }
+
+    @Test
+    public void setLineItemTaxAmount() throws Exception {
+        withFilledCartWithTaxMode(client(), TaxMode.EXTERNAL_AMOUNT, cart -> {
+            final LineItem originalLineItem = cart.getLineItems().get(0);
+            final ExternalTaxRateDraft taxRate = ExternalTaxRateDraftBuilder
+                    .ofAmount(1.0, "Test Tax", CountryCode.DE)
+                    .build();
+            final MonetaryAmount totalGross = MoneyImpl.ofCents(1000, EUR);
+            final ExternalTaxAmountDraftDsl taxAmountDraft = ExternalTaxAmountDraftBuilder
+                    .of(totalGross, taxRate)
+                    .build();
+            final SetLineItemTaxAmount setLineItemTaxAmount = SetLineItemTaxAmount.of(originalLineItem.getId(), taxAmountDraft);
+            final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, setLineItemTaxAmount));
+            final LineItem updatedLineItem = updatedCart.getLineItems().get(0);
+            assertThat(updatedLineItem.getTaxedPrice().getTotalGross()).isEqualTo(totalGross);
+        });
+    }
+
+    @Test
+    public void setCustomLineItemTaxAmount() throws Exception {
+        withCustomLineItemFilledCartWithTaxMode(client(), TaxMode.EXTERNAL_AMOUNT, cart -> {
+            final CustomLineItem originalCustomLineItem = cart.getCustomLineItems().get(0);
+            final ExternalTaxRateDraft taxRate = ExternalTaxRateDraftBuilder
+                    .ofAmount(1.0, "Test Tax", CountryCode.DE)
+                    .build();
+            final MonetaryAmount totalGross = MoneyImpl.ofCents(1000, EUR);
+            final ExternalTaxAmountDraftDsl taxAmountDraft = ExternalTaxAmountDraftBuilder
+                    .of(totalGross, taxRate)
+                    .build();
+            final SetCustomLineItemTaxAmount setCustomLineItemTaxAmount = SetCustomLineItemTaxAmount.of(originalCustomLineItem.getId(), taxAmountDraft);
+            final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, setCustomLineItemTaxAmount));
+            final CustomLineItem updatedCustomLineItem = updatedCart.getCustomLineItems().get(0);
+            assertThat(updatedCustomLineItem.getTaxedPrice().getTotalGross()).isEqualTo(totalGross);
+
+            return updatedCart;
         });
     }
 

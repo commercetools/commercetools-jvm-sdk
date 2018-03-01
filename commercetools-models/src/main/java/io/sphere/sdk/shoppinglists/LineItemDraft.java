@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.types.CustomFields;
+import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
@@ -14,14 +15,18 @@ import java.time.ZonedDateTime;
  * @see LineItemDraftBuilder
  */
 @JsonDeserialize(as = LineItemDraftDsl.class)
-@ResourceDraftValue(factoryMethods = {
-        @FactoryMethod(parameterNames = {"productId"}),
-})
+@ResourceDraftValue(
+        abstractBuilderClass = true,
+        factoryMethods = {
+                @FactoryMethod(methodName = "ofSku", parameterNames = {"sku", "quantity"}),
+                @FactoryMethod(parameterNames = {"productId"})})
 public interface LineItemDraft {
     String getProductId();
 
     @Nullable
     Integer getVariantId();
+
+    String getSku();
 
     @Nullable
     Long getQuantity();
@@ -30,5 +35,5 @@ public interface LineItemDraft {
     ZonedDateTime getAddedAt();
 
     @Nullable
-    CustomFields getCustom();
+    CustomFieldsDraft getCustom();
 }

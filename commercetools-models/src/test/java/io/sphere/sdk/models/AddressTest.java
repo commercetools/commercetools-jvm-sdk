@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
-public final class AddressTest {
+public class AddressTest {
     @Test
     public void equalsIgnoreId() {
         final Address addressWithoutId = Address.of(CountryCode.DE);

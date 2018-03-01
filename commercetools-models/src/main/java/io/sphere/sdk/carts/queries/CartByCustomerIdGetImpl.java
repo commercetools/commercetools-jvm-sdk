@@ -1,6 +1,7 @@
 package io.sphere.sdk.carts.queries;
 
 import io.sphere.sdk.carts.Cart;
+import io.sphere.sdk.carts.CartEndpoint;
 import io.sphere.sdk.carts.expansion.CartExpansionModel;
 import io.sphere.sdk.http.NameValuePair;
 import io.sphere.sdk.queries.MetaModelGetDslBuilder;

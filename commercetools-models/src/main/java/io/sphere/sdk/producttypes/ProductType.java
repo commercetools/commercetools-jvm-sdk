@@ -7,6 +7,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.WithKey;
 import io.sphere.sdk.products.Product;
+import io.sphere.sdk.products.attributes.AttributeConstraint;
 import io.sphere.sdk.products.attributes.AttributeDefinition;
 
 import javax.annotation.Nullable;
@@ -48,13 +49,13 @@ import java.util.Optional;
         "  {@include.example io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier}\n" +
         "\n" +
         "  <p>To create attribute definitions refer to {@link io.sphere.sdk.products.attributes.AttributeDefinition}.</p>")
-@HasUpdateCommand(updateWithKey = true)
+@HasUpdateCommand(updateWith = "key")
 @HasDeleteCommand(javadocSummary = "Deletes a product type.\n" +
         "\n" +
         " <p>Delete by ID:</p>\n" +
         " {@include.example io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommandIntegrationTest#execution()}\n" +
         " <p>Delete by key:</p>\n" +
-        " {@include.example io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommandIntegrationTest#executionByKey()}", deleteWithKey = true)
+        " {@include.example io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommandIntegrationTest#executionByKey()}", deleteWith = "key")
 @HasQueryModel
 public interface ProductType extends Resource<ProductType>, AttributeDefinitionContainer, WithKey {
 
@@ -67,6 +68,8 @@ public interface ProductType extends Resource<ProductType>, AttributeDefinitionC
     @QueryModelHint(type = "AttributeDefinitionQueryModel<ProductType>", impl = "return new AttributeDefinitionQueryModelImpl<>(this, fieldName);")
     List<AttributeDefinition> getAttributes();
 
+    @HasUpdateAction(value = "changeAttributeConstraint",
+            fields = {@PropertySpec(name = "attributeName", type = String.class),@PropertySpec(name = "newValue", type = AttributeConstraint.class)})
     @Nullable
     default AttributeDefinition getAttribute(final String attributeName) {
         return AttributeDefinitionContainer.super.getAttribute(attributeName);

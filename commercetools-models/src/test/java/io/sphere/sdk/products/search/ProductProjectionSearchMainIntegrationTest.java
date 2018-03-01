@@ -94,12 +94,12 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
 
     @Test
     public void findMatchingVariantByQueryFilter() throws Exception {
-        testBlueFilter(filters -> ProductProjectionSearch.ofStaged().withQueryFilters(filters));
+        testBlueFilter(filters -> ProductProjectionSearch.ofStaged().withMarkingMatchingVariants(true).withQueryFilters(filters));
     }
 
     @Test
     public void findMatchingVariantByResultFilter() throws Exception {
-        testBlueFilter(filters -> ProductProjectionSearch.ofStaged().withResultFilters(filters));
+        testBlueFilter(filters -> ProductProjectionSearch.ofStaged().withMarkingMatchingVariants(true).withResultFilters(filters));
     }
 
     @Ignore // HTTP API still not having sort associated to matching variant flag
@@ -120,7 +120,7 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
     @Test
     public void findMatchingVariantByFulltextSearch() throws Exception {
         final Condition<ProductVariant> allMatchingVariants = new Condition<>(variant -> variant.isMatchingVariant(), "all are matching variants");
-        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withText(ENGLISH, "shoe");
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withMarkingMatchingVariants(true).withText(ENGLISH, "shoe");
         assertThat(executeSearch(search).getResults())
                 .flatExtracting(p -> p.getAllVariants())
                 .are(allMatchingVariants);

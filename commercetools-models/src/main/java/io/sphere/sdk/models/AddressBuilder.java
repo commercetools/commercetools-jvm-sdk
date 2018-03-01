@@ -21,6 +21,8 @@ public final class AddressBuilder extends Base implements Builder<Address> {
     @Nullable
     String id;
     @Nullable
+    String key;
+    @Nullable
     String title;
     @Nullable
     String salutation;
@@ -95,6 +97,7 @@ public final class AddressBuilder extends Base implements Builder<Address> {
         builder.additionalAddressInfo = address.additionalAddressInfo;
         builder.fax = address.fax;
         builder.externalId = address.externalId;
+        builder.key = address.key;
         return builder;
     }
 
@@ -115,6 +118,11 @@ public final class AddressBuilder extends Base implements Builder<Address> {
 
     public AddressBuilder id(@Nullable final String id) {
         this.id = id;
+        return this;
+    }
+
+    public AddressBuilder key(@Nullable final String key) {
+        this.key = key;
         return this;
     }
 

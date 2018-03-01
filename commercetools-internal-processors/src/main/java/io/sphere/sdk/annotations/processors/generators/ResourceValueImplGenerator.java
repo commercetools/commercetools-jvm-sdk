@@ -1,11 +1,11 @@
 package io.sphere.sdk.annotations.processors.generators;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.squareup.javapoet.*;
 import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.annotations.processors.models.PropertyGenModel;
 
 import javax.annotation.Generated;
+import javax.annotation.processing.Messager;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
@@ -18,9 +18,9 @@ import java.util.stream.Collectors;
 /**
  * Generates implementation classes for interfaces annotated with {@link io.sphere.sdk.annotations.ResourceValue}.
  */
-public class ResourceValueImplGenerator extends AbstractGenerator {
-    public ResourceValueImplGenerator(final Elements elements, final Types types) {
-        super(elements, types);
+public class ResourceValueImplGenerator extends AbstractGenerator<TypeElement> {
+    public ResourceValueImplGenerator(final Elements elements, final Types types, Messager messager) {
+        super(elements, types, messager);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class ResourceValueImplGenerator extends AbstractGenerator {
         final List<PropertyGenModel> propertyGenModels = getPropertyGenModels(propertyMethods);
         final List<FieldSpec> fields = propertyGenModels.stream().map(this::createField).collect(Collectors.toList());
 
-        final List<MethodSpec> getMethods = propertyMethods.stream().map(this::createGetMethod).collect(Collectors.toList());
+        final List<MethodSpec> getMethods = propertyGenModels.stream().map(this::createGetMethod).collect(Collectors.toList());
 
         final ResourceValue resourceValue = resourceValueTypeElement.getAnnotation(ResourceValue.class);
 
@@ -61,20 +61,6 @@ public class ResourceValueImplGenerator extends AbstractGenerator {
                 .build();
 
         return typeSpec;
-    }
-
-    @Override
-    protected MethodSpec.Builder createGetMethodBuilder(final ExecutableElement propertyMethod) {
-        final MethodSpec.Builder builder = super.createGetMethodBuilder(propertyMethod);
-
-        final JsonProperty jsonProperty = propertyMethod.getAnnotation(JsonProperty.class);
-        final String jsonName = jsonProperty != null ? jsonProperty.value() : null;
-
-        if (jsonName != null) {
-            return builder.addAnnotation(createJsonPropertyAnnotation(jsonName));
-        }
-
-        return builder;
     }
 
     @Override

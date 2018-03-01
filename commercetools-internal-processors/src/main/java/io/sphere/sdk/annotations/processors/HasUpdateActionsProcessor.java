@@ -12,7 +12,7 @@ import java.util.List;
 
 @SupportedAnnotationTypes({"io.sphere.sdk.annotations.HasUpdateActions"})
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
-public class HasUpdateActionsProcessor extends CommercetoolsAnnotationProcessor<HasUpdateActions> {
+public class HasUpdateActionsProcessor extends ClassLevelAnnotationProcessor<HasUpdateActions> {
 
     public HasUpdateActionsProcessor() {
         super(HasUpdateActions.class);
@@ -20,7 +20,7 @@ public class HasUpdateActionsProcessor extends CommercetoolsAnnotationProcessor<
 
     @Override
     protected void generate(final TypeElement typeElement) {
-        final List<JavaFile> javaFiles = new UpdateActionsGenerator(processingEnv.getElementUtils(), processingEnv.getTypeUtils()).generate(typeElement);
+        final List<JavaFile> javaFiles = new UpdateActionsGenerator(processingEnv.getElementUtils(), processingEnv.getTypeUtils(),processingEnv.getMessager()).generate(typeElement);
         javaFiles.forEach(javaFile -> writeClass(javaFile));
     }
 

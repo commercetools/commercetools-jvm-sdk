@@ -47,7 +47,7 @@ public final class SphereInternalUtils {
         return result;
     }
 
-    public static <T> List<T> listOf(List<T> first, List<T> second) {
+    public static <T> List<T> listOf(List<? extends T> first, List<? extends T> second) {
         final List<T> result = new ArrayList<>(second.size() + first.size());
         result.addAll(first);
         result.addAll(second);
@@ -71,6 +71,13 @@ public final class SphereInternalUtils {
         final Set<T> result = new HashSet<>(1 + set.size());
         result.add(element);
         result.addAll(set);
+        return result;
+    }
+
+    public static <T> Set<T> setOf(final Set<T> first, final Set<T> second) {
+        final Set<T> result = new HashSet<>(first.size() + second.size());
+        result.addAll(first);
+        result.addAll(second);
         return result;
     }
 

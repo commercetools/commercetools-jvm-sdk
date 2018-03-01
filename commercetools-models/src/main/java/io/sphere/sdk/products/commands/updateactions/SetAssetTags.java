@@ -22,19 +22,25 @@ public final class SetAssetTags extends StagedProductUpdateActionImpl<Product> {
     @Nullable
     private final String sku;
     private final String assetId;
+    private final String assetKey;
     @Nullable
     private final Set<String> tags;
 
-    private SetAssetTags(final String assetId, @Nullable final Integer variantId, @Nullable final String sku, @Nullable final Set<String> tags, @Nullable final Boolean staged) {
+    private SetAssetTags(final String assetId,final String assetKey, @Nullable final Integer variantId, @Nullable final String sku, @Nullable final Set<String> tags, @Nullable final Boolean staged) {
         super("setAssetTags", staged);
         this.assetId = assetId;
         this.variantId = variantId;
         this.sku = sku;
         this.tags = tags;
+        this.assetKey = assetKey;
     }
 
     public String getAssetId() {
         return assetId;
+    }
+
+    public String getAssetKey() {
+        return assetKey;
     }
 
     @Nullable
@@ -57,7 +63,7 @@ public final class SetAssetTags extends StagedProductUpdateActionImpl<Product> {
     }
 
     public static SetAssetTags ofVariantId(final Integer variantId, final String assetId, @Nullable final Set<String> tags, @Nullable final Boolean staged) {
-        return new SetAssetTags(assetId, variantId, null, tags, staged);
+        return new SetAssetTags(assetId,null, variantId, null, tags, staged);
     }
 
     public static SetAssetTags ofSku(final String sku, final String assetId, @Nullable final Set<String> tags) {
@@ -65,6 +71,22 @@ public final class SetAssetTags extends StagedProductUpdateActionImpl<Product> {
     }
 
     public static SetAssetTags ofSku(final String sku, final String assetId, @Nullable final Set<String> tags, @Nullable final Boolean staged) {
-        return new SetAssetTags(assetId, null, sku, tags, staged);
+        return new SetAssetTags(assetId,null, null, sku, tags, staged);
+    }
+
+    public static SetAssetTags ofVariantIdAndAssetKey(final Integer variantId, final String assetKey, @Nullable final Set<String> tags) {
+        return ofVariantIdAndAssetKey(variantId, assetKey, tags, null);
+    }
+
+    public static SetAssetTags ofVariantIdAndAssetKey(final Integer variantId, final String assetKey, @Nullable final Set<String> tags, @Nullable final Boolean staged) {
+        return new SetAssetTags(null, assetKey, variantId, null, tags, staged);
+    }
+
+    public static SetAssetTags ofSkuAndAssetKey(final String sku, final String assetKey, @Nullable final Set<String> tags) {
+        return ofSkuAndAssetKey(sku, assetKey, tags, null);
+    }
+
+    public static SetAssetTags ofSkuAndAssetKey(final String sku, final String assetKey, @Nullable final Set<String> tags, @Nullable final Boolean staged) {
+        return new SetAssetTags(null,assetKey, null, sku, tags, staged);
     }
 }

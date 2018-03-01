@@ -20,8 +20,8 @@ final class CustomFieldsDraftImpl extends Base implements CustomFieldsDraft {
     @Nullable
     private final Map<String, JsonNode> fields;
 
-    CustomFieldsDraftImpl(@Nullable final String typeId, @Nullable final String typeKey, final Map<String, JsonNode> fields) {
-        this.type = ResourceIdentifier.ofIdOrKey(typeId, typeKey);
+    CustomFieldsDraftImpl(@Nullable final String id, @Nullable final String typeKey, final Map<String, JsonNode> fields) {
+        this.type = ResourceIdentifier.ofIdOrKey(id, typeKey);
         this.fields = immutableCopyOf(fields);
     }
 

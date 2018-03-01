@@ -12,6 +12,7 @@ import io.sphere.sdk.customers.commands.CustomerPasswordResetCommand;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
+import io.sphere.sdk.models.WithKey;
 import io.sphere.sdk.payments.Payment;
 import io.sphere.sdk.reviews.Review;
 import io.sphere.sdk.types.Custom;
@@ -94,7 +95,6 @@ import static java.util.stream.Collectors.toList;
  *
  * See {@link io.sphere.sdk.customers.commands.CustomerDeleteCommand}.
  *
- *
  * @see io.sphere.sdk.customers.commands.CustomerChangePasswordCommand
  * @see io.sphere.sdk.customers.commands.CustomerCreateCommand
  * @see io.sphere.sdk.customers.commands.CustomerCreatePasswordTokenCommand
@@ -120,26 +120,41 @@ import static java.util.stream.Collectors.toList;
         "    }")
 @ResourceInfo(pluralName = "customers", pathElement = "customers")
 @HasByIdGetEndpoint(javadocSummary = "Fetches a customer by a known ID.", includeExamples = "io.sphere.sdk.customers.queries.CustomerByIdGetIntegrationTest#execution()")
+@HasByKeyGetEndpoint(javadocSummary = "Fetches a customer by a known key.", includeExamples = "io.sphere.sdk.customers.queries.CustomerByKeyGetIntegrationTest#execution()")
 @HasUpdateCommand(javadocSummary = " Updates a customer.\n" +
         " \n" +
-        " To update the properties {@link Customer#isEmailVerified()} or {@link Customer#getPassword()} special commands are required which are documented in the {@link Customer customer Javadoc}.")
-@HasDeleteCommand(javadocSummary = "Deletes a customer.", includeExamples = "io.sphere.sdk.customers.commands.CustomerDeleteCommandIntegrationTest#execution()")
+        " To update the properties {@link Customer#isEmailVerified()} or {@link Customer#getPassword()} special commands are required which are documented in the {@link Customer customer Javadoc}.",
+        updateWith = "key")
+@HasDeleteCommand(
+        javadocSummary = "Deletes a customer.", includeExamples = "io.sphere.sdk.customers.commands.CustomerDeleteCommandIntegrationTest#execution()",
+        deleteWith = "key"
+)
 @HasQueryModel(additionalContents = {
         "StringQuerySortingModel<Customer> lowercaseEmail();",
         "BooleanQueryModel<Customer> isEmailVerified();"
 })
 @HasUpdateActions
-public interface Customer extends Resource<Customer>, Custom {
+public interface Customer extends Resource<Customer>, Custom, WithKey {
     /**
      * Gets the ID of this customer.
      *
      * @see io.sphere.sdk.customers.queries.CustomerByIdGet
      * @see io.sphere.sdk.carts.queries.CartByCustomerIdGet
+     *
      * @return ID
      */
     @HasNoUpdateAction
     @Override
     String getId();
+
+    /**
+     * User-specific unique identifier for a customer. Must be unique across a project.
+     *
+     * @see io.sphere.sdk.customers.queries.CustomerByKeyGet
+     * @return key
+     */
+    @Nullable
+    String getKey();
 
     /**
      * The customer number can be used to create a more human-readable (in contrast to ID) identifier for the customer.

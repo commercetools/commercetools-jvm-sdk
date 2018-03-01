@@ -2,16 +2,23 @@ package io.sphere.sdk.json;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.javamoney.moneta.function.MonetaryUtil;
+import org.javamoney.moneta.internal.DefaultRoundingProvider;
 
-import javax.money.Monetary;
+import javax.money.CurrencyUnit;
 import javax.money.MonetaryAmount;
+import javax.money.MonetaryRounding;
+import javax.money.RoundingQueryBuilder;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Objects;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 final class MoneyRepresentation {
     private final Long centAmount;
     private final String currencyCode;
+
+    private static final DefaultRoundingProvider ROUNDING_PROVIDER = new DefaultRoundingProvider();
 
     @JsonCreator
     private MoneyRepresentation(final Long centAmount, final String currencyCode) {
@@ -47,8 +54,23 @@ final class MoneyRepresentation {
     }
 
     public static long amountToCents(final MonetaryAmount monetaryAmount) {
+        final MonetaryRounding ROUNDING =
+                ROUNDING_PROVIDER.getRounding(RoundingQueryBuilder.of().setRoundingName("default").setCurrency(monetaryAmount.getCurrency())
+                .build());
         return monetaryAmount
-                .with(Monetary.getDefaultRounding())
-                .query(MonetaryUtil.minorUnits());
+                .with(ROUNDING)
+                .query(MoneyRepresentation::queryFrom);
+    }
+
+    private static Long queryFrom(MonetaryAmount amount) {
+        Objects.requireNonNull(amount, "Amount required.");
+        BigDecimal number = amount.getNumber().numberValue(BigDecimal.class);
+        CurrencyUnit cur = amount.getCurrency();
+        int scale = cur.getDefaultFractionDigits();
+        if(scale<0){
+            scale = 0;
+        }
+        number = number.setScale(scale, RoundingMode.DOWN);
+        return number.movePointRight(number.scale()).longValueExact();
     }
 }

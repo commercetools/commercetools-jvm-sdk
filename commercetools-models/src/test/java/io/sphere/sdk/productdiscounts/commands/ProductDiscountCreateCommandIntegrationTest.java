@@ -11,6 +11,7 @@ import io.sphere.sdk.test.IntegrationTest;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import static io.sphere.sdk.productdiscounts.ProductDiscountFixtures.withProductDiscount;
@@ -29,6 +30,8 @@ public class ProductDiscountCreateCommandIntegrationTest extends IntegrationTest
 
     @Test
     public void execution() throws Exception {
+        final ZonedDateTime start = ZonedDateTime.parse("2015-07-09T07:46:40.230Z");
+        final ZonedDateTime end = start.plusYears(100);
         final Product product = referenceableProduct(client());
         final ProductDiscountPredicate predicate =
                 ProductDiscountPredicate.of("product.id = \"" + product.getId() + "\"");
@@ -45,6 +48,8 @@ public class ProductDiscountCreateCommandIntegrationTest extends IntegrationTest
                     .value(discountValue)
                     .sortOrder(sortOrder)
                     .isActive(active)
+                    .validFrom(start)
+                    .validUntil(end)
                     .build();
 
         final ProductDiscount productDiscount = client().executeBlocking(ProductDiscountCreateCommand.of(discountDraft));
@@ -55,7 +60,8 @@ public class ProductDiscountCreateCommandIntegrationTest extends IntegrationTest
         assertThat(productDiscount.getValue()).isEqualTo(discountValue);
         assertThat(productDiscount.getSortOrder()).isEqualTo(sortOrder);
         assertThat(productDiscount.isActive()).isEqualTo(active);
-
+        assertThat(productDiscount.getValidFrom()).isEqualTo(start);
+        assertThat(productDiscount.getValidUntil()).isEqualTo(end);
         final ProductByIdGet sphereRequest =
                 ProductByIdGet.of(product)
                         .plusExpansionPaths(m -> m.masterData().staged().masterVariant().prices().discounted().discount());

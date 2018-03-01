@@ -2,12 +2,14 @@ package io.sphere.sdk.customers.commands;
 
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.queries.CartByCustomerIdGet;
+import io.sphere.sdk.customergroups.queries.CustomerGroupByKeyGet;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.customers.CustomerIntegrationTest;
 import io.sphere.sdk.customers.CustomerSignInResult;
 import org.junit.Test;
 
 import static io.sphere.sdk.customers.CustomerFixtures.newCustomerDraft;
+import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CustomerDeleteCommandIntegrationTest extends CustomerIntegrationTest {
@@ -19,4 +21,14 @@ public class CustomerDeleteCommandIntegrationTest extends CustomerIntegrationTes
         final Cart cart = client().executeBlocking(CartByCustomerIdGet.of(customer));
         assertThat(cart).isNull();
     }
+
+    @Test
+    public void deleteByKey() throws Exception {
+        final String key = randomKey();
+        final CustomerSignInResult result = client().executeBlocking(CustomerCreateCommand.of(newCustomerDraft().withKey(key)));
+        final Customer customer = result.getCustomer();
+        client().executeBlocking(CustomerDeleteCommand.ofKey(key, customer.getVersion()));
+        assertThat(client().executeBlocking(CustomerGroupByKeyGet.of(key))).isNull();
+    }
+
 }

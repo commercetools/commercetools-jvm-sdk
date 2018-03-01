@@ -9,7 +9,10 @@ import io.sphere.sdk.carts.commands.updateactions.SetCountry;
 import io.sphere.sdk.carts.queries.CartByIdGet;
 import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.client.ErrorResponseException;
-import io.sphere.sdk.customers.*;
+import io.sphere.sdk.customers.Customer;
+import io.sphere.sdk.customers.CustomerFixtures;
+import io.sphere.sdk.customers.CustomerIntegrationTest;
+import io.sphere.sdk.customers.CustomerSignInResult;
 import io.sphere.sdk.customers.errors.CustomerInvalidCredentials;
 import io.sphere.sdk.products.ProductFixtures;
 import org.junit.Test;
@@ -17,7 +20,8 @@ import org.junit.Test;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-import static io.sphere.sdk.carts.AnonymousCartSignInMode.*;
+import static io.sphere.sdk.carts.AnonymousCartSignInMode.MERGE_WITH_EXISTING_CUSTOMER_CART;
+import static io.sphere.sdk.carts.AnonymousCartSignInMode.USE_AS_NEW_ACTIVE_CUSTOMER_CART;
 import static io.sphere.sdk.customers.CustomerFixtures.PASSWORD;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -30,6 +34,14 @@ public class CustomerSignInCommandIntegrationTest extends CustomerIntegrationTes
     public void execution() throws Exception {
         withCustomer(client(), customer -> {
             final CustomerSignInResult result = client().executeBlocking(CustomerSignInCommand.of(customer.getEmail(), PASSWORD));
+            assertThat(result.getCustomer()).isEqualTo(customer);
+        });
+    }
+
+    @Test
+    public void signInWithUpdateProductData() throws Exception {
+        withCustomer(client(), customer -> {
+            final CustomerSignInResult result = client().executeBlocking(CustomerSignInCommand.of(customer.getEmail(), PASSWORD).withUpdateProductData(true));
             assertThat(result.getCustomer()).isEqualTo(customer);
         });
     }

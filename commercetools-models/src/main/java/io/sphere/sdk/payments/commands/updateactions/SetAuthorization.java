@@ -16,7 +16,7 @@ import java.time.ZonedDateTime;
  *
  * @see Payment
  *
- *
+ * @deprecated This update action will be removed with the next major SDK update.
  */
 public final class SetAuthorization extends UpdateActionImpl<Payment> {
     @Nullable

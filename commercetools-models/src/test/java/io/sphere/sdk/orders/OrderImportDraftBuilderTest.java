@@ -1,10 +1,7 @@
 package io.sphere.sdk.orders;
 
 import com.neovisionaries.i18n.CountryCode;
-import io.sphere.sdk.carts.InventoryMode;
-import io.sphere.sdk.carts.RoundingMode;
-import io.sphere.sdk.carts.TaxPortion;
-import io.sphere.sdk.carts.TaxedPrice;
+import io.sphere.sdk.carts.*;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.LocalizedEnumValue;
@@ -57,6 +54,8 @@ public class OrderImportDraftBuilderTest {
         final ZonedDateTime completedAt = ZonedDateTime.now();
         final RoundingMode taxRoundingMode = RoundingMode.HALF_UP;
         final InventoryMode inventoryMode = InventoryMode.NONE;
+        final TaxCalculationMode taxCalculationMode = TaxCalculationMode.LINE_ITEM_LEVEL;
+        final CartOrigin cartOrigin = CartOrigin.MERCHANT;
         final OrderImportDraftBuilder orderImportDraftBuilder = OrderImportDraftBuilder
                 .ofLineItems(lineItemsTotalPrice, lineItemsOrderState, lineItems)
                 .orderNumber(orderNumber)
@@ -75,7 +74,10 @@ public class OrderImportDraftBuilderTest {
                 .completedAt(completedAt)
                 .custom(custom)
                 .taxRoundingMode(taxRoundingMode)
-                .inventoryMode(inventoryMode);
+                .inventoryMode(inventoryMode)
+                .taxCalculationMode(taxCalculationMode)
+                .origin(cartOrigin)
+                ;
         final OrderImportDraft orderImportDraft = orderImportDraftBuilder.build();
         assertThat(orderImportDraft.getLineItems()).isEqualTo(lineItems);
         assertThat(orderImportDraft.getOrderNumber()).isEqualTo(orderNumber);
@@ -95,5 +97,7 @@ public class OrderImportDraftBuilderTest {
         assertThat(orderImportDraft.getCustom()).isEqualTo(custom);
         assertThat(orderImportDraft.getTaxRoundingMode()).isEqualTo(taxRoundingMode);
         assertThat(orderImportDraft.getInventoryMode()).isEqualTo(inventoryMode);
+        assertThat(orderImportDraft.getTaxCalculationMode()).isEqualTo(taxCalculationMode);
+        assertThat(orderImportDraft.getOrigin()).isEqualTo(cartOrigin);
     }
 }

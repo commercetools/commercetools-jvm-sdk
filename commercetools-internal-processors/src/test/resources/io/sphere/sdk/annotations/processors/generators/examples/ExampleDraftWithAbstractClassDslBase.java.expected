@@ -131,7 +131,8 @@ abstract class ExampleDraftWithAbstractClassDslBase<T extends ExampleDraftWithAb
    * @param optional initial value for the {@link ExampleDraftWithAbstractClass#getOptional()} property
    * @return new object initialized with the given values
    */
-  public static ExampleDraftWithAbstractClassDsl of(final Boolean _default, final String optional) {
+  public static ExampleDraftWithAbstractClassDsl of(final Boolean _default,
+      @Nullable final String optional) {
     return new ExampleDraftWithAbstractClassDsl(_default, null, null, optional, null);
   }
 

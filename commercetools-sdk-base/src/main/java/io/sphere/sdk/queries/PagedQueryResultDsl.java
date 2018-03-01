@@ -3,8 +3,8 @@ package io.sphere.sdk.queries;
 import java.util.List;
 
 public final class PagedQueryResultDsl<T> extends PagedQueryResultImpl<T> {
-    PagedQueryResultDsl(final Long offset, final Long total, final List<T> results, final Long count) {
-        super(offset, total, results, count);
+    PagedQueryResultDsl(final Long offset, final Long limit, final Long total, final List<T> results, final Long count) {
+        super(offset, limit, total, results, count);
     }
 
     /**
@@ -13,7 +13,7 @@ public final class PagedQueryResultDsl<T> extends PagedQueryResultImpl<T> {
      * @return the copy
      */
     public PagedQueryResultDsl<T> withOffset(final Long offset) {
-        return PagedQueryResult.of(offset, getTotal(), getResults());
+        return PagedQueryResult.of(offset, getLimit(), getTotal(), getResults());
     }
 
     /**
@@ -22,6 +22,6 @@ public final class PagedQueryResultDsl<T> extends PagedQueryResultImpl<T> {
      * @return a copy with total as new total.
      */
     public PagedQueryResultDsl<T> withTotal(final Long total) {
-        return PagedQueryResult.of(getOffset(), total, getResults());
+        return PagedQueryResult.of(getOffset(), getLimit(), total, getResults());
     }
 }

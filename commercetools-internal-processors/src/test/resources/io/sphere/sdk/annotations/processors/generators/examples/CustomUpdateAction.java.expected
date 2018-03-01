@@ -1,0 +1,108 @@
+package io.sphere.sdk.annotations.processors.generators.examples.commands.updateactions;
+
+import io.sphere.sdk.annotations.processors.generators.examples.ExampleResourceWithCustomUpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
+import io.sphere.sdk.models.Reference;
+import java.lang.Long;
+import java.lang.String;
+import java.util.List;
+import javax.annotation.Generated;
+import javax.annotation.Nullable;
+
+/**
+ * Updates the {@code userName} property of a {@link ExampleResourceWithCustomUpdateAction}.
+ *
+ * @see ExampleResourceWithCustomUpdateAction#getUserName()
+ */
+@Generated(
+    value = "io.sphere.sdk.annotations.processors.generators.UpdateActionGenerator",
+    comments = "Generated from: io.sphere.sdk.annotations.processors.generators.examples.ExampleResourceWithCustomUpdateAction"
+)
+public final class CustomUpdateAction extends UpdateActionImpl<ExampleResourceWithCustomUpdateAction> {
+  private final String name;
+
+  private final Long quantity;
+
+  private final String slug;
+
+  private final List<String> ids;
+
+  @Nullable
+  private final Reference<String> taxCategory;
+
+  private CustomUpdateAction(final String name, final Long quantity, final String slug,
+      final List<String> ids, @Nullable final Reference<String> taxCategory) {
+    super("customUpdateAction");
+    this.name = name;
+    this.quantity = quantity;
+    this.slug = slug;
+    this.ids = ids;
+    this.taxCategory = taxCategory;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public Long getQuantity() {
+    return quantity;
+  }
+
+  public String getSlug() {
+    return slug;
+  }
+
+  public List<String> getIds() {
+    return ids;
+  }
+
+  @Nullable
+  public Reference<String> getTaxCategory() {
+    return taxCategory;
+  }
+
+  /**
+   * Creates a new object initialized with the given values.
+   *
+   * @param name initial value for the  property
+   * @param slug initial value for the  property
+   * @return new object initialized with the given values
+   */
+  public static CustomUpdateAction of(final String name, final String slug) {
+    return new CustomUpdateAction(name, null, slug, null, null);
+  }
+
+  /**
+   * Creates a new object initialized with the given values.
+   *
+   * @param name initial value for the  property
+   * @return new object initialized with the given values
+   */
+  public static CustomUpdateAction of(final String name) {
+    return new CustomUpdateAction(name, null, null, null, null);
+  }
+
+  /**
+   * Creates a new object initialized with the given values.
+   *
+   * @param name initial value for the  property
+   * @param quantity initial value for the  property
+   * @param slug initial value for the  property
+   * @param ids initial value for the  property
+   * @param taxCategory initial value for the  property
+   * @return new object initialized with the given values
+   */
+  public static CustomUpdateAction of(final String name, final Long quantity, final String slug,
+      final List<String> ids, @Nullable final Reference<String> taxCategory) {
+    return new CustomUpdateAction(name, quantity, slug, ids, taxCategory);
+  }
+
+  /**
+   * Creates a copied update action initialized with the given parameter, the rest of the parameters are copied from the original object.
+   *
+   * @return new object initialized with the copied values from the original object
+   */
+  public CustomUpdateAction withTaxCategory(final Reference<String> taxCategory) {
+    return new CustomUpdateAction(getName(), getQuantity(), getSlug(), getIds(), taxCategory);
+  }
+}

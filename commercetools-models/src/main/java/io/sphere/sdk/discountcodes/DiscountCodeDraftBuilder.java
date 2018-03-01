@@ -1,22 +1,26 @@
 package io.sphere.sdk.discountcodes;
 
 import io.sphere.sdk.cartdiscounts.CartDiscount;
-import io.sphere.sdk.cartdiscounts.CartDiscountPredicate;
+import io.sphere.sdk.cartdiscounts.CartPredicate;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
+import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.List;
 
 public final class DiscountCodeDraftBuilder extends DiscountCodeDraftBuilderBase<DiscountCodeDraftBuilder> {
 
-    DiscountCodeDraftBuilder(final Boolean active, final List<Reference<CartDiscount>> cartDiscounts, @Nullable final String cartPredicate, final String code, @Nullable final LocalizedString description, @Nullable final Long maxApplications, @Nullable final Long maxApplicationsPerCustomer, @Nullable final LocalizedString name) {
-        super(active, cartDiscounts, cartPredicate, code, description, maxApplications, maxApplicationsPerCustomer, name);
+    DiscountCodeDraftBuilder(final Boolean active, final List<Reference<CartDiscount>> cartDiscounts, final @Nullable String cartPredicate,
+                             final String code, final @Nullable CustomFieldsDraft custom, final @Nullable LocalizedString description,@Nullable final List<String> groups,
+                             final @Nullable Long maxApplications, final @Nullable Long maxApplicationsPerCustomer, final @Nullable LocalizedString name, @Nullable final ZonedDateTime validFrom, @Nullable final ZonedDateTime validUntil) {
+        super(active, cartDiscounts, cartPredicate, code, custom, description,groups, maxApplications, maxApplicationsPerCustomer, name,validFrom,validUntil);
     }
 
-    public DiscountCodeDraftBuilder cartPredicate(@Nullable final CartDiscountPredicate cartPredicate) {
+    public DiscountCodeDraftBuilder cartPredicate(@Nullable final CartPredicate cartPredicate) {
         return cartPredicate(cartPredicate.toSphereCartPredicate());
     }
 

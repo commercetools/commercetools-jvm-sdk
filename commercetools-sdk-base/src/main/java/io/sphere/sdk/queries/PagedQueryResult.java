@@ -21,17 +21,37 @@ public interface PagedQueryResult<T> extends PagedResult<T> {
      * @return an empty {@code PagedQueryResult}
      */
     static <T> PagedQueryResultDsl<T> empty() {
-        return new PagedQueryResultDsl<>(0L, 0L, Collections.<T>emptyList(), 0L);
+        return new PagedQueryResultDsl<>(0L, 0L, 0L, Collections.<T>emptyList(), 0L);
     }
 
+    /**
+     * @deprecated PagedQueryResult should remain as a read model, and be constructed only by deserialization.
+     */
+    @Deprecated
+    static <T> PagedQueryResultDsl<T> of(final Long offset, final Long limit, final Long total, final List<T> results) {
+        return new PagedQueryResultDsl<>(offset, limit, total, results, (long) results.size());
+    }
+
+    /**
+     * @deprecated PagedQueryResult should remain as a read model, and be constructed only by deserialization.
+     */
+    @Deprecated
     static <T> PagedQueryResultDsl<T> of(final Long offset, final Long total, final List<T> results) {
-        return new PagedQueryResultDsl<>(offset, total, results, (long) results.size());
+        return of(offset, -1L, total, results);
     }
 
+    /**
+     * @deprecated PagedQueryResult should remain as a read model, and be constructed only by deserialization.
+     */
+    @Deprecated
     static <T> PagedQueryResultDsl<T> of(final List<T> results) {
-        return of(0L, (long) results.size(), results);
+        final long size = results.size();
+        return of(0L, size, size, results);
     }
 
+    /**
+     * @deprecated PagedQueryResult should remain as a read model, and be constructed only by deserialization.
+     */
     @JsonIgnore
     static <T> PagedQueryResultDsl<T> of(final T singleResult) {
         return of(Collections.singletonList(singleResult));
@@ -42,6 +62,9 @@ public interface PagedQueryResult<T> extends PagedResult<T> {
 
     @Override
     Long getOffset();
+
+    @Override
+    Long getLimit();
 
     @Override
     List<T> getResults();

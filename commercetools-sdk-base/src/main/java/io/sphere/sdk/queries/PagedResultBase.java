@@ -6,12 +6,14 @@ import java.util.List;
 
 public abstract class PagedResultBase<T> extends Base implements PagedResult<T> {
     protected final Long offset;
+    protected final Long limit;
     protected final Long total;
     protected final List<T> results;
     protected final Long count;
 
-    protected PagedResultBase(final Long offset, final Long total, final List<T> results, final Long count) {
+    protected PagedResultBase(final Long offset, final Long limit, final Long total, final List<T> results, final Long count) {
         this.offset = offset;
+        this.limit = limit;
         this.total = total;
         this.results = results;
         this.count = count;
@@ -23,6 +25,15 @@ public abstract class PagedResultBase<T> extends Base implements PagedResult<T> 
      */
     public Long getOffset() {
         return offset;
+    }
+
+    /**
+     * The limit supplied by the client or the server default.
+     * @return the maximum amount of items allowed to be included in the results
+     */
+    @Override
+    public Long getLimit() {
+        return limit;
     }
 
     /**

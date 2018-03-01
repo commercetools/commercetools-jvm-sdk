@@ -14,8 +14,8 @@ final class PagedSearchResultImpl<T> extends PagedResultBase<T> implements Paged
     private final Map<String, FacetResult> facets;
 
     @JsonCreator
-    PagedSearchResultImpl(final Long offset, final Long total, final List<T> results, final Map<String, FacetResult> facets, final Long count) {
-        super(offset, total, results, count);
+    PagedSearchResultImpl(final Long offset, final Long limit, final Long total, final List<T> results, final Map<String, FacetResult> facets, final Long count) {
+        super(offset, limit, total, results, count);
         this.facets = facets;
     }
 

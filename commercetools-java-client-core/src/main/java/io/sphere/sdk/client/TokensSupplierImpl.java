@@ -9,10 +9,7 @@ import io.sphere.sdk.models.SphereException;
 
 import javax.annotation.Nullable;
 import java.nio.charset.StandardCharsets;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.CompletionStage;
 
 import static io.sphere.sdk.client.SphereAuth.AUTH_LOGGER;
@@ -85,10 +82,12 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
     private HttpRequest newRequest() {
         final String usernamePassword = format("%s:%s", config.getClientId(), config.getClientSecret());
         final String encodedString = Base64.getEncoder().encodeToString(usernamePassword.getBytes(StandardCharsets.UTF_8));
+        final String correlationId = String.join("/", config.getProjectKey(), UUID.randomUUID().toString());
         final HttpHeaders httpHeaders = HttpHeaders
                 .of(HttpHeaders.AUTHORIZATION, "Basic " + encodedString)
                 .plus(HttpHeaders.USER_AGENT, UserAgentUtils.obtainUserAgent(httpClient))
-                .plus(HttpHeaders.CONTENT_TYPE, "application/x-www-form-urlencoded");
+                .plus(HttpHeaders.CONTENT_TYPE, "application/x-www-form-urlencoded")
+                .plus(HttpHeaders.X_CORRELATION_ID, correlationId);
         final String projectKey = config.getProjectKey();
         final Map<String, String> data = new HashMap<>();
         data.put("grant_type", isPasswordFlow() ? "password" : "client_credentials");

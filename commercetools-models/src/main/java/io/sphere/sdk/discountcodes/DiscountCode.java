@@ -6,11 +6,15 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.cartdiscounts.CartDiscount;
-import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Resource;
+import io.sphere.sdk.types.Custom;
+import io.sphere.sdk.types.CustomFields;
+import io.sphere.sdk.types.TypeDraft;
 
 import javax.annotation.Nullable;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 /**
@@ -32,7 +36,7 @@ import java.util.List;
 @HasUpdateCommand
 @HasDeleteCommand
 @HasQueryModel
-public interface DiscountCode extends Resource<DiscountCode> {
+public interface DiscountCode extends Resource<DiscountCode>, Custom {
     /**
      * The referenced matching cart discounts can be applied to the cart once the discount code is added ({@link io.sphere.sdk.carts.commands.updateactions.AddDiscountCode}).
      * @return cart discounts
@@ -57,6 +61,15 @@ public interface DiscountCode extends Resource<DiscountCode> {
      */
     String getCode();
 
+
+    /**
+     * This field is used to signal to which groups the {@link DiscountCode} belongs to.
+     * @return the groups, the discount code belongs to.
+     */
+    @HasUpdateAction
+    List<String> getGroups();
+
+
     /**
      * Description of this discount code.
      * @return description or null
@@ -76,6 +89,22 @@ public interface DiscountCode extends Resource<DiscountCode> {
     @JsonProperty("isActive")
     @IgnoreInQueryModel
     Boolean isActive();
+
+    /**
+     * Start date for discount code validity
+     */
+    @Nullable
+    @IgnoreInQueryModel
+    @HasUpdateAction
+    ZonedDateTime getValidFrom();
+
+    /**
+     * End date for discount code validity
+     */
+    @HasUpdateAction
+    @Nullable
+    @IgnoreInQueryModel
+    ZonedDateTime getValidUntil();
 
     /**
      * The discount code can only be applied maxApplications times.
@@ -112,6 +141,10 @@ public interface DiscountCode extends Resource<DiscountCode> {
      */
     @IgnoreInQueryModel
     List<Reference<JsonNode>> getReferences();
+
+    @Nullable
+    @Override
+    CustomFields getCustom();
 
     @Override
     default Reference<DiscountCode> toReference() {
@@ -161,5 +194,16 @@ public interface DiscountCode extends Resource<DiscountCode> {
      */
     static Reference<DiscountCode> referenceOfId(final String id) {
         return Reference.of(referenceTypeId(), id);
+    }
+
+
+    /**
+     * An identifier for this resource which supports {@link CustomFields}.
+     * @see TypeDraft#getResourceTypeIds()
+     * @see io.sphere.sdk.types.Custom
+     * @return ID of this resource type
+     */
+    static String resourceTypeId() {
+        return "discount-code";
     }
 }

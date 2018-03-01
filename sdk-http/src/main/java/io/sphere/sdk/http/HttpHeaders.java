@@ -13,6 +13,8 @@ public final class HttpHeaders extends Base {
     public static final String CONTENT_ENCODING = "Content-Encoding";
     public static final String CONTENT_TYPE = "Content-Type";
     public static final String CONTENT_LENGTH = "Content-Length";
+    public static final String X_CORRELATION_ID = "X-Correlation-ID";
+
     private final List<NameValuePair> data;
 
     private HttpHeaders(final List<NameValuePair> data) {

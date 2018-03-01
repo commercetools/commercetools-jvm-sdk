@@ -11,10 +11,10 @@ import java.util.Set;
 import static java.util.stream.Collectors.toSet;
 
 @JsonDeserialize(as = ZoneDraftDsl.class)
-@ResourceDraftValue(factoryMethods = {
-        @FactoryMethod(parameterNames = {"name", "locations", "description"}),
-        @FactoryMethod(parameterNames = {"name", "locations"})
-})
+@ResourceDraftValue(
+        factoryMethods = {
+            @FactoryMethod(parameterNames = {"name", "locations", "description"}),
+            @FactoryMethod(parameterNames = {"name", "locations"})})
 public interface ZoneDraft {
     @Nullable
     String getDescription();

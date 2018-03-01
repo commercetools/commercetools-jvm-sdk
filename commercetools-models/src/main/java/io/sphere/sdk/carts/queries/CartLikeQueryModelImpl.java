@@ -79,6 +79,11 @@ public abstract class CartLikeQueryModelImpl<T> extends CustomResourceQueryModel
     }
 
     @Override
+    public ShippingRateInputQueryModel<T> shippingRateInput() {
+        return new ShippingRateInputQueryModelImpl<>(this,"shippingRateInput");
+    }
+
+    @Override
     public StringQuerySortingModel<T> anonymousId() {
         return stringModel("anonymousId");
     }
@@ -86,5 +91,10 @@ public abstract class CartLikeQueryModelImpl<T> extends CustomResourceQueryModel
     @Override
     public LocaleQueryModel<T> locale() {
         return localeQuerySortingModel("locale");
+    }
+
+    @Override
+    public AddressCollectionQueryModel<T> itemShippingAddresses() {
+        return addressCollectionQueryModel("itemShippingAddresses");
     }
 }

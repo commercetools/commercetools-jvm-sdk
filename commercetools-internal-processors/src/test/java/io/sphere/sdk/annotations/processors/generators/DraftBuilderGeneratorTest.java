@@ -10,7 +10,7 @@ public class DraftBuilderGeneratorTest extends AbstractGeneratorTest {
 
     @Before
     public void setup() {
-        generator = new DraftBuilderGenerator(compilationRule.getElements(), compilationRule.getTypes());
+        generator = new DraftBuilderGenerator(compilationRule.getElements(), compilationRule.getTypes(),messager);
     }
 
     @Test
@@ -18,6 +18,12 @@ public class DraftBuilderGeneratorTest extends AbstractGeneratorTest {
         final String content = generateAsString(ExampleDraft.class);
 
         assertThat(content).isEqualTo(expectedContent(ExampleDraft.class));
+    }
+
+    @Test
+    public void generateDraftBuilderClassWithNoAttribute() throws Exception {
+        final String content = generateAsString(ExampleDraftWithNoAttribute.class);
+        assertThat(content).isEqualTo(expectedContent(ExampleDraftWithNoAttribute.class));
     }
 
     @Test

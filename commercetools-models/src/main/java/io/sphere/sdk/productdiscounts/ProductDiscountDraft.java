@@ -7,11 +7,12 @@ import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.models.LocalizedString;
 
 import javax.annotation.Nullable;
+import java.time.ZonedDateTime;
 
 @JsonDeserialize(as = ProductDiscountDraftDsl.class)
-@ResourceDraftValue(factoryMethods = {
-        @FactoryMethod(parameterNames = {}),
-        @FactoryMethod(parameterNames = {"active", "description", "name", "predicate", "sortOrder", "value"})
+@ResourceDraftValue(
+        factoryMethods = {@FactoryMethod(parameterNames = {}),
+                          @FactoryMethod(parameterNames = {"active", "description", "name", "predicate", "sortOrder", "value"})
 }, abstractBuilderClass = true)
 public interface ProductDiscountDraft {
     @JsonProperty("isActive")
@@ -25,6 +26,12 @@ public interface ProductDiscountDraft {
     String getPredicate();
 
     String getSortOrder();
+
+    @Nullable
+    ZonedDateTime getValidFrom();
+
+    @Nullable
+    ZonedDateTime getValidUntil();
 
     ProductDiscountValue getValue();
 

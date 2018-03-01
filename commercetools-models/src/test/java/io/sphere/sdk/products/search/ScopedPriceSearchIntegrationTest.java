@@ -1,7 +1,11 @@
 package io.sphere.sdk.products.search;
 
+import io.sphere.sdk.cartdiscounts.CartDiscountFixtures;
 import io.sphere.sdk.models.ResourceView;
-import io.sphere.sdk.productdiscounts.*;
+import io.sphere.sdk.productdiscounts.AbsoluteProductDiscountValue;
+import io.sphere.sdk.productdiscounts.ProductDiscountDraft;
+import io.sphere.sdk.productdiscounts.ProductDiscountPredicate;
+import io.sphere.sdk.productdiscounts.ProductDiscountValue;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
@@ -34,6 +38,7 @@ public class ScopedPriceSearchIntegrationTest extends IntegrationTest {
 
     @AfterClass
     public static void delete() {
+        CartDiscountFixtures.deleteDiscountCodesAndCartDiscounts(client());
         ProductFixtures.deleteProductsAndProductTypes(client());
         productType = null;
     }
@@ -110,6 +115,7 @@ public class ScopedPriceSearchIntegrationTest extends IntegrationTest {
             withProductDiscount(client(), productDiscountDraft, productDiscount -> {
                 assertEventually(s -> {
                     final ProductProjectionSearch searchForCurrentValue = ProductProjectionSearch.ofStaged()
+                            .withMarkingMatchingVariants(true)
                             .withPriceSelection(PriceSelection.of(EUR).withPriceCountry(DE))
                             .plusQueryFilters(m -> m.id().is(product.getId()))
                             .plusQueryFilters(m -> m.allVariants().scopedPrice().currentValue()
@@ -138,6 +144,7 @@ public class ScopedPriceSearchIntegrationTest extends IntegrationTest {
 
                     //it is also possible to filter for discounted values
                     final ProductProjectionSearch searchForDiscountedValue = ProductProjectionSearch.ofStaged()
+                            .withMarkingMatchingVariants(true)
                             .withPriceSelection(PriceSelection.of(EUR).withPriceCountry(DE))
                             .plusQueryFilters(m -> m.id().is(product.getId()))
                             //filter by discounted value

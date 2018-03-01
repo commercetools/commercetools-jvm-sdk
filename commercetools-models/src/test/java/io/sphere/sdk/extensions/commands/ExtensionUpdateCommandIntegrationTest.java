@@ -1,0 +1,133 @@
+package io.sphere.sdk.extensions.commands;
+
+import io.sphere.sdk.client.BlockingSphereClient;
+import io.sphere.sdk.extensions.*;
+import io.sphere.sdk.extensions.commands.updateactions.ChangeDestination;
+import io.sphere.sdk.extensions.commands.updateactions.ChangeTriggers;
+import io.sphere.sdk.extensions.commands.updateactions.SetKey;
+import io.sphere.sdk.extensions.queries.ExtensionQuery;
+import io.sphere.sdk.queries.PagedQueryResult;
+import io.sphere.sdk.test.IntegrationTest;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import java.util.List;
+import java.util.function.UnaryOperator;
+
+import static io.sphere.sdk.subscriptions.SubscriptionFixtures.assumeHasAzureFunctionUrl;
+import static io.sphere.sdk.subscriptions.SubscriptionFixtures.azureFunctionUrl;
+import static io.sphere.sdk.test.SphereTestUtils.asList;
+import static io.sphere.sdk.test.SphereTestUtils.randomKey;
+import static org.assertj.core.api.Assertions.assertThat;
+
+
+public class ExtensionUpdateCommandIntegrationTest extends IntegrationTest {
+
+
+    private static String AZURE_FUNCTION_URL;
+
+    @BeforeClass
+    public static void deleteAllExtensions() {
+        assumeHasAzureFunctionUrl();
+        AZURE_FUNCTION_URL = azureFunctionUrl();
+        PagedQueryResult<Extension> results = client().executeBlocking(ExtensionQuery.of());
+        results.getResults()
+                .stream()
+                .map(ExtensionDeleteCommand::of)
+                .forEach(client()::executeBlocking);
+    }
+
+
+    @Test
+    public void testExtensionForCart(){
+        ExtensionResourceType extensionResourceType = ExtensionResourceType.CART;
+        final List<Trigger> triggers = asList(TriggerBuilder.of(extensionResourceType, asList(TriggerType.CREATE, TriggerType.UPDATE)).build());
+        final Destination destination = HttpDestinationBuilder.of(AZURE_FUNCTION_URL, AzureFunctionsAuthenticationBuilder.of(randomKey()).build()).build();
+        withExtensionDraft(client(), ExtensionDraftBuilder.of(randomKey(), destination, triggers).build(), extension -> {
+            assertThat(extension.getTriggers()).hasSize(1);
+            assertThat(extension.getTriggers().get(0).getResourceTypeId()).isEqualByComparingTo(extensionResourceType);
+            return extension;
+        });
+    }
+
+    @Test
+    public void testExtensionForCustomer(){
+        ExtensionResourceType extensionResourceType = ExtensionResourceType.CUSTOMER;
+        final List<Trigger> triggers = asList(TriggerBuilder.of(extensionResourceType, asList(TriggerType.CREATE, TriggerType.UPDATE)).build());
+        final Destination destination = HttpDestinationBuilder.of(AZURE_FUNCTION_URL, AzureFunctionsAuthenticationBuilder.of(randomKey()).build()).build();
+        withExtensionDraft(client(), ExtensionDraftBuilder.of(randomKey(), destination, triggers).build(), extension -> {
+            assertThat(extension.getTriggers()).hasSize(1);
+            assertThat(extension.getTriggers().get(0).getResourceTypeId()).isEqualByComparingTo(extensionResourceType);
+            return extension;
+        });
+    }
+
+    @Test
+    public void testExtensionForPayment(){
+        ExtensionResourceType extensionResourceType = ExtensionResourceType.PAYMENT;
+        final List<Trigger> triggers = asList(TriggerBuilder.of(extensionResourceType, asList(TriggerType.CREATE, TriggerType.UPDATE)).build());
+        final Destination destination = HttpDestinationBuilder.of(AZURE_FUNCTION_URL, AzureFunctionsAuthenticationBuilder.of(randomKey()).build()).build();
+        withExtensionDraft(client(), ExtensionDraftBuilder.of(randomKey(), destination, triggers).build(), extension -> {
+            assertThat(extension.getTriggers()).hasSize(1);
+            assertThat(extension.getTriggers().get(0).getResourceTypeId()).isEqualByComparingTo(extensionResourceType);
+            return extension;
+        });
+    }
+
+
+
+    @Test
+    public void setKey() {
+
+        withExtension(client(), extension -> {
+            final String newKey = randomKey();
+            Extension updatedExtension = client().executeBlocking(ExtensionUpdateCommand.of(extension, SetKey.of(newKey)));
+            assertThat(updatedExtension.getKey()).isEqualTo(newKey);
+            return updatedExtension;
+        });
+    }
+
+
+    @Test
+    public void changeTriggers(){
+
+        withExtension(client(), extension -> {
+            final List<Trigger> triggers = asList(TriggerBuilder.of(ExtensionResourceType.CART, asList(TriggerType.CREATE)).build());
+            Extension updatedExtension = client().executeBlocking(ExtensionUpdateCommand.of(extension, ChangeTriggers.of(triggers)));
+            assertThat(updatedExtension.getTriggers()).containsAll(triggers);
+            return updatedExtension;
+        });
+
+    }
+
+
+    @Test
+    public void changeDestination(){
+
+        withExtension(client(), extension -> {
+            Destination destination = HttpDestinationBuilder.of(AZURE_FUNCTION_URL, AzureFunctionsAuthenticationBuilder.of(randomKey()).build()).build();
+            Extension updatedExtension = client().executeBlocking(ExtensionUpdateCommand.of(extension, ChangeDestination.of(destination)));
+            assertThat(updatedExtension.getDestination()).isEqualTo(destination);
+            return updatedExtension;
+        });
+
+    }
+
+
+    public void withExtensionDraft(final BlockingSphereClient client, final ExtensionDraft extensionDraft, final UnaryOperator<Extension> mapper) {
+
+        Extension extension = client.executeBlocking(ExtensionCreateCommand.of(extensionDraft));
+        Extension result = mapper.apply(extension);
+        client.executeBlocking(ExtensionDeleteCommand.of(result));
+    }
+
+    public void withExtension(final BlockingSphereClient client,final UnaryOperator<Extension> mapper) {
+
+        List<Trigger> triggers = asList(TriggerBuilder.of(ExtensionResourceType.CART, asList(TriggerType.CREATE, TriggerType.UPDATE)).build());
+        Destination destination = HttpDestinationBuilder.of(AZURE_FUNCTION_URL, AzureFunctionsAuthenticationBuilder.of(randomKey()).build()).build();
+        withExtensionDraft(client, ExtensionDraftBuilder.of(randomKey(), destination, triggers).build(), mapper);
+
+    }
+
+
+}

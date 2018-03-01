@@ -6,8 +6,12 @@ import io.sphere.sdk.customers.CustomerDraft;
 import io.sphere.sdk.customers.CustomerIntegrationTest;
 import io.sphere.sdk.customers.CustomerName;
 import io.sphere.sdk.customers.commands.updateactions.*;
+import io.sphere.sdk.customers.messages.*;
+import io.sphere.sdk.messages.queries.MessageQuery;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.AddressBuilder;
+import io.sphere.sdk.queries.PagedQueryResult;
+import io.sphere.sdk.queries.Query;
 import net.jcip.annotations.NotThreadSafe;
 import org.junit.Test;
 
@@ -25,6 +29,67 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @NotThreadSafe
 public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTest {
+
+    @Test
+    public void setKey() {
+        withCustomer(client(), customer -> {
+            String newKey = randomKey();
+            assertThat(customer.getKey()).isNotEqualTo(newKey);
+            final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, SetKey.of(newKey)));
+            assertThat(updatedCustomer.getKey()).isEqualTo(newKey);
+        });
+    }
+
+    @Test
+    public void setFirstName() {
+        withCustomer(client(), customer -> {
+            String newFirstName = "Jane";
+            assertThat(customer.getFirstName()).isNotEqualTo(newFirstName);
+            final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, SetFirstName.of(newFirstName)));
+            assertThat(updatedCustomer.getFirstName()).isEqualTo(newFirstName);
+        });
+    }
+
+    @Test
+    public void setLastName() {
+        withCustomer(client(), customer -> {
+            String newLastName = "Doe";
+            assertThat(customer.getLastName()).isNotEqualTo(newLastName);
+            final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, SetLastName.of(newLastName)));
+            assertThat(updatedCustomer.getLastName()).isEqualTo(newLastName);
+        });
+    }
+
+    @Test
+    public void setMiddleName() {
+        withCustomer(client(), customer -> {
+            String newMiddleName = "Petronella";
+            assertThat(customer.getMiddleName()).isNotEqualTo(newMiddleName);
+            final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, SetMiddleName.of(newMiddleName)));
+            assertThat(updatedCustomer.getMiddleName()).isEqualTo(newMiddleName);
+        });
+    }
+
+    @Test
+    public void setSalutation() {
+        withCustomer(client(), customer -> {
+            String newSalutation = "Dear Dr.";
+            assertThat(customer.getSalutation()).isNotEqualTo(newSalutation);
+            final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, SetSalutation.of(newSalutation)));
+            assertThat(updatedCustomer.getSalutation()).isEqualTo(newSalutation);
+        });
+    }
+
+    @Test
+    public void setTitle() {
+        withCustomer(client(), customer -> {
+            String newTitle = "Dr. Eng.";
+            assertThat(customer.getTitle()).isNotEqualTo(newTitle);
+            final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, SetTitle.of(newTitle)));
+            assertThat(updatedCustomer.getTitle()).isEqualTo(newTitle);
+        });
+    }
+
     @Test
     public void changeName() throws Exception {
         withCustomer(client(), customer -> {
@@ -59,6 +124,19 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
             assertThat(customer.getEmail()).isNotEqualTo(newEmail);
             final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, ChangeEmail.of(newEmail)));
             assertThat(updatedCustomer.getEmail()).isEqualTo(newEmail);
+
+            Query<CustomerEmailChangedMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(customer))
+                    .withSort(m -> m.createdAt().sort().desc())
+                    .withLimit(1L)
+                    .forMessageType(CustomerEmailChangedMessage.MESSAGE_HINT);
+
+            assertEventually(() -> {
+                final PagedQueryResult<CustomerEmailChangedMessage> queryResult = client().executeBlocking(messageQuery);
+                assertThat(queryResult.head()).isPresent();
+                final CustomerEmailChangedMessage message = queryResult.head().get();
+                assertThat(message.getEmail()).isEqualTo(newEmail);
+            });
         });
     }
 
@@ -84,7 +162,18 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
                     .isFalse();
             final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, AddAddress.of(newAddress)));
             assertThat(updatedCustomer.getAddresses().stream()
-            .anyMatch(containsNewAddressPredicate)).isTrue();
+                    .anyMatch(containsNewAddressPredicate)).isTrue();
+
+            Query<CustomerAddressAddedMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(customer))
+                    .withSort(m -> m.createdAt().sort().desc())
+                    .withLimit(1L)
+                    .forMessageType(CustomerAddressAddedMessage.MESSAGE_HINT);
+
+            assertEventually(() -> {
+                final PagedQueryResult<CustomerAddressAddedMessage> queryResult = client().executeBlocking(messageQuery);
+                assertThat(queryResult.head()).isPresent();
+            });
         });
     }
 
@@ -106,6 +195,19 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
 
             assertThat(customerWithReplacedAddress.getAddresses()).hasSize(1);
             assertThat(customerWithReplacedAddress.getAddresses().get(0).getCity()).contains(city);
+
+            Query<CustomerAddressChangedMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(customer))
+                    .withSort(m -> m.createdAt().sort().desc())
+                    .withLimit(1L)
+                    .forMessageType(CustomerAddressChangedMessage.MESSAGE_HINT);
+
+            assertEventually(() -> {
+                final PagedQueryResult<CustomerAddressChangedMessage> queryResult = client().executeBlocking(messageQuery);
+                assertThat(queryResult.head()).isPresent();
+                final CustomerAddressChangedMessage message = queryResult.head().get();
+                assertThat(message.getAddress()).isEqualTo(newAddress);
+            });
         });
     }
 
@@ -122,6 +224,19 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
                     client().executeBlocking(CustomerUpdateCommand.of(customer, action));
 
             assertThat(customerWithoutAddresses.getAddresses()).isEmpty();
+
+            Query<CustomerAddressRemovedMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(customer))
+                    .withSort(m -> m.createdAt().sort().desc())
+                    .withLimit(1L)
+                    .forMessageType(CustomerAddressRemovedMessage.MESSAGE_HINT);
+
+            assertEventually(() -> {
+                final PagedQueryResult<CustomerAddressRemovedMessage> queryResult = client().executeBlocking(messageQuery);
+                assertThat(queryResult.head()).isPresent();
+                final CustomerAddressRemovedMessage message = queryResult.head().get();
+                assertThat(message.getAddress()).isEqualTo(oldAddress);
+            });
         });
     }
 
@@ -195,8 +310,21 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
             final String companyName = "Big coorp";
             final Customer updatedCustomer =
                     client().executeBlocking(CustomerUpdateCommand.of(customer, SetCompanyName.of(companyName)));
-
             assertThat(updatedCustomer.getCompanyName()).isEqualTo(companyName);
+
+            Query<CustomerCompanyNameSetMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(customer))
+                    .withSort(m -> m.createdAt().sort().desc())
+                    .withLimit(1L)
+                    .forMessageType(CustomerCompanyNameSetMessage.MESSAGE_HINT);
+
+            assertEventually(() -> {
+                final PagedQueryResult<CustomerCompanyNameSetMessage> queryResult = client().executeBlocking(messageQuery);
+                assertThat(queryResult.head()).isPresent();
+                final CustomerCompanyNameSetMessage message = queryResult.head().get();
+                assertThat(message.getCompanyName()).isEqualTo(companyName);
+            });
+
         });
     }
 
@@ -223,6 +351,19 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
                     client().executeBlocking(CustomerUpdateCommand.of(customer, SetDateOfBirth.of(dateOfBirth)));
 
             assertThat(updatedCustomer.getDateOfBirth()).isEqualTo(dateOfBirth);
+
+            Query<CustomerDateOfBirthSetMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(customer))
+                    .withSort(m -> m.createdAt().sort().desc())
+                    .withLimit(1L)
+                    .forMessageType(CustomerDateOfBirthSetMessage.MESSAGE_HINT);
+
+            assertEventually(() -> {
+                final PagedQueryResult<CustomerDateOfBirthSetMessage> queryResult = client().executeBlocking(messageQuery);
+                assertThat(queryResult.head()).isPresent();
+                final CustomerDateOfBirthSetMessage message = queryResult.head().get();
+                assertThat(message.getDateOfBirth()).isEqualTo(dateOfBirth);
+            });
         });
     }
 
@@ -233,6 +374,19 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
                 assertThat(customer.getCustomerGroup()).isNull();
                 final Customer updateCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, SetCustomerGroup.of(customerGroup)));
                 assertThat(updateCustomer.getCustomerGroup()).isEqualTo(customerGroup.toReference());
+
+                Query<CustomerGroupSetMessage> messageQuery = MessageQuery.of()
+                        .withPredicates(m -> m.resource().is(customer))
+                        .withSort(m -> m.createdAt().sort().desc())
+                        .withLimit(1L)
+                        .forMessageType(CustomerGroupSetMessage.MESSAGE_HINT);
+
+                assertEventually(() -> {
+                    final PagedQueryResult<CustomerGroupSetMessage> queryResult = client().executeBlocking(messageQuery);
+                    assertThat(queryResult.head()).isPresent();
+                    final CustomerGroupSetMessage message = queryResult.head().get();
+                    assertThat(message.getCustomerGroup()).isEqualTo(customerGroup.toReference());
+                });
             });
         });
     }
@@ -262,7 +416,7 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
             assertThat(updatedCustomer.getShippingAddressIds()).containsExactly(addressId);
         });
     }
-    
+
     @Test
     public void addBillingAddressId() {
         final List<Address> addresses = asList(Address.of(DE), Address.of(FR));
@@ -297,7 +451,7 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
             assertThat(updatedCustomer.getBillingAddressIds()).isEmpty();
         });
     }
-    
+
     @Test
     public void removeShippingAddressId() {
         final List<Address> addresses = asList(Address.of(DE), Address.of(FR));

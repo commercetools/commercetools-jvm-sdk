@@ -18,6 +18,7 @@ import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
+import java.util.Collections;
 import java.util.List;
 
 import static io.sphere.sdk.carts.CartFixtures.withCartDraft;
@@ -240,7 +241,7 @@ public class ExternalTaxRatesIntegrationTest extends IntegrationTest {
             final double taxRate = 0.20;
             final ExternalTaxRateDraft externalTaxRate =
                     ExternalTaxRateDraftBuilder.ofAmount(taxRate, taxRateName, DE).build();
-            final ShippingRate shippingRate = ShippingRate.of(EURO_10);
+            final ShippingRate shippingRate = ShippingRate.of(EURO_10,null, Collections.emptyList());
             final SetCustomShippingMethod action =
                     SetCustomShippingMethod.ofExternalTaxCalculation("name", shippingRate, externalTaxRate);
 
@@ -264,7 +265,7 @@ public class ExternalTaxRatesIntegrationTest extends IntegrationTest {
                 .withTaxMode(TaxMode.EXTERNAL)
                 .withShippingAddress(Address.of(DE));
         withCartDraft(client(), draft, (Cart cart) -> {
-            final ShippingRate shippingRate = ShippingRate.of(EURO_10);
+            final ShippingRate shippingRate = ShippingRate.of(EURO_10,null, Collections.emptyList());
             final SetCustomShippingMethod action =
                     SetCustomShippingMethod.ofExternalTaxCalculation("name", shippingRate);
 
