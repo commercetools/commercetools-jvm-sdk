@@ -25,6 +25,6 @@ public class EveryObjectHasAGoodBaseClass extends ClassStrategyRule {
     //this should remind you to inherit from Base to get toString/equals/hashCode from it
     @Override
     protected boolean isRuleConform(final Class<?> clazz) {
-        return !clazz.getSuperclass().getSimpleName().equals("Object");
+        return !clazz.getSuperclass().getSimpleName().equals("Object"); 
     }
 }
