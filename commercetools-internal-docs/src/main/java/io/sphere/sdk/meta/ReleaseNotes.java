@@ -151,6 +151,7 @@ import java.util.function.Function;
  {@link io.sphere.sdk.customers.messages.CustomerEmailVerifiedMessage},
  {@link io.sphere.sdk.customers.messages.CustomerGroupSetMessage}
  </li>
+ <li class=new-in-release>Cart replication feature with {@link io.sphere.sdk.carts.commands.CartReplicationCommand} and {@link io.sphere.sdk.carts.commands.CartReplicationDraft}</li>
  <li class=change-in-release> Added {@link ExtensionResourceType} in order to add type check while creating {@link Trigger#getResourceTypeId()} field, instead of using string laterals.</li>
 
  </ul>
