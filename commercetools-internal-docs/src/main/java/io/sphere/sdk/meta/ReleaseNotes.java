@@ -46,6 +46,8 @@ import io.sphere.sdk.customobjects.queries.CustomObjectQueryModel;
 import io.sphere.sdk.discountcodes.DiscountCode;
 import io.sphere.sdk.discountcodes.DiscountCodeDraft;
 import io.sphere.sdk.expansion.ExpansionPath;
+import io.sphere.sdk.extensions.ExtensionResourceType;
+import io.sphere.sdk.extensions.Trigger;
 import io.sphere.sdk.http.*;
 import io.sphere.sdk.inventory.InventoryEntry;
 import io.sphere.sdk.inventory.InventoryEntryDraft;
@@ -150,6 +152,8 @@ import java.util.function.Function;
  {@link io.sphere.sdk.customers.messages.CustomerGroupSetMessage}
  </li>
  <li class=new-in-release>Cart replication feature with {@link io.sphere.sdk.carts.commands.CartReplicationCommand} and {@link io.sphere.sdk.carts.commands.CartReplicationDraft}</li>
+ <li class=change-in-release> Added {@link ExtensionResourceType} in order to add type check while creating {@link Trigger#getResourceTypeId()} field, instead of using string laterals.</li>
+
  </ul>
 
  <h3 class=released-version id="v1_29_1">1.29.1 (22.02.2018)</h3>
