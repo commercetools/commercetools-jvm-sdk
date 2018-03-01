@@ -2,6 +2,7 @@ package io.sphere.sdk.carts.commands;
 
 import com.fasterxml.jackson.databind.JavaType;
 import io.sphere.sdk.carts.Cart;
+import io.sphere.sdk.carts.CartEndpoint;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.commands.CommandImpl;
 import io.sphere.sdk.json.SphereJsonUtils;
