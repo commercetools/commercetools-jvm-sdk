@@ -1,6 +1,7 @@
 package io.sphere.sdk.models;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.annotation.Nullable;
@@ -27,6 +28,7 @@ final class ReferenceImpl<T> extends Base implements Reference<T> {
     }
 
     @Nullable
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public T getObj() {
         return obj;
     }
