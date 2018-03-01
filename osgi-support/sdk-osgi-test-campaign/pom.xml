@@ -9,8 +9,8 @@
     <modelVersion>4.0.0</modelVersion>
     <properties>
         <org.ops4j.pax.logging.DefaultServiceLog.level>ERROR</org.ops4j.pax.logging.DefaultServiceLog.level>
-        <!-- the tests version was set to 2.8.4 to check that the tests pass in compatibility with Available AEM plugins -->
-        <jackson.test.version>2.8.4</jackson.test.version>
+        <!-- the tests version of jackson can be customizing by changing this attribute -->
+        <jackson.test.version>${jackson.version}</jackson.test.version>
     </properties>
     <artifactId>sdk-osgi-test-campaign</artifactId>
     <dependencies>
