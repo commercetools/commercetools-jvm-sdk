@@ -13,7 +13,7 @@ import java.util.List;
 public interface Trigger {
 
 
-    ExtendedResourceType getResourceTypeId();
+    ExtensionResourceType getResourceTypeId();
 
     List<TriggerType> getActions();
 
