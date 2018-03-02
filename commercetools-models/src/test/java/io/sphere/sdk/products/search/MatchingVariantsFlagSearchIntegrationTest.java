@@ -1,10 +1,7 @@
 package io.sphere.sdk.products.search;
 
 import io.sphere.sdk.products.*;
-import io.sphere.sdk.products.attributes.AttributeDefinition;
-import io.sphere.sdk.products.attributes.AttributeDefinitionBuilder;
-import io.sphere.sdk.products.attributes.AttributeDraft;
-import io.sphere.sdk.products.attributes.StringAttributeType;
+import io.sphere.sdk.products.attributes.*;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.ProductTypeDraftDsl;
 import org.junit.Test;
@@ -66,7 +63,8 @@ public class MatchingVariantsFlagSearchIntegrationTest extends ProductProjection
         return ProductTypeDraftDsl.of(randomKey(), randomKey(), randomKey(), singletonList(attributeDefinition(attributeName)));
     }
 
-    private AttributeDefinition attributeDefinition(final String attributeName) {
-        return AttributeDefinitionBuilder.of(attributeName, randomSlug(), StringAttributeType.of()).build();
+    private AttributeDefinitionDraft attributeDefinition(final String attributeName) {
+        AttributeDefinition attributeDefinition = AttributeDefinitionBuilder.of(attributeName, randomSlug(), StringAttributeType.of()).build();
+        return AttributeDefinitionDraftBuilder.of(attributeDefinition).build();
     }
 }

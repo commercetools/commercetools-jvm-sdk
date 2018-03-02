@@ -78,10 +78,7 @@ import io.sphere.sdk.products.messages.ProductRevertedStagedChangesMessage;
 import io.sphere.sdk.products.messages.ProductVariantDeletedMessage;
 import io.sphere.sdk.products.queries.*;
 import io.sphere.sdk.products.search.*;
-import io.sphere.sdk.producttypes.ProductType;
-import io.sphere.sdk.producttypes.ProductTypeDraft;
-import io.sphere.sdk.producttypes.ProductTypeDraftBuilder;
-import io.sphere.sdk.producttypes.ProductTypeLocalRepository;
+import io.sphere.sdk.producttypes.*;
 import io.sphere.sdk.producttypes.commands.updateactions.ChangeInputHint;
 import io.sphere.sdk.producttypes.commands.updateactions.RemoveEnumValues;
 import io.sphere.sdk.projects.Project;
@@ -154,6 +151,9 @@ import java.util.function.Function;
  <li class=new-in-release>Cart replication feature with {@link io.sphere.sdk.carts.commands.CartReplicationCommand} and {@link io.sphere.sdk.carts.commands.CartReplicationDraft}</li>
  <li class=change-in-release> Added {@link ExtensionResourceType} in order to add type check while creating {@link Trigger#getResourceTypeId()} field, instead of using string laterals.</li>
  <li class=change-in-release> Update jackson from 2.9.3 to 2.9.4 </li>
+ <li class=change-in-release>changed return type of {@link ProductTypeDraft#getAttributes()} from {@link List<AttributeDefinition>} for {@link List<io.sphere.sdk.products.attributes.AttributeDefinitionDraft>}</li>
+ <li class=change-in-release>changed return type of {@link ProductTypeDraft#getAttributes()} from {@link List<AttributeDefinition>} for {@link List<io.sphere.sdk.products.attributes.AttributeDefinitionDraft>}</li>
+ <li class=change-in-release>changed return type of {@link ProductTypeDraftDsl#getAttributes()} from {@link List<AttributeDefinition>} for {@link List<io.sphere.sdk.products.attributes.AttributeDefinitionDraft>}</li>
  </ul>
 
  <h3 class=released-version id="v1_29_1">1.29.1 (22.02.2018)</h3>
