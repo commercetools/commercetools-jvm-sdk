@@ -1,6 +1,6 @@
 package io.sphere.sdk.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import javax.annotation.Nullable;
@@ -47,7 +47,7 @@ public interface Reference<T> extends Referenceable<T>, Identifiable<T>, Resourc
      *
      * @return The value of the referenced object or null.
      */
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Nullable
     T getObj();
 
