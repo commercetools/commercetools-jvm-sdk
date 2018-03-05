@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ChangeAssetNameTest {
 
     @Test
-    public void changeAssetName_ByAssetKeyToJsonString_IsSerialisedCorrectly() {
+    public void changeAssetName_ByAssetKeyToJsonString_ShouldSerialiseAssetKeyField() {
         final UpdateAction<Product> action =
             ChangeAssetName.ofAssetKeyAndVariantId(1, "foo", ofEnglish("bar"), true);
 

@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SetAssetCustomFieldTest {
 
     @Test
-    public void setAssetCustomField_ByAssetKeyToJsonString_IsSerialisedCorrectly() {
+    public void setAssetCustomField_ByAssetKeyToJsonString_ShouldSerialiseAssetKeyField() {
         final UpdateAction<Product> action =
             SetAssetCustomField.ofVariantIdUsingJsonAndAssetKey(1, "foo", "bar",
                 JsonNodeFactory.instance.numberNode(1), true);
