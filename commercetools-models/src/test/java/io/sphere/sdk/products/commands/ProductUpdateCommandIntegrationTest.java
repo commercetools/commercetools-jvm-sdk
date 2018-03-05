@@ -4,18 +4,86 @@ import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.commands.UpdateAction;
-import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.messages.queries.MessageQuery;
-import io.sphere.sdk.models.*;
+import io.sphere.sdk.models.Asset;
+import io.sphere.sdk.models.AssetDimensions;
+import io.sphere.sdk.models.AssetDraft;
+import io.sphere.sdk.models.AssetDraftBuilder;
+import io.sphere.sdk.models.AssetSource;
+import io.sphere.sdk.models.AssetSourceBuilder;
+import io.sphere.sdk.models.EnumValue;
+import io.sphere.sdk.models.LocalizedEnumValue;
+import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.MetaAttributes;
+import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.productdiscounts.DiscountedPrice;
 import io.sphere.sdk.productdiscounts.ExternalProductDiscountValue;
 import io.sphere.sdk.productdiscounts.ProductDiscountDraft;
 import io.sphere.sdk.productdiscounts.ProductDiscountPredicate;
-import io.sphere.sdk.products.*;
+import io.sphere.sdk.products.CategoryOrderHints;
+import io.sphere.sdk.products.Image;
+import io.sphere.sdk.products.ImageDimensions;
+import io.sphere.sdk.products.Price;
+import io.sphere.sdk.products.PriceDraft;
+import io.sphere.sdk.products.PriceDraftBuilder;
+import io.sphere.sdk.products.PriceTier;
+import io.sphere.sdk.products.PriceTierBuilder;
+import io.sphere.sdk.products.Product;
+import io.sphere.sdk.products.ProductData;
+import io.sphere.sdk.products.ProductProjection;
+import io.sphere.sdk.products.ProductVariant;
+import io.sphere.sdk.products.ProductVariantDraft;
+import io.sphere.sdk.products.ProductVariantDraftBuilder;
+import io.sphere.sdk.products.PublishScope;
 import io.sphere.sdk.products.attributes.AttributeAccess;
 import io.sphere.sdk.products.attributes.AttributeDraft;
 import io.sphere.sdk.products.attributes.NamedAttributeAccess;
-import io.sphere.sdk.products.commands.updateactions.*;
+import io.sphere.sdk.products.commands.updateactions.AddAsset;
+import io.sphere.sdk.products.commands.updateactions.AddExternalImage;
+import io.sphere.sdk.products.commands.updateactions.AddPrice;
+import io.sphere.sdk.products.commands.updateactions.AddToCategory;
+import io.sphere.sdk.products.commands.updateactions.AddVariant;
+import io.sphere.sdk.products.commands.updateactions.ChangeAssetName;
+import io.sphere.sdk.products.commands.updateactions.ChangeAssetOrder;
+import io.sphere.sdk.products.commands.updateactions.ChangeMasterVariant;
+import io.sphere.sdk.products.commands.updateactions.ChangeName;
+import io.sphere.sdk.products.commands.updateactions.ChangePrice;
+import io.sphere.sdk.products.commands.updateactions.ChangeSlug;
+import io.sphere.sdk.products.commands.updateactions.MetaAttributesUpdateActions;
+import io.sphere.sdk.products.commands.updateactions.MoveImageToPosition;
+import io.sphere.sdk.products.commands.updateactions.Publish;
+import io.sphere.sdk.products.commands.updateactions.RemoveAsset;
+import io.sphere.sdk.products.commands.updateactions.RemoveFromCategory;
+import io.sphere.sdk.products.commands.updateactions.RemoveImage;
+import io.sphere.sdk.products.commands.updateactions.RemovePrice;
+import io.sphere.sdk.products.commands.updateactions.RemoveVariant;
+import io.sphere.sdk.products.commands.updateactions.RevertStagedChanges;
+import io.sphere.sdk.products.commands.updateactions.RevertStagedVariantChanges;
+import io.sphere.sdk.products.commands.updateactions.SetAssetCustomField;
+import io.sphere.sdk.products.commands.updateactions.SetAssetCustomType;
+import io.sphere.sdk.products.commands.updateactions.SetAssetDescription;
+import io.sphere.sdk.products.commands.updateactions.SetAssetSources;
+import io.sphere.sdk.products.commands.updateactions.SetAssetTags;
+import io.sphere.sdk.products.commands.updateactions.SetAttribute;
+import io.sphere.sdk.products.commands.updateactions.SetAttributeInAllVariants;
+import io.sphere.sdk.products.commands.updateactions.SetCategoryOrderHint;
+import io.sphere.sdk.products.commands.updateactions.SetDescription;
+import io.sphere.sdk.products.commands.updateactions.SetDiscountedPrice;
+import io.sphere.sdk.products.commands.updateactions.SetImageLabel;
+import io.sphere.sdk.products.commands.updateactions.SetKey;
+import io.sphere.sdk.products.commands.updateactions.SetMetaDescription;
+import io.sphere.sdk.products.commands.updateactions.SetMetaKeywords;
+import io.sphere.sdk.products.commands.updateactions.SetMetaTitle;
+import io.sphere.sdk.products.commands.updateactions.SetPrices;
+import io.sphere.sdk.products.commands.updateactions.SetProductPriceCustomField;
+import io.sphere.sdk.products.commands.updateactions.SetProductPriceCustomType;
+import io.sphere.sdk.products.commands.updateactions.SetProductVariantKey;
+import io.sphere.sdk.products.commands.updateactions.SetSearchKeywords;
+import io.sphere.sdk.products.commands.updateactions.SetSku;
+import io.sphere.sdk.products.commands.updateactions.SetTaxCategory;
+import io.sphere.sdk.products.commands.updateactions.TransitionState;
+import io.sphere.sdk.products.commands.updateactions.Unpublish;
 import io.sphere.sdk.products.messages.ProductSlugChangedMessage;
 import io.sphere.sdk.products.messages.ProductStateTransitionMessage;
 import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
@@ -37,25 +105,55 @@ import io.sphere.sdk.types.Type;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
+import javax.annotation.Nonnull;
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
 import java.time.ZoneOffset;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.Random;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.productdiscounts.ProductDiscountFixtures.withProductDiscount;
-import static io.sphere.sdk.products.ProductFixtures.*;
+import static io.sphere.sdk.products.ProductFixtures.createExternalImage;
+import static io.sphere.sdk.products.ProductFixtures.withProduct;
+import static io.sphere.sdk.products.ProductFixtures.withProductAndUnconnectedCategory;
+import static io.sphere.sdk.products.ProductFixtures.withProductHavingAssets;
+import static io.sphere.sdk.products.ProductFixtures.withProductInCategory;
+import static io.sphere.sdk.products.ProductFixtures.withProductOfPrices;
+import static io.sphere.sdk.products.ProductFixtures.withUpdateablePricedProduct;
+import static io.sphere.sdk.products.ProductFixtures.withUpdateableProduct;
+import static io.sphere.sdk.products.ProductFixtures.withUpdateableProductOfMultipleVariants;
 import static io.sphere.sdk.products.ProductProjectionType.STAGED;
 import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
 import static io.sphere.sdk.states.StateType.PRODUCT_STATE;
 import static io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.MONEY_ATTRIBUTE_NAME;
-import static io.sphere.sdk.test.SphereTestUtils.*;
+import static io.sphere.sdk.test.SphereTestUtils.DE;
+import static io.sphere.sdk.test.SphereTestUtils.EURO_1;
+import static io.sphere.sdk.test.SphereTestUtils.EURO_10;
+import static io.sphere.sdk.test.SphereTestUtils.EURO_40;
+import static io.sphere.sdk.test.SphereTestUtils.EURO_5;
+import static io.sphere.sdk.test.SphereTestUtils.MASTER_VARIANT_ID;
+import static io.sphere.sdk.test.SphereTestUtils.asList;
+import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
+import static io.sphere.sdk.test.SphereTestUtils.en;
+import static io.sphere.sdk.test.SphereTestUtils.randomKey;
+import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
+import static io.sphere.sdk.test.SphereTestUtils.randomSortOrder;
 import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
 import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
-import static java.util.Collections.*;
+import static java.util.Collections.emptyList;
+import static java.util.Collections.emptySet;
+import static java.util.Collections.singletonList;
 import static java.util.Locale.ENGLISH;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -2377,6 +2475,51 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void changeAssetNameByVariantIdAndAssetKey() {
+        withProductHavingAssets(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+            final LocalizedString newName = LocalizedString.ofEnglish("new name");
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            final String assetKey = masterVariant.getAssets().get(0).getKey();
+
+            final ProductUpdateCommand cmd =
+                ProductUpdateCommand.of(product, ChangeAssetName.ofAssetKeyAndVariantId(masterVariant.getId(), assetKey, newName));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            final Asset updatedAsset = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0);
+            assertThat(updatedAsset.getName()).isEqualTo(newName);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isTrue();
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void changeAssetNameByVariantIdAndAssetKeyWithStaged() {
+        changeAssetNameByVariantIdAndAssetKeyWithStaged(true);
+        changeAssetNameByVariantIdAndAssetKeyWithStaged(false);
+    }
+
+    public void changeAssetNameByVariantIdAndAssetKeyWithStaged(@Nonnull final Boolean staged) {
+        withProductHavingAssets(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+            final LocalizedString newName = LocalizedString.ofEnglish("new name");
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            final String assetKey = masterVariant.getAssets().get(0).getKey();
+
+            final ProductUpdateCommand cmd =
+                ProductUpdateCommand.of(product, ChangeAssetName.ofAssetKeyAndVariantId(masterVariant.getId(), assetKey, newName, staged));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            final Asset updatedAsset = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0);
+            assertThat(updatedAsset.getName()).isEqualTo(newName);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
     public void setAssetDescriptionByVariantId() throws Exception {
         withProductHavingAssets(client(), product -> {
             assertThat(product.getMasterData().hasStagedChanges()).isFalse();
@@ -2762,6 +2905,147 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                         .getStaged().getMasterVariant()
                         .getAssets().get(0).getCustom().getFieldAsString(STRING_FIELD_NAME))
                         .isEqualTo("new");
+                assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
+
+                return updatedProduct;
+            });
+            return type;
+        });
+    }
+
+    @Test
+    public void setAssetCustomTypeByVariantIdAndAssetKey() {
+        withUpdateableType(client(), (Type type) -> {
+            withProductHavingAssets(client(), product -> {
+                assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+                final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+                final Asset assetWithoutCustomType = masterVariant.getAssets().get(0);
+                final String assetKey = assetWithoutCustomType.getKey();
+
+                final CustomFieldsDraft customFieldsDraft = CustomFieldsDraftBuilder.ofType(type).build();
+
+                final ProductUpdateCommand cmd = ProductUpdateCommand.of(product,
+                    SetAssetCustomType.ofVariantIdAndAssetKey(masterVariant.getId(), assetKey, customFieldsDraft));
+                final Product updatedProductWithCustomTypeInAssets = client().executeBlocking(cmd);
+
+                final Asset updatedAsset = updatedProductWithCustomTypeInAssets.getMasterData().getStaged()
+                                                                               .getMasterVariant().getAssets().get(0);
+                assertThat(updatedAsset.getCustom()).isNotNull();
+                assertThat(updatedAsset.getCustom().getType()).isEqualTo(type);
+
+                return updatedProductWithCustomTypeInAssets;
+            });
+            return type;
+        });
+    }
+
+    @Test
+    public void setAssetCustomTypeByVariantIdAndAssetKeyWithStaged() {
+        setAssetCustomTypeByVariantIdAndAssetKeyWithStaged(true);
+        setAssetCustomTypeByVariantIdAndAssetKeyWithStaged(false);
+    }
+
+    public void setAssetCustomTypeByVariantIdAndAssetKeyWithStaged(@Nonnull final Boolean staged) {
+        withUpdateableType(client(), (Type type) -> {
+            withProductHavingAssets(client(), product -> {
+                assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+                final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+                final Asset assetWithoutCustomType = masterVariant.getAssets().get(0);
+                final String assetKey = assetWithoutCustomType.getKey();
+
+                final CustomFieldsDraft customFieldsDraft = CustomFieldsDraftBuilder.ofType(type).build();
+
+                final ProductUpdateCommand cmd = ProductUpdateCommand.of(product,
+                    SetAssetCustomType.ofVariantIdAndAssetKey(masterVariant.getId(), assetKey, customFieldsDraft, staged));
+                final Product updatedProductWithCustomTypeInAssets = client().executeBlocking(cmd);
+
+                final Asset updatedAsset = updatedProductWithCustomTypeInAssets.getMasterData().getStaged()
+                                                                               .getMasterVariant().getAssets().get(0);
+                assertThat(updatedAsset.getCustom()).isNotNull();
+                assertThat(updatedAsset.getCustom().getType()).isEqualTo(type);
+                assertThat(updatedProductWithCustomTypeInAssets.getMasterData().hasStagedChanges()).isEqualTo(staged);
+
+                return updatedProductWithCustomTypeInAssets;
+            });
+            return type;
+        });
+    }
+
+    @Test
+    public void setAssetCustomFieldByVariantIdAndAssetKey() {
+        withUpdateableType(client(), (Type type) -> {
+            withProductHavingAssets(client(), product -> {
+                assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+                final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+                final Asset assetWithoutCustomType = masterVariant.getAssets().get(0);
+                final String assetKey = assetWithoutCustomType.getKey();
+
+                final String firstFieldValue = "commercetools";
+                final CustomFieldsDraft customFieldsDraft = CustomFieldsDraftBuilder.ofType(type)
+                                                                                    .addObject(STRING_FIELD_NAME, firstFieldValue)
+                                                                                    .build();
+                // Set custom type with staged false to publish the change right away, since this test is only for
+                // SetAssetCustomField and not SetAssetCustomType.
+                final ProductUpdateCommand cmd = ProductUpdateCommand.of(product,
+                    SetAssetCustomType.ofVariantIdAndAssetKey(masterVariant.getId(), assetKey, customFieldsDraft, false));
+                final Product updatedProductWithCustomTypeInAssets = client().executeBlocking(cmd);
+
+                final String actualFieldValue = updatedProductWithCustomTypeInAssets.getMasterData()
+                                                                                    .getStaged().getMasterVariant()
+                                                                                    .getAssets().get(0).getCustom().getFieldAsString(STRING_FIELD_NAME);
+                assertThat(actualFieldValue).isEqualTo(firstFieldValue);
+
+                final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(updatedProductWithCustomTypeInAssets,
+                    SetAssetCustomField.ofVariantIdAndAssetKey(masterVariant.getId(), assetKey, STRING_FIELD_NAME, "new")));
+
+                assertThat(updatedProduct.getMasterData()
+                                         .getStaged().getMasterVariant()
+                                         .getAssets().get(0).getCustom().getFieldAsString(STRING_FIELD_NAME))
+                    .isEqualTo("new");
+                assertThat(updatedProduct.getMasterData().hasStagedChanges()).isTrue();
+
+                return updatedProduct;
+            });
+            return type;
+        });
+    }
+
+    @Test
+    public void setAssetCustomFieldByVariantIdAndAssetKeyWithStaged() {
+        setAssetCustomFieldByVariantIdAndAssetKeyWithStaged(true);
+        setAssetCustomFieldByVariantIdAndAssetKeyWithStaged(false);
+    }
+
+    public void setAssetCustomFieldByVariantIdAndAssetKeyWithStaged(@Nonnull final Boolean staged) {
+        withUpdateableType(client(), (Type type) -> {
+            withProductHavingAssets(client(), product -> {
+                assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+                final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+                final Asset assetWithoutCustomType = masterVariant.getAssets().get(0);
+                final String assetKey = assetWithoutCustomType.getKey();
+
+                final String firstFieldValue = "commercetools";
+                final CustomFieldsDraft customFieldsDraft = CustomFieldsDraftBuilder.ofType(type)
+                                                                                    .addObject(STRING_FIELD_NAME, firstFieldValue)
+                                                                                    .build();
+                // Set custom type with staged false to publish the change right away, since this test is only for
+                // SetAssetCustomField and not SetAssetCustomType.
+                final ProductUpdateCommand cmd = ProductUpdateCommand.of(product,
+                    SetAssetCustomType.ofVariantIdAndAssetKey(masterVariant.getId(), assetKey, customFieldsDraft, staged));
+                final Product updatedProductWithCustomTypeInAssets = client().executeBlocking(cmd);
+
+                final String actualFieldValue = updatedProductWithCustomTypeInAssets.getMasterData()
+                                                                                    .getStaged().getMasterVariant()
+                                                                                    .getAssets().get(0).getCustom().getFieldAsString(STRING_FIELD_NAME);
+                assertThat(actualFieldValue).isEqualTo(firstFieldValue);
+
+                final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(updatedProductWithCustomTypeInAssets,
+                    SetAssetCustomField.ofVariantIdAndAssetKey(masterVariant.getId(), assetKey, STRING_FIELD_NAME, "new")));
+
+                assertThat(updatedProduct.getMasterData()
+                                         .getStaged().getMasterVariant()
+                                         .getAssets().get(0).getCustom().getFieldAsString(STRING_FIELD_NAME))
+                    .isEqualTo("new");
                 assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
 
                 return updatedProduct;
