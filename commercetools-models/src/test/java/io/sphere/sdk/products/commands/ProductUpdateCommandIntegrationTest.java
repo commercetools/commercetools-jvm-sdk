@@ -2833,7 +2833,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                 final Asset updatedAsset = updatedProductWithCustomTypeInAssets.getMasterData().getStaged()
                                                                                .getMasterVariant().getAssets().get(0);
                 assertThat(updatedAsset.getCustom()).isNotNull();
-                assertThat(updatedAsset.getCustom().getType()).isEqualTo(type);
+                assertThat(updatedAsset.getCustom().getType().getId()).isEqualTo(type.getId());
 
                 return updatedProductWithCustomTypeInAssets;
             });
@@ -2864,7 +2864,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                 final Asset updatedAsset = updatedProductWithCustomTypeInAssets.getMasterData().getStaged()
                                                                                .getMasterVariant().getAssets().get(0);
                 assertThat(updatedAsset.getCustom()).isNotNull();
-                assertThat(updatedAsset.getCustom().getType()).isEqualTo(type);
+                assertThat(updatedAsset.getCustom().getType().getId()).isEqualTo(type.getId());
                 assertThat(updatedProductWithCustomTypeInAssets.getMasterData().hasStagedChanges()).isEqualTo(staged);
 
                 return updatedProductWithCustomTypeInAssets;
