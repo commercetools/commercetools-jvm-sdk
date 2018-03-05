@@ -2933,7 +2933,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                 // Set custom type with staged false to publish the change right away, since this test is only for
                 // SetAssetCustomField and not SetAssetCustomType.
                 final ProductUpdateCommand cmd = ProductUpdateCommand.of(product,
-                    SetAssetCustomType.ofVariantIdAndAssetKey(masterVariant.getId(), assetKey, customFieldsDraft, staged));
+                    SetAssetCustomType.ofVariantIdAndAssetKey(masterVariant.getId(), assetKey, customFieldsDraft, false));
                 final Product updatedProductWithCustomTypeInAssets = client().executeBlocking(cmd);
 
                 final String actualFieldValue = updatedProductWithCustomTypeInAssets.getMasterData()
@@ -2942,7 +2942,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                 assertThat(actualFieldValue).isEqualTo(firstFieldValue);
 
                 final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(updatedProductWithCustomTypeInAssets,
-                    SetAssetCustomField.ofVariantIdAndAssetKey(masterVariant.getId(), assetKey, STRING_FIELD_NAME, "new")));
+                    SetAssetCustomField.ofVariantIdAndAssetKey(masterVariant.getId(), assetKey, STRING_FIELD_NAME, "new", staged)));
 
                 assertThat(updatedProduct.getMasterData()
                                          .getStaged().getMasterVariant()
