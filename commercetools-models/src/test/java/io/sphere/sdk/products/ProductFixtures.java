@@ -385,9 +385,10 @@ public class ProductFixtures {
         final LocalizedString name = LocalizedString.ofEnglish("REWE show case");
         final LocalizedString description = LocalizedString.ofEnglish("screenshot of the REWE webshop on a mobile and a notebook");
         return AssetDraftBuilder.of(singletonList(assetSource1), name)
-                .description(description)
-                .tags("desktop-sized", "jpg-format", "REWE", "awesome")
-                .build();
+                                .key("asset1Key")
+                                .description(description)
+                                .tags("desktop-sized", "jpg-format", "REWE", "awesome")
+                                .build();
     }
 
     private static AssetDraft getAssetDraft2() {
@@ -397,8 +398,9 @@ public class ProductFixtures {
                 .build();
         final LocalizedString name = LocalizedString.ofEnglish("commercetools logo");
         return AssetDraftBuilder.of(singletonList(assetSource1), name)
-                .tags("desktop-sized", "svg-format", "commercetools", "awesome")
-                .build();
+                                .key("asset2Key")
+                                .tags("desktop-sized", "svg-format", "commercetools", "awesome")
+                                .build();
     }
 
     public static Image createExternalImage() {
