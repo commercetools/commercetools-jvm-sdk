@@ -38,6 +38,10 @@ public final class ChangeAssetName extends StagedProductUpdateActionImpl<Product
         return assetId;
     }
 
+    public String getAssetKey() {
+        return assetKey;
+    }
+
     @Nullable
     public Integer getVariantId() {
         return variantId;

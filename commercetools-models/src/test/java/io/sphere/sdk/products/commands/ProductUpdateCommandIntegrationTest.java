@@ -4,7 +4,6 @@ import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.commands.UpdateAction;
-import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.messages.queries.MessageQuery;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.productdiscounts.DiscountedPrice;
@@ -37,6 +36,7 @@ import io.sphere.sdk.types.Type;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
+import javax.annotation.Nonnull;
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
 import java.time.ZoneOffset;
@@ -2377,6 +2377,51 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void changeAssetNameByVariantIdAndAssetKey() {
+        withProductHavingAssets(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+            final LocalizedString newName = LocalizedString.ofEnglish("new name");
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            final String assetKey = masterVariant.getAssets().get(0).getKey();
+
+            final ProductUpdateCommand cmd =
+                ProductUpdateCommand.of(product, ChangeAssetName.ofAssetKeyAndVariantId(masterVariant.getId(), assetKey, newName));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            final Asset updatedAsset = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0);
+            assertThat(updatedAsset.getName()).isEqualTo(newName);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isTrue();
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void changeAssetNameByVariantIdAndAssetKeyWithStaged() {
+        changeAssetNameByVariantIdAndAssetKeyWithStaged(true);
+        changeAssetNameByVariantIdAndAssetKeyWithStaged(false);
+    }
+
+    public void changeAssetNameByVariantIdAndAssetKeyWithStaged(@Nonnull final Boolean staged) {
+        withProductHavingAssets(client(), product -> {
+            assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+            final LocalizedString newName = LocalizedString.ofEnglish("new name");
+            final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+            final String assetKey = masterVariant.getAssets().get(0).getKey();
+
+            final ProductUpdateCommand cmd =
+                ProductUpdateCommand.of(product, ChangeAssetName.ofAssetKeyAndVariantId(masterVariant.getId(), assetKey, newName, staged));
+            final Product updatedProduct = client().executeBlocking(cmd);
+
+            final Asset updatedAsset = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0);
+            assertThat(updatedAsset.getName()).isEqualTo(newName);
+            assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
     public void setAssetDescriptionByVariantId() throws Exception {
         withProductHavingAssets(client(), product -> {
             assertThat(product.getMasterData().hasStagedChanges()).isFalse();
@@ -2762,6 +2807,147 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                         .getStaged().getMasterVariant()
                         .getAssets().get(0).getCustom().getFieldAsString(STRING_FIELD_NAME))
                         .isEqualTo("new");
+                assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
+
+                return updatedProduct;
+            });
+            return type;
+        });
+    }
+
+    @Test
+    public void setAssetCustomTypeByVariantIdAndAssetKey() {
+        withUpdateableType(client(), (Type type) -> {
+            withProductHavingAssets(client(), product -> {
+                assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+                final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+                final Asset assetWithoutCustomType = masterVariant.getAssets().get(0);
+                final String assetKey = assetWithoutCustomType.getKey();
+
+                final CustomFieldsDraft customFieldsDraft = CustomFieldsDraftBuilder.ofType(type).build();
+
+                final ProductUpdateCommand cmd = ProductUpdateCommand.of(product,
+                    SetAssetCustomType.ofVariantIdAndAssetKey(masterVariant.getId(), assetKey, customFieldsDraft));
+                final Product updatedProductWithCustomTypeInAssets = client().executeBlocking(cmd);
+
+                final Asset updatedAsset = updatedProductWithCustomTypeInAssets.getMasterData().getStaged()
+                                                                               .getMasterVariant().getAssets().get(0);
+                assertThat(updatedAsset.getCustom()).isNotNull();
+                assertThat(updatedAsset.getCustom().getType().getId()).isEqualTo(type.getId());
+
+                return updatedProductWithCustomTypeInAssets;
+            });
+            return type;
+        });
+    }
+
+    @Test
+    public void setAssetCustomTypeByVariantIdAndAssetKeyWithStaged() {
+        setAssetCustomTypeByVariantIdAndAssetKeyWithStaged(true);
+        setAssetCustomTypeByVariantIdAndAssetKeyWithStaged(false);
+    }
+
+    public void setAssetCustomTypeByVariantIdAndAssetKeyWithStaged(@Nonnull final Boolean staged) {
+        withUpdateableType(client(), (Type type) -> {
+            withProductHavingAssets(client(), product -> {
+                assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+                final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+                final Asset assetWithoutCustomType = masterVariant.getAssets().get(0);
+                final String assetKey = assetWithoutCustomType.getKey();
+
+                final CustomFieldsDraft customFieldsDraft = CustomFieldsDraftBuilder.ofType(type).build();
+
+                final ProductUpdateCommand cmd = ProductUpdateCommand.of(product,
+                    SetAssetCustomType.ofVariantIdAndAssetKey(masterVariant.getId(), assetKey, customFieldsDraft, staged));
+                final Product updatedProductWithCustomTypeInAssets = client().executeBlocking(cmd);
+
+                final Asset updatedAsset = updatedProductWithCustomTypeInAssets.getMasterData().getStaged()
+                                                                               .getMasterVariant().getAssets().get(0);
+                assertThat(updatedAsset.getCustom()).isNotNull();
+                assertThat(updatedAsset.getCustom().getType().getId()).isEqualTo(type.getId());
+                assertThat(updatedProductWithCustomTypeInAssets.getMasterData().hasStagedChanges()).isEqualTo(staged);
+
+                return updatedProductWithCustomTypeInAssets;
+            });
+            return type;
+        });
+    }
+
+    @Test
+    public void setAssetCustomFieldByVariantIdAndAssetKey() {
+        withUpdateableType(client(), (Type type) -> {
+            withProductHavingAssets(client(), product -> {
+                assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+                final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+                final Asset assetWithoutCustomType = masterVariant.getAssets().get(0);
+                final String assetKey = assetWithoutCustomType.getKey();
+
+                final String firstFieldValue = "commercetools";
+                final CustomFieldsDraft customFieldsDraft = CustomFieldsDraftBuilder.ofType(type)
+                                                                                    .addObject(STRING_FIELD_NAME, firstFieldValue)
+                                                                                    .build();
+                // Set custom type with staged false to publish the change right away, since this test is only for
+                // SetAssetCustomField and not SetAssetCustomType.
+                final ProductUpdateCommand cmd = ProductUpdateCommand.of(product,
+                    SetAssetCustomType.ofVariantIdAndAssetKey(masterVariant.getId(), assetKey, customFieldsDraft, false));
+                final Product updatedProductWithCustomTypeInAssets = client().executeBlocking(cmd);
+
+                final String actualFieldValue = updatedProductWithCustomTypeInAssets.getMasterData()
+                                                                                    .getStaged().getMasterVariant()
+                                                                                    .getAssets().get(0).getCustom().getFieldAsString(STRING_FIELD_NAME);
+                assertThat(actualFieldValue).isEqualTo(firstFieldValue);
+
+                final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(updatedProductWithCustomTypeInAssets,
+                    SetAssetCustomField.ofVariantIdAndAssetKey(masterVariant.getId(), assetKey, STRING_FIELD_NAME, "new")));
+
+                assertThat(updatedProduct.getMasterData()
+                                         .getStaged().getMasterVariant()
+                                         .getAssets().get(0).getCustom().getFieldAsString(STRING_FIELD_NAME))
+                    .isEqualTo("new");
+                assertThat(updatedProduct.getMasterData().hasStagedChanges()).isTrue();
+
+                return updatedProduct;
+            });
+            return type;
+        });
+    }
+
+    @Test
+    public void setAssetCustomFieldByVariantIdAndAssetKeyWithStaged() {
+        setAssetCustomFieldByVariantIdAndAssetKeyWithStaged(true);
+        setAssetCustomFieldByVariantIdAndAssetKeyWithStaged(false);
+    }
+
+    public void setAssetCustomFieldByVariantIdAndAssetKeyWithStaged(@Nonnull final Boolean staged) {
+        withUpdateableType(client(), (Type type) -> {
+            withProductHavingAssets(client(), product -> {
+                assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+                final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+                final Asset assetWithoutCustomType = masterVariant.getAssets().get(0);
+                final String assetKey = assetWithoutCustomType.getKey();
+
+                final String firstFieldValue = "commercetools";
+                final CustomFieldsDraft customFieldsDraft = CustomFieldsDraftBuilder.ofType(type)
+                                                                                    .addObject(STRING_FIELD_NAME, firstFieldValue)
+                                                                                    .build();
+                // Set custom type with staged false to publish the change right away, since this test is only for
+                // SetAssetCustomField and not SetAssetCustomType.
+                final ProductUpdateCommand cmd = ProductUpdateCommand.of(product,
+                    SetAssetCustomType.ofVariantIdAndAssetKey(masterVariant.getId(), assetKey, customFieldsDraft, false));
+                final Product updatedProductWithCustomTypeInAssets = client().executeBlocking(cmd);
+
+                final String actualFieldValue = updatedProductWithCustomTypeInAssets.getMasterData()
+                                                                                    .getStaged().getMasterVariant()
+                                                                                    .getAssets().get(0).getCustom().getFieldAsString(STRING_FIELD_NAME);
+                assertThat(actualFieldValue).isEqualTo(firstFieldValue);
+
+                final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(updatedProductWithCustomTypeInAssets,
+                    SetAssetCustomField.ofVariantIdAndAssetKey(masterVariant.getId(), assetKey, STRING_FIELD_NAME, "new", staged)));
+
+                assertThat(updatedProduct.getMasterData()
+                                         .getStaged().getMasterVariant()
+                                         .getAssets().get(0).getCustom().getFieldAsString(STRING_FIELD_NAME))
+                    .isEqualTo("new");
                 assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);
 
                 return updatedProduct;
