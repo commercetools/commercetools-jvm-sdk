@@ -155,6 +155,8 @@ import java.util.function.Function;
  <li class=change-in-release>Changed return type of {@link ProductTypeDraft#getAttributes()} from {@link List<AttributeDefinition>} for {@link List<io.sphere.sdk.products.attributes.AttributeDefinitionDraft>}</li>
  <li class=change-in-release>Changed return type of {@link ProductTypeDraft#getAttributes()} from {@link List<AttributeDefinition>} for {@link List<io.sphere.sdk.products.attributes.AttributeDefinitionDraft>}</li>
  <li class=change-in-release>Changed return type of {@link ProductTypeDraftDsl#getAttributes()} from {@link List<AttributeDefinition>} for {@link List<io.sphere.sdk.products.attributes.AttributeDefinitionDraft>}</li>
+ <li class=change-in-release>Added {@link ItemShippingDetails#getTargetsMap()} convenience method.</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.producttypes.commands.updateactions.ChangeEnumKey} and  {@link io.sphere.sdk.producttypes.commands.updateactions.ChangeAttributeName} update actions to {@link ProductType}</li>
  <li class=fixed-in-release>Added missing accessor method for {@code assetKey} to {@link ChangeAssetName#getAssetKey()} and {@link SetAssetCustomField#getAssetKey()}.</li>
  </ul>
 
