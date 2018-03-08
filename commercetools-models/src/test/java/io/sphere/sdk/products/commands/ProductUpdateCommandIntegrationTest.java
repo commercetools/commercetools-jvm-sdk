@@ -2842,6 +2842,31 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void setAssetCustomTypeByVariantSkuAndAssetKey() {
+        withUpdateableType(client(), (Type type) -> {
+            withProductHavingAssets(client(), product -> {
+                assertThat(product.getMasterData().hasStagedChanges()).isFalse();
+                final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+                final Asset assetWithoutCustomType = masterVariant.getAssets().get(0);
+                final String assetKey = assetWithoutCustomType.getKey();
+
+                final CustomFieldsDraft customFieldsDraft = CustomFieldsDraftBuilder.ofType(type).build();
+
+                final ProductUpdateCommand cmd = ProductUpdateCommand.of(product,
+                        SetAssetCustomType.ofSkuAndAssetKey(masterVariant.getSku(), assetKey, customFieldsDraft));
+                final Product updatedProductWithCustomTypeInAssets = client().executeBlocking(cmd);
+
+                final Asset updatedAsset = updatedProductWithCustomTypeInAssets.getMasterData().getStaged()
+                        .getMasterVariant().getAssets().get(0);
+                assertThat(updatedAsset.getCustom()).isNotNull();
+                assertThat(updatedAsset.getCustom().getType().getId()).isEqualTo(type.getId());
+
+                return updatedProductWithCustomTypeInAssets;
+            });
+            return type;
+        });
+    }
+    @Test
     public void setAssetCustomTypeByVariantIdAndAssetKeyWithStaged() {
         setAssetCustomTypeByVariantIdAndAssetKeyWithStaged(true);
         setAssetCustomTypeByVariantIdAndAssetKeyWithStaged(false);
