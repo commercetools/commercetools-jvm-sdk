@@ -155,6 +155,7 @@ import java.util.function.Function;
  <li class=change-in-release>changed return type of {@link ProductTypeDraft#getAttributes()} from {@link List<AttributeDefinition>} for {@link List<io.sphere.sdk.products.attributes.AttributeDefinitionDraft>}</li>
  <li class=change-in-release>changed return type of {@link ProductTypeDraft#getAttributes()} from {@link List<AttributeDefinition>} for {@link List<io.sphere.sdk.products.attributes.AttributeDefinitionDraft>}</li>
  <li class=change-in-release>changed return type of {@link ProductTypeDraftDsl#getAttributes()} from {@link List<AttributeDefinition>} for {@link List<io.sphere.sdk.products.attributes.AttributeDefinitionDraft>}</li>
+ <li class=change-in-release>added {@link ItemShippingDetails#getTargetsMap()} convenience method.</li>
  <li class=new-in-release>Added {@link io.sphere.sdk.producttypes.commands.updateactions.ChangeEnumKey} and  {@link io.sphere.sdk.producttypes.commands.updateactions.ChangeAttributeName} update actions to {@link ProductType}</li>
  </ul>
 
