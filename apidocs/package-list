@@ -7,6 +7,7 @@ io.sphere.sdk.cartdiscounts
 io.sphere.sdk.cartdiscounts.commands.updateactions
 io.sphere.sdk.cartdiscounts.expansion
 io.sphere.sdk.carts
+io.sphere.sdk.carts.commands
 io.sphere.sdk.carts.commands.updateactions
 io.sphere.sdk.carts.expansion
 io.sphere.sdk.carts.queries
