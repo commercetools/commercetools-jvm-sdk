@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.ResourceValue;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * In case multiple shipping addresses are needed for a cart, {@link ItemShippingDetails} contains the information where
@@ -15,6 +17,16 @@ import java.util.List;
 public interface ItemShippingDetails {
 
     List<ItemShippingTarget> getTargets();
+
+
+    /**
+     * Convenience method to extract map address keys to their target without further processing
+     * @return Map with addressKey as key and destined quantity as value.
+     */
+    default Map<String, Integer> getTargetsMap() {
+        return getTargets().stream().collect(Collectors.toMap(ItemShippingTarget::getAddressKey, ItemShippingTarget::getQuantity));
+    }
+
 
     /**
      * Boolean, {@literal true} if the quantity of the (custom) line item is equal to the sum of the quantities in {@code targets}, {@literal false}

@@ -134,7 +134,19 @@ public class MultipleShippingAddressesIntegrationTest extends IntegrationTest {
     }
 
 
-
+    @Test
+    public void testItemShippingDetailsConvenienceMethod(){
+        withFilledCartAndMultipleAddresses(client(), cart -> {
+            final LineItem firstLineItem = cart.getLineItems().get(0);
+            final List<Address> addresses = cart.getItemShippingAddresses();
+            final Address firstAddress = addresses.get(0);
+            final String firstAddressKey = firstAddress.getKey();
+            final ItemShippingDetailsDraft itemShippingDetailsDraft = ItemShippingDetailsDraftBuilder.of(Arrays.asList(ItemShippingTargetBuilder.of(firstAddressKey, 2).build())).build();
+            final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, SetLineItemShippingDetails.of(firstLineItem.getId(), itemShippingDetailsDraft)));
+            final LineItem updatedLineItem = updatedCart.getLineItems().stream().filter(lineItem -> lineItem.getId().equals(firstLineItem.getId())).findAny().get();
+            assertThat(updatedLineItem.getShippingDetails().getTargetsMap().get(firstAddressKey)).isNotNull();
+        });
+    }
 
 
     public void withFilledCartAndMultipleAddresses(final BlockingSphereClient client, final Consumer<Cart> f) {
