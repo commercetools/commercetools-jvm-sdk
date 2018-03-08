@@ -14,6 +14,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import static io.sphere.sdk.producttypes.ProductTypeFixtures.withUpdateableProductType;
 import static io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Colors;
@@ -22,6 +23,7 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.SphereInternalUtils.reverse;
 import static java.util.Collections.singletonList;
 import static java.util.Locale.GERMAN;
+import static java.util.Locale.GERMANY;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductTypeUpdateCommandIntegrationTest extends IntegrationTest {
@@ -371,6 +373,36 @@ public class ProductTypeUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(updatedAttributeType.getValues())
                     .containsExactly(LocalizedEnumValue.of("key1", label1), LocalizedEnumValue.of("key2", newLabel2));
 
+            return updatedProductType;
+        });
+    }
+
+
+    @Test
+    public void changeEnumValueKey(){
+        withUpdateableProductType(client(), productType -> {
+            final String attributeName = "color";
+            final LocalizedEnumAttributeType attributeType = (LocalizedEnumAttributeType) productType.getAttribute(attributeName)
+                    .getAttributeType();
+            assertThat(attributeType.getValues()).contains(LocalizedEnumValue.of("red", LocalizedString.of(ENGLISH,"red",GERMAN,"rot")));
+            final ProductType updatedProductType = client().executeBlocking(ProductTypeUpdateCommand.of(productType, ChangeEnumKey.of(attributeName, "red","rouge")));
+            final LocalizedEnumAttributeType updatedAttributeType = (LocalizedEnumAttributeType) updatedProductType.getAttribute(attributeName)
+                    .getAttributeType();
+            assertThat(updatedAttributeType.getValues()).contains(LocalizedEnumValue.of("rouge", LocalizedString.of(ENGLISH,"red",GERMAN,"rot")));
+            return updatedProductType;
+        });
+    }
+
+    @Test
+    public void changAttributeDefinitionName(){
+        withUpdateableProductType(client(), productType -> {
+            final String attributeName = "color";
+            final String newAttributeName = "couleur";
+            assertThat(productType.getAttribute(attributeName)).isNotNull();
+            assertThat(productType.getAttribute(newAttributeName)).isNull();
+            final ProductType updatedProductType = client().executeBlocking(ProductTypeUpdateCommand.of(productType, ChangeAttributeName.of(attributeName,newAttributeName)));
+            assertThat(updatedProductType.getAttribute(attributeName)).isNull();
+            assertThat(updatedProductType.getAttribute(newAttributeName)).isNotNull();
             return updatedProductType;
         });
     }
