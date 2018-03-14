@@ -46,6 +46,7 @@ abstract class AbstractBuilderGenerator<A extends Annotation> extends AbstractGe
      * Adds the return statement for the builder method.
      *
      * @param builder the builder to add the return statement
+     * @param builderType the builder type
      * @return the builder with the added return statement
      */
     protected abstract MethodSpec.Builder addBuilderMethodReturn(final TypeElement builderType, final MethodSpec.Builder builder);
@@ -69,6 +70,7 @@ abstract class AbstractBuilderGenerator<A extends Annotation> extends AbstractGe
      * Creates a builder method for the given getter method.
      *
      * @param property the getter method
+     * @param returnType the returned type from the builder
      * @return a list of builder methods - this will allow us later to create additional builder methods for collection types
      */
     protected List<MethodSpec> createBuilderMethods(final TypeElement returnType, final PropertyGenModel property) {

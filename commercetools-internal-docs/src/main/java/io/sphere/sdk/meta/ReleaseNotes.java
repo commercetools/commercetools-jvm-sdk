@@ -135,11 +135,13 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+ 
  <h3 class=released-version id="v1_31_0">1.31.0 </h3>
  <ul>
+ <li class=fixed-in-release>Our javadoc now contains documentation for our generated classes too.</li>
  <li class=change-in-release>Correct typo on {@link SetAssetCustomType#ofSkuAndAssetKey(String, String, CustomFieldsDraft)}, previously named ofSkuAndAssetKeyAndAssetKey</li>
  </ul>
-
+ 
  <h3 class=released-version id="v1_30_0">1.30.0 (08.03.2018)</h3>
  <ul>
  <li class=new-in-release>

@@ -40,6 +40,8 @@ public @interface HasUpdateAction {
     /**
      * Specifies whether there should be a default factory method generated.
      * a default factory method accepts all required parameters as argument.
+     *
+     * @return true if you need to generate a default factory, false otherwise.
      */
     boolean generateDefaultFactory() default true;
 

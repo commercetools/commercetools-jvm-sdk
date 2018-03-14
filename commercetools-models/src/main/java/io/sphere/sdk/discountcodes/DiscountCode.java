@@ -92,6 +92,7 @@ public interface DiscountCode extends Resource<DiscountCode>, Custom {
 
     /**
      * Start date for discount code validity
+     * @return the validity start date
      */
     @Nullable
     @IgnoreInQueryModel
@@ -100,6 +101,7 @@ public interface DiscountCode extends Resource<DiscountCode>, Custom {
 
     /**
      * End date for discount code validity
+     * @return the validity limit date
      */
     @HasUpdateAction
     @Nullable

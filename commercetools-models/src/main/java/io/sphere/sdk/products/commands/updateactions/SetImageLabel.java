@@ -106,7 +106,7 @@ public final class SetImageLabel extends UpdateActionImpl<Product> {
 
     /**
      * Creates a copied update action initialized with the given parameter, the rest of the parameters are copied from the original object.
-     *
+     * @param label The image label.
      * @return new object initialized with the copied values from the original object
      */
     public SetImageLabel withLabel(final String label) {
@@ -115,7 +115,7 @@ public final class SetImageLabel extends UpdateActionImpl<Product> {
 
     /**
      * Creates a copied update action initialized with the given parameter, the rest of the parameters are copied from the original object.
-     *
+     * @param staged specifiy if image is staged
      * @return new object initialized with the copied values from the original object
      */
     public SetImageLabel withStaged(final Boolean staged) {
