@@ -27,7 +27,7 @@ public final class CustomerCompanyNameSetMessage extends GenericMessageImpl<Cust
     }
 
     /**
-     * The name of the company, which was added to the user.
+     * @return The name of the company, which was added to the user.
      */
     public String getCompanyName() {
         return companyName;

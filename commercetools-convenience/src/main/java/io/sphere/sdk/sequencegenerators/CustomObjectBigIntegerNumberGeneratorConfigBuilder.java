@@ -31,6 +31,7 @@ public final class CustomObjectBigIntegerNumberGeneratorConfigBuilder extends Ba
      * Sets the container for the {@link CustomObject} storing the last used sequence number.
      *
      * @param container container name of the underlying {@link CustomObject}. If this method is not used the default value is {@value DEFAULT_CONTAINER}.
+     * @return the builder instance
      */
     public CustomObjectBigIntegerNumberGeneratorConfigBuilder container(final String container) {
         this.container = Objects.requireNonNull(container, "container");
@@ -42,6 +43,7 @@ public final class CustomObjectBigIntegerNumberGeneratorConfigBuilder extends Ba
      *
      * @param maxRetryAttempts the maximum amount of attempts to retry the number generation if a {@link io.sphere.sdk.client.ConcurrentModificationException} occurs
      * By default it is set to {@value DEFAULT_RETRY_ATTEMPTS}.
+     * @return the builder instance
      */
     public CustomObjectBigIntegerNumberGeneratorConfigBuilder maxRetryAttempts(final int maxRetryAttempts) {
         if (maxRetryAttempts < 0) {
@@ -55,6 +57,7 @@ public final class CustomObjectBigIntegerNumberGeneratorConfigBuilder extends Ba
      * Sets the first number generated if the underlying {@link CustomObject} does not exist.
      *
      * @param initialValue first number generated. By default it is set to 1.
+     * @return the builder instance
      */
     public CustomObjectBigIntegerNumberGeneratorConfigBuilder initialValue(final BigInteger initialValue) {
         this.initialValue = Objects.requireNonNull(initialValue, "initialValue");
@@ -66,7 +69,7 @@ public final class CustomObjectBigIntegerNumberGeneratorConfigBuilder extends Ba
      *
      * @param sphereClient A client to perform requests to the platform.
      * @param key the key is part of the namespace to store the {@link CustomObject} with the last used sequence number, it normally is sth. like "orderNumber" or "customerNumber"
-     *
+     * @return the builder instance
      * @see CustomObject
      */
     public static CustomObjectBigIntegerNumberGeneratorConfigBuilder of(final SphereClient sphereClient, final String key) {

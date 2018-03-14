@@ -58,7 +58,7 @@ public interface Payment extends Resource<Payment>, Custom {
      * The identifier that is used by the interface that manages the payment (usually the PSP).
      *
      * Can not be changed once it has been set. The combination of {@link #getInterfaceId()}
-     * and {@link #getPaymentMethodInfo#getPaymentMethodInfo()}  must be unique.
+     * and {@link #getPaymentMethodInfo()}  must be unique.
      *
      * @return the interface id
      */
@@ -69,6 +69,7 @@ public interface Payment extends Resource<Payment>, Custom {
 
     /**
      * @deprecated This field will be removed with the next major SDK update.
+     * @return the authorized amount
      */
     @Deprecated
     @Nullable
@@ -76,6 +77,7 @@ public interface Payment extends Resource<Payment>, Custom {
 
     /**
      * @deprecated This field will be removed with the next major SDK update.
+     * @return the authorization limit date
      */
     @Deprecated
     @Nullable
@@ -83,6 +85,7 @@ public interface Payment extends Resource<Payment>, Custom {
 
     /**
      * @deprecated This field will be removed with the next major SDK update.
+     * @return the paid amount
      */
     @Deprecated
     @Nullable
@@ -90,6 +93,7 @@ public interface Payment extends Resource<Payment>, Custom {
 
     /**
      * @deprecated This field will be removed with the next major SDK update.
+     * @return the refunded amount
      */
     @Deprecated
     @Nullable

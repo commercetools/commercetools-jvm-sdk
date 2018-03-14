@@ -26,6 +26,12 @@ public interface PagedQueryResult<T> extends PagedResult<T> {
 
     /**
      * @deprecated PagedQueryResult should remain as a read model, and be constructed only by deserialization.
+     * @param <T> the type of the underlying model
+     * @param limit The limit supplied by the client or the server default
+     * @param offset The offset supplied by the client or the server default.
+     * @param total  The total number of results matching the request.
+     * @param results the mocked results.
+     * @return the paged query result.
      */
     @Deprecated
     static <T> PagedQueryResultDsl<T> of(final Long offset, final Long limit, final Long total, final List<T> results) {
@@ -33,6 +39,11 @@ public interface PagedQueryResult<T> extends PagedResult<T> {
     }
 
     /**
+     * @param <T> the type of the underlying model
+     * @param offset The offset supplied by the client or the server default.
+     * @param total  The total number of results matching the request.
+     * @param results The mocked result.
+     * @return the paged query result.
      * @deprecated PagedQueryResult should remain as a read model, and be constructed only by deserialization.
      */
     @Deprecated
@@ -41,6 +52,9 @@ public interface PagedQueryResult<T> extends PagedResult<T> {
     }
 
     /**
+     * @param <T> the type of the underlying model
+     * @param results The mocked result.
+     * @return the paged query result.
      * @deprecated PagedQueryResult should remain as a read model, and be constructed only by deserialization.
      */
     @Deprecated
@@ -50,25 +64,43 @@ public interface PagedQueryResult<T> extends PagedResult<T> {
     }
 
     /**
+     * @param <T> the type of the underlying model
+     * @param singleResult the single result expected in the return.
      * @deprecated PagedQueryResult should remain as a read model, and be constructed only by deserialization.
+     * @return the paged query result.
      */
     @JsonIgnore
     static <T> PagedQueryResultDsl<T> of(final T singleResult) {
         return of(Collections.singletonList(singleResult));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     Long getCount();
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     Long getOffset();
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     Long getLimit();
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     List<T> getResults();
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     Long getTotal();
 }

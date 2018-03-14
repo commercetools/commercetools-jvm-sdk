@@ -63,6 +63,7 @@ public interface LineItemDraft {
     /**
      * Container for the sub-quantity of the line item quantity for the specific address
      * when multiple shipping addresses are required.
+     * @return the itemShippingDetailsDraft
      */
     @Nullable
     ItemShippingDetailsDraft getShippingDetails();

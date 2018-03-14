@@ -28,7 +28,8 @@ public interface PaymentDraft extends CustomDraft {
     Reference<Customer> getCustomer();
 
     /**
-     * @deprecated This field will be removed with the next major SDK update.
+     * @deprecated This field will be removed with the next major SDK update.3
+     * @return the external id
      */
     @Deprecated
     @Nullable
@@ -41,6 +42,7 @@ public interface PaymentDraft extends CustomDraft {
 
     /**
      * @deprecated This field will be removed with the next major SDK update.
+     * @return the authorized amount
      */
     @Deprecated
     @Nullable
@@ -48,6 +50,7 @@ public interface PaymentDraft extends CustomDraft {
 
     /**
      * @deprecated This field will be removed with the next major SDK update.
+     * @return the
      */
     @Deprecated
     @Nullable
