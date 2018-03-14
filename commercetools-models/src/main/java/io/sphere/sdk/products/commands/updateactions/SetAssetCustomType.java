@@ -100,7 +100,7 @@ public final class SetAssetCustomType extends SetCustomTypeBase<Product> {
         return of(null,assetKey, variantId, null, customFieldsDraft, staged);
     }
 
-    public static SetAssetCustomType ofSkuAndAssetKeyAndAssetKey(final String sku, final String assetKey, @Nullable final CustomFieldsDraft customFieldsDraft) {
+    public static SetAssetCustomType ofSkuAndAssetKey(final String sku, final String assetKey, @Nullable final CustomFieldsDraft customFieldsDraft) {
         return ofSkuAndAssetKey(sku, assetKey, customFieldsDraft, null);
     }
 
