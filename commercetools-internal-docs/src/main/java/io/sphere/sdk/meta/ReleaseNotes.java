@@ -135,6 +135,10 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+ <h3 class=released-version id="v1_30_0">1.31.0 (29.03.2018)</h3>
+ <ul>
+ <li class=fixed-in-release>Our javadoc now contains documentation for our generated classes too.</li>
+ </ul>
  <h3 class=released-version id="v1_30_0">1.30.0 (08.03.2018)</h3>
  <ul>
  <li class=new-in-release>
