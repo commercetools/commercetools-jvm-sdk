@@ -140,6 +140,7 @@ import java.util.function.Function;
  <ul>
  <li class=fixed-in-release>Our javadoc now contains documentation for our generated classes too.</li>
  <li class=change-in-release>Correct typo on {@link SetAssetCustomType#ofSkuAndAssetKey(String, String, CustomFieldsDraft)}, previously named ofSkuAndAssetKeyAndAssetKey</li>
+ <li class=change-in-release>Added support for Order extensions {@link ExtensionResourceType#ORDER}</li>
  </ul>
  
  <h3 class=released-version id="v1_30_0">1.30.0 (08.03.2018)</h3>

@@ -12,13 +12,17 @@ public enum ExtensionResourceType {
 
     CART,
     PAYMENT,
-    CUSTOMER;
+    CUSTOMER,
+    ORDER;
 
+
+    @SuppressWarnings("unused")
     @JsonCreator
     public static ExtensionResourceType forValue(String value) {
         return valueOf(value.toUpperCase());
     }
 
+    @SuppressWarnings("unused")
     @JsonValue
     public String toValue() {
         return toString().toLowerCase();

@@ -74,6 +74,18 @@ public class ExtensionUpdateCommandIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Test
+    public void testExtensionForOrder(){
+        ExtensionResourceType extensionResourceType = ExtensionResourceType.ORDER;
+        final List<Trigger> triggers = asList(TriggerBuilder.of(extensionResourceType, asList(TriggerType.CREATE, TriggerType.UPDATE)).build());
+        final Destination destination = HttpDestinationBuilder.of(AZURE_FUNCTION_URL, AzureFunctionsAuthenticationBuilder.of(randomKey()).build()).build();
+        withExtensionDraft(client(), ExtensionDraftBuilder.of(randomKey(), destination, triggers).build(), extension -> {
+            assertThat(extension.getTriggers()).hasSize(1);
+            assertThat(extension.getTriggers().get(0).getResourceTypeId()).isEqualByComparingTo(extensionResourceType);
+            return extension;
+        });
+    }
+
 
 
     @Test
