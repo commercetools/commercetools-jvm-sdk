@@ -69,6 +69,12 @@ public class OrderFixtures {
         });
     }
 
+    public static void withOrder(final BlockingSphereClient client, final Customer customer, final Cart cart, final UnaryOperator<Order> op) {
+            final Order updatedOrder = createOrderFromCart(client, customer, cart);
+            final Order orderToDelete = op.apply(updatedOrder);
+            client.executeBlocking(OrderDeleteCommand.of(orderToDelete));
+    }
+
     private static Order createOrderFromCart(BlockingSphereClient client, Customer customer, Cart cart) {
         final TaxCategory taxCategory = TaxCategoryFixtures.defaultTaxCategory(client);
         final SetCustomShippingMethod shippingMethodAction = SetCustomShippingMethod.of("custom shipping method", ShippingRate.of(EURO_10), taxCategory);

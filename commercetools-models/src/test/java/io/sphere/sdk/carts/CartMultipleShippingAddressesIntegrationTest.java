@@ -25,7 +25,7 @@ import static io.sphere.sdk.carts.CartFixtures.withFilledCart;
 import static io.sphere.sdk.products.ProductFixtures.withTaxedProduct;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MultipleShippingAddressesIntegrationTest extends IntegrationTest {
+public class CartMultipleShippingAddressesIntegrationTest extends IntegrationTest {
 
     @Test
     public void testDraftWithMultipleAddresses() {

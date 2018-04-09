@@ -177,10 +177,12 @@ public interface Order extends CartLike<Order> {
     String getCustomerId();
 
     @Override
+    @HasUpdateAction(value = "setCustomLineItemShippingDetails", fields = {@PropertySpec(name = "customLineItemId",type = String.class),@PropertySpec(name = "shippingDetails",type = ItemShippingDetailsDraft.class)})
     @QueryModelHint(type = "CustomLineItemCollectionQueryModel<Order>")
     List<CustomLineItem> getCustomLineItems();
 
     @Override
+    @HasUpdateAction(value = "setLineItemShippingDetails", fields = {@PropertySpec(name = "lineItemId",type = String.class),@PropertySpec(name = "shippingDetails",type = ItemShippingDetailsDraft.class)})
     @QueryModelHint(type = "LineItemCollectionQueryModel<Order>")
     List<LineItem> getLineItems();
 
@@ -259,6 +261,9 @@ public interface Order extends CartLike<Order> {
      */
     @Override
     @QueryModelHint(type = "AddressCollectionQueryModel<Order>")
+    @HasUpdateAction(value = "addItemShippingAddress", fields = {@PropertySpec(name = "address",type = Address.class)})
+    @HasUpdateAction(value = "updateItemShippingAddress", fields = {@PropertySpec(name = "address",type = Address.class)})
+    @HasUpdateAction(value = "removeItemShippingAddress", fields = {@PropertySpec(name = "addressKey",type = String.class)})
     List<Address> getItemShippingAddresses();
 
     /**
