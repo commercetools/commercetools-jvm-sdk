@@ -1,34 +1,62 @@
 package io.sphere.sdk.productdiscounts.queries;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.SphereRequest;
+import io.sphere.sdk.http.HttpResponse;
+import io.sphere.sdk.json.SphereJsonUtils;
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.productdiscounts.ProductDiscount;
 import io.sphere.sdk.products.Price;
 
-/**
- * This endpoint can be used to simulate which product discounts would be applied if a specified product variant had a specified price.<br>
- * Given product and variant ids and a price, this endpoint will return the product discount that would have been applied to that price.
- */
-public interface MatchingProductDiscountGet extends SphereRequest<ProductDiscount> {
+import static io.sphere.sdk.http.HttpMethod.POST;
 
-    /**
-     * @return UUID, ID of the product
-     */
-    String getProductId();
+public final class MatchingProductDiscountGet extends Base implements SphereRequest<ProductDiscount> {
 
-    /**
-     * @return ID of the variant
-     */
-    Integer getVariantId();
+    private final String productId;
+    private final Integer variantId;
+    private final Boolean staged;
+    private final Price price;
 
-    /**
-     * @return Whether to use the staged version of this variant or the published one
-     */
-    Boolean getStaged();
+    private MatchingProductDiscountGet(final String productId, final  Integer variantId, final  Boolean staged, final Price price) {
+        this.productId = productId;
+        this.variantId = variantId;
+        this.staged = staged;
+        this.price = price;
+    }
 
-    Price getPrice();
+    public static MatchingProductDiscountGet of(final String productId, final  Integer variantId, final  Boolean staged, final Price price){
+        return new MatchingProductDiscountGet(productId,variantId ,staged ,price );
+    }
 
-    static MatchingProductDiscountGet of(final String productId, final  Integer variantId, final  Boolean staged, final Price price){
-        return new MatchingProductDiscountGetImpl(productId,variantId ,staged ,price );
+    @Override
+    public ProductDiscount deserialize(final HttpResponse httpResponse) {
+        return SphereJsonUtils.readObject(httpResponse.getResponseBody(), ProductDiscount.typeReference());
+    }
+
+    @Override
+    public HttpRequestIntent httpRequestIntent() {
+        return HttpRequestIntent.of(POST, "/product-discounts/matching",SphereJsonUtils.toJsonString(this));
+    }
+
+
+    @JsonProperty
+    public String getProductId() {
+        return productId;
+    }
+
+    @JsonProperty
+    public Integer getVariantId() {
+        return variantId;
+    }
+
+    @JsonProperty
+    public Boolean getStaged() {
+        return staged;
+    }
+
+    @JsonProperty
+    public Price getPrice() {
+        return price;
     }
 }
