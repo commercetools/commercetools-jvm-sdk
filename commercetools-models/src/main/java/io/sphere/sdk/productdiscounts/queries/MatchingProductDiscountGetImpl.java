@@ -1,5 +1,6 @@
 package io.sphere.sdk.productdiscounts.queries;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.json.SphereJsonUtils;
@@ -35,21 +36,25 @@ final class MatchingProductDiscountGetImpl extends Base implements MatchingProdu
 
 
     @Override
+    @JsonProperty
     public String getProductId() {
         return productId;
     }
 
     @Override
+    @JsonProperty
     public Integer getVariantId() {
         return variantId;
     }
 
     @Override
+    @JsonProperty
     public Boolean getStaged() {
         return staged;
     }
 
     @Override
+    @JsonProperty
     public Price getPrice() {
         return price;
     }

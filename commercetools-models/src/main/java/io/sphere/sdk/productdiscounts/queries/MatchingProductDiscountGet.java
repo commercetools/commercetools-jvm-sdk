@@ -14,24 +14,19 @@ public interface MatchingProductDiscountGet extends SphereRequest<ProductDiscoun
     /**
      * @return UUID, ID of the product
      */
-    @JsonProperty
     String getProductId();
 
     /**
      * @return ID of the variant
      */
-    @JsonProperty
     Integer getVariantId();
 
     /**
      * @return Whether to use the staged version of this variant or the published one
      */
-    @JsonProperty
     Boolean getStaged();
 
-    @JsonProperty
     Price getPrice();
-
 
     static MatchingProductDiscountGet of(final String productId, final  Integer variantId, final  Boolean staged, final Price price){
         return new MatchingProductDiscountGetImpl(productId,variantId ,staged ,price );
