@@ -9,7 +9,7 @@ import io.sphere.sdk.products.Price;
 
 import static io.sphere.sdk.http.HttpMethod.POST;
 
-public final class MatchingProductDiscountGetImpl extends Base implements MatchingProductDiscountGet {
+final class MatchingProductDiscountGetImpl extends Base implements MatchingProductDiscountGet {
 
     private final String productId;
     private final Integer variantId;
