@@ -36,7 +36,7 @@ public final class MatchingProductDiscountGet extends Base implements SphereRequ
 
     @Override
     public HttpRequestIntent httpRequestIntent() {
-        return HttpRequestIntent.of(POST, "/product-discounts/matching",SphereJsonUtils.toJsonString(this));
+        return HttpRequestIntent.of(POST, "/product-discounts/matching",SphereJsonUtils.toJsonString(MatchingProductDiscountGet.this));
     }
 
 
