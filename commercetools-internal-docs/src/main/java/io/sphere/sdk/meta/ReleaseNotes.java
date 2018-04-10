@@ -139,6 +139,7 @@ import java.util.function.Function;
  
  <h3 class=released-version id="v1_31_0">1.31.0 </h3>
  <ul>
+ <li class=new-in-release>add support for Aws lambda based extension via {@link io.sphere.sdk.extensions.AWSLambdaDestination}</li>
  <li class=removed-in-release> {@link MatchingProductDiscountGet} Query to lockup matching product discount.</li>
  <li class=fixed-in-release>Our javadoc now contains documentation for our generated classes too.</li>
  <li class=change-in-release>Correct typo on {@link SetAssetCustomType#ofSkuAndAssetKey(String, String, CustomFieldsDraft)}, previously named ofSkuAndAssetKeyAndAssetKey</li>

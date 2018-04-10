@@ -9,7 +9,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         include = JsonTypeInfo.As.PROPERTY,
         property = "type")
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = HttpDestinationImpl.class, name = "HTTP")
+        @JsonSubTypes.Type(value = HttpDestinationImpl.class, name = "HTTP"),
+        @JsonSubTypes.Type(value = AWSLambdaDestinationImpl.class, name = "AWSLambda")
 })
 public interface Destination {
 
