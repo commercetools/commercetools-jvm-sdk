@@ -139,6 +139,16 @@ import java.util.function.Function;
  
  <h3 class=released-version id="v1_31_0">1.31.0 </h3>
  <ul>
+ <li class=new-in-release>
+ new ShippingDetails actions for order :
+     {@link io.sphere.sdk.orders.commands.updateactions.SetLineItemShippingDetails},
+     {@link io.sphere.sdk.orders.commands.updateactions.SetCustomLineItemShippingDetails},
+     {@link io.sphere.sdk.orders.commands.updateactions.AddItemShippingAddress}
+     {@link io.sphere.sdk.orders.commands.updateactions.RemoveItemShippingAddress}
+     {@link io.sphere.sdk.orders.commands.updateactions.UpdateItemShippingAddress},
+ supported now in our SDK.
+ </li>
+ <li class=change-in-release>{@link ItemShippingDetails#getTargets()} returns {@link Map<String, Long>} instead of {@link Map<String, Integer>}</li>
  <li class=new-in-release>add support for Aws lambda based extension via {@link io.sphere.sdk.extensions.AWSLambdaDestination}</li>
  <li class=removed-in-release> {@link MatchingProductDiscountGet} Query to lockup matching product discount.</li>
  <li class=fixed-in-release>Our javadoc now contains documentation for our generated classes too.</li>

@@ -12,6 +12,6 @@ public interface ItemShippingTarget {
 
     String getAddressKey();
 
-    int getQuantity();
+    Long getQuantity();
 
 }

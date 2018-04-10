@@ -23,7 +23,7 @@ public interface ItemShippingDetails {
      * Convenience method to extract map address keys to their target without further processing
      * @return Map with addressKey as key and destined quantity as value.
      */
-    default Map<String, Integer> getTargetsMap() {
+    default Map<String, Long> getTargetsMap() {
         return getTargets().stream().collect(Collectors.toMap(ItemShippingTarget::getAddressKey, ItemShippingTarget::getQuantity));
     }
 
