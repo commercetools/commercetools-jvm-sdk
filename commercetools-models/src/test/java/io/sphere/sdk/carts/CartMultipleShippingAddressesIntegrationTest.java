@@ -41,7 +41,7 @@ public class CartMultipleShippingAddressesIntegrationTest extends IntegrationTes
             withCartDraft(client(), draft, cart -> {
                 Assertions.assertThat(cart.getItemShippingAddresses()).containsAll(itemShippingAddresses);
                 final String addressKey = cart.getItemShippingAddresses().get(0).getKey();
-                final ItemShippingDetailsDraft itemShippingDetailsDraft = ItemShippingDetailsDraftBuilder.of(Arrays.asList(ItemShippingTargetBuilder.of(addressKey, 2).build())).build();
+                final ItemShippingDetailsDraft itemShippingDetailsDraft = ItemShippingDetailsDraftBuilder.of(Arrays.asList(ItemShippingTargetBuilder.of(addressKey, 2L).build())).build();
                 final int master_variant_id = product.getMasterData().getStaged().getMasterVariant().getId();
                 final LineItemDraft lineItemDraft = LineItemDraft.of(product, master_variant_id, 25).withShippingDetails(itemShippingDetailsDraft);
                 final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, AddLineItem.of(lineItemDraft)));
@@ -106,7 +106,7 @@ public class CartMultipleShippingAddressesIntegrationTest extends IntegrationTes
             final List<Address> addresses = cart.getItemShippingAddresses();
             final Address firstAddress = addresses.get(0);
             final String firstAddressKey = firstAddress.getKey();
-            final ItemShippingDetailsDraft itemShippingDetailsDraft = ItemShippingDetailsDraftBuilder.of(Arrays.asList(ItemShippingTargetBuilder.of(firstAddressKey, 2).build())).build();
+            final ItemShippingDetailsDraft itemShippingDetailsDraft = ItemShippingDetailsDraftBuilder.of(Arrays.asList(ItemShippingTargetBuilder.of(firstAddressKey, 2L).build())).build();
             final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, SetLineItemShippingDetails.of(firstLineItem.getId(),itemShippingDetailsDraft)));
             final LineItem updatedLineItem = updatedCart.getLineItems().stream().filter(lineItem -> lineItem.getId().equals(firstLineItem.getId())).findAny().get();
             assertThat(updatedLineItem.getShippingDetails().getTargets()).hasSize(1);
@@ -124,7 +124,7 @@ public class CartMultipleShippingAddressesIntegrationTest extends IntegrationTes
             final List<Address> addresses = cart.getItemShippingAddresses();
             final Address firstAddress = addresses.get(0);
             final String firstAddressKey = firstAddress.getKey();
-            final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, ApplyDeltaToLineItemShippingDetailsTargets.of(firstLineItem.getId(), Arrays.asList(ItemShippingTargetBuilder.of(firstAddressKey,6 ).build()))));
+            final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, ApplyDeltaToLineItemShippingDetailsTargets.of(firstLineItem.getId(), Arrays.asList(ItemShippingTargetBuilder.of(firstAddressKey,6L ).build()))));
             final LineItem updatedLineItem = updatedCart.getLineItems().stream().filter(lineItem -> lineItem.getId().equals(firstLineItem.getId())).findAny().get();
             assertThat(updatedLineItem.getShippingDetails().getTargets()).hasSize(1);
             assertThat(updatedLineItem.getShippingDetails().getTargets().get(0).getAddressKey()).isEqualTo(firstAddressKey);
@@ -141,7 +141,7 @@ public class CartMultipleShippingAddressesIntegrationTest extends IntegrationTes
             final List<Address> addresses = cart.getItemShippingAddresses();
             final Address firstAddress = addresses.get(0);
             final String firstAddressKey = firstAddress.getKey();
-            final ItemShippingDetailsDraft itemShippingDetailsDraft = ItemShippingDetailsDraftBuilder.of(Arrays.asList(ItemShippingTargetBuilder.of(firstAddressKey, 2).build())).build();
+            final ItemShippingDetailsDraft itemShippingDetailsDraft = ItemShippingDetailsDraftBuilder.of(Arrays.asList(ItemShippingTargetBuilder.of(firstAddressKey, 2L).build())).build();
             final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, SetLineItemShippingDetails.of(firstLineItem.getId(), itemShippingDetailsDraft)));
             final LineItem updatedLineItem = updatedCart.getLineItems().stream().filter(lineItem -> lineItem.getId().equals(firstLineItem.getId())).findAny().get();
             assertThat(updatedLineItem.getShippingDetails().getTargetsMap().get(firstAddressKey)).isNotNull();

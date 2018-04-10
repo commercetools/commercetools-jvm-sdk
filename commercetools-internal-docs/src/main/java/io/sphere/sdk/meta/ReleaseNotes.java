@@ -147,6 +147,7 @@ import java.util.function.Function;
      {@link io.sphere.sdk.orders.commands.updateactions.UpdateItemShippingAddress},
  supported now in our SDK.
  </li>
+ <li class=change-in-release>{@link ItemShippingDetails#getTargets()} returns {@link Map<String, Long>} instead of {@link Map<String, Integer>}</li>
  <li class=fixed-in-release>Our javadoc now contains documentation for our generated classes too.</li>
  <li class=change-in-release>Correct typo on {@link SetAssetCustomType#ofSkuAndAssetKey(String, String, CustomFieldsDraft)}, previously named ofSkuAndAssetKeyAndAssetKey</li>
  <li class=change-in-release>Added support for Order extensions {@link ExtensionResourceType#ORDER}</li>
