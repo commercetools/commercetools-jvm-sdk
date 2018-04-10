@@ -14,22 +14,18 @@ import org.junit.Test;
 import java.util.List;
 import java.util.function.UnaryOperator;
 
-import static io.sphere.sdk.subscriptions.SubscriptionFixtures.assumeHasAzureFunctionUrl;
-import static io.sphere.sdk.subscriptions.SubscriptionFixtures.azureFunctionUrl;
 import static io.sphere.sdk.test.SphereTestUtils.asList;
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-public class ExtensionUpdateCommandIntegrationTest extends IntegrationTest {
+public abstract class AbstractExtensionIntegrationTest extends IntegrationTest {
 
 
-    private static String AZURE_FUNCTION_URL;
+    public abstract Destination getDestination();
 
     @BeforeClass
     public static void deleteAllExtensions() {
-        assumeHasAzureFunctionUrl();
-        AZURE_FUNCTION_URL = azureFunctionUrl();
         PagedQueryResult<Extension> results = client().executeBlocking(ExtensionQuery.of());
         results.getResults()
                 .stream()
@@ -37,12 +33,11 @@ public class ExtensionUpdateCommandIntegrationTest extends IntegrationTest {
                 .forEach(client()::executeBlocking);
     }
 
-
     @Test
     public void testExtensionForCart(){
         ExtensionResourceType extensionResourceType = ExtensionResourceType.CART;
         final List<Trigger> triggers = asList(TriggerBuilder.of(extensionResourceType, asList(TriggerType.CREATE, TriggerType.UPDATE)).build());
-        final Destination destination = HttpDestinationBuilder.of(AZURE_FUNCTION_URL, AzureFunctionsAuthenticationBuilder.of(randomKey()).build()).build();
+        final Destination destination = getDestination();
         withExtensionDraft(client(), ExtensionDraftBuilder.of(randomKey(), destination, triggers).build(), extension -> {
             assertThat(extension.getTriggers()).hasSize(1);
             assertThat(extension.getTriggers().get(0).getResourceTypeId()).isEqualByComparingTo(extensionResourceType);
@@ -54,7 +49,7 @@ public class ExtensionUpdateCommandIntegrationTest extends IntegrationTest {
     public void testExtensionForCustomer(){
         ExtensionResourceType extensionResourceType = ExtensionResourceType.CUSTOMER;
         final List<Trigger> triggers = asList(TriggerBuilder.of(extensionResourceType, asList(TriggerType.CREATE, TriggerType.UPDATE)).build());
-        final Destination destination = HttpDestinationBuilder.of(AZURE_FUNCTION_URL, AzureFunctionsAuthenticationBuilder.of(randomKey()).build()).build();
+        final Destination destination =getDestination();
         withExtensionDraft(client(), ExtensionDraftBuilder.of(randomKey(), destination, triggers).build(), extension -> {
             assertThat(extension.getTriggers()).hasSize(1);
             assertThat(extension.getTriggers().get(0).getResourceTypeId()).isEqualByComparingTo(extensionResourceType);
@@ -66,7 +61,7 @@ public class ExtensionUpdateCommandIntegrationTest extends IntegrationTest {
     public void testExtensionForPayment(){
         ExtensionResourceType extensionResourceType = ExtensionResourceType.PAYMENT;
         final List<Trigger> triggers = asList(TriggerBuilder.of(extensionResourceType, asList(TriggerType.CREATE, TriggerType.UPDATE)).build());
-        final Destination destination = HttpDestinationBuilder.of(AZURE_FUNCTION_URL, AzureFunctionsAuthenticationBuilder.of(randomKey()).build()).build();
+        final Destination destination =getDestination();
         withExtensionDraft(client(), ExtensionDraftBuilder.of(randomKey(), destination, triggers).build(), extension -> {
             assertThat(extension.getTriggers()).hasSize(1);
             assertThat(extension.getTriggers().get(0).getResourceTypeId()).isEqualByComparingTo(extensionResourceType);
@@ -78,7 +73,7 @@ public class ExtensionUpdateCommandIntegrationTest extends IntegrationTest {
     public void testExtensionForOrder(){
         ExtensionResourceType extensionResourceType = ExtensionResourceType.ORDER;
         final List<Trigger> triggers = asList(TriggerBuilder.of(extensionResourceType, asList(TriggerType.CREATE, TriggerType.UPDATE)).build());
-        final Destination destination = HttpDestinationBuilder.of(AZURE_FUNCTION_URL, AzureFunctionsAuthenticationBuilder.of(randomKey()).build()).build();
+        final Destination destination =getDestination();
         withExtensionDraft(client(), ExtensionDraftBuilder.of(randomKey(), destination, triggers).build(), extension -> {
             assertThat(extension.getTriggers()).hasSize(1);
             assertThat(extension.getTriggers().get(0).getResourceTypeId()).isEqualByComparingTo(extensionResourceType);
@@ -117,7 +112,7 @@ public class ExtensionUpdateCommandIntegrationTest extends IntegrationTest {
     public void changeDestination(){
 
         withExtension(client(), extension -> {
-            Destination destination = HttpDestinationBuilder.of(AZURE_FUNCTION_URL, AzureFunctionsAuthenticationBuilder.of(randomKey()).build()).build();
+            Destination destination =getDestination();
             Extension updatedExtension = client().executeBlocking(ExtensionUpdateCommand.of(extension, ChangeDestination.of(destination)));
             assertThat(updatedExtension.getDestination()).isEqualTo(destination);
             return updatedExtension;
@@ -136,7 +131,7 @@ public class ExtensionUpdateCommandIntegrationTest extends IntegrationTest {
     public void withExtension(final BlockingSphereClient client,final UnaryOperator<Extension> mapper) {
 
         List<Trigger> triggers = asList(TriggerBuilder.of(ExtensionResourceType.CART, asList(TriggerType.CREATE, TriggerType.UPDATE)).build());
-        Destination destination = HttpDestinationBuilder.of(AZURE_FUNCTION_URL, AzureFunctionsAuthenticationBuilder.of(randomKey()).build()).build();
+        Destination destination =getDestination();
         withExtensionDraft(client, ExtensionDraftBuilder.of(randomKey(), destination, triggers).build(), mapper);
 
     }

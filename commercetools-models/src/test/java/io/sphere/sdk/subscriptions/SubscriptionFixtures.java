@@ -30,6 +30,9 @@ public class SubscriptionFixtures {
 
     private final static String AZUREFUNCTION_URL = "AZUREFUNCTION_URL";
 
+    private final static String AWS_FUNCTION_ARN = "AWS_FUNCTION_ARN";
+
+
     private final static String AZURE_SERVICE_BUS_CONNECTION_STRING_ENV = "AZURE_SERVICE_BUS_CONNECTION_STRING_ENV";
 
     public static SubscriptionDraftBuilder ironMqSubscriptionDraftBuilder() {
@@ -81,6 +84,14 @@ public class SubscriptionFixtures {
 
 
     /**
+     * Check if azure url is defined
+     */
+    public static void assumeHasAWSLambdaArn(){
+        final String arn = awsLambdaArn();
+        assumeNotNull(arn);
+    }
+
+    /**
      *
      * @return The azure function used to validate the resource lifecycle (create, delete ....)
      * @see io.sphere.sdk.extensions.Extension
@@ -88,6 +99,16 @@ public class SubscriptionFixtures {
     public static String azureFunctionUrl(){
         final String ironMqUriEnv = System.getenv(AZUREFUNCTION_URL);
         return ironMqUriEnv;
+    }
+
+    /**
+     *
+     * @return The aws lambda function used to validate the resource lifecycle (create, delete ....)
+     * @see io.sphere.sdk.extensions.Extension
+     */
+    public static String awsLambdaArn(){
+        final String awsLambdaArn = System.getenv(AWS_FUNCTION_ARN);
+        return awsLambdaArn;
     }
 
 

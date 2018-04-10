@@ -63,6 +63,7 @@ import io.sphere.sdk.payments.messages.PaymentStatusInterfaceCodeSetMessage;
 import io.sphere.sdk.payments.messages.PaymentTransactionStateChangedMessage;
 import io.sphere.sdk.productdiscounts.ProductDiscount;
 import io.sphere.sdk.productdiscounts.ProductDiscountDraftBuilder;
+import io.sphere.sdk.productdiscounts.queries.MatchingProductDiscountGet;
 import io.sphere.sdk.productdiscounts.queries.ProductDiscountByIdGet;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.attributes.Attribute;
@@ -148,6 +149,8 @@ import java.util.function.Function;
  supported now in our SDK.
  </li>
  <li class=change-in-release>{@link ItemShippingDetails#getTargets()} returns {@link Map<String, Long>} instead of {@link Map<String, Integer>}</li>
+ <li class=new-in-release>add support for Aws lambda based extension via {@link io.sphere.sdk.extensions.AWSLambdaDestination}</li>
+ <li class=removed-in-release> {@link MatchingProductDiscountGet} Query to lockup matching product discount.</li>
  <li class=fixed-in-release>Our javadoc now contains documentation for our generated classes too.</li>
  <li class=change-in-release>Correct typo on {@link SetAssetCustomType#ofSkuAndAssetKey(String, String, CustomFieldsDraft)}, previously named ofSkuAndAssetKeyAndAssetKey</li>
  <li class=change-in-release>Added support for Order extensions {@link ExtensionResourceType#ORDER}</li>
