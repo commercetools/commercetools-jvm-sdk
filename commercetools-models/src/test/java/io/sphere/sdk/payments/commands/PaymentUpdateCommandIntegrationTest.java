@@ -56,6 +56,18 @@ public class PaymentUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void setAnonymousId() {
+        withPayment(client(), payment -> {
+            final String anonymousId = randomString();
+            final Payment updatedPayment = client().executeBlocking(PaymentUpdateCommand.of(payment, SetAnonymousId.of(anonymousId)));
+
+            assertThat(updatedPayment.getAnonymousId()).isEqualTo(anonymousId);
+
+            return updatedPayment;
+        });
+    }
+
+    @Test
     public void setExternalId() {
             withPayment(client(), payment -> {
                 final String externalId = randomKey();

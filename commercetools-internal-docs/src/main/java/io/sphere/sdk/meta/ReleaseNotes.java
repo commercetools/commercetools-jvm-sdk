@@ -143,6 +143,8 @@ import java.util.function.Function;
  <li class=new-in-release>add {@link SphereJsonUtils#configureObjectMapper(ObjectMapper)} to configure
  an existing jackson object mapper for usage with our JVM SDK
  </li>
+ <li class=new-in-release>added {@link Payment#getAnonymousId()}, {@link PaymentDraft#getAnonymousId()}
+ and corresponding update action {@link io.sphere.sdk.payments.commands.updateactions.SetAnonymousId}</li>
  <li class=new-in-release>
  new ShippingDetails actions for order :
      {@link io.sphere.sdk.orders.commands.updateactions.SetLineItemShippingDetails},
