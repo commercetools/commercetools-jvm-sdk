@@ -93,4 +93,12 @@ public interface PaymentDraft extends CustomDraft {
      */
     @Nullable
     String getKey();
+
+    /**
+     * Identifies payments belonging to an anonymous session (the customer has not signed up/in yet).
+     *
+     * @return the anonymous id of this payment
+     */
+    @Nullable
+    String getAnonymousId();
 }

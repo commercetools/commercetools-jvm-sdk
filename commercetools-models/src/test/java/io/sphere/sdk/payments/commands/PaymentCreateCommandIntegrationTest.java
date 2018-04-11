@@ -25,6 +25,30 @@ import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PaymentCreateCommandIntegrationTest extends IntegrationTest {
+
+    @Test
+    public void withAnonymousId() {
+        CustomerFixtures.withCustomerAndCart(client(), ((customer, cart) -> {
+            final MonetaryAmount totalAmount = cart.getTotalPrice();
+            final PaymentMethodInfo paymentMethodInfo = PaymentMethodInfoBuilder.of()
+                    .paymentInterface("payment interface X")
+                    .method("CREDIT_CARD")
+                    .build();
+
+            final String anonymousId = randomString();
+            final PaymentDraftBuilder paymentDraftBuilder = PaymentDraftBuilder.of(totalAmount)
+                    .paymentMethodInfo(paymentMethodInfo)
+                    .anonymousId(anonymousId);
+            final Payment payment = client().executeBlocking(PaymentCreateCommand.of(paymentDraftBuilder.build()));
+
+            assertThat(payment.getAnonymousId()).isEqualTo(anonymousId);
+            assertThat(payment.getPaymentMethodInfo()).isEqualTo(paymentMethodInfo);
+            assertThat(payment.getAmountPlanned()).isEqualTo(totalAmount);
+
+            client().executeBlocking(PaymentDeleteCommand.of(payment));
+        }));
+    }
+
     @Test
     public void payingPerCreditCart() {
         CustomerFixtures.withCustomerAndCart(client(), ((customer, cart) -> {
