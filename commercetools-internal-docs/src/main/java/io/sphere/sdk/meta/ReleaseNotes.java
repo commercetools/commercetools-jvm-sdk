@@ -139,6 +139,8 @@ import java.util.function.Function;
  
  <h3 class=released-version id="v1_31_0">1.31.0 </h3>
  <ul>
+ <li class=new-in-release>added {@link Payment#getAnonymousId()}, {@link PaymentDraft#getAnonymousId()}
+ and corresponding update action {@link io.sphere.sdk.payments.commands.updateactions.SetAnonymousId}</li>
  <li class=new-in-release>
  new ShippingDetails actions for order :
      {@link io.sphere.sdk.orders.commands.updateactions.SetLineItemShippingDetails},
