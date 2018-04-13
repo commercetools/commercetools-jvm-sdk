@@ -21,11 +21,10 @@ import java.util.Set;
 
 /**
  * Public utility class to work with JSON from the commercetools platform.
- *
+ * <p>
  * <p>If an error occurs, the {@link JsonException} (a {@link RuntimeException}) will be thrown:</p>
- *
+ * <p>
  * {@include.example io.sphere.sdk.json.SphereJsonUtilsTest#exceptionHandling()}
- *
  */
 public final class SphereJsonUtils {
     private static final ObjectMapper objectMapper = newObjectMapper();
@@ -39,7 +38,32 @@ public final class SphereJsonUtils {
      * @return new object mapper
      */
     public static ObjectMapper newObjectMapper() {
-        return new ObjectMapper()
+        final ObjectMapper objectMapper = new ObjectMapper();
+        return configureObjectMapper(objectMapper);
+    }
+
+    /**
+     * Configures an existing external Jackson {@link ObjectMapper} with all modules and settings required
+     * to serialize and deserialize according to JVM SDK conventions and capabilities:
+     * <ul>
+     * <li>Jackson Parameter Names Module (requires Java compiler flag -parameters)</li>
+     * <li>Jackson JavaTime Module</li>
+     * <li>Jackson config: do not fail on unknown properties</li>
+     * <li>Jackson config: do not fail on empty beans</li>
+     * <li>Jackson config: do not use getters as setters</li>
+     * <li>Jackson config: do not serialize null value properties</li>
+     * <li>Serialize LinkedHashSet as Set</li>
+     * <li>commercetools LocalizedString</li>
+     * <li>commercetools Time, Date, DateTime</li>
+     * <li>commercetools Money for Java MonetaryAmount</li>
+     * <li>commercetools Enum</li>
+     * </ul>
+     *
+     * @param objectMapper the object mapper to configure
+     * @return the given object mapper with additional configuration and modules
+     */
+    public static ObjectMapper configureObjectMapper(final ObjectMapper objectMapper) {
+        return objectMapper
                 .registerModule(new LocaleModule())
                 .registerModule(new ParameterNamesModule())
                 .registerModule(new JavaTimeModule())
@@ -56,7 +80,7 @@ public final class SphereJsonUtils {
 
     /**
      * Converts a commercetools platform Java object to JSON as String (one liner).
-     *
+     * <p>
      * {@include.example io.sphere.sdk.json.SphereJsonUtilsTest#toJsonString()}
      *
      * @param value the object to convert
@@ -68,7 +92,7 @@ public final class SphereJsonUtils {
 
     /**
      * Converts a commercetools platform Java object to JSON as String (pretty).
-     *
+     * <p>
      * {@include.example io.sphere.sdk.json.SphereJsonUtilsTest#toPrettyJsonString()}
      *
      * @param value the object to convert
@@ -82,7 +106,7 @@ public final class SphereJsonUtils {
      * Converts a commercetools platform Java object to JSON as {@link JsonNode}.
      * <p>If {@code value} is of type String and contains JSON data, that will be ignored, {@code value} will be treated as just any String.
      * If you want to parse a JSON String to a JsonNode use {@link SphereJsonUtils#parse(java.lang.String)} instead.</p>
-     *
+     * <p>
      * {@include.example io.sphere.sdk.json.SphereJsonUtilsTest#toJsonNode()}
      *
      * @param value the object to convert
@@ -94,7 +118,7 @@ public final class SphereJsonUtils {
 
     /**
      * Parses a String containing JSON data and produces a {@link JsonNode}.
-     *
+     * <p>
      * {@include.example io.sphere.sdk.json.SphereJsonUtilsTest#parse()}
      *
      * @param jsonAsString json data
@@ -114,8 +138,9 @@ public final class SphereJsonUtils {
         return executing(() -> objectMapper.readTree(jsonAsBytes));
     }
 
-    /** Pretty prints a given JSON string.
-     *
+    /**
+     * Pretty prints a given JSON string.
+     * <p>
      * {@include.example io.sphere.sdk.json.SphereJsonUtilsTest#prettyPrint()}
      *
      * @param json JSON code as String which should be formatted
@@ -138,9 +163,9 @@ public final class SphereJsonUtils {
     /**
      * Reads a UTF-8 JSON text file from the classpath of the current thread and transforms it into a Java object.
      *
-     * @param resourcePath the path to the resource. Example: If the file is located in "src/test/resources/foo/bar/product.json" then the path should be "foo/bar/product.json"
+     * @param resourcePath  the path to the resource. Example: If the file is located in "src/test/resources/foo/bar/product.json" then the path should be "foo/bar/product.json"
      * @param typeReference the full generic type information about the object to create
-     * @param <T> the type of the result
+     * @param <T>           the type of the result
      * @return the created objected
      */
     public static <T> T readObjectFromResource(final String resourcePath, final TypeReference<T> typeReference) {
@@ -164,12 +189,12 @@ public final class SphereJsonUtils {
 
     /**
      * Reads a Java object from JSON data (String).
-     *
+     * <p>
      * {@include.example io.sphere.sdk.json.SphereJsonUtilsTest#readObjectFromJsonString()}
      *
-     * @param jsonAsString the JSON data which represents sth. of type {@code <T>}
+     * @param jsonAsString  the JSON data which represents sth. of type {@code <T>}
      * @param typeReference the full generic type information about the object to create
-     * @param <T> the type of the result
+     * @param <T>           the type of the result
      * @return the created objected
      */
     public static <T> T readObject(final String jsonAsString, final TypeReference<T> typeReference) {
@@ -182,12 +207,12 @@ public final class SphereJsonUtils {
 
     /**
      * Reads a Java object from JsonNode data.
-     *
+     * <p>
      * {@include.example io.sphere.sdk.json.SphereJsonUtilsTest#readObjectFromJsonNode()}
      *
-     * @param jsonNode the JSON data which represents sth. of type {@code <T>}
+     * @param jsonNode      the JSON data which represents sth. of type {@code <T>}
      * @param typeReference the full generic type information about the object to create
-     * @param <T> the type of the result
+     * @param <T>           the type of the result
      * @return the created objected
      */
     public static <T> T readObject(final JsonNode jsonNode, final TypeReference<T> typeReference) {
@@ -197,12 +222,12 @@ public final class SphereJsonUtils {
 
     /**
      * Reads a Java object from JsonNode data.
-     *
+     * <p>
      * {@include.example io.sphere.sdk.json.SphereJsonUtilsTest#readObjectFromJsonNodeWithClass()}
      *
      * @param jsonNode the JSON data which represents sth. of type {@code <T>}
-     * @param clazz the class of the type to create
-     * @param <T> the type of the result
+     * @param clazz    the class of the type to create
+     * @param <T>      the type of the result
      * @return the created objected
      */
     public static <T> T readObject(final JsonNode jsonNode, final Class<T> clazz) {
@@ -215,12 +240,12 @@ public final class SphereJsonUtils {
 
     /**
      * Reads a Java object from JSON string data encoded as UTF-8.
-     *
+     * <p>
      * {@include.example io.sphere.sdk.json.SphereJsonUtilsTest#readObjectFromJsonNodeWithClass()}
      *
-     * @param jsonAsBytes the JSON data which represents sth. of type {@code <T>}
+     * @param jsonAsBytes   the JSON data which represents sth. of type {@code <T>}
      * @param typeReference the full generic type information about the object to create
-     * @param <T> the type of the result
+     * @param <T>           the type of the result
      * @return the created objected
      */
     public static <T> T readObject(final byte[] jsonAsBytes, final TypeReference<T> typeReference) {
@@ -233,7 +258,7 @@ public final class SphereJsonUtils {
 
     /**
      * Creates a new {@link ObjectNode} created by the commercetools platform object mapper.
-     *
+     * <p>
      * {@include.example io.sphere.sdk.json.SphereJsonUtilsTest#readObjectFromJsonNodeWithClass()}
      *
      * @return new node

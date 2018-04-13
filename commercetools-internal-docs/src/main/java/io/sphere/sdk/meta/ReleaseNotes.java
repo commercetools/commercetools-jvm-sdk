@@ -1,5 +1,6 @@
 package io.sphere.sdk.meta;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.sphere.sdk.cartdiscounts.*;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.carts.commands.updateactions.SetShippingMethod;
@@ -137,8 +138,11 @@ import java.util.function.Function;
  </ul>
  -->
  
- <h3 class=released-version id="v1_31_0">1.31.0 </h3>
+ <h3 class=released-version id="v1_31_0">1.31.0 (12.04.2018)</h3>
  <ul>
+ <li class=new-in-release>add {@link SphereJsonUtils#configureObjectMapper(ObjectMapper)} to configure
+ an existing jackson object mapper for usage with our JVM SDK
+ </li>
  <li class=new-in-release>added {@link Payment#getAnonymousId()}, {@link PaymentDraft#getAnonymousId()}
  and corresponding update action {@link io.sphere.sdk.payments.commands.updateactions.SetAnonymousId}</li>
  <li class=new-in-release>
