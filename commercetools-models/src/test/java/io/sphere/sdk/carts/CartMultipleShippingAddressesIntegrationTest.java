@@ -148,6 +148,26 @@ public class CartMultipleShippingAddressesIntegrationTest extends IntegrationTes
         });
     }
 
+    @Test
+    public void testRemoveLineItemDetails(){
+        withFilledCartAndMultipleAddresses(client(), cart -> {
+            final LineItem firstLineItem = cart.getLineItems().get(0);
+            final List<Address> addresses = cart.getItemShippingAddresses();
+            final Address firstAddress = addresses.get(0);
+            final String firstAddressKey = firstAddress.getKey();
+            final ItemShippingDetailsDraft itemShippingDetailsDraft = ItemShippingDetailsDraftBuilder.of(Arrays.asList(ItemShippingTargetBuilder.of(firstAddressKey, 2L).build())).build();
+            final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, SetLineItemShippingDetails.of(firstLineItem.getId(), itemShippingDetailsDraft)));
+            final LineItem updatedLineItem = updatedCart.getLineItems().stream().filter(lineItem -> lineItem.getId().equals(firstLineItem.getId())).findAny().get();
+            assertThat(updatedLineItem.getShippingDetails().getTargetsMap().get(firstAddressKey)).isNotNull();
+
+            final Cart updatedCart2 = client().executeBlocking(CartUpdateCommand.of(updatedCart, RemoveLineItem.of(firstLineItem.getId(), 1L).withShippingDetailsToRemove(itemShippingDetailsDraft)));
+            final LineItem updatedLineItem2 = updatedCart2.getLineItems().stream().filter(lineItem -> lineItem.getId().equals(firstLineItem.getId())).findAny().get();
+            //Check if line item details is removed
+            assertThat(updatedLineItem2.getShippingDetails().getTargetsMap().get(firstAddressKey)).isNull();
+
+        });
+    }
+
 
     public void withFilledCartAndMultipleAddresses(final BlockingSphereClient client, final Consumer<Cart> f) {
 
