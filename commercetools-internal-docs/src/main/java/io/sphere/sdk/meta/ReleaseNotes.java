@@ -3,6 +3,7 @@ package io.sphere.sdk.meta;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.sphere.sdk.cartdiscounts.*;
 import io.sphere.sdk.carts.*;
+import io.sphere.sdk.carts.commands.updateactions.RemoveLineItem;
 import io.sphere.sdk.carts.commands.updateactions.SetShippingMethod;
 import io.sphere.sdk.carts.expansion.CartExpansionModel;
 import io.sphere.sdk.carts.expansion.ShippingInfoExpansionModel;
@@ -137,7 +138,11 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
- 
+ <h3 class=released-version id="v1_32_0">1.32.0</h3>
+ <ul>
+ <li class=change-in-release>Added field {@link RemoveLineItem#getShippingDetailsToRemove()} to {@link RemoveLineItem}</li>
+ </ul>
+
  <h3 class=released-version id="v1_31_0">1.31.0 (12.04.2018)</h3>
  <ul>
  <li class=new-in-release>add {@link SphereJsonUtils#configureObjectMapper(ObjectMapper)} to configure

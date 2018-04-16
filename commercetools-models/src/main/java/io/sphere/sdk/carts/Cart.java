@@ -149,6 +149,15 @@ public interface Cart extends CartLike<Cart> {
     @Override
     @HasUpdateAction(value = "applyDeltaToLineItemShippingDetailsTargets", fields = {@PropertySpec(name = "lineItemId",type = String.class),@PropertySpec(name = "targetsDelta",type = ItemShippingTarget[].class)})
     @HasUpdateAction(value = "setLineItemShippingDetails", fields = {@PropertySpec(name = "lineItemId",type = String.class),@PropertySpec(name = "shippingDetails",type = ItemShippingDetailsDraft.class)})
+    @HasUpdateAction(value = "removeLineItem", makeAbstract = true,
+            fields = {
+                    @PropertySpec(name = "lineItemId", type = String.class),
+                    @PropertySpec(name = "quantity", type = Long.class,isOptional = true),
+                    @PropertySpec(name = "externalPrice", type = MonetaryAmount.class,isOptional = true),
+                    @PropertySpec(name = "externalTotalPrice", type = ExternalLineItemTotalPrice.class,isOptional = true),
+                    @PropertySpec(name = "shippingDetailsToRemove", type = ItemShippingDetailsDraft .class,isOptional = true)
+            }
+    )
     @QueryModelHint(type = "LineItemCollectionQueryModel<Cart>")
     List<LineItem> getLineItems();
 
