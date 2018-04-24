@@ -142,6 +142,7 @@ import java.util.function.Function;
  <ul>
  <li class=change-in-release>Added field {@link RemoveLineItem#getShippingDetailsToRemove()} to {@link RemoveLineItem}</li>
  <li class=change-in-release>update jackson to 2.9.5</li>
+ <li class=change-in-release>Update org.asynchttpclient:async-http-client from version 2.0.38 to 2.4.5</li>
  </ul>
 
  <h3 class=released-version id="v1_31_0">1.31.0 (12.04.2018)</h3>
