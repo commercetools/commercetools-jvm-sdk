@@ -7,6 +7,7 @@ import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.models.ResourceIdentifier;
 
 import javax.annotation.Nullable;
+import java.util.Optional;
 
 /**
  * Sets the customer group for a customer.
@@ -21,19 +22,16 @@ public final class SetCustomerGroup extends UpdateActionImpl<Customer> {
     @Nullable
     private final ResourceIdentifier<CustomerGroup> customerGroup;
 
-    private SetCustomerGroup(final ResourceIdentifier<CustomerGroup> customerGroup) {
+    private SetCustomerGroup(final Referenceable<CustomerGroup> customerGroup) {
         super("setCustomerGroup");
-        this.customerGroup = customerGroup;
+        this.customerGroup = Optional.ofNullable(customerGroup)
+                .map(x -> x.toReference().filled(null))
+                .orElse(null);
     }
 
     public static SetCustomerGroup of(@Nullable final Referenceable<CustomerGroup> customerGroup) {
-        return new SetCustomerGroup(customerGroup.toReference());
-    }
-
-    public static SetCustomerGroup of(@Nullable final ResourceIdentifier<CustomerGroup> customerGroup) {
         return new SetCustomerGroup(customerGroup);
     }
-
 
     @Nullable
     public ResourceIdentifier<CustomerGroup> getCustomerGroup() {
