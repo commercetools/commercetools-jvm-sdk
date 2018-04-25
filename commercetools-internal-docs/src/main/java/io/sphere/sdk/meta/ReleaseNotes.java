@@ -142,6 +142,7 @@ import java.util.function.Function;
  <ul>
  <li class=change-in-release>Added field {@link RemoveLineItem#getShippingDetailsToRemove()} to {@link RemoveLineItem}</li>
  <li class=change-in-release>update jackson to 2.9.5</li>
+ <li class=change-in-release>Changed return type of {@link Cart#getCustomerGroup()} and {@link Customer#getCustomerGroup()} from {@link Reference<CustomerGroup>} to {@link ResourceIdentifier<CustomerGroup>}</li>
  </ul>
 
  <h3 class=released-version id="v1_31_0">1.31.0 (12.04.2018)</h3>
