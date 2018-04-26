@@ -3,8 +3,8 @@ package io.sphere.sdk.customers.commands.updateactions;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.customers.Customer;
-import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.models.ResourceIdentifier;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
@@ -20,7 +20,7 @@ import java.util.Optional;
  */
 public final class SetCustomerGroup extends UpdateActionImpl<Customer> {
     @Nullable
-    private final Reference<CustomerGroup> customerGroup;
+    private final ResourceIdentifier<CustomerGroup> customerGroup;
 
     private SetCustomerGroup(final Referenceable<CustomerGroup> customerGroup) {
         super("setCustomerGroup");
@@ -34,7 +34,7 @@ public final class SetCustomerGroup extends UpdateActionImpl<Customer> {
     }
 
     @Nullable
-    public Reference<CustomerGroup> getCustomerGroup() {
+    public ResourceIdentifier<CustomerGroup> getCustomerGroup() {
         return customerGroup;
     }
 }
