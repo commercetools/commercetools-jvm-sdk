@@ -105,6 +105,6 @@ public abstract class HttpClientAdapterTest {
         client.close();
         final String receivedHttpHeadersAndBody = future.join();
         LoggerFactory.getLogger(HttpClientAdapterTest.class).info(receivedHttpHeadersAndBody);
-        assertThat(receivedHttpHeadersAndBody).contains("Content-Length: " + length);
+        assertThat(receivedHttpHeadersAndBody).containsIgnoringCase("Content-Length: " + length);
     }
 }
