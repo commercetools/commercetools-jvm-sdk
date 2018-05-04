@@ -17,8 +17,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MoneyTest {
     public static final MonetaryAmount MONEY = MoneyImpl.of(new BigDecimal("12345.67"), EUR);
     public static final MonetaryAmount MONEY_YEN = MoneyImpl.of(new BigDecimal("12345"), "JPY");
-    public static final String JSON = "{\"centAmount\":1234567,\"currencyCode\":\"EUR\"}";
-    public static final String JSON_YEN = "{\"centAmount\":12345,\"currencyCode\":\"JPY\"}";
+    public static final String JSON = "{\"type\":\"centPrecision\",\"centAmount\":1234567,\"currencyCode\":\"EUR\"}";
+    public static final String JSON_YEN = "{\"type\":\"centPrecision\",\"centAmount\":12345,\"currencyCode\":\"JPY\"}";
 
     @Test
     public void serializeToJson() throws Exception {
@@ -32,19 +32,19 @@ public class MoneyTest {
 
     @Test
     public void serializeWithMorePrecision() throws Exception {
-        final String json = "{\"centAmount\":1234568,\"currencyCode\":\"EUR\"}";//rounds up
+        final String json = "{\"type\":\"centPrecision\",\"centAmount\":1234568,\"currencyCode\":\"EUR\"}";//rounds up
         checkSerialization(MoneyImpl.of(new BigDecimal("12345.6789"), EUR), json);
     }
 
     @Test
     public void serializeWithLessPrecision() throws Exception {
-        checkSerialization(MoneyImpl.of(new BigDecimal("12345.6"), EUR), "{\"centAmount\":1234560,\"currencyCode\":\"EUR\"}");
+        checkSerialization(MoneyImpl.of(new BigDecimal("12345.6"), EUR), "{\"type\":\"centPrecision\",\"centAmount\":1234560,\"currencyCode\":\"EUR\"}");
 
     }
 
     @Test
     public void serializeWholeEuros() throws Exception {
-        checkSerialization(MoneyImpl.of(new BigDecimal("12345"), EUR), "{\"centAmount\":1234500,\"currencyCode\":\"EUR\"}");
+        checkSerialization(MoneyImpl.of(new BigDecimal("12345"), EUR), "{\"type\":\"centPrecision\",\"centAmount\":1234500,\"currencyCode\":\"EUR\"}");
     }
 
     @Test

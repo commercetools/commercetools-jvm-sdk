@@ -2,6 +2,9 @@ package io.sphere.sdk.json;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.neovisionaries.i18n.CurrencyCode;
 import org.javamoney.moneta.internal.DefaultRoundingProvider;
 
 import javax.money.CurrencyUnit;
@@ -14,29 +17,30 @@ import java.util.Objects;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
-final class MoneyRepresentation {
+
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type",
+        defaultImpl = CentPrecisionMoneyRepresentation.class)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = CentPrecisionMoneyRepresentation.class, name = "centPrecision"),
+        @JsonSubTypes.Type(value = HighPrecisionMoneyRepresentation.class, name = "highPrecision")
+})
+abstract class MoneyRepresentation {
+
+
     private final Long centAmount;
     private final String currencyCode;
 
     private static final DefaultRoundingProvider ROUNDING_PROVIDER = new DefaultRoundingProvider();
 
-    @JsonCreator
-    private MoneyRepresentation(final Long centAmount, final String currencyCode) {
+    protected MoneyRepresentation(final Long centAmount, final String currencyCode) {
         this.centAmount = centAmount;
         this.currencyCode = currencyCode;
     }
 
-    /**
-     * Creates a new Money instance.
-     * Money can't represent cent fractions. The value will be rounded to nearest cent value using RoundingMode.HALF_EVEN.
-     * @param monetaryAmount the amount with currency to transform
-     */
-    @JsonIgnore
-    public MoneyRepresentation(final MonetaryAmount monetaryAmount) {
-        this(amountToCents(monetaryAmount), requireValidCurrencyCode(monetaryAmount.getCurrency().getCurrencyCode()));
-    }
-
-    public long getCentAmount() {
+    public Long getCentAmount() {
         return centAmount;
     }
 
@@ -47,22 +51,23 @@ final class MoneyRepresentation {
         return currencyCode;
     }
 
-    private static String requireValidCurrencyCode(final String currencyCode) {
+    protected static String requireValidCurrencyCode(final String currencyCode) {
         if (isEmpty(currencyCode))
             throw new IllegalArgumentException("Money.currencyCode can't be empty.");
         return currencyCode;
     }
 
-    public static long amountToCents(final MonetaryAmount monetaryAmount) {
+    protected static long amountToCents(final MonetaryAmount monetaryAmount) {
         final MonetaryRounding ROUNDING =
                 ROUNDING_PROVIDER.getRounding(RoundingQueryBuilder.of().setRoundingName("default").setCurrency(monetaryAmount.getCurrency())
-                .build());
+                        .build());
         return monetaryAmount
                 .with(ROUNDING)
                 .query(MoneyRepresentation::queryFrom);
     }
 
-    private static Long queryFrom(MonetaryAmount amount) {
+
+    protected static Long queryFrom(MonetaryAmount amount) {
         Objects.requireNonNull(amount, "Amount required.");
         BigDecimal number = amount.getNumber().numberValue(BigDecimal.class);
         CurrencyUnit cur = amount.getCurrency();
@@ -73,4 +78,5 @@ final class MoneyRepresentation {
         number = number.setScale(scale, RoundingMode.DOWN);
         return number.movePointRight(number.scale()).longValueExact();
     }
+
 }
