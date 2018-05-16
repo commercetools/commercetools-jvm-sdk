@@ -127,7 +127,8 @@ import static java.util.stream.Collectors.toList;
         updateWith = "key")
 @HasDeleteCommand(
         javadocSummary = "Deletes a customer.", includeExamples = "io.sphere.sdk.customers.commands.CustomerDeleteCommandIntegrationTest#execution()",
-        deleteWith = "key"
+        deleteWith = "key",
+        canEraseUsersData = true
 )
 @HasQueryModel(additionalContents = {
         "StringQuerySortingModel<Customer> lowercaseEmail();",

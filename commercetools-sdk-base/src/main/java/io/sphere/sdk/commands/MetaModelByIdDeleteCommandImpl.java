@@ -5,8 +5,8 @@ import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.JsonEndpoint;
 import io.sphere.sdk.expansion.ExpansionDslUtils;
 import io.sphere.sdk.expansion.ExpansionPath;
-import io.sphere.sdk.expansion.MetaModelExpansionDslExpansionModelRead;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
+import io.sphere.sdk.expansion.MetaModelExpansionDslExpansionModelRead;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.UrlQueryBuilder;
 import io.sphere.sdk.models.ResourceView;
@@ -28,27 +28,33 @@ import static java.util.Objects.requireNonNull;
  */
 public abstract class MetaModelByIdDeleteCommandImpl<T extends ResourceView<T, T>, C, E> extends CommandImpl<T> implements MetaModelExpansionDslExpansionModelRead<T, C, E>, DeleteCommand<T> {
     final Versioned<T> versioned;
+    final boolean eraseData;
     final String endpoint;
     final JavaType javaType;
     final E expansionModel;
     final List<ExpansionPath<T>> expansionPaths;
     final Function<MetaModelByIdDeleteCommandBuilder<T, C, E>, C> creationFunction;
 
-    protected MetaModelByIdDeleteCommandImpl(final Versioned<T> versioned, final JavaType javaType, final String endpoint, final E expansionModel, final List<ExpansionPath<T>> expansionPaths, final Function<MetaModelByIdDeleteCommandBuilder<T, C, E>, C> creationFunction) {
+    protected MetaModelByIdDeleteCommandImpl(final Versioned<T> versioned,final boolean eraseData, final JavaType javaType, final String endpoint, final E expansionModel, final List<ExpansionPath<T>> expansionPaths, final Function<MetaModelByIdDeleteCommandBuilder<T, C, E>, C> creationFunction) {
         this.creationFunction = requireNonNull(creationFunction);
         this.expansionModel = requireNonNull(expansionModel);
         this.expansionPaths = requireNonNull(expansionPaths);
         this.versioned = requireNonNull(versioned);
         this.endpoint = requireNonNull(endpoint);
         this.javaType = requireNonNull(javaType);
+        this.eraseData = eraseData;
     }
 
     protected MetaModelByIdDeleteCommandImpl(final Versioned<T> versioned, final JsonEndpoint<T> endpoint, final E expansionModel, final Function<MetaModelByIdDeleteCommandBuilder<T, C, E>, C> creationFunction) {
-        this(versioned, convertToJavaType(endpoint.typeReference()), endpoint.endpoint(), expansionModel, Collections.emptyList(), creationFunction);
+        this(versioned, false, convertToJavaType(endpoint.typeReference()), endpoint.endpoint(), expansionModel, Collections.emptyList(), creationFunction);
+    }
+
+    protected MetaModelByIdDeleteCommandImpl(final Versioned<T> versioned, final boolean eraseData, final JsonEndpoint<T> endpoint, final E expansionModel, final Function<MetaModelByIdDeleteCommandBuilder<T, C, E>, C> creationFunction) {
+        this(versioned,eraseData, convertToJavaType(endpoint.typeReference()), endpoint.endpoint(), expansionModel, Collections.emptyList(), creationFunction);
     }
 
     protected MetaModelByIdDeleteCommandImpl(final MetaModelByIdDeleteCommandBuilder<T, C, E> builder) {
-        this(builder.versioned, builder.javaType, builder.endpoint, builder.expansionModel, builder.expansionPaths, builder.creationFunction);
+        this(builder.versioned, builder.eraseData, builder.javaType, builder.endpoint, builder.expansionModel, builder.expansionPaths, builder.creationFunction);
     }
 
     @Override
@@ -60,7 +66,9 @@ public abstract class MetaModelByIdDeleteCommandImpl<T extends ResourceView<T, T
         final UrlQueryBuilder builder = UrlQueryBuilder.of();
         expansionPaths().forEach(path -> builder.add("expand", path.toSphereExpand(), true));
         final String expansionPathParameters = builder.build();
-        return HttpRequestIntent.of(HttpMethod.DELETE, baseEndpointWithoutId + "/" + versioned.getId() + "?version=" + versioned.getVersion() + (expansionPathParameters.isEmpty() ? "" : "&" + expansionPathParameters));
+        return HttpRequestIntent.of(HttpMethod.DELETE, baseEndpointWithoutId + "/" + versioned.getId() + "?version=" + versioned.getVersion()
+                + (expansionPathParameters.isEmpty() ? "" : "&" + expansionPathParameters)
+                + (eraseData ? "&dataErasure=true" : ""));
     }
 
     @Override

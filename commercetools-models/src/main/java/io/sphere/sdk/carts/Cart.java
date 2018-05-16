@@ -39,7 +39,7 @@ import java.util.List;
 @HasByIdGetEndpoint(javadocSummary = "Gets a cart by ID.", includeExamples = "io.sphere.sdk.carts.queries.CartByIdGetIntegrationTest#fetchById()")
 @HasCreateCommand(javadocSummary = "Creates a cart.", includeExamples = {"io.sphere.sdk.carts.commands.CartCreateCommandIntegrationTest#execution()", "io.sphere.sdk.carts.commands.CartCreateCommandIntegrationTest#fullExample()"})
 @HasUpdateCommand(javadocSummary = "Updates a cart.")
-@HasDeleteCommand(javadocSummary = "Deletes a cart.")
+@HasDeleteCommand(javadocSummary = "Deletes a cart.", canEraseUsersData = true)
 @HasQueryModel(implBaseClass = "CartLikeQueryModelImpl<Cart>", baseInterfaces = {"CartLikeQueryModel<Cart>"})
 public interface Cart extends CartLike<Cart> {
 

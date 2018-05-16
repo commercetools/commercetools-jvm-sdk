@@ -77,7 +77,7 @@ import java.util.Locale;
 @HasByKeyGetEndpoint
 @HasCreateCommand(includeExamples = "io.sphere.sdk.reviews.commands.ReviewCreateCommandIntegrationTest#createByCode()")
 @HasUpdateCommand(javadocSummary = "Updates a review.", updateWith = "key")
-@HasDeleteCommand(deleteWith = "key")
+@HasDeleteCommand(deleteWith = {"key","id"}, canEraseUsersData = true)
 @HasQueryModel()
 public interface Review extends Resource<Review>, Custom, WithKey {
     /**
