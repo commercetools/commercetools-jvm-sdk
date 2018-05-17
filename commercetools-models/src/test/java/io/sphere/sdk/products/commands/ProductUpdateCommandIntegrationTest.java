@@ -33,6 +33,7 @@ import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.types.CustomFieldsDraft;
 import io.sphere.sdk.types.CustomFieldsDraftBuilder;
 import io.sphere.sdk.types.Type;
+import io.sphere.sdk.utils.HighPrecisionMoneyImpl;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
@@ -815,6 +816,24 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             final Price actualPrice = getFirstPrice(updatedProduct);
             assertThat(PriceDraft.of(actualPrice)).isEqualTo(newPrice);
 
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void changePriceToAHigherPrecision() throws Exception {
+        withUpdateablePricedProduct(client(), product -> {
+            final PriceDraft newHighPrecisionPrice = PriceDraft.of(HighPrecisionMoneyImpl.of(new BigDecimal("15.3669996"),EUR,7));
+            final List<Price> prices = product.getMasterData().getStaged().getMasterVariant()
+                    .getPrices();
+            assertThat(prices.stream().anyMatch(p -> p.equals(newHighPrecisionPrice))).isFalse();
+
+            final Product updatedProduct = client()
+                    .executeBlocking(ProductUpdateCommand.of(product, ChangePrice.of(prices.get(0), newHighPrecisionPrice)));
+
+            final Price actualPrice = getFirstPrice(updatedProduct);
+
+            assertThat(PriceDraft.of(actualPrice)).isEqualTo(newHighPrecisionPrice);
             return updatedProduct;
         });
     }

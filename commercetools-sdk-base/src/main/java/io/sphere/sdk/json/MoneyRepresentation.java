@@ -21,8 +21,9 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
-        property = "type",
-        defaultImpl = CentPrecisionMoneyRepresentation.class)
+        property = "type"
+//        defaultImpl = CentPrecisionMoneyRepresentation.class
+)
 @JsonSubTypes({
         @JsonSubTypes.Type(value = CentPrecisionMoneyRepresentation.class, name = "centPrecision"),
         @JsonSubTypes.Type(value = HighPrecisionMoneyRepresentation.class, name = "highPrecision")
@@ -33,7 +34,7 @@ abstract class MoneyRepresentation {
     private final Long centAmount;
     private final String currencyCode;
 
-    private static final DefaultRoundingProvider ROUNDING_PROVIDER = new DefaultRoundingProvider();
+    protected static final DefaultRoundingProvider ROUNDING_PROVIDER = new DefaultRoundingProvider();
 
     protected MoneyRepresentation(final Long centAmount, final String currencyCode) {
         this.centAmount = centAmount;
@@ -63,11 +64,11 @@ abstract class MoneyRepresentation {
                         .build());
         return monetaryAmount
                 .with(ROUNDING)
-                .query(MoneyRepresentation::queryFrom);
+                .query(amount -> queryFrom(monetaryAmount).longValue());
     }
 
 
-    protected static Long queryFrom(MonetaryAmount amount) {
+    protected static BigDecimal queryFrom(MonetaryAmount amount) {
         Objects.requireNonNull(amount, "Amount required.");
         BigDecimal number = amount.getNumber().numberValue(BigDecimal.class);
         CurrencyUnit cur = amount.getCurrency();
@@ -75,8 +76,15 @@ abstract class MoneyRepresentation {
         if(scale<0){
             scale = 0;
         }
-        number = number.setScale(scale, RoundingMode.DOWN);
-        return number.movePointRight(number.scale()).longValueExact();
+        number = number.setScale(scale, RoundingMode.HALF_EVEN);
+        return number.movePointRight(number.scale());
+    }
+
+    protected static BigDecimal queryFrom(MonetaryAmount amount, final int fractionsDigit) {
+        Objects.requireNonNull(amount, "Amount required.");
+        BigDecimal number = amount.getNumber().numberValue(BigDecimal.class);
+        number = number.setScale(fractionsDigit, RoundingMode.HALF_EVEN);
+        return number.movePointRight(number.scale());
     }
 
 }
