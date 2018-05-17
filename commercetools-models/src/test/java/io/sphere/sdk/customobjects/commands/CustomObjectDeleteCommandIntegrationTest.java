@@ -26,6 +26,12 @@ public class CustomObjectDeleteCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void deletionWithoutTypeReferenceAndDataErasure() throws Exception {
+        testOmitResult(customObject -> CustomObjectDeleteCommand.ofJsonNode(customObject.getContainer(), customObject.getKey(),true));
+    }
+
+
+    @Test
     public void deletionWithoutTypeReferenceAsObject() throws Exception {
         testOmitResult(customObject -> CustomObjectDeleteCommand.ofJsonNode(customObject));
     }

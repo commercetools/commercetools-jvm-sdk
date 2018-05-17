@@ -31,4 +31,25 @@ public class OrderDeleteCommandIntegrationTest extends IntegrationTest {
             assertThat(queriedDeletedOrder).isNull();
         });
     }
+
+    @Test
+    public void deleteByIdEraseData() throws Exception {
+        withOrder(client(), order -> {
+            final Order deletedOrder = client().executeBlocking(OrderDeleteCommand.of(order,true));
+            final Order queriedDeletedOrder = client().executeBlocking(OrderByIdGet.of(deletedOrder));
+            assertThat(queriedDeletedOrder).isNull();
+        });
+    }
+
+    @Test
+    public void deleteByOrderNumberEraseData() throws Exception {
+        withOrder(client(), order -> {
+            final String orderNumber = randomString();
+            final Order orderWithOrderNumber = client().executeBlocking(OrderUpdateCommand.of(order, SetOrderNumber.of(orderNumber)));
+
+            final Order deletedOrder = client().executeBlocking(OrderDeleteCommand.ofOrderNumber(orderNumber, orderWithOrderNumber.getVersion(),true));
+            final Order queriedDeletedOrder = client().executeBlocking(OrderByIdGet.of(deletedOrder));
+            assertThat(queriedDeletedOrder).isNull();
+        });
+    }
 }

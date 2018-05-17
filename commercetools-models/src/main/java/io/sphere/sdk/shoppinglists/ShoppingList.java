@@ -41,7 +41,7 @@ import java.util.List;
 @HasByKeyGetEndpoint
 @HasUpdateCommand(javadocSummary = "Updates a shopping list.", updateWith = "key")
 @HasCreateCommand(javadocSummary = "Creates a {@link io.sphere.sdk.shoppinglists.ShoppingList}.", includeExamples = "io.sphere.sdk.shoppinglists.commands.ShoppingListCreateCommandIntegrationTest#execution()")
-@HasDeleteCommand(javadocSummary = "Deletes a shopping list.", deleteWith = "key")
+@HasDeleteCommand(javadocSummary = "Deletes a shopping list.", deleteWith = {"key","id"}, canEraseUsersData = true)
 @HasQueryModel
 public interface ShoppingList extends Resource<ShoppingList>, Custom {
 

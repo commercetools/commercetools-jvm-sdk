@@ -31,4 +31,22 @@ public class CustomerDeleteCommandIntegrationTest extends CustomerIntegrationTes
         assertThat(client().executeBlocking(CustomerGroupByKeyGet.of(key))).isNull();
     }
 
+    @Test
+    public void executionEraseData() throws Exception {
+        final CustomerSignInResult result = client().executeBlocking(CustomerCreateCommand.of(newCustomerDraft()));
+        final Customer customer = result.getCustomer();
+        client().executeBlocking(CustomerDeleteCommand.of(customer,true));
+        final Cart cart = client().executeBlocking(CartByCustomerIdGet.of(customer));
+        assertThat(cart).isNull();
+    }
+
+    @Test
+    public void deleteByKeyEraseData() throws Exception {
+        final String key = randomKey();
+        final CustomerSignInResult result = client().executeBlocking(CustomerCreateCommand.of(newCustomerDraft().withKey(key)));
+        final Customer customer = result.getCustomer();
+        client().executeBlocking(CustomerDeleteCommand.ofKey(key, customer.getVersion(),true));
+        assertThat(client().executeBlocking(CustomerGroupByKeyGet.of(key))).isNull();
+    }
+
 }

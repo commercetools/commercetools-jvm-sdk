@@ -50,7 +50,9 @@ import java.util.Set;
 @HasDeleteCommand(deleteWith = "orderNumber",
         includeExamples = {
             "io.sphere.sdk.orders.commands.OrderDeleteCommandIntegrationTest#deleteById()",
-            "io.sphere.sdk.orders.commands.OrderDeleteCommandIntegrationTest#deleteByOrderNumber()"})
+            "io.sphere.sdk.orders.commands.OrderDeleteCommandIntegrationTest#deleteByOrderNumber()"},
+        canEraseUsersData = true
+)
 @HasQueryModel(implBaseClass = "io.sphere.sdk.carts.queries.CartLikeQueryModelImpl<Order>", baseInterfaces = {"CartLikeQueryModel<Order>"})
 public interface Order extends CartLike<Order> {
     /**
