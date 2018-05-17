@@ -144,6 +144,7 @@ import java.util.function.Function;
  <li class=change-in-release>update jackson to 2.9.5</li>
  <li class=change-in-release>Update org.asynchttpclient:async-http-client from version 2.0.38 to 2.4.5</li>
  <li class=change-in-release>Changed return type of {@link Cart#getCustomerGroup()} and {@link Customer#getCustomerGroup()} from {@link Reference<CustomerGroup>} to {@link ResourceIdentifier<CustomerGroup>}</li>
+ <li class=change-in-release>Add {@link io.sphere.sdk.utils.HighPrecisionMoneyImpl} to enable high precision money in commercetools plateform when needed.</li>
  </ul>
 
  <h3 class=released-version id="v1_31_0">1.31.0 (12.04.2018)</h3>
