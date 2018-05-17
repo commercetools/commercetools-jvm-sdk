@@ -41,19 +41,19 @@ final class CustomObjectDeleteCommandImpl<T> extends CommandImpl<CustomObject<T>
     }
 
     CustomObjectDeleteCommandImpl(final String container, final String key, final Class<T> valueClass) {
-        this(container, key,true, SphereJsonUtils.convertToJavaType(valueClass));
+        this(container, key,false, SphereJsonUtils.convertToJavaType(valueClass));
     }
 
     CustomObjectDeleteCommandImpl(final String container, final String key, final TypeReference<T> typeReference) {
-        this(container, key,true, SphereJsonUtils.convertToJavaType(typeReference));
+        this(container, key,false, SphereJsonUtils.convertToJavaType(typeReference));
     }
 
     CustomObjectDeleteCommandImpl(final String id, final Long version, final Class<T> valueClass) {
-        this(id, version,true, SphereJsonUtils.convertToJavaType(valueClass));
+        this(id, version,false, SphereJsonUtils.convertToJavaType(valueClass));
     }
 
     CustomObjectDeleteCommandImpl(final String id, final Long version, final TypeReference<T> typeReference) {
-        this(id, version, true,SphereJsonUtils.convertToJavaType(typeReference));
+        this(id, version, false,SphereJsonUtils.convertToJavaType(typeReference));
     }
 
 
