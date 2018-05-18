@@ -21,8 +21,8 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
-        property = "type"
-//        defaultImpl = CentPrecisionMoneyRepresentation.class
+        property = "type",
+        defaultImpl = CentPrecisionMoneyRepresentation.class
 )
 @JsonSubTypes({
         @JsonSubTypes.Type(value = CentPrecisionMoneyRepresentation.class, name = "centPrecision"),
