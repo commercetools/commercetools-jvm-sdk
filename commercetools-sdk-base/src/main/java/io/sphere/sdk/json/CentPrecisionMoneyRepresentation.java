@@ -9,7 +9,7 @@ final class CentPrecisionMoneyRepresentation extends MoneyRepresentation{
 
 
     @JsonCreator
-    public CentPrecisionMoneyRepresentation(Long centAmount, String currencyCode) {
+    public CentPrecisionMoneyRepresentation(final Long centAmount,final String currencyCode) {
         super(centAmount, currencyCode);
     }
 

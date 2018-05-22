@@ -22,9 +22,9 @@ final class MoneyDeserializer extends StdScalarDeserializer<MonetaryAmount> {
         final MoneyRepresentation moneyRepresentation = deserializationContext.readValue(jsonParser, MoneyRepresentation.class);
         final String currencyCode = moneyRepresentation.getCurrencyCode();
         if(moneyRepresentation instanceof HighPrecisionMoneyRepresentation){
-            HighPrecisionMoneyRepresentation highPrecisionMoneyRepresentation = ((HighPrecisionMoneyRepresentation) moneyRepresentation);
+            final HighPrecisionMoneyRepresentation highPrecisionMoneyRepresentation = ((HighPrecisionMoneyRepresentation) moneyRepresentation);
             final int scale = highPrecisionMoneyRepresentation.getFractionDigits();
-            BigDecimal bigDecimal = highPrecisionMoneyRepresentation.getPreciseAmount().movePointLeft(scale);
+            final BigDecimal bigDecimal = highPrecisionMoneyRepresentation.getPreciseAmount().movePointLeft(scale);
 
             return HighPrecisionMoneyImpl.of(bigDecimal,currencyCode ,scale );
         }

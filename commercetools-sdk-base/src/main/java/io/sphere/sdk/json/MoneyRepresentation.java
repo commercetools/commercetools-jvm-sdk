@@ -80,7 +80,7 @@ abstract class MoneyRepresentation {
         return number.movePointRight(number.scale());
     }
 
-    protected static BigDecimal queryFrom(MonetaryAmount amount, final int fractionsDigit) {
+    protected static BigDecimal queryFrom(final MonetaryAmount amount, final int fractionsDigit) {
         Objects.requireNonNull(amount, "Amount required.");
         BigDecimal number = amount.getNumber().numberValue(BigDecimal.class);
         number = number.setScale(fractionsDigit, RoundingMode.HALF_EVEN);
