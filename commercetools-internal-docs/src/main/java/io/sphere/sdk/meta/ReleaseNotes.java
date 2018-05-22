@@ -144,6 +144,7 @@ import java.util.function.Function;
  <li class=change-in-release>update jackson to 2.9.5</li>
  <li class=change-in-release>Update org.asynchttpclient:async-http-client from version 2.0.38 to 2.4.5</li>
  <li class=change-in-release>Changed return type of {@link Cart#getCustomerGroup()} and {@link Customer#getCustomerGroup()} from {@link Reference<CustomerGroup>} to {@link ResourceIdentifier<CustomerGroup>}</li>
+ <li class=change-in-release>Add {@link io.sphere.sdk.utils.HighPrecisionMoneyImpl} to enable high precision money in commercetools plateform when needed.</li>
  <li class=change-in-release>to enable permanent erasure of users data, a boolean parameter can be set now to specify this in
     {@link io.sphere.sdk.customers.commands.CustomerDeleteCommand},{@link io.sphere.sdk.orders.commands.OrderDeleteCommand}, {@link io.sphere.sdk.carts.commands.CartDeleteCommand}, {@link io.sphere.sdk.payments.commands.PaymentDeleteCommand},
     {@link io.sphere.sdk.shoppinglists.commands.ShoppingListDeleteCommand}, {@link io.sphere.sdk.reviews.commands.ReviewDeleteCommand}, {@link io.sphere.sdk.discountcodes.commands.DiscountCodeDeleteCommand}, {@link CustomObjectDeleteCommand}.

@@ -133,7 +133,7 @@ public final class PriceDraftBuilder extends Base implements Builder<PriceDraftD
 
 
     public static PriceDraftBuilder of(final MonetaryAmount value) {
-        return new PriceDraftBuilder(MoneyImpl.of(value));
+        return new PriceDraftBuilder(value);
     }
 
     public static PriceDraftBuilder of(final PriceDraft template) {
