@@ -68,7 +68,7 @@ abstract class MoneyRepresentation {
     }
 
 
-    protected static BigDecimal queryFrom(MonetaryAmount amount) {
+    protected static BigDecimal queryFrom(final MonetaryAmount amount) {
         Objects.requireNonNull(amount, "Amount required.");
         BigDecimal number = amount.getNumber().numberValue(BigDecimal.class);
         CurrencyUnit cur = amount.getCurrency();
