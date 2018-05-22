@@ -22,6 +22,7 @@ public final class MetaModelByIdDeleteCommandBuilder<T extends ResourceView<T, T
     final JavaType javaType;
     final String endpoint;
     final E expansionModel;
+    final boolean eraseData;
     List<ExpansionPath<T>> expansionPaths;
     final Function<MetaModelByIdDeleteCommandBuilder<T, C, E>, C> creationFunction;
 
@@ -32,6 +33,7 @@ public final class MetaModelByIdDeleteCommandBuilder<T extends ResourceView<T, T
         this.versioned = requireNonNull(template.versioned);
         this.javaType = requireNonNull(template.javaType);
         this.endpoint = requireNonNull(template.endpoint);
+        this.eraseData = requireNonNull(template.eraseData);
     }
 
     @Override

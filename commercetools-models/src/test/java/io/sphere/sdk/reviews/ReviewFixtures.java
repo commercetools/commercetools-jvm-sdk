@@ -23,7 +23,7 @@ public class ReviewFixtures {
         withReview(client, draft, consumer);
     }
 
-    private static ReviewDraftBuilder createReviewDraftBuilder() {
+    public static ReviewDraftBuilder createReviewDraftBuilder() {
         return ReviewDraftBuilder.ofTitle(REVIEW_TITLE)
                 .authorName(AUTHOR_NAME)
                 .text(REVIEW_TEXT)

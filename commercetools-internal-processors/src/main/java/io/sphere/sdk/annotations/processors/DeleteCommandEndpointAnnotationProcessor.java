@@ -55,5 +55,6 @@ public class DeleteCommandEndpointAnnotationProcessor<A extends Annotation> exte
             deleteWith.add(deleteWithProperties);
         }
         map.put("deleteWith", deleteWith);
+        map.put("canEraseUsersData", annotation.canEraseUsersData());
     }
 }

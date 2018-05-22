@@ -35,4 +35,27 @@ public class PaymentDeleteCommandIntegrationTest extends IntegrationTest {
 
         assertThat(loadedPayment).isNull();
     }
+
+    @Test
+    public void executionWithDataErasure() {
+        final PaymentDraft paymentDraft = PaymentDraftBuilder.of(EURO_20).build();
+        final Payment payment = client().executeBlocking(PaymentCreateCommand.of(paymentDraft));
+        client().executeBlocking(PaymentDeleteCommand.of(payment,true));
+
+        final Payment loadedPayment = client().executeBlocking(PaymentByIdGet.of(payment));
+
+        assertThat(loadedPayment).isNull();
+    }
+
+    @Test
+    public void deleteByKeyWithDataErasure() {
+        final String key = randomKey();
+        final PaymentDraft paymentDraft = PaymentDraftBuilder.of(EURO_20).key(key).build();
+        final Payment payment = client().executeBlocking(PaymentCreateCommand.of(paymentDraft));
+        client().executeBlocking(PaymentDeleteCommand.ofKey(key, payment.getVersion(),true));
+
+        final Payment loadedPayment = client().executeBlocking(PaymentByKeyGet.of(key));
+
+        assertThat(loadedPayment).isNull();
+    }
 }

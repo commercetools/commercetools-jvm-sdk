@@ -16,4 +16,12 @@ public class DiscountCodeDeleteCommandIntegrationTest extends IntegrationTest {
         client().executeBlocking(DiscountCodeDeleteCommand.of(discountCode));
         assertThat(client().executeBlocking(DiscountCodeByIdGet.of(discountCode))).isNull();
     }
+
+    @Test
+    public void executionWithDataErasure() throws Exception {
+        final String code = DiscountCodeDeleteCommandIntegrationTest.class.getSimpleName();
+        final DiscountCode discountCode = createDiscountCode(client(), code);
+        client().executeBlocking(DiscountCodeDeleteCommand.of(discountCode,true));
+        assertThat(client().executeBlocking(DiscountCodeByIdGet.of(discountCode))).isNull();
+    }
 }

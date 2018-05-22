@@ -26,19 +26,45 @@ public interface {{resourceName}}DeleteCommand extends MetaModelReferenceExpansi
         @return delete command
      */
     static {{resourceName}}DeleteCommand of(final Versioned<{{resourceName}}> versioned) {
-        return new {{resourceName}}DeleteCommandImpl(versioned);
+        return new {{resourceName}}DeleteCommandImpl(versioned,false);
     }
+
+    {{#if canEraseUsersData}}
+    /**
+        Creates a command object to delete a {@link {{resourceName}}{{!}}} by ID.
+        @param versioned the object to delete (so directly a {@link {{resourceName}}{{!}}}) or just the version/ID information of it
+        @param eraseData  If set to {@literal true}, the commercetools platform guarantees that all personal data related to the particular object, including invisible data, is erased, in compliance with the GDPR.
+        @return delete command
+     */
+    static {{resourceName}}DeleteCommand of(final Versioned<{{resourceName}}> versioned,final boolean eraseData) {
+        return new {{resourceName}}DeleteCommandImpl(versioned,eraseData);
+    }
+   {{/if}}
 
 {{#each deleteWith}}
     /**
         Creates a command object to delete a {@link {{resourceName}}{{!}}} by its {{name}}.
         @param {{name}} the {{name}} of the {{resourceName}} to delete, see {@link {{resourceName}}#get{{capitalizedName}}()}
-        @param version the current version of the {{resourceName}}, see {@link {{resourceName}}#getVersion()}
+        @param version `the current version of the {{resourceName}}, see {@link {{resourceName}}#getVersion()}
         @return delete command
     */
     static {{resourceName}}DeleteCommand of{{capitalizedName}}(final String {{name}}, final Long version) {
         final Versioned<{{resourceName}}> versioned = Versioned.of("{{hyphenizedName}}=" + urlEncode({{name}}), version);//hack for simple reuse
         return of(versioned);
     }
+
+   {{#if canEraseUsersData}}
+    /**
+        Creates a command object to delete a {@link {{resourceName}}{{!}}} by its {{name}}.
+        @param {{name}} the {{name}} of the {{resourceName}} to delete, see {@link {{resourceName}}#get{{capitalizedName}}()}
+        @param version the current version of the {{resourceName}}, see {@link {{resourceName}}#getVersion()}
+        @param eraseData  If set to {@literal true}, the commercetools platform guarantees that all personal data related to the particular object, including invisible data, is erased, in compliance with the GDPR.
+        @return delete command
+    */
+    static {{resourceName}}DeleteCommand of{{capitalizedName}}(final String {{name}}, final Long version, final boolean eraseData) {
+        final Versioned<{{resourceName}}> versioned = Versioned.of("{{hyphenizedName}}=" + urlEncode({{name}}), version);//hack for simple reuse
+        return of(versioned, eraseData);
+    }
+   {{/if}}
 {{/each}}
 }

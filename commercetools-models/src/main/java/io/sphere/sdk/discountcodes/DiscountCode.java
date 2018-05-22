@@ -34,7 +34,7 @@ import java.util.List;
 @HasByIdGetEndpoint
 @HasCreateCommand(includeExamples = "io.sphere.sdk.discountcodes.commands.DiscountCodeCreateCommandIntegrationTest#execution()")
 @HasUpdateCommand
-@HasDeleteCommand
+@HasDeleteCommand(canEraseUsersData = true)
 @HasQueryModel
 public interface DiscountCode extends Resource<DiscountCode>, Custom {
     /**

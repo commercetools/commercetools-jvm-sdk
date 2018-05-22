@@ -10,4 +10,7 @@ public @interface HasDeleteCommand {
     String[] includeExamples() default {};
 
     String[] deleteWith() default {};
+
+    boolean canEraseUsersData() default false;
+
 }

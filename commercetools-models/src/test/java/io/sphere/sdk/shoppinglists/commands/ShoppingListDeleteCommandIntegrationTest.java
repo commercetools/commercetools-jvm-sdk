@@ -28,4 +28,24 @@ public class ShoppingListDeleteCommandIntegrationTest extends IntegrationTest {
             assertThat(client().executeBlocking(shoppingListQuery).head()).isEmpty();
         });
     }
+
+    @Test
+    public void deleteWithDataErasure() {
+        withPersistentShoppingList(client(), shoppingList -> {
+            client().executeBlocking(ShoppingListDeleteCommand.of(shoppingList,true));
+
+            final ShoppingListQuery shoppingListQuery = ShoppingListQuery.of().withPredicates(m -> m.id().is(shoppingList.getId()));
+            assertThat(client().executeBlocking(shoppingListQuery).head()).isEmpty();
+        });
+    }
+
+    @Test
+    public void deleteByKeyWithDataErasure() {
+        withPersistentShoppingList(client(), shoppingList -> {
+            client().executeBlocking(ShoppingListDeleteCommand.ofKey(shoppingList.getKey(), shoppingList.getVersion(),true));
+
+            final ShoppingListQuery shoppingListQuery = ShoppingListQuery.of().withPredicates(m -> m.id().is(shoppingList.getId()));
+            assertThat(client().executeBlocking(shoppingListQuery).head()).isEmpty();
+        });
+    }
 }

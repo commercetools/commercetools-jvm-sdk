@@ -30,29 +30,49 @@ final class CustomObjectDeleteCommandImpl<T> extends CommandImpl<CustomObject<T>
         return HttpRequestIntent.of(HttpMethod.DELETE, CustomObjectEndpoint.PATH + path);
     }
 
+    CustomObjectDeleteCommandImpl(final String container, final String key,final boolean eraseData, final JavaType valueJavaType) {
+        this.path = format("/%s/%s?%s", container, key,eraseData? "dataErasure=true":"");
+        this.javaType = CustomObjectUtils.getCustomObjectJavaTypeForValue(valueJavaType);
+    }
+
+    CustomObjectDeleteCommandImpl(final String id, final Long version,final boolean eraseData , final JavaType valueJavaType) {
+        this.path = format("/%s?version=%d%s", id, version,eraseData? "&dataErasure=true":"");
+        this.javaType = CustomObjectUtils.getCustomObjectJavaTypeForValue(valueJavaType);
+    }
+
     CustomObjectDeleteCommandImpl(final String container, final String key, final Class<T> valueClass) {
-        this(container, key, SphereJsonUtils.convertToJavaType(valueClass));
+        this(container, key,false, SphereJsonUtils.convertToJavaType(valueClass));
     }
 
     CustomObjectDeleteCommandImpl(final String container, final String key, final TypeReference<T> typeReference) {
-        this(container, key, SphereJsonUtils.convertToJavaType(typeReference));
-    }
-
-    CustomObjectDeleteCommandImpl(final String container, final String key, final JavaType valueJavaType) {
-        this.path = format("/%s/%s", container, key);
-        this.javaType = CustomObjectUtils.getCustomObjectJavaTypeForValue(valueJavaType);
+        this(container, key,false, SphereJsonUtils.convertToJavaType(typeReference));
     }
 
     CustomObjectDeleteCommandImpl(final String id, final Long version, final Class<T> valueClass) {
-        this(id, version, SphereJsonUtils.convertToJavaType(valueClass));
+        this(id, version,false, SphereJsonUtils.convertToJavaType(valueClass));
     }
 
     CustomObjectDeleteCommandImpl(final String id, final Long version, final TypeReference<T> typeReference) {
-        this(id, version, SphereJsonUtils.convertToJavaType(typeReference));
+        this(id, version, false,SphereJsonUtils.convertToJavaType(typeReference));
     }
 
-    CustomObjectDeleteCommandImpl(final String id, final Long version, final JavaType valueJavaType) {
-        this.path = format("/%s?version=%d", id, version);
-        this.javaType = CustomObjectUtils.getCustomObjectJavaTypeForValue(valueJavaType);
+
+
+
+    CustomObjectDeleteCommandImpl(final String container, final String key,final boolean eraseData, final Class<T> valueClass) {
+        this(container, key,eraseData, SphereJsonUtils.convertToJavaType(valueClass));
     }
+
+    CustomObjectDeleteCommandImpl(final String container, final String key,final boolean eraseData, final TypeReference<T> typeReference) {
+        this(container, key,eraseData, SphereJsonUtils.convertToJavaType(typeReference));
+    }
+
+    CustomObjectDeleteCommandImpl(final String id, final Long version,final boolean eraseData, final Class<T> valueClass) {
+        this(id, version,eraseData, SphereJsonUtils.convertToJavaType(valueClass));
+    }
+
+    CustomObjectDeleteCommandImpl(final String id, final Long version,final boolean eraseData, final TypeReference<T> typeReference) {
+        this(id, version, eraseData,SphereJsonUtils.convertToJavaType(typeReference));
+    }
+
 }
