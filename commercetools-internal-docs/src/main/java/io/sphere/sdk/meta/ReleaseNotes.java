@@ -138,7 +138,7 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
- <h3 class=released-version id="v1_32_0">1.32.0</h3>
+ <h3 class=released-version id="v1_32_0">1.32.0 (23.05.2018)</h3>
  <ul>
  <li class=change-in-release>Added field {@link RemoveLineItem#getShippingDetailsToRemove()} to {@link RemoveLineItem}</li>
  <li class=change-in-release>update jackson to 2.9.5</li>
