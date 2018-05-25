@@ -12,7 +12,7 @@ public enum StackingMode implements SphereEnumeration {
      */
     STACKING,
     /**
-     * Don't apply any more matching discounts after this one.
+     * Don't apply any more matching discounts after this one if it got successfully applied.
      */
     STOP_AFTER_THIS_DISCOUNT;
 
