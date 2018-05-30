@@ -357,7 +357,7 @@ public class PaymentUpdateCommandIntegrationTest extends IntegrationTest {
     @Test
     public void changeTransactionState() {
         withPaymentTransaction(client(), (Payment payment, Transaction transaction) -> {
-            assertThat(transaction.getState()).isEqualTo(TransactionState.PENDING);
+            assertThat(transaction.getState()).isEqualTo(TransactionState.INITIAL);
             final TransactionState transactionState = TransactionState.SUCCESS;
 
             final Payment updatedPayment = client().executeBlocking(PaymentUpdateCommand.of(payment, ChangeTransactionState.of(transactionState, transaction.getId())));
