@@ -34,8 +34,8 @@ public class CustomerQueryIntegrationTest extends IntegrationTest {
 
     @BeforeClass
     public static void setUpCustomer() throws Exception {
-        customer = createCustomer(FIRST_NAME, "Smith");
-        distraction = createCustomer("Missy", "Jones");
+        customer = createCustomer(FIRST_NAME, "Smith","von","Mr.");
+        distraction = createCustomer("Missy", "Jones","Bin","Mrs.");
     }
 
     @AfterClass
@@ -79,6 +79,16 @@ public class CustomerQueryIntegrationTest extends IntegrationTest {
     @Test
     public void emailHelper() throws Exception {
         check((model) -> model.email().is(customer.getEmail()));
+    }
+
+    @Test
+    public void middleName() throws Exception {
+        check((model) -> model.middleName().is(customer.getMiddleName()));
+    }
+
+    @Test
+    public void title() throws Exception {
+        check((model) -> model.title().is(customer.getTitle()));
     }
 
     @Test
@@ -142,10 +152,12 @@ public class CustomerQueryIntegrationTest extends IntegrationTest {
         }
     }
 
-    private static Customer createCustomer(final String firstName, final String lastName) {
+    private static Customer createCustomer(final String firstName, final String lastName,final String middleName, final String title) {
         final CustomerName customerName = CustomerName.ofFirstAndLastName(firstName, lastName);
         final CustomerDraft draft = CustomerDraftDsl.of(customerName, randomEmail(CustomerQueryIntegrationTest.class), "secret")
                 .withLocale(Locale.GERMAN)
+                .withMiddleName(middleName)
+                .withTitle(title)
                 .withExternalId(randomString()+firstName)
                 .withCustomerNumber(randomKey());
         final CustomerSignInResult signInResult = client().executeBlocking(CustomerCreateCommand.of(draft));
