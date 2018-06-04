@@ -1,5 +1,6 @@
 package io.sphere.sdk.orders;
 
+import io.sphere.sdk.products.PriceDraft;
 import io.sphere.sdk.products.attributes.AttributeImportDraft;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
@@ -9,6 +10,8 @@ import io.sphere.sdk.products.Price;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
 
@@ -21,7 +24,7 @@ public final class ProductVariantImportDraftBuilder extends Base implements Buil
     @Nullable
     private final String productId;
     @Nullable
-    private List<Price> prices;
+    private List<PriceDraft> prices;
     @Nullable
     private List<AttributeImportDraft> attributes;
     @Nullable
@@ -39,7 +42,9 @@ public final class ProductVariantImportDraftBuilder extends Base implements Buil
      * @return this builder
      */
     public ProductVariantImportDraftBuilder prices(@Nullable final List<Price> prices) {
-        this.prices = prices;
+        this.prices = Optional.ofNullable(prices).map(
+                prices1 -> prices1.stream().map(PriceDraft::of).map(PriceDraft.class::cast).collect(Collectors.toList())
+        ).orElse(null);
         return this;
     }
 

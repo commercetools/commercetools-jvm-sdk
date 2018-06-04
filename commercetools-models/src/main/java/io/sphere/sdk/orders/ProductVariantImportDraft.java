@@ -1,6 +1,7 @@
 package io.sphere.sdk.orders;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.products.PriceDraft;
 import io.sphere.sdk.products.attributes.AttributeImportDraft;
 import io.sphere.sdk.products.Image;
 import io.sphere.sdk.products.Price;
@@ -24,7 +25,7 @@ public interface ProductVariantImportDraft {
     List<Image> getImages();
 
     @Nullable
-    List<Price> getPrices();
+    List<PriceDraft> getPrices();
 
     @Nullable
     String getSku();
