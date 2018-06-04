@@ -222,7 +222,6 @@ public interface Customer extends Resource<Customer>, Custom, WithKey {
      * @return middle name
      */
     @Nullable
-    @IgnoreInQueryModel
     String getMiddleName();
 
     /**
@@ -234,7 +233,6 @@ public interface Customer extends Resource<Customer>, Custom, WithKey {
      * @return title
      */
     @Nullable
-    @IgnoreInQueryModel
     String getTitle();
 
     /**
