@@ -9,6 +9,9 @@ import io.sphere.sdk.carts.queries.CartByIdGet;
 import io.sphere.sdk.client.ErrorResponseException;
 import io.sphere.sdk.models.DefaultCurrencyUnits;
 import io.sphere.sdk.orders.Order;
+import io.sphere.sdk.orders.OrderFromCartDraft;
+import io.sphere.sdk.orders.OrderFromCartDraftBuilder;
+import io.sphere.sdk.orders.ShipmentState;
 import io.sphere.sdk.orders.commands.updateactions.TransitionState;
 import io.sphere.sdk.orders.expansion.OrderExpansionModel;
 import io.sphere.sdk.states.StateType;
@@ -81,5 +84,17 @@ public class OrderFromCartCreateCommandIntegrationTest extends IntegrationTest {
                 });
             });
         });
+    }
+
+
+    @Test
+    public void orderFromCartDraft(){
+        withFilledCart(client(), cart -> {
+            final OrderFromCartDraft orderFromCartDraft = OrderFromCartDraftBuilder.of(cart.getId(),cart.getVersion() ).shipmentState(ShipmentState.SHIPPED).build();
+            final Order order = client().executeBlocking(OrderFromCartCreateCommand.of(cart).withDraft(orderFromCartDraft));
+            assertThat(order).isNotNull();
+            assertThat(order.getShipmentState()).isEqualByComparingTo(ShipmentState.SHIPPED);
+        });
+
     }
 }
