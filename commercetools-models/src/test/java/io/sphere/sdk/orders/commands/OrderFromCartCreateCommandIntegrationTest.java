@@ -93,7 +93,7 @@ public class OrderFromCartCreateCommandIntegrationTest extends IntegrationTest {
             final OrderFromCartDraft orderFromCartDraft = OrderFromCartDraftBuilder.of(cart.getId(),cart.getVersion() ).shipmentState(ShipmentState.SHIPPED).build();
             final Order order = client().executeBlocking(OrderFromCartCreateCommand.of(cart).withDraft(orderFromCartDraft));
             assertThat(order).isNotNull();
-            assertThat(order.getShipmentState()).isEqualByComparingTo(ShipmentState.SHIPPED);
+            assertThat(order.getShipmentState()).isEqualTo(ShipmentState.SHIPPED);
         });
 
     }
