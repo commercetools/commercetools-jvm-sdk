@@ -138,11 +138,12 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+
  <h3 class=released-version id="v1_33_0">1.33.0 </h3>
  <ul>
  <li class=change-in-release>Added field {@link OrderFromCartDraft#getShipmentState()} to {@link OrderFromCartDraft}</li>
+ <li class=change-in-release>Added {@link CustomerQueryModel#title()} and {@link CustomerQueryModel#middleName()} to {@link CustomerQueryModel}</li>
  </ul>
-
 
  <h3 class=released-version id="v1_32_0">1.32.0 (23.05.2018)</h3>
  <ul>
