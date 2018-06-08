@@ -19,8 +19,6 @@ import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.JsonNodeReferenceResolver;
 import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.types.CustomFields;
-import io.sphere.sdk.types.CustomFieldsDraft;
-import io.sphere.sdk.types.TypeFixtures;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
@@ -44,7 +42,6 @@ import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingM
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.defaultTaxCategory;
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTransientTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
-import static java.util.Collections.singletonMap;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class OrderImportCommandIntegrationTest extends IntegrationTest {

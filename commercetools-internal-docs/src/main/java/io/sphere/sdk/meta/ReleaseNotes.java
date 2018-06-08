@@ -143,6 +143,7 @@ import java.util.function.Function;
  <ul>
  <li class=change-in-release>Added field {@link OrderFromCartDraft#getShipmentState()} to {@link OrderFromCartDraft}</li>
  <li class=change-in-release>Added {@link CustomerQueryModel#title()} and {@link CustomerQueryModel#middleName()} to {@link CustomerQueryModel}</li>
+ <li class=change-in-release>Order import bug fix</li>
  </ul>
 
  <h3 class=released-version id="v1_32_0">1.32.0 (23.05.2018)</h3>
