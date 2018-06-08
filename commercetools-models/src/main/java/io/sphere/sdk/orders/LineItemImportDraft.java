@@ -7,6 +7,7 @@ import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.Price;
+import io.sphere.sdk.products.PriceDraft;
 import io.sphere.sdk.taxcategories.TaxRate;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
@@ -20,7 +21,7 @@ import java.util.Set;
 public interface LineItemImportDraft {
     LocalizedString getName();
 
-    Price getPrice();
+    PriceDraft getPrice();
 
     @Nullable
     String getProductId();

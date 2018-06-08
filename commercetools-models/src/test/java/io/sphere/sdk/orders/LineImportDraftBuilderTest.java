@@ -5,6 +5,7 @@ import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.Price;
+import io.sphere.sdk.products.PriceDraft;
 import io.sphere.sdk.products.attributes.AttributeImportDraft;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.types.CustomFieldsDraft;
@@ -42,7 +43,7 @@ public class LineImportDraftBuilderTest {
         assertThat(lineItemImportDraft.getName()).isEqualTo(name);
         assertThat(lineItemImportDraft.getProductId()).isEqualTo(productId);
         assertThat(lineItemImportDraft.getVariant()).isEqualTo(variant);
-        assertThat(lineItemImportDraft.getPrice()).isEqualTo(price);
+        assertThat(lineItemImportDraft.getPrice()).isEqualTo(PriceDraft.of(price));
         assertThat(lineItemImportDraft.getQuantity()).isEqualTo(quantity);
         assertThat(lineItemImportDraft.getState()).isEqualTo(state);
         assertThat(lineItemImportDraft.getSupplyChannel()).isEqualTo(supplyChannel);

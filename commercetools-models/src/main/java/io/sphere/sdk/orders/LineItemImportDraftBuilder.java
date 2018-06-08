@@ -5,7 +5,9 @@ import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.products.Price;
+import io.sphere.sdk.products.PriceDraft;
 import io.sphere.sdk.taxcategories.TaxRate;
+import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
@@ -17,7 +19,7 @@ public final class LineItemImportDraftBuilder extends Base implements Builder<Li
     private final String productId;
     private final LocalizedString name;
     private final ProductVariantImportDraft variant;
-    private Price price;
+    private PriceDraft price;
     private Long quantity;
     @Nullable
     private Set<ItemState> state;
@@ -30,7 +32,7 @@ public final class LineItemImportDraftBuilder extends Base implements Builder<Li
 
     @Nullable private ItemShippingDetailsDraft shippingDetails;
 
-    private LineItemImportDraftBuilder(final ProductVariantImportDraft variant, final Long quantity, final Price price, @Nullable final String productId, final LocalizedString name) {
+    private LineItemImportDraftBuilder(final ProductVariantImportDraft variant, final Long quantity, final PriceDraft price, @Nullable final String productId, final LocalizedString name) {
         this.price = price;
         this.variant = variant;
         this.quantity = quantity;
@@ -38,7 +40,7 @@ public final class LineItemImportDraftBuilder extends Base implements Builder<Li
         this.name = name;
     }
 
-    public LineItemImportDraftBuilder price(final Price price) {
+    public LineItemImportDraftBuilder price(final PriceDraft price) {
         this.price = price;
         return this;
     }
@@ -73,8 +75,16 @@ public final class LineItemImportDraftBuilder extends Base implements Builder<Li
         return this;
     }
 
-    public static LineItemImportDraftBuilder of(final ProductVariantImportDraft variant, final long quantity, final Price price, final LocalizedString name) {
+    public static LineItemImportDraftBuilder of(final ProductVariantImportDraft variant, final long quantity, final PriceDraft price, final LocalizedString name) {
         return new LineItemImportDraftBuilder(variant, quantity, price, variant.getProductId(), name);
+    }
+
+    /**
+     * @deprecated use LineItemImportDraftBuilder{@link #of(ProductVariantImportDraft, long, PriceDraft, LocalizedString)} instead.
+     */
+    @Deprecated
+    public static LineItemImportDraftBuilder of(final ProductVariantImportDraft variant, final long quantity, final Price price, final LocalizedString name) {
+        return new LineItemImportDraftBuilder(variant, quantity, PriceDraft.of(price), variant.getProductId(), name);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package io.sphere.sdk.orders;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.sphere.sdk.products.PriceDraft;
 import io.sphere.sdk.products.attributes.AttributeImportDraft;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.products.Image;
@@ -17,13 +18,13 @@ final class ProductVariantImportDraftImpl extends Base implements ProductVariant
     @Nullable
     private final String productId;
     @Nullable
-    private final List<Price> prices;
+    private final List<PriceDraft> prices;
     @Nullable
     private final List<AttributeImportDraft> attributes;
     @Nullable
     private final List<Image> images;
 
-    ProductVariantImportDraftImpl(@Nullable final Integer id, @Nullable final String sku, @Nullable final List<Price> prices, @Nullable final List<Image> images, @Nullable final List<AttributeImportDraft> attributes, @Nullable final String productId) {
+    ProductVariantImportDraftImpl(@Nullable final Integer id, @Nullable final String sku, @Nullable final List<PriceDraft> prices, @Nullable final List<Image> images, @Nullable final List<AttributeImportDraft> attributes, @Nullable final String productId) {
         this.attributes = attributes;
         this.id = id;
         this.sku = sku;
@@ -52,7 +53,7 @@ final class ProductVariantImportDraftImpl extends Base implements ProductVariant
 
     @Nullable
     @Override
-    public List<Price> getPrices() {
+    public List<PriceDraft> getPrices() {
         return prices;
     }
 
