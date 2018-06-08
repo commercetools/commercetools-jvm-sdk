@@ -77,7 +77,7 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
             assertThat(lineItem.getVariant().getId()).isEqualTo(variantId);
             assertThat(lineItem.getName()).isEqualTo(name);
             assertThat(lineItem.getQuantity()).isEqualTo(quantity);
-            assertThat(lineItem.getPrice()).isEqualTo(price);
+            assertThat(lineItem.getPrice().getValue()).isEqualTo(price.getValue());
         });
     }
 
@@ -104,7 +104,7 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
                                     assertThat(lineItem.getVariant().getPrices()).isEqualTo(masterVariant.getPrices());
                                     assertThat(lineItem.getVariant().getSku()).contains(masterVariant.getSku());
                                     assertThat(lineItem.getQuantity()).isEqualTo(2);
-                                    assertThat(lineItem.getPrice()).isEqualTo(price);
+                                    assertThat(lineItem.getPrice().getValue()).isEqualTo(price.getValue());
                                     assertThat(lineItem.getName()).isEqualTo(name);
                                 }
                         );
