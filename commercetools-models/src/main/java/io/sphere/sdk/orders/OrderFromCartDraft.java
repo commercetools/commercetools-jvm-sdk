@@ -1,12 +1,19 @@
 package io.sphere.sdk.orders;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.FactoryMethod;
+import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.models.Versioned;
 
 import javax.annotation.Nullable;
 
-@JsonDeserialize(as = OrderFromCartDraftImpl.class)
+@JsonDeserialize(as = OrderFromCartDraftDsl.class)
+@ResourceDraftValue(factoryMethods =
+        {
+                @FactoryMethod(parameterNames = {"id", "version", "orderNumber", "paymentState"}),
+                @FactoryMethod(parameterNames = {"id", "version"})
+        })
 public interface OrderFromCartDraft {
     String getId();
 
@@ -18,11 +25,14 @@ public interface OrderFromCartDraft {
     @Nullable
     PaymentState getPaymentState();
 
+    @Nullable
+    ShipmentState getShipmentState();
+
     static OrderFromCartDraft of(final Versioned<Cart> cart, @Nullable final String orderNumber, @Nullable final PaymentState paymentState) {
-        return new OrderFromCartDraftImpl(cart.getId(), cart.getVersion(), orderNumber, paymentState);
+        return OrderFromCartDraftDsl.of(cart.getId(), cart.getVersion(), orderNumber, paymentState);
     }
 
     static OrderFromCartDraft of(final Versioned<Cart> cart) {
-        return new OrderFromCartDraftImpl(cart.getId(), cart.getVersion(), null, null);
+        return OrderFromCartDraftDsl.of(cart.getId(), cart.getVersion(), null, null);
     }
 }
