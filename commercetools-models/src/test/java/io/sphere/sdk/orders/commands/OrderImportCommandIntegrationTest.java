@@ -85,38 +85,34 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void lineItems() throws Exception {
-        TypeFixtures.withUpdateableType(client(),type -> {
-            withPersistentChannel(client(), ChannelRole.INVENTORY_SUPPLY, channel -> {
-                        withProduct(client(), product -> {
-                            final int variantId = 1;
-                            final String sku = sku(product);
-                            final ProductVariantImportDraft productVariantImportDraft = ProductVariantImportDraftBuilder.of(product.getId(), variantId, sku)
-                                    .build();
-                            final CustomFieldsDraft customFieldsDraft =
-                                    CustomFieldsDraft.ofTypeIdAndObjects(type.getId(), singletonMap(TypeFixtures.STRING_FIELD_NAME, "foo"));
-                            final PriceDraft price = PriceDraftBuilder.of(PRICE).custom(customFieldsDraft).build();
-                            final LocalizedString name = randomSlug();
-                            final LineItemImportDraft lineItemImportDraft = LineItemImportDraftBuilder.of(productVariantImportDraft, 2L, price, name).supplyChannel(channel).build();
-                            testOrderAspect(
-                                    builder -> builder.lineItems(asList(lineItemImportDraft)),
-                                    order -> {
-                                        final LineItem lineItem = order.getLineItems().get(0);
-                                        assertThat(lineItem.getProductId()).isEqualTo(product.getId());
-                                        assertThat(lineItem.getVariant().getId()).isEqualTo(variantId);
-                                        final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
-                                        assertThat(lineItem.getVariant().getAttributes()).isEqualTo(masterVariant.getAttributes());
-                                        assertThat(lineItem.getVariant().getImages()).isEqualTo(masterVariant.getImages());
-                                        assertThat(lineItem.getVariant().getPrices()).isEqualTo(masterVariant.getPrices());
-                                        assertThat(lineItem.getVariant().getSku()).contains(masterVariant.getSku());
-                                        assertThat(lineItem.getQuantity()).isEqualTo(2);
-                                        assertThat(lineItem.getName()).isEqualTo(name);
-                                    }
-                            );
-                        });
-                    }
-            );
-            return type;
-        });
+        withPersistentChannel(client(), ChannelRole.INVENTORY_SUPPLY, channel -> {
+                    withProduct(client(), product -> {
+                        final int variantId = 1;
+                        final String sku = sku(product);
+                        final ProductVariantImportDraft productVariantImportDraft = ProductVariantImportDraftBuilder.of(product.getId(), variantId, sku)
+                                .build();
+                        final Price price = PRICE;
+                        final LocalizedString name = randomSlug();
+                        final LineItemImportDraft lineItemImportDraft = LineItemImportDraftBuilder.of(productVariantImportDraft, 2L, price, name).supplyChannel(channel).build();
+                        testOrderAspect(
+                                builder -> builder.lineItems(asList(lineItemImportDraft)),
+                                order -> {
+                                    final LineItem lineItem = order.getLineItems().get(0);
+                                    assertThat(lineItem.getProductId()).isEqualTo(product.getId());
+                                    assertThat(lineItem.getVariant().getId()).isEqualTo(variantId);
+                                    final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+                                    assertThat(lineItem.getVariant().getAttributes()).isEqualTo(masterVariant.getAttributes());
+                                    assertThat(lineItem.getVariant().getImages()).isEqualTo(masterVariant.getImages());
+                                    assertThat(lineItem.getVariant().getPrices()).isEqualTo(masterVariant.getPrices());
+                                    assertThat(lineItem.getVariant().getSku()).contains(masterVariant.getSku());
+                                    assertThat(lineItem.getQuantity()).isEqualTo(2);
+                                    assertThat(lineItem.getName()).isEqualTo(name);
+                                }
+                        );
+                    });
+                }
+        );
+
     }
 
     @Test
