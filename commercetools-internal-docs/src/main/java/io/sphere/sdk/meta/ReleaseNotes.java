@@ -143,7 +143,11 @@ import java.util.function.Function;
  <ul>
  <li class=change-in-release>Added field {@link OrderFromCartDraft#getShipmentState()} to {@link OrderFromCartDraft}</li>
  <li class=change-in-release>Added {@link CustomerQueryModel#title()} and {@link CustomerQueryModel#middleName()} to {@link CustomerQueryModel}</li>
- <li class=change-in-release>Order import bug fix</li>
+ <li class=change-in-release>{@link LineItemImportDraftBuilder#of(ProductVariantImportDraft, long, PriceDraft, LocalizedString)} accepts price draft instead of price</li>
+ <li class=change-in-release>{@link LineItemImportDraftBuilder#of(ProductVariantImportDraft, long, Price, LocalizedString)} deprecated</li>
+ <li class=change-in-release>{@link ProductVariantImportDraft#getPrices()} returns a {@link PriceDraft} instead {@link Price}</li>
+ <li class=change-in-release>Fixing bug {@link CustomFields} addition to {@link PriceDraft}</li>
+ <li class=fixed-in-release>while making an order with prices containing custom fields, the request used to fail, this has now been fixed.</li>
  </ul>
 
  <h3 class=released-version id="v1_32_0">1.32.0 (23.05.2018)</h3>
