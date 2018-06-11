@@ -103,6 +103,7 @@ import io.sphere.sdk.shoppinglists.expansion.LineItemExpansionModel;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.states.StateDraftDsl;
 import io.sphere.sdk.subscriptions.AzureServiceBusDestination;
+import io.sphere.sdk.subscriptions.MessageSubscriptionPayload;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxCategoryDraft;
 import io.sphere.sdk.taxcategories.TaxCategoryDraftBuilder;
@@ -138,6 +139,11 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+
+ <h3 class=released-version id="v1_34_0">1.34.0)</h3>
+ <ul>
+ <li class=change-in-release>Added field {@link MessageSubscriptionPayload#getPaylaodNotIncluded()} to {@link io.sphere.sdk.subscriptions.PayloadNotIncluded} to give more details when the payload is not included in a message</li>
+ </ul>
 
  <h3 class=released-version id="v1_33_0">1.33.0 (08.06.2018)</h3>
  <ul>
