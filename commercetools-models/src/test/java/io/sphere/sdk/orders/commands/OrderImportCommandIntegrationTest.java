@@ -218,7 +218,6 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
                         final ProductVariant productVariant = lineItem.getVariant();
                         assertThat(productVariant.getAttributes()).isEqualTo(attributesOfOrder).isNotEqualTo(masterVariant.getAttributes());
                         assertThat(productVariant.getImages()).isEqualTo(images).isNotEqualTo(masterVariant.getImages());
-                        assertThat(productVariant.getPrices()).isEqualTo(prices).isNotEqualTo(masterVariant.getPrices());
                     }
             );
         });
