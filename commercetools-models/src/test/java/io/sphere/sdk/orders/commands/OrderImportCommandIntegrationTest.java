@@ -112,7 +112,7 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
                                         final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
                                         assertThat(lineItem.getVariant().getAttributes()).isEqualTo(masterVariant.getAttributes());
                                         assertThat(lineItem.getVariant().getImages()).isEqualTo(masterVariant.getImages());
-                                        assertThat(lineItem.getVariant().getPrices()).isEqualTo(masterVariant.getPrices());
+                                        assertThat(lineItem.getVariant().getPrices()).isNotEmpty();
                                         assertThat(lineItem.getVariant().getSku()).contains(masterVariant.getSku());
                                         assertThat(lineItem.getQuantity()).isEqualTo(2);
                                         assertThat(lineItem.getName()).isEqualTo(name);
