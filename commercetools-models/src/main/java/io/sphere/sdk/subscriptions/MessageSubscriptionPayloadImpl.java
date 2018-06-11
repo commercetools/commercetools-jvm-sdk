@@ -6,6 +6,8 @@ import io.sphere.sdk.messages.Message;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Reference;
 
+import javax.annotation.Nullable;
+
 final class MessageSubscriptionPayloadImpl<T> extends Base implements MessageSubscriptionPayload<T> {
 
   private Message message;
@@ -15,6 +17,9 @@ final class MessageSubscriptionPayloadImpl<T> extends Base implements MessageSub
   private String projectKey;
 
   private Reference<T> resource;
+
+  private PayloadNotIncluded payloadNotInclude;
+
 
   @JsonProperty("message")
   @JsonUnwrapped
@@ -32,5 +37,11 @@ final class MessageSubscriptionPayloadImpl<T> extends Base implements MessageSub
 
   public Reference<T> getResource() {
     return resource;
+  }
+
+  @Nullable
+  @Override
+  public PayloadNotIncluded getPaylaodNotIncluded() {
+    return payloadNotInclude;
   }
 }

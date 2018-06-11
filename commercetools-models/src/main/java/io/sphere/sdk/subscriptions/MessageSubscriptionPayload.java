@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.messages.Message;
 
+import javax.annotation.Nullable;
+
 /**
  * This payload will be sent for a MessageSubscription.
  *
@@ -35,6 +37,14 @@ public interface MessageSubscriptionPayload<T> extends Payload<T> {
     @JsonUnwrapped
     @JsonProperty("message")
     Message getMessage();
+
+
+    /**
+     * @return
+     */
+    @Nullable
+    PayloadNotIncluded getPaylaodNotIncluded();
+
 
     /**
      * Returns true iff. this payload contains a complete message.
