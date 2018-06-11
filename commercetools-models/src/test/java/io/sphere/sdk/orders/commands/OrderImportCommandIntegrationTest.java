@@ -33,6 +33,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static io.sphere.sdk.channels.ChannelFixtures.withPersistentChannel;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
@@ -230,7 +231,7 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
                         final ProductVariant productVariant = lineItem.getVariant();
                         assertThat(productVariant.getAttributes()).isEqualTo(attributesOfOrder).isNotEqualTo(masterVariant.getAttributes());
                         assertThat(productVariant.getImages()).isEqualTo(images).isNotEqualTo(masterVariant.getImages());
-//                        assertThat(productVariant.getPrices()).isEqualTo(prices).isNotEqualTo(masterVariant.getPrices());
+                        assertEqualPrices(productVariant.getPrices(), prices);
                     }
             );
         });
@@ -509,5 +510,17 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
                 client().executeBlocking(OrderDeleteCommand.of(order));
             });
         });
+    }
+
+
+    public void assertEqualPrice(final Price price,final PriceDraft priceDraft){
+        assertThat(priceDraft).isEqualTo(PriceDraft.of(price));
+    }
+
+    public void assertEqualPrices(final List<Price> price,final List<PriceDraft> priceDraft){
+
+        final List<PriceDraft> transformedPriceDrafts = price.stream().map(PriceDraft::of).collect(Collectors.toList());
+        assertThat(transformedPriceDrafts).isEqualTo(priceDraft);
+
     }
 }
