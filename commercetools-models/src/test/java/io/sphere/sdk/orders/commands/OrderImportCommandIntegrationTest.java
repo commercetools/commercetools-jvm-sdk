@@ -232,6 +232,7 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
                         assertThat(productVariant.getAttributes()).isEqualTo(attributesOfOrder).isNotEqualTo(masterVariant.getAttributes());
                         assertThat(productVariant.getImages()).isEqualTo(images).isNotEqualTo(masterVariant.getImages());
                         assertEqualPrices(productVariant.getPrices(), prices);
+
                     }
             );
         });
