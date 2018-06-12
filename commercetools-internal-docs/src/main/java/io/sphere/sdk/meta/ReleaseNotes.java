@@ -138,6 +138,11 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+ -->
+ <h3 class=released-version id="v1_34_0">1.34.0 </h3>
+ <ul>
+    <li class=change-in-release>Changed {@link ProductVariantImportDraftBuilder#prices(List)} argument from {@link List<Price>} to {@link List<PriceDraft>}</li>
+ </ul>
 
  <h3 class=released-version id="v1_33_0">1.33.0 (08.06.2018)</h3>
  <ul>
