@@ -33,6 +33,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static io.sphere.sdk.channels.ChannelFixtures.withPersistentChannel;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
@@ -89,17 +90,22 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
         withUpdateableType(client(), type -> {
             withPersistentChannel(client(), ChannelRole.INVENTORY_SUPPLY, channel -> {
                         withProduct(client(), product -> {
-                            final int variantId = 1;
-                            final String sku = sku(product);
-                            final ProductVariantImportDraft productVariantImportDraft = ProductVariantImportDraftBuilder.of(product.getId(), variantId, sku)
-                                    .build();
                             final String value = "foo";
                             final PriceDraft price = PriceDraft.of(EURO_1)
                                     .withCustom(CustomFieldsDraft.ofTypeIdAndObjects(type.getId(), singletonMap(STRING_FIELD_NAME, value)));
+                            final String orderNumber = randomString();
+                            final int variantId = 1;
+                            final String sku = sku(product);
+                            final ProductVariantImportDraft productVariantImportDraft = ProductVariantImportDraftBuilder.of(product.getId(), variantId, sku)
+                                    .prices(asList(price))
+                                    .build();
+
                             final LocalizedString name = randomSlug();
-                            final LineItemImportDraft lineItemImportDraft = LineItemImportDraftBuilder.of(productVariantImportDraft, 2L, price, name).supplyChannel(channel).build();
+                            final LineItemImportDraft lineItemImportDraft = LineItemImportDraftBuilder.of(productVariantImportDraft, 2L, price, name)
+                                    .supplyChannel(channel)
+                                    .build();
                             testOrderAspect(
-                                    builder -> builder.lineItems(asList(lineItemImportDraft)),
+                                    builder -> builder.lineItems(asList(lineItemImportDraft)).orderNumber(orderNumber),
                                     order -> {
                                         final LineItem lineItem = order.getLineItems().get(0);
                                         assertThat(lineItem.getProductId()).isEqualTo(product.getId());
@@ -107,7 +113,7 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
                                         final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
                                         assertThat(lineItem.getVariant().getAttributes()).isEqualTo(masterVariant.getAttributes());
                                         assertThat(lineItem.getVariant().getImages()).isEqualTo(masterVariant.getImages());
-                                        assertThat(lineItem.getVariant().getPrices()).isEqualTo(masterVariant.getPrices());
+                                        assertThat(lineItem.getVariant().getPrices()).isNotEmpty();
                                         assertThat(lineItem.getVariant().getSku()).contains(masterVariant.getSku());
                                         assertThat(lineItem.getQuantity()).isEqualTo(2);
                                         assertThat(lineItem.getName()).isEqualTo(name);
@@ -159,34 +165,41 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void customLineItems() throws Exception {
-        withTransientTaxCategory(client(), taxCategory -> withProduct(client(), product -> {
-            final LocalizedString name = randomSlug();
-            final long quantity = 16;
-            final MonetaryAmount money = EURO_20;
-            final Reference<TaxCategory> taxCategoryReference = defaultTaxCategory(client()).toReference();
-            final String id = "an id";
-            final String slug = "a-slug";
-            final TaxRate taxRate = taxCategory.getTaxRates().get(0);
-            final CustomLineItemImportDraft customLineItem = CustomLineItemImportDraftBuilder.of(name, quantity, money, taxCategoryReference)
-                    .id(id)
-                    .slug(slug)
-                    .taxRate(taxRate)
-                    .build();
-            final List<CustomLineItemImportDraft> customLineItems = asList(customLineItem);
-            testOrderAspect(
-                    builder -> builder.customLineItems(customLineItems),
-                    order -> {
-                        assertThat(order.getCustomLineItems()).hasSize(1);
-                        final CustomLineItem actual = order.getCustomLineItems().get(0);
-                        assertThat(actual.getMoney()).isEqualTo(money);
-                        assertThat(actual.getQuantity()).isEqualTo(quantity);
-                        assertThat(actual.getName()).isEqualTo(name);
-                        assertThat(actual.getSlug()).isEqualTo(slug);
-                        assertThat(actual.getTaxCategory()).isEqualTo(taxCategoryReference);
-                        assertThat(actual.getTaxRate()).isEqualTo(taxRate);
-                    }
-            );
-        }));
+        withUpdateableType(client(), type -> {
+            withTransientTaxCategory(client(), taxCategory -> withProduct(client(), product -> {
+                final LocalizedString name = randomSlug();
+                final long quantity = 16;
+                final MonetaryAmount money = EURO_20;
+                final Reference<TaxCategory> taxCategoryReference = defaultTaxCategory(client()).toReference();
+                final String id = "an id";
+                final String slug = "a-slug";
+                final TaxRate taxRate = taxCategory.getTaxRates().get(0);
+                final String value = "foo";
+                final PriceDraft price = PriceDraft.of(EURO_1)
+                        .withCustom(CustomFieldsDraft.ofTypeIdAndObjects(type.getId(), singletonMap(STRING_FIELD_NAME, value)));
+                final CustomLineItemImportDraft customLineItem = CustomLineItemImportDraftBuilder.of(name, quantity, money, taxCategoryReference)
+                        .id(id)
+                        .slug(slug)
+                        .taxRate(taxRate)
+                        .build();
+                final List<CustomLineItemImportDraft> customLineItems = asList(customLineItem);
+                testOrderAspect(
+                        builder -> builder.customLineItems(customLineItems),
+                        order -> {
+                            assertThat(order.getCustomLineItems()).hasSize(1);
+                            final CustomLineItem actual = order.getCustomLineItems().get(0);
+                            assertThat(actual.getMoney()).isEqualTo(money);
+                            assertThat(actual.getQuantity()).isEqualTo(quantity);
+                            assertThat(actual.getName()).isEqualTo(name);
+                            assertThat(actual.getSlug()).isEqualTo(slug);
+                            assertThat(actual.getTaxCategory()).isEqualTo(taxCategoryReference);
+                            assertThat(actual.getTaxRate()).isEqualTo(taxRate);
+                        }
+                );
+            }));
+            return type;
+                });
+
     }
 
     @Test
@@ -198,7 +211,7 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
         final List<Attribute> attributesOfOrder = asList(TShirtProductTypeDraftSupplier.Sizes.ATTRIBUTE.valueOf(TShirtProductTypeDraftSupplier.Sizes.S),
                 TShirtProductTypeDraftSupplier.Colors.ATTRIBUTE.valueOf(TShirtProductTypeDraftSupplier.Colors.RED));
         final List<Image> images = asList(Image.of("url", ImageDimensions.of(1, 2), "label"));
-        final List<Price> prices = asList(Price.of(new BigDecimal("15.23"), DefaultCurrencyUnits.EUR));
+        final List<PriceDraft> prices = asList(PriceDraft.of(new BigDecimal("15.23"), DefaultCurrencyUnits.EUR));
 
         withProduct(client(), product -> {
             final int variantId = 1;
@@ -218,6 +231,8 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
                         final ProductVariant productVariant = lineItem.getVariant();
                         assertThat(productVariant.getAttributes()).isEqualTo(attributesOfOrder).isNotEqualTo(masterVariant.getAttributes());
                         assertThat(productVariant.getImages()).isEqualTo(images).isNotEqualTo(masterVariant.getImages());
+                        assertEqualPrices(productVariant.getPrices(), prices);
+
                     }
             );
         });
@@ -496,5 +511,17 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
                 client().executeBlocking(OrderDeleteCommand.of(order));
             });
         });
+    }
+
+
+    public void assertEqualPrice(final Price price,final PriceDraft priceDraft){
+        assertThat(priceDraft).isEqualTo(PriceDraft.of(price));
+    }
+
+    public void assertEqualPrices(final List<Price> price,final List<PriceDraft> priceDraft){
+
+        final List<PriceDraft> transformedPriceDrafts = price.stream().map(PriceDraft::of).collect(Collectors.toList());
+        assertThat(transformedPriceDrafts).isEqualTo(priceDraft);
+
     }
 }

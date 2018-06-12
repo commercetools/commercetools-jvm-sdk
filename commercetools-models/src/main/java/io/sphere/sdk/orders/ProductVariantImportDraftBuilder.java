@@ -41,10 +41,8 @@ public final class ProductVariantImportDraftBuilder extends Base implements Buil
      * @param prices the prices to set
      * @return this builder
      */
-    public ProductVariantImportDraftBuilder prices(@Nullable final List<Price> prices) {
-        this.prices = Optional.ofNullable(prices).map(
-                prices1 -> prices1.stream().map(PriceDraft::of).map(PriceDraft.class::cast).collect(Collectors.toList())
-        ).orElse(null);
+    public ProductVariantImportDraftBuilder prices(@Nullable final List<PriceDraft> prices) {
+        this.prices = prices;
         return this;
     }
 
