@@ -8,6 +8,7 @@ import io.sphere.sdk.models.GeoJSON;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.WithKey;
 import io.sphere.sdk.types.CustomDraft;
+import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
 import java.util.Set;
@@ -25,6 +26,8 @@ import java.util.Set;
         abstractResourceDraftValueClass = true,
         factoryMethods = @FactoryMethod(parameterNames = {"key"}))
 public interface ChannelDraft extends WithKey, CustomDraft {
+    String getKey();
+
     @Nullable
     Set<ChannelRole> getRoles();
 
@@ -33,6 +36,9 @@ public interface ChannelDraft extends WithKey, CustomDraft {
 
     @Nullable
     LocalizedString getDescription();
+
+    @Nullable
+    CustomFieldsDraft getCustom();
 
     @Nullable
     Address getAddress();
