@@ -144,6 +144,7 @@ import java.util.function.Function;
  <ul>
     <li class=change-in-release>Changed {@link ProductVariantImportDraftBuilder#prices(List)} argument from {@link List<Price>} to {@link List<PriceDraft>}</li>
     <li class=added-in-release>Now {@link io.sphere.sdk.categories.commands.updateactions.ChangeParent} has an additional method {@link io.sphere.sdk.categories.commands.updateactions.ChangeParent#of(ResourceIdentifier)} to point out the changed parent via its resource identifier.</li>
+    <li class=added-in-release>Now supporting google PubSub destination {@link io.sphere.sdk.subscriptions.PubSubDestination} </li>
  </ul>
 
  <h3 class=released-version id="v1_34_0">1.34.0)</h3>
