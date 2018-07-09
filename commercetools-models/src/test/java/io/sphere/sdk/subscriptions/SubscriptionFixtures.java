@@ -165,6 +165,15 @@ public class SubscriptionFixtures {
                 .key(snsKey);
     }
 
+    public static SubscriptionDraftBuilder mockPubSubSubscription() {
+        final String projectKey = "achraf-61";
+
+        final String topic = "projects/ctp-playground/topics/sdk-test";
+
+        return SubscriptionDraftBuilder.of(PubSubDestination.of(projectKey, topic));
+    }
+
+
     public static SubscriptionDraftBuilder withCategoryChanges(final SubscriptionDraftBuilder subscriptionDraftBuilder) {
         return subscriptionDraftBuilder.changes(Collections.singletonList(ChangeSubscription.of(Category.resourceTypeId())));
     }

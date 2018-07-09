@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
                     @JsonSubTypes.Type(value = AzureServiceBusDestinationImpl.class, name = "AzureServiceBus"),
                     @JsonSubTypes.Type(value = SnsDestinationImpl.class, name = "SNS"),
                     @JsonSubTypes.Type(value = SqsDestinationImpl.class, name = "SQS"),
-                    @JsonSubTypes.Type(value = PubSubDestination.class, name = "GoogleCloudPubSub")
+                    @JsonSubTypes.Type(value = PubSubDestinationImpl.class, name = "GoogleCloudPubSub")
             }
         )
 public interface Destination {

@@ -20,4 +20,9 @@ public interface PubSubDestination extends Destination {
      * @return Name of the topic
      */
     String getTopic();
+
+
+    static PubSubDestination of(final String projectId, final String topic){
+        return new PubSubDestinationImpl(projectId, topic, "GoogleCloudPubSub");
+    }
 }

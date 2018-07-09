@@ -4,6 +4,7 @@ import com.amazonaws.services.sns.AmazonSNS;
 import com.amazonaws.services.sns.AmazonSNSClientBuilder;
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
+import io.sphere.sdk.client.ErrorResponseException;
 import io.sphere.sdk.subscriptions.*;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.AfterClass;
@@ -116,6 +117,26 @@ public class SubscriptionCreateCommandIntegrationTest extends SubscriptionIntegr
             assertThat(subscription.getChanges()).isEqualTo(subscriptionDraft.getChanges());
         } finally {
             SnsUtils.deleteTopicAndShutdown(topicArn, snsClient);
+            SubscriptionFixtures.deleteSubscription(client(), subscription);
+        }
+    }
+
+    /**
+     * The exception  expected here is due to the fact that the topic doesn't exist
+     */
+    @Test(expected = ErrorResponseException.class)
+    public void createPubSubChangesSubscription() throws Exception {
+        Subscription subscription = null;
+        try {
+            final SubscriptionDraftDsl subscriptionDraft = withCategoryChanges(mockPubSubSubscription()).build();
+
+            final SubscriptionCreateCommand createCommand = SubscriptionCreateCommand.of(subscriptionDraft);
+            subscription = client().executeBlocking(createCommand);
+
+            assertThat(subscription).isNotNull();
+            assertThat(subscription.getDestination()).isEqualTo(subscriptionDraft.getDestination());
+            assertThat(subscription.getChanges()).isEqualTo(subscriptionDraft.getChanges());
+        } finally {
             SubscriptionFixtures.deleteSubscription(client(), subscription);
         }
     }
