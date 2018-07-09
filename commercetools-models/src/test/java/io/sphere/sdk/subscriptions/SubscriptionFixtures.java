@@ -165,7 +165,7 @@ public class SubscriptionFixtures {
                 .key(snsKey);
     }
 
-    public static SubscriptionDraftBuilder mockPubSubSubscription() {
+    public static SubscriptionDraftBuilder createPubSubSubscription() {
         final String projectKey = "achraf-61";
 
         final String topic = "projects/ctp-playground/topics/sdk-test";

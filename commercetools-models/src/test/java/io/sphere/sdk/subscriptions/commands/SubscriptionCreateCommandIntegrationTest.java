@@ -6,11 +6,8 @@ import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import io.sphere.sdk.client.ErrorResponseException;
 import io.sphere.sdk.subscriptions.*;
-import io.sphere.sdk.test.IntegrationTest;
 import org.junit.AfterClass;
 import org.junit.Test;
-
-import java.io.IOException;
 
 import static io.sphere.sdk.subscriptions.SubscriptionFixtures.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -128,7 +125,7 @@ public class SubscriptionCreateCommandIntegrationTest extends SubscriptionIntegr
     public void createPubSubChangesSubscription() throws Exception {
         Subscription subscription = null;
         try {
-            final SubscriptionDraftDsl subscriptionDraft = withCategoryChanges(mockPubSubSubscription()).build();
+            final SubscriptionDraftDsl subscriptionDraft = withCategoryChanges(createPubSubSubscription()).build();
 
             final SubscriptionCreateCommand createCommand = SubscriptionCreateCommand.of(subscriptionDraft);
             subscription = client().executeBlocking(createCommand);
