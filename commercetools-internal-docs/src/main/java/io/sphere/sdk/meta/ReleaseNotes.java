@@ -278,6 +278,7 @@ import java.util.function.Function;
  {@link io.sphere.sdk.categories.commands.updateactions.SetAssetSources}, {@link io.sphere.sdk.categories.commands.updateactions.SetAssetCustomType},
  {@link io.sphere.sdk.categories.commands.updateactions.SetAssetCustomField}.
  </li>
+ 
  <li class=new-in-release>
  Added optional property position on update actions {@link AddAsset#getPosition()} and {@link io.sphere.sdk.categories.commands.updateactions.AddAsset#getPosition()}
  </li>
