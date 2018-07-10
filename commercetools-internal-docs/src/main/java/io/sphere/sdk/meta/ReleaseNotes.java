@@ -144,6 +144,7 @@ import java.util.function.Function;
  <ul>
     <li class=change-in-release>Changed {@link ProductVariantImportDraftBuilder#prices(List)} argument from {@link List<Price>} to {@link List<PriceDraft>}</li>
     <li class=added-in-release>Now {@link io.sphere.sdk.categories.commands.updateactions.ChangeParent} has an additional method {@link io.sphere.sdk.categories.commands.updateactions.ChangeParent#of(ResourceIdentifier)} to point out the changed parent via its resource identifier.</li>
+    <li class=added-in-release>Now supporting google PubSub destination {@link io.sphere.sdk.subscriptions.PubSubDestination} </li>
     <li class=change-in-release>Added field {@link MessageSubscriptionPayload#getPaylaodNotIncluded()} to {@link io.sphere.sdk.subscriptions.PayloadNotIncluded} to give more details when the payload is not included in a message</li>
  </ul>
 

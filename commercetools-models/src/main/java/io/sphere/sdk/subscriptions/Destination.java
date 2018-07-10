@@ -12,7 +12,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
             {       @JsonSubTypes.Type(value = IronMqDestinationImpl.class, name = "IronMQ"),
                     @JsonSubTypes.Type(value = AzureServiceBusDestinationImpl.class, name = "AzureServiceBus"),
                     @JsonSubTypes.Type(value = SnsDestinationImpl.class, name = "SNS"),
-                    @JsonSubTypes.Type(value = SqsDestinationImpl.class, name = "SQS")
+                    @JsonSubTypes.Type(value = SqsDestinationImpl.class, name = "SQS"),
+                    @JsonSubTypes.Type(value = PubSubDestinationImpl.class, name = "GoogleCloudPubSub")
             }
         )
 public interface Destination {
