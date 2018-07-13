@@ -39,7 +39,7 @@ public class ChangeSubscriptionSqsIntegrationTest extends SqsIntegrationTest {
                 final ResourceCreatedPayload<Product> resourceCreatedPayload =
                         SphereJsonUtils.readObject(sqsMessage.getBody(), ResourceCreatedPayload.class);
                 assertThat(resourceCreatedPayload).isNotNull();
-
+                assertThat(resourceCreatedPayload.getModifiedAt()).isNotNull();
                 final Reference resource = resourceCreatedPayload.getResource();
 
                 assertThat(resource).isNotNull();
