@@ -8,10 +8,7 @@ import io.sphere.sdk.carts.commands.updateactions.SetCustomerEmail;
 import io.sphere.sdk.carts.queries.CartByIdGet;
 import io.sphere.sdk.client.ErrorResponseException;
 import io.sphere.sdk.models.DefaultCurrencyUnits;
-import io.sphere.sdk.orders.Order;
-import io.sphere.sdk.orders.OrderFromCartDraft;
-import io.sphere.sdk.orders.OrderFromCartDraftBuilder;
-import io.sphere.sdk.orders.ShipmentState;
+import io.sphere.sdk.orders.*;
 import io.sphere.sdk.orders.commands.updateactions.TransitionState;
 import io.sphere.sdk.orders.expansion.OrderExpansionModel;
 import io.sphere.sdk.states.StateType;
@@ -88,13 +85,22 @@ public class OrderFromCartCreateCommandIntegrationTest extends IntegrationTest {
 
 
     @Test
-    public void orderFromCartDraft(){
-        withFilledCart(client(), cart -> {
-            final OrderFromCartDraft orderFromCartDraft = OrderFromCartDraftBuilder.of(cart.getId(),cart.getVersion() ).shipmentState(ShipmentState.SHIPPED).build();
-            final Order order = client().executeBlocking(OrderFromCartCreateCommand.of(cart).withDraft(orderFromCartDraft));
-            assertThat(order).isNotNull();
-            assertThat(order.getShipmentState()).isEqualTo(ShipmentState.SHIPPED);
-        });
+    public void orderFromCartDraft() {
+        withStateByBuilder(client(), builder -> builder.type(StateType.ORDER_STATE), state -> {
+            withFilledCart(client(), cart -> {
+                final OrderFromCartDraft orderFromCartDraft = OrderFromCartDraftBuilder.of(cart.getId(), cart.getVersion())
+                        .shipmentState(ShipmentState.SHIPPED)
+                        .state(state.toReference())
+                        .orderState(OrderState.CANCELLED)
+                        .build();
+                final Order order = client().executeBlocking(OrderFromCartCreateCommand.of(cart).withDraft(orderFromCartDraft));
+                assertThat(order.getState().getId()).isEqualTo(state.getId());
+                assertThat(order.getOrderState()).isEqualTo(OrderState.CANCELLED);
+                assertThat(order).isNotNull();
+                assertThat(order.getShipmentState()).isEqualTo(ShipmentState.SHIPPED);
 
+                client().executeBlocking(OrderDeleteCommand.of(order));
+            });
+        });
     }
 }

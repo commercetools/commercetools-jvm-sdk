@@ -4,7 +4,9 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.carts.Cart;
+import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Versioned;
+import io.sphere.sdk.states.State;
 
 import javax.annotation.Nullable;
 
@@ -24,6 +26,12 @@ public interface OrderFromCartDraft {
 
     @Nullable
     PaymentState getPaymentState();
+
+    @Nullable
+    OrderState getOrderState();
+
+    @Nullable
+    Reference<State> getState();
 
     @Nullable
     ShipmentState getShipmentState();

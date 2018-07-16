@@ -143,6 +143,7 @@ import java.util.function.Function;
  <h3 class=released-version id="v1_35_0">1.35.0 </h3>
  <ul>
     <li class=change-in-release> Add field modified a to Payload {@link io.sphere.sdk.subscriptions.ResourceCreatedPayload}, {@link io.sphere.sdk.subscriptions.ResourceUpdatedPayload} and {@link io.sphere.sdk.subscriptions.ResourceDeletedPayload} </li>
+    <li class=change-in-release>Added new attributes  {@link OrderFromCartDraft#getOrderState()} and {@link OrderFromCartDraft#getState()}</li>
  </ul>
 
  <h3 class=released-version id="v1_34_0">1.34.0 (10.07.2018)</h3>
