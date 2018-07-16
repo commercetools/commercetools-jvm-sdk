@@ -67,6 +67,20 @@ public class ProductDiscountUpdateCommandIntegrationTest extends IntegrationTest
     }
 
     @Test
+    public void setValidFromAndUntil() throws Exception {
+        withUpdateableProductDiscount(client(), discount -> {
+            final ZonedDateTime start = ZonedDateTime.parse("2015-07-09T07:46:40.230Z");
+            final ZonedDateTime end = start.plusYears(100);
+
+            final ProductDiscount updatedDiscount = client().executeBlocking(ProductDiscountUpdateCommand.of(discount, SetValidFromAndUntil.of(start,end )));
+
+            assertThat(updatedDiscount.getValidFrom()).isEqualTo(start);
+            assertThat(updatedDiscount.getValidUntil()).isEqualTo(end);
+            return updatedDiscount;
+        });
+    }
+
+    @Test
     public void changeName() throws Exception {
         withUpdateableProductDiscount(client(), discount -> {
             final LocalizedString newName = randomSlug();

@@ -55,6 +55,7 @@ public interface ProductDiscount extends Resource<ProductDiscount> {
 
     @Nullable
     @HasUpdateAction
+    @HasUpdateAction(value = "setValidFromAndUntil", fields = {@PropertySpec(name = "validFrom",type=ZonedDateTime.class),@PropertySpec(name = "validUntil",type=ZonedDateTime.class)})
     ZonedDateTime getValidFrom();
 
     @Nullable
