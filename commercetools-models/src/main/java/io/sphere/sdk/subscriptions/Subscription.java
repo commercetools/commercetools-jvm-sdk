@@ -27,6 +27,7 @@ public interface Subscription extends Resource<Subscription> {
     @Nullable
     String getKey();
 
+    @HasUpdateAction
     @IgnoreInQueryModel
     Destination getDestination();
 
@@ -36,6 +37,8 @@ public interface Subscription extends Resource<Subscription> {
     @IgnoreInQueryModel
     List<ChangeSubscription> getChanges();
 
+    @IgnoreInQueryModel
+    SubscriptionHealthStatus getStatus();
     /**
      * Creates a container which contains the full Java type information to deserialize this class from JSON.
      *
