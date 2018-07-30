@@ -105,6 +105,7 @@ import io.sphere.sdk.states.State;
 import io.sphere.sdk.states.StateDraftDsl;
 import io.sphere.sdk.subscriptions.AzureServiceBusDestination;
 import io.sphere.sdk.subscriptions.MessageSubscriptionPayload;
+import io.sphere.sdk.subscriptions.Subscription;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxCategoryDraft;
 import io.sphere.sdk.taxcategories.TaxCategoryDraftBuilder;
@@ -144,9 +145,11 @@ import java.util.function.Function;
  <h3 class=released-version id="v1_35_0">1.35.0 </h3>
  <ul>
     <li class=change-in-release> Add field modified a to Payload {@link io.sphere.sdk.subscriptions.ResourceCreatedPayload}, {@link io.sphere.sdk.subscriptions.ResourceUpdatedPayload} and {@link io.sphere.sdk.subscriptions.ResourceDeletedPayload} </li>
+    <li class=new-in-release> Now its possible to query the subscriptions endpoint health via the new {@link Subscription#getStatus()}</li>
     <li class=change-in-release>Added new attributes  {@link OrderFromCartDraft#getOrderState()} and {@link OrderFromCartDraft#getState()}</li>
     <li class=new-in-release>new update action {@link io.sphere.sdk.productdiscounts.commands.updateactions.SetValidFromAndUntil} to {@link ProductDiscount}</li>
     <li class=change-in-release>{@link io.sphere.sdk.producttypes.commands.updateactions.AddAttributeDefinition#of(AttributeDefinition)} changed parameter to {@link io.sphere.sdk.producttypes.commands.updateactions.AddAttributeDefinition#of(AttributeDefinitionDraft)} instead</li>
+
  </ul>
 
  <h3 class=released-version id="v1_34_0">1.34.0 (10.07.2018)</h3>

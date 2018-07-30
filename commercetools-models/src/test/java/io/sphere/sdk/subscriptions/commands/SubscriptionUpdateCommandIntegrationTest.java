@@ -1,7 +1,10 @@
 package io.sphere.sdk.subscriptions.commands;
 
+import com.amazonaws.services.sqs.AmazonSQS;
+import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import io.sphere.sdk.payments.Payment;
 import io.sphere.sdk.subscriptions.*;
+import io.sphere.sdk.subscriptions.commands.updateactions.ChangeDestination;
 import io.sphere.sdk.subscriptions.commands.updateactions.SetChanges;
 import io.sphere.sdk.subscriptions.commands.updateactions.SetKey;
 import io.sphere.sdk.subscriptions.commands.updateactions.SetMessages;
@@ -56,6 +59,30 @@ public class SubscriptionUpdateCommandIntegrationTest extends SubscriptionIntegr
     public void setMessagesIronMq(){
         assumeHasIronMqEnv();
         setMessagesQueue(SubscriptionFixtures::ironMqSubscriptionDraftBuilder);
+    }
+
+    @Test
+    public void changeDestination(){
+        assumeHasIronMqEnv();
+        assumeHasAwsCliEnv();
+
+        final AmazonSQS sqsClient = AmazonSQSClientBuilder.defaultClient();
+        final String queueUrl = SqsUtils.createTestQueue(sqsClient);
+        Subscription subscription = null;
+        try {
+            final SubscriptionDraftDsl subscriptionDraft = withCategoryChanges(sqsSubscriptionDraftBuilder(queueUrl)).build();
+
+            final SubscriptionCreateCommand createCommand = SubscriptionCreateCommand.of(subscriptionDraft);
+            subscription = client().executeBlocking(createCommand);
+            final Destination newDestination = ironMqSubscriptionDraftBuilder().getDestination();
+            subscription = client().executeBlocking(SubscriptionUpdateCommand.of(subscription,ChangeDestination.of(newDestination)));
+            assertThat(subscription).isNotNull();
+            assertThat(subscription.getDestination()).isEqualTo(newDestination);
+        } finally {
+            SqsUtils.deleteQueueAndShutdown(queueUrl, sqsClient);
+            SubscriptionFixtures.deleteSubscription(client(), subscription);
+        }
+
     }
 
     public void setKeyQueue(Supplier<SubscriptionDraftBuilder> subscriptionDraftBuilderSupplier) {
