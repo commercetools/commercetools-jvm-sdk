@@ -32,9 +32,13 @@ public @interface HasUpdateAction {
      */
 
     String exampleBaseClass() default "";
+
     FactoryMethod[] factoryMethods() default {};
+
     CopyFactoryMethod[] copyFactoryMethods() default {};
+
     Class[] superInterfaces() default {};
+
     boolean makeAbstract() default false;
 
     /**
