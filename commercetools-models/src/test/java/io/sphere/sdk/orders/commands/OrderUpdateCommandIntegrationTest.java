@@ -841,6 +841,17 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
                 assertThat(order.getCustomerId()).isNotEqualTo(customer.getId());
                 final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, SetCustomerId.of(customer.getId())));
                 assertThat(updatedOrder.getCustomerId()).isEqualTo(customer.getId());
+
+                final Query<OrderCustomerSetMessage> messageQuery = MessageQuery.of()
+                        .withPredicates(m -> m.resource().is(order))
+                        .forMessageType(OrderCustomerSetMessage.MESSAGE_HINT);
+                assertEventually(() -> {
+                    final Optional<OrderCustomerSetMessage> customerSetMessageOptional =
+                            client().executeBlocking(messageQuery).head();
+                    assertThat(customerSetMessageOptional).isPresent();
+                    final OrderCustomerSetMessage customerSetMessage = customerSetMessageOptional.get();
+                    assertThat(customerSetMessage.getCustomer()).isEqualTo(customer);
+                });
                 return updatedOrder;
             });
         });
