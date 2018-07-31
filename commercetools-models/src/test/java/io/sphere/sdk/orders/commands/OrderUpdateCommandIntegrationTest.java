@@ -838,7 +838,8 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
     public void testSetCustomerId() {
         CustomerFixtures.withCustomer(client(), customer -> {
             withOrder(client(), order -> {
-                assertThat(order.getCustomerId()).isNotEqualTo(customer.getId());
+                final String olderCustomerId = order.getCustomerId();
+                assertThat(olderCustomerId).isNotEqualTo(customer.getId());
                 final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, SetCustomerId.of(customer.getId())));
                 assertThat(updatedOrder.getCustomerId()).isEqualTo(customer.getId());
 
@@ -850,7 +851,8 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
                             client().executeBlocking(messageQuery).head();
                     assertThat(customerSetMessageOptional).isPresent();
                     final OrderCustomerSetMessage customerSetMessage = customerSetMessageOptional.get();
-                    assertThat(customerSetMessage.getCustomer()).isEqualTo(customer);
+                    assertThat(customerSetMessage.getCustomer().getId()).isEqualTo(customer.getId());
+                    assertThat(customerSetMessage.getOldCustomer().getId()).isEqualTo(olderCustomerId);
                 });
                 return updatedOrder;
             });
