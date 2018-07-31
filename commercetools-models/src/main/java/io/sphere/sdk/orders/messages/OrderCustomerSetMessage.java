@@ -29,7 +29,7 @@ public final class OrderCustomerSetMessage extends GenericMessageImpl<Order> {
     Reference<CustomerGroup> oldCustomerGroup;
 
     @JsonCreator
-    public OrderCustomerSetMessage(final Reference<Customer> customer, @Nullable final Reference<CustomerGroup> customerGroup, final Reference<Customer> oldCustomer, final Reference<CustomerGroup> oldCustomerGroup, final
+    private OrderCustomerSetMessage(final Reference<Customer> customer, @Nullable final Reference<CustomerGroup> customerGroup, final Reference<Customer> oldCustomer, final Reference<CustomerGroup> oldCustomerGroup, final
     String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final Class<Order> clazz) {
         super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, clazz);
         this.customer = customer;
