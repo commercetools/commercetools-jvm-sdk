@@ -5,6 +5,7 @@ import io.sphere.sdk.carts.CustomLineItem;
 import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.carts.LineItemLike;
+import io.sphere.sdk.customers.CustomerFixtures;
 import io.sphere.sdk.messages.queries.MessageQuery;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Reference;
@@ -830,6 +831,18 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(parcel.getMeasurements()).isEqualTo(parcelMeasurements);
             return updatedOrder2;
 
+        });
+    }
+
+    @Test
+    public void testSetCustomerId() {
+        CustomerFixtures.withCustomer(client(), customer -> {
+            withOrder(client(), order -> {
+                assertThat(order.getCustomerId()).isNotEqualTo(customer.getId());
+                final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, SetCustomerId.of(customer.getId())));
+                assertThat(updatedOrder.getCustomerId()).isEqualTo(customer.getId());
+                return updatedOrder;
+            });
         });
     }
 }
