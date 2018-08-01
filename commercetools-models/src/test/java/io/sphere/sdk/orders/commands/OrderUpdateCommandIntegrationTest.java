@@ -5,6 +5,7 @@ import io.sphere.sdk.carts.CustomLineItem;
 import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.carts.LineItemLike;
+import io.sphere.sdk.customers.CustomerFixtures;
 import io.sphere.sdk.messages.queries.MessageQuery;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Reference;
@@ -830,6 +831,31 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(parcel.getMeasurements()).isEqualTo(parcelMeasurements);
             return updatedOrder2;
 
+        });
+    }
+
+    @Test
+    public void testSetCustomerId() {
+        CustomerFixtures.withCustomer(client(), customer -> {
+            withOrder(client(), order -> {
+                final String olderCustomerId = order.getCustomerId();
+                assertThat(olderCustomerId).isNotEqualTo(customer.getId());
+                final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, SetCustomerId.of(customer.getId())));
+                assertThat(updatedOrder.getCustomerId()).isEqualTo(customer.getId());
+
+                final Query<OrderCustomerSetMessage> messageQuery = MessageQuery.of()
+                        .withPredicates(m -> m.resource().is(order))
+                        .forMessageType(OrderCustomerSetMessage.MESSAGE_HINT);
+                assertEventually(() -> {
+                    final Optional<OrderCustomerSetMessage> customerSetMessageOptional =
+                            client().executeBlocking(messageQuery).head();
+                    assertThat(customerSetMessageOptional).isPresent();
+                    final OrderCustomerSetMessage customerSetMessage = customerSetMessageOptional.get();
+                    assertThat(customerSetMessage.getCustomer().getId()).isEqualTo(customer.getId());
+                    assertThat(customerSetMessage.getOldCustomer().getId()).isEqualTo(olderCustomerId);
+                });
+                return updatedOrder;
+            });
         });
     }
 }
