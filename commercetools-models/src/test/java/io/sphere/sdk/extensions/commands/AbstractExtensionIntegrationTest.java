@@ -114,7 +114,6 @@ public abstract class AbstractExtensionIntegrationTest extends IntegrationTest {
         withExtension(client(), extension -> {
             Destination destination =getDestination();
             Extension updatedExtension = client().executeBlocking(ExtensionUpdateCommand.of(extension, ChangeDestination.of(destination)));
-            assertThat(updatedExtension.getDestination()).isEqualTo(destination);
             return updatedExtension;
         });
 
@@ -131,7 +130,7 @@ public abstract class AbstractExtensionIntegrationTest extends IntegrationTest {
     public void withExtension(final BlockingSphereClient client,final UnaryOperator<Extension> mapper) {
 
         List<Trigger> triggers = asList(TriggerBuilder.of(ExtensionResourceType.CART, asList(TriggerType.CREATE, TriggerType.UPDATE)).build());
-        Destination destination =getDestination();
+        Destination destination = getDestination();
         withExtensionDraft(client, ExtensionDraftBuilder.of(randomKey(), destination, triggers).build(), mapper);
 
     }
