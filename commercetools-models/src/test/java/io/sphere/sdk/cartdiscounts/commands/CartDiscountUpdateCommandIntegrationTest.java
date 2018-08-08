@@ -10,6 +10,7 @@ import io.sphere.sdk.utils.MoneyImpl;
 import net.jcip.annotations.NotThreadSafe;
 import org.junit.Test;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
@@ -27,6 +28,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @NotThreadSafe
 public class CartDiscountUpdateCommandIntegrationTest extends IntegrationTest {
+
+    @Test
+    public void setValidFromAndUntil() {
+        withPersistentCartDiscount(client(), cartDiscount -> {
+            final ZonedDateTime validFrom =
+                    ZonedDateTime.of(2018, 8, 8, 0, 0, 0, 0, ZoneId.systemDefault());
+            final ZonedDateTime validUntil = ZonedDateTime.now().plusYears(1);
+
+            final CartDiscount updatedDiscountCode =
+                    client().executeBlocking(CartDiscountUpdateCommand.of(cartDiscount, SetValidFromAndUntil.of(validFrom, validUntil)));
+            assertThat(updatedDiscountCode.getValidFrom()).isEqualTo(validFrom);
+            assertThat(updatedDiscountCode.getValidUntil()).isEqualTo(validUntil);
+        });
+    }
+
     @Test
     public void changeValue() throws Exception {
         withPersistentCartDiscount(client(), cartDiscount -> {
