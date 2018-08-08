@@ -99,7 +99,7 @@ public interface DiscountCode extends Resource<DiscountCode>, Custom {
     @HasUpdateAction
     @HasUpdateAction(value = "setValidFromAndUntil", fields = {
             @PropertySpec(name = "validFrom", type = ZonedDateTime.class),
-            @PropertySpec(name = "validTo", type = ZonedDateTime.class)})
+            @PropertySpec(name = "validUntil", type = ZonedDateTime.class)})
     ZonedDateTime getValidFrom();
 
     /**
