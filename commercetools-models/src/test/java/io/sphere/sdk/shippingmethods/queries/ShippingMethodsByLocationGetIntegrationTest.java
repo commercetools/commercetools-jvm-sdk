@@ -20,7 +20,7 @@ public class ShippingMethodsByLocationGetIntegrationTest extends IntegrationTest
     public void execution() throws Exception {
         withShippingMethodForGermany(client(), shippingMethod -> {
             final SphereRequest<List<ShippingMethod>> sphereRequest =
-                    new VrapRequestDecorator<>(ShippingMethodsByLocationGet.of(CountryCode.DE), "response");
+                    new VrapRequestDecorator<>(ShippingMethodsByLocationGet.of(CountryCode.DE).withExpansionPaths(m -> m.zones()), "response");
 
             final List<ShippingMethod> shippingMethodsByLocation =
                     client().executeBlocking(sphereRequest);
