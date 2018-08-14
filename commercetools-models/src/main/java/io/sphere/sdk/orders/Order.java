@@ -175,6 +175,7 @@ public interface Order extends CartLike<Order> {
     Reference<CustomerGroup> getCustomerGroup();
 
     @Override
+    @HasUpdateAction
     @Nullable
     String getCustomerId();
 
