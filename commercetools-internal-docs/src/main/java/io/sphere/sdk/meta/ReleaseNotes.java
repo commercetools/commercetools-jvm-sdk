@@ -150,6 +150,7 @@ import java.util.function.Function;
     <li class=new-in-release>new update action {@link io.sphere.sdk.productdiscounts.commands.updateactions.SetValidFromAndUntil} to {@link ProductDiscount}</li>
     <li class=change-in-release>{@link io.sphere.sdk.producttypes.commands.updateactions.AddAttributeDefinition#of(AttributeDefinition)} changed parameter to {@link io.sphere.sdk.producttypes.commands.updateactions.AddAttributeDefinition#of(AttributeDefinitionDraft)} instead</li>
     <li class=new-in-release>now possible to change customer in order via {@link io.sphere.sdk.orders.commands.updateactions.SetCustomerId} which would result in a {@link io.sphere.sdk.orders.messages.OrderCustomerSetMessage}</li>
+    <li class=new-in-release>Added new {@link io.sphere.sdk.orders.messages.OrderDeletedMessage}.</li>
  </ul>
 
  <h3 class=released-version id="v1_34_0">1.34.0 (10.07.2018)</h3>

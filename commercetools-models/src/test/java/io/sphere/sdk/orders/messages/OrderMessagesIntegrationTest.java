@@ -4,6 +4,7 @@ import io.sphere.sdk.messages.queries.MessageQuery;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.orders.*;
+import io.sphere.sdk.orders.commands.OrderDeleteCommand;
 import io.sphere.sdk.orders.commands.OrderImportCommand;
 import io.sphere.sdk.orders.commands.OrderUpdateCommand;
 import io.sphere.sdk.orders.commands.updateactions.ChangeOrderState;
@@ -16,6 +17,7 @@ import org.junit.Test;
 import javax.money.MonetaryAmount;
 import java.util.Optional;
 
+import static io.sphere.sdk.orders.OrderFixtures.withOrder;
 import static io.sphere.sdk.orders.OrderFixtures.withOrderAndReturnInfo;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -70,6 +72,34 @@ public class OrderMessagesIntegrationTest extends IntegrationTest {
 
             return order;
         }));
+    }
+
+    @Test
+    public void orderDeletedMessage() throws Exception {
+        withOrder(client(), order -> {
+            final Order deletedOrder = client().executeBlocking(OrderDeleteCommand.of(order));
+
+            final Query<OrderDeletedMessage> messageQuery = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(deletedOrder))
+                    .withExpansionPaths(m -> m.resource())
+                    .withLimit(1L)
+                    .forMessageType(OrderDeletedMessage.MESSAGE_HINT);
+
+            assertEventually(() -> {
+                final Optional<OrderDeletedMessage> orderDeletedMessageOptional = client().executeBlocking(messageQuery).head();
+                assertThat(orderDeletedMessageOptional).isPresent();
+
+                final OrderDeletedMessage orderDeletedMessage = orderDeletedMessageOptional.get();
+                final Order orderFromMessage = orderDeletedMessage.getOrder();
+
+                assertThat(orderFromMessage.getId()).isEqualTo(deletedOrder.getId());
+
+                final Reference<Order> resource = orderDeletedMessage.getResource();
+
+                assertThat(resource.getObj()).isNotNull();
+                assertThat(resource.getId()).isEqualTo(deletedOrder.getId());
+            });
+        });
     }
 
     @Test
