@@ -10,17 +10,33 @@ import io.sphere.sdk.test.IntegrationTest;
 import net.jcip.annotations.NotThreadSafe;
 import org.junit.Test;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.*;
-import static io.sphere.sdk.discountcodes.DiscountCodeFixtures.*;
+import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.withCartDiscount;
+import static io.sphere.sdk.discountcodes.DiscountCodeFixtures.withPersistentDiscountCode;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @NotThreadSafe
 public class DiscountCodeUpdateCommandIntegrationTest extends IntegrationTest {
+    @Test
+    public void setValidFromAndUntil() {
+        withPersistentDiscountCode(client(), discountCode -> {
+            final ZonedDateTime validFrom =
+                    ZonedDateTime.of(2018, 8, 8, 0, 0, 0, 0, ZoneId.systemDefault());
+            final ZonedDateTime validUntil = ZonedDateTime.now().plusYears(1);
+
+            final DiscountCode updatedDiscountCode =
+                    client().executeBlocking(DiscountCodeUpdateCommand.of(discountCode, SetValidFromAndUntil.of(validFrom, validUntil)));
+            assertThat(updatedDiscountCode.getValidFrom()).isEqualTo(validFrom);
+            assertThat(updatedDiscountCode.getValidUntil()).isEqualTo(validUntil);
+        });
+    }
+
     @Test
     public void setName() throws Exception {
         withPersistentDiscountCode(client(), discountCode -> {
@@ -30,7 +46,7 @@ public class DiscountCodeUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(updatedDiscountCode.getName()).isEqualTo(newName);
         });
     }
-    
+
     @Test
     public void setDescription() throws Exception {
         withPersistentDiscountCode(client(), discountCode -> {
