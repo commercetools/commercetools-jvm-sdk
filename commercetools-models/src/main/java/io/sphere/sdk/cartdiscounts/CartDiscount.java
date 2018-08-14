@@ -141,8 +141,8 @@ public interface CartDiscount extends Resource<CartDiscount> {
     @IgnoreInQueryModel
     @HasUpdateAction
     @HasUpdateAction(value = "setValidFromAndUntil", fields = {
-            @PropertySpec(name = "validFrom",type=ZonedDateTime.class,isOptional = true),
-            @PropertySpec(name = "validUntil",type=ZonedDateTime.class, isOptional = true)
+            @PropertySpec(name = "validFrom", type = ZonedDateTime.class, isOptional = true),
+            @PropertySpec(name = "validUntil", type = ZonedDateTime.class, isOptional = true)
     })
     ZonedDateTime getValidFrom();
 
