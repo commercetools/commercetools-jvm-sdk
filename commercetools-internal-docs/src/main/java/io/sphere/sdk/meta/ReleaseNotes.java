@@ -152,7 +152,6 @@ import java.util.function.Function;
     <li class=new-in-release>It's now possible to change customer in order via {@link io.sphere.sdk.orders.commands.updateactions.SetCustomerId} which would result in a {@link io.sphere.sdk.orders.messages.OrderCustomerSetMessage}</li>
     <li  class=new-in-release>Added new update action {@link io.sphere.sdk.cartdiscounts.commands.updateactions.SetValidFromAndUntil} to {@link CartDiscount}</li>
     <li  class=new-in-release>Added new update action {@link io.sphere.sdk.discountcodes.commands.updateactions.SetValidFromAndUntil} to {@link DiscountCode}</li>
-    <li class=new-in-release>now possible to change customer in order via {@link io.sphere.sdk.orders.commands.updateactions.SetCustomerId} which would result in a {@link io.sphere.sdk.orders.messages.OrderCustomerSetMessage}</li>
     <li class=new-in-release>Added new {@link io.sphere.sdk.orders.messages.OrderDeletedMessage}.</li>
  </ul>
 
