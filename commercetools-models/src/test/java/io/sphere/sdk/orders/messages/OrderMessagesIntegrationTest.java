@@ -93,11 +93,6 @@ public class OrderMessagesIntegrationTest extends IntegrationTest {
                 final Order orderFromMessage = orderDeletedMessage.getOrder();
 
                 assertThat(orderFromMessage.getId()).isEqualTo(deletedOrder.getId());
-
-                final Reference<Order> resource = orderDeletedMessage.getResource();
-
-                assertThat(resource.getObj()).isNotNull();
-                assertThat(resource.getId()).isEqualTo(deletedOrder.getId());
             });
         });
     }
