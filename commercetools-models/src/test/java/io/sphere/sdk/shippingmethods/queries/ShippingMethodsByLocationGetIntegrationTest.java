@@ -32,6 +32,8 @@ public class ShippingMethodsByLocationGetIntegrationTest extends IntegrationTest
                         .collect(Collectors.toList());
 
                 assertThat(shippingRates).areAtLeastOne(new Condition<>(ShippingRate::isMatching, "Shipping rate is matching"));
+                assertThat(shippingMethodByLocation.getZones()).isNotEmpty();
+                assertThat(shippingMethodByLocation.getZones().get(0).getObj()).isNotNull();
             }
         });
     }
