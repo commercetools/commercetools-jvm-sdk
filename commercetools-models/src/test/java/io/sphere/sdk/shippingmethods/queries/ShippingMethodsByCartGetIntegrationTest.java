@@ -33,7 +33,7 @@ public class ShippingMethodsByCartGetIntegrationTest extends IntegrationTest {
                 final Cart cartWithShippingAddress = client().executeBlocking(CartUpdateCommand.of(cart, SetShippingAddress.of(GERMAN_ADDRESS)));
 
                 final SphereRequest<List<ShippingMethod>> sphereRequest =
-                        new VrapRequestDecorator<>(ShippingMethodsByCartGet.of(cartWithShippingAddress), "response");
+                        new VrapRequestDecorator<>(ShippingMethodsByCartGet.of(cartWithShippingAddress).plusExpansionPaths(exp -> exp.taxCategory()), "response");
 
                 final List<ShippingMethod> shippingMethods =
                         client().executeBlocking(sphereRequest);
@@ -45,6 +45,7 @@ public class ShippingMethodsByCartGetIntegrationTest extends IntegrationTest {
                             .collect(Collectors.toList());
 
                     assertThat(shippingRates).areExactly(1, new Condition<>(ShippingRate::isMatching, "Shipping rate is matching"));
+                    assertThat(cartShippingMethod.getTaxCategory().getObj()).isNotNull();
                 }
                 return cartWithShippingAddress;
             });

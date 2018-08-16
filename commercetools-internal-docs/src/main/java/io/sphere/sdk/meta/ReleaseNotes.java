@@ -153,6 +153,8 @@ import java.util.function.Function;
     <li  class=new-in-release>Added new update action {@link io.sphere.sdk.cartdiscounts.commands.updateactions.SetValidFromAndUntil} to {@link CartDiscount}</li>
     <li  class=new-in-release>Added new update action {@link io.sphere.sdk.discountcodes.commands.updateactions.SetValidFromAndUntil} to {@link DiscountCode}</li>
     <li class=new-in-release>Added new {@link io.sphere.sdk.orders.messages.OrderDeletedMessage}.</li>
+    <li class=new-in-release>Added reference expansion to {@link io.sphere.sdk.shippingmethods.queries.ShippingMethodsByCartGet}.</li>
+    <li class=new-in-release>Added reference expansion to {@link io.sphere.sdk.shippingmethods.queries.ShippingMethodsByLocationGet}</li>
  </ul>
 
  <h3 class=released-version id="v1_34_0">1.34.0 (10.07.2018)</h3>

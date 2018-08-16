@@ -20,7 +20,7 @@ public class ShippingMethodsByLocationGetIntegrationTest extends IntegrationTest
     public void execution() throws Exception {
         withShippingMethodForGermany(client(), shippingMethod -> {
             final SphereRequest<List<ShippingMethod>> sphereRequest =
-                    new VrapRequestDecorator<>(ShippingMethodsByLocationGet.of(CountryCode.DE), "response");
+                    new VrapRequestDecorator<>(ShippingMethodsByLocationGet.of(CountryCode.DE).withExpansionPaths(m -> m.zones()), "response");
 
             final List<ShippingMethod> shippingMethodsByLocation =
                     client().executeBlocking(sphereRequest);
@@ -32,6 +32,8 @@ public class ShippingMethodsByLocationGetIntegrationTest extends IntegrationTest
                         .collect(Collectors.toList());
 
                 assertThat(shippingRates).areAtLeastOne(new Condition<>(ShippingRate::isMatching, "Shipping rate is matching"));
+                assertThat(shippingMethodByLocation.getZones()).isNotEmpty();
+                assertThat(shippingMethodByLocation.getZones().get(0).getObj()).isNotNull();
             }
         });
     }

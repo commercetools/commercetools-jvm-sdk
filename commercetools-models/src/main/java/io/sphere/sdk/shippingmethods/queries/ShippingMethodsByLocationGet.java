@@ -1,8 +1,9 @@
 package io.sphere.sdk.shippingmethods.queries;
 
 import com.neovisionaries.i18n.CountryCode;
-import io.sphere.sdk.client.SphereRequest;
+import io.sphere.sdk.queries.MetaModelGetDsl;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
+import io.sphere.sdk.shippingmethods.expansion.ShippingMethodExpansionModel;
 
 import javax.money.CurrencyUnit;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  *
  * {@include.example io.sphere.sdk.shippingmethods.queries.ShippingMethodsByLocationGetIntegrationTest#execution()}
  */
-public interface ShippingMethodsByLocationGet extends SphereRequest<List<ShippingMethod>> {
+public interface ShippingMethodsByLocationGet extends MetaModelGetDsl<List<ShippingMethod>, ShippingMethod, ShippingMethodsByCartGet, ShippingMethodExpansionModel<ShippingMethod>> {
     static ShippingMethodsByLocationGet of(final CountryCode countryCode) {
         return of(countryCode, null, null);
     }
