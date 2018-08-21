@@ -144,6 +144,7 @@ import java.util.function.Function;
  -->
  <h3 class=released-version id="v1_35_0">1.35.0 </h3>
  <ul>
+    <li class=fixed-in-release>Fixed field name in cart update action `SetShippingRateInput`, which was not properly working before</li>
     <li class=change-in-release> Add field modified a to Payload {@link io.sphere.sdk.subscriptions.ResourceCreatedPayload}, {@link io.sphere.sdk.subscriptions.ResourceUpdatedPayload} and {@link io.sphere.sdk.subscriptions.ResourceDeletedPayload} </li>
     <li class=new-in-release> Now its possible to query the subscriptions endpoint health via the new {@link Subscription#getStatus()}</li>
     <li class=change-in-release>Added new attributes  {@link OrderFromCartDraft#getOrderState()} and {@link OrderFromCartDraft#getState()}</li>
