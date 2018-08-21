@@ -27,11 +27,14 @@ public class ShippingRateCartValueIntegrationTest extends ProjectIntegrationTest
     public void setCartValueShippingRateInput() {
 
         final Project project = client().executeBlocking(ProjectGet.of());
-        final Project updatedProjectCartValue = client().executeBlocking(ProjectUpdateCommand.of(project, SetShippingRateInputType.of(CartValueDraftBuilder.of().build())));
+        final Project updatedProjectCartValue = client().executeBlocking(ProjectUpdateCommand.of(project,
+                SetShippingRateInputType.of(CartValueDraftBuilder.of().build())));
         assertThat(updatedProjectCartValue.getShippingRateInputType().getType()).isEqualTo("CartValue");
+
         final CartDraft draft = CartDraft.of(EUR)
                 .withTaxMode(TaxMode.EXTERNAL)
                 .withShippingAddress(Address.of(DE));
+
         withCartDraft(client(), draft, (Cart cart) -> {
             final String taxRateName = "special tax";
             final double taxRate = 0.20;
@@ -39,13 +42,15 @@ public class ShippingRateCartValueIntegrationTest extends ProjectIntegrationTest
                     ExternalTaxRateDraftBuilder.ofAmount(taxRate, taxRateName, DE).build();
             final ShippingRate shippingRate = ShippingRate.of(EURO_10, null,
                     Arrays.asList(
-                            io.sphere.sdk.shippingmethods.CartValueBuilder.of(0l, EURO_10).build(),
-                            io.sphere.sdk.shippingmethods.CartValueBuilder.of(1l, EURO_20).build()
+                            io.sphere.sdk.shippingmethods.CartValueBuilder.of(0L, EURO_30).build(),
+                            io.sphere.sdk.shippingmethods.CartValueBuilder.of(1L, EURO_20).build()
                     ));
             final SetCustomShippingMethod action =
                     SetCustomShippingMethod.ofExternalTaxCalculation("name", shippingRate, externalTaxRate);
+
             final Cart cartWithShippingMethod = client().executeBlocking(CartUpdateCommand.of(cart, action));
-            assertThat(cartWithShippingMethod.getTotalPrice()).isEqualTo(EURO_10);
+            assertThat(cartWithShippingMethod.getTotalPrice()).isEqualTo(EURO_30);
+
             return cartWithShippingMethod;
         });
     }

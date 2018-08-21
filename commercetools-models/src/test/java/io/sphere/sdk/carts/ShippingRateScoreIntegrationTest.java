@@ -29,10 +29,11 @@ public class ShippingRateScoreIntegrationTest extends ProjectIntegrationTest {
     @Test
     public void setScoreShippingRateInput() {
 
-        final ShippingRateInputTypeDraft shippingRateInputType = CartScoreDraftBuilder.of().build();
         final Project project = client().executeBlocking(ProjectGet.of());
-        final Project updatedProjectCartValue = client().executeBlocking(ProjectUpdateCommand.of(project, SetShippingRateInputType.of(shippingRateInputType)));
-        assertThat(updatedProjectCartValue.getShippingRateInputType().getType()).isEqualTo("CartScore");
+        final Project updatedProjectCartScore = client().executeBlocking(ProjectUpdateCommand.of(project,
+                SetShippingRateInputType.of(CartScoreDraftBuilder.of().build())));
+        assertThat(updatedProjectCartScore.getShippingRateInputType().getType()).isEqualTo("CartScore");
+
         final CartDraft draft = CartDraft.of(EUR)
                 .withTaxMode(TaxMode.EXTERNAL)
                 .withShippingAddress(Address.of(DE));
@@ -44,18 +45,24 @@ public class ShippingRateScoreIntegrationTest extends ProjectIntegrationTest {
                     ExternalTaxRateDraftBuilder.ofAmount(taxRate, taxRateName, DE).build();
             final ShippingRate shippingRate = ShippingRate.of(EURO_10, null,
                     Arrays.asList(
-                            io.sphere.sdk.shippingmethods.CartScoreBuilder.of( 0L, PriceFunctionBuilder.of(EUR.getCurrencyCode(), "(50 * x) + 750").build()).build(),
+                            io.sphere.sdk.shippingmethods.CartScoreBuilder.of( 0L, PriceFunctionBuilder.of(EUR.getCurrencyCode(), "(50 * x) + 4000").build()).build(),
                             io.sphere.sdk.shippingmethods.CartScoreBuilder.of(1L, EURO_20).build(),
-                            io.sphere.sdk.shippingmethods.CartScoreBuilder.of(2L, EURO_20).build()
+                            io.sphere.sdk.shippingmethods.CartScoreBuilder.of(2L, EURO_30).build()
                     ));
 
             final SetCustomShippingMethod action =
                     SetCustomShippingMethod.ofExternalTaxCalculation("name", shippingRate, externalTaxRate);
             final Cart cartWithShippingMethod = client().executeBlocking(CartUpdateCommand.of(cart, action));
 
-            final ShippingRateInputDraft shippingRateInput = ScoreShippingRateInputDraftBuilder.of(11L).build();
-            final Cart cartWithShippingMethodWithScore = client().executeBlocking(CartUpdateCommand.of(cartWithShippingMethod, SetShippingRateInput.of(shippingRateInput)));
-            return cartWithShippingMethodWithScore;
+            final Cart cartWithShippingMethodWithScore1 = client().executeBlocking(CartUpdateCommand.of(cartWithShippingMethod,
+                    SetShippingRateInput.of(ScoreShippingRateInputDraftBuilder.of(1L).build())));
+            assertThat(cartWithShippingMethodWithScore1.getTotalPrice()).isEqualTo(EURO_20);
+
+            final Cart cartWithShippingMethodWithScore0 = client().executeBlocking(CartUpdateCommand.of(cartWithShippingMethodWithScore1,
+                    SetShippingRateInput.of(ScoreShippingRateInputDraftBuilder.of(0L).build())));
+            assertThat(cartWithShippingMethodWithScore0.getTotalPrice()).isEqualTo(EURO_40);
+
+            return cartWithShippingMethodWithScore0;
         });
     }
 
