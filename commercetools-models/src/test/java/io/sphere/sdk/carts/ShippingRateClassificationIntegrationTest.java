@@ -62,7 +62,8 @@ public class ShippingRateClassificationIntegrationTest extends ProjectIntegratio
 
             final Cart cartWithShippingMethodWithClassification = client().executeBlocking(CartUpdateCommand.of(cartWithShippingMethod,
                     SetShippingRateInput.of(ClassificationShippingRateInputDraftBuilder.of("Small").build())));
-            assertThat(cartWithShippingMethodWithClassification.getTotalPrice()).isEqualTo(EURO_20);
+            assertThat(cartWithShippingMethodWithClassification.getShippingRateInput()).isInstanceOf(ClassificationShippingRateInput.class);
+            assertThat(cartWithShippingMethodWithClassification.getShippingInfo().getPrice()).isEqualTo(EURO_20);
 
             return cartWithShippingMethodWithClassification;
         });

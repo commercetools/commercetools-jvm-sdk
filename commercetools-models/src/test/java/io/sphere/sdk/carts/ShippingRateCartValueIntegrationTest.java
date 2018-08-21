@@ -49,7 +49,8 @@ public class ShippingRateCartValueIntegrationTest extends ProjectIntegrationTest
                     SetCustomShippingMethod.ofExternalTaxCalculation("name", shippingRate, externalTaxRate);
 
             final Cart cartWithShippingMethod = client().executeBlocking(CartUpdateCommand.of(cart, action));
-            assertThat(cartWithShippingMethod.getTotalPrice()).isEqualTo(EURO_30);
+            assertThat(cartWithShippingMethod.getShippingRateInput()).isNull();
+            assertThat(cartWithShippingMethod.getShippingInfo().getPrice()).isEqualTo(EURO_30);
 
             return cartWithShippingMethod;
         });

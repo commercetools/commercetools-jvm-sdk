@@ -56,11 +56,13 @@ public class ShippingRateScoreIntegrationTest extends ProjectIntegrationTest {
 
             final Cart cartWithShippingMethodWithScore1 = client().executeBlocking(CartUpdateCommand.of(cartWithShippingMethod,
                     SetShippingRateInput.of(ScoreShippingRateInputDraftBuilder.of(1L).build())));
-            assertThat(cartWithShippingMethodWithScore1.getTotalPrice()).isEqualTo(EURO_20);
+            assertThat(cartWithShippingMethodWithScore1.getShippingRateInput()).isInstanceOf(ScoreShippingRateInput.class);
+            assertThat(cartWithShippingMethodWithScore1.getShippingInfo().getPrice()).isEqualTo(EURO_20);
 
             final Cart cartWithShippingMethodWithScore0 = client().executeBlocking(CartUpdateCommand.of(cartWithShippingMethodWithScore1,
                     SetShippingRateInput.of(ScoreShippingRateInputDraftBuilder.of(0L).build())));
-            assertThat(cartWithShippingMethodWithScore0.getTotalPrice()).isEqualTo(EURO_40);
+            assertThat(cartWithShippingMethodWithScore0.getShippingRateInput()).isInstanceOf(ScoreShippingRateInput.class);
+            assertThat(cartWithShippingMethodWithScore0.getShippingInfo().getPrice()).isEqualTo(EURO_40);
 
             return cartWithShippingMethodWithScore0;
         });
