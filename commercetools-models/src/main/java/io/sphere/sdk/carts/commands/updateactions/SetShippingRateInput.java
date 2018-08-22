@@ -8,23 +8,23 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import javax.annotation.Nullable;
 
 /**
- * Updates the {@code shippingRateInputDraft} property of a {@link Cart}.
+ * Updates the {@code shippingRateInput} property of a {@link Cart}.
  *
  * @see Cart#getShippingRateInput()
  */
 public final class SetShippingRateInput extends UpdateActionImpl<Cart> {
   @Nullable
-  private final ShippingRateInputDraft shippingRateInputDraft;
+  private final ShippingRateInputDraft shippingRateInput;
 
   private SetShippingRateInput(@Nullable final ShippingRateInputDraft shippingRateInput) {
     super("setShippingRateInput");
-    this.shippingRateInputDraft = shippingRateInput;
+    this.shippingRateInput = shippingRateInput;
   }
 
   @Nullable
-  @JsonProperty("shippingRateInputDraft")
-  public ShippingRateInputDraft getShippingRateInputDraft() {
-    return shippingRateInputDraft;
+  @JsonProperty("shippingRateInput")
+  public ShippingRateInputDraft getShippingRateInput() {
+    return shippingRateInput;
   }
 
   /**

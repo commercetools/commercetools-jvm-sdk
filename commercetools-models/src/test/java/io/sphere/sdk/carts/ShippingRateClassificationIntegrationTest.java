@@ -32,17 +32,15 @@ public class ShippingRateClassificationIntegrationTest extends ProjectIntegratio
     @Test
     public void setClassificationShippingRateInput() {
 
-        final Set<LocalizedEnumValue> set = new HashSet();
+        final Set<LocalizedEnumValue> set = new HashSet<>();
         set.add(LocalizedEnumValue.of("Small", LocalizedString.of(Locale.ENGLISH, "Small", Locale.GERMANY, "Klein")));
         set.add(LocalizedEnumValue.of("Medium", LocalizedString.of(Locale.ENGLISH, "Medium", Locale.GERMANY, "Mittel")));
         set.add(LocalizedEnumValue.of("Heavy", LocalizedString.of(Locale.ENGLISH, "Heavy", Locale.GERMANY, "Schwergut")));
 
-        final ShippingRateInputTypeDraft classificationInputType = CartClassificationDraftBuilder.of(set).build();
-
         final Project project = client().executeBlocking(ProjectGet.of());
-        final Project updatedProjectCartValue = client().executeBlocking(ProjectUpdateCommand.of(project, SetShippingRateInputType.of(classificationInputType)));
-        assertThat(updatedProjectCartValue.getShippingRateInputType().getType()).isEqualTo("CartClassification");
-
+        final Project updatedProjectCartClassification = client().executeBlocking(ProjectUpdateCommand.of(project,
+                SetShippingRateInputType.of(CartClassificationDraftBuilder.of(set).build())));
+        assertThat(updatedProjectCartClassification.getShippingRateInputType().getType()).isEqualTo("CartClassification");
 
         final CartDraft draft = CartDraft.of(EUR)
                 .withTaxMode(TaxMode.EXTERNAL)
@@ -55,16 +53,19 @@ public class ShippingRateClassificationIntegrationTest extends ProjectIntegratio
                     ExternalTaxRateDraftBuilder.ofAmount(taxRate, taxRateName, DE).build();
             final ShippingRate shippingRate = ShippingRate.of(EURO_10, null,
                     Arrays.asList(
-                            io.sphere.sdk.shippingmethods.CartClassificationBuilder.of("Small", EURO_1).build()
+                            io.sphere.sdk.shippingmethods.CartClassificationBuilder.of("Small", EURO_20).build(),
+                            io.sphere.sdk.shippingmethods.CartClassificationBuilder.of("Heavy", EURO_30).build()
                     ));
             final SetCustomShippingMethod action =
                     SetCustomShippingMethod.ofExternalTaxCalculation("name", shippingRate, externalTaxRate);
-
             final Cart cartWithShippingMethod = client().executeBlocking(CartUpdateCommand.of(cart, action));
-            final ShippingRateInputDraft shippingRateInput = ClassificationShippingRateInputDraftBuilder.of("Small").build();
-            final Cart cartWithShippingMethodWithScore = client().executeBlocking(CartUpdateCommand.of(cartWithShippingMethod, SetShippingRateInput.of(shippingRateInput)));
 
-            return cartWithShippingMethodWithScore;
+            final Cart cartWithShippingMethodWithClassification = client().executeBlocking(CartUpdateCommand.of(cartWithShippingMethod,
+                    SetShippingRateInput.of(ClassificationShippingRateInputDraftBuilder.of("Small").build())));
+            assertThat(cartWithShippingMethodWithClassification.getShippingRateInput()).isInstanceOf(ClassificationShippingRateInput.class);
+            assertThat(cartWithShippingMethodWithClassification.getShippingInfo().getPrice()).isEqualTo(EURO_20);
+
+            return cartWithShippingMethodWithClassification;
         });
     }
 

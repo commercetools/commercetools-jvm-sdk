@@ -29,6 +29,7 @@ public class SubscriptionCreateCommandIntegrationTest extends SubscriptionIntegr
             subscription = client().executeBlocking(createCommand);
 
             assertThat(subscription).isNotNull();
+            assertThat(subscription.getDestination()).isInstanceOf(IronMqDestination.class);
             assertThat(subscription.getDestination()).isEqualTo(subscriptionDraft.getDestination());
             assertThat(subscription.getChanges()).isEqualTo(subscriptionDraft.getChanges());
         } finally {
@@ -47,7 +48,8 @@ public class SubscriptionCreateCommandIntegrationTest extends SubscriptionIntegr
         try {
             subscription = client().executeBlocking(createCommand);
             assertThat(subscription).isNotNull();
-            assertThat(subscription.getDestination()).isEqualTo(subscriptionDraft.getDestination());
+            assertThat(subscription.getDestination()).isInstanceOf(AzureServiceBusDestination.class);
+            assertThat(((AzureServiceBusDestination)subscription.getDestination()).getConnectionString()).isNotNull();
             assertThat(subscription.getChanges()).isEqualTo(subscriptionDraft.getChanges());
         } finally {
             SubscriptionFixtures.deleteSubscription(client(), subscription);
@@ -67,6 +69,7 @@ public class SubscriptionCreateCommandIntegrationTest extends SubscriptionIntegr
             subscription = client().executeBlocking(createCommand);
 
             assertThat(subscription).isNotNull();
+            assertThat(subscription.getDestination()).isInstanceOf(IronMqDestination.class);
             assertThat(subscription.getDestination()).isEqualTo(subscriptionDraft.getDestination());
             assertThat(subscription.getMessages()).isEqualTo(subscriptionDraft.getMessages());
         } finally {
