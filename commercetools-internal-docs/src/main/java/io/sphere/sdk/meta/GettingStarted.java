@@ -21,19 +21,8 @@ import io.sphere.sdk.models.Base;
 
  <h3 id=preparation>Preparation</h3>
 
- <p>You need to <a href="https://admin.sphere.io" target="_blank">create a project in commercetools first</a>.
- After that you need to go to the "Developers" section and open the tab "API clients".
- There you'll find the credentials to access the project with the client.</p>
-
- <p>This is an example for the client credentials page (client secret has been modified):</p>
-
- <img src="{@docRoot}/resources/images/merchant-center/project-credentials.png" alt="Merchant Center with project credentials view">
-
- <p>For this example the configuration values are:</p>
-
- <pre><code>project key: jvm-sdk-dev-1
-client ID: ELqF0rykXD2fyS8s-IhIPKfQ
-client secret: 222222222222222222222222222222226</code></pre>
+ <p>Follow the instructions at <a href=https://docs.commercetools.com/getting-started.html>Getting Started</a> to create a CTP project and to retrieve the API credentials needed
+ for the following sections.</p>
 
  <h3 id=instantiation>Instantiation</h3>
 
