@@ -142,11 +142,11 @@ import java.util.function.Function;
  </ul>
  -->
  -->
- <h3 class=released-version id="v1_35_0">1.35.0 </h3>
+ <h3 class=released-version id="v1_35_0">1.35.0 (23.08.2018)</h3>
  <ul>
     <li class=fixed-in-release>Fixed field name in cart update action {@link io.sphere.sdk.carts.commands.updateactions.SetShippingRateInput}`, which was not properly working before</li>
-    <li class=change-in-release> Add field modified a to Payload {@link io.sphere.sdk.subscriptions.ResourceCreatedPayload}, {@link io.sphere.sdk.subscriptions.ResourceUpdatedPayload} and {@link io.sphere.sdk.subscriptions.ResourceDeletedPayload} </li>
-    <li class=new-in-release> Now its possible to query the subscriptions endpoint health via the new {@link Subscription#getStatus()}</li>
+    <li class=change-in-release>Add field modified a to Payload {@link io.sphere.sdk.subscriptions.ResourceCreatedPayload}, {@link io.sphere.sdk.subscriptions.ResourceUpdatedPayload} and {@link io.sphere.sdk.subscriptions.ResourceDeletedPayload} </li>
+    <li class=new-in-release>It's now possible to query the subscriptions endpoint health via the new {@link Subscription#getStatus()}</li>
     <li class=change-in-release>Added new attributes  {@link OrderFromCartDraft#getOrderState()} and {@link OrderFromCartDraft#getState()}</li>
     <li class=new-in-release>Added new update action {@link io.sphere.sdk.productdiscounts.commands.updateactions.SetValidFromAndUntil} to {@link ProductDiscount}</li>
     <li class=change-in-release>{@link io.sphere.sdk.producttypes.commands.updateactions.AddAttributeDefinition#of(AttributeDefinition)} changed parameter to {@link io.sphere.sdk.producttypes.commands.updateactions.AddAttributeDefinition#of(AttributeDefinitionDraft)} instead</li>
