@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.messages.GenericMessageImpl;
 import io.sphere.sdk.messages.MessageDerivateHint;
+import io.sphere.sdk.messages.UserProvidedIdentifiers;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.reviews.Review;
 
@@ -32,8 +33,8 @@ public final class ReviewRatingSetMessage extends GenericMessageImpl<Review> {
     private final Reference<JsonNode> target;
 
     @JsonCreator
-    private ReviewRatingSetMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, @Nullable final Integer oldRating, @Nullable final Integer newRating, final Boolean includedInStatistics, @Nullable final Reference<JsonNode> target) {
-        super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, Review.class);
+    private ReviewRatingSetMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final UserProvidedIdentifiers resourceUserProvidedIdentifiers, @Nullable final Integer oldRating, @Nullable final Integer newRating, final Boolean includedInStatistics, @Nullable final Reference<JsonNode> target) {
+        super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type,resourceUserProvidedIdentifiers, Review.class);
         this.oldRating = oldRating;
         this.newRating = newRating;
         this.includedInStatistics = includedInStatistics;

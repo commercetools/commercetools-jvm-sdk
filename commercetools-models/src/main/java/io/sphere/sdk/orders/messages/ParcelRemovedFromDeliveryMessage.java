@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.messages.GenericMessageImpl;
 import io.sphere.sdk.messages.MessageDerivateHint;
+import io.sphere.sdk.messages.UserProvidedIdentifiers;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.Parcel;
 
@@ -26,9 +27,9 @@ public final class ParcelRemovedFromDeliveryMessage extends GenericMessageImpl<O
 
     @JsonCreator
     private ParcelRemovedFromDeliveryMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource,
-                                            final Long sequenceNumber, final Long resourceVersion, final String type,
+                                            final Long sequenceNumber, final Long resourceVersion, final String type, final UserProvidedIdentifiers resourceUserProvidedIdentifiers,
                                             final String deliveryId, final Parcel parcel) {
-        super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, Order.class);
+        super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type,resourceUserProvidedIdentifiers, Order.class);
         this.deliveryId = deliveryId;
         this.parcel = parcel;
     }

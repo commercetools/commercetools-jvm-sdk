@@ -7,6 +7,7 @@ import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.inventory.InventoryEntry;
 import io.sphere.sdk.messages.GenericMessageImpl;
 import io.sphere.sdk.messages.MessageDerivateHint;
+import io.sphere.sdk.messages.UserProvidedIdentifiers;
 import io.sphere.sdk.models.Reference;
 
 import javax.annotation.Nullable;
@@ -23,8 +24,8 @@ public final class InventoryEntryDeletedMessage extends GenericMessageImpl<Inven
     private final Reference<Channel> supplyChannel;
 
     @JsonCreator
-    private InventoryEntryDeletedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final String sku, final Reference<Channel> supplyChannel) {
-        super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, InventoryEntry.class);
+    private InventoryEntryDeletedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final UserProvidedIdentifiers resourceUserProvidedIdentifiers, final String sku, final Reference<Channel> supplyChannel) {
+        super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type,resourceUserProvidedIdentifiers, InventoryEntry.class);
         this.sku = sku;
         this.supplyChannel = supplyChannel;
     }

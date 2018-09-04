@@ -23,6 +23,8 @@ public abstract class GenericMessageImpl<R> extends ResourceImpl<Message> implem
     protected final JsonNode resource;
     protected final Long resourceVersion;
     protected final String type;
+    protected final UserProvidedIdentifiers resourceUserProvidedIdentifiers;
+
     @JsonIgnore
     private final Map<String, JsonNode> furtherFields = new HashMap<>();
     @JsonIgnore
@@ -31,12 +33,13 @@ public abstract class GenericMessageImpl<R> extends ResourceImpl<Message> implem
     public GenericMessageImpl(final String id, final Long version, final ZonedDateTime createdAt,
                               final ZonedDateTime lastModifiedAt, final JsonNode resource,
                               final Long sequenceNumber, final Long resourceVersion,
-                              final String type, final Class<R> clazz) {
+                              final String type,final UserProvidedIdentifiers resourceUserProvidedIdentifiers, final Class<R> clazz) {
         super(id, version, createdAt, lastModifiedAt);
         this.resource = resource;
         this.sequenceNumber = sequenceNumber;
         this.resourceVersion = resourceVersion;
         this.type = type;
+        this.resourceUserProvidedIdentifiers = resourceUserProvidedIdentifiers;
         requireNonNull(clazz, "class of reference must be explicitly given, it cannot be part of a JsonCreator.");
         final JavaType javaType = SphereJsonUtils.convertToJavaType(clazz);
         final TypeFactory typeFactory = TypeFactory.defaultInstance();
@@ -56,6 +59,11 @@ public abstract class GenericMessageImpl<R> extends ResourceImpl<Message> implem
     @Override
     public String getType() {
         return type;
+    }
+
+    @Override
+    public UserProvidedIdentifiers getResourceUserProvidedIdentifiers() {
+        return resourceUserProvidedIdentifiers;
     }
 
     @Override

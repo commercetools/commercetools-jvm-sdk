@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.messages.GenericMessageImpl;
 import io.sphere.sdk.messages.MessageDerivateHint;
+import io.sphere.sdk.messages.UserProvidedIdentifiers;
 import io.sphere.sdk.products.Image;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductVariant;
@@ -28,9 +29,9 @@ public final class ProductImageAddedMessage extends GenericMessageImpl<Product> 
 
     @JsonCreator
     private ProductImageAddedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
-                                    final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type,
+                                    final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final UserProvidedIdentifiers resourceUserProvidedIdentifiers,
                                     final Long variantId, final Image image, final Boolean staged) {
-        super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, Product.class);
+        super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type,resourceUserProvidedIdentifiers, Product.class);
         this.variantId = variantId;
         this.image = image;
         this.staged = staged;
