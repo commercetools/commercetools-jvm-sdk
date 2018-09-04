@@ -56,6 +56,8 @@ public interface Message extends Resource<Message> {
 
     String getType();
 
+    UserProvidedIdentifiers getResourceUserProvidedIdentifiers();
+
     /**
      * Gets the top level fields not mapped by the current message class.
      * @return json

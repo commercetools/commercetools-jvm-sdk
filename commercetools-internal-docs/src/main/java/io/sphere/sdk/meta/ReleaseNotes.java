@@ -55,6 +55,7 @@ import io.sphere.sdk.inventory.InventoryEntry;
 import io.sphere.sdk.inventory.InventoryEntryDraft;
 import io.sphere.sdk.inventory.InventoryEntryDraftBuilder;
 import io.sphere.sdk.json.SphereJsonUtils;
+import io.sphere.sdk.messages.Message;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.orders.*;
 import io.sphere.sdk.orders.commands.updateactions.AddDelivery;
@@ -105,6 +106,7 @@ import io.sphere.sdk.states.State;
 import io.sphere.sdk.states.StateDraftDsl;
 import io.sphere.sdk.subscriptions.AzureServiceBusDestination;
 import io.sphere.sdk.subscriptions.MessageSubscriptionPayload;
+import io.sphere.sdk.subscriptions.Payload;
 import io.sphere.sdk.subscriptions.Subscription;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxCategoryDraft;
@@ -142,6 +144,11 @@ import java.util.function.Function;
  </ul>
  -->
  -->
+ <h3 class=released-version id="v1_36_0">1.36.0 </h3>
+ <ul>
+    <li class=change-in-release>added new fields {@link Payload#getResourceUserProvidedIdentifiers()} and {@link Message#getResourceUserProvidedIdentifiers()} to reference user defined identifiers.</li>
+ </ul>
+
  <h3 class=released-version id="v1_35_0">1.35.0 (23.08.2018)</h3>
  <ul>
     <li class=fixed-in-release>Fixed field name in cart update action {@link io.sphere.sdk.carts.commands.updateactions.SetShippingRateInput}`, which was not properly working before</li>

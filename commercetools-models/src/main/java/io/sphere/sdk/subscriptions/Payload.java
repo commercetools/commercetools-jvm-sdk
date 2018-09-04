@@ -3,6 +3,7 @@ package io.sphere.sdk.subscriptions;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import io.sphere.sdk.annotations.ResourceValue;
+import io.sphere.sdk.messages.UserProvidedIdentifiers;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.projects.Project;
 
@@ -39,4 +40,6 @@ public interface Payload<T> {
      * @return the reference to the resource that triggered this delivery
      */
     Reference<T> getResource();
+
+    UserProvidedIdentifiers getResourceUserProvidedIdentifiers();
 }
