@@ -15,10 +15,7 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.orders.commands.OrderDeleteCommand;
 import io.sphere.sdk.orders.commands.OrderFromCartCreateCommand;
 import io.sphere.sdk.orders.commands.OrderUpdateCommand;
-import io.sphere.sdk.orders.commands.updateactions.AddDelivery;
-import io.sphere.sdk.orders.commands.updateactions.AddReturnInfo;
-import io.sphere.sdk.orders.commands.updateactions.ChangePaymentState;
-import io.sphere.sdk.orders.commands.updateactions.ChangeShipmentState;
+import io.sphere.sdk.orders.commands.updateactions.*;
 import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
@@ -84,8 +81,8 @@ public class OrderFixtures {
         final CustomerSignInCommand signInCommand = CustomerSignInCommand.of(customer.getEmail(), CustomerFixtures.PASSWORD, cart.getId());
         final CustomerSignInResult signInResult = client.executeBlocking(signInCommand);
 
-        final Order order = client.executeBlocking(OrderFromCartCreateCommand.of(signInResult.getCart()));
-
+        final OrderFromCartDraft fromCartDraft = OrderFromCartDraft.of(signInResult.getCart(),randomString(),PaymentState.PAID);
+        final Order order = client.executeBlocking(OrderFromCartCreateCommand.of(signInResult.getCart()).withDraft(fromCartDraft));
         return client.executeBlocking(OrderUpdateCommand.of(order, asList(
                 ChangeShipmentState.of(ShipmentState.READY),
                 ChangePaymentState.of(PaymentState.PENDING)

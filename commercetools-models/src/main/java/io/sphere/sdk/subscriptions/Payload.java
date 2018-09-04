@@ -7,6 +7,8 @@ import io.sphere.sdk.messages.UserProvidedIdentifiers;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.projects.Project;
 
+import javax.annotation.Nullable;
+
 /**
  * Common interface for all subscription payloads.
  *
@@ -41,5 +43,6 @@ public interface Payload<T> {
      */
     Reference<T> getResource();
 
+    @Nullable
     UserProvidedIdentifiers getResourceUserProvidedIdentifiers();
 }

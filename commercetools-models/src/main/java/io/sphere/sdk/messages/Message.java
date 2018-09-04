@@ -8,6 +8,8 @@ import io.sphere.sdk.annotations.ResourceInfo;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
 
+import javax.annotation.Nullable;
+
 /**
  * A message represents a change or an action performed on a resource (like an Order or a Product). Messages can be seen as a subset of the change history for a resource inside a project. It is a subset because not all changes on resources result in messages.
  *
@@ -56,6 +58,7 @@ public interface Message extends Resource<Message> {
 
     String getType();
 
+    @Nullable
     UserProvidedIdentifiers getResourceUserProvidedIdentifiers();
 
     /**
