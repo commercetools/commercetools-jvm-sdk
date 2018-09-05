@@ -7,6 +7,7 @@ import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.messages.GenericMessageImpl;
 import io.sphere.sdk.messages.MessageDerivateHint;
+import io.sphere.sdk.messages.UserProvidedIdentifiers;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.orders.Order;
 
@@ -29,9 +30,9 @@ public final class OrderCustomerSetMessage extends GenericMessageImpl<Order> {
     Reference<CustomerGroup> oldCustomerGroup;
 
     @JsonCreator
-    private OrderCustomerSetMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type,
+    private OrderCustomerSetMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final UserProvidedIdentifiers resourceUserProvidedIdentifiers,
                                     final Reference<Customer> customer, @Nullable final Reference<CustomerGroup> customerGroup, final Reference<Customer> oldCustomer,@Nullable  final Reference<CustomerGroup> oldCustomerGroup) {
-        super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, Order.class);
+        super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type,resourceUserProvidedIdentifiers, Order.class);
         this.customer = customer;
         this.customerGroup = customerGroup;
         this.oldCustomer = oldCustomer;

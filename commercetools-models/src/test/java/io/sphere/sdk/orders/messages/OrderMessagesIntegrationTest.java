@@ -8,6 +8,7 @@ import io.sphere.sdk.orders.commands.OrderDeleteCommand;
 import io.sphere.sdk.orders.commands.OrderImportCommand;
 import io.sphere.sdk.orders.commands.OrderUpdateCommand;
 import io.sphere.sdk.orders.commands.updateactions.ChangeOrderState;
+import io.sphere.sdk.orders.commands.updateactions.SetOrderNumber;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
@@ -77,7 +78,8 @@ public class OrderMessagesIntegrationTest extends IntegrationTest {
     @Test
     public void orderDeletedMessage() throws Exception {
         withOrder(client(), order -> {
-            final Order deletedOrder = client().executeBlocking(OrderDeleteCommand.of(order));
+            final Order orderWithOrderNumber = client().executeBlocking(OrderUpdateCommand.of(order, SetOrderNumber.of(randomString())));
+            final Order deletedOrder = client().executeBlocking(OrderDeleteCommand.of(orderWithOrderNumber));
 
             final Query<OrderDeletedMessage> messageQuery = MessageQuery.of()
                     .withPredicates(m -> m.resource().is(deletedOrder))
@@ -91,7 +93,8 @@ public class OrderMessagesIntegrationTest extends IntegrationTest {
 
                 final OrderDeletedMessage orderDeletedMessage = orderDeletedMessageOptional.get();
                 final Order orderFromMessage = orderDeletedMessage.getOrder();
-
+                assertThat(orderDeletedMessage.getResourceUserProvidedIdentifiers()).isNotNull();
+                assertThat(orderDeletedMessage.getResourceUserProvidedIdentifiers().getOrderNumber()).isEqualTo(orderWithOrderNumber.getOrderNumber());
                 assertThat(orderFromMessage.getId()).isEqualTo(deletedOrder.getId());
             });
         });

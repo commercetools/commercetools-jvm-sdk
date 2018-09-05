@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.messages.GenericMessageImpl;
 import io.sphere.sdk.messages.Message;
 import io.sphere.sdk.messages.MessageDerivateHint;
+import io.sphere.sdk.messages.UserProvidedIdentifiers;
 import io.sphere.sdk.orders.Order;
 
 import java.time.ZonedDateTime;
@@ -25,8 +26,8 @@ public final class OrderImportedMessage extends GenericMessageImpl<Order> {
     private final Order order;
 
     @JsonCreator
-    private OrderImportedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final Order order) {
-        super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, Order.class);
+    private OrderImportedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final UserProvidedIdentifiers resourceUserProvidedIdentifiers, final Order order) {
+        super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type,resourceUserProvidedIdentifiers, Order.class);
         this.order = order;
     }
 

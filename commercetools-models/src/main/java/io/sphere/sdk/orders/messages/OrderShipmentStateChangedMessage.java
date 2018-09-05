@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.messages.GenericMessageImpl;
 import io.sphere.sdk.messages.MessageDerivateHint;
+import io.sphere.sdk.messages.UserProvidedIdentifiers;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.ShipmentState;
 
@@ -19,9 +20,9 @@ public final class OrderShipmentStateChangedMessage extends GenericMessageImpl<O
     private final ShipmentState shipmentState;
 
     @JsonCreator
-    private OrderShipmentStateChangedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type,
+    private OrderShipmentStateChangedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final UserProvidedIdentifiers resourceUserProvidedIdentifiers,
                                             final ShipmentState shipmentState) {
-        super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, Order.class);
+        super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type,resourceUserProvidedIdentifiers, Order.class);
         this.shipmentState = shipmentState;
     }
 

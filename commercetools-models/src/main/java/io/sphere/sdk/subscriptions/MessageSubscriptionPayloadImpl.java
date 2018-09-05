@@ -3,6 +3,7 @@ package io.sphere.sdk.subscriptions;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import io.sphere.sdk.messages.Message;
+import io.sphere.sdk.messages.UserProvidedIdentifiers;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Reference;
 
@@ -20,6 +21,7 @@ final class MessageSubscriptionPayloadImpl<T> extends Base implements MessageSub
 
   private PayloadNotIncluded payloadNotInclude;
 
+  private UserProvidedIdentifiers resourceUserProvidedIdentifiers;
 
   @JsonProperty("message")
   @JsonUnwrapped
@@ -37,6 +39,11 @@ final class MessageSubscriptionPayloadImpl<T> extends Base implements MessageSub
 
   public Reference<T> getResource() {
     return resource;
+  }
+
+  @Override
+  public UserProvidedIdentifiers getResourceUserProvidedIdentifiers() {
+    return resourceUserProvidedIdentifiers;
   }
 
   @Nullable

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.messages.MessageDerivateHint;
+import io.sphere.sdk.messages.UserProvidedIdentifiers;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductVariant;
@@ -23,8 +24,8 @@ public final class ProductDeletedMessage extends AbstractImageDeletionMessage {
     private final ProductProjection currentProjection;
 
     @JsonCreator
-    private ProductDeletedMessage(final String id,final Long version,final ZonedDateTime createdAt,final ZonedDateTime lastModifiedAt,final JsonNode resource,final Long sequenceNumber,final Long resourceVersion,final String type,final String[] removedImageUrls,final ProductProjection currentProjection) {
-        super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, removedImageUrls);
+    private ProductDeletedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final UserProvidedIdentifiers resourceUserProvidedIdentifiers, final String[] removedImageUrls, final ProductProjection currentProjection) {
+        super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type,resourceUserProvidedIdentifiers, removedImageUrls);
         this.currentProjection = currentProjection;
     }
 
