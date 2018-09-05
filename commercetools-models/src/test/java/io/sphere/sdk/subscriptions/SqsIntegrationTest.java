@@ -72,6 +72,8 @@ public abstract class SqsIntegrationTest extends SubscriptionIntegrationTest {
                 final ResourceCreatedPayload<Subscription> resourceCreatedPayload =
                         SphereJsonUtils.readObject(sqsMessage.getBody(), ResourceCreatedPayload.class);
                 assertThat(resourceCreatedPayload).isNotNull();
+                assertThat(resourceCreatedPayload.getResourceUserProvidedIdentifiers()).isNotNull();
+                assertThat(resourceCreatedPayload.getResourceUserProvidedIdentifiers().getKey()).isNotNull();
                 final Reference resource = resourceCreatedPayload.getResource();
                 assertThat(resource).isNotNull();
                 assertThat(resource.getTypeId()).isEqualTo(Subscription.referenceTypeId());

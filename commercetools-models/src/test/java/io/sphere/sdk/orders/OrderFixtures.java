@@ -81,8 +81,7 @@ public class OrderFixtures {
         final CustomerSignInCommand signInCommand = CustomerSignInCommand.of(customer.getEmail(), CustomerFixtures.PASSWORD, cart.getId());
         final CustomerSignInResult signInResult = client.executeBlocking(signInCommand);
 
-        final OrderFromCartDraft fromCartDraft = OrderFromCartDraft.of(signInResult.getCart(),randomString(),PaymentState.PAID);
-        final Order order = client.executeBlocking(OrderFromCartCreateCommand.of(signInResult.getCart()).withDraft(fromCartDraft));
+        final Order order = client.executeBlocking(OrderFromCartCreateCommand.of(signInResult.getCart()));
         return client.executeBlocking(OrderUpdateCommand.of(order, asList(
                 ChangeShipmentState.of(ShipmentState.READY),
                 ChangePaymentState.of(PaymentState.PENDING)
