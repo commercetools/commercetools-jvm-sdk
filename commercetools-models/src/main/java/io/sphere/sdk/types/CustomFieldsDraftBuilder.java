@@ -32,7 +32,7 @@ public final class CustomFieldsDraftBuilder extends Base implements Builder<Cust
     private CustomFieldsDraftBuilder(final CustomFieldsDraft customFieldsDraft) {
         typeId = customFieldsDraft.getType().getId();
         typeKey = customFieldsDraft.getType().getKey();
-        fields = customFieldsDraft.getFields();
+        fields = new HashMap<>(customFieldsDraft.getFields());
     }
 
     public static CustomFieldsDraftBuilder ofTypeId(final String typeId) {
