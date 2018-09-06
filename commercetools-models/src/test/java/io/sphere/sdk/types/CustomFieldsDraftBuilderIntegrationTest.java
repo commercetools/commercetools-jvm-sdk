@@ -1,8 +1,12 @@
 package io.sphere.sdk.types;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.categories.CategoryDraftBuilder;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
+
+import java.util.Map;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.test.SphereTestUtils.en;
@@ -31,6 +35,25 @@ public class CustomFieldsDraftBuilderIntegrationTest extends IntegrationTest {
             });
             return type;
         });
+    }
+
+    @Test
+    public void customFieldsDraftTest(){
+
+        final CustomFieldsDraft initialDraft = CustomFieldsDraftBuilder
+                .ofTypeKey("foo")
+                .addObject("field1", "value1")
+                .build();
+        final CustomFieldsDraft extendedDraft = CustomFieldsDraftBuilder
+                .of(initialDraft)
+                .addObject("field2", "value2")
+                .build();
+
+        assertThat(extendedDraft.getFields()).hasSize(2);
+        assertThat(extendedDraft.getFields().get("field1")).isEqualTo(SphereJsonUtils.toJsonNode("value1"));
+        assertThat(extendedDraft.getFields().get("field2")).isEqualTo(SphereJsonUtils.toJsonNode("value2"));
+
+
     }
 
 }
