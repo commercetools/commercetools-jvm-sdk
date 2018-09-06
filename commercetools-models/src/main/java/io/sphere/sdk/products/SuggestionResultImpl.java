@@ -47,7 +47,7 @@ final class SuggestionResultImpl extends Base implements SuggestionResult {
     @JsonIgnore
     public static SuggestionResult of(final Map<Locale, List<Suggestion>> suggestions) {
         final Map<String, List<Suggestion>> suggestionMap = new HashMap<>();
-        suggestions.entrySet().forEach(entry -> suggestionMap.put(entry.getKey().toLanguageTag(), entry.getValue()));
+        suggestions.entrySet().forEach(entry -> suggestionMap.put("searchKeywords."+ entry.getKey().toLanguageTag(), entry.getValue()));
         return new SuggestionResultImpl(suggestionMap);
     }
 
