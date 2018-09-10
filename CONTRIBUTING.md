@@ -27,7 +27,7 @@ Note: Integration tests will fail since we use encrypted credentials which are n
 
 ## Testing
 
-Be aware that during integration tests, the CT platform will fail silently on certain errors, such as:
+Be aware that during integration tests the CT platform will fail silently on certain errors, such as:
 - wrong field name (unless required)
 - wrong expansion path
 - wrong query predicate
