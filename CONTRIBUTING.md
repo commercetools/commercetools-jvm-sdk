@@ -58,4 +58,4 @@ public void testShippingRateClassification() {
   assertThat(cart.getShippingInfo().getPrice()).isEqualTo(EURO_20);
 }
 ```
-The previous assertion works well because the possibilities are either 10, 20 or 30; so our scenario has a different value for each case. Should some of the cases have the same value (e.g. 20 EUR for "Small" and the default value), we wouldn't be able to confirm that the 20 EUR corresponds to "Small" and not the default one.
+The previous assertion works well because the possibilities are either 10, 20 or 30; so our scenario has a unique value for each case. Should some of the cases have the same value (e.g. 20 EUR for "Small" and the default value), we wouldn't be able to confirm that the 20 EUR corresponds to "Small" and not the default one.
