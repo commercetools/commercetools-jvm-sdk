@@ -69,6 +69,10 @@ public interface Type extends Resource<Type>, WithKey {
         return "type";
     }
 
+    static String resourceTypeId(){
+        return "type";
+    }
+
     /**
      * Creates a container which contains the full Java type information to deserialize this class from JSON.
      *

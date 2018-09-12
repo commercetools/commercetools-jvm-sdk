@@ -83,6 +83,10 @@ public interface State extends Resource<State>, WithKey {
         return "state";
     }
 
+    static String resourceTypeId() {
+        return "state";
+    }
+
     /**
      * Creates a container which contains the full Java type information to deserialize this class from JSON.
      *

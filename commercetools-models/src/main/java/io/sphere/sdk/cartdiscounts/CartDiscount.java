@@ -188,6 +188,8 @@ public interface CartDiscount extends Resource<CartDiscount> {
         return "cart-discount";
     }
 
+    static String resourceTypeId() { return "cart-discount"; }
+
     @Override
     default Reference<CartDiscount> toReference() {
         return Reference.of(referenceTypeId(), getId(), this);
