@@ -47,7 +47,7 @@ public void testExpansionPath() {
 Also when testing, make sure that you have a clear distinction between test cases, so that you are not asserting the wrong case. For example:
 ```java
 @Test
-public void test() {
+public void testShippingRateClassification() {
   final ShippingRate shippingRate = ShippingRate.of(EURO_10, null,
           Arrays.asList(
                   CartClassificationBuilder.of("Small", EURO_20).build(),
