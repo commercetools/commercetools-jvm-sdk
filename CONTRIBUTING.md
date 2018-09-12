@@ -23,7 +23,7 @@ We want to have a clear and well-tested code base.
 - your code is from you and not copied from third party sources
 - use good [commit messages](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html)
 
-Note: Integration tests will fail since we use encrypted credentials which are not available in forks for security reasons.
+Note: Integration tests will fail in CI since we use encrypted credentials which are not available in forks for security reasons.
 
 ## Testing
 
@@ -36,6 +36,7 @@ Be aware that during integration tests the CT platform will fail silently on cer
 
 Therefore you need to assert that the result is as expected. For example:
 ```java
+@Test
 public void testExpansionPath() {
   Product product = sphereClient.executeBlocking(ProductByIdGet.of(id).plusExpansionPaths(ExpansionPath.of("productType")));
   // make sure that the product type is indeed expanded
@@ -44,3 +45,17 @@ public void testExpansionPath() {
 ```
 
 Also when testing, make sure that you have a clear distinction between test cases, so that you are not asserting the wrong case. For example:
+```
+@Test
+public void test() {
+  final ShippingRate shippingRate = ShippingRate.of(EURO_10, null,
+          Arrays.asList(
+                  CartClassificationBuilder.of("Small", EURO_20).build(),
+                  CartClassificationBuilder.of("Heavy", EURO_30).build()
+          ));
+  // ...
+  // Omitted: set custom shipping method to a cart and assign it the classification of "Small"
+  assertThat(cart.getShippingInfo().getPrice()).isEqualTo(EURO_20);
+}
+```
+The previous assertion works well because the possibilities are either 10, 20 or 30; so our scenario has a different value for each case. Should some of the cases have the same value (e.g. 20 EUR for "Small" and the default value), we wouldn't be able to confirm that the 20 EUR corresponds to "Small" and not the default one.
