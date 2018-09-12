@@ -45,7 +45,7 @@ public void testExpansionPath() {
 ```
 
 Also when testing, make sure that you have a clear distinction between test cases, so that you are not asserting the wrong case. For example:
-```
+```java
 @Test
 public void test() {
   final ShippingRate shippingRate = ShippingRate.of(EURO_10, null,
