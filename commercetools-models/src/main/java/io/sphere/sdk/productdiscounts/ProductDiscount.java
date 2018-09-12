@@ -77,6 +77,8 @@ public interface ProductDiscount extends Resource<ProductDiscount> {
         return "product-discount";
     }
 
+    static String resourceTypeId() { return "product-discount";}
+
     /**
      * Creates a container which contains the full Java type information to deserialize this class from JSON.
      *

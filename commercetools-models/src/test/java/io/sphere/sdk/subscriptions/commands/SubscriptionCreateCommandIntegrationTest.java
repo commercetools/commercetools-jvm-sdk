@@ -128,7 +128,7 @@ public class SubscriptionCreateCommandIntegrationTest extends SubscriptionIntegr
     public void createPubSubChangesSubscription() throws Exception {
         Subscription subscription = null;
         try {
-            final SubscriptionDraftDsl subscriptionDraft = withCategoryChanges(createPubSubSubscription()).build();
+            final SubscriptionDraftDsl subscriptionDraft = withCategoryChanges(createPubSubSubscription(getSphereClientConfig().getProjectKey())).build();
 
             final SubscriptionCreateCommand createCommand = SubscriptionCreateCommand.of(subscriptionDraft);
             subscription = client().executeBlocking(createCommand);

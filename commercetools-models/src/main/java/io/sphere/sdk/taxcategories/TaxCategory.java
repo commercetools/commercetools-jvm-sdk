@@ -104,6 +104,10 @@ public interface TaxCategory extends Resource<TaxCategory>, WithKey {
         return "tax-category";
     }
 
+    static String resourceTypeId() {
+        return "tax-category";
+    }
+
     /**
      * Creates a reference for one item of this class by a known ID.
      * <p>
