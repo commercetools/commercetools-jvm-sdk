@@ -27,14 +27,14 @@ Note: Integration tests will fail in CI since we use encrypted credentials which
 
 ## Testing
 
-Be aware that during integration tests the CT platform will fail silently on certain errors, such as:
+Integration tests should avoid testing the CT Platform, as this is not the focus of the JVM SDK. Nevertheless you need to be aware that the CT platform will fail silently on certain errors, such as:
 - wrong field name (unless required)
 - wrong expansion path
 - wrong query predicate
 - wrong sort criteria
 - wrong facet/filter expressions
 
-Therefore you need to assert that the result is as expected. For example:
+Therefore you will need to assert that the result provided by the CT Platform is as expected. For example:
 ```java
 @Test
 public void testExpansionPath() {
