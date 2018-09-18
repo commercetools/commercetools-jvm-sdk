@@ -224,8 +224,15 @@ public interface Order extends CartLike<Order> {
     @QueryModelHint(type = "DiscountCodeInfoCollectionQueryModel<Order>")
     List<DiscountCodeInfo> getDiscountCodes();
 
+    /**
+     * The refused gifts of this cart. Automatically filled when a line item with {@link LineItemMode#GIFT_LINE_ITEM}
+     * is removed from this order.
+     *
+     * @return the refused gifts of this cart
+     */
     @Nullable
-    List<CartDiscount> getRefusedGifts();
+    @IgnoreInQueryModel
+    List<Reference<CartDiscount>> getRefusedGifts();
 
 
     @Nullable
