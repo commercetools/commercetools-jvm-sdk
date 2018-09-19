@@ -88,7 +88,7 @@ public abstract class IntegrationTest {
 //        }
 //    }
 
-    private static void assertProjectSettingsAreFine(final BlockingSphereClient sphereClient) {
+    public static void assertProjectSettingsAreFine(final BlockingSphereClient sphereClient) {
         final JsonNode project = sphereClient.executeBlocking(new SphereRequest<JsonNode>() {
             @Nullable
             @Override

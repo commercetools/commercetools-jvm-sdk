@@ -40,7 +40,11 @@ final class ExceptionFactory {
                 .when(r -> isServiceNotAvailable(r), r -> new ServiceUnavailableException(extractBody(r)))
                 .whenStatus(401, r -> {
                     final String body = extractBody(r);
-                    return body.contains("invalid_token") ? new InvalidTokenException() : new UnauthorizedException(body);
+                    return body.contains("invalid_token") ? new InvalidTokenException() : new UnauthorizedException(body,401);
+                })
+                .whenStatus(400, r -> {
+                    final String body = extractBody(r);
+                    return body.contains("invalid_scope") ? new InvalidTokenException() : new UnauthorizedException(body,400);
                 })
                 .whenStatus(403, r -> new ForbiddenException(extractBody(r)))
                 .whenStatus(500, r -> new InternalServerErrorException(extractBody(r)))
