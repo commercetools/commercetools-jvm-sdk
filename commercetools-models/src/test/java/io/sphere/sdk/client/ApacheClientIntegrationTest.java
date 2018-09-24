@@ -5,14 +5,11 @@ import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.projects.queries.ProjectGet;
 import io.sphere.sdk.test.IntegrationTest;
-import io.sphere.sdk.test.SphereTestUtils;
 import org.apache.http.impl.nio.client.HttpAsyncClients;
 import org.junit.Test;
 
-import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
-import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ApacheClientIntegrationTest extends IntegrationTest {
