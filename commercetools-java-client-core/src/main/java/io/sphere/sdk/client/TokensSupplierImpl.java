@@ -113,16 +113,19 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
      */
     private Tokens parseResponse(final HttpResponse httpResponse, final HttpRequest httpRequest) {
         try {
-            if (httpResponse.getStatusCode() == 401 && httpResponse.getResponseBody() != null) {
-                ClientErrorException exception = new UnauthorizedException(httpResponse.toString());
+            if ((httpResponse.getStatusCode() == 401 || httpResponse.getStatusCode() == 400) && httpResponse.getResponseBody() != null) {
+                ClientErrorException exception = new UnauthorizedException(httpResponse.toString(),httpResponse.getStatusCode());
                 try {
                     final JsonNode jsonNode = SphereJsonUtils.parse(httpResponse.getResponseBody());
                     final String error = jsonNode.get("error").asText();
                     if (error.equals("invalid_client")) {
                         exception = new InvalidClientCredentialsException(config);
                     }
+                    if (error.equals("invalid_scope")) {
+                        exception = new InvalidScopeException(exception);
+                    }
                 } catch (final JsonException e) {
-                    exception = new UnauthorizedException(httpResponse.toString(), e);
+                    exception = new UnauthorizedException(httpResponse.toString(), e,httpResponse.getStatusCode());
                 }
                 throw exception;
             } else if (httpResponse.getStatusCode() >= 300) {
