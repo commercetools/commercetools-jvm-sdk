@@ -42,9 +42,25 @@ public class ApacheClientIntegrationTest extends IntegrationTest {
         final SphereClient underlying = SphereClient.of(badConfig, httpClient, tokenSupplier);
         BlockingSphereClient localClient = BlockingSphereClient.of(underlying, 30, TimeUnit.SECONDS);
         try { assertProjectSettingsAreFine(localClient);} catch (Exception e) {}
-        //The sleep op here is added to avoid the race condition (the circuit breaker runs on a diff thread)
-        Thread.sleep(100);
-        assertProjectSettingsAreFine(localClient);
+
+
+        // In less then 100 retries the client should shut down (it should be only 1 try when we have an authorization problem,
+        // but a race condition doesn't allow the interrupting thread from evaluating the number of retries immediately)
+
+        SphereTestUtils.assertEventually(() -> {
+            for (int i = 0; i < 100; i++) {
+                try {
+                    assertProjectSettingsAreFine(localClient);
+                } catch (Exception e) {
+                    if (e instanceof IllegalStateException) {
+                        throw e;
+                    }
+                }
+            }
+        });
+
+
+
 
     }
 }
