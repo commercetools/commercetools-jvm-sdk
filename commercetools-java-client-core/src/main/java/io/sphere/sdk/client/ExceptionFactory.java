@@ -3,8 +3,8 @@ package io.sphere.sdk.client;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.json.SphereJsonUtils;
-import io.sphere.sdk.models.errors.ErrorResponse;
 import io.sphere.sdk.models.SphereException;
+import io.sphere.sdk.models.errors.ErrorResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import static io.sphere.sdk.client.HttpResponseBodyUtils.*;
+import static io.sphere.sdk.client.HttpResponseBodyUtils.bytesToString;
 
 final class ExceptionFactory {
     private final List<HttpResponseExceptionResponsibility> responsibilities = new ArrayList<>();
@@ -42,10 +42,6 @@ final class ExceptionFactory {
                     final String body = extractBody(r);
                     return body.contains("invalid_token") ? new InvalidTokenException() : new UnauthorizedException(body,401);
                 })
-                .whenStatus(400, r -> {
-                    final String body = extractBody(r);
-                    return body.contains("invalid_scope") ? new InvalidTokenException() : new UnauthorizedException(body,400);
-                })
                 .whenStatus(403, r -> new ForbiddenException(extractBody(r)))
                 .whenStatus(500, r -> new InternalServerErrorException(extractBody(r)))
                 .whenStatus(502, r -> new BadGatewayException(extractBody(r)))
@@ -57,10 +53,13 @@ final class ExceptionFactory {
                 })
                 .whenStatus(413, r -> new RequestEntityTooLargeException())
                 .whenStatus(400, r -> {
+                    final String body = extractBody(r);
+                    if (body.contains("invalid_scope")) {
+                        return new InvalidTokenException();
+                    }
                     final ErrorResponse errorResponse = SphereJsonUtils.readObject(r.getResponseBody(), ErrorResponse.typeReference());
                     return new ErrorResponseException(errorResponse);
-                }
-                )
+                })
                 .whenStatus(404, r -> new NotFoundException())
                 //default
                 .when(response -> true, r -> new SphereException("Can't parse backend response."));
