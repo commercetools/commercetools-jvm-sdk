@@ -5,17 +5,20 @@ import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.projects.queries.ProjectGet;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.test.SphereTestUtils;
 import org.apache.http.impl.nio.client.HttpAsyncClients;
 import org.junit.Test;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
+import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ApacheClientIntegrationTest extends IntegrationTest {
     @Test
     public void itWorks() throws Exception {
-        //we cannot check this in TeamCity with sphere CI, but with travis
+        //we cannot check this in TeamCity, this test is rather reserved for Travis ci
         if (!"false".equals(System.getenv("JVM_SDK_IT_SSL_VALIDATION"))) {
             final SphereClientConfig config = getSphereClientConfig();
             final HttpClient httpClient = ApacheHttpClientAdapter.of(HttpAsyncClients.createDefault());
