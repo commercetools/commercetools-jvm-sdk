@@ -1,0 +1,213 @@
+{
+  "cart": {
+    "typeId": "cart",
+    "id": "6c77769c-4abf-4d8f-8d1a-1e4ec2095879"
+  },
+  "country": "DE",
+  "createdAt": "2018-09-27T11:49:32.375Z",
+  "customLineItems": [],
+  "customerEmail": "foo@bar.tld",
+  "customerGroup": {
+    "typeId": "customer-group",
+    "id": "e4426148-7d31-4bec-b5a1-aa0ec21fad5f"
+  },
+  "customerId": "076833f4-4339-44ce-9fd3-c3e15048f9b6",
+  "discountCodes": [],
+  "id": "d9197cd3-13b1-4142-bed7-fcb54a78b9fa",
+  "inventoryMode": "None",
+  "itemShippingAddresses": [],
+  "lastMessageSequenceNumber": 3,
+  "lastModifiedAt": "2018-09-27T11:49:32.490Z",
+  "lineItems": [
+    {
+      "discountedPricePerQuantity": [],
+      "id": "5ce8648a-cca3-4a08-993b-db4491f99547",
+      "lineItemMode": "Standard",
+      "name": {
+        "en": "foorandom string -20053411621538048951041-2"
+      },
+      "price": {
+        "country": "DE",
+        "id": "e3364dd4-2baf-42f2-a0b8-1b251f3c5f38",
+        "value": {
+          "type": "centPrecision",
+          "centAmount": 1234,
+          "currencyCode": "EUR"
+        }
+      },
+      "priceMode": "Platform",
+      "productId": "5f4ac206-0a85-409f-a763-796190591cc9",
+      "productSlug": {
+        "en": "foorandom-string-20053411621538048951041-2-23500280"
+      },
+      "productType": {
+        "typeId": "product-type",
+        "id": "6b7a3bbf-022c-45c8-9e68-38f7f6d9c4dc"
+      },
+      "quantity": 3,
+      "state": [
+        {
+          "state": {
+            "typeId": "state",
+            "id": "3242fa75-0cbe-4b9f-b852-dab162f3a7a9"
+          },
+          "quantity": 3
+        }
+      ],
+      "taxRate": {
+        "id": "cyvmpLY7",
+        "name": "de19",
+        "amount": 0.19,
+        "includedInPrice": true,
+        "country": "DE",
+        "subRates": []
+      },
+      "taxedPrice": {
+        "totalNet": {
+          "type": "centPrecision",
+          "centAmount": 3111,
+          "currencyCode": "EUR"
+        },
+        "totalGross": {
+          "type": "centPrecision",
+          "centAmount": 3702,
+          "currencyCode": "EUR"
+        }
+      },
+      "totalPrice": {
+        "type": "centPrecision",
+        "centAmount": 3702,
+        "currencyCode": "EUR"
+      },
+      "variant": {
+        "assets": [],
+        "attributes": [
+          {
+            "name": "size",
+            "value": {
+              "label": "S",
+              "key": "S"
+            }
+          },
+          {
+            "name": "color",
+            "value": {
+              "label": {
+                "en": "green",
+                "de": "grün"
+              },
+              "key": "green"
+            }
+          }
+        ],
+        "id": 1,
+        "images": [],
+        "prices": [
+          {
+            "country": "DE",
+            "id": "e3364dd4-2baf-42f2-a0b8-1b251f3c5f38",
+            "value": {
+              "type": "centPrecision",
+              "centAmount": 1234,
+              "currencyCode": "EUR"
+            }
+          }
+        ],
+        "sku": "e4d54760-23b1-44b5-8452-78984245e875"
+      }
+    }
+  ],
+  "orderState": "Open",
+  "origin": "Customer",
+  "paymentState": "Pending",
+  "refusedGifts":  [{"id": "<my-order-discount-id>"}],
+  "returnInfo": [],
+  "shipmentState": "Ready",
+  "shippingAddress": {
+    "country": "DE"
+  },
+  "shippingInfo": {
+    "deliveries": [],
+    "price": {
+      "type": "centPrecision",
+      "centAmount": 1000,
+      "currencyCode": "EUR"
+    },
+    "shippingMethodName": "custom shipping method",
+    "shippingMethodState": "MatchesCart",
+    "shippingRate": {
+      "price": {
+        "type": "centPrecision",
+        "centAmount": 1000,
+        "currencyCode": "EUR"
+      },
+      "tiers": []
+    },
+    "taxCategory": {
+      "typeId": "tax-category",
+      "id": "6aedda14-41ab-4de5-978c-ab3e947f36ee"
+    },
+    "taxRate": {
+      "id": "6KPC9qaO",
+      "name": "xyz",
+      "amount": 0.2,
+      "includedInPrice": true,
+      "country": "DE",
+      "subRates": []
+    },
+    "taxedPrice": {
+      "totalNet": {
+        "type": "centPrecision",
+        "centAmount": 833,
+        "currencyCode": "EUR"
+      },
+      "totalGross": {
+        "type": "centPrecision",
+        "centAmount": 1000,
+        "currencyCode": "EUR"
+      }
+    }
+  },
+  "syncInfo": [],
+  "taxCalculationMode": "LineItemLevel",
+  "taxMode": "Platform",
+  "taxRoundingMode": "HalfEven",
+  "taxedPrice": {
+    "totalNet": {
+      "type": "centPrecision",
+      "centAmount": 3944,
+      "currencyCode": "EUR"
+    },
+    "totalGross": {
+      "type": "centPrecision",
+      "centAmount": 4702,
+      "currencyCode": "EUR"
+    },
+    "taxPortions": [
+      {
+        "rate": 0.19,
+        "amount": {
+          "type": "centPrecision",
+          "centAmount": 591,
+          "currencyCode": "EUR"
+        },
+        "name": "de19"
+      },
+      {
+        "rate": 0.2,
+        "amount": {
+          "type": "centPrecision",
+          "centAmount": 167,
+          "currencyCode": "EUR"
+        },
+        "name": "xyz"
+      }
+    ]
+  },
+  "totalPrice": {
+    "type": "centPrecision",
+    "centAmount": 4702,
+    "currencyCode": "EUR"
+  },
+  "version": 3
+}
