@@ -61,6 +61,12 @@ public final class SphereProjectScope extends Base implements SphereScope {
     /** Grants access to the API for viewing the project settings.*/
     public final static SphereProjectScope VIEW_PROJECT_SETTINGS = SphereProjectScope.of("view_project_settings");
 
+    /** Grants access to the APIs for creating, modifying and viewing anything related to Extensions in a project*/
+    public final static SphereProjectScope MANAGE_EXTENSIONS = SphereProjectScope.of("manage_extensions");
+
+    /** Grants access to the API for modifying and viewing the project settings*/
+    public final static SphereProjectScope MANAGE_PROJECT_SETTINGS = SphereProjectScope.of("manage_project_settings");
+
     /** Grants access to the APIs for creating, modifying and viewing anything related to states in a project.*/
     public final static SphereProjectScope MANAGE_STATES = SphereProjectScope.of("manage_states");
 
