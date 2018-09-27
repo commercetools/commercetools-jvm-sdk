@@ -31,6 +31,8 @@ public class SphereProjectScopeTest {
         assertThat(MANAGE_STATES.toScopeString()).isEqualTo("manage_states");
         assertThat(VIEW_STATES.toScopeString()).isEqualTo("view_states");
         assertThat(VIEW_MESSAGES.toScopeString()).isEqualTo("view_messages");
+        assertThat(MANAGE_PROJECT_SETTINGS.toScopeString()).isEqualTo("manage_project_settings");
+        assertThat(MANAGE_EXTENSIONS.toScopeString()).isEqualTo("manage_extensions");
     }
 
     @Test
