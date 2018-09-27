@@ -12,6 +12,7 @@ import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.AddressBuilder;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
+import io.sphere.sdk.test.utils.VrapRequestDecorator;
 import net.jcip.annotations.NotThreadSafe;
 import org.junit.Test;
 
@@ -95,7 +96,7 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
         withCustomer(client(), customer -> {
             final CustomerName newName = CustomerName.ofTitleFirstAndLastName("Mister", "John", "Smith");
             assertThat(customer.getName()).isNotEqualTo(newName);
-            final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, ChangeName.of(newName)));
+            final Customer updatedCustomer = client().executeBlocking(new VrapRequestDecorator<>(CustomerUpdateCommand.of(customer, ChangeName.of(newName)), "request"));
             assertThat(updatedCustomer.getName()).isEqualTo(newName);
         });
     }
