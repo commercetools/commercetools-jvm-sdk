@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.annotations.*;
+import io.sphere.sdk.cartdiscounts.CartDiscount;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.discountcodes.DiscountCodeInfo;
@@ -222,6 +223,17 @@ public interface Order extends CartLike<Order> {
     @Override
     @QueryModelHint(type = "DiscountCodeInfoCollectionQueryModel<Order>")
     List<DiscountCodeInfo> getDiscountCodes();
+
+    /**
+     * The refused gifts of this cart. Automatically filled when a line item with {@link LineItemMode#GIFT_LINE_ITEM}
+     * is removed from this order.
+     *
+     * @return the refused gifts of this cart
+     */
+    @Nullable
+    @IgnoreInQueryModel
+    List<Reference<CartDiscount>> getRefusedGifts();
+
 
     @Nullable
     @Override
