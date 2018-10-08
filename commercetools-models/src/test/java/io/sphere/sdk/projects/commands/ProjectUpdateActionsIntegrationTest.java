@@ -1,6 +1,7 @@
 package io.sphere.sdk.projects.commands;
 
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.projects.MessagesConfigurationDraft;
 import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.projects.commands.updateactions.*;
 import io.sphere.sdk.projects.queries.ProjectGet;
@@ -25,6 +26,7 @@ public class ProjectUpdateActionsIntegrationTest extends ProjectIntegrationTest{
         final List<Locale> new_project_locales = Arrays.asList(Locale.FRANCE);
         final List<String> new_project_languages = new_project_locales.stream().map(Locale::toLanguageTag).collect(Collectors.toList());
         final Boolean new_project_messages_enabled = false;
+        final Long delete_days_after_activation = 20L;
 
 
         final ProjectUpdateCommand updateCommand = ProjectUpdateCommand.of(project, Arrays.asList(
@@ -32,7 +34,7 @@ public class ProjectUpdateActionsIntegrationTest extends ProjectIntegrationTest{
                 ChangeCurrencies.of(new_project_currencies),
                 ChangeCountries.of(new_project_countries),
                 ChangeLanguages.of(new_project_languages),
-                ChangeMessagesEnabled.of(new_project_messages_enabled),
+                ChangeMessagesConfiguration.of(MessagesConfigurationDraft.of(new_project_messages_enabled, delete_days_after_activation)),
                 SetShippingRateInputType.ofUnset()
         ));
 
@@ -48,6 +50,7 @@ public class ProjectUpdateActionsIntegrationTest extends ProjectIntegrationTest{
             soft.assertThat(updatedProject.getCurrencies()).as("currencies").isEqualTo(new_project_currencies);
             soft.assertThat(updatedProject.getCurrencyUnits()).as("currencies as unit").contains(USD);
             soft.assertThat(updatedProject.getMessages().isEnabled()).isEqualTo(new_project_messages_enabled);
+            soft.assertThat(updatedProject.getMessages().getDeleteDaysAfterCreation()).isEqualTo(delete_days_after_activation);
             soft.assertThat(updatedProject.getShippingRateInputType()).isNull();
 
         });
