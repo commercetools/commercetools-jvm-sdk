@@ -53,4 +53,8 @@ public final class ProductProjectionSortSearchModel extends ProductDataSortSearc
     public SingleValueSortSearchModel<ProductProjection> id() {
         return searchModel("id").sorted();
     }
+
+    public SingleValueSortSearchModel<ProductProjection> score() {
+        return searchModel("score").sorted();
+    }
 }
