@@ -179,6 +179,16 @@ public class ProductProjectionSearchModelSortIntegrationTest extends ProductProj
         testProductIds(PRODUCT_MODEL.allVariants().sku().asc(),
                 ids -> assertThat(ids).containsExactly(product1.getId(), product2.getId()));
     }
+    @Test
+    public void score() {
+        final ProductProjectionSearch baseRequest = ProductProjectionSearch.ofStaged()
+                .withQueryFilters(m -> m.id().isIn(getAllIds()));
+        final ProductProjectionSearch asc = baseRequest.withSort(m -> m.score().asc());
+        assertEventually(() -> {
+            final PagedSearchResult<ProductProjection> ascResult = client().executeBlocking(asc);
+            assertThat(ascResult.getTotal()).isEqualTo(getAllIds().size());
+        });
+    }
 
     @Test
     public void id() {

@@ -152,8 +152,8 @@ import java.util.function.Function;
     <li class=new-in-release>added new message {@link io.sphere.sdk.orders.messages.OrderCustomerGroupSetMessage} </li>
     <li class=fixed-in-release>Now the use of invalid project key leads to client shutdown, instead of token fetching retries </li>
     <li class=new-in-release>adding new authentication scopes {@link io.sphere.sdk.client.SphereProjectScope#MANAGE_EXTENSIONS} and  {@link io.sphere.sdk.client.SphereProjectScope#MANAGE_PROJECT_SETTINGS} </li>
+    <li class=change-in-release>explicit sort by {@link ProductProjectionSortSearchModel#score()} in {@link ProductProjectionSearch} </li>
     <li class=new-in-release> Now you can specify the days till deletion of messages using {@link io.sphere.sdk.projects.commands.updateactions.ChangeMessagesConfiguration} update action</li>
-
  </ul>
 
  <h3 class=released-version id="v1_35_0">1.35.0 (23.08.2018)</h3>
