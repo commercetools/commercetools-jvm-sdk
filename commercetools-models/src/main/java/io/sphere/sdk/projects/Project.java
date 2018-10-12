@@ -94,6 +94,7 @@ public interface Project extends CreationTimestamped, WithKey {
     }
     @HasUpdateAction
     @HasUpdateAction(value = "changeMessagesEnabled", fields = {@PropertySpec(name = "messagesEnabled", type = Boolean.class)})
+    @HasUpdateAction(value = "changeMessagesConfiguration", fields = {@PropertySpec(name = "messagesConfiguration", type = MessagesConfigurationDraft.class)})
     MessagesConfiguration getMessages();
 
     /**

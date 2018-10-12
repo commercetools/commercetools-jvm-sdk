@@ -46,7 +46,7 @@ public class ApacheClientIntegrationTest extends IntegrationTest {
         // but a race condition doesn't allow the interrupting thread from evaluating the number of retries immediately)
 
         SphereTestUtils.assertEventually(() -> {
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 1_000; i++) {
                 try {
                     assertProjectSettingsAreFine(localClient);
                 } catch (Exception e) {
