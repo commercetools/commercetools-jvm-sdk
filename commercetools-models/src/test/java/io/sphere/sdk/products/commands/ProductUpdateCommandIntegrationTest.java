@@ -15,6 +15,7 @@ import io.sphere.sdk.products.attributes.AttributeAccess;
 import io.sphere.sdk.products.attributes.AttributeDraft;
 import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 import io.sphere.sdk.products.commands.updateactions.*;
+import io.sphere.sdk.products.messages.ProductPriceExternalDiscountSetMessage;
 import io.sphere.sdk.products.messages.ProductSlugChangedMessage;
 import io.sphere.sdk.products.messages.ProductStateTransitionMessage;
 import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
@@ -3056,6 +3057,17 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                 assertThat(updatedPrice.getValue()).isEqualTo(EURO_40);
                 assertThat(updatedPrice.getDiscounted().getValue()).isEqualTo(EURO_5);
                 assertThat(updatedPrice.getDiscounted().getDiscount()).isEqualTo(externalProductDiscount.toReference());
+
+                assertEventually(() -> {
+                    final Query<ProductPriceExternalDiscountSetMessage> query = MessageQuery.of()
+                            .withPredicates(m -> m.resource().is(product))
+                            .forMessageType(ProductPriceExternalDiscountSetMessage.MESSAGE_HINT);
+                    final List<ProductPriceExternalDiscountSetMessage> results =
+                            client().executeBlocking(query).getResults();
+                    assertThat(results).hasSize(1);
+                    final ProductPriceExternalDiscountSetMessage message = results.get(0);
+                    assertThat(message.getPriceId()).isEqualTo(priceId);
+                });
             });
         });
     }
