@@ -1,12 +1,15 @@
 package io.sphere.sdk.productdiscounts.commands;
 
 import io.sphere.sdk.json.SphereJsonUtils;
+import io.sphere.sdk.messages.queries.MessageQuery;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.productdiscounts.*;
 import io.sphere.sdk.productdiscounts.queries.ProductDiscountQuery;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.Product;
+import io.sphere.sdk.products.messages.ProductPriceDiscountsSetMessage;
 import io.sphere.sdk.products.queries.ProductByIdGet;
+import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -73,9 +76,19 @@ public class ProductDiscountCreateCommandIntegrationTest extends IntegrationTest
             assertThat(productPrices)
                     .overridingErrorMessage("discount object in price is expanded")
                     .matches(prices -> prices.stream().anyMatch(price -> price.getDiscounted() != null && price.getDiscounted().getDiscount().getObj() != null));
-            // clean up test
-            client().executeBlocking(ProductDiscountDeleteCommand.of(productDiscount));
+
+            //Query that the messages are returned correctly
+            final Query<ProductPriceDiscountsSetMessage> query = MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(product))
+                    .forMessageType(ProductPriceDiscountsSetMessage.MESSAGE_HINT);
+            final List<ProductPriceDiscountsSetMessage> results =
+                    client().executeBlocking(query).getResults();
+            assertThat(results).isNotEmpty();
+            assertThat(results.get(0).getUpdatedPrices()).isNotNull();
+
         });
+        // clean up test
+        client().executeBlocking(ProductDiscountDeleteCommand.of(productDiscount));
     }
 
     @Test

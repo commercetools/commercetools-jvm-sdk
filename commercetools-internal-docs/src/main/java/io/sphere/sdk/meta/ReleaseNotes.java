@@ -154,6 +154,7 @@ import java.util.function.Function;
     <li class=new-in-release>adding new authentication scopes {@link io.sphere.sdk.client.SphereProjectScope#MANAGE_EXTENSIONS} and  {@link io.sphere.sdk.client.SphereProjectScope#MANAGE_PROJECT_SETTINGS} </li>
     <li class=change-in-release>explicit sort by {@link ProductProjectionSortSearchModel#score()} in {@link ProductProjectionSearch} </li>
     <li class=new-in-release> Now you can specify the days till deletion of messages using {@link io.sphere.sdk.projects.commands.updateactions.ChangeMessagesConfiguration} update action</li>
+    <li class=new-in-release>two new messages {@link io.sphere.sdk.products.messages.ProductPriceDiscountsSetMessage} and {@link io.sphere.sdk.products.messages.ProductPriceExternalDiscountSetMessage}</li>
  </ul>
 
  <h3 class=released-version id="v1_35_0">1.35.0 (23.08.2018)</h3>
