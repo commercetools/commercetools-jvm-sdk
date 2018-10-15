@@ -6,7 +6,7 @@ import io.sphere.sdk.productdiscounts.DiscountedPrice;
 
 import javax.annotation.Nullable;
 
-public class ProductPriceDiscountUpdate extends Base {
+public final class ProductPriceDiscountUpdate extends Base {
     private final Long variantId;
 
     @Nullable
