@@ -1,11 +1,12 @@
 package io.sphere.sdk.products.messages;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.productdiscounts.DiscountedPrice;
 
 import javax.annotation.Nullable;
 
-public class ProductPriceDiscountUpdate {
+public class ProductPriceDiscountUpdate extends Base {
     private final Long variantId;
 
     @Nullable
