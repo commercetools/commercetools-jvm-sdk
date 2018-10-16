@@ -144,7 +144,7 @@ import java.util.function.Function;
  </ul>
  -->
  -->
- <h3 class=released-version id="v1_36_0">1.36.0 </h3>
+ <h3 class=released-version id="v1_36_0">1.36.0 (16.10.2018)</h3>
  <ul>
     <li class=change-in-release>added new fields {@link Payload#getResourceUserProvidedIdentifiers()} and {@link Message#getResourceUserProvidedIdentifiers()} to reference user defined identifiers.</li>
     <li class=change-in-release>added new subscriptions for the following types {@link CartDiscount}, {@link Channel}, {@link DiscountCode}, {@link io.sphere.sdk.extensions.Extension}, {@link ProductDiscount}, {@link ShoppingList}, {@link Subscription}, {@link State}, {@link TaxCategory}, {@link Type}, </li>
