@@ -6,6 +6,7 @@ import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
 import javax.annotation.Nullable;
@@ -27,7 +28,7 @@ public interface ShippingMethodDraft {
     @Nullable
     String getDescription();
 
-    Reference<TaxCategory> getTaxCategory();
+    ResourceIdentifier<TaxCategory> getTaxCategory();
 
     List<ZoneRate> getZoneRates();
 
