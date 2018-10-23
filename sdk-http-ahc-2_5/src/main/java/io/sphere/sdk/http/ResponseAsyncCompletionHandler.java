@@ -8,7 +8,7 @@ import java.util.concurrent.CompletableFuture;
 final class ResponseAsyncCompletionHandler extends AsyncCompletionHandler<Response> {
     private final CompletableFuture<Response> future;
 
-    public ResponseAsyncCompletionHandler(final CompletableFuture<Response> future) {
+    ResponseAsyncCompletionHandler(final CompletableFuture<Response> future) {
         this.future = future;
     }
 
