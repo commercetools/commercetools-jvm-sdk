@@ -1,7 +1,6 @@
 package io.sphere.sdk.test;
 
 import io.sphere.sdk.http.*;
-import io.sphere.sdk.http.test.*;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.input.AutoCloseInputStream;
 import org.apache.http.Header;
