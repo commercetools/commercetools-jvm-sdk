@@ -29,7 +29,7 @@ public class CustomClientConfigDemoIntegrationTest {
         return AsyncHttpClientAdapter.of(asyncHttpClient);
     }
 
-    
+
     private void demoCreateClient() {
         final SphereClient sphereClient = SphereClientFactory.of(CustomClientConfigDemoIntegrationTest::createCustomHttpClient)
                 .createClient("your projectKey", "your clientId", "your clientSecret");
