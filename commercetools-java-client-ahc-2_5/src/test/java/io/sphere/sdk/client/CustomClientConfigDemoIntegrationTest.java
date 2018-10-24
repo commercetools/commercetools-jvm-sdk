@@ -16,10 +16,7 @@ import static io.sphere.sdk.http.HttpMethod.GET;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CustomClientConfigDemoIntegrationTest {
-    /**
-     * Creates a {@link HttpClient} that can be used by the {@link SphereClient}.
-     * @return new http client with custom settings
-     */
+
     public static HttpClient createCustomHttpClient() {
         final AsyncHttpClientConfig httpClientConfig = new DefaultAsyncHttpClientConfig.Builder()
                 .setEnabledProtocols(new String[]{"TLSv1.2"})//required
@@ -32,9 +29,7 @@ public class CustomClientConfigDemoIntegrationTest {
         return AsyncHttpClientAdapter.of(asyncHttpClient);
     }
 
-    /**
-     * Shows the initialization of a {@link SphereClient} with a custom {@link HttpClient} provider.
-     */
+    
     private void demoCreateClient() {
         final SphereClient sphereClient = SphereClientFactory.of(CustomClientConfigDemoIntegrationTest::createCustomHttpClient)
                 .createClient("your projectKey", "your clientId", "your clientSecret");
