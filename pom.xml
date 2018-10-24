@@ -85,7 +85,7 @@
         <asynchttpclient18.version>1.8.16</asynchttpclient18.version>
         <asynchttpclient19.version>1.9.33</asynchttpclient19.version>
         <asynchttpclient20.version>2.0.38</asynchttpclient20.version>
-        <asynchttpclient25.version>2.4.5</asynchttpclient25.version>
+        <asynchttpclient25.version>2.5.4</asynchttpclient25.version>
         <httpasyncclient.version>4.1.1</httpasyncclient.version>
         <netty.version>4.0.54.Final</netty.version>
         <nv-i18n.version>1.18</nv-i18n.version>
