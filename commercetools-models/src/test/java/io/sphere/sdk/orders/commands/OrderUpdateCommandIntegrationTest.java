@@ -474,20 +474,47 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
         withOrder(client(), order -> {
             assertThat(order.getReturnInfo()).isEmpty();
             final String lineItemId = order.getLineItems().get(0).getId();
-            final List<ReturnItemDraft> items = asList(ReturnItemDraft.of(1L, lineItemId, ReturnShipmentState.RETURNED, "foo bar"));
+            final List<LineItemReturnItemDraft> items = asList(LineItemReturnItemDraft.of(1L, lineItemId, ReturnShipmentState.RETURNED, "foo bar"));
             final AddReturnInfo action = AddReturnInfo.of(items).withReturnDate(ZonedDateTime_IN_PAST).withReturnTrackingId("trackingId");
             final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, action));
 
             final ReturnInfo returnInfo = updatedOrder.getReturnInfo().get(0);
             final ReturnItem returnItem = returnInfo.getItems().get(0);
+            assertThat(returnItem).isInstanceOf(LineItemReturnItem.class);
+            final LineItemReturnItem lineItemReturnItem = (LineItemReturnItem) returnItem;
             assertThat(returnItem.getQuantity()).isEqualTo(1);
-            assertThat(returnItem.getLineItemId()).isEqualTo(lineItemId);
-            assertThat(returnItem.getShipmentState()).isEqualTo(ReturnShipmentState.RETURNED);
-            assertThat(returnItem.getComment()).contains("foo bar");
+            assertThat(lineItemReturnItem.getLineItemId()).isEqualTo(lineItemId);
+            assertThat(lineItemReturnItem.getShipmentState()).isEqualTo(ReturnShipmentState.RETURNED);
+            assertThat(lineItemReturnItem.getComment()).contains("foo bar");
             assertThat(returnInfo.getReturnDate()).isEqualTo(ZonedDateTime_IN_PAST);
             assertThat(returnInfo.getReturnTrackingId()).contains("trackingId");
 
             return updatedOrder;
+        });
+    }
+
+
+    @Test
+    public void addReturnInfoOfCustomLineItems() throws Exception {
+        withOrderOfCustomLineItems(client(), order -> {
+            assertThat(order.getReturnInfo()).isEmpty();
+            assertThat(order.getCustomLineItems()).isNotEmpty();
+            final String customLineItemId = order.getCustomLineItems().get(0).getId();
+            final List<CustomLineItemReturnItemDraft> items = asList(CustomLineItemReturnItemDraft.of(1L, customLineItemId, ReturnShipmentState.RETURNED, "foo bar"));
+            final AddReturnInfo action = AddReturnInfo.of(items).withReturnDate(ZonedDateTime_IN_PAST).withReturnTrackingId("trackingId");
+            final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, action));
+
+            final ReturnInfo returnInfo = updatedOrder.getReturnInfo().get(0);
+            final ReturnItem returnItem = returnInfo.getItems().get(0);
+            assertThat(returnItem).isInstanceOf(CustomLineItemReturnItem.class);
+            final CustomLineItemReturnItem customLineItemReturnItem = (CustomLineItemReturnItem) returnItem;
+            assertThat(returnItem.getQuantity()).isEqualTo(1);
+            assertThat(customLineItemReturnItem.getCustomLineItemId()).isEqualTo(customLineItemId);
+            assertThat(customLineItemReturnItem.getShipmentState()).isEqualTo(ReturnShipmentState.RETURNED);
+            assertThat(customLineItemReturnItem.getComment()).contains("foo bar");
+            assertThat(returnInfo.getReturnDate()).isEqualTo(ZonedDateTime_IN_PAST);
+            assertThat(returnInfo.getReturnTrackingId()).contains("trackingId");
+
         });
     }
 
