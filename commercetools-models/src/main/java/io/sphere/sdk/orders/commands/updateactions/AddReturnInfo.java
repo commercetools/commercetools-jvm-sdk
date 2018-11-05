@@ -23,20 +23,20 @@ public final class AddReturnInfo extends UpdateActionImpl<Order> {
     private final ZonedDateTime returnDate;
     @Nullable
     private final String returnTrackingId;
-    private final List<ReturnItemDraft> items;
+    private final List<? extends ReturnItemDraft> items;
 
-    private AddReturnInfo(final List<ReturnItemDraft> items, @Nullable final ZonedDateTime returnDate, @Nullable final String returnTrackingId) {
+    private AddReturnInfo(final List<? extends ReturnItemDraft> items, @Nullable final ZonedDateTime returnDate, @Nullable final String returnTrackingId) {
         super("addReturnInfo");
         this.returnDate = returnDate;
         this.returnTrackingId = returnTrackingId;
         this.items = items;
     }
 
-    public static AddReturnInfo of(final List<ReturnItemDraft> items, @Nullable final ZonedDateTime returnDate, @Nullable final String returnTrackingId) {
+    public static AddReturnInfo of(final List<? extends ReturnItemDraft> items, @Nullable final ZonedDateTime returnDate, @Nullable final String returnTrackingId) {
         return new AddReturnInfo(items, returnDate, returnTrackingId);
     }
 
-    public static AddReturnInfo of(final List<ReturnItemDraft> items) {
+    public static AddReturnInfo of(final List<? extends ReturnItemDraft> items) {
         return of(items, null, null);
     }
 
@@ -58,7 +58,7 @@ public final class AddReturnInfo extends UpdateActionImpl<Order> {
         return returnTrackingId;
     }
 
-    public List<ReturnItemDraft> getItems() {
+    public List<? extends ReturnItemDraft> getItems() {
         return items;
     }
 }

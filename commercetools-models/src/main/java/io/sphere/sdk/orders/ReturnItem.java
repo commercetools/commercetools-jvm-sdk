@@ -1,23 +1,27 @@
 package io.sphere.sdk.orders;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import io.sphere.sdk.carts.ClassificationShippingRateInputDraftDsl;
+import io.sphere.sdk.carts.ScoreShippingRateInputDraftDsl;
 import io.sphere.sdk.models.Timestamped;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
-@JsonDeserialize(as = ReturnItemImpl.class)
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = CustomLineItemReturnItem.class, name = "CustomLineItemReturnItem"),
+        @JsonSubTypes.Type(value = LineItemReturnItem.class, name = "LineItemReturnItem")
+})
 public interface ReturnItem extends Timestamped {
-    static ReturnItem of(final String id, final Long quantity, final String lineItemId, final String comment, final ReturnShipmentState shipmentState, final ReturnPaymentState paymentState, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt) {
-        return new ReturnItemImpl(id, quantity, lineItemId, comment, shipmentState, paymentState, createdAt, lastModifiedAt);
-
-    }
 
     String getId();
 
     Long getQuantity();
-
-    String getLineItemId();
 
     @Nullable
     String getComment();

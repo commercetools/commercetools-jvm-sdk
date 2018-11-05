@@ -122,7 +122,7 @@ public class OrderFixtures {
         withOrder(client, order -> {
             Assertions.assertThat(order.getReturnInfo()).isEmpty();
             final String lineItemId = order.getLineItems().get(0).getId();
-            final List<ReturnItemDraft> items = asList(ReturnItemDraft.of(1L, lineItemId, ReturnShipmentState.RETURNED, "foo bar"));
+            final List<LineItemReturnItemDraft> items = asList(LineItemReturnItemDraft.of(1L, lineItemId, ReturnShipmentState.RETURNED, "foo bar"));
             final AddReturnInfo action = AddReturnInfo.of(items);
             final AddDelivery addDelivery = AddDelivery.of(asList(DeliveryItem.of(lineItemId, 1)));
             final Order updatedOrder = client.executeBlocking(OrderUpdateCommand.of(order, asList(action, addDelivery)));

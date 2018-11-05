@@ -150,6 +150,7 @@ import java.util.function.Function;
     <li class=change-in-release> {@link io.sphere.sdk.shippingmethods.commands.updateactions.ChangeTaxCategory} accept {@link ResourceIdentifier<TaxCategory>} as a parameter now </li
     <li class=change-in-release> {@link ShippingMethodDraftBuilder} accept a {@link ResourceIdentifier<TaxCategory>} which is a {@link Reference<TaxCategory>} generalization </li>
     <li class=change-in-release> Added support for asynchttpclient 2.5.4 </li>
+    <li class=change-in-release> Now {@link ReturnItem} has two specializations {@link LineItemReturnItem} and {@link CustomLineItemReturnItem} </li>
     <li class=change-in-release> Added new field {@link UserProvidedIdentifiers#getCustomerNumber()} to reflect customer number in change messages</li>
  </ul>
 
