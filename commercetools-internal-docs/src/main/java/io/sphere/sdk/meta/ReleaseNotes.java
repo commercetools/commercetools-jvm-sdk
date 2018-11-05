@@ -56,6 +56,7 @@ import io.sphere.sdk.inventory.InventoryEntryDraft;
 import io.sphere.sdk.inventory.InventoryEntryDraftBuilder;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.messages.Message;
+import io.sphere.sdk.messages.UserProvidedIdentifiers;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.orders.*;
 import io.sphere.sdk.orders.commands.updateactions.AddDelivery;
@@ -150,6 +151,7 @@ import java.util.function.Function;
     <li class=change-in-release> {@link ShippingMethodDraftBuilder} accept a {@link ResourceIdentifier<TaxCategory>} which is a {@link Reference<TaxCategory>} generalization </li>
     <li class=change-in-release> Added support for asynchttpclient 2.5.4 </li>
     <li class=change-in-release> Now {@link ReturnItem} has two specializations {@link LineItemReturnItem} and {@link CustomLineItemReturnItem} </li>
+    <li class=change-in-release> Added new field {@link UserProvidedIdentifiers#getCustomerNumber()} to reflect customer number in change messages</li>
  </ul>
 
  <h3 class=released-version id="v1_36_0">1.36.0 (16.10.2018)</h3>

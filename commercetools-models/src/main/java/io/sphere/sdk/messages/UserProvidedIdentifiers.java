@@ -28,4 +28,7 @@ public interface UserProvidedIdentifiers extends WithKey {
     @Nullable
     LocalizedString getSlug();
 
+    @Nullable
+    String getCustomerNumber();
+
 }
