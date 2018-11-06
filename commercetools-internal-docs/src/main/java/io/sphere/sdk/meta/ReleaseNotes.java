@@ -145,7 +145,7 @@ import java.util.function.Function;
  </ul>
  -->
  -->
- <h3 class=released-version id="v1_37_0">1.37.0</h3>
+ <h3 class=released-version id="v1_37_0">1.37.0 (06.11.2018)</h3>
  <ul>
     <li class=change-in-release> {@link io.sphere.sdk.shippingmethods.commands.updateactions.ChangeTaxCategory} accept {@link ResourceIdentifier<TaxCategory>} as a parameter now </li
     <li class=change-in-release> {@link ShippingMethodDraftBuilder} accept a {@link ResourceIdentifier<TaxCategory>} which is a {@link Reference<TaxCategory>} generalization </li>
