@@ -23,6 +23,13 @@ public interface ZoneDraft {
 
     String getName();
 
+    /**
+     * @return Unique identifier for a zone. Must be unique across a project.
+     */
+    @Nullable
+    String getKey();
+
+
 
     static ZoneDraft ofCountries(final String name, final Set<CountryCode> countries, @Nullable final String description) {
         final Set<Location> locations = countries.stream().map(country -> Location.of(country)).collect(toSet());

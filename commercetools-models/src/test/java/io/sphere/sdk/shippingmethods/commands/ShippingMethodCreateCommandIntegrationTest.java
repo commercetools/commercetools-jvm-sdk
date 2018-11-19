@@ -44,7 +44,7 @@ public class ShippingMethodCreateCommandIntegrationTest extends IntegrationTest 
         final TaxRateDraft taxRate = TaxRateDraft.of("x20", 0.20, true, COUNTRY_CODE);
         withZone(client(), zone -> {
             withTaxCategory(client(), TaxCategoryDraft.of("taxcat", asList(taxRate)), taxCategory -> {
-                final ZoneRate zoneRate = ZoneRate.of(zone, asList(ShippingRate.of(MoneyImpl.of(30, currencyUnit))));
+                final ZoneRateDraft zoneRate = ZoneRateDraftBuilder.of(zone.toResourceIdentifier(), asList(ShippingRate.of(MoneyImpl.of(30, currencyUnit)))).build();
                 final ShippingMethodDraft draft =
                         ShippingMethodDraft.of("standard shipping", "description", taxCategory, asList(zoneRate));
                 final ShippingMethod shippingMethod = client().executeBlocking(ShippingMethodCreateCommand.of(draft));
@@ -60,9 +60,9 @@ public class ShippingMethodCreateCommandIntegrationTest extends IntegrationTest 
         final TaxRateDraft taxRate = TaxRateDraft.of("x20", 0.20, true, COUNTRY_CODE);
         withZone(client(), zone -> {
             withTaxCategory(client(), TaxCategoryDraft.of("taxcat", asList(taxRate)), taxCategory -> {
-                final ZoneRate zoneRate = ZoneRate.of(zone, asList(ShippingRate.of(MoneyImpl.of(30, currencyUnit))));
+                final ZoneRateDraft zoneRateDraft = ZoneRateDraftBuilder.of(zone.toResourceIdentifier(), asList(ShippingRate.of(MoneyImpl.of(30, currencyUnit)))).build();
                 final ShippingMethodDraft draft =
-                        ShippingMethodDraftBuilder.of("standard shipping", "description", taxCategory.toReference(), asList(zoneRate), false)
+                        ShippingMethodDraftBuilder.of("standard shipping", "description", taxCategory.toReference(), asList(zoneRateDraft), false)
                                 .predicate(CartPredicate.of("customer.email = \"john@example.com\""))
                                 .build();
                 final ShippingMethod shippingMethod = client().executeBlocking(ShippingMethodCreateCommand.of(draft));

@@ -30,7 +30,7 @@ public interface ShippingMethodDraft {
 
     ResourceIdentifier<TaxCategory> getTaxCategory();
 
-    List<ZoneRate> getZoneRates();
+    List<ZoneRateDraft> getZoneRates();
 
     @JsonProperty("isDefault")
     Boolean isDefault();
@@ -38,11 +38,11 @@ public interface ShippingMethodDraft {
     @Nullable
     String getPredicate();
 
-    static ShippingMethodDraft of(final String name, @Nullable final String description, final Referenceable<TaxCategory> taxCategory, final List<ZoneRate> zoneRates) {
+    static ShippingMethodDraft of(final String name, @Nullable final String description, final Referenceable<TaxCategory> taxCategory, final List<ZoneRateDraft> zoneRates) {
         return of(name, description, taxCategory, zoneRates, false);
     }
 
-    static ShippingMethodDraft of(final String name, @Nullable final String description, final Referenceable<TaxCategory> taxCategory, final List<ZoneRate> zoneRates, final boolean isDefault) {
+    static ShippingMethodDraft of(final String name, @Nullable final String description, final Referenceable<TaxCategory> taxCategory, final List<ZoneRateDraft> zoneRates, final boolean isDefault) {
         return ShippingMethodDraftDsl.of(name, description, taxCategory.toReference(), zoneRates, isDefault);
     }
 }

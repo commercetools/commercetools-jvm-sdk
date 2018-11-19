@@ -5,13 +5,11 @@ import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.zones.Location;
 import io.sphere.sdk.zones.Zone;
 import io.sphere.sdk.zones.ZoneFixtures;
-import io.sphere.sdk.zones.commands.updateactions.AddLocation;
-import io.sphere.sdk.zones.commands.updateactions.ChangeName;
-import io.sphere.sdk.zones.commands.updateactions.RemoveLocation;
-import io.sphere.sdk.zones.commands.updateactions.SetDescription;
+import io.sphere.sdk.zones.commands.updateactions.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static io.sphere.sdk.test.SphereTestUtils.randomString;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,6 +17,36 @@ public class ZoneUpdateCommandIntegrationTest extends IntegrationTest {
     @BeforeClass
     public static void deleteRemainingZone() throws Exception {
         ZoneFixtures.deleteZonesForCountries(client(), CountryCode.AM, CountryCode.AN, CountryCode.AO, CountryCode.AQ);
+    }
+
+    @Test
+    public void updateByKey() throws Exception {
+        ZoneFixtures.withUpdateableZone(client(), zone -> {
+            final String newKey = randomKey();
+            assertThat(zone.getKey()).isNotEqualTo(newKey);
+            final ZoneUpdateCommand command = ZoneUpdateCommand.of(zone, SetKey.of(newKey));
+            final Zone updatedZone = client().executeBlocking(command);
+            assertThat(updatedZone.getKey()).isEqualTo(newKey);
+
+            final String newKey2 = randomKey();
+            final ZoneUpdateCommand commandByKey = ZoneUpdateCommand.ofKey(updatedZone.getKey(),updatedZone.getVersion(), SetKey.of(newKey2));
+            final Zone updatedZone2 = client().executeBlocking(commandByKey);
+            assertThat(updatedZone2.getKey()).isEqualTo(newKey2);
+
+            return updatedZone2;
+        }, CountryCode.AM);
+    }
+
+    @Test
+    public void setKey() throws Exception {
+        ZoneFixtures.withUpdateableZone(client(), zone -> {
+            final String newKey = randomKey();
+            assertThat(zone.getKey()).isNotEqualTo(newKey);
+            final ZoneUpdateCommand command = ZoneUpdateCommand.of(zone, SetKey.of(newKey));
+            final Zone updatedZone = client().executeBlocking(command);
+            assertThat(updatedZone.getKey()).isEqualTo(newKey);
+            return updatedZone;
+        }, CountryCode.AM);
     }
 
     @Test
