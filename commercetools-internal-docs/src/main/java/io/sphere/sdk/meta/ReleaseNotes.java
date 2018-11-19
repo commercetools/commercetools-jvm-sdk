@@ -145,6 +145,14 @@ import java.util.function.Function;
  </ul>
  -->
  -->
+ <h3 class=released-version id="v1_38_0">1.38.0</h3>
+ <ul>
+ <li class=change-in-release> {@link ShippingMethodDraft}  accepts {@link List<io.sphere.sdk.shippingmethods.ZoneRateDraft>} instead of {@link List<io.sphere.sdk.shippingmethods.ZoneRate>}</li>
+ <li class=change-in-release> {@link io.sphere.sdk.zones.Zone} and {@link io.sphere.sdk.zones.ZoneDraft} contains a key property</li>
+ <li class=change-in-release> {@link io.sphere.sdk.zones.Zone} is updatable, deletable by key </li>
+ <li class=new-in-release> {@link io.sphere.sdk.zones.commands.updateactions.SetKey} to set key for a zone </li>
+ </ul>
+
  <h3 class=released-version id="v1_37_0">1.37.0 (06.11.2018)</h3>
  <ul>
     <li class=change-in-release> {@link io.sphere.sdk.shippingmethods.commands.updateactions.ChangeTaxCategory} accept {@link ResourceIdentifier<TaxCategory>} as a parameter now </li
