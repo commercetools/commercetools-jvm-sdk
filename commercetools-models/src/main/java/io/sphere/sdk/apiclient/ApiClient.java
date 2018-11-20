@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
-import io.sphere.sdk.models.WithKey;
 
 import java.time.ZonedDateTime;
 
@@ -29,6 +28,10 @@ public interface ApiClient extends Resource<ApiClient> {
 
     ZonedDateTime getCreatedAt();
 
+    /**
+     * Since the api client can only be invalidated and not modified, this method returns only the creation time ({@link ApiClient#getCreatedAt()}) of the ApiClient
+     * @return the creation time of the ApiClient
+     */
     @Override
     @JsonIgnore
     default ZonedDateTime getLastModifiedAt(){
