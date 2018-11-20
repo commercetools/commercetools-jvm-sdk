@@ -19,7 +19,7 @@ import java.time.ZonedDateTime;
 @HasCreateCommand(javadocSummary = "Creates an ApiClient")
 @HasUpdateCommand(javadocSummary = "Updates an ApiClient.")
 @HasDeleteCommand(javadocSummary = "Deletes an ApiClient.")
-public interface ApiClient extends Resource<ApiClient>, WithKey {
+public interface ApiClient extends Resource<ApiClient> {
 
     String getId();
 
