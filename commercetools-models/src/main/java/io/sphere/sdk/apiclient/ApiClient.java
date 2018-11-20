@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.*;
+import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
 
@@ -63,4 +64,9 @@ public interface ApiClient extends Resource<ApiClient> {
     static String referenceTypeId() {
         return "api-client";
     }
+
+    static Reference<ApiClient> referenceOfId(final String id) {
+        return Reference.of(referenceTypeId(), id);
+    }
 }
+
