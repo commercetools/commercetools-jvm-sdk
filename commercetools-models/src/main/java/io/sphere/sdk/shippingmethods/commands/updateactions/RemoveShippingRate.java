@@ -3,6 +3,7 @@ package io.sphere.sdk.shippingmethods.commands.updateactions;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.zones.Zone;
@@ -15,10 +16,10 @@ import io.sphere.sdk.zones.Zone;
  * {@include.example io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommandIntegrationTest#workingWithZones()}
  */
 public final class RemoveShippingRate extends UpdateActionImpl<ShippingMethod> {
-    private final Reference<Zone> zone;
+    private final ResourceIdentifier<Zone> zone;
     private final ShippingRate shippingRate;
 
-    private RemoveShippingRate(final ShippingRate shippingRate, final Reference<Zone> zone) {
+    private RemoveShippingRate(final ShippingRate shippingRate, final ResourceIdentifier<Zone> zone) {
         super("removeShippingRate");
         this.shippingRate = shippingRate;
         this.zone = zone;
@@ -28,7 +29,7 @@ public final class RemoveShippingRate extends UpdateActionImpl<ShippingMethod> {
         return shippingRate;
     }
 
-    public Reference<Zone> getZone() {
+    public ResourceIdentifier<Zone> getZone() {
         return zone;
     }
 

@@ -3,6 +3,7 @@ package io.sphere.sdk.shippingmethods.commands.updateactions;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.zones.Zone;
 
@@ -16,14 +17,14 @@ import io.sphere.sdk.zones.Zone;
  * @see ShippingMethod#getZones()
  */
 public final class AddZone extends UpdateActionImpl<ShippingMethod> {
-    private final Reference<Zone> zone;
+    private final ResourceIdentifier<Zone> zone;
 
     private AddZone(final Reference<Zone> zone) {
         super("addZone");
         this.zone = zone;
     }
 
-    public Reference<Zone> getZone() {
+    public ResourceIdentifier<Zone> getZone() {
         return zone;
     }
 

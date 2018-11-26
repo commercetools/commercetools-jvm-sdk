@@ -3,6 +3,7 @@ package io.sphere.sdk.shippingmethods.commands.updateactions;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.zones.Zone;
@@ -18,10 +19,10 @@ import io.sphere.sdk.zones.Zone;
  * @see ShippingMethod#getZoneRates()
  */
 public final class AddShippingRate extends UpdateActionImpl<ShippingMethod> {
-    private final Reference<Zone> zone;
+    private final ResourceIdentifier<Zone> zone;
     private final ShippingRate shippingRate;
 
-    private AddShippingRate(final ShippingRate shippingRate, final Reference<Zone> zone) {
+    private AddShippingRate(final ShippingRate shippingRate, final ResourceIdentifier<Zone> zone) {
         super("addShippingRate");
         this.shippingRate = shippingRate;
         this.zone = zone;
@@ -31,7 +32,7 @@ public final class AddShippingRate extends UpdateActionImpl<ShippingMethod> {
         return shippingRate;
     }
 
-    public Reference<Zone> getZone() {
+    public ResourceIdentifier<Zone> getZone() {
         return zone;
     }
 

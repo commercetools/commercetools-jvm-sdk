@@ -6,6 +6,7 @@ import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.WithKey;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shippingmethods.ZoneRate;
 
@@ -59,13 +60,21 @@ import java.util.Set;
         "io.sphere.sdk.zones.Location"
 })
 @HasByIdGetEndpoint(javadocSummary = "Gets a zone by ID.", includeExamples = "io.sphere.sdk.zones.queries.ZoneByIdGetIntegrationTest#fetchById()")
+@HasByKeyGetEndpoint(javadocSummary = "Get Zone by Key")
 @HasCreateCommand(includeExamples = "io.sphere.sdk.zones.commands.ZoneCreateCommandIntegrationTest#execution()")
-@HasUpdateCommand
-@HasDeleteCommand
+@HasUpdateCommand(javadocSummary = "Updates a zone.", updateWith = "key")
+@HasDeleteCommand(deleteWith = {"key","id"})
 @HasQueryModel
 public interface Zone extends Resource<Zone> {
 
     String getName();
+
+    /**
+     * @return Unique identifier for a zone. Must be unique across a project.
+     */
+    @HasUpdateAction
+    @Nullable
+    String getKey();
 
     @Nullable
     @IgnoreInQueryModel

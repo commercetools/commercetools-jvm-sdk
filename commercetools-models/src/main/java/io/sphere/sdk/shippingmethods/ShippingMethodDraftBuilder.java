@@ -10,7 +10,7 @@ import java.util.List;
 
 public final class ShippingMethodDraftBuilder extends ShippingMethodDraftBuilderBase<ShippingMethodDraftBuilder> {
     ShippingMethodDraftBuilder(Boolean _default, @Nullable String description, @Nullable String key,
-                               String name, @Nullable String predicate, ResourceIdentifier<TaxCategory> taxCategory, List<ZoneRate> zoneRates) {
+                               String name, @Nullable String predicate, ResourceIdentifier<TaxCategory> taxCategory, List<ZoneRateDraft> zoneRates) {
         super(_default, description, key, name, predicate, taxCategory, zoneRates);
     }
 
