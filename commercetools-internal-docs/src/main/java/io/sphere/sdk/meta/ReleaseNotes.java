@@ -100,6 +100,7 @@ import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shippingmethods.ShippingMethodDraft;
 import io.sphere.sdk.shippingmethods.ShippingMethodDraftBuilder;
 import io.sphere.sdk.shippingmethods.ShippingRate;
+import io.sphere.sdk.shippingmethods.commands.updateactions.RemoveZone;
 import io.sphere.sdk.shoppinglists.ShoppingList;
 import io.sphere.sdk.shoppinglists.ShoppingListDraft;
 import io.sphere.sdk.shoppinglists.expansion.LineItemExpansionModel;
@@ -151,7 +152,8 @@ import java.util.function.Function;
  <li class=change-in-release> {@link io.sphere.sdk.zones.Zone} and {@link io.sphere.sdk.zones.ZoneDraft} contains a key property</li>
  <li class=change-in-release> {@link io.sphere.sdk.zones.Zone} is updatable, deletable by key </li>
  <li class=new-in-release> {@link io.sphere.sdk.zones.commands.updateactions.SetKey} to set key for a zone </li>
- </ul>
+ <li class=change-in-release> {@link RemoveZone#getZone()} return a {@link ResourceIdentifier<io.sphere.sdk.zones.Zone>} instead of {@link Reference<io.sphere.sdk.zones.Zone>}</li>
+</ul>
 
  <h3 class=released-version id="v1_37_0">1.37.0 (06.11.2018)</h3>
  <ul>
