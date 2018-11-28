@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class ApiClientDraftBuilder extends ApiClientDraftBuilderBase {
+public final class ApiClientDraftBuilder extends ApiClientDraftBuilderBase {
 
     ApiClientDraftBuilder(String name, String scope) {
         super(name, scope);
