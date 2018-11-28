@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class ApiClientDraftBuilder extends ApiClientDraftBuilderBase {
 
-    public ApiClientDraftBuilder(String name, String scope) {
+    ApiClientDraftBuilder(String name, String scope) {
         super(name, scope);
     }
 
