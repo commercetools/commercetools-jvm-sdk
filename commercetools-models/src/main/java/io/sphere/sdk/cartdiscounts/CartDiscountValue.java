@@ -3,7 +3,7 @@ package io.sphere.sdk.cartdiscounts;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import io.sphere.sdk.channels.Channel;
-import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.products.ByIdVariantIdentifier;
 import io.sphere.sdk.products.Product;
 
@@ -37,15 +37,15 @@ public interface CartDiscountValue {
     }
 
     static GiftLineItemCartDiscountValue ofGiftLineItem(final ByIdVariantIdentifier variantIdentifier,
-                                                        @Nullable final Reference<Channel> supplyChannel,
-                                                        @Nullable final Reference<Channel> distributionChannel) {
-        return ofGiftLineItem(Product.reference(variantIdentifier.getProductId()), variantIdentifier.getVariantId(), supplyChannel, distributionChannel);
+                                                        @Nullable final ResourceIdentifier<Channel> supplyChannel,
+                                                        @Nullable final ResourceIdentifier<Channel> distributionChannel) {
+        return ofGiftLineItem(ResourceIdentifier.ofId(variantIdentifier.getProductId(),Product.resourceTypeId()), variantIdentifier.getVariantId(), supplyChannel, distributionChannel);
     }
 
-    static GiftLineItemCartDiscountValue ofGiftLineItem(final Reference<Product> product,
+    static GiftLineItemCartDiscountValue ofGiftLineItem(final ResourceIdentifier<Product> product,
                                                         final Integer variantId,
-                                                        @Nullable final Reference<Channel> supplyChannel,
-                                                        @Nullable final Reference<Channel> distributionChannel) {
+                                                        @Nullable final ResourceIdentifier<Channel> supplyChannel,
+                                                        @Nullable final ResourceIdentifier<Channel> distributionChannel) {
         return GiftLineItemCartDiscountValue.of(product, variantId, supplyChannel, distributionChannel);
     }
 }

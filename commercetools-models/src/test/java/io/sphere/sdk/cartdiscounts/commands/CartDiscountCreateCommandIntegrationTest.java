@@ -4,6 +4,7 @@ import io.sphere.sdk.cartdiscounts.*;
 import io.sphere.sdk.cartdiscounts.queries.CartDiscountQuery;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.products.ByIdVariantIdentifier;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
@@ -94,7 +95,12 @@ public class CartDiscountCreateCommandIntegrationTest extends IntegrationTest {
                     CartDiscountValue.ofGiftLineItem(variantId,
                             null, null);
 
-            checkCreation(builder -> builder.value(value).target(null), discount -> assertThat(discount.getValue()).isEqualTo(value));
+            checkCreation(builder -> builder.value(value).target(null),
+                    discount -> {
+                        assertThat(discount.getValue()).isEqualTo(value);
+                        assertThat(((GiftLineItemCartDiscountValue)discount.getValue()).getProduct()).isInstanceOf(ResourceIdentifier.class);
+                    }
+            );
         });
     }
 

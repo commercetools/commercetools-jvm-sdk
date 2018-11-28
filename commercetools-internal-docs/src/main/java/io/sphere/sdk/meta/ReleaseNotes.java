@@ -153,6 +153,7 @@ import java.util.function.Function;
  <li class=change-in-release> {@link io.sphere.sdk.zones.Zone} is updatable, deletable by key </li>
  <li class=new-in-release> {@link io.sphere.sdk.zones.commands.updateactions.SetKey} to set key for a zone </li>
  <li class=change-in-release> {@link RemoveZone#getZone()} return a {@link ResourceIdentifier<io.sphere.sdk.zones.Zone>} instead of {@link Reference<io.sphere.sdk.zones.Zone>}</li>
+ <li class=change-in-release> {@link GiftLineItemCartDiscountValue#getProduct()}, {@link GiftLineItemCartDiscountValue#getDistributionChannel()}, {@link GiftLineItemCartDiscountValue#getSupplyChannel()} changed return type from {@link Reference} to {@link ResourceIdentifier}</li>
 </ul>
 
  <h3 class=released-version id="v1_37_0">1.37.0 (06.11.2018)</h3>
