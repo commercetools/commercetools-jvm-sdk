@@ -6,9 +6,8 @@ import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.commands.CommandImpl;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.json.SphereJsonUtils;
-import io.sphere.sdk.models.Identifiable;
 
-public class ApiClientDeleteCommandImpl extends CommandImpl<ApiClient> implements ApiClientDeleteCommand{
+final class ApiClientDeleteCommandImpl extends CommandImpl<ApiClient> implements ApiClientDeleteCommand{
 
     final String id;
 
