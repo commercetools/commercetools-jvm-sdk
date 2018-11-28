@@ -11,7 +11,7 @@ final class ApiClientDeleteCommandImpl extends CommandImpl<ApiClient> implements
 
     final String id;
 
-    public ApiClientDeleteCommandImpl(final String id) {
+    ApiClientDeleteCommandImpl(final String id) {
         this.id = id;
     }
 

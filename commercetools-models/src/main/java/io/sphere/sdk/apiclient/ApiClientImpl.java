@@ -3,7 +3,7 @@ package io.sphere.sdk.apiclient;
 import java.time.ZonedDateTime;
 
 class ApiClientImpl extends ApiClientImplBase {
-    public ApiClientImpl(ZonedDateTime createdAt, String id, ZonedDateTime lastUsedAt, String name, String scope, String secret) {
+    ApiClientImpl(ZonedDateTime createdAt, String id, ZonedDateTime lastUsedAt, String name, String scope, String secret) {
         super(createdAt, id, lastUsedAt, name, scope, secret);
     }
 
