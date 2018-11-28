@@ -5,7 +5,7 @@ import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 
 @JsonDeserialize(as = ApiClientDraftDsl.class)
-@ResourceDraftValue(factoryMethods = @FactoryMethod(parameterNames = {"name", "scope"}))
+@ResourceDraftValue(factoryMethods = @FactoryMethod(parameterNames = {"name", "scope"}),abstractBuilderClass = true)
 public interface ApiClientDraft {
 
     String getName();

@@ -152,6 +152,7 @@ import java.util.function.Function;
     <li class=change-in-release> Added support for asynchttpclient 2.5.4 </li>
     <li class=change-in-release> Now {@link ReturnItem} has two specializations {@link LineItemReturnItem} and {@link CustomLineItemReturnItem} </li>
     <li class=change-in-release> Added new field {@link UserProvidedIdentifiers#getCustomerNumber()} to reflect customer number in change messages</li>
+    <li class=new-in-release> Now you can manage {@link io.sphere.sdk.apiclient.ApiClient}s programmatically, that was possible only via user interface before</li>
  </ul>
 
  <h3 class=released-version id="v1_36_0">1.36.0 (16.10.2018)</h3>
