@@ -35,7 +35,7 @@ public final class GiftLineItemCartDiscountValue extends Base implements CartDis
     private ResourceIdentifier<Channel> distributionChannel;
 
     @JsonCreator
-    private GiftLineItemCartDiscountValue(final Reference<Product> product,
+    private GiftLineItemCartDiscountValue(final ResourceIdentifier<Product> product,
                                          final Integer variantId,
                                          @Nullable final ResourceIdentifier<Channel> supplyChannel,
                                          @Nullable final ResourceIdentifier<Channel> distributionChannel) {
@@ -63,10 +63,10 @@ public final class GiftLineItemCartDiscountValue extends Base implements CartDis
         return distributionChannel;
     }
 
-    public static GiftLineItemCartDiscountValue of(final Reference<Product> product,
+    public static GiftLineItemCartDiscountValue of(final ResourceIdentifier<Product> product,
                                                    final Integer variantId,
-                                                   @Nullable final Reference<Channel> supplyChannel,
-                                                   @Nullable final Reference<Channel> distributionChannel) {
+                                                   @Nullable final ResourceIdentifier<Channel> supplyChannel,
+                                                   @Nullable final ResourceIdentifier<Channel> distributionChannel) {
         return new GiftLineItemCartDiscountValue(product, variantId, supplyChannel, distributionChannel);
     }
 }
