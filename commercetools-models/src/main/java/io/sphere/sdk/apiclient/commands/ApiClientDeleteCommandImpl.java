@@ -9,7 +9,7 @@ import io.sphere.sdk.json.SphereJsonUtils;
 
 final class ApiClientDeleteCommandImpl extends CommandImpl<ApiClient> implements ApiClientDeleteCommand{
 
-    final String id;
+    private final String id;
 
     ApiClientDeleteCommandImpl(final String id) {
         this.id = id;

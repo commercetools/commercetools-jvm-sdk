@@ -1,14 +1,15 @@
 package io.sphere.sdk.apiclient;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 
 class ApiClientImpl extends ApiClientImplBase {
-    ApiClientImpl(ZonedDateTime createdAt, String id, ZonedDateTime lastUsedAt, String name, String scope, String secret) {
+    ApiClientImpl(ZonedDateTime createdAt, String id, LocalDate lastUsedAt, String name, String scope, String secret) {
         super(createdAt, id, lastUsedAt, name, scope, secret);
     }
 
     /**
-     * Overriding to string to hide secret on logs
+     * Overriding toString to hide secret on logs
      * @return string representation of the an ApiClient
      */
     @Override

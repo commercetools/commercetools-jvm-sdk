@@ -3,10 +3,15 @@ package io.sphere.sdk.apiclient;
 import io.sphere.sdk.apiclient.commands.ApiClientCreateCommand;
 
 import io.sphere.sdk.apiclient.commands.ApiClientDeleteCommand;
+import io.sphere.sdk.apiclient.expansion.ApiClientExpansionModel;
+import io.sphere.sdk.apiclient.queries.ApiClientQuery;
 import io.sphere.sdk.client.SphereScope;
+import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
+import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.*;
@@ -27,4 +32,19 @@ public class ApiClientCommandIntegrationTest extends IntegrationTest {
         assertThat(deletedRes).isEqualToIgnoringGivenFields(res,"secret");
     }
 
+    @Test
+    public void testQueryModel(){
+        final String projectKey = getSphereClientConfig().getProjectKey();
+        final ApiClientCreateCommand createCommand  =ApiClientCreateCommand.of(ApiClientDraftBuilder.of("name", projectKey, MANAGE_MY_ORDERS, MANAGE_API_CLIENTS).build());
+        final ApiClient res = client().executeBlocking(createCommand);assertThat(res).isNotNull();
+        final PagedQueryResult<ApiClient> result = client().executeBlocking(ApiClientQuery.of()
+                .plusPredicates(m-> m.createdAt().isLessThan(ZonedDateTime.now()))
+                .plusPredicates(m -> m.id().is(res.getId()))
+        );
+        assertThat(result.getResults()).hasSize(1);
+
+        assertThat(result.getResults().get(0)).isEqualToIgnoringGivenFields(res,"secret");
+        final ApiClient deletedRes =client().executeBlocking(ApiClientDeleteCommand.of(res));
+        assertThat(deletedRes).isEqualToIgnoringGivenFields(res,"secret");
+    }
 }

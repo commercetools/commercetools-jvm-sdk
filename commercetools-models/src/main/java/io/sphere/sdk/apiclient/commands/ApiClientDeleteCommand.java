@@ -5,7 +5,7 @@ import io.sphere.sdk.commands.DeleteCommand;
 
 public interface ApiClientDeleteCommand extends DeleteCommand<ApiClient> {
 
-    static ApiClientDeleteCommand of(ApiClient apiClient){
+    static ApiClientDeleteCommand of(final ApiClient apiClient){
         return new ApiClientDeleteCommandImpl(apiClient.getId());
     }
 

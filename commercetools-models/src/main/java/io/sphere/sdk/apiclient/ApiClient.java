@@ -5,7 +5,9 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.models.*;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
+import java.util.Date;
 
 @JsonDeserialize(as= ApiClientImpl.class)
 @ResourceValue(abstractResourceClass = true)
@@ -24,7 +26,7 @@ public interface ApiClient  extends Identifiable<ApiClient>, Referenceable<ApiCl
 
     ZonedDateTime getCreatedAt();
 
-    ZonedDateTime getLastUsedAt();
+    LocalDate getLastUsedAt();
 
     String getSecret();
 
