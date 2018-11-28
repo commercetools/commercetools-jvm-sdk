@@ -6,6 +6,7 @@ import io.sphere.sdk.carts.LineItemMode;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.products.Product;
 
 import javax.annotation.Nullable;
@@ -23,28 +24,28 @@ import javax.annotation.Nullable;
  *  or because no price can be selected for the particular cart.
  */
 public final class GiftLineItemCartDiscountValue extends Base implements CartDiscountValue {
-    private Reference<Product> product;
+    private ResourceIdentifier<Product> product;
 
     private Integer variantId;
 
     @Nullable
-    private Reference<Channel> supplyChannel;
+    private ResourceIdentifier<Channel> supplyChannel;
 
     @Nullable
-    private Reference<Channel> distributionChannel;
+    private ResourceIdentifier<Channel> distributionChannel;
 
     @JsonCreator
     private GiftLineItemCartDiscountValue(final Reference<Product> product,
                                          final Integer variantId,
-                                         @Nullable final Reference<Channel> supplyChannel,
-                                         @Nullable final Reference<Channel> distributionChannel) {
+                                         @Nullable final ResourceIdentifier<Channel> supplyChannel,
+                                         @Nullable final ResourceIdentifier<Channel> distributionChannel) {
         this.product = product;
         this.variantId = variantId;
         this.supplyChannel = supplyChannel;
         this.distributionChannel = distributionChannel;
     }
 
-    public Reference<Product> getProduct() {
+    public ResourceIdentifier<Product> getProduct() {
         return product;
     }
 
@@ -53,12 +54,12 @@ public final class GiftLineItemCartDiscountValue extends Base implements CartDis
     }
 
     @Nullable
-    public Reference<Channel> getSupplyChannel() {
+    public ResourceIdentifier<Channel> getSupplyChannel() {
         return supplyChannel;
     }
 
     @Nullable
-    public Reference<Channel> getDistributionChannel() {
+    public ResourceIdentifier<Channel> getDistributionChannel() {
         return distributionChannel;
     }
 
