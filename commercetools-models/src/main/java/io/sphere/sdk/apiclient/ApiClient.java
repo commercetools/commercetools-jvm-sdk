@@ -1,8 +1,10 @@
 package io.sphere.sdk.apiclient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.*;
+import io.sphere.sdk.client.SphereClientConfig;
 import io.sphere.sdk.models.*;
 
 import java.time.LocalDate;
@@ -29,6 +31,9 @@ public interface ApiClient  extends Identifiable<ApiClient>, Referenceable<ApiCl
     LocalDate getLastUsedAt();
 
     String getSecret();
+
+    @JsonIgnore
+    SphereClientConfig toSphereClientConfig();
 
     static TypeReference<ApiClient> typeReference() {
         return new TypeReference<ApiClient>() {
