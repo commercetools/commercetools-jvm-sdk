@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import java.util.concurrent.CompletionStage;
 
+import static io.sphere.sdk.apiclient.ApiClientFixtures.toSphereClientConfig;
 import static io.sphere.sdk.apiclient.ApiClientFixtures.withApiClient;
 import static io.sphere.sdk.client.SphereClientUtils.blockingWait;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
@@ -18,6 +19,7 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
+
 public class TokensFacadeIntegrationTest extends IntegrationTest {
 
     @Test//workaround to not put the if condition into the demo code
@@ -43,10 +45,8 @@ public class TokensFacadeIntegrationTest extends IntegrationTest {
 
     private void scopedTokenBody() {
         withApiClient(client(), asList(SphereProjectScope.VIEW_CUSTOMERS,SphereProjectScope.VIEW_ORDERS), apiClient -> {
-            final SphereClientConfig sphereClientConfig = getSphereClientConfig();
-            final SphereAuthConfig config = SphereClientConfigBuilder.ofKeyIdSecret(sphereClientConfig.getProjectKey(), apiClient.getId(), apiClient.getSecret())
-                    .scopes(asList(SphereProjectScope.VIEW_CUSTOMERS, SphereProjectScope.VIEW_ORDERS))
-                    .build();
+
+            final SphereAuthConfig config = toSphereClientConfig(getSphereClientConfig(),apiClient);
             assertThat(config.getScopes()).containsExactly("view_customers", "view_orders");
             final CompletionStage<String> stringCompletionStage = TokensFacade.fetchAccessToken(config);
             final String accessToken = blockingWait(stringCompletionStage, 2, SECONDS);
@@ -70,8 +70,7 @@ public class TokensFacadeIntegrationTest extends IntegrationTest {
     private void passwordFlowDemo() {
         withApiClient(client(), singletonList(SphereProjectScope.VIEW_PRODUCTS), apiClient -> {
             withCustomer(client(), (Customer customer) -> {
-//                final SphereClientConfig sphereClientConfig = getSphereClientConfig();
-                final SphereAuthConfig authConfig = apiClient.toSphereClientConfig();
+                final SphereAuthConfig authConfig = toSphereClientConfig(getSphereClientConfig(),apiClient);
                 final String email = customer.getEmail();
 //              final String pw = customer.getPassword();//won;t work since it is obfusciated
                 final String pw = CustomerFixtures.PASSWORD;
@@ -87,9 +86,5 @@ public class TokensFacadeIntegrationTest extends IntegrationTest {
                 }
             });
         });
-    }
-
-    private SphereAuthConfigBuilder getSphereAuthConfigBuilder() {
-        return SphereAuthConfigBuilder.ofAuthConfig(getSphereClientConfig());
     }
 }

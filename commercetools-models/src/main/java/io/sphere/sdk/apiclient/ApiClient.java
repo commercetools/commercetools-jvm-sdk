@@ -33,7 +33,7 @@ public interface ApiClient  extends Identifiable<ApiClient>, Referenceable<ApiCl
     String getSecret();
 
     @JsonIgnore
-    SphereClientConfig toSphereClientConfig();
+    String getProjectKey();
 
     static TypeReference<ApiClient> typeReference() {
         return new TypeReference<ApiClient>() {

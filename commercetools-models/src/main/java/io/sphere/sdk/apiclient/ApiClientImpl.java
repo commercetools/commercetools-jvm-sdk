@@ -18,20 +18,8 @@ class ApiClientImpl extends ApiClientImplBase {
 
 
     @Override
-    public SphereClientConfig toSphereClientConfig() {
-        final String projectKey = getScope().split("\\s")[0].split(":")[1];
-
-        final List<SphereScope> sphereScopes = Arrays.stream(getScope().split("\\s"))
-                .map(s -> s.split(":"))
-                .map(strings -> strings[0])
-                .map(SphereProjectScope::of)
-                .collect(Collectors.toList());
-
-        return SphereClientConfigBuilder.ofKeyIdSecret(projectKey, getId(), getSecret())
-                .scopes(sphereScopes)
-                .build();
-
-
+    public String getProjectKey() {
+        return getScope().split("\\s")[0].split(":")[1];
     }
 
     /**
