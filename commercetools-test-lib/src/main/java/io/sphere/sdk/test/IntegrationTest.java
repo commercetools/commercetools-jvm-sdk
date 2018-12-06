@@ -151,21 +151,15 @@ public abstract class IntegrationTest {
 
     public static SphereClientConfig getSphereClientConfig() {
 
-
-        return SphereClientConfigBuilder.ofKeyIdSecret("jvm-sdk-travis-test-us-58", "s1-qgjRbYseZwET9vDJd9GCN", "V-R7mJmTa_cBFxbHrJsmkuqH0XdAo6dh")
-                .apiUrl("https://api.commercetools.co")
-                .authUrl( "https://auth.commercetools.co")
-                .scopes(Arrays.asList(SphereProjectScope.MANAGE_PROJECT,SphereProjectScope.MANAGE_API_CLIENTS))
-                .build();
-//        String propertiesFile = "integrationtest.properties";
-//        String parentDir = ".";
-//        for (int i = 0; i < MAX_DEPTH_LEVEL; i++) {
-//            if (Paths.get(parentDir, propertiesFile).toFile().exists()) {
-//                return loadViaProperties(Paths.get(parentDir, propertiesFile).toFile());
-//            }
-//            parentDir = "../" + parentDir;
-//        }
-//        return loadViaEnvironmentArgs();
+        String propertiesFile = "integrationtest.properties";
+        String parentDir = ".";
+        for (int i = 0; i < MAX_DEPTH_LEVEL; i++) {
+            if (Paths.get(parentDir, propertiesFile).toFile().exists()) {
+                return loadViaProperties(Paths.get(parentDir, propertiesFile).toFile());
+            }
+            parentDir = "../" + parentDir;
+        }
+        return loadViaEnvironmentArgs();
     }
 
 
