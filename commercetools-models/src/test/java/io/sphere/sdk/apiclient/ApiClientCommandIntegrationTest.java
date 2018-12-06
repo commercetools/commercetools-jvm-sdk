@@ -39,7 +39,6 @@ public class ApiClientCommandIntegrationTest extends IntegrationTest {
         final ApiClientCreateCommand createCommand  =ApiClientCreateCommand.of(ApiClientDraftBuilder.of("name", projectKey, MANAGE_MY_ORDERS, MANAGE_API_CLIENTS).build());
         final ApiClient res = client().executeBlocking(createCommand);assertThat(res).isNotNull();
         final PagedQueryResult<ApiClient> result = client().executeBlocking(ApiClientQuery.of()
-                .plusPredicates(m-> m.createdAt().isLessThan(ZonedDateTime.now()))
                 .plusPredicates(m -> m.id().is(res.getId()))
         );
         assertThat(result.getResults()).hasSize(1);
