@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 
 public final class ApiClientFixtures {
 
+    public static final String GENERATED_CLIENT_NAME = "GENERATED_CLIENT";
+
     public static void withApiClient(final BlockingSphereClient client,final ApiClientDraft apiClientDraft,final Consumer<ApiClient> consumer){
         ApiClient apiClient = client.executeBlocking(ApiClientCreateCommand.of(apiClientDraft));
         consumer.accept(apiClient);
@@ -19,7 +21,7 @@ public final class ApiClientFixtures {
 
     public static void withApiClient(final BlockingSphereClient client, final List<SphereScope> scopes, final Consumer<ApiClient> consumer){
         final SphereApiConfig config = client.getConfig();
-        final ApiClientDraft apiClientDraft = ApiClientDraftBuilder.of("api_generated_client", config.getProjectKey(), scopes).build();
+        final ApiClientDraft apiClientDraft = ApiClientDraftBuilder.of(GENERATED_CLIENT_NAME, config.getProjectKey(), scopes).build();
         withApiClient(client,apiClientDraft,consumer);
     }
 
