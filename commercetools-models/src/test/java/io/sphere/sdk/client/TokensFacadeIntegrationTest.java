@@ -9,9 +9,10 @@ import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
-import java.util.List;
 import java.util.concurrent.CompletionStage;
 
+import static io.sphere.sdk.apiclient.ApiClientFixtures.toSphereClientConfig;
+import static io.sphere.sdk.apiclient.ApiClientFixtures.withApiClient;
 import static io.sphere.sdk.client.SphereClientUtils.blockingWait;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static java.util.Arrays.asList;
@@ -43,20 +44,20 @@ public class TokensFacadeIntegrationTest extends IntegrationTest {
     }
 
     private void scopedTokenBody() {
-        final List<SphereScope> scopes = asList(SphereProjectScope.VIEW_CUSTOMERS, SphereProjectScope.VIEW_ORDERS);
-        final SphereAuthConfig config = getSphereAuthConfigBuilder()
-                .scopes(scopes)
-                .build();
-        assertThat(config.getScopes()).containsExactly("view_customers", "view_orders");
-        final CompletionStage<String> stringCompletionStage = TokensFacade.fetchAccessToken(config);
-        final String accessToken = blockingWait(stringCompletionStage, 2, SECONDS);
-        assertThat(accessToken).isNotEmpty();
-        try(final SphereClient client = SphereClientFactory.of()
-                .createClient(getSphereClientConfig(), SphereAccessTokenSupplier.ofConstantToken(accessToken))) {
-            final PagedQueryResult<Customer> customerPagedQueryResult =
-                    blockingWait(client.execute(CustomerQuery.of().withLimit(1)), 2, SECONDS);
-            assertThat(customerPagedQueryResult).isNotNull();
-        }
+        withApiClient(client(), asList(SphereProjectScope.VIEW_CUSTOMERS,SphereProjectScope.VIEW_ORDERS), apiClient -> {
+
+            final SphereAuthConfig config = toSphereClientConfig(getSphereClientConfig(),apiClient);
+            assertThat(config.getScopes()).containsExactly("view_customers", "view_orders");
+            final CompletionStage<String> stringCompletionStage = TokensFacade.fetchAccessToken(config);
+            final String accessToken = blockingWait(stringCompletionStage, 2, SECONDS);
+            assertThat(accessToken).isNotEmpty();
+            try (final SphereClient client = SphereClientFactory.of()
+                    .createClient(getSphereClientConfig(), SphereAccessTokenSupplier.ofConstantToken(accessToken))) {
+                final PagedQueryResult<Customer> customerPagedQueryResult =
+                        blockingWait(client.execute(CustomerQuery.of().withLimit(1)), 2, SECONDS);
+                assertThat(customerPagedQueryResult).isNotNull();
+            }
+        });
     }
 
     @Test
@@ -67,28 +68,23 @@ public class TokensFacadeIntegrationTest extends IntegrationTest {
     }
 
     private void passwordFlowDemo() {
-        withCustomer(client(), (Customer customer) -> {
-            final SphereAuthConfigBuilder sphereAuthConfigBuilder = getSphereAuthConfigBuilder();
-            final SphereAuthConfig authConfig = sphereAuthConfigBuilder
-                    .scopes(singletonList(SphereProjectScope.VIEW_PRODUCTS))
-                    .build();
-            final String email = customer.getEmail();
-//            final String pw = customer.getPassword();//won;t work since it is obfusciated
-            final String pw = CustomerFixtures.PASSWORD;
-            final Tokens tokens = blockingWait(TokensFacade.
-                    fetchCustomerPasswordFlowTokens(authConfig, email, pw), 2, SECONDS);
-            final String accessToken = tokens.getAccessToken();
-            assertThat(accessToken).isNotEmpty();
-            try(final SphereClient client = SphereClientFactory.of()
-                    .createClient(getSphereClientConfig(), SphereAccessTokenSupplier.ofConstantToken(accessToken))) {
-                final PagedQueryResult<ProductProjection> customerPagedQueryResult =
-                        blockingWait(client.execute(ProductProjectionQuery.ofCurrent().withLimit(1)), 2, SECONDS);
-                assertThat(customerPagedQueryResult).isNotNull();
-            }
+        withApiClient(client(), singletonList(SphereProjectScope.VIEW_PRODUCTS), apiClient -> {
+            withCustomer(client(), (Customer customer) -> {
+                final SphereAuthConfig authConfig = toSphereClientConfig(getSphereClientConfig(),apiClient);
+                final String email = customer.getEmail();
+//              final String pw = customer.getPassword();//won;t work since it is obfusciated
+                final String pw = CustomerFixtures.PASSWORD;
+                final Tokens tokens = blockingWait(TokensFacade.
+                        fetchCustomerPasswordFlowTokens(authConfig, email, pw), 2, SECONDS);
+                final String accessToken = tokens.getAccessToken();
+                assertThat(accessToken).isNotEmpty();
+                try (final SphereClient client = SphereClientFactory.of()
+                        .createClient(getSphereClientConfig(), SphereAccessTokenSupplier.ofConstantToken(accessToken))) {
+                    final PagedQueryResult<ProductProjection> customerPagedQueryResult =
+                            blockingWait(client.execute(ProductProjectionQuery.ofCurrent().withLimit(1)), 2, SECONDS);
+                    assertThat(customerPagedQueryResult).isNotNull();
+                }
+            });
         });
-    }
-
-    private SphereAuthConfigBuilder getSphereAuthConfigBuilder() {
-        return SphereAuthConfigBuilder.ofAuthConfig(getSphereClientConfig());
     }
 }

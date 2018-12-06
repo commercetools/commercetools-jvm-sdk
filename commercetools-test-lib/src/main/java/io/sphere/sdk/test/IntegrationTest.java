@@ -35,6 +35,7 @@ import java.io.UncheckedIOException;
 import java.lang.reflect.Modifier;
 import java.nio.file.Paths;
 import java.security.cert.X509Certificate;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
@@ -76,7 +77,7 @@ public abstract class IntegrationTest {
             final SphereAccessTokenSupplier tokenSupplier = SphereAccessTokenSupplier.ofAutoRefresh(config, httpClient, false);
             final SphereClient underlying = SphereClient.of(config, httpClient, tokenSupplier);
             final SphereClient underlying1 = withMaybeDeprecationWarnTool(underlying);
-            client = BlockingSphereClient.of(underlying1, 30, TimeUnit.SECONDS);
+            client = BlockingSphereClient.of(underlying1, 120, TimeUnit.SECONDS);
             assertProjectSettingsAreFine(client);
         }
     }
@@ -149,15 +150,22 @@ public abstract class IntegrationTest {
     }
 
     public static SphereClientConfig getSphereClientConfig() {
-        String propertiesFile = "integrationtest.properties";
-        String parentDir = ".";
-        for (int i = 0; i < MAX_DEPTH_LEVEL; i++) {
-            if (Paths.get(parentDir, propertiesFile).toFile().exists()) {
-                return loadViaProperties(Paths.get(parentDir, propertiesFile).toFile());
-            }
-            parentDir = "../" + parentDir;
-        }
-        return loadViaEnvironmentArgs();
+
+
+        return SphereClientConfigBuilder.ofKeyIdSecret("jvm-sdk-travis-test-us-58", "s1-qgjRbYseZwET9vDJd9GCN", "V-R7mJmTa_cBFxbHrJsmkuqH0XdAo6dh")
+                .apiUrl("https://api.commercetools.co")
+                .authUrl( "https://auth.commercetools.co")
+                .scopes(Arrays.asList(SphereProjectScope.MANAGE_PROJECT,SphereProjectScope.MANAGE_API_CLIENTS))
+                .build();
+//        String propertiesFile = "integrationtest.properties";
+//        String parentDir = ".";
+//        for (int i = 0; i < MAX_DEPTH_LEVEL; i++) {
+//            if (Paths.get(parentDir, propertiesFile).toFile().exists()) {
+//                return loadViaProperties(Paths.get(parentDir, propertiesFile).toFile());
+//            }
+//            parentDir = "../" + parentDir;
+//        }
+//        return loadViaEnvironmentArgs();
     }
 
 

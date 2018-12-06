@@ -76,6 +76,13 @@ public final class SphereProjectScope extends Base implements SphereScope {
     /** Grants access to the APIs for viewing anything related to messages in a project.*/
     public final static SphereProjectScope VIEW_MESSAGES = SphereProjectScope.of("view_messages");
 
+    /** Grants access to the APIs for creating, deleting and viewing api clients */
+    public final static SphereProjectScope MANAGE_API_CLIENTS = SphereProjectScope.of("manage_api_clients");
+
+    /** Grants access to the APIs for viewing api clients*/
+    public final static SphereProjectScope VIEW_API_CLIENTS = SphereProjectScope.of("view_api_clients");
+
+
     private SphereProjectScope(final String scope) {
         this.scope = scope;
     }
