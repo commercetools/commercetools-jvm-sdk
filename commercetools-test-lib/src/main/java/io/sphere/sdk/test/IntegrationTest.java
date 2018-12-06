@@ -77,7 +77,7 @@ public abstract class IntegrationTest {
             final SphereAccessTokenSupplier tokenSupplier = SphereAccessTokenSupplier.ofAutoRefresh(config, httpClient, false);
             final SphereClient underlying = SphereClient.of(config, httpClient, tokenSupplier);
             final SphereClient underlying1 = withMaybeDeprecationWarnTool(underlying);
-            client = BlockingSphereClient.of(underlying1, 120, TimeUnit.SECONDS);
+            client = BlockingSphereClient.of(underlying1, 30, TimeUnit.SECONDS);
             assertProjectSettingsAreFine(client);
         }
     }
