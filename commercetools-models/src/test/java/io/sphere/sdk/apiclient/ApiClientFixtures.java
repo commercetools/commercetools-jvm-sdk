@@ -25,7 +25,7 @@ public final class ApiClientFixtures {
         withApiClient(client,apiClientDraft,consumer);
     }
 
-    public static SphereAuthConfig toSphereClientConfig(final SphereAuthConfig sphereAuthConfig, final ApiClient apiClient) {
+    public static SphereAuthConfig toSphereAuthConfig(final SphereAuthConfig sphereAuthConfig, final ApiClient apiClient) {
 
         final List<SphereScope> scopes = Arrays.stream(apiClient.getScope()
                 .split("\\s")).map(s -> s.split(":"))
@@ -38,5 +38,18 @@ public final class ApiClientFixtures {
                 .authUrl(sphereAuthConfig.getAuthUrl())
                 .build();
     }
+    public static SphereClientConfig toSphereClientConfig(final SphereClientConfig sphereClientConfig, final ApiClient apiClient) {
 
+        final List<SphereScope> scopes = Arrays.stream(apiClient.getScope()
+                .split("\\s")).map(s -> s.split(":"))
+                .map(strings -> strings[0])
+                .map(SphereProjectScope::of)
+                .collect(Collectors.toList());
+
+        return SphereClientConfigBuilder.ofKeyIdSecret(apiClient.getProjectKey(),apiClient.getId(),apiClient.getSecret())
+                .scopes(scopes)
+                .authUrl(sphereClientConfig.getAuthUrl())
+                .apiUrl(sphereClientConfig.getApiUrl())
+                .build();
+    }
 }

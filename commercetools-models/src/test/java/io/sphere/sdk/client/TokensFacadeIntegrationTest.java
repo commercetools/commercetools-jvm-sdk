@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import java.util.concurrent.CompletionStage;
 
-import static io.sphere.sdk.apiclient.ApiClientFixtures.toSphereClientConfig;
+import static io.sphere.sdk.apiclient.ApiClientFixtures.toSphereAuthConfig;
 import static io.sphere.sdk.apiclient.ApiClientFixtures.withApiClient;
 import static io.sphere.sdk.client.SphereClientUtils.blockingWait;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
@@ -46,7 +46,7 @@ public class TokensFacadeIntegrationTest extends IntegrationTest {
     private void scopedTokenBody() {
         withApiClient(client(), asList(SphereProjectScope.VIEW_CUSTOMERS,SphereProjectScope.VIEW_ORDERS), apiClient -> {
 
-            final SphereAuthConfig config = toSphereClientConfig(getSphereClientConfig(),apiClient);
+            final SphereAuthConfig config = toSphereAuthConfig(getSphereClientConfig(),apiClient);
             assertThat(config.getScopes()).containsExactly("view_customers", "view_orders");
             final CompletionStage<String> stringCompletionStage = TokensFacade.fetchAccessToken(config);
             final String accessToken = blockingWait(stringCompletionStage, 2, SECONDS);
@@ -70,7 +70,7 @@ public class TokensFacadeIntegrationTest extends IntegrationTest {
     private void passwordFlowDemo() {
         withApiClient(client(), singletonList(SphereProjectScope.VIEW_PRODUCTS), apiClient -> {
             withCustomer(client(), (Customer customer) -> {
-                final SphereAuthConfig authConfig = toSphereClientConfig(getSphereClientConfig(),apiClient);
+                final SphereAuthConfig authConfig = toSphereAuthConfig(getSphereClientConfig(),apiClient);
                 final String email = customer.getEmail();
 //              final String pw = customer.getPassword();//won;t work since it is obfusciated
                 final String pw = CustomerFixtures.PASSWORD;

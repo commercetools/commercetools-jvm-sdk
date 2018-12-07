@@ -1,5 +1,6 @@
 package io.sphere.sdk.errors;
 
+import io.sphere.sdk.apiclient.ApiClientFixtures;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.AddLineItem;
@@ -41,6 +42,7 @@ import java.util.concurrent.CompletionException;
 import java.util.concurrent.CompletionStage;
 import java.util.function.Supplier;
 
+import static io.sphere.sdk.apiclient.ApiClientFixtures.toSphereClientConfig;
 import static io.sphere.sdk.carts.CartFixtures.withCart;
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.http.HttpMethod.POST;
@@ -312,21 +314,18 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
 
     private void permissionsExceeded() {
         final List<SphereScope> scopes = singletonList(SphereProjectScope.VIEW_PRODUCTS);
-        try(final SphereClient client = createClientWithScopes(scopes)) {
-            assertThatThrownBy(() -> {
-                final CustomerQuery request = CustomerQuery.of();
-                SphereClientUtils.blockingWait(client.execute(request), 5, SECONDS);
-            })
-            .as("since the allowed scope is only to view products, customer data should not be loadable")
-            .isInstanceOf(ForbiddenException.class);
-        }
-    }
 
-    private SphereClient createClientWithScopes(final List<SphereScope> scopes) {
-        final SphereClientConfig config = SphereClientConfigBuilder.ofClientConfig(getSphereClientConfig())
-                .scopes(scopes)
-                .build();
-        return SphereClientFactory.of(IntegrationTest::newHttpClient)
-                .createClient(config);
+        ApiClientFixtures.withApiClient(client(), scopes, apiClient -> {
+            final SphereClientConfig clientConfig = toSphereClientConfig(getSphereClientConfig(), apiClient);
+            try (final SphereClient client = SphereClientFactory.of(IntegrationTest::newHttpClient)
+                    .createClient(clientConfig)) {
+                assertThatThrownBy(() -> {
+                    final CustomerQuery request = CustomerQuery.of();
+                    SphereClientUtils.blockingWait(client.execute(request), 5, SECONDS);
+                })
+                        .as("since the allowed scope is only to view products, customer data should not be loadable")
+                        .isInstanceOf(ForbiddenException.class);
+            }
+        });
     }
 }
