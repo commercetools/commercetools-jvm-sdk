@@ -3,6 +3,10 @@ io.sphere.sdk.annotations.processors
 io.sphere.sdk.annotations.processors.generators
 io.sphere.sdk.annotations.processors.models
 io.sphere.sdk.annotations.processors.validators
+io.sphere.sdk.apiclient
+io.sphere.sdk.apiclient.commands
+io.sphere.sdk.apiclient.expansion
+io.sphere.sdk.apiclient.queries
 io.sphere.sdk.cartdiscounts
 io.sphere.sdk.cartdiscounts.commands
 io.sphere.sdk.cartdiscounts.commands.updateactions
