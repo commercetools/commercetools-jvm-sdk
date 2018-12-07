@@ -146,7 +146,7 @@ import java.util.function.Function;
  </ul>
  -->
  -->
- <h3 class=released-version id="v1_38_0">1.38.0</h3>
+ <h3 class=released-version id="v1_38_0">1.38.0 (07.12.2018)</h3>
  <ul>
  <li class=change-in-release> {@link ShippingMethodDraft}  accepts {@link List<io.sphere.sdk.shippingmethods.ZoneRateDraft>} instead of {@link List<io.sphere.sdk.shippingmethods.ZoneRate>}</li>
  <li class=change-in-release> {@link io.sphere.sdk.zones.Zone} and {@link io.sphere.sdk.zones.ZoneDraft} contains a key property</li>
