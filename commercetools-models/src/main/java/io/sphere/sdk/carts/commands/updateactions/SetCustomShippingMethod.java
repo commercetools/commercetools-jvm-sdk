@@ -4,6 +4,7 @@ import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.taxcategories.ExternalTaxRateDraft;
 import io.sphere.sdk.taxcategories.TaxCategory;
@@ -22,22 +23,27 @@ public final class SetCustomShippingMethod extends UpdateActionImpl<Cart> {
     private final String shippingMethodName;
     private final ShippingRate shippingRate;
     @Nullable
-    private final Reference<TaxCategory> taxCategory;
+    private final ResourceIdentifier<TaxCategory> taxCategory;
     @Nullable
     private final ExternalTaxRateDraft externalTaxRate;
 
     private SetCustomShippingMethod(final String shippingMethodName, final ShippingRate shippingRate,
-                                    @Nullable final Referenceable<TaxCategory> taxCategory, final ExternalTaxRateDraft externalTaxRate) {
+                                    @Nullable final ResourceIdentifier<TaxCategory> taxCategory, final ExternalTaxRateDraft externalTaxRate) {
         super("setCustomShippingMethod");
         this.shippingMethodName = shippingMethodName;
         this.shippingRate = shippingRate;
         this.externalTaxRate = externalTaxRate;
-        this.taxCategory = taxCategory != null ? taxCategory.toReference() : null;
+        this.taxCategory = taxCategory;
+    }
+
+    public static SetCustomShippingMethod of(final String shippingMethodName, final ShippingRate shippingRate,
+                                             final ResourceIdentifier<TaxCategory> taxCategory) {
+        return new SetCustomShippingMethod(shippingMethodName, shippingRate, taxCategory, null);
     }
 
     public static SetCustomShippingMethod of(final String shippingMethodName, final ShippingRate shippingRate,
                                       final Referenceable<TaxCategory> taxCategory) {
-        return new SetCustomShippingMethod(shippingMethodName, shippingRate, taxCategory, null);
+        return new SetCustomShippingMethod(shippingMethodName, shippingRate, taxCategory !=null? taxCategory.toResourceIdentifier() : null, null);
     }
 
     public static SetCustomShippingMethod ofExternalTaxCalculation(final String shippingMethodName, final ShippingRate shippingRate,
@@ -58,7 +64,7 @@ public final class SetCustomShippingMethod extends UpdateActionImpl<Cart> {
     }
 
     @Nullable
-    public Reference<TaxCategory> getTaxCategory() {
+    public ResourceIdentifier<TaxCategory> getTaxCategory() {
         return taxCategory;
     }
 

@@ -5,6 +5,7 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.inventory.InventoryEntry;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.models.ResourceIdentifier;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
@@ -18,9 +19,9 @@ import java.util.Optional;
  */
 public final class SetSupplyChannel extends UpdateActionImpl<InventoryEntry> {
     @Nullable
-    private final Reference<Channel> supplyChannel;
+    private final ResourceIdentifier<Channel> supplyChannel;
 
-    private SetSupplyChannel(@Nullable final Reference<Channel> supplyChannel) {
+    private SetSupplyChannel(@Nullable final ResourceIdentifier<Channel> supplyChannel) {
         super("setSupplyChannel");
         this.supplyChannel = supplyChannel;
     }
@@ -32,8 +33,12 @@ public final class SetSupplyChannel extends UpdateActionImpl<InventoryEntry> {
         return new SetSupplyChannel(channelReference);
     }
 
+    public static SetSupplyChannel of(@Nullable final ResourceIdentifier<Channel> supplyChannel) {
+        return new SetSupplyChannel(supplyChannel);
+    }
+
     @Nullable
-    public Reference<Channel> getSupplyChannel() {
+    public ResourceIdentifier<Channel> getSupplyChannel() {
         return supplyChannel;
     }
 }

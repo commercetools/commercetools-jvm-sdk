@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.cartdiscounts.DiscountedLineItemPrice;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.taxcategories.TaxCategory;
@@ -28,7 +29,7 @@ public interface CartShippingInfo {
 
     TaxRate getTaxRate();
 
-    Reference<TaxCategory> getTaxCategory();
+    ResourceIdentifier<TaxCategory> getTaxCategory();
 
     @Nullable
     TaxedItemPrice getTaxedPrice();

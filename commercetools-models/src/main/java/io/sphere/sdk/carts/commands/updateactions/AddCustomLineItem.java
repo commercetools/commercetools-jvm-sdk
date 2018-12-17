@@ -6,6 +6,7 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.taxcategories.ExternalTaxRateDraft;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.types.CustomDraft;
@@ -34,14 +35,14 @@ public final class AddCustomLineItem extends UpdateActionImpl<Cart> implements C
     private final MonetaryAmount money;
     private final String slug;
     @Nullable
-    private final Reference<TaxCategory> taxCategory;
+    private final ResourceIdentifier<TaxCategory> taxCategory;
     @Nullable
     private final CustomFieldsDraft custom;
     @Nullable
     private final ExternalTaxRateDraft externalTaxRate;
 
     private AddCustomLineItem(final LocalizedString name, final String slug,
-                              final MonetaryAmount money, @Nullable final Referenceable<TaxCategory> taxCategory,
+                              final MonetaryAmount money, @Nullable final ResourceIdentifier<TaxCategory> taxCategory,
                               final Long quantity, @Nullable final CustomFieldsDraft custom,
                               @Nullable final ExternalTaxRateDraft externalTaxRate) {
         super("addCustomLineItem");
@@ -51,7 +52,7 @@ public final class AddCustomLineItem extends UpdateActionImpl<Cart> implements C
         this.slug = slug;
         this.custom = custom;
         this.externalTaxRate = externalTaxRate;
-        this.taxCategory = taxCategory != null ? taxCategory.toReference() : null;
+        this.taxCategory = taxCategory;
     }
 
     public static AddCustomLineItem of(final LocalizedString name, final String slug,
@@ -62,6 +63,12 @@ public final class AddCustomLineItem extends UpdateActionImpl<Cart> implements C
 
     public static AddCustomLineItem of(final LocalizedString name, final String slug,
                                        final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory,
+                                       final long quantity, @Nullable final CustomFieldsDraft custom) {
+        return new AddCustomLineItem(name, slug, money, taxCategory != null ? taxCategory.toResourceIdentifier() : null, quantity, custom, null);
+    }
+
+    public static AddCustomLineItem of(final LocalizedString name, final String slug,
+                                       final MonetaryAmount money, final ResourceIdentifier<TaxCategory> taxCategory,
                                        final long quantity, @Nullable final CustomFieldsDraft custom) {
         return new AddCustomLineItem(name, slug, money, taxCategory, quantity, custom, null);
     }
@@ -88,7 +95,7 @@ public final class AddCustomLineItem extends UpdateActionImpl<Cart> implements C
     }
 
     @Nullable
-    public Reference<TaxCategory> getTaxCategory() {
+    public ResourceIdentifier<TaxCategory> getTaxCategory() {
         return taxCategory;
     }
 

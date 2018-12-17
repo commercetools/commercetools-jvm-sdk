@@ -59,7 +59,7 @@ public interface ProductDraft extends WithLocalizedSlug, MetaAttributes {
     List<ProductVariantDraft> getVariants();
 
     @Nullable
-    Reference<TaxCategory> getTaxCategory();
+    ResourceIdentifier<TaxCategory> getTaxCategory();
 
     SearchKeywords getSearchKeywords();
 

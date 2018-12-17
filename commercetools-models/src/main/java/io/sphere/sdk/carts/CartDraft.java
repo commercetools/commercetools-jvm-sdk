@@ -25,7 +25,10 @@ import java.util.Locale;
  */
 @JsonDeserialize(as = CartDraftDsl.class)
 @ResourceDraftValue(
-        factoryMethods = @FactoryMethod(parameterNames = "currency"))
+        factoryMethods = @FactoryMethod(parameterNames = "currency"),
+        abstractResourceDraftValueClass = true,
+        abstractBuilderClass = true
+)
 public interface CartDraft extends CustomDraft {
     CurrencyUnit getCurrency();
 
@@ -57,7 +60,7 @@ public interface CartDraft extends CustomDraft {
     Address getShippingAddress();
 
     @Nullable
-    Reference<ShippingMethod> getShippingMethod();
+    ResourceIdentifier<ShippingMethod> getShippingMethod();
 
     @Nullable
     CustomFieldsDraft getCustom();

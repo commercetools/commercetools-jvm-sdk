@@ -2,8 +2,8 @@ package io.sphere.sdk.carts;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.taxcategories.ExternalTaxRateDraft;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.types.CustomDraft;
@@ -35,7 +35,7 @@ public interface CustomLineItemDraft extends CustomDraft {
      * @see TaxMode
      */
     @Nullable
-    Reference<TaxCategory> getTaxCategory();
+    ResourceIdentifier<TaxCategory> getTaxCategory();
 
     /**
      * Possible custom tax rate.

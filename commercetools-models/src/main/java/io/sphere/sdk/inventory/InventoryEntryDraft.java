@@ -7,6 +7,7 @@ import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.types.CustomDraft;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
@@ -18,11 +19,13 @@ import java.util.Optional;
 @ResourceDraftValue(
         copyFactoryMethods = @CopyFactoryMethod(InventoryEntry.class),
         factoryMethods = {
-            @FactoryMethod(parameterNames = {"sku", "quantityOnStock"}),
-            @FactoryMethod(parameterNames = {"sku", "quantityOnStock", "expectedDelivery"}),
-            @FactoryMethod(parameterNames = {"sku", "quantityOnStock", "expectedDelivery", "restockableInDays", "supplyChannel"
-         })
-})
+                @FactoryMethod(parameterNames = {"sku", "quantityOnStock"}),
+                @FactoryMethod(parameterNames = {"sku", "quantityOnStock", "expectedDelivery"}),
+                @FactoryMethod(parameterNames = {"sku", "quantityOnStock", "expectedDelivery", "restockableInDays", "supplyChannel"
+                })
+        },
+        abstractResourceDraftValueClass = true
+)
 public interface InventoryEntryDraft extends CustomDraft {
     @Nullable
     ZonedDateTime getExpectedDelivery();
@@ -41,7 +44,7 @@ public interface InventoryEntryDraft extends CustomDraft {
     String getSku();
 
     @Nullable
-    Reference<Channel> getSupplyChannel();
+    ResourceIdentifier<Channel> getSupplyChannel();
 
     @Nullable
     @Override
