@@ -6,7 +6,6 @@ import io.sphere.sdk.annotations.PropertySpec;
 import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.carts.CartShippingInfo;
 import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.taxcategories.TaxCategory;
@@ -38,7 +37,7 @@ public interface OrderShippingInfo extends CartShippingInfo {
     ShippingRate getShippingRate();
 
     @Override
-    ResourceIdentifier<TaxCategory> getTaxCategory();
+    Reference<TaxCategory> getTaxCategory();
 
     @Override
     TaxRate getTaxRate();
@@ -55,7 +54,7 @@ public interface OrderShippingInfo extends CartShippingInfo {
      * @param deliveries deliveries
      * @return OrderShippingInfo
      */
-    static OrderShippingInfo of(final String shippingMethodName, final MonetaryAmount price, final ShippingRate shippingRate, final TaxRate taxRate, final ResourceIdentifier<TaxCategory> taxCategory, final Reference<ShippingMethod> shippingMethod, final List<Delivery> deliveries) {
+    static OrderShippingInfo of(final String shippingMethodName, final MonetaryAmount price, final ShippingRate shippingRate, final TaxRate taxRate, final Reference<TaxCategory> taxCategory, final Reference<ShippingMethod> shippingMethod, final List<Delivery> deliveries) {
         return new OrderShippingInfoImpl(deliveries, null, price, shippingMethod,  shippingMethodName, null, shippingRate, taxCategory, taxRate, null);
     }
 }

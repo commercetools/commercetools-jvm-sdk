@@ -29,7 +29,7 @@ public interface CartShippingInfo {
 
     TaxRate getTaxRate();
 
-    ResourceIdentifier<TaxCategory> getTaxCategory();
+    Reference<TaxCategory> getTaxCategory();
 
     @Nullable
     TaxedItemPrice getTaxedPrice();
