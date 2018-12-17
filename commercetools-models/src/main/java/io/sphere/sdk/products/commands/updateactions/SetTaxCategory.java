@@ -27,11 +27,9 @@ public final class SetTaxCategory extends UpdateActionImpl<Product> {
         this.taxCategory = taxCategory;
     }
 
-
     public static SetTaxCategory of(@Nullable final Referenceable<TaxCategory> taxCategory) {
-        return new SetTaxCategory(Optional.ofNullable(taxCategory).map(t -> t.toReference()).orElse(null));
+        return new SetTaxCategory(Optional.ofNullable(taxCategory).map(Referenceable::toResourceIdentifier).orElse(null));
     }
-
 
     public static SetTaxCategory unset() {
         return new SetTaxCategory(null);
@@ -39,5 +37,10 @@ public final class SetTaxCategory extends UpdateActionImpl<Product> {
 
     public static SetTaxCategory to(final Referenceable<TaxCategory> taxCategory) {
         return of(taxCategory);
+    }
+
+    @Nullable
+    public ResourceIdentifier<TaxCategory> getTaxCategory() {
+        return taxCategory;
     }
 }
