@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.taxcategories.ExternalTaxRateDraft;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.types.CustomFieldsDraft;
@@ -16,7 +17,7 @@ final class CustomLineItemDraftImpl extends Base implements CustomLineItemDraft 
     private final MonetaryAmount money;
     private final String slug;
     @Nullable
-    private final Reference<TaxCategory> taxCategory;
+    private final ResourceIdentifier<TaxCategory> taxCategory;
     private final Long quantity;
     @Nullable
     private final CustomFieldsDraft custom;
@@ -26,7 +27,7 @@ final class CustomLineItemDraftImpl extends Base implements CustomLineItemDraft 
     private final ItemShippingDetailsDraft shippingDetails;
 
     @JsonCreator
-    CustomLineItemDraftImpl(final LocalizedString name, final String slug, final MonetaryAmount money, @Nullable final Reference<TaxCategory> taxCategory, final Long quantity, @Nullable final CustomFieldsDraft custom, final ExternalTaxRateDraft externalTaxRate,@Nullable final ItemShippingDetailsDraft shippingDetails) {
+    CustomLineItemDraftImpl(final LocalizedString name, final String slug, final MonetaryAmount money, @Nullable final ResourceIdentifier<TaxCategory> taxCategory, final Long quantity, @Nullable final CustomFieldsDraft custom, final ExternalTaxRateDraft externalTaxRate,@Nullable final ItemShippingDetailsDraft shippingDetails) {
         this.name = name;
         this.money = money;
         this.slug = slug;
@@ -53,7 +54,7 @@ final class CustomLineItemDraftImpl extends Base implements CustomLineItemDraft 
     }
 
     @Override
-    public Reference<TaxCategory> getTaxCategory() {
+    public ResourceIdentifier<TaxCategory> getTaxCategory() {
         return taxCategory;
     }
 

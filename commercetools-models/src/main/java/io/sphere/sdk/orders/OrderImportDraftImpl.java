@@ -39,7 +39,7 @@ final class OrderImportDraftImpl extends Base implements OrderImportDraft {
     @Nullable
     private final PaymentState paymentState;
     @Nullable
-    private final OrderShippingInfo shippingInfo;
+    private final ShippingInfoImportDraft shippingInfo;
     @Nullable
     private final ZonedDateTime completedAt;
     @Nullable
@@ -55,7 +55,7 @@ final class OrderImportDraftImpl extends Base implements OrderImportDraft {
 
     @Nullable private final List<Address> itemShippingAddresses;
 
-    public OrderImportDraftImpl(@Nullable final Address billingAddress, @Nullable final String orderNumber, @Nullable final String customerId, @Nullable final String customerEmail, final List<LineItemImportDraft> lineItems, final List<CustomLineItemImportDraft> customLineItems, final MonetaryAmount totalPrice, @Nullable final TaxedPrice taxedPrice, @Nullable final Address shippingAddress, @Nullable final Reference<CustomerGroup> customerGroup, @Nullable final CountryCode country, final OrderState orderState, @Nullable final ShipmentState shipmentState, @Nullable final PaymentState paymentState, @Nullable final OrderShippingInfo shippingInfo, @Nullable final ZonedDateTime completedAt, @Nullable final CustomFieldsDraft custom, @Nullable final RoundingMode taxRoundingMode, @Nullable final InventoryMode inventoryMode,@Nullable TaxCalculationMode taxCalculationMode, @Nullable CartOrigin origin,@Nullable final List<Address> itemShippingAddresses) {
+    public OrderImportDraftImpl(@Nullable final Address billingAddress, @Nullable final String orderNumber, @Nullable final String customerId, @Nullable final String customerEmail, final List<LineItemImportDraft> lineItems, final List<CustomLineItemImportDraft> customLineItems, final MonetaryAmount totalPrice, @Nullable final TaxedPrice taxedPrice, @Nullable final Address shippingAddress, @Nullable final Reference<CustomerGroup> customerGroup, @Nullable final CountryCode country, final OrderState orderState, @Nullable final ShipmentState shipmentState, @Nullable final PaymentState paymentState, @Nullable final ShippingInfoImportDraft shippingInfo, @Nullable final ZonedDateTime completedAt, @Nullable final CustomFieldsDraft custom, @Nullable final RoundingMode taxRoundingMode, @Nullable final InventoryMode inventoryMode,@Nullable TaxCalculationMode taxCalculationMode, @Nullable CartOrigin origin,@Nullable final List<Address> itemShippingAddresses) {
         this.billingAddress = billingAddress;
         this.orderNumber = orderNumber;
         this.customerId = customerId;
@@ -157,7 +157,7 @@ final class OrderImportDraftImpl extends Base implements OrderImportDraft {
 
     @Override
     @Nullable
-    public OrderShippingInfo getShippingInfo() {
+    public ShippingInfoImportDraft getShippingInfo() {
         return shippingInfo;
     }
 

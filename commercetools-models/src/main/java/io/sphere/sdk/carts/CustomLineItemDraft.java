@@ -86,7 +86,7 @@ public interface CustomLineItemDraft extends CustomDraft {
     static CustomLineItemDraft of(final LocalizedString name, final String slug, final MonetaryAmount money,
                                   final Referenceable<TaxCategory> taxCategory, final long quantity,
                                   @Nullable final CustomFieldsDraft custom) {
-        return new CustomLineItemDraftImpl(name, slug, money, taxCategory.toReference(), quantity, custom, null,null);
+        return new CustomLineItemDraftImpl(name, slug, money, taxCategory.toResourceIdentifier(), quantity, custom, null,null);
     }
 
     /**
