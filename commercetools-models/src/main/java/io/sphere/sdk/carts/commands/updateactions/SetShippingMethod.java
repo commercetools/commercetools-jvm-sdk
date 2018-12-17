@@ -35,13 +35,10 @@ public final class SetShippingMethod extends UpdateActionImpl<Cart> {
                 ? new SetShippingMethod(shippingMethod.toReference())
                 : ofRemove();
     }
-    public static SetShippingMethod of(@Nullable final ResourceIdentifier<ShippingMethod> shippingMethod) {
-        return  new SetShippingMethod(shippingMethod);
 
-    }
     public static SetShippingMethod ofId(@Nullable String shippingMethodId) {
         return shippingMethodId != null
-                ? of(ShippingMethod.referenceOfId(shippingMethodId).toResourceIdentifier())
+                ? of(ShippingMethod.referenceOfId(shippingMethodId))
                 : ofRemove();
     }
 

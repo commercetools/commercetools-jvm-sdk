@@ -3,7 +3,9 @@ package io.sphere.sdk.meta;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.sphere.sdk.cartdiscounts.*;
 import io.sphere.sdk.carts.*;
+import io.sphere.sdk.carts.commands.updateactions.AddCustomLineItem;
 import io.sphere.sdk.carts.commands.updateactions.RemoveLineItem;
+import io.sphere.sdk.carts.commands.updateactions.SetCustomShippingMethod;
 import io.sphere.sdk.carts.commands.updateactions.SetShippingMethod;
 import io.sphere.sdk.carts.expansion.CartExpansionModel;
 import io.sphere.sdk.carts.expansion.ShippingInfoExpansionModel;
@@ -54,6 +56,7 @@ import io.sphere.sdk.http.*;
 import io.sphere.sdk.inventory.InventoryEntry;
 import io.sphere.sdk.inventory.InventoryEntryDraft;
 import io.sphere.sdk.inventory.InventoryEntryDraftBuilder;
+import io.sphere.sdk.inventory.commands.updateactions.SetSupplyChannel;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.messages.Message;
 import io.sphere.sdk.messages.UserProvidedIdentifiers;
@@ -146,15 +149,20 @@ import java.util.function.Function;
  </ul>
  -->
  -->
+ <h3 class=released-version id="v1_39_0">1.39.0</h3>
+ <ul>
+    <li class=change-in-release> changed {@link CartDraft#getShippingMethod()}, {@link CartShippingInfo#getTaxCategory()}, {{@link CustomLineItemDraft#getTaxCategory()}, {@link AddCustomLineItem#getTaxCategory()}, {@link SetCustomShippingMethod#getTaxCategory()}, {@link SetShippingMethod#getShippingMethod()}, {@link InventoryEntryDraft#getSupplyChannel()}, {@link SetSupplyChannel#getSupplyChannel()}, {@link OrderShippingInfo#getTaxCategory()}, {@link ProductDraft#getTaxCategory()}, {@link SetTaxCategory#getTaxCategory()} return type from {@link Reference} to {@link ResourceIdentifier} </li>
+ </ul>
+
  <h3 class=released-version id="v1_38_0">1.38.0 (07.12.2018)</h3>
  <ul>
- <li class=change-in-release> {@link ShippingMethodDraft}  accepts {@link List<io.sphere.sdk.shippingmethods.ZoneRateDraft>} instead of {@link List<io.sphere.sdk.shippingmethods.ZoneRate>}</li>
- <li class=change-in-release> {@link io.sphere.sdk.zones.Zone} and {@link io.sphere.sdk.zones.ZoneDraft} contains a key property</li>
- <li class=change-in-release> {@link io.sphere.sdk.zones.Zone} is updatable, deletable by key </li>
- <li class=new-in-release> {@link io.sphere.sdk.zones.commands.updateactions.SetKey} to set key for a zone </li>
- <li class=change-in-release> {@link RemoveZone#getZone()} return a {@link ResourceIdentifier<io.sphere.sdk.zones.Zone>} instead of {@link Reference<io.sphere.sdk.zones.Zone>}</li>
- <li class=change-in-release> {@link GiftLineItemCartDiscountValue#getProduct()}, {@link GiftLineItemCartDiscountValue#getDistributionChannel()}, {@link GiftLineItemCartDiscountValue#getSupplyChannel()} changed return type from {@link Reference} to {@link ResourceIdentifier}</li>
-</ul>
+    <li class=change-in-release> {@link ShippingMethodDraft}  accepts {@link List<io.sphere.sdk.shippingmethods.ZoneRateDraft>} instead of {@link List<io.sphere.sdk.shippingmethods.ZoneRate>}</li>
+    <li class=change-in-release> {@link io.sphere.sdk.zones.Zone} and {@link io.sphere.sdk.zones.ZoneDraft} contains a key property</li>
+    <li class=change-in-release> {@link io.sphere.sdk.zones.Zone} is updatable, deletable by key </li>
+    <li class=new-in-release> {@link io.sphere.sdk.zones.commands.updateactions.SetKey} to set key for a zone </li>
+    <li class=change-in-release> {@link RemoveZone#getZone()} return a {@link ResourceIdentifier<io.sphere.sdk.zones.Zone>} instead of {@link Reference<io.sphere.sdk.zones.Zone>}</li>
+    <li class=change-in-release> {@link GiftLineItemCartDiscountValue#getProduct()}, {@link GiftLineItemCartDiscountValue#getDistributionChannel()}, {@link GiftLineItemCartDiscountValue#getSupplyChannel()} changed return type from {@link Reference} to {@link ResourceIdentifier}</li>
+ </ul>
 
  <h3 class=released-version id="v1_37_0">1.37.0 (06.11.2018)</h3>
  <ul>
