@@ -442,8 +442,8 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
                         .as("reference expansion shippingMethod")
                         .isEqualTo(shippingMethod);
                 assertThat(cartWithShippingMethod.getShippingInfo().getShippingMethod().getObj().getTaxCategory().getObj())
-                        .isEqualTo(cartWithShippingMethod.getShippingInfo().getTaxCategory().getObj())
                         .as("reference expansion taxCategory")
+                        .isEqualTo(cartWithShippingMethod.getShippingInfo().getTaxCategory().getObj())
                         .isNotNull();
 
                 //remove shipping method
