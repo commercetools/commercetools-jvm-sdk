@@ -296,7 +296,7 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
                         .withCarrier("carrier").withProvider("provider").withProviderTransaction("prov transaction").withIsReturn(true);
                 final Parcel parcel = Parcel.of(createdAt, randomUUID(),asList(), parcelMeasurements, trackingData);
                 final List<Delivery> deliveries = asList(Delivery.of(deliveryId, createdAt, asList(deliveryItem), asList(parcel)));
-                final OrderShippingInfo shippingInfo = OrderShippingInfo.of(randomString(), price, shippingRate, taxRate, taxCategoryRef, shippingMethodRef, deliveries);
+                final ShippingInfoImportDraft shippingInfo = ShippingInfoImportDraftBuilder.of(randomString(), price, shippingRate, taxRate, taxCategoryRef, shippingMethodRef,ShippingMethodState.DOES_NOT_MATCH_CART, deliveries).build();
                 testOrderAspect(
                         builder -> builder.shippingInfo(shippingInfo),
                         order -> assertThat(order.getShippingInfo()).

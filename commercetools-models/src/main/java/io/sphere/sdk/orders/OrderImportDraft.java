@@ -57,7 +57,7 @@ public interface OrderImportDraft {
     Address getShippingAddress();
 
     @Nullable
-    OrderShippingInfo getShippingInfo();
+    ShippingInfoImportDraft getShippingInfo();
 
     @Nullable
     TaxedPrice getTaxedPrice();

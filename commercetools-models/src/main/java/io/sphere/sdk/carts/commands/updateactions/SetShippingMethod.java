@@ -4,6 +4,7 @@ import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 
 import javax.annotation.Nullable;
@@ -17,15 +18,15 @@ import javax.annotation.Nullable;
  */
 public final class SetShippingMethod extends UpdateActionImpl<Cart> {
     @Nullable
-    private final Reference<ShippingMethod> shippingMethod;
+    private final ResourceIdentifier<ShippingMethod> shippingMethod;
 
-    private SetShippingMethod(@Nullable final Reference<ShippingMethod> shippingMethod) {
+    private SetShippingMethod(@Nullable final ResourceIdentifier<ShippingMethod> shippingMethod) {
         super("setShippingMethod");
         this.shippingMethod = shippingMethod;
     }
 
     @Nullable
-    public Reference<ShippingMethod> getShippingMethod() {
+    public ResourceIdentifier<ShippingMethod> getShippingMethod() {
         return shippingMethod;
     }
 

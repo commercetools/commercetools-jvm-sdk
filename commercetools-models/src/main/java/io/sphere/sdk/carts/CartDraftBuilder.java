@@ -1,0 +1,27 @@
+package io.sphere.sdk.carts;
+
+import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.customergroups.CustomerGroup;
+import io.sphere.sdk.models.Address;
+import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.models.ResourceIdentifier;
+import io.sphere.sdk.shippingmethods.ShippingMethod;
+import io.sphere.sdk.types.CustomFieldsDraft;
+
+import javax.annotation.Nullable;
+import javax.money.CurrencyUnit;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+
+public final class CartDraftBuilder extends CartDraftBuilderBase<CartDraftBuilder> {
+
+    CartDraftBuilder(@Nullable String anonymousId, @Nullable Address billingAddress, @Nullable CountryCode country, CurrencyUnit currency, @Nullable CustomFieldsDraft custom, @Nullable List<CustomLineItemDraft> customLineItems, @Nullable String customerEmail, @Nullable ResourceIdentifier<CustomerGroup> customerGroup, @Nullable String customerId, @Nullable Integer deleteDaysAfterLastModification, @Nullable InventoryMode inventoryMode, @Nullable List<Address> itemShippingAddresses, @Nullable List<LineItemDraft> lineItems, @Nullable Locale locale, @Nullable CartOrigin origin, @Nullable Address shippingAddress, @Nullable ResourceIdentifier<ShippingMethod> shippingMethod, @Nullable ShippingRateInputDraft shippingRateInput, @Nullable TaxCalculationMode taxCalculationMode, @Nullable TaxMode taxMode, @Nullable RoundingMode taxRoundingMode) {
+        super(anonymousId, billingAddress, country, currency, custom, customLineItems, customerEmail, customerGroup, customerId, deleteDaysAfterLastModification, inventoryMode, itemShippingAddresses, lineItems, locale, origin, shippingAddress, shippingMethod, shippingRateInput, taxCalculationMode, taxMode, taxRoundingMode);
+    }
+
+
+    public CartDraftBuilder shippingMethod(@Nullable Referenceable<ShippingMethod> shippingMethod) {
+        return super.shippingMethod(Optional.ofNullable(shippingMethod).map(Referenceable::toResourceIdentifier).orElse(null));
+    }
+}

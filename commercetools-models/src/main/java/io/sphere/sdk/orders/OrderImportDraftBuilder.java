@@ -40,7 +40,7 @@ public final class OrderImportDraftBuilder extends Base implements Builder<Order
     @Nullable
     private PaymentState paymentState;
     @Nullable
-    private OrderShippingInfo shippingInfo;
+    private ShippingInfoImportDraft shippingInfo;
     @Nullable
     private ZonedDateTime completedAt;
     @Nullable
@@ -137,7 +137,7 @@ public final class OrderImportDraftBuilder extends Base implements Builder<Order
         return this;
     }
 
-    public OrderImportDraftBuilder shippingInfo(@Nullable final OrderShippingInfo shippingInfo) {
+    public OrderImportDraftBuilder shippingInfo(@Nullable final ShippingInfoImportDraft shippingInfo) {
         this.shippingInfo = shippingInfo;
         return this;
     }

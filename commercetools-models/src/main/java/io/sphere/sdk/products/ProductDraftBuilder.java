@@ -30,7 +30,7 @@ public final class ProductDraftBuilder extends ProductDraftBuilderBase<ProductDr
                         final SearchKeywords searchKeywords,
                         final LocalizedString slug,
                         @Nullable final Reference<State> state,
-                        @Nullable final Reference<TaxCategory> taxCategory,
+                        @Nullable final ResourceIdentifier<TaxCategory> taxCategory,
                         final List<ProductVariantDraft> variants) {
         super(categories, categoryOrderHints, description, key, masterVariant, metaDescription, metaKeywords, metaTitle,
                 name, productType, publish, searchKeywords, slug, state, taxCategory, variants);
@@ -101,6 +101,11 @@ public final class ProductDraftBuilder extends ProductDraftBuilderBase<ProductDr
         return ProductDraftBuilder.this;
     }
 
+    public ProductDraftBuilder taxCategory(@Nullable Referenceable<TaxCategory> taxCategory) {
+        return super.taxCategory(Optional.ofNullable(taxCategory).map(Referenceable::toResourceIdentifier).orElse(null));
+    }
 
-
+    public ProductDraftBuilder taxCategory(@Nullable Reference<TaxCategory> taxCategory) {
+        return super.taxCategory(taxCategory);
+    }
 }

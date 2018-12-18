@@ -3,6 +3,7 @@ package io.sphere.sdk.products.commands.updateactions;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
@@ -19,28 +20,27 @@ import java.util.Optional;
  */
 public final class SetTaxCategory extends UpdateActionImpl<Product> {
     @Nullable
-    private final Reference<TaxCategory> taxCategory;
+    private final ResourceIdentifier<TaxCategory> taxCategory;
 
-    private SetTaxCategory(@Nullable final Reference<TaxCategory> taxCategory) {
+    private SetTaxCategory(@Nullable final ResourceIdentifier<TaxCategory> taxCategory) {
         super("setTaxCategory");
         this.taxCategory = taxCategory;
     }
 
-
     public static SetTaxCategory of(@Nullable final Referenceable<TaxCategory> taxCategory) {
-        return new SetTaxCategory(Optional.ofNullable(taxCategory).map(t -> t.toReference()).orElse(null));
+        return new SetTaxCategory(Optional.ofNullable(taxCategory).map(Referenceable::toResourceIdentifier).orElse(null));
     }
 
     public static SetTaxCategory unset() {
-        return of(null);
-    }
-
-    @Nullable
-    public Reference<TaxCategory> getTaxCategory() {
-        return taxCategory;
+        return new SetTaxCategory(null);
     }
 
     public static SetTaxCategory to(final Referenceable<TaxCategory> taxCategory) {
         return of(taxCategory);
+    }
+
+    @Nullable
+    public ResourceIdentifier<TaxCategory> getTaxCategory() {
+        return taxCategory;
     }
 }
