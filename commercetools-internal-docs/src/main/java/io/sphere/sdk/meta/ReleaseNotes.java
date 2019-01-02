@@ -1,6 +1,8 @@
 package io.sphere.sdk.meta;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.sphere.sdk.apiclient.ApiClient;
+import io.sphere.sdk.apiclient.ApiClientDraft;
 import io.sphere.sdk.cartdiscounts.*;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.carts.commands.updateactions.AddCustomLineItem;
@@ -153,6 +155,8 @@ import java.util.function.Function;
  <ul>
     <li class=change-in-release> changed {@link CartDraft#getShippingMethod()}, {@link CartShippingInfo#getTaxCategory()}, {{@link CustomLineItemDraft#getTaxCategory()}, {@link AddCustomLineItem#getTaxCategory()}, {@link SetCustomShippingMethod#getTaxCategory()}, {@link SetShippingMethod#getShippingMethod()}, {@link InventoryEntryDraft#getSupplyChannel()}, {@link SetSupplyChannel#getSupplyChannel()}, {@link OrderShippingInfo#getTaxCategory()}, {@link ProductDraft#getTaxCategory()}, {@link SetTaxCategory#getTaxCategory()} return type from {@link Reference} to {@link ResourceIdentifier} </li>
     <li class=change-in-release> {@link OrderImportDraft#getShippingInfo()} is of type {@link ShippingInfoImportDraft} instead of {@link OrderShippingInfo}</li>
+    <li class=change-in-release> {@link io.sphere.sdk.apiclient.ApiClient} has a new attribute {@link ApiClient#getDeleteAt()} which marks when the project key would be deleted</li>
+    <li class=change-in-release> {@link io.sphere.sdk.apiclient.ApiClientDraft} has a new attribute {@link ApiClientDraft#getDeleteDaysAfterCreation()} which allows to specifiy the key life length </li>
  </ul>
 
  <h3 class=released-version id="v1_38_0">1.38.0 (07.12.2018)</h3>
