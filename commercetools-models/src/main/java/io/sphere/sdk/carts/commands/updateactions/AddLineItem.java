@@ -5,8 +5,8 @@ import io.sphere.sdk.carts.ExternalLineItemTotalPrice;
 import io.sphere.sdk.carts.LineItemDraft;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.commands.UpdateActionImpl;
-import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.products.ProductIdentifiable;
 import io.sphere.sdk.taxcategories.ExternalTaxRateDraft;
 import io.sphere.sdk.types.CustomDraft;
@@ -35,9 +35,9 @@ public final class AddLineItem extends UpdateActionImpl<Cart> implements CustomD
     private final String sku;
     private final Long quantity;
     @Nullable
-    private final Reference<Channel> supplyChannel;
+    private final ResourceIdentifier<Channel> supplyChannel;
     @Nullable
-    private final Reference<Channel> distributionChannel;
+    private final ResourceIdentifier<Channel> distributionChannel;
     @Nullable
     private final CustomFieldsDraft custom;
     @Nullable
@@ -47,7 +47,7 @@ public final class AddLineItem extends UpdateActionImpl<Cart> implements CustomD
     @Nullable
     private final ExternalLineItemTotalPrice externalTotalPrice;
 
-    private AddLineItem(@Nullable final String productId, @Nullable final Integer variantId, @Nullable String sku, final Long quantity, @Nullable final Reference<Channel> supplyChannel, @Nullable final Reference<Channel> distributionChannel, @Nullable final CustomFieldsDraft custom, @Nullable final ExternalTaxRateDraft externalTaxRate, @Nullable final MonetaryAmount externalPrice, @Nullable final ExternalLineItemTotalPrice externalTotalPrice) {
+    private AddLineItem(@Nullable final String productId, @Nullable final Integer variantId, @Nullable String sku, final Long quantity, @Nullable final ResourceIdentifier<Channel> supplyChannel, @Nullable final ResourceIdentifier<Channel> distributionChannel, @Nullable final CustomFieldsDraft custom, @Nullable final ExternalTaxRateDraft externalTaxRate, @Nullable final MonetaryAmount externalPrice, @Nullable final ExternalLineItemTotalPrice externalTotalPrice) {
         super("addLineItem");
         this.productId = productId;
         this.variantId = variantId;
@@ -93,12 +93,12 @@ public final class AddLineItem extends UpdateActionImpl<Cart> implements CustomD
     }
 
     @Nullable
-    public Reference<Channel> getDistributionChannel() {
+    public ResourceIdentifier<Channel> getDistributionChannel() {
         return distributionChannel;
     }
 
     @Nullable
-    public Reference<Channel> getSupplyChannel() {
+    public ResourceIdentifier<Channel> getSupplyChannel() {
         return supplyChannel;
     }
 

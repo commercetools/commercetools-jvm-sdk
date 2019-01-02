@@ -55,12 +55,12 @@ public class LineItemDraftBuilderIntegrationTest extends IntegrationTest {
                 assertThat(builtLineItemDraft.getVariantId()).isEqualTo(variantId);
                 assertThat(builtLineItemDraft.getQuantity()).isEqualTo(quantity);
                 assertThat(builtLineItemDraft.getCustom()).isEqualTo(customFieldsDraft);
-                assertThat(builtLineItemDraft.getDistributionChannel().toReference()).isEqualTo(distributionChannel.toReference());
+                assertThat(builtLineItemDraft.getDistributionChannel()).isEqualTo(distributionChannel.toResourceIdentifier());
                 assertThat(builtLineItemDraft.getExternalPrice()).isEqualTo(externalPrice);
                 assertThat(builtLineItemDraft.getExternalTaxRate()).isEqualTo(externalTaxRate);
                 assertThat(builtLineItemDraft.getExternalTotalPrice()).isEqualTo(externalTotalPrice);
                 assertThat(builtLineItemDraft.getSku()).isEqualTo(sku);
-                assertThat(builtLineItemDraft.getSupplyChannel().toReference()).isEqualTo(supplyChannel.toReference());
+                assertThat(builtLineItemDraft.getSupplyChannel()).isEqualTo(supplyChannel.toResourceIdentifier());
 
                 return type;
             });
