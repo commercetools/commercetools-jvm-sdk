@@ -3,10 +3,7 @@ package io.sphere.sdk.products;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.customergroups.CustomerGroup;
-import io.sphere.sdk.models.Base;
-import io.sphere.sdk.models.Builder;
-import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.models.*;
 import io.sphere.sdk.types.CustomFieldsDraft;
 import io.sphere.sdk.types.CustomFieldsDraftBuilder;
 import io.sphere.sdk.utils.MoneyImpl;
@@ -24,7 +21,7 @@ public final class PriceDraftBuilder extends Base implements Builder<PriceDraftD
     @Nullable
     private Reference<CustomerGroup> customerGroup;
     @Nullable
-    private Reference<Channel> channel;
+    private ResourceIdentifier<Channel> channel;
     @Nullable
     private ZonedDateTime validFrom;
     @Nullable
@@ -62,6 +59,11 @@ public final class PriceDraftBuilder extends Base implements Builder<PriceDraftD
         return this;
     }
 
+    public PriceDraftBuilder channel(@Nullable final ResourceIdentifier<Channel> channel) {
+        this.channel =  channel;
+        return this;
+    }
+
     public PriceDraftBuilder validFrom(@Nullable final ZonedDateTime validFrom) {
         this.validFrom = validFrom;
         return this;
@@ -88,7 +90,7 @@ public final class PriceDraftBuilder extends Base implements Builder<PriceDraftD
     }
 
     @Nullable
-    public Reference<Channel> getChannel() {
+    public ResourceIdentifier<Channel> getChannel() {
         return channel;
     }
 
@@ -156,7 +158,7 @@ public final class PriceDraftBuilder extends Base implements Builder<PriceDraftD
         return of(template.getValue())
                 .country(template.getCountry())
                 .customerGroup(template.getCustomerGroup())
-                .channel(template.getChannel())
+                .channel(Optional.ofNullable(template.getChannel()).map(Referenceable::toResourceIdentifier).orElse(null))
                 .validFrom(template.getValidFrom())
                 .validUntil(template.getValidUntil())
                 .custom(copyCustom(template));

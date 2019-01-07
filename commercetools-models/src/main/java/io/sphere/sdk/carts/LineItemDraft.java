@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.channels.Channel;
-import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.products.ProductIdentifiable;
 import io.sphere.sdk.taxcategories.ExternalTaxRateDraft;
 import io.sphere.sdk.types.CustomFieldsDraft;
@@ -20,6 +20,7 @@ import javax.money.MonetaryAmount;
 @JsonDeserialize(as = LineItemDraftDsl.class)
 @ResourceDraftValue(
         abstractBuilderClass = true,
+        abstractResourceDraftValueClass = true,
         factoryMethods = {
                 @FactoryMethod(methodName = "ofSku", parameterNames = {"sku", "quantity"}),
                 @FactoryMethod(parameterNames = {"productId", "variantId", "quantity", "supplyChannel", "distributionChannel", "custom", "externalTaxRate", "externalPrice", "externalTotalPrice"})
@@ -33,7 +34,7 @@ public interface LineItemDraft {
     CustomFieldsDraft getCustom();
 
     @Nullable
-    Reference<Channel> getDistributionChannel();
+    ResourceIdentifier<Channel> getDistributionChannel();
 
     String getProductId();
 
@@ -41,7 +42,7 @@ public interface LineItemDraft {
     Long getQuantity();
 
     @Nullable
-    Reference<Channel> getSupplyChannel();
+    ResourceIdentifier<Channel> getSupplyChannel();
 
     Integer getVariantId();
 
