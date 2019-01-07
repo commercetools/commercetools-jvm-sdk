@@ -7,6 +7,7 @@ import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.client.SphereClientConfig;
 import io.sphere.sdk.models.*;
 
+import javax.annotation.Nullable;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
@@ -26,11 +27,17 @@ public interface ApiClient  extends Identifiable<ApiClient>, Referenceable<ApiCl
 
     String getScope();
 
+    @Nullable
     ZonedDateTime getCreatedAt();
 
+    @Nullable
     LocalDate getLastUsedAt();
 
+    @Nullable
     String getSecret();
+
+    @Nullable
+    ZonedDateTime getDeleteAt();
 
     @JsonIgnore
     String getProjectKey();

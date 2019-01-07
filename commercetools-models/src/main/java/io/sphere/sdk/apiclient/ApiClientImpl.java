@@ -5,6 +5,7 @@ import io.sphere.sdk.client.SphereClientConfigBuilder;
 import io.sphere.sdk.client.SphereProjectScope;
 import io.sphere.sdk.client.SphereScope;
 
+import javax.annotation.Nullable;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Arrays;
@@ -12,10 +13,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 class ApiClientImpl extends ApiClientImplBase {
-    ApiClientImpl(ZonedDateTime createdAt, String id, LocalDate lastUsedAt, String name, String scope, String secret) {
-        super(createdAt, id, lastUsedAt, name, scope, secret);
-    }
 
+    public ApiClientImpl(final @Nullable ZonedDateTime createdAt, final @Nullable ZonedDateTime deleteAt, final String id, final @Nullable LocalDate lastUsedAt, final String name, final String scope, final @Nullable String secret) {
+        super(createdAt, deleteAt, id, lastUsedAt, name, scope, secret);
+    }
 
     @Override
     public String getProjectKey() {
