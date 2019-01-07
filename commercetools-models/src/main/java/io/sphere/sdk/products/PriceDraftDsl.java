@@ -8,6 +8,7 @@ import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.types.CustomFieldsDraft;
 import io.sphere.sdk.utils.MoneyImpl;
 
@@ -31,7 +32,7 @@ public final class PriceDraftDsl extends Base implements PriceDraft {
     @Nullable
     private final Reference<CustomerGroup> customerGroup;
     @Nullable
-    private final Reference<Channel> channel;
+    private final ResourceIdentifier<Channel> channel;
     @Nullable
     private final ZonedDateTime validFrom;
     @Nullable
@@ -43,7 +44,7 @@ public final class PriceDraftDsl extends Base implements PriceDraft {
 
      @JsonCreator
     PriceDraftDsl(final MonetaryAmount value, @Nullable final CountryCode country,
-                  @Nullable final Reference<CustomerGroup> customerGroup, @Nullable final Reference<Channel> channel,
+                  @Nullable final Reference<CustomerGroup> customerGroup, @Nullable final ResourceIdentifier<Channel> channel,
                   @Nullable final ZonedDateTime validFrom, @Nullable final ZonedDateTime validUntil,
                   @Nullable final CustomFieldsDraft custom, @Nullable final List<PriceTier> tiers) {
         this.value = value;
@@ -71,7 +72,7 @@ public final class PriceDraftDsl extends Base implements PriceDraft {
     }
 
     @Nullable
-    public Reference<Channel> getChannel() {
+    public ResourceIdentifier<Channel> getChannel() {
         return channel;
     }
 
@@ -114,8 +115,8 @@ public final class PriceDraftDsl extends Base implements PriceDraft {
     }
 
     public PriceDraftDsl withChannel(@Nullable final Referenceable<Channel> channel) {
-        final Reference<Channel> channelReference = Optional.ofNullable(channel).map(Referenceable::toReference).orElse(null);
-        return PriceDraftBuilder.of(this).channel(channelReference).build();
+        final ResourceIdentifier<Channel> channelResourceIdentifier = Optional.ofNullable(channel).map(Referenceable::toResourceIdentifier).orElse(null);
+        return PriceDraftBuilder.of(this).channel(channelResourceIdentifier).build();
     }
 
     public PriceDraftDsl withValue(final MonetaryAmount value) {
@@ -145,10 +146,13 @@ public final class PriceDraftDsl extends Base implements PriceDraft {
     }
 
     public static PriceDraftDsl of(final Price template) {
+
+        final ResourceIdentifier<Channel> channelResourceIdentifier = Optional.ofNullable(template.getChannel()).map(Referenceable::toResourceIdentifier).orElse(null);
+
         return PriceDraftBuilder.of(template.getValue())
                 .country(template.getCountry())
                 .customerGroup(template.getCustomerGroup())
-                .channel(template.getChannel())
+                .channel(channelResourceIdentifier)
                 .validFrom(template.getValidFrom())
                 .validUntil(template.getValidUntil())
                 .custom(customFieldsDraftOrNull(template))

@@ -153,6 +153,8 @@ import java.util.function.Function;
  <ul>
     <li class=change-in-release> changed {@link CartDraft#getShippingMethod()}, {@link CartShippingInfo#getTaxCategory()}, {{@link CustomLineItemDraft#getTaxCategory()}, {@link AddCustomLineItem#getTaxCategory()}, {@link SetCustomShippingMethod#getTaxCategory()}, {@link SetShippingMethod#getShippingMethod()}, {@link InventoryEntryDraft#getSupplyChannel()}, {@link SetSupplyChannel#getSupplyChannel()}, {@link OrderShippingInfo#getTaxCategory()}, {@link ProductDraft#getTaxCategory()}, {@link SetTaxCategory#getTaxCategory()} return type from {@link Reference} to {@link ResourceIdentifier} </li>
     <li class=change-in-release> {@link OrderImportDraft#getShippingInfo()} is of type {@link ShippingInfoImportDraft} instead of {@link OrderShippingInfo}</li>
+    <li class=change-in-release> {@link LineItemDraft#getSupplyChannel()} and {@link LineItemDraft#getDistributionChannel()} are now of type {@link ResourceIdentifier<Channel>} instead of {@link Reference<Channel>}</li>
+    <li class=change-in-release> {@link PriceDraft#getChannel()} is of type {@link ResourceIdentifier<Channel>} instead of {@link Reference<Channel>}</li>
  </ul>
 
  <h3 class=released-version id="v1_38_0">1.38.0 (07.12.2018)</h3>
