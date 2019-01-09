@@ -61,12 +61,10 @@ public final class AddLineItem extends UpdateActionImpl<Cart> implements CustomD
         this.externalTotalPrice = externalTotalPrice;
     }
 
-    @Deprecated
     public static AddLineItem of(final ProductIdentifiable product, final int variantId, final long quantity) {
         return of(product.getId(), variantId, quantity);
     }
 
-    @Deprecated
     public static AddLineItem of(final String productId, final int variantId, final long quantity) {
         return new AddLineItem(productId, variantId, null, quantity, null, null, null, null, null, null);
     }
