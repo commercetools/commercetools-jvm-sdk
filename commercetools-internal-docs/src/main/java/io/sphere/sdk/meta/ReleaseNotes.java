@@ -159,6 +159,8 @@ import java.util.function.Function;
     <li class=change-in-release> {@link io.sphere.sdk.apiclient.ApiClientDraft} has a new attribute {@link ApiClientDraft#getDeleteDaysAfterCreation()} which allows to specifiy the key life length </li>
     <li class=change-in-release> {@link LineItemDraft#getSupplyChannel()} and {@link LineItemDraft#getDistributionChannel()} are now of type {@link ResourceIdentifier<Channel>} instead of {@link Reference<Channel>}</li>
     <li class=change-in-release> {@link PriceDraft#getChannel()} is of type {@link ResourceIdentifier<Channel>} instead of {@link Reference<Channel>}</li>
+    <li class=change-in-release> {@link LineItemImportDraft#getSupplyChannel()} return type changed from {@link Reference<Channel>} to {@link ResourceIdentifier<Channel>}</li>
+    <li class=new-in-release> a method {@link LineItemImportDraft#getDistributionChannel()} ()}was added</li>
  </ul>
 
  <h3 class=released-version id="v1_38_0">1.38.0 (07.12.2018)</h3>
