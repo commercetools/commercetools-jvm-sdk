@@ -5,8 +5,7 @@ import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.products.Price;
+import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.products.PriceDraft;
 import io.sphere.sdk.taxcategories.TaxRate;
 import io.sphere.sdk.types.CustomFieldsDraft;
@@ -24,15 +23,18 @@ final class LineItemImportDraftImpl extends Base implements LineItemImportDraft 
     @Nullable
     private final Set<ItemState> state;
     @Nullable
-    private final Reference<Channel> supplyChannel;
+    private final ResourceIdentifier<Channel> supplyChannel;
+    @Nullable
+    private final ResourceIdentifier<Channel> distributionChannel;
     @Nullable
     private final TaxRate taxRate;
     @Nullable
     private final CustomFieldsDraft custom;
 
+
     @Nullable private final ItemShippingDetailsDraft shippingDetails;
 
-    public LineItemImportDraftImpl(final LocalizedString name, @Nullable final String productId, final ProductVariantImportDraft variant, final PriceDraft price, final Long quantity, @Nullable final Set<ItemState> state, @Nullable final Reference<Channel> supplyChannel, @Nullable final TaxRate taxRate, @Nullable final CustomFieldsDraft custom, @Nullable final ItemShippingDetailsDraft shippingDetails) {
+    public LineItemImportDraftImpl(final LocalizedString name, @Nullable final String productId, final ProductVariantImportDraft variant, final PriceDraft price, final Long quantity, @Nullable final Set<ItemState> state, @Nullable final ResourceIdentifier<Channel> supplyChannel,final ResourceIdentifier<Channel> distributionChannel, @Nullable final TaxRate taxRate, @Nullable final CustomFieldsDraft custom, @Nullable final ItemShippingDetailsDraft shippingDetails) {
         this.name = name;
         this.productId = productId;
         this.variant = variant;
@@ -43,6 +45,7 @@ final class LineItemImportDraftImpl extends Base implements LineItemImportDraft 
         this.taxRate = taxRate;
         this.custom = custom;
         this.shippingDetails = shippingDetails;
+        this.distributionChannel = distributionChannel;
     }
 
     @Override
@@ -74,8 +77,14 @@ final class LineItemImportDraftImpl extends Base implements LineItemImportDraft 
 
     @Override
     @Nullable
-    public Reference<Channel> getSupplyChannel() {
+    public ResourceIdentifier<Channel> getSupplyChannel() {
         return supplyChannel;
+    }
+
+    @Nullable
+    @Override
+    public ResourceIdentifier<Channel> getDistributionChannel() {
+        return distributionChannel;
     }
 
     @Override

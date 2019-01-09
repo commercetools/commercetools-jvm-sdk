@@ -5,8 +5,7 @@ import io.sphere.sdk.carts.ItemShippingDetailsDraft;
 import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.products.Price;
+import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.products.PriceDraft;
 import io.sphere.sdk.taxcategories.TaxRate;
 import io.sphere.sdk.types.CustomFieldsDraft;
@@ -32,7 +31,11 @@ public interface LineItemImportDraft {
     Set<ItemState> getState();
 
     @Nullable
-    Reference<Channel> getSupplyChannel();
+    ResourceIdentifier<Channel> getSupplyChannel();
+
+    @Nullable
+    ResourceIdentifier<Channel> getDistributionChannel();
+
 
     @Nullable
     TaxRate getTaxRate();

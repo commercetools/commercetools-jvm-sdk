@@ -24,7 +24,10 @@ public final class LineItemImportDraftBuilder extends Base implements Builder<Li
     @Nullable
     private Set<ItemState> state;
     @Nullable
-    private Reference<Channel> supplyChannel;
+    private ResourceIdentifier<Channel> supplyChannel;
+
+    @Nullable
+    private ResourceIdentifier<Channel> distpributionChannel;
     @Nullable
     private TaxRate taxRate;
     @Nullable
@@ -75,6 +78,11 @@ public final class LineItemImportDraftBuilder extends Base implements Builder<Li
         return this;
     }
 
+    public LineItemImportDraftBuilder distributionChannel(@Nullable final ResourceIdentifier<Channel> distpributionChannel){
+        this.distpributionChannel = distpributionChannel;
+        return this;
+    }
+
     public static LineItemImportDraftBuilder of(final ProductVariantImportDraft variant, final long quantity, final PriceDraft price, final LocalizedString name) {
         return new LineItemImportDraftBuilder(variant, quantity, price, variant.getProductId(), name);
     }
@@ -89,6 +97,6 @@ public final class LineItemImportDraftBuilder extends Base implements Builder<Li
 
     @Override
     public LineItemImportDraft build() {
-        return new LineItemImportDraftImpl(name, productId, variant, price, quantity, state, supplyChannel, taxRate, custom, shippingDetails);
+        return new LineItemImportDraftImpl(name, productId, variant, price, quantity, state, supplyChannel,distpributionChannel, taxRate, custom, shippingDetails);
     }
 }
