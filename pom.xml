@@ -35,6 +35,11 @@
             <name>Achraf Beniasaad</name>
             <url>https://github.com/acbeni</url>
         </developer>
+        <developer>
+            <id>aleksandarpetrovic</id>
+            <name>Aleksandar Petrovic</name>
+            <url>https://github.com/alex-ct</url>
+        </developer>
     </developers>
     <distributionManagement>
         <snapshotRepository>
