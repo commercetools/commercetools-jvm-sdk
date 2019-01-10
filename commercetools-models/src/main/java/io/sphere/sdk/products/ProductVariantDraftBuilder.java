@@ -13,7 +13,7 @@ import static java.util.Arrays.asList;
 
 public final class ProductVariantDraftBuilder extends ProductVariantDraftBuilderBase<ProductVariantDraftBuilder> {
 
-    ProductVariantDraftBuilder(@Nullable final List<AssetDraft> assets, final List<AttributeDraft> attributes, final List<Image> images, @Nullable final String key, final List<PriceDraft> prices, @Nullable final String sku) {
+    ProductVariantDraftBuilder(@Nullable final List<AssetDraft> assets, @Nullable final List<AttributeDraft> attributes, @Nullable final List<Image> images, @Nullable final String key, @Nullable final List<PriceDraft> prices, @Nullable final String sku) {
         super(assets, attributes, images, key, prices, sku);
     }
 

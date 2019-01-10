@@ -22,10 +22,13 @@ public interface ProductVariantDraft {
     @Nullable
     String getSku();
 
+    @Nullable
     List<PriceDraft> getPrices();
 
+    @Nullable
     List<AttributeDraft> getAttributes();
 
+    @Nullable
     List<Image> getImages();
 
     @Nullable
