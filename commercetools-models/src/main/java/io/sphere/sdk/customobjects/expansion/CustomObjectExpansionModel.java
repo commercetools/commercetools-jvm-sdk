@@ -8,6 +8,7 @@ import io.sphere.sdk.customobjects.CustomObject;
  * @param <T> The type of the value of this custom object.
  */
 public interface CustomObjectExpansionModel<T> {
+
     static <T> CustomObjectExpansionModel<CustomObject<T>> of(){
         return new CustomObjectExpansionModelImpl<>();
     }

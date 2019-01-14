@@ -3,8 +3,10 @@ package io.sphere.sdk.customobjects.queries;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.customobjects.CustomObject;
+import io.sphere.sdk.customobjects.expansion.CustomObjectExpansionModel;
 import io.sphere.sdk.json.TypeReferences;
 import io.sphere.sdk.queries.Get;
+import io.sphere.sdk.queries.MetaModelGetDsl;
 
 /**
  * {@link io.sphere.sdk.client.SphereRequest} to fetch one {@link CustomObject} by id.
@@ -14,7 +16,7 @@ import io.sphere.sdk.queries.Get;
  * @param <T> The type of the value of the custom object.
  * @see CustomObject
  */
-public interface CustomObjectByIdGet<T> extends Get<CustomObject<T>> {
+public interface CustomObjectByIdGet<T> extends MetaModelGetDsl<CustomObject<T>, CustomObject<T>, CustomObjectByIdGet<T>, CustomObjectExpansionModel<CustomObject<T>>> {
 
     /**
      * Creates an object to fetch a custom object by id with POJO mapping.
