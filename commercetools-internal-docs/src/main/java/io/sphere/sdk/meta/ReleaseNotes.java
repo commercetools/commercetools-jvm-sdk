@@ -162,6 +162,7 @@ import java.util.function.Function;
     <li class=change-in-release> removed @Deprecated annotation from {@link io.sphere.sdk.carts.commands.updateactions.AddLineItem#of(String, int, long)}</li>
     <li class=change-in-release> removed @Deprecated annotation from {@link io.sphere.sdk.carts.commands.updateactions.AddLineItem#of(ProductIdentifiable, int, long)}</li>
     <li class=change-in-release> {@link ProductVariantDraft#getPrices()}, {@link ProductVariantDraft#getAttributes} and {@link ProductVariantDraft#getImages()} are now optional</li>
+    <li class=change-in-release> {@link AddVariant} action now includes assets field </li>
  </ul>
 
  <h3 class=released-version id="v1_38_0">1.38.0 (07.12.2018)</h3>

@@ -31,6 +31,7 @@ import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Sizes;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
+import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.CustomFieldsDraft;
 import io.sphere.sdk.types.CustomFieldsDraftBuilder;
 import io.sphere.sdk.types.Type;
@@ -39,6 +40,7 @@ import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
 import java.time.ZoneOffset;
@@ -50,6 +52,7 @@ import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.productdiscounts.ProductDiscountFixtures.withProductDiscount;
 import static io.sphere.sdk.products.ProductFixtures.*;
+import static io.sphere.sdk.products.ProductFixtures.withProductHavingAssets;
 import static io.sphere.sdk.products.ProductProjectionType.STAGED;
 import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
 import static io.sphere.sdk.states.StateType.PRODUCT_STATE;
@@ -1494,9 +1497,27 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             final String sku = randomKey();
             final String key = randomKey();
             final Image image = Image.of("url", ImageDimensions.of(3, 5));
+
+            final AssetSource assetSource = AssetSourceBuilder.ofUri("https://commercetools.com/binaries/content/gallery/commercetoolswebsite/homepage/cases/rewe.jpg")
+                    .key("rewe-showcase")
+                    .contentType("image/jpg")
+                    .dimensionsOfWidthAndHeight(1934, 1115)
+                    .build();
+            final LocalizedString name = LocalizedString.ofEnglish("REWE show case");
+            final LocalizedString description = LocalizedString.ofEnglish("screenshot of the REWE webshop on a mobile and a notebook");
+            final AssetDraft assetDraft = AssetDraftBuilder.of(singletonList(assetSource), name)
+                    .description(description)
+                    .tags("desktop-sized", "jpg-format", "REWE", "awesome")
+                    .build();
+            product = client().executeBlocking(ProductUpdateCommand.of(product, AddAsset.ofSku(product.getMasterData().getStaged().getMasterVariant().getSku(), assetDraft)));
+
+            final List<Asset> assets = product.getMasterData().getStaged().getMasterVariant().getAssets();
+            assertThat(assets).hasSize(1);
+
             final AddVariant updateAction = AddVariant.of(attributeValues, prices, sku)
                     .withKey(key)
-                    .withImages(singletonList(image));
+                    .withImages(singletonList(image))
+                    .withAssets(assets);
             final ProductUpdateCommand addVariantCommand =
                     ProductUpdateCommand.of(product, updateAction);
 
@@ -1510,12 +1531,14 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(variant.getSku()).isEqualTo(sku);
             assertThat(variant.getKey()).isEqualTo(key);
             assertThat(variant.getImages()).containsExactly(image);
+            assertThat(variant.getAssets().get(0).getKey()).isEqualTo(assets.get(0).getKey());
 
             final Product productWithoutVariant = client().executeBlocking(ProductUpdateCommand.of(productWithVariant, RemoveVariant.of(variant)));
             assertThat(productWithoutVariant.getMasterData().getStaged().getVariants()).isEmpty();
 
             return productWithoutVariant;
         });
+
     }
 
     @Test
