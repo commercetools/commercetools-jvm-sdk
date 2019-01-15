@@ -2,6 +2,7 @@ package io.sphere.sdk.customobjects.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.client.JsonEndpoint;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.customobjects.CustomObjectUtils;
@@ -13,19 +14,22 @@ import io.sphere.sdk.queries.MetaModelGetDslImpl;
 import java.util.Optional;
 
 final class CustomObjectByIdGetImpl<T> extends MetaModelGetDslImpl<CustomObject<T>, CustomObject<T>, CustomObjectByIdGet<T>, CustomObjectExpansionModel<CustomObject<T>>> implements CustomObjectByIdGet<T> {
-    private JavaType javaType;
 
-    CustomObjectByIdGetImpl(final String id) {
+    private final JavaType javaType;
+
+    CustomObjectByIdGetImpl(final String id, final JavaType javaType) {
         super(id, JsonEndpoint.of(new TypeReference<CustomObject<T>>() {
             @Override
             public String toString() {
                 return "TypeReference<CustomObject<T>>";
             }
-        }, "/custom-objects"), CustomObjectExpansionModel.<T>of(), CustomObjectByIdGetImpl::new);
+        }, "/custom-objects"), CustomObjectExpansionModel.<T>of(), att -> new CustomObjectByIdGetImpl(att, javaType));
+        this.javaType = javaType;
     }
 
-    CustomObjectByIdGetImpl(final MetaModelGetDslBuilder<CustomObject<T>, CustomObject<T>, CustomObjectByIdGet<T>, CustomObjectExpansionModel<CustomObject<T>>> builder){
+    CustomObjectByIdGetImpl(final MetaModelGetDslBuilder<CustomObject<T>, CustomObject<T>, CustomObjectByIdGet<T>, CustomObjectExpansionModel<CustomObject<T>>> builder, JavaType javaType){
         super(builder);
+        this.javaType = javaType;
     }
 
     @Override
@@ -35,7 +39,9 @@ final class CustomObjectByIdGetImpl<T> extends MetaModelGetDslImpl<CustomObject<
 
     protected CustomObject<T> deserializeCustomObject(final HttpResponse httpResponse) {
 
-        JavaType customObjectJavaType = SphereJsonUtils.createCustomObjectJavaType(CustomObject.class, javaType.getRawClass());
+        JavaType customObjectJavaType = SphereJsonUtils.createCustomObjectJavaType(
+                CustomObject.class,
+                javaType.getRawClass());
 
         return Optional.ofNullable(httpResponse)
                 .filter(response -> response.getResponseBody() != null && response.getResponseBody().length > 0)
@@ -44,15 +50,4 @@ final class CustomObjectByIdGetImpl<T> extends MetaModelGetDslImpl<CustomObject<
                 .orElse(null);
     }
 
-    public void setJavaType(final JavaType valueJavaType){
-        this.javaType = CustomObjectUtils.getCustomObjectJavaTypeForValue(valueJavaType);
-    }
-
-    public void setJavaType(final Class<T> valueClass){
-        this.javaType = SphereJsonUtils.convertToJavaType(valueClass);
-    }
-
-    public void setJavaType(final TypeReference<T> valueTypeReference){
-        this.javaType = SphereJsonUtils.convertToJavaType(valueTypeReference);
-    }
 }

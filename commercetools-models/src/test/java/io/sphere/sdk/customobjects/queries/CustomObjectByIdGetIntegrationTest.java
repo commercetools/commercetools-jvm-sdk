@@ -1,14 +1,18 @@
 package io.sphere.sdk.customobjects.queries;
 
+import io.sphere.sdk.carts.CartFixtures;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.customobjects.demo.Foo;
+import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
 import static io.sphere.sdk.customobjects.CustomObjectFixtures.withCustomObject;
+import static io.sphere.sdk.customobjects.CustomObjectFixtures.withCustomObjectAndCustomClasses;
 import static org.assertj.core.api.Assertions.*;
 
 public class CustomObjectByIdGetIntegrationTest extends IntegrationTest {
+
     @Test
     public void execution() throws Exception {
         withCustomObject(client(), existingCustomObject -> {
@@ -17,6 +21,27 @@ public class CustomObjectByIdGetIntegrationTest extends IntegrationTest {
                     CustomObjectByIdGet.of(id, Foo.class);
             final CustomObject<Foo> customObject = client().executeBlocking(fetch);
             assertThat(customObject).isEqualTo(existingCustomObject);
+        });
+    }
+
+    @Test
+    public void testExpansionPath() {
+        CartFixtures.withCart(client(), cart -> {
+
+            withCustomObjectAndCustomClasses(client(), cart, existingCustomObject -> {
+                final String id = existingCustomObject.getId();
+                final CustomObjectByIdGet<MyCustomClass> fetch =
+                        CustomObjectByIdGet.of(id, MyCustomClass.class);
+                CustomObject<MyCustomClass> customObject = client().executeBlocking(fetch);
+                assertThat(customObject).isEqualTo(existingCustomObject);
+
+                final ExpansionPath<CustomObject<MyCustomClass>> expansionPath = ExpansionPath.of("value.cartReference");
+                CustomObjectByIdGet<MyCustomClass> expandedFetch = fetch.withExpansionPaths(expansionPath);
+                customObject = client().executeBlocking(expandedFetch);
+                assertThat(customObject).isEqualTo(existingCustomObject);
+
+            });
+            return cart;
         });
     }
 }
