@@ -26,7 +26,9 @@ public interface CustomObjectByIdGet<T> extends MetaModelGetDsl<CustomObject<T>,
      * @return query object
      */
     static <T> CustomObjectByIdGet<T> of(final String id, final Class<T> valueClass) {
-        return new CustomObjectByIdGetImpl<>(id, valueClass);
+        CustomObjectByIdGetImpl<T> customObjectByIdGetImpl = new CustomObjectByIdGetImpl<>(id);
+        customObjectByIdGetImpl.setJavaType(valueClass);
+        return customObjectByIdGetImpl;
     }
 
     /**
@@ -37,7 +39,9 @@ public interface CustomObjectByIdGet<T> extends MetaModelGetDsl<CustomObject<T>,
      * @return query object
      */
     static <T> CustomObjectByIdGet<T> of(final String id, final TypeReference<T> valueTypeReference) {
-        return new CustomObjectByIdGetImpl<>(id, valueTypeReference);
+        CustomObjectByIdGetImpl<T> customObjectByIdGetImpl = new CustomObjectByIdGetImpl<>(id);
+        customObjectByIdGetImpl.setJavaType(valueTypeReference);
+        return customObjectByIdGetImpl;
     }
 
     /**
