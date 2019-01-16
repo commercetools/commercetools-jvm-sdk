@@ -25,7 +25,7 @@ public class CustomObjectByIdGetIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void testExpansionPath() {
+    public void expansionPath() {
         CartFixtures.withCart(client(), cart -> {
 
             withCustomObjectAndCustomClasses(client(), cart, existingCustomObject -> {
@@ -44,4 +44,6 @@ public class CustomObjectByIdGetIntegrationTest extends IntegrationTest {
             return cart;
         });
     }
+
+
 }

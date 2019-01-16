@@ -23,7 +23,7 @@ final class CustomObjectByIdGetImpl<T> extends MetaModelGetDslImpl<CustomObject<
             public String toString() {
                 return "TypeReference<CustomObject<T>>";
             }
-        }, "/custom-objects"), CustomObjectExpansionModel.<T>of(), att -> new CustomObjectByIdGetImpl(att, javaType));
+        }, "/custom-objects"), CustomObjectExpansionModel.<T>of(), att -> new CustomObjectByIdGetImpl<T>(att, javaType));
         this.javaType = javaType;
     }
 

@@ -32,9 +32,7 @@ public interface CustomObjectByIdGet<T> extends MetaModelGetDsl<CustomObject<T>,
      * @return query object
      */
     static <T> CustomObjectByIdGet<T> of(final String id, final Class<T> valueClass) {
-        CustomObjectByIdGetImpl<T> customObjectByIdGetImpl = new CustomObjectByIdGetImpl(id, SphereJsonUtils.convertToJavaType(valueClass));
-
-        return customObjectByIdGetImpl;
+        return new CustomObjectByIdGetImpl<T>(id, SphereJsonUtils.convertToJavaType(valueClass));
     }
 
     /**
@@ -45,8 +43,7 @@ public interface CustomObjectByIdGet<T> extends MetaModelGetDsl<CustomObject<T>,
      * @return query object
      */
     static <T> CustomObjectByIdGet<T> of(final String id, final TypeReference<T> valueTypeReference) {
-        CustomObjectByIdGetImpl<T> customObjectByIdGetImpl = new CustomObjectByIdGetImpl<T>(id, SphereJsonUtils.convertToJavaType(valueTypeReference));
-        return customObjectByIdGetImpl;
+        return new CustomObjectByIdGetImpl<T>(id, SphereJsonUtils.convertToJavaType(valueTypeReference));
     }
 
     /**
