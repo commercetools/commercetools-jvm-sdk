@@ -151,6 +151,12 @@ import java.util.function.Function;
  </ul>
  -->
  -->
+
+ <h3 class=released-version id="v1_40_0">1.40.0</h3>
+ <ul>
+    <li class=new-in-release>{@link io.sphere.sdk.customobjects.queries.CustomObjectByIdGet} and {@link CustomObjectByKeyGet} now support expansion parameter</li>
+ </ul>
+
  <h3 class=released-version id="v1_39_0">1.39.0 (14.01.2019)</h3>
  <ul>
     <li class=change-in-release> changed {@link CartDraft#getShippingMethod()}, {@link CartShippingInfo#getTaxCategory()}, {{@link CustomLineItemDraft#getTaxCategory()}, {@link AddCustomLineItem#getTaxCategory()}, {@link SetCustomShippingMethod#getTaxCategory()}, {@link SetShippingMethod#getShippingMethod()}, {@link InventoryEntryDraft#getSupplyChannel()}, {@link SetSupplyChannel#getSupplyChannel()}, {@link OrderShippingInfo#getTaxCategory()}, {@link ProductDraft#getTaxCategory()}, {@link SetTaxCategory#getTaxCategory()} return type from {@link Reference} to {@link ResourceIdentifier} </li>
