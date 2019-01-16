@@ -27,7 +27,6 @@ public class CustomObjectByIdGetIntegrationTest extends IntegrationTest {
     @Test
     public void expansionPath() {
         CartFixtures.withCart(client(), cart -> {
-
             withCustomObjectAndCustomClasses(client(), cart, existingCustomObject -> {
                 final String id = existingCustomObject.getId();
                 final CustomObjectByIdGet<MyCustomClass> fetch =
@@ -38,12 +37,11 @@ public class CustomObjectByIdGetIntegrationTest extends IntegrationTest {
                 final ExpansionPath<CustomObject<MyCustomClass>> expansionPath = ExpansionPath.of("value.cartReference");
                 CustomObjectByIdGet<MyCustomClass> expandedFetch = fetch.withExpansionPaths(expansionPath);
                 customObject = client().executeBlocking(expandedFetch);
-                assertThat(customObject).isEqualTo(existingCustomObject);
-
+                assertThat(customObject).isNotNull();
+                assertThat(customObject.getValue().getCartReference().getObj()).isNotNull();
             });
             return cart;
         });
     }
-
 
 }
