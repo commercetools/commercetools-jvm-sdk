@@ -2,10 +2,8 @@ package io.sphere.sdk.customobjects.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.client.JsonEndpoint;
 import io.sphere.sdk.customobjects.CustomObject;
-import io.sphere.sdk.customobjects.CustomObjectUtils;
 import io.sphere.sdk.customobjects.expansion.CustomObjectExpansionModel;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.json.SphereJsonUtils;
@@ -38,6 +36,10 @@ final class CustomObjectByIdGetImpl<T> extends MetaModelGetDslImpl<CustomObject<
     }
 
     protected CustomObject<T> deserializeCustomObject(final HttpResponse httpResponse) {
+
+        if(!httpResponse.hasSuccessResponseCode()){
+            return null;
+        }
 
         JavaType customObjectJavaType = SphereJsonUtils.createCustomObjectJavaType(
                 CustomObject.class,

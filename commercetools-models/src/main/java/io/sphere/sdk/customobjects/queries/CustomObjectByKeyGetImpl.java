@@ -4,13 +4,11 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JavaType;
 import io.sphere.sdk.client.JsonEndpoint;
 import io.sphere.sdk.customobjects.CustomObject;
-import io.sphere.sdk.customobjects.CustomObjectUtils;
 import io.sphere.sdk.customobjects.expansion.CustomObjectExpansionModel;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.queries.MetaModelGetDslBuilder;
 import io.sphere.sdk.queries.MetaModelGetDslImpl;
-
 import java.util.Optional;
 
 final class CustomObjectByKeyGetImpl<T> extends MetaModelGetDslImpl<CustomObject<T>, CustomObject<T>, CustomObjectByKeyGet<T>, CustomObjectExpansionModel<CustomObject<T>>> implements CustomObjectByKeyGet<T> {
@@ -37,6 +35,11 @@ final class CustomObjectByKeyGetImpl<T> extends MetaModelGetDslImpl<CustomObject
     }
 
     protected CustomObject<T> deserializeCustomObject(final HttpResponse httpResponse) {
+
+        if(!httpResponse.hasSuccessResponseCode()){
+            return null;
+        }
+
         JavaType customObjectJavaType = SphereJsonUtils.createCustomObjectJavaType(
                 CustomObject.class,
                 javaType.getRawClass());
