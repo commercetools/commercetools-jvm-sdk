@@ -151,7 +151,7 @@ import java.util.function.Function;
  </ul>
  -->
  -->
- <h3 class=released-version id="v1_39_0">1.39.0</h3>
+ <h3 class=released-version id="v1_39_0">1.39.0 (14.01.2019)</h3>
  <ul>
     <li class=change-in-release> changed {@link CartDraft#getShippingMethod()}, {@link CartShippingInfo#getTaxCategory()}, {{@link CustomLineItemDraft#getTaxCategory()}, {@link AddCustomLineItem#getTaxCategory()}, {@link SetCustomShippingMethod#getTaxCategory()}, {@link SetShippingMethod#getShippingMethod()}, {@link InventoryEntryDraft#getSupplyChannel()}, {@link SetSupplyChannel#getSupplyChannel()}, {@link OrderShippingInfo#getTaxCategory()}, {@link ProductDraft#getTaxCategory()}, {@link SetTaxCategory#getTaxCategory()} return type from {@link Reference} to {@link ResourceIdentifier} </li>
     <li class=change-in-release> {@link OrderImportDraft#getShippingInfo()} is of type {@link ShippingInfoImportDraft} instead of {@link OrderShippingInfo}</li>
