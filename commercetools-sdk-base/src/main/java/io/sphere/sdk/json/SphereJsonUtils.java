@@ -272,6 +272,10 @@ public final class SphereJsonUtils {
         return typeFactory.constructType(typeReference);
     }
 
+    public static JavaType createCustomObjectJavaType(Class<?> customObject, Class<?> param){
+        return objectMapper.getTypeFactory().constructParametricType(customObject, param);
+    }
+
     /**
      * Very simple way to "erase" passwords -
      * replaces all field values whose names contains {@code 'pass'} by {@code '**removed from output**'}.
