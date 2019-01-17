@@ -33,6 +33,7 @@ public class CustomObjectByIdGetIntegrationTest extends IntegrationTest {
                         CustomObjectByIdGet.of(id, MyCustomClass.class);
                 CustomObject<MyCustomClass> customObject = client().executeBlocking(fetch);
                 assertThat(customObject).isEqualTo(existingCustomObject);
+                assertThat(customObject.getValue().getCartReference().getObj()).isNull();
 
                 final ExpansionPath<CustomObject<MyCustomClass>> expansionPath = ExpansionPath.of("value.cartReference");
                 CustomObjectByIdGet<MyCustomClass> expandedFetch = fetch.withExpansionPaths(expansionPath);

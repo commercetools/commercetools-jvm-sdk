@@ -12,7 +12,8 @@ import io.sphere.sdk.queries.MetaModelGetDslImpl;
 import java.util.Optional;
 
 final class CustomObjectByKeyGetImpl<T> extends MetaModelGetDslImpl<CustomObject<T>, CustomObject<T>, CustomObjectByKeyGet<T>, CustomObjectExpansionModel<CustomObject<T>>> implements CustomObjectByKeyGet<T> {
-    private final JavaType javaType;
+
+    private final JavaType customObjectJavaType;
 
     public CustomObjectByKeyGetImpl(final String container, final String key, final JavaType javaType) {
         super(container + "/" + key, JsonEndpoint.of(new TypeReference<CustomObject<T>>() {
@@ -21,12 +22,13 @@ final class CustomObjectByKeyGetImpl<T> extends MetaModelGetDslImpl<CustomObject
                 return "TypeReference<CustomObject<T>>";
             }
         }, "/custom-objects"), CustomObjectExpansionModel.<T>of(), att -> new CustomObjectByKeyGetImpl<T>(att, javaType));
-        this.javaType = javaType;
+        this.customObjectJavaType = SphereJsonUtils.createCustomObjectJavaType(CustomObject.class, javaType.getRawClass());
+
     }
 
     CustomObjectByKeyGetImpl(final MetaModelGetDslBuilder<CustomObject<T>, CustomObject<T>, CustomObjectByKeyGet<T>, CustomObjectExpansionModel<CustomObject<T>>> builder, JavaType javaType){
         super(builder);
-        this.javaType = javaType;
+        this.customObjectJavaType = SphereJsonUtils.createCustomObjectJavaType(CustomObject.class, javaType.getRawClass());
     }
 
     @Override
@@ -39,10 +41,6 @@ final class CustomObjectByKeyGetImpl<T> extends MetaModelGetDslImpl<CustomObject
         if(!httpResponse.hasSuccessResponseCode()){
             return null;
         }
-
-        JavaType customObjectJavaType = SphereJsonUtils.createCustomObjectJavaType(
-                CustomObject.class,
-                javaType.getRawClass());
 
         return Optional.ofNullable(httpResponse)
                 .filter(response -> response.getResponseBody() != null && response.getResponseBody().length > 0)
