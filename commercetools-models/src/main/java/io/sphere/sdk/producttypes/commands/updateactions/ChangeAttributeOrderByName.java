@@ -8,7 +8,7 @@ import java.util.List;
 public final class ChangeAttributeOrderByName extends UpdateActionImpl<ProductType> {
     private final List<String> attributeNames;
 
-    public ChangeAttributeOrderByName(final List<String> attributeNames) {
+    private ChangeAttributeOrderByName(final List<String> attributeNames) {
         super("changeAttributeOrderByName");
         this.attributeNames = attributeNames;
     }
