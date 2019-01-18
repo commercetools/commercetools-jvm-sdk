@@ -155,6 +155,7 @@ import java.util.function.Function;
  <h3 class=released-version id="v1_40_0">1.40.0</h3>
  <ul>
     <li class=new-in-release>{@link io.sphere.sdk.customobjects.queries.CustomObjectByIdGet} and {@link CustomObjectByKeyGet} now support expansion parameter</li>
+    <li class=fixed-in-release>{@link Attribute#of(String, AttributeAccess, Object)} now works properly with Set of {@link Reference}</li>
  </ul>
 
  <h3 class=released-version id="v1_39_0">1.39.0 (14.01.2019)</h3>
