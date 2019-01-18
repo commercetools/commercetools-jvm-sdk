@@ -13,6 +13,7 @@ import java.util.List;
  *
  * {@include.example io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommandIntegrationTest#changeAttributeOrder()}
  */
+
 public final class ChangeAttributeOrder extends UpdateActionImpl<ProductType> {
     private final List<AttributeDefinition> attributes;
 
