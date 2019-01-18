@@ -2,7 +2,10 @@ package io.sphere.sdk.products.attributes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.EnumValue;
@@ -36,16 +39,14 @@ public interface Attribute {
     }
 
     static <T> Attribute of(final NamedAttributeAccess<T> namedAttributeAccess, final T value) {
+
         final String name = namedAttributeAccess.getName();
-        //here is not the attributeMapper used to keep LocalizedEnum values which
-        //are transformed to just the key so the attribute could not be read anymore
-        final JsonNode jsonNode = SphereJsonUtils.toJsonNode(value);
-        if (value instanceof Reference && jsonNode instanceof ObjectNode) {
-            final Reference<?> reference = (Reference<?>) value;
-            if (reference.getObj() != null) {
-                ((ObjectNode) jsonNode).replace("obj", SphereJsonUtils.toJsonNode(reference.getObj()));
-            }
-        }
+        final ObjectMapper mapper = SphereJsonUtils.newObjectMapper();
+        final SimpleModule module = new SimpleModule();
+        module.addSerializer(new ReferenceInternalSerializer());
+        mapper.registerModule(module);
+        final JsonNode jsonNode = mapper.valueToTree(value);
+
         return of(name, jsonNode);
     }
 
