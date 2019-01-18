@@ -19,7 +19,7 @@ final class ReferenceInternalSerializer extends StdSerializer<Reference> {
     }
 
     @Override
-    public void serialize(Reference reference, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+    public void serialize(final Reference reference, final JsonGenerator jsonGenerator, final SerializerProvider serializerProvider) throws IOException {
         jsonGenerator.writeStartObject();
         jsonGenerator.writeStringField("id", reference.getId());
         jsonGenerator.writeStringField("typeId", reference.getTypeId());
