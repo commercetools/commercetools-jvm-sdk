@@ -7,12 +7,14 @@ import io.sphere.sdk.producttypes.ProductType;
 import java.util.List;
 
 /**
+ * @deprecated Please use {@link ChangeAttributeOrderByName}.
  * Changes the attribute order.
  *
  * {@doc.gen intro}
  *
  * {@include.example io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommandIntegrationTest#changeAttributeOrder()}
  */
+@Deprecated
 public final class ChangeAttributeOrder extends UpdateActionImpl<ProductType> {
     private final List<AttributeDefinition> attributes;
 

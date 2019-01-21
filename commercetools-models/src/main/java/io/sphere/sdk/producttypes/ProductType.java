@@ -68,6 +68,7 @@ public interface ProductType extends Resource<ProductType>, AttributeDefinitionC
     @QueryModelHint(type = "AttributeDefinitionQueryModel<ProductType>", impl = "return new AttributeDefinitionQueryModelImpl<>(this, fieldName);")
     List<AttributeDefinition> getAttributes();
 
+    @HasUpdateAction(value = "changeAttributeOrderByName", fields = {@PropertySpec(name="attributeNames", type = String[].class)})
     @HasUpdateAction(value = "changeAttributeConstraint",
             fields = {@PropertySpec(name = "attributeName", type = String.class),@PropertySpec(name = "newValue", type = AttributeConstraint.class)})
     @HasUpdateAction(value = "changeAttributeName",fields = {@PropertySpec(name = "attributeName",type = String.class),@PropertySpec(name = "newAttributeName",type = String.class)})
