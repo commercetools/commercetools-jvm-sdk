@@ -13,7 +13,6 @@ final class ReferenceInternalSerializer extends StdSerializer<Reference> {
         super(Reference.class,true);
     }
 
-    @Override
     public Class<Reference> handledType() {
         return super.handledType();
     }
