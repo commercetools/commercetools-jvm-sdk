@@ -154,6 +154,7 @@ import java.util.function.Function;
 
  <h3 class=released-version id="v1_40_0">1.40.0</h3>
  <ul>
+    <li class=new-in-release>{@link java.time.ZonedDateTime} formatter now always include milliseconds even if they are equal to 0</li>
     <li class=new-in-release>{@link io.sphere.sdk.customobjects.queries.CustomObjectByIdGet} and {@link CustomObjectByKeyGet} now support expansion parameter</li>
     <li class=change-in-release>{@link io.sphere.sdk.producttypes.commands.updateactions.ChangeAttributeOrder} is now deprecated</li>
     <li class=new-in-release>{@link io.sphere.sdk.producttypes.commands.updateactions.ChangeAttributeOrderByName} added</li>
