@@ -39,14 +39,8 @@ public interface Attribute {
     }
 
     static <T> Attribute of(final NamedAttributeAccess<T> namedAttributeAccess, final T value) {
-
         final String name = namedAttributeAccess.getName();
-        final ObjectMapper mapper = SphereJsonUtils.newObjectMapper();
-        final SimpleModule module = new SimpleModule();
-        module.addSerializer(new ReferenceInternalSerializer());
-        mapper.registerModule(module);
-        final JsonNode jsonNode = mapper.valueToTree(value);
-
+        final JsonNode jsonNode = ReferenceInternalObjectMapper.getInstance().valueToTree(value);
         return of(name, jsonNode);
     }
 
