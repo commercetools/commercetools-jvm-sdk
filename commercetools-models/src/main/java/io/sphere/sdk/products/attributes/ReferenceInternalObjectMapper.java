@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import io.sphere.sdk.json.SphereJsonUtils;
 
-class ReferenceInternalObjectMapper {
+final class ReferenceInternalObjectMapper {
 
     private static final ObjectMapper instance;
 
