@@ -1,12 +1,14 @@
 package io.sphere.sdk.customobjects;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.commands.DeleteCommand;
 import io.sphere.sdk.customobjects.commands.CustomObjectDeleteCommand;
 import io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommand;
 import io.sphere.sdk.customobjects.demo.Foo;
 import io.sphere.sdk.customobjects.queries.CustomObjectQuery;
+import io.sphere.sdk.customobjects.queries.MyCustomClass;
 
 import java.util.function.Consumer;
 
@@ -38,6 +40,22 @@ public class CustomObjectFixtures {
         assertThat(loadedValue).isEqualTo(value);
         //end example parsing here
         return customObject;
+    }
+
+    public static void withCustomObjectAndCustomClasses(final BlockingSphereClient client, Cart cart, final Consumer<CustomObject<MyCustomClass>> consumer){
+        MyCustomClass myCustomClass = new MyCustomClass("id-1", "description-1", cart.toReference());
+
+        final String container = "CustomObjectFixtures";
+        final String key = randomKey();
+        final MyCustomClass value = myCustomClass;
+        final CustomObjectDraft<MyCustomClass> draft = CustomObjectDraft.ofUnversionedUpsert(container, key, value, MyCustomClass.class);
+        final CustomObjectUpsertCommand<MyCustomClass> createCommand = CustomObjectUpsertCommand.of(draft);
+        final CustomObject<MyCustomClass> customObject = client.executeBlocking(createCommand);
+        assertThat(customObject.getContainer()).isEqualTo(container);
+        assertThat(customObject.getKey()).isEqualTo(key);
+        consumer.accept(customObject);
+        final DeleteCommand<CustomObject<MyCustomClass>> deleteCommand = CustomObjectDeleteCommand.of(customObject, MyCustomClass.class);
+        client.executeBlocking(deleteCommand);
     }
 
     public static void withCustomObject(final BlockingSphereClient client, final String container, final String key, final Consumer<CustomObject<Foo>> consumer) {

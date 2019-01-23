@@ -3,8 +3,14 @@ package io.sphere.sdk.customobjects.queries;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.customobjects.CustomObject;
+import io.sphere.sdk.customobjects.expansion.CustomObjectExpansionModel;
+import io.sphere.sdk.expansion.ExpansionPath;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.json.TypeReferences;
 import io.sphere.sdk.queries.Get;
+import io.sphere.sdk.queries.MetaModelGetDsl;
+
+import java.util.List;
 
 /**
  * {@link io.sphere.sdk.client.SphereRequest} to fetch one {@link io.sphere.sdk.customobjects.CustomObject} by container and key.
@@ -14,7 +20,7 @@ import io.sphere.sdk.queries.Get;
  * @param <T> The type of the value of the custom object.
  * @see CustomObject
  */
-public interface CustomObjectByKeyGet<T> extends Get<CustomObject<T>> {
+public interface CustomObjectByKeyGet<T> extends MetaModelGetDsl<CustomObject<T>, CustomObject<T>, CustomObjectByKeyGet<T>, CustomObjectExpansionModel<CustomObject<T>>> {
 
     /**
      * Creates an object to fetch a custom object by the container and key with POJO mapping.
@@ -25,7 +31,7 @@ public interface CustomObjectByKeyGet<T> extends Get<CustomObject<T>> {
      * @return query object
      */
     static <T> CustomObjectByKeyGet<T> of(final String container, final String key, final Class<T> valueClass) {
-        return new CustomObjectByKeyGetImpl<>(container, key, valueClass);
+        return new CustomObjectByKeyGetImpl<T>(container, key, SphereJsonUtils.convertToJavaType(valueClass));
     }
 
     /**
@@ -37,7 +43,7 @@ public interface CustomObjectByKeyGet<T> extends Get<CustomObject<T>> {
      * @return query object
      */
     static <T> CustomObjectByKeyGet<T> of(final String container, final String key, final TypeReference<T> valueTypeReference) {
-        return new CustomObjectByKeyGetImpl<>(container, key, valueTypeReference);
+        return new CustomObjectByKeyGetImpl<T>(container, key, SphereJsonUtils.convertToJavaType(valueTypeReference));
     }
 
     /**
@@ -49,4 +55,17 @@ public interface CustomObjectByKeyGet<T> extends Get<CustomObject<T>> {
     static CustomObjectByKeyGet<JsonNode> ofJsonNode(final String container, final String key) {
         return of(container, key, TypeReferences.jsonNodeTypeReference());
     }
+
+    @Override
+    List<ExpansionPath<CustomObject<T>>> expansionPaths();
+
+    @Override
+    CustomObjectByKeyGet<T> plusExpansionPaths(final ExpansionPath<CustomObject<T>> expansionPath);
+
+    @Override
+    CustomObjectByKeyGet<T> withExpansionPaths(final ExpansionPath<CustomObject<T>> expansionPath);
+
+    @Override
+    CustomObjectByKeyGet<T> withExpansionPaths(final List<ExpansionPath<CustomObject<T>>> expansionPaths);
+
 }
