@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static io.sphere.sdk.producttypes.ProductTypeFixtures.withUpdateableProductType;
 import static io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Colors;
@@ -231,6 +232,23 @@ public class ProductTypeUpdateCommandIntegrationTest extends IntegrationTest {
 
             final List<AttributeDefinition> attributeDefinitions = reverse(productType.getAttributes());
             final ProductType updatedProductType = client().executeBlocking(ProductTypeUpdateCommand.of(productType, ChangeAttributeOrder.of(attributeDefinitions)));
+
+            assertThat(updatedProductType.getAttributes()).isEqualTo(attributeDefinitions);
+
+            return updatedProductType;
+        });
+    }
+
+    @Test
+    public void changeAttributeOrderByName() {
+        withUpdateableProductType(client(), productType -> {
+
+            final List<AttributeDefinition> attributeDefinitions = reverse(productType.getAttributes());
+            final List<String> attributeNames = attributeDefinitions.stream()
+                    .map(AttributeDefinition::getName)
+                    .collect(Collectors.toList());
+
+            final ProductType updatedProductType = client().executeBlocking(ProductTypeUpdateCommand.of(productType, ChangeAttributeOrderByName.of(attributeNames)));
 
             assertThat(updatedProductType.getAttributes()).isEqualTo(attributeDefinitions);
 

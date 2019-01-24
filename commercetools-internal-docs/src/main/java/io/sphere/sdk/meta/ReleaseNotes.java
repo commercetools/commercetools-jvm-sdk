@@ -156,6 +156,8 @@ import java.util.function.Function;
  <ul>
     <li class=new-in-release>{@link io.sphere.sdk.customobjects.queries.CustomObjectByIdGet} and {@link CustomObjectByKeyGet} now support expansion parameter</li>
     <li class=fixed-in-release>{@link Attribute#of(String, AttributeAccess, Object)} now works properly with Set of {@link Reference}</li>
+    <li class=change-in-release>{@link io.sphere.sdk.producttypes.commands.updateactions.ChangeAttributeOrder} is now deprecated</li>
+    <li class=new-in-release>{@link io.sphere.sdk.producttypes.commands.updateactions.ChangeAttributeOrderByName} added</li>
  </ul>
 
  <h3 class=released-version id="v1_39_0">1.39.0 (14.01.2019)</h3>
