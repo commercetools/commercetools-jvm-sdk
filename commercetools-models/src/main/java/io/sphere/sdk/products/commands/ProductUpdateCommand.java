@@ -8,6 +8,7 @@ import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.expansion.ProductExpansionModel;
 import io.sphere.sdk.products.search.PriceSelectionRequestDsl;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -17,8 +18,10 @@ import java.util.List;
 
  */
 public interface ProductUpdateCommand extends UpdateCommandDsl<Product, ProductUpdateCommand>, MetaModelReferenceExpansionDsl<Product, ProductUpdateCommand, ProductExpansionModel<Product>>, PriceSelectionRequestDsl<ProductUpdateCommand> {
-    static ProductUpdateCommand of(final Versioned<Product> versioned, final UpdateAction<Product> updateAction) {
-        return of(versioned, Collections.singletonList(updateAction));
+    static ProductUpdateCommand of(final Versioned<Product> versioned, final UpdateAction<Product> updateAction, final UpdateAction<Product>... updateActions) {
+        final List<UpdateAction<Product>> actions = Arrays.asList(updateAction);
+        actions.addAll(Arrays.asList(updateActions));
+        return of(versioned, actions);
     }
 
     static ProductUpdateCommand of(final Versioned<Product> versioned, final List<? extends UpdateAction<Product>> updateActions) {
