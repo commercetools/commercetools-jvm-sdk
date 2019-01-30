@@ -3,6 +3,7 @@ package io.sphere.sdk.orderedits.commands.stagedactions;
 import io.sphere.sdk.commands.StagedUpdateActionImpl;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.orderedits.OrderEdit;
+import io.sphere.sdk.orderedits.OrderEditStagedUpdateAction;
 
 import javax.annotation.Nullable;
 
@@ -24,4 +25,6 @@ public final class SetBillingAddress extends StagedUpdateActionImpl<OrderEdit> {
     public Address getAddress() {
         return address;
     }
+
+
 }

@@ -13,7 +13,7 @@ import io.sphere.sdk.orders.Order;
 import java.time.ZonedDateTime;
 
 @JsonDeserialize(as = OrderCustomerGroupSetMessage.class)//important to override annotation in Message class
-public final class OrderCustomerGroupSetMessage extends GenericMessageImpl<Order> {
+public final class OrderCustomerGroupSetMessage extends GenericMessageImpl<Order> implements OrderMessage {
     public static final String MESSAGE_TYPE = "OrderCustomerGroupSet";
     public static final MessageDerivateHint<OrderCustomerGroupSetMessage> MESSAGE_HINT =
             MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, OrderCustomerGroupSetMessage.class, Order.referenceTypeId());

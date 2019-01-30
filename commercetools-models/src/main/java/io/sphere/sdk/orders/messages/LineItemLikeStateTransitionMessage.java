@@ -9,7 +9,7 @@ import io.sphere.sdk.states.State;
 
 import java.time.ZonedDateTime;
 
-abstract class LineItemLikeStateTransitionMessage extends GenericMessageImpl<Order> {
+abstract class LineItemLikeStateTransitionMessage extends GenericMessageImpl<Order> implements OrderMessage {
 
     protected final ZonedDateTime transitionDate;
     protected final Long quantity;

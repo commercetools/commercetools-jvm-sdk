@@ -18,7 +18,7 @@ import java.util.List;
  *
  */
 @JsonDeserialize(as = ParcelItemsUpdatedMessage.class)//important to override annotation in Message class
-public final class ParcelItemsUpdatedMessage extends GenericMessageImpl<Order> {
+public final class ParcelItemsUpdatedMessage extends GenericMessageImpl<Order> implements OrderMessage {
     public static final String MESSAGE_TYPE = "ParcelItemsUpdated";
     public static final MessageDerivateHint<ParcelItemsUpdatedMessage> MESSAGE_HINT = MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, ParcelItemsUpdatedMessage.class, Order.referenceTypeId());
     private final String deliveryId;

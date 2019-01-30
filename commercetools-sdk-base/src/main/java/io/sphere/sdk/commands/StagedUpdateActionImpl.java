@@ -1,5 +1,6 @@
 package io.sphere.sdk.commands;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 
 import static java.util.Objects.requireNonNull;
@@ -13,6 +14,7 @@ import static java.util.Objects.requireNonNull;
 public abstract class StagedUpdateActionImpl<T> extends Base implements StagedUpdateAction<T> {
     private final String action;
 
+    @JsonCreator
     protected StagedUpdateActionImpl(final String action) {
         this.action = requireNonNull(action);
     }
