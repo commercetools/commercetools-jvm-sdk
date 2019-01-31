@@ -1,8 +1,9 @@
-package io.sphere.sdk.orderedits;
+package io.sphere.sdk.orderedits.commands.stagedactions;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import io.sphere.sdk.commands.StagedUpdateAction;
+import io.sphere.sdk.orderedits.OrderEdit;
 import io.sphere.sdk.orderedits.commands.stagedactions.SetCustomerEmail;
 
 
