@@ -25,7 +25,7 @@ public class OrderEditAppliedMessage extends GenericMessageImpl<Order> implement
     private final OrderEditApplied result;
 
     @JsonCreator
-    public OrderEditAppliedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final UserProvidedIdentifiers resourceUserProvidedIdentifiers, final Reference<OrderEdit> edit, final OrderEditApplied result) {
+    private OrderEditAppliedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final UserProvidedIdentifiers resourceUserProvidedIdentifiers, final Reference<OrderEdit> edit, final OrderEditApplied result) {
         super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, resourceUserProvidedIdentifiers, Order.class);
         this.edit = edit;
         this.result = result;
