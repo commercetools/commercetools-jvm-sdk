@@ -3029,10 +3029,10 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         withProduct(client(), (Product product) -> {
             assertThat(product.getMasterData().hasStagedChanges()).isFalse();
             final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
-            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, asList(
+            final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product,
                     SetAttribute.ofSku(sku, "size", "M"),
                     SetAttribute.ofVariantId(MASTER_VARIANT_ID, "color", "red")
-            )));
+            ));
             final ProductVariant masterVariant = updatedProduct.getMasterData().getStaged().getMasterVariant();
             assertThat(masterVariant.getAttribute("size").getValueAsEnumValue()).isEqualTo(EnumValue.of("M", "M"));
             assertThat(masterVariant.getAttribute("color").getValueAsLocalizedEnumValue().getKey()).isEqualTo("red");

@@ -173,10 +173,9 @@ public class PaymentUpdateCommandIntegrationTest extends IntegrationTest {
             final String interfaceText = "Operation successful";
             final String interfaceCode = "20000";
             final Payment updatedPayment = client().executeBlocking(PaymentUpdateCommand.of(payment,
-                    asList(
                             SetStatusInterfaceText.of(interfaceText),
                             SetStatusInterfaceCode.of(interfaceCode)
-                    )));
+                    ));
 
             assertThat(updatedPayment.getPaymentStatus().getInterfaceText()).isEqualTo(interfaceText);
             assertThat(updatedPayment.getPaymentStatus().getInterfaceCode()).isEqualTo(interfaceCode);

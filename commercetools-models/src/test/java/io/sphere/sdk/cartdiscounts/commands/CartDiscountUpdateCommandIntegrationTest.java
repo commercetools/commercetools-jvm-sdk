@@ -79,7 +79,7 @@ public class CartDiscountUpdateCommandIntegrationTest extends IntegrationTest {
             final ZonedDateTime end = start.plusYears(100);
 
             final CartDiscount updatedDiscount =
-                    client().executeBlocking(CartDiscountUpdateCommand.of(cartDiscount, asList(SetValidFrom.of(start),SetValidUntil.of(end))));
+                    client().executeBlocking(CartDiscountUpdateCommand.of(cartDiscount, SetValidFrom.of(start),SetValidUntil.of(end)));
             assertThat(updatedDiscount.getValidFrom()).isEqualTo(start);
             assertThat(updatedDiscount.getValidUntil()).isEqualTo(end);
         });
