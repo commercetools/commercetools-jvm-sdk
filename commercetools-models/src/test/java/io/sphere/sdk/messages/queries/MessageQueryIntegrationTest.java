@@ -61,36 +61,6 @@ public class MessageQueryIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void convertAfterQueryToSpecificMessageClassesButToTheWrongOne() throws Exception {
-        withOrderAndReturnInfo(client(), ((order, returnInfo) -> {
-            final MessageQuery query = MessageQuery.of()
-                    .withPredicates(m -> m.resource().id().is(order.getId()))
-                    .withSort(m -> m.createdAt().sort().desc())
-                    .withExpansionPaths(m -> m.resource());
-            assertEventually(() -> {
-                final List<Message> results = client().executeBlocking(query).getResults();
-
-                final Optional<Message> returnInfoAddedUntypedMessage = results.stream()
-                        .filter(m -> {
-                            final String messageType = ReturnInfoAddedMessage.MESSAGE_TYPE;
-                            return m.getType().equals(messageType);
-                        })
-                        .findFirst();
-
-                assertThat(returnInfoAddedUntypedMessage).isPresent();
-                final DeliveryAddedMessage deliveryAddedMessage
-                        //wrong cast, but may not explodes
-                        = returnInfoAddedUntypedMessage.get().as(DeliveryAddedMessage.class);
-                assertThat(deliveryAddedMessage.getDelivery())
-                        .overridingErrorMessage("with wrong cast, fields can be null")
-                        .isNull();
-            });
-
-            return order;
-        }));
-    }
-
-    @Test
     public void queryForASpecificResource() throws Exception {
         withOrderAndReturnInfo(client(), ((order, returnInfo) -> {
             final Query<SimpleOrderMessage> query = MessageQuery.of()

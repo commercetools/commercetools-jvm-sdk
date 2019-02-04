@@ -23,7 +23,7 @@ public final class OrderEditPreviewSuccess extends Base implements OrderEditResu
         return preview;
     }
 
-    public List<  OrderMessage> getMessagePayloads() {
+    public List<OrderMessage> getMessagePayloads() {
         return messagePayloads;
     }
 }

@@ -21,7 +21,7 @@ import java.time.ZonedDateTime;
  * @see io.sphere.sdk.orders.commands.updateactions.SetBillingAddress
  */
 @JsonDeserialize(as = OrderBillingAddressSetMessage.class)//important to override annotation in Message class
-public final class OrderBillingAddressSetMessage extends GenericMessageImpl<Order> implements OrderMessage {
+public final class OrderBillingAddressSetMessage extends GenericMessageImpl<Order> implements SimpleOrderMessage {
     public static final String MESSAGE_TYPE = "OrderBillingAddressSet";
     public static final MessageDerivateHint<OrderBillingAddressSetMessage> MESSAGE_HINT = MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, OrderBillingAddressSetMessage.class, Order.referenceTypeId());
 
