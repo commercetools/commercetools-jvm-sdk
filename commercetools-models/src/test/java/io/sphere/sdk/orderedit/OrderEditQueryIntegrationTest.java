@@ -20,7 +20,7 @@ public class OrderEditQueryIntegrationTest extends IntegrationTest {
             });
         });
     }
-    
+
     @Test
     public void queryByPredicate(){
         OrderFixtures.withOrder(client(), order -> {

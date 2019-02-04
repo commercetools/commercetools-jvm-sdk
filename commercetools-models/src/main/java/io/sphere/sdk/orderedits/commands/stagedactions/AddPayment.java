@@ -1,6 +1,6 @@
 package io.sphere.sdk.orderedits.commands.stagedactions;
 
-import io.sphere.sdk.commands.StagedUpdateActionImpl;
+import io.sphere.sdk.commands.StagedUpdateActionBase;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.orderedits.OrderEdit;
@@ -8,7 +8,7 @@ import io.sphere.sdk.payments.Payment;
 
 import java.util.Optional;
 
-public final class AddPayment extends StagedUpdateActionImpl<OrderEdit> {
+public final class AddPayment extends StagedUpdateActionBase<OrderEdit> {
 
     private final Reference<Payment> payment;
 

@@ -1,12 +1,12 @@
 package io.sphere.sdk.orderedits.commands.stagedactions;
 
-import io.sphere.sdk.commands.StagedUpdateActionImpl;
+import io.sphere.sdk.commands.StagedUpdateActionBase;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.orderedits.OrderEdit;
 
 import javax.annotation.Nullable;
 
-public final class SetBillingAddress extends StagedUpdateActionImpl<OrderEdit> {
+public final class SetBillingAddress extends StagedUpdateActionBase<OrderEdit> {
 
     @Nullable
     private final Address address;

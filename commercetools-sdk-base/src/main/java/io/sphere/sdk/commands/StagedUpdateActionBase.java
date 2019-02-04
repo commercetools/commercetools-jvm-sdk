@@ -11,11 +11,11 @@ import static java.util.Objects.requireNonNull;
  * @param <T> the context of the update action
  *
  */
-public abstract class StagedUpdateActionImpl<T> extends Base implements StagedUpdateAction<T> {
+public abstract class StagedUpdateActionBase<T> extends Base implements StagedUpdateAction<T> {
     private final String action;
 
     @JsonCreator
-    protected StagedUpdateActionImpl(final String action) {
+    protected StagedUpdateActionBase(final String action) {
         this.action = requireNonNull(action);
     }
 

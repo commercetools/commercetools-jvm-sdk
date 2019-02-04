@@ -17,11 +17,11 @@ import java.util.List;
 @JsonDeserialize(as = OrderEditImpl.class)
 @ResourceValue
 @ResourceInfo(pluralName = "orderedits", pathElement = "orders/edits")
-@HasByIdGetEndpoint
-@HasByKeyGetEndpoint
-@HasCreateCommand
+@HasByIdGetEndpoint(javadocSummary = "Gets an order edit by ID.", includeExamples = "io.sphere.sdk.orderedit.queries.OrderEditByIdGetIntegrationTest#execute()")
+@HasByKeyGetEndpoint(javadocSummary = "Gets an order edit by key.", includeExamples = "io.sphere.sdk.orderedit.queries.OrderEditByKeyGetIntegrationTest#execute()")
+@HasCreateCommand(includeExamples = "io.sphere.sdk.orderedit.commands.OrderEditCreateCommandIntegrationTest#execute()")
 @HasUpdateCommand(updateWith = "key")
-@HasDeleteCommand(deleteWith = {"key","id"})
+@HasDeleteCommand(deleteWith = {"key","id"}, includeExamples = "io.sphere.sdk.orderedit.commands.OrderEditCreateCommandIntegrationTest#execute()")
 @HasQueryEndpoint(additionalContentsQueryInterface = "\n" +
         "    default OrderEditQuery byKey(final String key) {\n" +
         "        return withPredicates(m -> m.key().is(key));\n" +

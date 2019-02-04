@@ -2,7 +2,7 @@ package io.sphere.sdk.orderedits.commands.stagedactions;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 
-public final class SetCustomerEmail extends OrderEditStagedUpdateActionImpl {
+public final class SetCustomerEmail extends OrderEditStagedUpdateActionBase {
 
     private final String email;
 
