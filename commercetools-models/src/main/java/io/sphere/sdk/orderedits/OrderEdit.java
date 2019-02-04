@@ -60,7 +60,7 @@ public interface OrderEdit extends Resource<OrderEdit> {
      * @return type hint
      */
     static String referenceTypeId() {
-        return "orderedit";
+        return "order-edit";
     }
 
 
