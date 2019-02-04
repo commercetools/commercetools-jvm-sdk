@@ -4,7 +4,7 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.orderedits.OrderEdit;
 import io.sphere.sdk.orderedits.commands.stagedactions.OrderEditStagedUpdateAction;
 
-public class AddStagedAction extends UpdateActionImpl<OrderEdit> {
+public final class AddStagedAction extends UpdateActionImpl<OrderEdit> {
 
     private final OrderEditStagedUpdateAction stagedAction;
 

@@ -14,7 +14,7 @@ import io.sphere.sdk.orders.Order;
 import java.time.ZonedDateTime;
 
 @JsonDeserialize(as = OrderEditAppliedMessage.class)//important to override annotation in Message class
-public class OrderEditAppliedMessage extends GenericMessageImpl<Order> implements OrderMessage {
+public final class OrderEditAppliedMessage extends GenericMessageImpl<Order> implements OrderMessage {
 
     public static final String MESSAGE_TYPE = "OrderEditApplied";
     public static final MessageDerivateHint<OrderEditAppliedMessage> MESSAGE_HINT =

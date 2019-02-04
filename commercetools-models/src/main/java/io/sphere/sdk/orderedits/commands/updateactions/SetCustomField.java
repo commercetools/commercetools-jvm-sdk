@@ -5,7 +5,7 @@ import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.orderedits.OrderEdit;
 import io.sphere.sdk.types.customupdateactions.SetCustomFieldBase;
 
-public class SetCustomField extends SetCustomFieldBase<OrderEdit> {
+public final class SetCustomField extends SetCustomFieldBase<OrderEdit> {
 
     private SetCustomField(final String name, final JsonNode value) {
         super(name, value);
