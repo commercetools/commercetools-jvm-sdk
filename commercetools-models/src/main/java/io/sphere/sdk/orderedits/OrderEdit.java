@@ -7,6 +7,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.orderedits.commands.stagedactions.OrderEditStagedUpdateAction;
 import io.sphere.sdk.orders.Order;
+import io.sphere.sdk.types.Custom;
 import io.sphere.sdk.types.CustomFields;
 
 import javax.annotation.Nullable;
@@ -21,7 +22,13 @@ import java.util.List;
 @HasCreateCommand
 @HasUpdateCommand(updateWith = "key")
 @HasDeleteCommand(deleteWith = {"key","id"})
-public interface OrderEdit extends Resource<OrderEdit> {
+@HasQueryEndpoint(additionalContentsQueryInterface = "\n" +
+        "    default OrderEditQuery byKey(final String key) {\n" +
+        "        return withPredicates(m -> m.key().is(key));\n" +
+        "    }\n"
+        )
+@HasQueryModel()
+public interface OrderEdit extends Resource<OrderEdit>, Custom {
 
     String getId();
 
@@ -37,12 +44,14 @@ public interface OrderEdit extends Resource<OrderEdit> {
 
     Reference<Order> getResource();
 
+    @IgnoreInQueryModel
     @HasUpdateAction(value = "setStagedActions")
     List<OrderEditStagedUpdateAction> getStagedActions();
 
     @Nullable
     CustomFields getCustom();
 
+    @IgnoreInQueryModel
     OrderEditResult getResult();
 
     @Nullable

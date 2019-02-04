@@ -20,7 +20,7 @@ public class OrderEditFixtures {
 
     public static void withOrderEdit(final BlockingSphereClient client, final Reference<Order> orderReference, final Consumer<OrderEdit> consumer) {
         final List<StagedUpdateAction<OrderEdit>> stagedActions = new ArrayList<>();
-        final OrderEditDraft orderEditDraft = OrderEditDraftBuilder.of(orderReference, stagedActions).key(SphereTestUtils.randomKey()).build();
+        final OrderEditDraft orderEditDraft = OrderEditDraftBuilder.of(orderReference, stagedActions).key(SphereTestUtils.randomKey()).comment(SphereTestUtils.randomString()).build();
         final OrderEditCreateCommand orderEditCreateCommand = OrderEditCreateCommand.of(orderEditDraft);
         final OrderEdit orderEdit = client.executeBlocking(orderEditCreateCommand);
         consumer.accept(orderEdit);
