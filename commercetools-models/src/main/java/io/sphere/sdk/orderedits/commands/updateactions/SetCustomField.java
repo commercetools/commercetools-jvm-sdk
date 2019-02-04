@@ -8,7 +8,7 @@ import io.sphere.sdk.types.customupdateactions.SetCustomFieldBase;
 public class SetCustomField extends SetCustomFieldBase<OrderEdit> {
 
     private SetCustomField(final String name, final JsonNode value) {
-        super("setCustomField", name, value);
+        super(name, value);
     }
 
     public static SetCustomField ofJson(final String name, final JsonNode value) {
