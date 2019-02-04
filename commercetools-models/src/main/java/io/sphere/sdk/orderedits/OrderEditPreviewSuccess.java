@@ -14,7 +14,7 @@ public final class OrderEditPreviewSuccess extends Base implements OrderEditResu
     private final List<OrderMessage> messagePayloads;
 
     @JsonCreator
-    public OrderEditPreviewSuccess(Order preview, List<OrderMessage> messagePayloads) {
+    OrderEditPreviewSuccess(Order preview, List<OrderMessage> messagePayloads) {
         this.preview = preview;
         this.messagePayloads = messagePayloads;
     }

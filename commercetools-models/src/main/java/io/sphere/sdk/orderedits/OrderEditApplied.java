@@ -14,7 +14,7 @@ public final class OrderEditApplied extends Base implements OrderEditResult {
     private final OrderExcerpt excerptAfterEdit;
 
     @JsonCreator
-    public OrderEditApplied(ZonedDateTime appliedAt, OrderExcerpt excerptBeforeEdit, OrderExcerpt excerptAfterEdit) {
+    OrderEditApplied(ZonedDateTime appliedAt, OrderExcerpt excerptBeforeEdit, OrderExcerpt excerptAfterEdit) {
         this.appliedAt = appliedAt;
         this.excerptBeforeEdit = excerptBeforeEdit;
         this.excerptAfterEdit = excerptAfterEdit;

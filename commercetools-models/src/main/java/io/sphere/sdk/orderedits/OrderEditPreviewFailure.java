@@ -11,7 +11,7 @@ public final class OrderEditPreviewFailure extends Base implements OrderEditResu
     private final List<ErrorResponse> errors;
 
     @JsonCreator
-    public OrderEditPreviewFailure(final List<ErrorResponse> errors) {
+    OrderEditPreviewFailure(final List<ErrorResponse> errors) {
         this.errors = errors;
     }
 

@@ -6,7 +6,7 @@ import io.sphere.sdk.models.Base;
 public final class OrderEditNotProcessed extends Base implements OrderEditResult {
 
     @JsonCreator
-    public OrderEditNotProcessed() {
+    OrderEditNotProcessed() {
 
     }
 
