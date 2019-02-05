@@ -6,8 +6,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
-        property = "type",
-        visible = true
+        property = "type"
+        //defaultImpl = SimpleOrderMessage.class
 )
 @JsonSubTypes({
         @JsonSubTypes.Type(value = ParcelRemovedFromDeliveryMessage.class, name = "ParcelRemovedFromDelivery"),

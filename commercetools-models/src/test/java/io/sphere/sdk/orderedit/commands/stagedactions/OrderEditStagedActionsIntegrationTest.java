@@ -21,6 +21,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Locale;
+import java.util.UUID;
 
 import static io.sphere.sdk.carts.CartFixtures.withCartAndDiscountCode;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -88,6 +89,22 @@ public class OrderEditStagedActionsIntegrationTest extends IntegrationTest {
             return cart;
         });
     }
+
+    @Test
+    public void removeDiscountCode() {
+        CartFixtures.withCartAndDiscountCode(client(), (cart, discountCode) -> {
+            RemoveDiscountCode removeDiscountCode = RemoveDiscountCode.of(discountCode);
+            testOrderEditStagedUpdateAction(removeDiscountCode);
+            return cart;
+        });
+    }
+
+    @Test
+    public void setCustomerId() {
+        SetCustomerId setCustomerId = SetCustomerId.of(UUID.randomUUID().toString());
+        testOrderEditStagedUpdateAction(setCustomerId);
+    }
+    
 
     private void testOrderEditStagedUpdateAction(final OrderEditStagedUpdateAction orderEditStagedUpdateAction) {
         OrderEditFixtures.withUpdateableOrderEdit(client(), orderEdit -> {
