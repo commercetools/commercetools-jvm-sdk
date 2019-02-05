@@ -11,7 +11,12 @@ import io.sphere.sdk.orderedits.commands.stagedactions.SetCustomerEmail;
         use = JsonTypeInfo.Id.NAME,
         property = "action")
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = SetCustomerEmail.class, name = "setCustomerEmail")
+        @JsonSubTypes.Type(value = SetCustomerEmail.class, name = "setCustomerEmail"),
+        @JsonSubTypes.Type(value = SetShippingAddress.class, name = "setShippingAddress"),
+        @JsonSubTypes.Type(value = SetBillingAddress.class, name = "setBillingAddress"),
+        @JsonSubTypes.Type(value = SetLocale.class, name = "setLocale"),
+        @JsonSubTypes.Type(value = SetCountry.class, name = "setCountry"),
+        @JsonSubTypes.Type(value = SetShippingMethod.class, name = "setShippingMethod")
 })
 public interface OrderEditStagedUpdateAction extends StagedUpdateAction<OrderEdit> {
 }

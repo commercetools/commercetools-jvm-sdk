@@ -7,7 +7,7 @@ public final class SetCustomerEmail extends OrderEditStagedUpdateActionBase {
     private final String email;
 
     @JsonCreator
-    SetCustomerEmail(final String email) {
+    private SetCustomerEmail(final String email) {
         super("setCustomerEmail");
         this.email = email;
     }
