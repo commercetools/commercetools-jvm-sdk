@@ -1,6 +1,7 @@
 package io.sphere.sdk.orderedit.commands.stagedactions;
 
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.carts.CartFixtures;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.orderedit.OrderEditFixtures;
 import io.sphere.sdk.orderedit.commands.OrderEditUpdateCommandIntegrationTest;
@@ -8,13 +9,21 @@ import io.sphere.sdk.orderedits.OrderEdit;
 import io.sphere.sdk.orderedits.commands.OrderEditUpdateCommand;
 import io.sphere.sdk.orderedits.commands.stagedactions.*;
 import io.sphere.sdk.orderedits.commands.updateactions.AddStagedAction;
+import io.sphere.sdk.shippingmethods.CartValueBuilder;
 import io.sphere.sdk.shippingmethods.ShippingMethodFixtures;
+import io.sphere.sdk.shippingmethods.ShippingRate;
+import io.sphere.sdk.taxcategories.ExternalTaxRateDraft;
+import io.sphere.sdk.taxcategories.ExternalTaxRateDraftBuilder;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.Locale;
+
+import static io.sphere.sdk.carts.CartFixtures.withCartAndDiscountCode;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 
 
 public class OrderEditStagedActionsIntegrationTest extends IntegrationTest {
@@ -57,6 +66,26 @@ public class OrderEditStagedActionsIntegrationTest extends IntegrationTest {
         ShippingMethodFixtures.withShippingMethodForGermany(client(), shippingMethod -> {
             SetShippingMethod setShippingMethod = SetShippingMethod.of(shippingMethod.toResourceIdentifier(), null);
             testOrderEditStagedUpdateAction(setShippingMethod);
+        });
+    }
+
+    @Test
+    public void setCustomShippingMethod() {
+        final ShippingRate shippingRate = ShippingRate.of(EURO_10, null,
+                Arrays.asList(
+                        CartValueBuilder.of(0L, EURO_30).build(),
+                        CartValueBuilder.of(1L, EURO_20).build()
+                ));
+        final SetCustomShippingMethod setCustomShippingMethod = SetCustomShippingMethod.of("name", shippingRate, null, null);
+        testOrderEditStagedUpdateAction(setCustomShippingMethod);
+    }
+
+    @Test
+    public void addDiscountCode() {
+        CartFixtures.withCartAndDiscountCode(client(), (cart, discountCode) -> {
+            AddDiscountCode addDiscountCode = AddDiscountCode.of(discountCode);
+            testOrderEditStagedUpdateAction(addDiscountCode);
+            return cart;
         });
     }
 
