@@ -39,7 +39,7 @@ public class OrderEditCustomFieldsIntegrationTest extends IntegrationTest {
     public void setCustomTypeByKey() {
         setCustomType(type -> SetCustomType.ofTypeKeyAndObjects(type.getKey(), CUSTOM_FIELDS_MAP));
     }
-    
+
     @Test
     public void createOrderEditWithCustomTypeById() {
         createOrderEditWithCustomType(type -> CustomFieldsDraftBuilder.ofTypeId(type.getId()));
