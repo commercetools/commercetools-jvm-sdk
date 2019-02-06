@@ -19,9 +19,9 @@ import java.util.List;
 @ResourceInfo(pluralName = "orderedits", pathElement = "orders/edits")
 @HasByIdGetEndpoint(javadocSummary = "Gets an order edit by ID.", includeExamples = "io.sphere.sdk.orderedit.queries.OrderEditByIdGetIntegrationTest#execute()")
 @HasByKeyGetEndpoint(javadocSummary = "Gets an order edit by key.", includeExamples = "io.sphere.sdk.orderedit.queries.OrderEditByKeyGetIntegrationTest#execute()")
-@HasCreateCommand(includeExamples = "io.sphere.sdk.orderedit.commands.OrderEditCreateCommandIntegrationTest#execute()")
+@HasCreateCommand(includeExamples = "io.sphere.sdk.orderedit.commands.OrderEditCreateCommandIntegrationTest#createAndDeleteOrderEditById()")
 @HasUpdateCommand(updateWith = "key")
-@HasDeleteCommand(deleteWith = {"key","id"}, includeExamples = "io.sphere.sdk.orderedit.commands.OrderEditCreateCommandIntegrationTest#execute()")
+@HasDeleteCommand(deleteWith = {"key","id"}, includeExamples = "io.sphere.sdk.orderedit.commands.OrderEditCreateCommandIntegrationTest#createAndDeleteOrderEditById()")
 @HasQueryEndpoint(additionalContentsQueryInterface = "\n" +
         "    default OrderEditQuery byKey(final String key) {\n" +
         "        return withPredicates(m -> m.key().is(key));\n" +
