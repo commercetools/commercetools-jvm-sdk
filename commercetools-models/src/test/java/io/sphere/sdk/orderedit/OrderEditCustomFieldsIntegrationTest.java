@@ -39,6 +39,16 @@ public class OrderEditCustomFieldsIntegrationTest extends IntegrationTest {
     public void setCustomTypeByKey() {
         setCustomType(type -> SetCustomType.ofTypeKeyAndObjects(type.getKey(), CUSTOM_FIELDS_MAP));
     }
+    
+    @Test
+    public void createOrderEditWithCustomTypeById() {
+        createOrderEditWithCustomType(type -> CustomFieldsDraftBuilder.ofTypeId(type.getId()));
+    }
+
+    @Test
+    public void createOrderEditWithCustomTypeByKey() {
+        createOrderEditWithCustomType(type -> CustomFieldsDraftBuilder.ofTypeKey(type.getKey()));
+    }
 
     private void setCustomType(final Function<Type, SetCustomType> updateActionCreator) {
         withUpdateableType(client(), type -> {
@@ -55,16 +65,6 @@ public class OrderEditCustomFieldsIntegrationTest extends IntegrationTest {
             });
             return type;
         });
-    }
-
-    @Test
-    public void createOrderEditWithCustomTypeById() {
-        createOrderEditWithCustomType(type -> CustomFieldsDraftBuilder.ofTypeId(type.getId()));
-    }
-
-    @Test
-    public void createOrderEditWithCustomTypeByKey() {
-        createOrderEditWithCustomType(type -> CustomFieldsDraftBuilder.ofTypeKey(type.getKey()));
     }
 
     private void createOrderEditWithCustomType(final Function<Type, CustomFieldsDraftBuilder> draftCreator) {
