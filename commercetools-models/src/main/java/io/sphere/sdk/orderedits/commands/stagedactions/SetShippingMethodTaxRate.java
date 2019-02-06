@@ -5,7 +5,7 @@ import io.sphere.sdk.taxcategories.ExternalTaxRateDraft;
 
 import javax.annotation.Nullable;
 
-public class SetShippingMethodTaxRate extends OrderEditStagedUpdateActionBase {
+public final class SetShippingMethodTaxRate extends OrderEditStagedUpdateActionBase {
 
     @Nullable
     private final ExternalTaxRateDraft externalTaxRate;

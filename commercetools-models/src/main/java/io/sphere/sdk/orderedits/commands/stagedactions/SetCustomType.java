@@ -11,7 +11,7 @@ import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class SetCustomType extends OrderEditStagedUpdateActionBase {
+public final class SetCustomType extends OrderEditStagedUpdateActionBase {
 
     @Nullable
     private final ResourceIdentifier<Type> type;

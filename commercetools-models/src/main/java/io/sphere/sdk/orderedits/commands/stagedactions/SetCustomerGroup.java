@@ -9,7 +9,7 @@ import io.sphere.sdk.models.ResourceIdentifier;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public class SetCustomerGroup extends OrderEditStagedUpdateActionBase {
+public final class SetCustomerGroup extends OrderEditStagedUpdateActionBase {
 
     @Nullable
     private final ResourceIdentifier<CustomerGroup> customerGroup;

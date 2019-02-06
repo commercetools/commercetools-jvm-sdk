@@ -6,7 +6,7 @@ import io.sphere.sdk.json.SphereJsonUtils;
 
 import javax.annotation.Nullable;
 
-public class SetCustomField extends OrderEditStagedUpdateActionBase {
+public final class SetCustomField extends OrderEditStagedUpdateActionBase {
 
     private final String name;
 

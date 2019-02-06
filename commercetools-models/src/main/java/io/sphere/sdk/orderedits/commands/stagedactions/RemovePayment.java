@@ -7,7 +7,7 @@ import io.sphere.sdk.payments.Payment;
 
 import java.util.Optional;
 
-public class RemovePayment extends OrderEditStagedUpdateActionBase {
+public final class RemovePayment extends OrderEditStagedUpdateActionBase {
 
     private final Reference<Payment> payment;
 
