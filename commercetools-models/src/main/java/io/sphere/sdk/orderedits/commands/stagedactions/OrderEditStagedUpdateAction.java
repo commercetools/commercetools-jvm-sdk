@@ -20,7 +20,13 @@ import io.sphere.sdk.orderedits.commands.stagedactions.SetCustomerEmail;
         @JsonSubTypes.Type(value = SetCustomShippingMethod.class, name = "setCustomShippingMethod"),
         @JsonSubTypes.Type(value = AddDiscountCode.class, name = "addDiscountCode"),
         @JsonSubTypes.Type(value = RemoveDiscountCode.class, name = "removeDiscountCode"),
-        @JsonSubTypes.Type(value = SetCustomerId.class, name = "setCustomerId")
+        @JsonSubTypes.Type(value = SetCustomerId.class, name = "setCustomerId"),
+        @JsonSubTypes.Type(value = SetCustomerGroup.class, name = "setCustomerGroup"),
+        @JsonSubTypes.Type(value = SetCustomType.class, name = "setCustomType"),
+        @JsonSubTypes.Type(value = SetCustomField.class, name = "setCustomField"),
+        @JsonSubTypes.Type(value = AddPayment.class, name = "addPayment"),
+        @JsonSubTypes.Type(value = RemovePayment.class, name = "removePayment"),
+        @JsonSubTypes.Type(value = SetShippingMethodTaxRate.class, name = "setShippingMethodTaxRate")
 })
 public interface OrderEditStagedUpdateAction extends StagedUpdateAction<OrderEdit> {
 }

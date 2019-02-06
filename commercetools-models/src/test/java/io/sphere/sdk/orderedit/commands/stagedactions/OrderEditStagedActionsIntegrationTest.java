@@ -23,8 +23,10 @@ import java.util.Arrays;
 import java.util.Locale;
 import java.util.UUID;
 
-import static io.sphere.sdk.carts.CartFixtures.withCartAndDiscountCode;
+import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withB2cCustomerGroup;
+import static io.sphere.sdk.payments.PaymentFixtures.withPayment;
 import static io.sphere.sdk.test.SphereTestUtils.*;
+import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
 
 
 public class OrderEditStagedActionsIntegrationTest extends IntegrationTest {
@@ -104,7 +106,55 @@ public class OrderEditStagedActionsIntegrationTest extends IntegrationTest {
         SetCustomerId setCustomerId = SetCustomerId.of(UUID.randomUUID().toString());
         testOrderEditStagedUpdateAction(setCustomerId);
     }
-    
+
+    @Test
+    public void setCustomerGroup() {
+        withB2cCustomerGroup(client(), customerGroup -> {
+           SetCustomerGroup setCustomerGroup = SetCustomerGroup.of(customerGroup);
+           testOrderEditStagedUpdateAction(setCustomerGroup);
+        });
+    }
+
+    @Test
+    public void setCustomType() {
+        SetCustomType setCustomType = SetCustomType.ofRemoveType();
+        testOrderEditStagedUpdateAction(setCustomType);
+    }
+
+    @Test
+    public void setCustomField() {
+        SetCustomField setCustomField = SetCustomField.ofObject(STRING_FIELD_NAME, "other");
+        testOrderEditStagedUpdateAction(setCustomField);
+    }
+
+    @Test
+    public void addPayment() {
+        withPayment(client(), payment -> {
+            AddPayment addPayment = AddPayment.of(payment);
+            testOrderEditStagedUpdateAction(addPayment);
+            return payment;
+        });
+    }
+
+    @Test
+    public void removePayment() {
+        withPayment(client(), payment -> {
+            RemovePayment removePayment = RemovePayment.of(payment);
+            testOrderEditStagedUpdateAction(removePayment);
+            return payment;
+        });
+    }
+
+    @Test
+    public void setShippingMethodTaxRate() {
+        final String taxRateName = "special tax";
+        final double taxRate = 0.20;
+        final ExternalTaxRateDraft externalTaxRate =
+                ExternalTaxRateDraftBuilder.ofAmount(taxRate, taxRateName, DE).build();
+        SetShippingMethodTaxRate setShippingMethodTaxRate = SetShippingMethodTaxRate.of(externalTaxRate);
+        testOrderEditStagedUpdateAction(setShippingMethodTaxRate);
+    }
+
 
     private void testOrderEditStagedUpdateAction(final OrderEditStagedUpdateAction orderEditStagedUpdateAction) {
         OrderEditFixtures.withUpdateableOrderEdit(client(), orderEdit -> {
