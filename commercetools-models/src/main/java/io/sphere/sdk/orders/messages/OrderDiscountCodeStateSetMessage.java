@@ -14,12 +14,12 @@ import io.sphere.sdk.orders.Order;
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
-@JsonDeserialize(as = OrderDiscountCodeStateSet.class)
-public final class OrderDiscountCodeStateSet extends GenericMessageImpl<Order> implements SimpleOrderMessage {
+@JsonDeserialize(as = OrderDiscountCodeStateSetMessage.class)
+public final class OrderDiscountCodeStateSetMessage extends GenericMessageImpl<Order> implements SimpleOrderMessage {
 
     public static final String MESSAGE_TYPE = "OrderDiscountCodeStateSet";
-    public static final MessageDerivateHint<OrderDiscountCodeStateSet> MESSAGE_HINT =
-            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, OrderDiscountCodeStateSet.class, Order.referenceTypeId());
+    public static final MessageDerivateHint<OrderDiscountCodeStateSetMessage> MESSAGE_HINT =
+            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, OrderDiscountCodeStateSetMessage.class, Order.referenceTypeId());
 
     private final Reference<DiscountCode> discountCode;
 
@@ -29,9 +29,9 @@ public final class OrderDiscountCodeStateSet extends GenericMessageImpl<Order> i
     private final DiscountCodeState oldState;
 
     @JsonCreator
-    private OrderDiscountCodeStateSet(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
-                                   final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final UserProvidedIdentifiers resourceUserProvidedIdentifiers,
-                                   final Reference<DiscountCode> discountCode, final DiscountCodeState state, @Nullable final DiscountCodeState oldState) {
+    private OrderDiscountCodeStateSetMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
+                                             final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final UserProvidedIdentifiers resourceUserProvidedIdentifiers,
+                                             final Reference<DiscountCode> discountCode, final DiscountCodeState state, @Nullable final DiscountCodeState oldState) {
         super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type,resourceUserProvidedIdentifiers, Order.class);
         this.discountCode = discountCode;
         this.state = state;

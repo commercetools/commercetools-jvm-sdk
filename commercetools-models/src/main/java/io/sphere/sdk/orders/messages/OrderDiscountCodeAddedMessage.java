@@ -12,18 +12,18 @@ import io.sphere.sdk.orders.Order;
 
 import java.time.ZonedDateTime;
 
-@JsonDeserialize(as = OrderDiscountCodeAdded.class)
-public final class OrderDiscountCodeAdded extends GenericMessageImpl<Order> implements SimpleOrderMessage {
+@JsonDeserialize(as = OrderDiscountCodeAddedMessage.class)
+public final class OrderDiscountCodeAddedMessage extends GenericMessageImpl<Order> implements SimpleOrderMessage {
 
     public static final String MESSAGE_TYPE = "OrderDiscountCodeAdded";
-    public static final MessageDerivateHint<OrderDiscountCodeAdded> MESSAGE_HINT =
-            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, OrderDiscountCodeAdded.class, Order.referenceTypeId());
+    public static final MessageDerivateHint<OrderDiscountCodeAddedMessage> MESSAGE_HINT =
+            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, OrderDiscountCodeAddedMessage.class, Order.referenceTypeId());
 
     private final Reference<DiscountCode> discountCode;
 
     @JsonCreator
-    private OrderDiscountCodeAdded(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
-                                final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final UserProvidedIdentifiers resourceUserProvidedIdentifiers, final Reference<DiscountCode> discountCode) {
+    private OrderDiscountCodeAddedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
+                                          final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final UserProvidedIdentifiers resourceUserProvidedIdentifiers, final Reference<DiscountCode> discountCode) {
         super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type,resourceUserProvidedIdentifiers, Order.class);
         this.discountCode = discountCode;
     }

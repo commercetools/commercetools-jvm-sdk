@@ -12,12 +12,12 @@ import io.sphere.sdk.orders.OrderShippingInfo;
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
-@JsonDeserialize(as = OrderShippingInfoSet.class)//important to override annotation in Message class
-public class OrderShippingInfoSet extends GenericMessageImpl<Order> implements SimpleOrderMessage {
+@JsonDeserialize(as = OrderShippingInfoSetMessage.class)//important to override annotation in Message class
+public class OrderShippingInfoSetMessage extends GenericMessageImpl<Order> implements SimpleOrderMessage {
 
     public static final String MESSAGE_TYPE = "OrderShippingInfoSet";
-    public static final MessageDerivateHint<OrderShippingInfoSet> MESSAGE_HINT =
-            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, OrderShippingInfoSet.class, Order.referenceTypeId());
+    public static final MessageDerivateHint<OrderShippingInfoSetMessage> MESSAGE_HINT =
+            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, OrderShippingInfoSetMessage.class, Order.referenceTypeId());
 
     @Nullable
     private final OrderShippingInfo shippingInfo;
@@ -26,7 +26,7 @@ public class OrderShippingInfoSet extends GenericMessageImpl<Order> implements S
     private final OrderShippingInfo oldShippingInfo;
 
     @JsonCreator
-    private OrderShippingInfoSet(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber,
+    private OrderShippingInfoSetMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber,
                                         final Long resourceVersion, final String type, final UserProvidedIdentifiers resourceUserProvidedIdentifiers,
                                         final OrderShippingInfo shippingInfo, final OrderShippingInfo oldShippingInfo) {
         super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type,resourceUserProvidedIdentifiers, Order.class);
