@@ -40,7 +40,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         @JsonSubTypes.Type(value = OrderEditAppliedMessage.class, name = "OrderEditApplied"),
         @JsonSubTypes.Type(value = OrderShippingInfoSet.class, name = "OrderShippingInfoSet"),
         @JsonSubTypes.Type(value = OrderDiscountCodeAdded.class, name = "OrderDiscountCodeAdded"),
-        @JsonSubTypes.Type(value = OrderDiscountCodeAdded.class, name = "OrderDiscountCodeStateSet")
+        @JsonSubTypes.Type(value = OrderDiscountCodeStateSet.class, name = "OrderDiscountCodeStateSet")
 })
 public interface OrderMessage {
 

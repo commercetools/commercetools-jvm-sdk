@@ -2,6 +2,8 @@ package io.sphere.sdk.orderedit.commands.stagedactions;
 
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.carts.CartFixtures;
+import io.sphere.sdk.carts.ExternalTaxAmountDraftBuilder;
+import io.sphere.sdk.carts.ExternalTaxAmountDraftDsl;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.orderedit.OrderEditFixtures;
 import io.sphere.sdk.orderedit.commands.OrderEditUpdateCommandIntegrationTest;
@@ -16,9 +18,11 @@ import io.sphere.sdk.taxcategories.ExternalTaxRateDraft;
 import io.sphere.sdk.taxcategories.ExternalTaxRateDraftBuilder;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
+import io.sphere.sdk.utils.MoneyImpl;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
+import javax.money.MonetaryAmount;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.UUID;
@@ -155,6 +159,25 @@ public class OrderEditStagedActionsIntegrationTest extends IntegrationTest {
         testOrderEditStagedUpdateAction(setShippingMethodTaxRate);
     }
 
+    @Test
+    public void setShippingMethodTaxAmount() {
+        final ExternalTaxRateDraft taxRate = ExternalTaxRateDraftBuilder
+                .ofAmount(1.0, "Test Tax", CountryCode.DE)
+                .build();
+        final MonetaryAmount totalGross = MoneyImpl.ofCents(100000, EUR);
+        final ExternalTaxAmountDraftDsl taxAmountDraft = ExternalTaxAmountDraftBuilder
+                .of(totalGross, taxRate)
+                .build();
+        final SetShippingMethodTaxAmount setShippingMethodTaxAmount = SetShippingMethodTaxAmount.of(taxAmountDraft);
+        testOrderEditStagedUpdateAction(setShippingMethodTaxAmount);
+    }
+
+    @Test
+    public void setOrderTotalTax() {
+        MonetaryAmount monetaryAmount = MoneyImpl.of(25, EUR);
+        SetOrderTotalTax setOrderTotalTax = SetOrderTotalTax.of(monetaryAmount);
+        testOrderEditStagedUpdateAction(setOrderTotalTax);
+    }
 
     private void testOrderEditStagedUpdateAction(final OrderEditStagedUpdateAction orderEditStagedUpdateAction) {
         OrderEditFixtures.withUpdateableOrderEdit(client(), orderEdit -> {
