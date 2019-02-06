@@ -1,21 +1,13 @@
 package io.sphere.sdk.orderedits;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.sphere.sdk.models.Base;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.models.errors.ErrorResponse;
-
 import java.util.List;
 
-public final class OrderEditPreviewFailure extends Base implements OrderEditResult {
+@JsonDeserialize(as = OrderEditPreviewFailureImpl.class)
+@ResourceValue
+public interface OrderEditPreviewFailure extends OrderEditResult {
 
-    private final List<ErrorResponse> errors;
-
-    @JsonCreator
-    OrderEditPreviewFailure(final List<ErrorResponse> errors) {
-        this.errors = errors;
-    }
-
-    public List<ErrorResponse> getErrors() {
-        return errors;
-    }
+    List<ErrorResponse> getErrors();
 }

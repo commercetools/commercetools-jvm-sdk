@@ -1,13 +1,10 @@
 package io.sphere.sdk.orderedits;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.sphere.sdk.models.Base;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.ResourceValue;
 
-public final class OrderEditNotProcessed extends Base implements OrderEditResult {
-
-    @JsonCreator
-    OrderEditNotProcessed() {
-
-    }
+@JsonDeserialize(as = OrderEditNotProcessedImpl.class)
+@ResourceValue
+public interface OrderEditNotProcessed extends OrderEditResult {
 
 }
