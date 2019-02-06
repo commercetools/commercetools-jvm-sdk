@@ -19,9 +19,9 @@ import java.util.List;
 @ResourceInfo(pluralName = "orderedits", pathElement = "orders/edits")
 @HasByIdGetEndpoint(javadocSummary = "Gets an order edit by ID.", includeExamples = "io.sphere.sdk.orderedit.queries.OrderEditByIdGetIntegrationTest#execute()")
 @HasByKeyGetEndpoint(javadocSummary = "Gets an order edit by key.", includeExamples = "io.sphere.sdk.orderedit.queries.OrderEditByKeyGetIntegrationTest#execute()")
-@HasCreateCommand(includeExamples = "io.sphere.sdk.orderedit.commands.OrderEditCreateCommandIntegrationTest#execute()")
+@HasCreateCommand(includeExamples = "io.sphere.sdk.orderedit.commands.OrderEditCreateCommandIntegrationTest#createAndDeleteOrderEditById()")
 @HasUpdateCommand(updateWith = "key")
-@HasDeleteCommand(deleteWith = {"key","id"}, includeExamples = "io.sphere.sdk.orderedit.commands.OrderEditCreateCommandIntegrationTest#execute()")
+@HasDeleteCommand(deleteWith = {"key","id"}, includeExamples = "io.sphere.sdk.orderedit.commands.OrderEditCreateCommandIntegrationTest#createAndDeleteOrderEditById()")
 @HasQueryEndpoint(additionalContentsQueryInterface = "\n" +
         "    default OrderEditQuery byKey(final String key) {\n" +
         "        return withPredicates(m -> m.key().is(key));\n" +
@@ -84,13 +84,6 @@ public interface OrderEdit extends Resource<OrderEdit>, Custom {
 
     /**
      * Creates a reference for one item of this class by a known ID.
-     *
-     * <p>An example for categories but this applies for other resources, too:</p>
-     * {@include.example io.sphere.sdk.categories.CategoryTest#referenceOfId()}
-     *
-     * <p>If you already have a resource object, then use {@link #toReference()} instead:</p>
-     *
-     * {@include.example io.sphere.sdk.categories.CategoryTest#toReference()}
      *
      * @param id the ID of the resource which should be referenced.
      * @return reference

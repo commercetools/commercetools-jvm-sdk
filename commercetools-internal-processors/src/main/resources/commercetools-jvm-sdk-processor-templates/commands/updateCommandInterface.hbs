@@ -8,6 +8,8 @@ import io.sphere.sdk.models.Versioned;
 import {{package}}.{{resourceName}};
 import {{package}}.expansion.{{resourceName}}ExpansionModel;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -45,8 +47,11 @@ public interface {{resourceName}}UpdateCommand extends UpdateCommandDsl<{{resour
         @param updateAction the update to perform
         @return the update command for {{resourceName}}
     */
-    static {{resourceName}}UpdateCommand of(final Versioned<{{resourceName}}> versioned, final UpdateAction<{{resourceName}}> updateAction) {
-        return new {{resourceName}}UpdateCommandImpl(versioned, Collections.singletonList(updateAction));
+    static {{resourceName}}UpdateCommand of(final Versioned<{{resourceName}}> versioned, final UpdateAction<{{resourceName}}> updateAction, final UpdateAction<{{resourceName}}>... updateActions) {
+        final List<UpdateAction<{{resourceName}}>> actions = new ArrayList<>();
+        actions.add(updateAction);
+        actions.addAll(Arrays.asList(updateActions));
+        return new {{resourceName}}UpdateCommandImpl(versioned, actions);
     }
 
 {{#each updateWith}}

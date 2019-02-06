@@ -1,29 +1,16 @@
 package io.sphere.sdk.orderedits;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.sphere.sdk.models.Base;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.messages.OrderMessage;
-
 import java.util.List;
 
-public final class OrderEditPreviewSuccess extends Base implements OrderEditResult {
+@JsonDeserialize(as = OrderEditPreviewSuccessImpl.class)
+@ResourceValue
+public interface OrderEditPreviewSuccess extends OrderEditResult {
 
-    private final Order preview;
+    Order getPreview();
 
-    private final List<OrderMessage> messagePayloads;
-
-    @JsonCreator
-    OrderEditPreviewSuccess(Order preview, List<OrderMessage> messagePayloads) {
-        this.preview = preview;
-        this.messagePayloads = messagePayloads;
-    }
-
-    public Order getPreview() {
-        return preview;
-    }
-
-    public List<OrderMessage> getMessagePayloads() {
-        return messagePayloads;
-    }
+    List<OrderMessage> getMessagePayloads();
 }

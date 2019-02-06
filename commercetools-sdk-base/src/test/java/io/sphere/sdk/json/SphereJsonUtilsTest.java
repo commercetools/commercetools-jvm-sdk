@@ -18,7 +18,7 @@ public class SphereJsonUtilsTest {
         final String timeAsString = "2007-12-03T10:15:30+02:00[Europe/Berlin]";
         final ZonedDateTime dateTime = ZonedDateTime.parse(timeAsString);
         final String actual = SphereJsonUtils.toJsonString(dateTime);
-        assertThat(actual).isEqualTo("\"2007-12-03T09:15:30Z\"");
+        assertThat(actual).isEqualTo("\"2007-12-03T09:15:30.000Z\"");
     }
 
     @Test

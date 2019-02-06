@@ -32,7 +32,7 @@ public interface OrderEditDraft {
     @Nullable
     String getComment();
 
-    @JsonProperty("dryRun")
+    @JsonProperty(value = "dryRun", defaultValue = "false")
     @Nullable
     Boolean isDryRun();
 }

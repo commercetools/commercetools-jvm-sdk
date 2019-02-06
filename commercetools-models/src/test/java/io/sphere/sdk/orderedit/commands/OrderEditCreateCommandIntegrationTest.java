@@ -24,15 +24,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class OrderEditCreateCommandIntegrationTest extends IntegrationTest {
 
     @Test
-    public void execute() {
+    public void createAndDeleteOrderEditById() {
         withOrder(client(), order -> {
-            final Reference<Order> orderReference = order.toReference();
-            final List<StagedUpdateAction<OrderEdit>> stagedActions = new ArrayList<>();
-            final SetCustomerEmail setCustomerEmailStagedAction = SetCustomerEmail.of("john.doe@commercetools.de");
-            stagedActions.add(setCustomerEmailStagedAction);
-            final OrderEditDraft orderEditDraft = OrderEditDraftBuilder.of(orderReference, stagedActions).key(SphereTestUtils.randomKey()).build();
-            final OrderEditCreateCommand orderEditCreateCommand = OrderEditCreateCommand.of(orderEditDraft);
-            final OrderEdit orderEdit = client().executeBlocking(orderEditCreateCommand);
+            final OrderEdit orderEdit = createOrderEdit(order);
             assertThat(orderEdit).isNotNull();
             assertThat(orderEdit.getResult()).isNotNull();
 
@@ -43,17 +37,34 @@ public class OrderEditCreateCommandIntegrationTest extends IntegrationTest {
             final OrderEdit deletedOrderEdit = client().executeBlocking(orderEditByIdGet);
             assertThat(deletedOrderEdit).isNull();
 
-            //create new order edit and delete it by key
-            final OrderEdit orderEdit2 = client().executeBlocking(orderEditCreateCommand);
-            assertThat(orderEdit2).isNotNull();
-            final OrderEditDeleteCommand orderEditDeleteByKeyCommand = OrderEditDeleteCommand.ofKey(orderEdit2.getKey(), orderEdit2.getVersion());
+            return order;
+        });
+    }
+
+    @Test
+    public void createAndDeleteOrderEditByKey() {
+        withOrder(client(), order -> {
+            final OrderEdit orderEdit = createOrderEdit(order);
+            assertThat(orderEdit).isNotNull();
+            final OrderEditDeleteCommand orderEditDeleteByKeyCommand = OrderEditDeleteCommand.ofKey(orderEdit.getKey(), orderEdit.getVersion());
             client().executeBlocking(orderEditDeleteByKeyCommand);
 
-            final OrderEditByKeyGet orderEditByKeyGet = OrderEditByKeyGet.of(orderEdit2.getKey());
+            final OrderEditByKeyGet orderEditByKeyGet = OrderEditByKeyGet.of(orderEdit.getKey());
             final OrderEdit deletedOrderEdit2 = client().executeBlocking(orderEditByKeyGet);
             assertThat(deletedOrderEdit2).isNull();
 
             return order;
         });
     }
+
+    private OrderEdit createOrderEdit(final Order order) {
+        final Reference<Order> orderReference = order.toReference();
+        final List<StagedUpdateAction<OrderEdit>> stagedActions = new ArrayList<>();
+        final SetCustomerEmail setCustomerEmailStagedAction = SetCustomerEmail.of("john.doe@commercetools.de");
+        stagedActions.add(setCustomerEmailStagedAction);
+        final OrderEditDraft orderEditDraft = OrderEditDraftBuilder.of(orderReference, stagedActions).key(SphereTestUtils.randomKey()).build();
+        final OrderEditCreateCommand orderEditCreateCommand = OrderEditCreateCommand.of(orderEditDraft);
+        return client().executeBlocking(orderEditCreateCommand);
+    }
+
 }
