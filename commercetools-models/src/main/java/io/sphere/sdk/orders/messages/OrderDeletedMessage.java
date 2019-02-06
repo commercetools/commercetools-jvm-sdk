@@ -12,7 +12,7 @@ import io.sphere.sdk.orders.Order;
 import java.time.ZonedDateTime;
 
 @JsonDeserialize(as = OrderDeletedMessage.class)//important to override annotation in Message class
-public final class OrderDeletedMessage extends GenericMessageImpl<Order> {
+public final class OrderDeletedMessage extends GenericMessageImpl<Order> implements SimpleOrderMessage {
 
     public static final String MESSAGE_TYPE = "OrderDeleted";
     public static final MessageDerivateHint<OrderDeletedMessage> MESSAGE_HINT =

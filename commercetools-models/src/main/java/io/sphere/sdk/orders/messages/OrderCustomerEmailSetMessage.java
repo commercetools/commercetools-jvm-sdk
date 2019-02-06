@@ -20,7 +20,7 @@ import java.time.ZonedDateTime;
  * @see io.sphere.sdk.orders.commands.updateactions.SetCustomerEmail
  */
 @JsonDeserialize(as = OrderCustomerEmailSetMessage.class)//important to override annotation in Message class
-public final class OrderCustomerEmailSetMessage extends GenericMessageImpl<Order> {
+public final class OrderCustomerEmailSetMessage extends GenericMessageImpl<Order> implements SimpleOrderMessage {
     public static final String MESSAGE_TYPE = "OrderCustomerEmailSet";
     public static final MessageDerivateHint<OrderCustomerEmailSetMessage> MESSAGE_HINT = MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, OrderCustomerEmailSetMessage.class, Order.referenceTypeId());
 

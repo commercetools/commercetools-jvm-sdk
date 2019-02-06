@@ -18,7 +18,7 @@ import java.time.ZonedDateTime;
  *
  */
 @JsonDeserialize(as = DeliveryRemovedMessage.class)//important to override annotation in Message class
-public final class DeliveryRemovedMessage extends GenericMessageImpl<Order> {
+public final class DeliveryRemovedMessage extends GenericMessageImpl<Order> implements SimpleOrderMessage {
     public static final String MESSAGE_TYPE = "DeliveryRemoved";
     public static final MessageDerivateHint<DeliveryRemovedMessage> MESSAGE_HINT = MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, DeliveryRemovedMessage.class, Order.referenceTypeId());
 

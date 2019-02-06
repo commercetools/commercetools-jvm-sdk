@@ -15,7 +15,7 @@ import java.time.ZonedDateTime;
  * This message is the result of the {@link io.sphere.sdk.orders.commands.updateactions.SetDeliveryAddress} update action.
  */
 @JsonDeserialize(as = DeliveryAddressSetMessage.class)//important to override annotation in Message class
-public final class DeliveryAddressSetMessage extends GenericMessageImpl<Order> {
+public final class DeliveryAddressSetMessage extends GenericMessageImpl<Order> implements SimpleOrderMessage {
     public static final String MESSAGE_TYPE = "DeliveryAddressSet";
     public static final MessageDerivateHint<DeliveryAddressSetMessage> MESSAGE_HINT = MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, DeliveryAddressSetMessage.class, Order.referenceTypeId());
 

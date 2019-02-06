@@ -9,7 +9,7 @@ import io.sphere.sdk.orders.Order;
  * Messages for an {@link Order}.
  */
 @JsonDeserialize(as = SimpleOrderMessageImpl.class)
-public interface SimpleOrderMessage extends GenericMessage<Order> {
+public interface SimpleOrderMessage extends GenericMessage<Order>, OrderMessage  {
     MessageDerivateHint<SimpleOrderMessage> MESSAGE_HINT =
             MessageDerivateHint.ofResourceType(Order.referenceTypeId(), SimpleOrderMessage.class, Order.referenceTypeId());
 

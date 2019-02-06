@@ -34,9 +34,6 @@ import static java.util.stream.Collectors.toList;
  <h3 id="query-for-specific-resource">Query for any message for a specific resource like orders</h3>
  {@include.example io.sphere.sdk.messages.queries.MessageQueryIntegrationTest#queryForASpecificResource()}
 
- <h3 id="class-converting-errors">If you convert a message to the wrong class the behaviour is undefined, but then still null pointer exceptions can occur</h3>
- {@include.example io.sphere.sdk.messages.queries.MessageQueryIntegrationTest#convertAfterQueryToSpecificMessageClassesButToTheWrongOne()}
-
  */
 public interface MessageQuery extends MetaModelQueryDsl<Message, MessageQuery, MessageQueryModel, MessageExpansionModel<Message>> {
     /**
