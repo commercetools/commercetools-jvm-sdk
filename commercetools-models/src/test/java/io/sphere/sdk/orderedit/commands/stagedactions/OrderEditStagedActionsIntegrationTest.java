@@ -365,7 +365,7 @@ public class OrderEditStagedActionsIntegrationTest extends IntegrationTest {
     public void setCustomLineItemTaxAmount() {
         CartFixtures.withFilledCart(client(), cart -> {
             final LineItem firstLineItem = cart.getLineItems().get(0);
-            SetCustomLineItemTaxAmount setCustomLineItemTaxAmount = SetCustomLineItemTaxAmount.of(firstLineItem.getId(), null);
+            final SetCustomLineItemTaxAmount setCustomLineItemTaxAmount = SetCustomLineItemTaxAmount.of(firstLineItem.getId(), null);
             testOrderEditStagedUpdateAction(setCustomLineItemTaxAmount);
         });
     }
@@ -374,7 +374,7 @@ public class OrderEditStagedActionsIntegrationTest extends IntegrationTest {
     public void SetCustomLineItemTaxRate() {
         CartFixtures.withFilledCart(client(), cart -> {
             final LineItem firstLineItem = cart.getLineItems().get(0);
-            SetCustomLineItemTaxRate setCustomLineItemTaxRate = SetCustomLineItemTaxRate.of(firstLineItem.getId(), null);
+            final SetCustomLineItemTaxRate setCustomLineItemTaxRate = SetCustomLineItemTaxRate.of(firstLineItem.getId(), null);
             testOrderEditStagedUpdateAction(setCustomLineItemTaxRate);
         });
     }
@@ -383,8 +383,8 @@ public class OrderEditStagedActionsIntegrationTest extends IntegrationTest {
     public void changeCustomLineItemQuantity() {
         CartFixtures.withFilledCart(client(), cart -> {
             final LineItem firstLineItem = cart.getLineItems().get(0);
-            SetCustomLineItemTaxRate setCustomLineItemTaxRate = SetCustomLineItemTaxRate.of(firstLineItem.getId(), null);
-            testOrderEditStagedUpdateAction(setCustomLineItemTaxRate);
+            final ChangeCustomLineItemQuantity changeCustomLineItemQuantity = ChangeCustomLineItemQuantity.of(firstLineItem.getId(), 2L);
+            testOrderEditStagedUpdateAction(changeCustomLineItemQuantity);
         });
     }
 
@@ -392,9 +392,21 @@ public class OrderEditStagedActionsIntegrationTest extends IntegrationTest {
     public void changeCustomLineItemMoney() {
         CartFixtures.withFilledCart(client(), cart -> {
             final LineItem firstLineItem = cart.getLineItems().get(0);
-            ChangeCustomLineItemMoney changeCustomLineItemMoney = ChangeCustomLineItemMoney.of(firstLineItem.getId(), MoneyImpl.of(25, EUR));
+            final ChangeCustomLineItemMoney changeCustomLineItemMoney = ChangeCustomLineItemMoney.of(firstLineItem.getId(), MoneyImpl.of(25, EUR));
             testOrderEditStagedUpdateAction(changeCustomLineItemMoney);
         });
+    }
+
+    @Test
+    public void setShippingAddressAndCustomShippingMethod() {
+        final ShippingRate shippingRate = ShippingRate.of(EURO_10, null,
+                Arrays.asList(
+                        io.sphere.sdk.shippingmethods.CartValueBuilder.of(0L, EURO_30).build(),
+                        io.sphere.sdk.shippingmethods.CartValueBuilder.of(1L, EURO_20).build()
+                ));
+        final SetShippingAddressAndCustomShippingMethod setShippingAddressAndCustomShippingMethod =
+                SetShippingAddressAndCustomShippingMethod.of(Address.of(CountryCode.DE),"custom-shipping", shippingRate);
+        testOrderEditStagedUpdateAction(setShippingAddressAndCustomShippingMethod);
     }
 
     private void testOrderEditStagedUpdateAction(final OrderEditStagedUpdateAction orderEditStagedUpdateAction) {
