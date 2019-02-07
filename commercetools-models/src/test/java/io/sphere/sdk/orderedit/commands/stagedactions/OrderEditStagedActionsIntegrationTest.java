@@ -1,10 +1,9 @@
 package io.sphere.sdk.orderedit.commands.stagedactions;
 
 import com.neovisionaries.i18n.CountryCode;
-import io.sphere.sdk.carts.CartFixtures;
-import io.sphere.sdk.carts.ExternalTaxAmountDraftBuilder;
-import io.sphere.sdk.carts.ExternalTaxAmountDraftDsl;
+import io.sphere.sdk.carts.*;
 import io.sphere.sdk.models.Address;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.orderedit.OrderEditFixtures;
 import io.sphere.sdk.orderedit.commands.OrderEditUpdateCommandIntegrationTest;
 import io.sphere.sdk.orderedits.OrderEdit;
@@ -14,6 +13,7 @@ import io.sphere.sdk.orderedits.commands.updateactions.AddStagedAction;
 import io.sphere.sdk.shippingmethods.CartValueBuilder;
 import io.sphere.sdk.shippingmethods.ShippingMethodFixtures;
 import io.sphere.sdk.shippingmethods.ShippingRate;
+import io.sphere.sdk.shoppinglists.ShoppingListFixtures;
 import io.sphere.sdk.taxcategories.ExternalTaxRateDraft;
 import io.sphere.sdk.taxcategories.ExternalTaxRateDraftBuilder;
 import io.sphere.sdk.test.IntegrationTest;
@@ -29,9 +29,9 @@ import java.util.UUID;
 
 import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withB2cCustomerGroup;
 import static io.sphere.sdk.payments.PaymentFixtures.withPayment;
+import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
-
 
 public class OrderEditStagedActionsIntegrationTest extends IntegrationTest {
 
@@ -71,7 +71,7 @@ public class OrderEditStagedActionsIntegrationTest extends IntegrationTest {
     @Test
     public void setShippingMethod() {
         ShippingMethodFixtures.withShippingMethodForGermany(client(), shippingMethod -> {
-            SetShippingMethod setShippingMethod = SetShippingMethod.of(shippingMethod.toResourceIdentifier(), null);
+            final SetShippingMethod setShippingMethod = SetShippingMethod.of(shippingMethod.toResourceIdentifier(), null);
             testOrderEditStagedUpdateAction(setShippingMethod);
         });
     }
@@ -90,7 +90,7 @@ public class OrderEditStagedActionsIntegrationTest extends IntegrationTest {
     @Test
     public void addDiscountCode() {
         CartFixtures.withCartAndDiscountCode(client(), (cart, discountCode) -> {
-            AddDiscountCode addDiscountCode = AddDiscountCode.of(discountCode);
+            final AddDiscountCode addDiscountCode = AddDiscountCode.of(discountCode);
             testOrderEditStagedUpdateAction(addDiscountCode);
             return cart;
         });
@@ -99,7 +99,7 @@ public class OrderEditStagedActionsIntegrationTest extends IntegrationTest {
     @Test
     public void removeDiscountCode() {
         CartFixtures.withCartAndDiscountCode(client(), (cart, discountCode) -> {
-            RemoveDiscountCode removeDiscountCode = RemoveDiscountCode.of(discountCode);
+            final RemoveDiscountCode removeDiscountCode = RemoveDiscountCode.of(discountCode);
             testOrderEditStagedUpdateAction(removeDiscountCode);
             return cart;
         });
@@ -107,34 +107,34 @@ public class OrderEditStagedActionsIntegrationTest extends IntegrationTest {
 
     @Test
     public void setCustomerId() {
-        SetCustomerId setCustomerId = SetCustomerId.of(UUID.randomUUID().toString());
+        final SetCustomerId setCustomerId = SetCustomerId.of(UUID.randomUUID().toString());
         testOrderEditStagedUpdateAction(setCustomerId);
     }
 
     @Test
     public void setCustomerGroup() {
         withB2cCustomerGroup(client(), customerGroup -> {
-           SetCustomerGroup setCustomerGroup = SetCustomerGroup.of(customerGroup);
-           testOrderEditStagedUpdateAction(setCustomerGroup);
+            final SetCustomerGroup setCustomerGroup = SetCustomerGroup.of(customerGroup);
+            testOrderEditStagedUpdateAction(setCustomerGroup);
         });
     }
 
     @Test
     public void setCustomType() {
-        SetCustomType setCustomType = SetCustomType.ofRemoveType();
+        final SetCustomType setCustomType = SetCustomType.ofRemoveType();
         testOrderEditStagedUpdateAction(setCustomType);
     }
 
     @Test
     public void setCustomField() {
-        SetCustomField setCustomField = SetCustomField.ofObject(STRING_FIELD_NAME, "other");
+        final SetCustomField setCustomField = SetCustomField.ofObject(STRING_FIELD_NAME, "other");
         testOrderEditStagedUpdateAction(setCustomField);
     }
 
     @Test
     public void addPayment() {
         withPayment(client(), payment -> {
-            AddPayment addPayment = AddPayment.of(payment);
+            final AddPayment addPayment = AddPayment.of(payment);
             testOrderEditStagedUpdateAction(addPayment);
             return payment;
         });
@@ -143,7 +143,7 @@ public class OrderEditStagedActionsIntegrationTest extends IntegrationTest {
     @Test
     public void removePayment() {
         withPayment(client(), payment -> {
-            RemovePayment removePayment = RemovePayment.of(payment);
+            final RemovePayment removePayment = RemovePayment.of(payment);
             testOrderEditStagedUpdateAction(removePayment);
             return payment;
         });
@@ -155,7 +155,7 @@ public class OrderEditStagedActionsIntegrationTest extends IntegrationTest {
         final double taxRate = 0.20;
         final ExternalTaxRateDraft externalTaxRate =
                 ExternalTaxRateDraftBuilder.ofAmount(taxRate, taxRateName, DE).build();
-        SetShippingMethodTaxRate setShippingMethodTaxRate = SetShippingMethodTaxRate.of(externalTaxRate);
+        final SetShippingMethodTaxRate setShippingMethodTaxRate = SetShippingMethodTaxRate.of(externalTaxRate);
         testOrderEditStagedUpdateAction(setShippingMethodTaxRate);
     }
 
@@ -174,9 +174,227 @@ public class OrderEditStagedActionsIntegrationTest extends IntegrationTest {
 
     @Test
     public void setOrderTotalTax() {
-        MonetaryAmount monetaryAmount = MoneyImpl.of(25, EUR);
-        SetOrderTotalTax setOrderTotalTax = SetOrderTotalTax.of(monetaryAmount);
+        final MonetaryAmount monetaryAmount = MoneyImpl.of(25, EUR);
+        final SetOrderTotalTax setOrderTotalTax = SetOrderTotalTax.of(monetaryAmount);
         testOrderEditStagedUpdateAction(setOrderTotalTax);
+    }
+
+    @Test
+    public void changeTaxMode() {
+        final ChangeTaxMode changeTaxMode = ChangeTaxMode.of(TaxMode.PLATFORM);
+        testOrderEditStagedUpdateAction(changeTaxMode);
+    }
+
+    @Test
+    public void changeTaxRoundingMode() {
+        final ChangeTaxRoundingMode changeTaxRoundingMode = ChangeTaxRoundingMode.of(RoundingMode.HALF_UP);
+        testOrderEditStagedUpdateAction(changeTaxRoundingMode);
+    }
+
+    @Test
+    public void setShippingRateInput() {
+        final SetShippingRateInput setShippingRateInput = SetShippingRateInput.of(ClassificationShippingRateInputDraftBuilder.of("Small").build());
+        testOrderEditStagedUpdateAction(setShippingRateInput);
+    }
+
+    @Test
+    public void changeTaxCalculationMode() {
+        final ChangeTaxCalculationMode changeTaxCalculationMode = ChangeTaxCalculationMode.of(TaxCalculationMode.UNIT_PRICE_LEVEL);
+        testOrderEditStagedUpdateAction(changeTaxCalculationMode);
+    }
+
+    @Test
+    public void addShoppingList() {
+        ShoppingListFixtures.withShoppingList(client(), shoppingList -> {
+            final AddShoppingList addShoppingList = AddShoppingList.of(shoppingList.toReference());
+            testOrderEditStagedUpdateAction(addShoppingList);
+            return shoppingList;
+        });
+    }
+
+    @Test
+    public void addItemShippingAddress() {
+        final AddItemShippingAddress addItemShippingAddress = AddItemShippingAddress.of(Address.of(CountryCode.DE));
+        testOrderEditStagedUpdateAction(addItemShippingAddress);
+    }
+
+    @Test
+    public void removeItemShippingAddress() {
+        final RemoveItemShippingAddress removeItemShippingAddress = RemoveItemShippingAddress.of(UUID.randomUUID().toString());
+        testOrderEditStagedUpdateAction(removeItemShippingAddress);
+    }
+
+    @Test
+    public void updateItemShippingAddress() {
+        final UpdateItemShippingAddress updateItemShippingAddress = UpdateItemShippingAddress.of(Address.of(CountryCode.DE));
+        testOrderEditStagedUpdateAction(updateItemShippingAddress);
+    }
+
+    @Test
+    public void SetShippingAddressAndShippingMethod() {
+        final SetShippingAddressAndShippingMethod setShippingAddressAndShippingMethod = SetShippingAddressAndShippingMethod.of(Address.of(CountryCode.DE));
+        testOrderEditStagedUpdateAction(setShippingAddressAndShippingMethod);
+    }
+
+    @Test
+    public void setLineItemShippingDetails() {
+        final SetLineItemShippingDetails setLineItemShippingDetails = SetLineItemShippingDetails.of(UUID.randomUUID().toString());
+        testOrderEditStagedUpdateAction(setLineItemShippingDetails);
+    }
+
+    @Test
+    public void addLineItem() {
+        withProduct(client(), product -> {
+            final LineItemDraft lineItemDraft = LineItemDraft.of(product, 1, 5);
+            final AddLineItem addLineItem = AddLineItem.of(lineItemDraft);
+            testOrderEditStagedUpdateAction(addLineItem);
+        });
+    }
+
+    @Test
+    public void removeLineItem() {
+        CartFixtures.withFilledCart(client(), cart -> {
+            final LineItem firstLineItem = cart.getLineItems().get(0);
+            final RemoveLineItem removeLineItem = RemoveLineItem.of(firstLineItem.getId());
+            testOrderEditStagedUpdateAction(removeLineItem);
+        });
+    }
+
+    @Test
+    public void changeLineItemQuantity() {
+        CartFixtures.withFilledCart(client(), cart -> {
+            final LineItem firstLineItem = cart.getLineItems().get(0);
+            final ChangeLineItemQuantity changeLineItemQuantity = ChangeLineItemQuantity.of(firstLineItem.getId(), 2L);
+            testOrderEditStagedUpdateAction(changeLineItemQuantity);
+        });
+    }
+
+    @Test
+    public void setLineItemCustomType() {
+        CartFixtures.withFilledCart(client(), cart -> {
+            final LineItem firstLineItem = cart.getLineItems().get(0);
+            final SetLineItemCustomType setLineItemCustomType = SetLineItemCustomType.of(firstLineItem.getId());
+            testOrderEditStagedUpdateAction(setLineItemCustomType);
+        });
+    }
+
+    @Test
+    public void setLineItemCustomField() {
+        CartFixtures.withFilledCart(client(), cart -> {
+            final LineItem firstLineItem = cart.getLineItems().get(0);
+            final SetLineItemCustomField setLineItemCustomField = SetLineItemCustomField.of("name", null, firstLineItem.getId());
+            testOrderEditStagedUpdateAction(setLineItemCustomField);
+        });
+    }
+
+    @Test
+    public void setLineItemTaxRate() {
+        CartFixtures.withFilledCart(client(), cart -> {
+            final LineItem firstLineItem = cart.getLineItems().get(0);
+            final String taxRateName = "special tax";
+            final double taxRate = 0.20;
+            final ExternalTaxRateDraft externalTaxRate =
+                    ExternalTaxRateDraftBuilder.ofAmount(taxRate, taxRateName, DE).build();
+
+            final SetLineItemTaxRate setLineItemTaxRate = SetLineItemTaxRate.of(firstLineItem.getId(), externalTaxRate);
+            testOrderEditStagedUpdateAction(setLineItemTaxRate);
+        });
+    }
+
+    @Test
+    public void setLineItemTaxAmount() {
+        CartFixtures.withFilledCart(client(), cart -> {
+            final LineItem firstLineItem = cart.getLineItems().get(0);
+            final SetLineItemTaxAmount setLineItemTaxAmount = SetLineItemTaxAmount.of(firstLineItem.getId(), null);
+            testOrderEditStagedUpdateAction(setLineItemTaxAmount);
+        });
+    }
+
+    @Test
+    public void setLineItemTotalPrice() {
+        CartFixtures.withFilledCart(client(), cart -> {
+            final LineItem firstLineItem = cart.getLineItems().get(0);
+            final SetLineItemTotalPrice setLineItemTotalPrice = SetLineItemTotalPrice.of(firstLineItem.getId(), null);
+            testOrderEditStagedUpdateAction(setLineItemTotalPrice);
+        });
+    }
+
+    @Test
+    public void setLineItemPrice() {
+        CartFixtures.withFilledCart(client(), cart -> {
+            final LineItem firstLineItem = cart.getLineItems().get(0);
+            final SetLineItemPrice setLineItemPrice = SetLineItemPrice.of(firstLineItem.getId(), null);
+            testOrderEditStagedUpdateAction(setLineItemPrice);
+        });
+    }
+
+    @Test
+    public void addCustomLineItem() {
+        final AddCustomLineItem addCustomLineItem = AddCustomLineItem.of(LocalizedString.ofEnglish("customItem"), "slug", MoneyImpl.of("23.50", EUR), null, 2L, null, null);
+        testOrderEditStagedUpdateAction(addCustomLineItem);
+    }
+
+    @Test
+    public void removeCustomLineItem() {
+        CartFixtures.withFilledCart(client(), cart -> {
+            final LineItem firstLineItem = cart.getLineItems().get(0);
+            final RemoveCustomLineItem removeCustomLineItem = RemoveCustomLineItem.of(firstLineItem.getId());
+            testOrderEditStagedUpdateAction(removeCustomLineItem);
+        });
+    }
+
+    @Test
+    public void setCustomLineItemCustomType() {
+        CartFixtures.withFilledCart(client(), cart -> {
+            final LineItem firstLineItem = cart.getLineItems().get(0);
+            final SetCustomLineItemCustomType setCustomLineItemCustomType = SetCustomLineItemCustomType.of(firstLineItem.getId(), null, null);
+            testOrderEditStagedUpdateAction(setCustomLineItemCustomType);
+        });
+    }
+
+    @Test
+    public void setCustomLineItemCustomField() {
+        CartFixtures.withFilledCart(client(), cart -> {
+            final LineItem firstLineItem = cart.getLineItems().get(0);
+            final SetCustomLineItemCustomField setCustomLineItemCustomField = SetCustomLineItemCustomField.of(firstLineItem.getId(), "name", null);
+            testOrderEditStagedUpdateAction(setCustomLineItemCustomField);
+        });
+    }
+
+    @Test
+    public void setCustomLineItemTaxAmount() {
+        CartFixtures.withFilledCart(client(), cart -> {
+            final LineItem firstLineItem = cart.getLineItems().get(0);
+            SetCustomLineItemTaxAmount setCustomLineItemTaxAmount = SetCustomLineItemTaxAmount.of(firstLineItem.getId(), null);
+            testOrderEditStagedUpdateAction(setCustomLineItemTaxAmount);
+        });
+    }
+
+    @Test
+    public void SetCustomLineItemTaxRate() {
+        CartFixtures.withFilledCart(client(), cart -> {
+            final LineItem firstLineItem = cart.getLineItems().get(0);
+            SetCustomLineItemTaxRate setCustomLineItemTaxRate = SetCustomLineItemTaxRate.of(firstLineItem.getId(), null);
+            testOrderEditStagedUpdateAction(setCustomLineItemTaxRate);
+        });
+    }
+
+    @Test
+    public void changeCustomLineItemQuantity() {
+        CartFixtures.withFilledCart(client(), cart -> {
+            final LineItem firstLineItem = cart.getLineItems().get(0);
+            SetCustomLineItemTaxRate setCustomLineItemTaxRate = SetCustomLineItemTaxRate.of(firstLineItem.getId(), null);
+            testOrderEditStagedUpdateAction(setCustomLineItemTaxRate);
+        });
+    }
+
+    @Test
+    public void changeCustomLineItemMoney() {
+        CartFixtures.withFilledCart(client(), cart -> {
+            final LineItem firstLineItem = cart.getLineItems().get(0);
+            ChangeCustomLineItemMoney changeCustomLineItemMoney = ChangeCustomLineItemMoney.of(firstLineItem.getId(), MoneyImpl.of(25, EUR));
+            testOrderEditStagedUpdateAction(changeCustomLineItemMoney);
+        });
     }
 
     private void testOrderEditStagedUpdateAction(final OrderEditStagedUpdateAction orderEditStagedUpdateAction) {
