@@ -13,7 +13,7 @@ import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
 @JsonDeserialize(as = OrderShippingInfoSetMessage.class)//important to override annotation in Message class
-public class OrderShippingInfoSetMessage extends GenericMessageImpl<Order> implements SimpleOrderMessage {
+public final class OrderShippingInfoSetMessage extends GenericMessageImpl<Order> implements SimpleOrderMessage {
 
     public static final String MESSAGE_TYPE = "OrderShippingInfoSet";
     public static final MessageDerivateHint<OrderShippingInfoSetMessage> MESSAGE_HINT =
