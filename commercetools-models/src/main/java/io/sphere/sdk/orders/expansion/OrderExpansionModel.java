@@ -6,6 +6,8 @@ import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.states.expansion.StateExpansionModel;
 
+import java.util.List;
+
 /**
  DSL class to create expansion path expressions.
 
@@ -41,5 +43,9 @@ public interface OrderExpansionModel<T> extends ExpansionPathContainer<T>, CartL
 
     static OrderExpansionModel<Order> of() {
         return new OrderExpansionModelImpl<>();
+    }
+
+    static <T> OrderExpansionModel<T> of(final List<String> parentPath, final String path) {
+        return new OrderExpansionModelImpl<>(parentPath, path);
     }
 }
