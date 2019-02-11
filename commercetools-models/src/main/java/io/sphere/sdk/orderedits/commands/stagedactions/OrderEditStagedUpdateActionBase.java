@@ -5,7 +5,7 @@ import io.sphere.sdk.orderedits.OrderEdit;
 
 abstract class OrderEditStagedUpdateActionBase extends StagedUpdateActionBase<OrderEdit> implements OrderEditStagedUpdateAction {
 
-    public OrderEditStagedUpdateActionBase(final String action) {
+    OrderEditStagedUpdateActionBase(final String action) {
         super(action);
     }
 
