@@ -415,6 +415,7 @@ public class OrderEditStagedActionsIntegrationTest extends IntegrationTest {
             final OrderEditUpdateCommand orderEditUpdateCommand = OrderEditUpdateCommand.of(orderEdit, AddStagedAction.of(orderEditStagedUpdateAction));
             final OrderEdit updatedOrderEdit = client().executeBlocking(orderEditUpdateCommand);
             Assertions.assertThat(updatedOrderEdit).isNotNull();
+            Assertions.assertThat(updatedOrderEdit.getStagedActions().size()).isEqualTo(1);
             Assertions.assertThat(updatedOrderEdit.getStagedActions().get(0).getAction()).isEqualTo(orderEditStagedUpdateAction.getAction());
 
             Assertions.assertThat(updatedOrderEdit.getStagedActions().get(0)).isInstanceOf(orderEditStagedUpdateAction.getClass());
