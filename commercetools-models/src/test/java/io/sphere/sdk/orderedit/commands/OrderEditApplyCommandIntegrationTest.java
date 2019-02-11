@@ -28,7 +28,7 @@ public class OrderEditApplyCommandIntegrationTest extends IntegrationTest {
             final OrderEdit updatedOrderEdit = client().executeBlocking(orderEditUpdateCommand);
             Assertions.assertThat(updatedOrderEdit).isNotNull();
 
-            final OrderEditApplyCommand orderEditApplyCommand = OrderEditApplyCommand.of(updatedOrderEdit.getId(), updatedOrderEdit.getResource().getObj().getVersion(), updatedOrderEdit.getVersion());
+            final OrderEditApplyCommand orderEditApplyCommand = OrderEditApplyCommand.of(updatedOrderEdit.getId(), updatedOrderEdit.getVersion(), updatedOrderEdit.getResource().getObj().getVersion());
             final OrderEdit appliedOrderEdit = client().executeBlocking(orderEditApplyCommand);
             Assertions.assertThat(appliedOrderEdit).isNotNull();
 

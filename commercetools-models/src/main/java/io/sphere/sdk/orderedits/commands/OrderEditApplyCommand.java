@@ -16,14 +16,21 @@ public final class OrderEditApplyCommand extends CommandImpl<OrderEdit> {
 
     private final Long editVersion;
 
-    private OrderEditApplyCommand(final String id, final Long resourceVersion, final Long editVersion) {
+    private OrderEditApplyCommand(final String id, final Long editVersion, final Long resourceVersion) {
         this.id = id;
-        this.resourceVersion = resourceVersion;
         this.editVersion = editVersion;
+        this.resourceVersion = resourceVersion;
     }
 
-    public static OrderEditApplyCommand of(final String id, final Long resourceVersion, final Long editVersion) {
-        return new OrderEditApplyCommand(id, resourceVersion, editVersion);
+    /**
+     *
+     * @param id of the {@link OrderEdit} that should be applied
+     * @param editVersion - version of the {@link OrderEdit} that should be applied
+     * @param resourceVersion - version of the {@link io.sphere.sdk.orders.Order} that is referenced from the {@link OrderEdit}
+     * @return new instance of {@link OrderEditApplyCommand}
+     */
+    public static OrderEditApplyCommand of(final String id, final Long editVersion, final Long resourceVersion) {
+        return new OrderEditApplyCommand(id, editVersion, resourceVersion);
     }
 
     @Override
