@@ -1,10 +1,12 @@
 package io.sphere.sdk.taxcategories;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
+@JsonDeserialize(as = ExternalTaxRateDraftImpl.class)
 public interface ExternalTaxRateDraft {
     String getName();
 

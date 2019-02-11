@@ -7,18 +7,18 @@ import io.sphere.sdk.payments.Payment;
 
 import java.util.Optional;
 
-public final class AddPayment extends OrderEditStagedUpdateActionBase {
+public final class RemovePayment extends OrderEditStagedUpdateActionBase {
 
     private final Reference<Payment> payment;
 
     @JsonCreator
-    private AddPayment(final Reference<Payment> payment) {
-        super("addPayment");
+    private RemovePayment(final Reference<Payment> payment) {
+        super("removePayment");
         this.payment = payment;
     }
 
-    public static AddPayment of(final Referenceable<Payment> payment) {
-        return new AddPayment(Optional.ofNullable(payment).map(Referenceable::toReference).orElse(null));
+    public static RemovePayment of(final Referenceable<Payment> payment) {
+        return new RemovePayment(Optional.ofNullable(payment).map(Referenceable::toReference).orElse(null));
     }
 
     public Reference<Payment> getPayment() {
