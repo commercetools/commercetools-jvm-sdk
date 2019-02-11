@@ -38,6 +38,15 @@ public class OrderEditFixtures {
         client.executeBlocking(OrderEditDeleteCommand.of(orderEdit));
     }
 
+    public static void withUpdateableOrderEdit(final BlockingSphereClient client, final Order order, final Function<OrderEdit, OrderEdit> f) {
+        final List<StagedUpdateAction<OrderEdit>> stagedActions = new ArrayList<>();
+        final OrderEditDraft orderEditDraft = OrderEditDraftBuilder.of(order.toReference(), stagedActions).key(SphereTestUtils.randomKey()).build();
+        final OrderEditCreateCommand orderEditCreateCommand = OrderEditCreateCommand.of(orderEditDraft);
+        OrderEdit orderEdit = client.executeBlocking(orderEditCreateCommand);
+        orderEdit = f.apply(orderEdit);
+        client.executeBlocking(OrderEditDeleteCommand.of(orderEdit));
+    }
+
     public static void withUpdateableOrderEdit(final BlockingSphereClient client, final Function<OrderEdit, OrderEdit> f) {
         OrderFixtures.withOrder(client, order -> {
             final List<StagedUpdateAction<OrderEdit>> stagedActions = new ArrayList<>();

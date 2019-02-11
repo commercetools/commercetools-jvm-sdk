@@ -21,6 +21,11 @@ public class OrderEditApplyCommandIntegrationTest extends IntegrationTest {
     public void applyOrderEdit() {
         OrderEditFixtures.withUpdateableOrderEdit(client(), orderEdit -> {
 
+            boolean orderBillingAddressNotDE = orderEdit.getResource().getObj().getBillingAddress() == null ||
+                    orderEdit.getResource().getObj().getBillingAddress().getCountry() == null ||
+                    !orderEdit.getResource().getObj().getBillingAddress().getCountry().equals(CountryCode.DE);
+            Assertions.assertThat(orderBillingAddressNotDE).isTrue();
+
             final Address address = Address.of(CountryCode.DE);
             final SetBillingAddress setBillingAddress = SetBillingAddress.of(address);
             final OrderEditUpdateCommand orderEditUpdateCommand = OrderEditUpdateCommand.of(orderEdit, AddStagedAction.of(setBillingAddress))
