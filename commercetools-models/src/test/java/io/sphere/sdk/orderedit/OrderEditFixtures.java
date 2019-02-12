@@ -8,6 +8,7 @@ import io.sphere.sdk.orderedits.OrderEditDraft;
 import io.sphere.sdk.orderedits.OrderEditDraftBuilder;
 import io.sphere.sdk.orderedits.commands.OrderEditCreateCommand;
 import io.sphere.sdk.orderedits.commands.OrderEditDeleteCommand;
+import io.sphere.sdk.orderedits.expansion.OrderEditExpansionModel;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.OrderFixtures;
 import io.sphere.sdk.test.SphereTestUtils;
@@ -37,11 +38,21 @@ public class OrderEditFixtures {
         client.executeBlocking(OrderEditDeleteCommand.of(orderEdit));
     }
 
+    public static void withUpdateableOrderEdit(final BlockingSphereClient client, final Order order, final Function<OrderEdit, OrderEdit> f) {
+        final List<StagedUpdateAction<OrderEdit>> stagedActions = new ArrayList<>();
+        final OrderEditDraft orderEditDraft = OrderEditDraftBuilder.of(order.toReference(), stagedActions).key(SphereTestUtils.randomKey()).build();
+        final OrderEditCreateCommand orderEditCreateCommand = OrderEditCreateCommand.of(orderEditDraft);
+        OrderEdit orderEdit = client.executeBlocking(orderEditCreateCommand);
+        orderEdit = f.apply(orderEdit);
+        client.executeBlocking(OrderEditDeleteCommand.of(orderEdit));
+    }
+
     public static void withUpdateableOrderEdit(final BlockingSphereClient client, final Function<OrderEdit, OrderEdit> f) {
         OrderFixtures.withOrder(client, order -> {
             final List<StagedUpdateAction<OrderEdit>> stagedActions = new ArrayList<>();
             final OrderEditDraft orderEditDraft = OrderEditDraftBuilder.of(order.toReference(), stagedActions).key(SphereTestUtils.randomKey()).build();
-            final OrderEditCreateCommand orderEditCreateCommand = OrderEditCreateCommand.of(orderEditDraft);
+            final OrderEditCreateCommand orderEditCreateCommand = OrderEditCreateCommand.of(orderEditDraft)
+                    .withExpansionPaths(OrderEditExpansionModel::resource);
             OrderEdit orderEdit = client.executeBlocking(orderEditCreateCommand);
             orderEdit = f.apply(orderEdit);
             client.executeBlocking(OrderEditDeleteCommand.of(orderEdit));

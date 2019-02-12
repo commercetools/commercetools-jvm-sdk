@@ -7,7 +7,8 @@ import io.sphere.sdk.states.expansion.StateExpansionModel;
 import java.util.List;
 
 final class OrderExpansionModelImpl<T> extends CartLikeExpansionModelImpl<T> implements OrderExpansionModel<T> {
-    private OrderExpansionModelImpl(final List<String> parentPath, final String path) {
+
+    OrderExpansionModelImpl(final List<String> parentPath, final String path) {
         super(parentPath, path);
     }
 
