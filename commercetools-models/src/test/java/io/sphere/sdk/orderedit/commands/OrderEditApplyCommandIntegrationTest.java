@@ -15,10 +15,23 @@ import io.sphere.sdk.test.IntegrationTest;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
+import java.util.function.Function;
+
 public class OrderEditApplyCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void applyOrderEdit() {
+        final Function<OrderEdit, OrderEditApplyCommand> function = (OrderEdit orderEdit) -> OrderEditApplyCommand.of(orderEdit.getId(), orderEdit.getVersion(), orderEdit.getResource().getObj().getVersion());
+        apply(function);
+    }
+
+    @Test
+    public void applyOrderEditUsingVersionedOrderEdit() {
+        final Function<OrderEdit, OrderEditApplyCommand> function = (OrderEdit orderEdit) -> OrderEditApplyCommand.of(orderEdit, orderEdit.getResource().getObj().getVersion());
+        apply(function);
+    }
+
+    private void apply(final Function<OrderEdit, OrderEditApplyCommand> createOrderEditApplyCommandFunction) {
         OrderEditFixtures.withUpdateableOrderEdit(client(), orderEdit -> {
 
             boolean orderBillingAddressNotDE = orderEdit.getResource().getObj().getBillingAddress() == null ||
@@ -33,7 +46,7 @@ public class OrderEditApplyCommandIntegrationTest extends IntegrationTest {
             final OrderEdit updatedOrderEdit = client().executeBlocking(orderEditUpdateCommand);
             Assertions.assertThat(updatedOrderEdit).isNotNull();
 
-            final OrderEditApplyCommand orderEditApplyCommand = OrderEditApplyCommand.of(updatedOrderEdit.getId(), updatedOrderEdit.getVersion(), updatedOrderEdit.getResource().getObj().getVersion());
+            final OrderEditApplyCommand orderEditApplyCommand = createOrderEditApplyCommandFunction.apply(updatedOrderEdit);
             final OrderEdit appliedOrderEdit = client().executeBlocking(orderEditApplyCommand);
             Assertions.assertThat(appliedOrderEdit).isNotNull();
 
