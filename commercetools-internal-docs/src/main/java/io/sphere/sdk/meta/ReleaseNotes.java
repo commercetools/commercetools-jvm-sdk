@@ -162,7 +162,8 @@ import java.util.function.Function;
     <li class=new-in-release>Update commands 'of' methods now accept varargs</li>
     <li class=new-in-release>Added {@link io.sphere.sdk.orderedits.OrderEdit} with create, query, update and delete commands</li>
     <li class=new-in-release>Added {@link io.sphere.sdk.orderedits.OrderEdit} update and staged actions</li>
-    <li class=new-in-release>Added {@link io.sphere.sdk.orderedits.OrderEdit} apply command</li>
+    <li class=new-in-release>Added {@link io.sphere.sdk.orderedits.commands.OrderEditApplyCommand}</li>
+    <li class=new-in-release>Added new {@link io.sphere.sdk.orderedits.OrderEdit} message types</li>
  </ul>
 
  <h3 class=released-version id="v1_39_0">1.39.0 (14.01.2019)</h3>
