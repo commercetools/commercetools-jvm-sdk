@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@SupportedSourceVersion(SourceVersion.RELEASE_8)
+@SupportedSourceVersion(SourceVersion.RELEASE_11)
 public abstract class CommandEndpointAnnotationProcessor<A extends Annotation> extends ClassLevelAnnotationProcessor<A> {
 
     protected CommandEndpointAnnotationProcessor(final Class<A> clazz) {

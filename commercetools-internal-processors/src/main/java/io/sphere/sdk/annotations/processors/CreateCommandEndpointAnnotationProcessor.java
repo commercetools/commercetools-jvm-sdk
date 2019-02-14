@@ -14,7 +14,7 @@ import java.util.List;
 import static java.util.Arrays.asList;
 
 @SupportedAnnotationTypes({"io.sphere.sdk.annotations.HasCreateCommand"})
-@SupportedSourceVersion(SourceVersion.RELEASE_8)
+@SupportedSourceVersion(SourceVersion.RELEASE_11)
 public class CreateCommandEndpointAnnotationProcessor<A extends Annotation> extends CommandEndpointAnnotationProcessor<HasCreateCommand> {
     public CreateCommandEndpointAnnotationProcessor() {
         super(HasCreateCommand.class);

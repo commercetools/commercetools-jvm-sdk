@@ -56,7 +56,6 @@ public class JvmSdkConfigurationFactory implements ConfigurationFactory {
                 "com.google.gson",
                 "com.neovisionaries.i18n",
                 "org.apache.aries.spifly.dynamic.bundle",
-                "org.apache.aries.util",
                 "org.apache.commons.codec",
                 "org.apache.commons.io",
                 "org.apache.commons.lang3",

@@ -34,7 +34,7 @@ public class CartDiscountUpdateCommandIntegrationTest extends IntegrationTest {
         withPersistentCartDiscount(client(), cartDiscount -> {
             final ZonedDateTime validFrom =
                     ZonedDateTime.of(2018, 8, 8, 0, 0, 0, 0, ZoneId.systemDefault());
-            final ZonedDateTime validUntil = ZonedDateTime.now().plusYears(1);
+            final ZonedDateTime validUntil = SphereTestUtils.now().plusYears(1);
 
             final CartDiscount updatedDiscountCode =
                     client().executeBlocking(CartDiscountUpdateCommand.of(cartDiscount, SetValidFromAndUntil.of(validFrom, validUntil)));

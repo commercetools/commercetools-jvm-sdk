@@ -258,7 +258,6 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(client().executeBlocking(cartQuery).head().get().getId()).isEqualTo(cart.getId());
         });
     }
-
     @Ignore
     @Test
     public void addMergesSameCustomLineItems() throws Exception {

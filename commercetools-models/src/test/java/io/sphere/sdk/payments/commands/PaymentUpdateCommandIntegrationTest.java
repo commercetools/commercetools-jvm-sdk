@@ -11,6 +11,7 @@ import io.sphere.sdk.payments.messages.PaymentTransactionStateChangedMessage;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.test.SphereTestUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 
@@ -36,7 +37,7 @@ public class PaymentUpdateCommandIntegrationTest extends IntegrationTest {
         withPayment(client(), payment -> {
             //set authorization
             final MonetaryAmount totalAmount = EURO_30;
-            final ZonedDateTime until = ZonedDateTime.now().plusDays(7);
+            final ZonedDateTime until = SphereTestUtils.now().plusDays(7);
             final Payment updatedPayment = client().executeBlocking(PaymentUpdateCommand.of(payment, SetAuthorization.of(totalAmount, until)));
 
             assertThat(updatedPayment.getAmountAuthorized()).isEqualTo(totalAmount);
@@ -262,7 +263,7 @@ public class PaymentUpdateCommandIntegrationTest extends IntegrationTest {
                     .method("CREDIT_CARD")
                     .build();
             final TransactionDraft chargeTransaction = TransactionDraftBuilder
-                    .of(TransactionType.CHARGE, totalAmount, ZonedDateTime.now())
+                    .of(TransactionType.CHARGE, totalAmount, SphereTestUtils.now())
                     .build();
             final PaymentDraftBuilder paymentDraftBuilder = PaymentDraftBuilder.of(totalAmount)
                     .customer(customer)
@@ -276,7 +277,7 @@ public class PaymentUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(payment.getAmountPlanned()).isEqualTo(totalAmount);
 
             final MonetaryAmount firstRefundAmount = EURO_10;
-            final TransactionDraft firstRefundTransaction = TransactionDraftBuilder.of(TransactionType.REFUND, firstRefundAmount, ZonedDateTime.now()).build();
+            final TransactionDraft firstRefundTransaction = TransactionDraftBuilder.of(TransactionType.REFUND, firstRefundAmount, SphereTestUtils.now()).build();
             final Payment paymentWithFirstRefund = client().executeBlocking(PaymentUpdateCommand.of(payment, asList(SetAmountRefunded.of(firstRefundAmount), AddTransaction.of(firstRefundTransaction))));
 
             assertThat(paymentWithFirstRefund.getTransactions()).hasSize(2);
@@ -293,7 +294,7 @@ public class PaymentUpdateCommandIntegrationTest extends IntegrationTest {
             });
 
             final MonetaryAmount secondRefundAmount = EURO_5;
-            final TransactionDraft secondRefundTransaction = TransactionDraftBuilder.of(TransactionType.REFUND, secondRefundAmount, ZonedDateTime.now()).build();
+            final TransactionDraft secondRefundTransaction = TransactionDraftBuilder.of(TransactionType.REFUND, secondRefundAmount, SphereTestUtils.now()).build();
             final MonetaryAmount totalRefundAmount = secondRefundAmount.add(paymentWithFirstRefund.getAmountRefunded());
             final Payment paymentWithSecondRefund = client().executeBlocking(PaymentUpdateCommand.of(paymentWithFirstRefund, asList(SetAmountRefunded.of(totalRefundAmount), AddTransaction.of(secondRefundTransaction))));
 
@@ -328,7 +329,7 @@ public class PaymentUpdateCommandIntegrationTest extends IntegrationTest {
     @Test
     public void changeTransactionTimestamp() {
         withPaymentTransaction(client(), (Payment payment, Transaction transaction) -> {
-            final ZonedDateTime now = ZonedDateTime.now();
+            final ZonedDateTime now = SphereTestUtils.now();
 
             final Payment updatedPayment = client().executeBlocking(PaymentUpdateCommand.of(payment, ChangeTransactionTimestamp.of(now, transaction.getId())));
 

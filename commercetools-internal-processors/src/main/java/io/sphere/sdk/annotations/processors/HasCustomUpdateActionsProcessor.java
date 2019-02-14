@@ -14,7 +14,7 @@ import javax.tools.Diagnostic;
 import java.util.List;
 
 @SupportedAnnotationTypes({"io.sphere.sdk.annotations.HasCustomUpdateActions"})
-@SupportedSourceVersion(SourceVersion.RELEASE_8)
+@SupportedSourceVersion(SourceVersion.RELEASE_11)
 public class HasCustomUpdateActionsProcessor extends MethodLevelAnnotationProcessor<HasCustomUpdateActions> {
 
     public HasCustomUpdateActionsProcessor() {

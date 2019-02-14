@@ -19,7 +19,7 @@ import static java.util.Arrays.asList;
 import static org.apache.commons.lang3.text.WordUtils.capitalize;
 
 @SupportedAnnotationTypes({"io.sphere.sdk.annotations.HasUpdateCommand"})
-@SupportedSourceVersion(SourceVersion.RELEASE_8)
+@SupportedSourceVersion(SourceVersion.RELEASE_11)
 public class UpdateCommandEndpointAnnotationProcessor<A extends Annotation> extends CommandEndpointAnnotationProcessor<HasUpdateCommand> {
     public UpdateCommandEndpointAnnotationProcessor() {
         super(HasUpdateCommand.class);

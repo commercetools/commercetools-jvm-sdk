@@ -11,7 +11,7 @@ import javax.lang.model.element.TypeElement;
 import java.util.List;
 
 @SupportedAnnotationTypes({"io.sphere.sdk.annotations.HasUpdateActions"})
-@SupportedSourceVersion(SourceVersion.RELEASE_8)
+@SupportedSourceVersion(SourceVersion.RELEASE_11)
 public class HasUpdateActionsProcessor extends ClassLevelAnnotationProcessor<HasUpdateActions> {
 
     public HasUpdateActionsProcessor() {

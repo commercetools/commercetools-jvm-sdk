@@ -10,7 +10,7 @@ import javax.lang.model.SourceVersion;
 import javax.lang.model.element.TypeElement;
 
 @SupportedAnnotationTypes({"io.sphere.sdk.annotations.HasBuilder"})
-@SupportedSourceVersion(SourceVersion.RELEASE_8)
+@SupportedSourceVersion(SourceVersion.RELEASE_11)
 public final class HasBuilderAnnotationProcessor extends ClassLevelAnnotationProcessor<HasBuilder> {
 
     public HasBuilderAnnotationProcessor() {

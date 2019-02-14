@@ -3,6 +3,7 @@ package io.sphere.sdk.json;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.sphere.sdk.models.LocalizedString;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.time.ZonedDateTime;
@@ -15,7 +16,7 @@ import static org.assertj.core.api.Assertions.*;
 public class SphereJsonUtilsTest {
     @Test
     public void serializeZonedDateTime() throws Exception {
-        final String timeAsString = "2007-12-03T10:15:30+02:00[Europe/Berlin]";
+        final String timeAsString = "2007-12-03T10:15:30+01:00[Europe/Berlin]";
         final ZonedDateTime dateTime = ZonedDateTime.parse(timeAsString);
         final String actual = SphereJsonUtils.toJsonString(dateTime);
         assertThat(actual).isEqualTo("\"2007-12-03T09:15:30.000Z\"");

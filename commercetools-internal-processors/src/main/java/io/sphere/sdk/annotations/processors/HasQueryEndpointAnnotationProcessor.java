@@ -14,7 +14,7 @@ import java.util.Map;
 import static java.util.Arrays.asList;
 
 @SupportedAnnotationTypes({"io.sphere.sdk.annotations.HasQueryEndpoint"})
-@SupportedSourceVersion(SourceVersion.RELEASE_8)
+@SupportedSourceVersion(SourceVersion.RELEASE_11)
 public final class HasQueryEndpointAnnotationProcessor extends ClassLevelAnnotationProcessor<HasQueryEndpoint> {
 
     public HasQueryEndpointAnnotationProcessor() {

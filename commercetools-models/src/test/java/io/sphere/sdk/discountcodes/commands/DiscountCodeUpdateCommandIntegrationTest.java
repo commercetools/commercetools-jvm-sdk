@@ -7,6 +7,7 @@ import io.sphere.sdk.discountcodes.commands.updateactions.*;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.test.SphereTestUtils;
 import net.jcip.annotations.NotThreadSafe;
 import org.junit.Test;
 
@@ -28,7 +29,7 @@ public class DiscountCodeUpdateCommandIntegrationTest extends IntegrationTest {
         withPersistentDiscountCode(client(), discountCode -> {
             final ZonedDateTime validFrom =
                     ZonedDateTime.of(2018, 8, 8, 0, 0, 0, 0, ZoneId.systemDefault());
-            final ZonedDateTime validUntil = ZonedDateTime.now().plusYears(1);
+            final ZonedDateTime validUntil = SphereTestUtils.now().plusYears(1);
 
             final DiscountCode updatedDiscountCode =
                     client().executeBlocking(DiscountCodeUpdateCommand.of(discountCode, SetValidFromAndUntil.of(validFrom, validUntil)));

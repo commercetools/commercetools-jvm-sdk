@@ -60,7 +60,7 @@ public final class SphereTestUtils {
     public static final MonetaryAmount USD_20 = MoneyImpl.of(20, USD);
 
     public static ZonedDateTime now() {
-        return ZonedDateTime. now().withZoneSameInstant(ZoneOffset.UTC);
+        return ZonedDateTime.now().withZoneSameInstant(ZoneOffset.UTC).truncatedTo(ChronoUnit.MILLIS);
     }
 
     public static ZonedDateTime tomorrowZonedDateTime() {

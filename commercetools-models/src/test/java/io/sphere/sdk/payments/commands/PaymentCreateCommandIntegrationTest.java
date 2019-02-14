@@ -6,6 +6,7 @@ import io.sphere.sdk.payments.*;
 import io.sphere.sdk.payments.messages.PaymentCreatedMessage;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.types.CustomFieldsDraft;
 import io.sphere.sdk.types.TypeFixtures;
 import org.assertj.core.api.Assertions;
@@ -98,8 +99,8 @@ public class PaymentCreateCommandIntegrationTest extends IntegrationTest {
                 final String interfaceId = randomKey();
                 final String interactionId = randomKey();
                 final List<TransactionDraft> transactions = Collections.singletonList(TransactionDraftBuilder
-                        .of(TransactionType.CHARGE, totalAmount, ZonedDateTime.now())
-                        .timestamp(ZonedDateTime.now())
+                        .of(TransactionType.CHARGE, totalAmount, SphereTestUtils.now())
+                        .timestamp(SphereTestUtils.now())
                         .interactionId(interactionId)
                         .build());
                 final PaymentDraftBuilder paymentDraftBuilder = PaymentDraftBuilder.of(totalAmount)
@@ -138,15 +139,15 @@ public class PaymentCreateCommandIntegrationTest extends IntegrationTest {
                             .name(randomSlug())
                             .build();
                     final TransactionDraft transactionDraft = TransactionDraftBuilder
-                            .of(TransactionType.CHARGE, totalAmount, ZonedDateTime.now())
-                            .timestamp(ZonedDateTime.now())
+                            .of(TransactionType.CHARGE, totalAmount, SphereTestUtils.now())
+                            .timestamp(SphereTestUtils.now())
                             .interactionId(randomKey())
                             .state(TransactionState.PENDING)
                             .build();
                     final List<TransactionDraft> transactions = Collections.singletonList(transactionDraft);
                     final String externalId = randomKey();
                     final String interfaceId = randomKey();
-                    final ZonedDateTime authorizedUntil = ZonedDateTime.now().plusMonths(1);
+                    final ZonedDateTime authorizedUntil = SphereTestUtils.now().plusMonths(1);
                     final PaymentDraftBuilder paymentDraftBuilder = PaymentDraftBuilder.of(totalAmount)
                             .customer(customer)
                             .externalId(externalId)
@@ -185,6 +186,7 @@ public class PaymentCreateCommandIntegrationTest extends IntegrationTest {
                         s.assertThat(payment.getInterfaceInteractions().get(0).getFieldAsString(TypeFixtures.STRING_FIELD_NAME)).isEqualTo("foo1");
                         s.assertThat(payment.getInterfaceInteractions().get(1).getFieldAsString(TypeFixtures.STRING_FIELD_NAME)).isEqualTo("foo2");
                     });
+
                     client().executeBlocking(PaymentDeleteCommand.of(payment));
                 }));
                 return type;

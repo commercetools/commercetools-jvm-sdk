@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @SupportedAnnotationTypes({"io.sphere.sdk.annotations.HasByKeyGetEndpoint"})
-@SupportedSourceVersion(SourceVersion.RELEASE_8)
+@SupportedSourceVersion(SourceVersion.RELEASE_11)
 public final class HasByKeyGetEndpointAnnotationProcessor extends HasByFieldGetEndpointAnnotationProcessor<HasByKeyGetEndpoint> {
 
     public HasByKeyGetEndpointAnnotationProcessor() {

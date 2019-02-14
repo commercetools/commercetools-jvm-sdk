@@ -55,7 +55,6 @@ public class DemoOSGiMinimalConfigTest {
                 "com.neovisionaries.i18n",
                 "com.google.gson",
                 "org.apache.aries.spifly.dynamic.bundle",
-                "org.apache.aries.util",
                 "org.apache.commons.codec",
                 "org.apache.commons.io",
                 "org.apache.commons.lang3",
