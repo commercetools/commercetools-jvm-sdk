@@ -7,6 +7,7 @@ import io.sphere.sdk.categories.commands.CategoryCreateCommand;
 import io.sphere.sdk.categories.commands.CategoryDeleteCommand;
 import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.types.commands.TypeCreateCommand;
 import io.sphere.sdk.types.commands.TypeDeleteCommand;
 import io.sphere.sdk.utils.MoneyImpl;
@@ -32,7 +33,7 @@ import static io.sphere.sdk.types.TypeFixtures.createTypeDraftBuilder;
 public class TypeFixtureRule extends ExternalResource {
     public static final LocalDate DATE = LocalDate.now().minusDays(1);
     public static final boolean BOOLEAN = true;
-    public static final ZonedDateTime ZONED_DATE_TIME = ZonedDateTime.now();
+    public static final ZonedDateTime ZONED_DATE_TIME = SphereTestUtils.now();
     public static final double DOUBLE = 3223.43;
     public static final BigDecimal BIG_DECIMAL = new BigDecimal("3223.43");
     public static final String ENUM_KEY = "key1";

@@ -146,7 +146,7 @@ public  class ProductTypeAttributesIntegrationTest extends IntegrationTest {
     @Test
     public void timeAttribute() throws Exception {
         testSingleAndSet(AttributeAccess.ofTime(), AttributeAccess.ofTimeSet(),
-                asSet(LocalTime.now(), LocalTime.now().plus(3, ChronoUnit.MINUTES)),
+                asSet(LocalTime.now().truncatedTo(ChronoUnit.MILLIS), LocalTime.now().truncatedTo(ChronoUnit.MILLIS).plus(3, ChronoUnit.MINUTES)),
                 TimeAttributeType.of(),
                 AttributeDefinitionBuilder.of("time-attribute", LABEL, TimeAttributeType.of()).build());
     }
