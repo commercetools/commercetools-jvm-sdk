@@ -24,6 +24,11 @@ class ProductCatalogDataImpl extends ProductCatalogDataImplBase {
         return isPublished() ? super.getCurrent() : null;
     }
 
+    @Nullable
+    public ProductData getCurrentUnsafe() {
+        return super.getCurrent();
+    }
+
     // https://github.com/commercetools/commercetools-jvm-sdk/issues/239
     void setProductId(final String id) {
         final List<ProductData> currentAsList = Optional.ofNullable(getCurrent()).map(c -> Collections.singletonList(c)).orElse(Collections.emptyList());

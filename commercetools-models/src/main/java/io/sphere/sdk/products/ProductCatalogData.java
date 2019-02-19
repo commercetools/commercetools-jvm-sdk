@@ -1,5 +1,6 @@
 package io.sphere.sdk.products;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.ResourceValue;
@@ -20,13 +21,31 @@ public interface ProductCatalogData {
     /**
      * The current data of the product.
      *
-     * The JSON of the product catalog data always contains a filled current data field, but since it should only be
-     * accessed if "published" contains true, this method returns an optional {@link io.sphere.sdk.products.ProductData}.
+     * The JSON of the product catalog data always contains a filled current data field, but it should only be
+     * accessed if "published" contains true.
      *
-     * @return The current product data if present.
+     * @see ProductCatalogData#getCurrentUnsafe() to access current data even if product catalog is not "published"
+     *
+     * @return The current product data if it is "published", otherwise null.
      */
     @Nullable
     ProductData getCurrent();
+
+    /**
+     * The current data of the product.
+     *
+     * The JSON of the product catalog data always contains a filled current data field, but it should only be
+     * accessed if "published" contains true.
+     *
+     * However, this method allows for current data access even if product catalog is not "published".
+     *
+     * @see ProductCatalogData#getCurrent() to access current data in a safer way
+     *
+     * @return The current product data
+     */
+    @JsonIgnore
+    @Nullable
+    ProductData getCurrentUnsafe();
 
     ProductData getStaged();
 
