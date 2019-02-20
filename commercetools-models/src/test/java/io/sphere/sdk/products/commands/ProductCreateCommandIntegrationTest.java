@@ -63,6 +63,7 @@ public class ProductCreateCommandIntegrationTest extends IntegrationTest {
                     .build();
             final Product product = client().executeBlocking(ProductCreateCommand.of(productDraft));
             final Image loadedImage = product.getMasterData().getStaged().getMasterVariant().getImages().get(0);
+            assertThat(product.getMasterData().getCurrentUnsafe()).isNotNull();
             assertThat(loadedImage).isEqualTo(image);
             assertThat(product.getTaxCategory()).isEqualTo(taxCategory.toReference());
             assertThat(product.getMasterData().getStaged().getSearchKeywords()).isEqualTo(searchKeywords);
