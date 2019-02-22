@@ -5,7 +5,6 @@ import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.search.FilterExpression;
 import io.sphere.sdk.search.model.RangeTermFacetSearchModel;
 import org.assertj.core.api.iterable.Extractor;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.money.CurrencyUnit;
@@ -23,8 +22,6 @@ import static java.util.Locale.ENGLISH;
 import static java.util.Locale.GERMAN;
 import static org.assertj.core.api.Assertions.assertThat;
 
-//TODO FIX
-@Ignore
 public class ProductProjectionSearchTest {
     private static final ProductProjectionFilterSearchModel FILTER_MODEL = ProductProjectionSearchModel.of().filter();
     private static final ProductDataFacetSearchModel FACET_MODEL = ProductProjectionSearchModel.of().facet();

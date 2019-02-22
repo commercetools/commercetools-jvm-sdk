@@ -3,15 +3,12 @@ package io.sphere.sdk.products.queries;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.test.IntegrationTest;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.products.ProductProjectionType.STAGED;
 import static org.assertj.core.api.Assertions.assertThat;
 
-//TODO FIX
-@Ignore
 public class ProductProjectionByIdGetIntegrationTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {

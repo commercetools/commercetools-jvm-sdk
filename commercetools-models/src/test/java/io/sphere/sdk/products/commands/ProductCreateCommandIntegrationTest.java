@@ -18,7 +18,6 @@ import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.JsonNodeReferenceResolver;
 import io.sphere.sdk.types.CustomFieldsDraft;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -38,8 +37,6 @@ import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
 import static java.util.Collections.singletonMap;
 import static org.assertj.core.api.Assertions.assertThat;
 
-//TODO FIX
-@Ignore
 public class ProductCreateCommandIntegrationTest extends IntegrationTest {
 
     @BeforeClass

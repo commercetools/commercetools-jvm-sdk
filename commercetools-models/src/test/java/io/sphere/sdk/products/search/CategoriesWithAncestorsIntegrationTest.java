@@ -3,7 +3,6 @@ package io.sphere.sdk.products.search;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.test.IntegrationTest;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -14,8 +13,6 @@ import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-//TODO FIX
-@Ignore
 public class CategoriesWithAncestorsIntegrationTest extends IntegrationTest {
     @SuppressWarnings("unchecked")
     @Test

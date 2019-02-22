@@ -9,7 +9,6 @@ import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.RetryIntegrationTest;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.slf4j.LoggerFactory;
 
@@ -22,8 +21,6 @@ import java.util.stream.Stream;
 import static io.sphere.sdk.products.ProductsScenario1Fixtures.*;
 import static io.sphere.sdk.test.SphereTestUtils.asList;
 
-//TODO FIX
-@Ignore
 @NotOSGiCompatible
 public abstract class ProductProjectionSearchModelIntegrationTest extends IntegrationTest {
     protected static Data data;

@@ -3,13 +3,10 @@ package io.sphere.sdk.products.queries;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.queries.QueryPredicate;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-//TODO FIX
-@Ignore
 public class SharedProductProjectionProductDataQueryModelTest {
     private static final String embeddedProductProjectionPredicate = "masterVariant(sku=\"bar\") or variants(sku=\"bar\")";
     private static final String embeddedProductPredicate = "masterData(current(" + embeddedProductProjectionPredicate + "))";

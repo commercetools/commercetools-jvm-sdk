@@ -3,7 +3,6 @@ package io.sphere.sdk.products.search;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.search.PagedSearchResult;
 import io.sphere.sdk.search.SortExpression;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Collections;
@@ -15,8 +14,6 @@ import static io.sphere.sdk.products.ProductsScenario1Fixtures.*;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-//TODO FIX
-@Ignore
 public class ProductProjectionSearchModelSortIntegrationTest extends ProductProjectionSearchModelIntegrationTest {
 
     public static final ProductProjectionSortSearchModel PRODUCT_MODEL = ProductProjectionSearchModel.of().sort();

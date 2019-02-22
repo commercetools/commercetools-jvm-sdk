@@ -7,7 +7,6 @@ import io.sphere.sdk.search.PagedSearchResult;
 import io.sphere.sdk.test.IntegrationTest;
 import org.assertj.core.api.Condition;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static io.sphere.sdk.models.LocalizedString.ofEnglish;
@@ -15,8 +14,6 @@ import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static java.util.Locale.ENGLISH;
 
-//TODO FIX
-@Ignore
 public class FuzzyLevelIntegrationTest extends IntegrationTest {
     @BeforeClass
     public static void setUp() throws Exception {

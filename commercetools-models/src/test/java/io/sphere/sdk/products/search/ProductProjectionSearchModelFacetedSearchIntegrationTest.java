@@ -3,7 +3,6 @@ package io.sphere.sdk.products.search;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.search.*;
 import io.sphere.sdk.search.model.SimpleRangeStats;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -15,8 +14,6 @@ import static io.sphere.sdk.search.model.FilterRange.atMost;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-//TODO FIX
-@Ignore
 public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends ProductProjectionSearchModelIntegrationTest {
 
     private static final ProductProjectionFacetedSearchSearchModel PRODUCT_MODEL = ProductProjectionSearchModel.of().facetedSearch();

@@ -32,8 +32,6 @@ import static io.sphere.sdk.reviews.ReviewFixtures.withReview;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-//TODO FIX
-@Ignore
 public class ProductQueryIntegrationTest extends IntegrationTest {
 
     @Test

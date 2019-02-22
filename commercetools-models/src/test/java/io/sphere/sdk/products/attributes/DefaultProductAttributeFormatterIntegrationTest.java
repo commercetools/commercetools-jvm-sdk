@@ -20,8 +20,7 @@ import static java.util.Collections.singletonList;
 import static io.sphere.sdk.products.ProductsScenario1Fixtures.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-//TODO FIX
-@Ignore
+
 @NotOSGiCompatible
 public class DefaultProductAttributeFormatterIntegrationTest extends IntegrationTest {
 

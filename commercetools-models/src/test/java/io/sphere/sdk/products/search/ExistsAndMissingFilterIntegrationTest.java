@@ -5,7 +5,6 @@ import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.attributes.AttributeDraft;
 import io.sphere.sdk.search.model.ExistsAndMissingFilterSearchModelSupport;
 import io.sphere.sdk.test.IntegrationTest;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -23,8 +22,6 @@ import static java.util.Collections.singleton;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-//TODO FIX
-@Ignore
 public class ExistsAndMissingFilterIntegrationTest extends IntegrationTest {
     @Test
     public void categoriesExists() {

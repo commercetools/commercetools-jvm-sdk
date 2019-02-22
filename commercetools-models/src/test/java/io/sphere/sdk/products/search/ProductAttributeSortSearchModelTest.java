@@ -2,13 +2,10 @@ package io.sphere.sdk.products.search;
 
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.search.model.MultiValueSortSearchModel;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-//TODO FIX
-@Ignore
 public class ProductAttributeSortSearchModelTest {
 
     @Test

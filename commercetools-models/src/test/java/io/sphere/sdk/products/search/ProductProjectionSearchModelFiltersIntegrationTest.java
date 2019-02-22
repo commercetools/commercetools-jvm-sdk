@@ -2,7 +2,6 @@ package io.sphere.sdk.products.search;
 
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.search.FilterExpression;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -12,8 +11,6 @@ import static io.sphere.sdk.products.ProductsScenario1Fixtures.*;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-//TODO FIX
-@Ignore
 public class ProductProjectionSearchModelFiltersIntegrationTest extends ProductProjectionSearchModelIntegrationTest {
 
     public static final ProductProjectionFilterSearchModel PRODUCT_MODEL = ProductProjectionSearchModel.of().filter();

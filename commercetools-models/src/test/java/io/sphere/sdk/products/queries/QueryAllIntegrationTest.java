@@ -17,8 +17,6 @@ import java.util.concurrent.CompletionStage;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-//TODO FIX
-@Ignore
 public class QueryAllIntegrationTest extends QueryAllBase {
     //in production code it would higher #smalltestset
     private static final long PAGE_SIZE = 5;

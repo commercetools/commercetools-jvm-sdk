@@ -3,7 +3,6 @@ package io.sphere.sdk.products.search;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.search.FilterExpression;
 import io.sphere.sdk.search.PagedSearchResult;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.time.Duration;
@@ -20,8 +19,6 @@ import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-//TODO FIX
-@Ignore
 public class ProductProjectionSearchFiltersIntegrationTest extends ProductProjectionSearchIntegrationTest {
 
     @Test

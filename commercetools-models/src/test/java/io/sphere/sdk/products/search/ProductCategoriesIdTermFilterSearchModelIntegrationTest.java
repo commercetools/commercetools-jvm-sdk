@@ -28,8 +28,6 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-//TODO FIX
-@Ignore
 public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends IntegrationTest {
 
     private static CategoryTree categoryTree;

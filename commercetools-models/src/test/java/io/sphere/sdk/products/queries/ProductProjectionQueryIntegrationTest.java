@@ -43,8 +43,6 @@ import static java.util.Locale.ENGLISH;
 import static java.util.stream.Collectors.toSet;
 import static org.assertj.core.api.Assertions.assertThat;
 
-//TODO FIX
-@Ignore
 public class ProductProjectionQueryIntegrationTest extends IntegrationTest {
     public static final int MASTER_VARIANT_ID = 1;
 
