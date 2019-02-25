@@ -74,6 +74,12 @@ io.sphere.sdk.messages.queries
 io.sphere.sdk.meta
 io.sphere.sdk.models
 io.sphere.sdk.models.errors
+io.sphere.sdk.orderedits
+io.sphere.sdk.orderedits.commands
+io.sphere.sdk.orderedits.commands.stagedactions
+io.sphere.sdk.orderedits.commands.updateactions
+io.sphere.sdk.orderedits.expansion
+io.sphere.sdk.orderedits.queries
 io.sphere.sdk.orders
 io.sphere.sdk.orders.commands
 io.sphere.sdk.orders.commands.updateactions
