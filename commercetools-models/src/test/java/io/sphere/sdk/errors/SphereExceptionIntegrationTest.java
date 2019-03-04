@@ -22,6 +22,7 @@ import io.sphere.sdk.customers.queries.CustomerQuery;
 import io.sphere.sdk.http.HttpHeaders;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.HttpStatusCode;
+import io.sphere.sdk.meta.BuildInfo;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.SphereException;
 import io.sphere.sdk.models.Versioned;
@@ -123,7 +124,7 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
                 fail("should throw exception");
             } catch (final SphereServiceException e) {
                 assertThat(e.getProjectKey()).contains(getSphereClientConfig().getProjectKey());
-                assertThat(e.getMessage()).contains("1.40.0-SNAPSHOT").contains(command.toString());
+                assertThat(e.getMessage()).contains(BuildInfo.version()).contains(command.toString());
                 assertThat(e.getJsonBody().get("statusCode").asInt())
                         .overridingErrorMessage("exception contains json body of error response")
                         .isEqualTo(HttpStatusCode.CONFLICT_409);

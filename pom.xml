@@ -102,7 +102,7 @@
         <junit.version>4.12</junit.version>
         <assertj.version>3.12.0</assertj.version>
         <mockito.version>2.24.5</mockito.version>
-        <commercetools-taglets.version>1.5</commercetools-taglets.version>
+        <commercetools-taglets.version>0.8.4</commercetools-taglets.version>
         <jacoco.version>0.8.3</jacoco.version>
         <maven-scm-publish-plugin.version>3.0.0</maven-scm-publish-plugin.version>
         <maven-scm-publish-plugin.scm.url>scm:git:git@github.com:commercetools/commercetools-jvm-sdk.git
@@ -270,83 +270,80 @@
                         </compilerArguments>
                     </configuration>
                 </plugin>
-
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>${maven-javadoc-plugin.version}</version>
-                    <executions>
-                        <execution>
-                            <id>attach-javadocs</id>
-                            <goals>
-                                <goal>jar</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <docfilessubdirs>true</docfilessubdirs>
-                        <excludePackageNames>*.internal:*.priv</excludePackageNames>
-                        <quiet>true</quiet>
-                        <notimestamp>true</notimestamp>
-                        <bottom><![CDATA[
-                            <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css'>
-                            <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js'></script>
-                            <script>hljs.initHighlightingOnLoad();</script>
-                            <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
-                            <span id='custom-javascripts'></span>
-                            <script src='{@docRoot}/resources/javascripts/main.js'></script>
-                            <link rel='stylesheet' href='{@docRoot}/resources/stylesheets/main.css'>
-                        ]]></bottom>
-                        <encoding>${project.build.sourceEncoding}</encoding>
-                        <charset>${project.build.sourceEncoding}</charset>
-                        <docencoding>${project.build.sourceEncoding}</docencoding>
-                        <additionalparam>-Xdoclint:missing,syntax,accessibility,reference ${javadoc.additionalparams}
-                        </additionalparam>
-                        <taglets>
-                            <!-- see https://github.com/commercetools/commercetools-taglets -->
-                            <taglet>
-                                <tagletClass>com.commercetools.sdk.jvm.taglets.DocumentationTaglet</tagletClass>
-                                <tagletArtifact>
-                                    <groupId>com.commercetools.build.taglets</groupId>
-                                    <artifactId>commercetools-taglets</artifactId>
-                                    <version>${commercetools-taglets.version}</version>
-                                </tagletArtifact>
-                            </taglet>
-                            <taglet>
-                                <tagletClass>com.commercetools.sdk.jvm.taglets.CodeTaglet</tagletClass>
-                                <tagletArtifact>
-                                    <groupId>com.commercetools.build.taglets</groupId>
-                                    <artifactId>commercetools-taglets</artifactId>
-                                    <version>${commercetools-taglets.version}</version>
-                                </tagletArtifact>
-                            </taglet>
-                            <taglet>
-                                <tagletClass>com.commercetools.build.taglets.FileIncludeTaglet</tagletClass>
-                                <tagletArtifact>
-                                    <groupId>com.commercetools.build.taglets</groupId>
-                                    <artifactId>commercetools-taglets</artifactId>
-                                    <version>${commercetools-taglets.version}</version>
-                                </tagletArtifact>
-                            </taglet>
-                        </taglets>
-                        <excludedocfilessubdir>
-                            commercetools-internal-docs:commercetools-java-client-internal-test:commercetools-test-lib
-                        </excludedocfilessubdir>
-                        <excludePackageNames>test</excludePackageNames>
-                        <sourceFileExcludes>
-                            <sourceFileExclude>**/*Test.java</sourceFileExclude>
-                            <sourceFileExclude>**/test/*.java</sourceFileExclude>
-                        </sourceFileExcludes>
-                        <javaApiLinks>
-                            <property>
-                                <name>api_${java.version}</name>
-                                <value>http://docs.oracle.com/javase/${java.version}/docs/api/</value>
-                            </property>
-                        </javaApiLinks>
-                    </configuration>
-                </plugin>
-
-
+                <!--<plugin>-->
+                    <!--<groupId>org.apache.maven.plugins</groupId>-->
+                    <!--<artifactId>maven-javadoc-plugin</artifactId>-->
+                    <!--<version>${maven-javadoc-plugin.version}</version>-->
+                    <!--<executions>-->
+                        <!--<execution>-->
+                            <!--<id>attach-javadocs</id>-->
+                            <!--<goals>-->
+                                <!--<goal>jar</goal>-->
+                            <!--</goals>-->
+                        <!--</execution>-->
+                    <!--</executions>-->
+                    <!--<configuration>-->
+                        <!--<docfilessubdirs>true</docfilessubdirs>-->
+                        <!--<excludePackageNames>*.internal:*.priv</excludePackageNames>-->
+                        <!--<quiet>true</quiet>-->
+                        <!--<notimestamp>true</notimestamp>-->
+                        <!--<bottom><![CDATA[-->
+                            <!--<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css'>-->
+                            <!--<script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js'></script>-->
+                            <!--<script>hljs.initHighlightingOnLoad();</script>-->
+                            <!--<script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>-->
+                            <!--<span id='custom-javascripts'></span>-->
+                            <!--<script src='{@docRoot}/resources/javascripts/main.js'></script>-->
+                            <!--<link rel='stylesheet' href='{@docRoot}/resources/stylesheets/main.css'>-->
+                        <!--]]></bottom>-->
+                        <!--<encoding>${project.build.sourceEncoding}</encoding>-->
+                        <!--<charset>${project.build.sourceEncoding}</charset>-->
+                        <!--<docencoding>${project.build.sourceEncoding}</docencoding>-->
+                        <!--<additionalparam>-Xdoclint:missing,syntax,accessibility,reference ${javadoc.additionalparams}-->
+                        <!--</additionalparam>-->
+                        <!--<taglets>-->
+                            <!--&lt;!&ndash; see https://github.com/commercetools/commercetools-taglets &ndash;&gt;-->
+                            <!--<taglet>-->
+                                <!--<tagletClass>com.commercetools.sdk.jvm.taglets.DocumentationTaglet</tagletClass>-->
+                                <!--<tagletArtifact>-->
+                                    <!--<groupId>com.commercetools.build.taglets</groupId>-->
+                                    <!--<artifactId>commercetools-taglets</artifactId>-->
+                                    <!--<version>${commercetools-taglets.version}</version>-->
+                                <!--</tagletArtifact>-->
+                            <!--</taglet>-->
+                            <!--<taglet>-->
+                                <!--<tagletClass>com.commercetools.sdk.jvm.taglets.CodeTaglet</tagletClass>-->
+                                <!--<tagletArtifact>-->
+                                    <!--<groupId>com.commercetools.build.taglets</groupId>-->
+                                    <!--<artifactId>commercetools-taglets</artifactId>-->
+                                    <!--<version>${commercetools-taglets.version}</version>-->
+                                <!--</tagletArtifact>-->
+                            <!--</taglet>-->
+                            <!--<taglet>-->
+                                <!--<tagletClass>com.commercetools.build.taglets.FileIncludeTaglet</tagletClass>-->
+                                <!--<tagletArtifact>-->
+                                    <!--<groupId>com.commercetools.build.taglets</groupId>-->
+                                    <!--<artifactId>commercetools-taglets</artifactId>-->
+                                    <!--<version>${commercetools-taglets.version}</version>-->
+                                <!--</tagletArtifact>-->
+                            <!--</taglet>-->
+                        <!--</taglets>-->
+                        <!--<excludedocfilessubdir>-->
+                            <!--commercetools-internal-docs:commercetools-java-client-internal-test:commercetools-test-lib-->
+                        <!--</excludedocfilessubdir>-->
+                        <!--<excludePackageNames>test</excludePackageNames>-->
+                        <!--<sourceFileExcludes>-->
+                            <!--<sourceFileExclude>**/*Test.java</sourceFileExclude>-->
+                            <!--<sourceFileExclude>**/test/*.java</sourceFileExclude>-->
+                        <!--</sourceFileExcludes>-->
+                        <!--<javaApiLinks>-->
+                            <!--<property>-->
+                                <!--<name>api_${java.version}</name>-->
+                                <!--<value>http://docs.oracle.com/javase/${java.major.version}/docs/api/</value>-->
+                            <!--</property>-->
+                        <!--</javaApiLinks>-->
+                    <!--</configuration>-->
+                <!--</plugin>-->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
@@ -361,7 +358,6 @@
                         </argLine>
                     </configuration>
                 </plugin>
-
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
@@ -448,69 +444,70 @@
                     <artifactId>license-maven-plugin</artifactId>
                     <version>1.12</version>
                 </plugin>
-
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <version>${maven-jar-plugin.version}</version>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>
-                                    test-jar
-                                </goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-release-plugin</artifactId>
-                    <version>${maven-release-plugin.version}</version>
-                    <configuration>
-                        <autoVersionSubmodules>true</autoVersionSubmodules>
-                        <useReleaseProfile>false</useReleaseProfile>
-                        <releaseProfiles>release</releaseProfiles>
-                        <goals>deploy</goals>
-                        <tagNameFormat>v@{project.version}</tagNameFormat>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <!--
-                    http://revapi.org/modules/revapi-maven-plugin/examples/comparing-specific-artifacts.html
-
-                    mvn clean package -Darguments="-DskipTests" -DskipTests -Pjavadoc-jdk-8u121
-
-                    mvn revapi:report-aggregate -Darguments="-DskipTests" -DskipTests -Pjavadoc-jdk-8u121
-
-                    open target/site/revapi-aggregate-report.html
-                    -->
-                    <groupId>org.revapi</groupId>
-                    <artifactId>revapi-maven-plugin</artifactId>
-                    <version>0.10.5</version>
-                    <configuration>
-                        <newArtifacts>
-                            <artifact>${project.groupId}:${project.artifactId}:${project.version}</artifact>
-                        </newArtifacts>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>report</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <dependencies>
-                        <dependency>
-                            <groupId>org.revapi</groupId>
-                            <artifactId>revapi-java</artifactId>
-                            <version>0.18.2</version>
-                        </dependency>
-                    </dependencies>
-                </plugin>
             </plugins>
         </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven-jar-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>
+                                test-jar
+                            </goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>${maven-release-plugin.version}</version>
+                <configuration>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <useReleaseProfile>false</useReleaseProfile>
+                    <releaseProfiles>release</releaseProfiles>
+                    <goals>deploy</goals>
+                    <tagNameFormat>v@{project.version}</tagNameFormat>
+                </configuration>
+            </plugin>
+            <plugin>
+                <!--
+                http://revapi.org/modules/revapi-maven-plugin/examples/comparing-specific-artifacts.html
+
+                mvn clean package -Darguments="-DskipTests" -DskipTests -Pjavadoc-jdk-8u121
+
+                mvn revapi:report-aggregate -Darguments="-DskipTests" -DskipTests -Pjavadoc-jdk-8u121
+
+                open target/site/revapi-aggregate-report.html
+                -->
+                <groupId>org.revapi</groupId>
+                <artifactId>revapi-maven-plugin</artifactId>
+                <version>0.10.5</version>
+                <configuration>
+                    <newArtifacts>
+                        <artifact>${project.groupId}:${project.artifactId}:${project.version}</artifact>
+                    </newArtifacts>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.revapi</groupId>
+                        <artifactId>revapi-java</artifactId>
+                        <version>0.18.2</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
     </build>
     <profiles>
         <profile>

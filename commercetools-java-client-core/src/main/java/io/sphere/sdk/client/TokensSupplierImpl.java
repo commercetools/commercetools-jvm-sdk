@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.http.*;
 import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.json.SphereJsonUtils;
+import io.sphere.sdk.meta.BuildInfo;
 import io.sphere.sdk.models.SphereException;
 
 import javax.annotation.Nullable;
