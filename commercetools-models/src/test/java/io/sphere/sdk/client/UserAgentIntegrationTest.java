@@ -4,7 +4,6 @@ import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.http.HttpHeaders;
 import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
-import io.sphere.sdk.meta.BuildInfo;
 import io.sphere.sdk.projects.queries.ProjectGet;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
@@ -23,7 +22,7 @@ public class UserAgentIntegrationTest extends IntegrationTest {
                 assertThat(httpClient.getLastUserAgent())
                         .startsWith("commercetools-jvm-sdk")
                         .contains("JVM-SDK-integration-tests")
-                        .contains(BuildInfo.version());
+                        .contains("1.40.0-SNAPSHOT");
             }
         }
     }

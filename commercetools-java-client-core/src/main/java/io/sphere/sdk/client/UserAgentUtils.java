@@ -1,7 +1,6 @@
 package io.sphere.sdk.client;
 
 import io.sphere.sdk.http.HttpClient;
-import io.sphere.sdk.meta.BuildInfo;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.commons.lang3.text.StrSubstitutor;
 import org.slf4j.LoggerFactory;
@@ -31,8 +30,8 @@ final class UserAgentUtils {
         final String template = "${sdkLikeGitHubRepo}/${sdkVersion} (${underlyingHttpClient}) ${runtime}/${runtimeVersion} (${optionalOs}; ${optionalOsarch}) ${solutionInfos}";
         final Map<String, String> values = new HashMap<>();
         values.put("sdkLikeGitHubRepo", "commercetools-jvm-sdk");
-        values.put("sdkVersion", BuildInfo.version());
-        final String underlyingHttpClient = Optional.ofNullable(httpClient.getUserAgent()).orElse("unknown/" + BuildInfo.version());
+        values.put("sdkVersion", "1.40.0-SNAPSHOT");
+        final String underlyingHttpClient = Optional.ofNullable(httpClient.getUserAgent()).orElse("unknown/" + "commercetools-jvm-sdk/1.40");
         values.put("underlyingHttpClient", underlyingHttpClient);
         values.put("runtime", "Java");
         values.put("runtimeVersion", SystemUtils.JAVA_RUNTIME_VERSION);

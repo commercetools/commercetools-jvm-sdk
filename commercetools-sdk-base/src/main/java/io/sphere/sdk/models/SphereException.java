@@ -1,3 +1,4 @@
+
 package io.sphere.sdk.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -7,7 +8,6 @@ import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.StringHttpRequestBody;
 import io.sphere.sdk.json.SphereJsonUtils;
-import io.sphere.sdk.meta.BuildInfo;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nullable;
@@ -15,7 +15,6 @@ import java.nio.charset.StandardCharsets;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -100,7 +99,7 @@ public class SphereException extends RuntimeException {
                 .append(httpSummary())
                 .append(responseBodyFormatted())
                 .append("http response: ").append(Optional.ofNullable(getHttpResponse()).map(Object::toString).orElse("<unknown>")).append("\n")
-                .append("SDK: ").append(BuildInfo.version()).append("\n")
+                .append("SDK: ").append("commercetools-jvm-sdk/1.40").append("\n")
                 .append("project: ").append(Optional.ofNullable(getProjectKey()).orElse("<unknown>")).append("\n")
                 .append(Optional.ofNullable(getSphereRequest()).map(x -> x.httpRequestIntent()).map(x -> "" + x.getHttpMethod() + " " + x.getPath()).map(x -> "endpoint: " + x + "\n").orElse(""))
                 .append("Java: ").append(System.getProperty("java.version")).append("\n")
@@ -203,9 +202,9 @@ public class SphereException extends RuntimeException {
     }
 
 
-    private static String getVersionForJavadoc() {
-        return getVersionForJavadoc(BuildInfo.version());
-    }
+//    private static String getVersionForJavadoc() {
+//        return getVersionForJavadoc(BuildInfo.version());
+//    }
 
     //package scope for testing
     static String getVersionForJavadoc(final String version) {

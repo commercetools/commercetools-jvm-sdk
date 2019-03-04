@@ -4,7 +4,6 @@ import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.http.HttpHeaders;
 import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
-import io.sphere.sdk.meta.BuildInfo;
 import org.junit.Test;
 
 import javax.annotation.Nullable;
@@ -18,7 +17,7 @@ public class TokensSupplierImplTest {
         final SphereAuthConfig authConfig = SphereAuthConfig.of("a", "b", "c");
         final RecordHttpClient httpClient = new RecordHttpClient();
         SphereAccessTokenSupplier.ofOneTimeFetchingToken(authConfig, httpClient, true).get();
-        final String expectedValue = BuildInfo.userAgent();
+        final String expectedValue = "1.40.0-SNAPSHOT";
         final String header = httpClient.request.getHeaders().findFlatHeader(HttpHeaders.USER_AGENT).orElse("");
         assertThat(header).matches("^(?<sdkOrClient>[^\\s\\/]+)(\\/(?<sdkOrClientVersion>\\S+))?(\\s+\\((?<sdkOrClientInfo>[^(]*)\\))?\\s+(?<environment>[^\\s\\/]+)(\\/(?<environmentVersion>\\S+))?(\\s+\\((?<environmentInfo>[^(]*)\\))?\\s+(?<solution>[^\\s\\/]+)(\\/(?<solutionVersion>\\S+))?(\\s+\\((?<solutionInfo>[^(]*)\\))?$").contains(expectedValue);
     }
