@@ -19,9 +19,7 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /**
  * Uploads an Image for a product.
- * <p>
  * <p>Uploads a binary image file to a given {@link io.sphere.sdk.products.ProductVariant}. The supported image formats are JPEG, PNG and GIF.</p>
- * <p>
  * Example usage executing the command:
  * {@include.example io.sphere.sdk.products.commands.ProductImageUploadCommandIntegrationTest#uploadImage()}
  */

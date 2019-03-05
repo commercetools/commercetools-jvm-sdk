@@ -14,12 +14,11 @@ import java.util.Collection;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
+import static io.sphere.sdk.products.ProductsScenario1Fixtures.*;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singleton;
 import static java.util.Collections.singletonList;
-import static io.sphere.sdk.products.ProductsScenario1Fixtures.*;
 import static org.assertj.core.api.Assertions.assertThat;
-
 
 @NotOSGiCompatible
 public class DefaultProductAttributeFormatterIntegrationTest extends IntegrationTest {

@@ -109,7 +109,7 @@
         </maven-scm-publish-plugin.scm.url>
 
         <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
-        <maven-javadoc-plugin.version>3.0.1</maven-javadoc-plugin.version>
+        <maven-javadoc-plugin.version>3.1.0</maven-javadoc-plugin.version>
         <maven-failsafe-plugin.version>3.0.0-M3</maven-failsafe-plugin.version>
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
@@ -257,6 +257,8 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${maven-compiler-plugin.version}</version>
                     <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
                         <release>${java.version}</release>
                         <encoding>${project.build.sourceEncoding}</encoding>
                         <compilerArguments>
@@ -270,6 +272,10 @@
                         </compilerArguments>
                     </configuration>
                 </plugin>
+
+
+
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
@@ -288,15 +294,15 @@
                         <excludePackageNames>*.internal:*.priv</excludePackageNames>
                         <quiet>true</quiet>
                         <notimestamp>true</notimestamp>
-                        <bottom><![CDATA[
-                            <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css'>
-                            <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js'></script>
-                            <script>hljs.initHighlightingOnLoad();</script>
-                            <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
-                            <span id='custom-javascripts'></span>
-                            <script src='{@docRoot}/resources/javascripts/main.js'></script>
-                            <link rel='stylesheet' href='{@docRoot}/resources/stylesheets/main.css'>
-                        ]]></bottom>
+                        <!--<bottom><![CDATA[-->
+                            <!--<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css'>-->
+                            <!--<script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js'></script>-->
+                            <!--<script>hljs.initHighlightingOnLoad();</script>-->
+                            <!--<script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>-->
+                            <!--<span id='custom-javascripts'></span>-->
+                            <!--<script src='{@docRoot}/resources/javascripts/main.js'></script>-->
+                            <!--<link rel='stylesheet' href='{@docRoot}/resources/stylesheets/main.css'>-->
+                        <!--]]></bottom>-->
                         <encoding>${project.build.sourceEncoding}</encoding>
                         <charset>${project.build.sourceEncoding}</charset>
                         <docencoding>${project.build.sourceEncoding}</docencoding>
@@ -345,6 +351,11 @@
                         </javaApiLinks>
                     </configuration>
                 </plugin>
+
+
+
+
+
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>

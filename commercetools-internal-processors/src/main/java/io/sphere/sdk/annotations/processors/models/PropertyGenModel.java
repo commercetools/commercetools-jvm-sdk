@@ -143,8 +143,8 @@ public class PropertyGenModel {
      * Replaces the parameterized type of this type with the given replacement type.
      * <p>
      * This is useful to replace a reference type {@code Reference<Example>} with a
-     * referenceable type {@type Referenceable<Example>}.
-     *
+     * referenceable type {@code Referenceable<Example>}.
+     * </p>
      * @param replacementType the replacement type
      * @return a new type name with the replacement type which has the same type arguments as t
      */

@@ -153,7 +153,7 @@ abstract class BaseAbstractGenerator {
      * @param property             the property to generate the parameter
      * @param useLowercaseBooleans {@link FactoryMethod#useLowercaseBooleans()}
      * @param copyNullable         if true, an existing {@link Nullable} annotation on the model will be copied to the parameter
-     * @return
+     * @return {@link ParameterSpec}
      */
     protected ParameterSpec createParameter(final PropertyGenModel property, final boolean useLowercaseBooleans, final boolean copyNullable) {
         TypeName type = property.getType();
