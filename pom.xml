@@ -290,6 +290,7 @@
                         </execution>
                     </executions>
                     <configuration>
+
                         <docfilessubdirs>true</docfilessubdirs>
                         <excludePackageNames>*.internal:*.priv</excludePackageNames>
                         <quiet>true</quiet>
@@ -306,8 +307,8 @@
                         <encoding>${project.build.sourceEncoding}</encoding>
                         <charset>${project.build.sourceEncoding}</charset>
                         <docencoding>${project.build.sourceEncoding}</docencoding>
-                        <additionalparam>-Xdoclint:missing,syntax,accessibility,reference ${javadoc.additionalparams}
-                        </additionalparam>
+
+                        <additionalparam>-Xdoclint:missing,syntax,accessibility,reference ${javadoc.additionalparams}</additionalparam>
                         <taglets>
                             <!-- see https://github.com/commercetools/commercetools-taglets -->
                             <taglet>

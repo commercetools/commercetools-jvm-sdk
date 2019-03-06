@@ -39,7 +39,7 @@ public enum TaxMode implements SphereEnumeration {
      *
      * {@include.example io.sphere.sdk.carts.ExternalTaxRatesIntegrationTest#addCustomLineItem()}
      *
-     * <h3 id="add-line-item-with-delayed-external-tax-rate">Add a CustomLineItem and add the external tax rate later</h3>
+     * <h3 id="add-custom-line-item-with-delayed-external-tax-rate">Add a CustomLineItem and add the external tax rate later</h3>
      *
      * {@include.example io.sphere.sdk.carts.ExternalTaxRatesIntegrationTest#setCustomLineItemTaxRate()}
      *

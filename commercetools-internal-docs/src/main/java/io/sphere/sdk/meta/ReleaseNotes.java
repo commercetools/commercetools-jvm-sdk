@@ -150,7 +150,6 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
- -->
 
  <h3 class=released-version id="v1_40_0">1.40.0</h3>
  <ul>
@@ -172,8 +171,8 @@ import java.util.function.Function;
     <li class=change-in-release> {@link OrderImportDraft#getShippingInfo()} is of type {@link ShippingInfoImportDraft} instead of {@link OrderShippingInfo}</li>
     <li class=change-in-release> {@link io.sphere.sdk.apiclient.ApiClient} has a new attribute {@link ApiClient#getDeleteAt()} which marks when the project key would be deleted</li>
     <li class=change-in-release> {@link io.sphere.sdk.apiclient.ApiClientDraft} has a new attribute {@link ApiClientDraft#getDeleteDaysAfterCreation()} which allows to specifiy the key life length </li>
-    <li class=change-in-release> {@link LineItemDraft#getSupplyChannel()} and {@link LineItemDraft#getDistributionChannel()} are now of type {@link ResourceIdentifier<Channel>} instead of {@link Reference<Channel>}</li>
-    <li class=change-in-release> {@link PriceDraft#getChannel()} is of type {@link ResourceIdentifier<Channel>} instead of {@link Reference<Channel>}</li>
+    <li class=change-in-release> {@link LineItemDraft#getSupplyChannel()} and {@link LineItemDraft#getDistributionChannel()} are now of type {@code ResourceIdentifier<Channel>} instead of {@code Reference<Channel>}</li>
+    <li class=change-in-release> {@link PriceDraft#getChannel()} is of type {@code ResourceIdentifier<Channel>} instead of {@code Reference<Channel>}</li>
     <li class=change-in-release> removed @Deprecated annotation from {@link io.sphere.sdk.carts.commands.updateactions.AddLineItem#of(String, int, long)}</li>
     <li class=change-in-release> removed @Deprecated annotation from {@link io.sphere.sdk.carts.commands.updateactions.AddLineItem#of(ProductIdentifiable, int, long)}</li>
     <li class=change-in-release> {@link ProductVariantDraft#getPrices()}, {@link ProductVariantDraft#getAttributes} and {@link ProductVariantDraft#getImages()} are now optional</li>
@@ -182,18 +181,18 @@ import java.util.function.Function;
 
  <h3 class=released-version id="v1_38_0">1.38.0 (07.12.2018)</h3>
  <ul>
-    <li class=change-in-release> {@link ShippingMethodDraft}  accepts {@link List<io.sphere.sdk.shippingmethods.ZoneRateDraft>} instead of {@link List<io.sphere.sdk.shippingmethods.ZoneRate>}</li>
+    <li class=change-in-release> {@link ShippingMethodDraft}  accepts {@code List<io.sphere.sdk.shippingmethods.ZoneRateDraft>} instead of {@code List<io.sphere.sdk.shippingmethods.ZoneRate>}</li>
     <li class=change-in-release> {@link io.sphere.sdk.zones.Zone} and {@link io.sphere.sdk.zones.ZoneDraft} contains a key property</li>
     <li class=change-in-release> {@link io.sphere.sdk.zones.Zone} is updatable, deletable by key </li>
     <li class=new-in-release> {@link io.sphere.sdk.zones.commands.updateactions.SetKey} to set key for a zone </li>
-    <li class=change-in-release> {@link RemoveZone#getZone()} return a {@link ResourceIdentifier<io.sphere.sdk.zones.Zone>} instead of {@link Reference<io.sphere.sdk.zones.Zone>}</li>
+    <li class=change-in-release> {@link RemoveZone#getZone()} return a {@code ResourceIdentifier<io.sphere.sdk.zones.Zone>} instead of {@code Reference<io.sphere.sdk.zones.Zone>}</li>
     <li class=change-in-release> {@link GiftLineItemCartDiscountValue#getProduct()}, {@link GiftLineItemCartDiscountValue#getDistributionChannel()}, {@link GiftLineItemCartDiscountValue#getSupplyChannel()} changed return type from {@link Reference} to {@link ResourceIdentifier}</li>
  </ul>
 
  <h3 class=released-version id="v1_37_0">1.37.0 (06.11.2018)</h3>
  <ul>
-    <li class=change-in-release> {@link io.sphere.sdk.shippingmethods.commands.updateactions.ChangeTaxCategory} accept {@link ResourceIdentifier<TaxCategory>} as a parameter now </li
-    <li class=change-in-release> {@link ShippingMethodDraftBuilder} accept a {@link ResourceIdentifier<TaxCategory>} which is a {@link Reference<TaxCategory>} generalization </li>
+    <li class=change-in-release> {@link io.sphere.sdk.shippingmethods.commands.updateactions.ChangeTaxCategory} accept {@code ResourceIdentifier<TaxCategory>} as a parameter now </li>
+    <li class=change-in-release> {@link ShippingMethodDraftBuilder} accept a {@code ResourceIdentifier<TaxCategory>} which is a {@code Reference<TaxCategory>} generalization </li>
     <li class=change-in-release> Added support for asynchttpclient 2.5.4 </li>
     <li class=change-in-release> Now {@link ReturnItem} has two specializations {@link LineItemReturnItem} and {@link CustomLineItemReturnItem} </li>
     <li class=change-in-release> Added new field {@link UserProvidedIdentifiers#getCustomerNumber()} to reflect customer number in change messages</li>
@@ -231,7 +230,7 @@ import java.util.function.Function;
 
  <h3 class=released-version id="v1_34_0">1.34.0 (10.07.2018)</h3>
  <ul>
-    <li class=change-in-release>Changed {@link ProductVariantImportDraftBuilder#prices(List)} argument from {@link List<Price>} to {@link List<PriceDraft>}</li>
+    <li class=change-in-release>Changed {@link ProductVariantImportDraftBuilder#prices(List)} argument from {@code List<Price>} to {@code List<PriceDraft>}</li>
     <li class=added-in-release>Now {@link io.sphere.sdk.categories.commands.updateactions.ChangeParent} has an additional method {@link io.sphere.sdk.categories.commands.updateactions.ChangeParent#of(ResourceIdentifier)} to point out the changed parent via its resource identifier.</li>
     <li class=added-in-release>Now supporting google PubSub destination {@link io.sphere.sdk.subscriptions.PubSubDestination} </li>
     <li class=change-in-release>Added field {@link MessageSubscriptionPayload#getPaylaodNotIncluded()} to {@link io.sphere.sdk.subscriptions.PayloadNotIncluded} to give more details when the payload is not included in a message</li>
@@ -253,7 +252,7 @@ import java.util.function.Function;
  <li class=change-in-release>Added field {@link RemoveLineItem#getShippingDetailsToRemove()} to {@link RemoveLineItem}</li>
  <li class=change-in-release>update jackson to 2.9.5</li>
  <li class=change-in-release>Update org.asynchttpclient:async-http-client from version 2.0.38 to 2.4.5</li>
- <li class=change-in-release>Changed return type of {@link Cart#getCustomerGroup()} and {@link Customer#getCustomerGroup()} from {@link Reference<CustomerGroup>} to {@link ResourceIdentifier<CustomerGroup>}</li>
+ <li class=change-in-release>Changed return type of {@link Cart#getCustomerGroup()} and {@link Customer#getCustomerGroup()} from {@code Reference<CustomerGroup>} to {@code ResourceIdentifier<CustomerGroup>}</li>
  <li class=change-in-release>Add {@link io.sphere.sdk.utils.HighPrecisionMoneyImpl} to enable high precision money in commercetools plateform when needed.</li>
  <li class=change-in-release>to enable permanent erasure of users data, a boolean parameter can be set now to specify this in
     {@link io.sphere.sdk.customers.commands.CustomerDeleteCommand},{@link io.sphere.sdk.orders.commands.OrderDeleteCommand}, {@link io.sphere.sdk.carts.commands.CartDeleteCommand}, {@link io.sphere.sdk.payments.commands.PaymentDeleteCommand},
@@ -277,7 +276,7 @@ import java.util.function.Function;
      {@link io.sphere.sdk.orders.commands.updateactions.UpdateItemShippingAddress},
  supported now in our SDK.
  </li>
- <li class=change-in-release>{@link ItemShippingDetails#getTargets()} returns {@link Map<String, Long>} instead of {@link Map<String, Integer>}</li>
+ <li class=change-in-release>{@link ItemShippingDetails#getTargets()} returns {@code Map<String, Long>} instead of {@code Map<String, Integer>}</li>
  <li class=new-in-release>add support for Aws lambda based extension via {@link io.sphere.sdk.extensions.AWSLambdaDestination}</li>
  <li class=removed-in-release> {@link MatchingProductDiscountGet} Query to lockup matching product discount.</li>
  <li class=fixed-in-release>Our javadoc now contains documentation for our generated classes too.</li>
@@ -302,9 +301,9 @@ import java.util.function.Function;
  <li class=change-in-release>Changed visibility of {@link ProductLike} interface to public.</li>
  <li class=change-in-release>Added {@link ExtensionResourceType} in order to add type check while creating {@link Trigger#getResourceTypeId()} field, instead of using string laterals.</li>
  <li class=change-in-release>Update jackson from 2.9.3 to 2.9.4 </li>
- <li class=change-in-release>Changed return type of {@link ProductTypeDraft#getAttributes()} from {@link List<AttributeDefinition>} for {@link List<io.sphere.sdk.products.attributes.AttributeDefinitionDraft>}</li>
- <li class=change-in-release>Changed return type of {@link ProductTypeDraft#getAttributes()} from {@link List<AttributeDefinition>} for {@link List<io.sphere.sdk.products.attributes.AttributeDefinitionDraft>}</li>
- <li class=change-in-release>Changed return type of {@link ProductTypeDraftDsl#getAttributes()} from {@link List<AttributeDefinition>} for {@link List<io.sphere.sdk.products.attributes.AttributeDefinitionDraft>}</li>
+ <li class=change-in-release>Changed return type of {@link ProductTypeDraft#getAttributes()} from {@code List<AttributeDefinition>} for {@code List<io.sphere.sdk.products.attributes.AttributeDefinitionDraft>}</li>
+ <li class=change-in-release>Changed return type of {@link ProductTypeDraft#getAttributes()} from {@code List<AttributeDefinition>} for {@code List<io.sphere.sdk.products.attributes.AttributeDefinitionDraft>}</li>
+ <li class=change-in-release>Changed return type of {@link ProductTypeDraftDsl#getAttributes()} from {@code List<AttributeDefinition>} for {@code List<io.sphere.sdk.products.attributes.AttributeDefinitionDraft>}</li>
  <li class=change-in-release>Added {@link ItemShippingDetails#getTargetsMap()} convenience method.</li>
  <li class=new-in-release>Added {@link io.sphere.sdk.producttypes.commands.updateactions.ChangeEnumKey} and  {@link io.sphere.sdk.producttypes.commands.updateactions.ChangeAttributeName} update actions to {@link ProductType}</li>
  <li class=fixed-in-release>Added missing accessor method for {@code assetKey} to {@link ChangeAssetName#getAssetKey()} and {@link SetAssetCustomField#getAssetKey()}.</li>
@@ -332,7 +331,7 @@ import java.util.function.Function;
 
  <h3 class=released-version id="v1_28_0">1.28.0 (18.01.2018)</h3>
  <ul>
- <li class=change-in-release>{@link CategoryDraft#getParent()} changed return type from {@link Reference<Category>} to {@link ResourceIdentifier<Category>}</li>
+ <li class=change-in-release>{@link CategoryDraft#getParent()} changed return type from {@code Reference<Category>} to {@code ResourceIdentifier<Category>}</li>
  <li class=change-in-release>{@link CategoryDraftBuilder#parent(Referenceable)} is now deprecated and should be replaced by the new method {@link CategoryDraftBuilder#parent(ResourceIdentifier)}</li>
  <li class=change-in-release>Updated Asynchronous Http Client to 2.0.38</li>
  <li class=change-in-release>Added member {@link ParcelDraft#getItems()}</li>
@@ -458,7 +457,7 @@ import java.util.function.Function;
  {@link io.sphere.sdk.shoppinglists.ShoppingListDraftBuilder#plusLineItems(List)}).
  </li>
  <li class=new-in-release>Added missing {@link io.sphere.sdk.payments.queries.PaymentByKeyGet} query,
- {@link io.sphere.sdk.payments.commands.PaymentDeleteCommand#ofKey(String, Long)} and<
+ {@link io.sphere.sdk.payments.commands.PaymentDeleteCommand#ofKey(String, Long)} and
  {@link io.sphere.sdk.payments.commands.PaymentUpdateCommand#ofKey(String, Long, UpdateAction)} commands.
  </li>
  <li class=new-in-release>Added support for creating multi buy discounts {@link io.sphere.sdk.cartdiscounts.MultiBuyLineItemsTarget},
@@ -484,7 +483,7 @@ import java.util.function.Function;
  <li class=new-in-release>Added new {@link io.sphere.sdk.carts.commands.updateactions.SetAnonymousId} cart update action.</li>
  <li class=new-in-release>Added new key property to customer {@link Customer#getKey()}, {@link CustomerDraft#getKey()} and corresponding update action {@link io.sphere.sdk.customers.commands.updateactions.SetKey}.
  Added {@link io.sphere.sdk.customers.queries.CustomerByKeyGet}, {@link io.sphere.sdk.customers.commands.CustomerDeleteCommand#ofKey(String, Long)} and {@link io.sphere.sdk.customers.commands.CustomerUpdateCommand#ofKey(String, Long, UpdateAction)}.</li>
- <li class=new-in-release><Added support for publish prices only {@link PublishScope}, {@link io.sphere.sdk.products.commands.updateactions.Publish#ofScope(PublishScope)} and {@link ProductPublishedMessage#getScope()}.</li>
+ <li class=new-in-release>Added support for publish prices only {@link PublishScope}, {@link io.sphere.sdk.products.commands.updateactions.Publish#ofScope(PublishScope)} and {@link ProductPublishedMessage#getScope()}.</li>
  </ul>
  <h3 class=released-version id="v1_22_0">1.22.0 (09.08.2017)</h3>
  <ul>
@@ -555,7 +554,6 @@ import java.util.function.Function;
  but requires a recompilation of all projects that depend on this class.</li>
  <li class=new-in-release>{@link io.sphere.sdk.categories.queries.CategoryQuery} now
  supports sorting by {@link Category#getOrderHint()} via {@link CategoryQueryModel#orderHint()}.</li>
- </li>
  <li class=new-in-release>Added {@link io.sphere.sdk.products.commands.updateactions.SetAssetSources} update action for products.</li>
  <li class=new-in-release>Added new message {@link io.sphere.sdk.products.messages.ProductImageAddedMessage}.</li>
  <li class=fixed-in-release>The shopping lists {@link io.sphere.sdk.shoppinglists.LineItem#getVariant()} {@link ProductVariant#getIdentifier()}
@@ -588,7 +586,7 @@ import java.util.function.Function;
  <h3 class=released-version id="v1_15_0">1.15.0 (04.04.2017)</h3>
  <ul>
  <li class=new-in-release>Added query model {@link PriceTierQueryModel} for tiered prices {@link PriceQueryModel#tiers()}.</li>
- </ul
+ </ul>
 
  <h3 class=released-version id="v1_14_1">1.14.1 (30.03.2017)</h3>
  <ul>
@@ -736,7 +734,7 @@ import java.util.function.Function;
  <li class=new-in-release>{@link io.sphere.sdk.products.commands.updateactions.MoveImageToPosition}</li>
  <li class=new-in-release>{@link PaymentTransactionStateChangedMessage#getTransactionId()} </li>
  <li class=new-in-release>{@link CartShippingInfo#getDiscountedPrice()} and the {@link ShippingInfoExpansionModel#discountedPrice()} to receive the value of discounts for shipping costs and maybe expand in the {@link Cart} the {@link io.sphere.sdk.cartdiscounts.CartDiscount} objects.</li>
- <li class=fixed-in-release>{@link Category}s {@link Category#toString()} is now using reflection so former missing fields like "metaTitle" will be included in the output.</li>
+ <li class=fixed-in-release>{@link Category}s {@code Category#toString()} is now using reflection so former missing fields like "metaTitle" will be included in the output.</li>
  <li class=fixed-in-release>{@link io.sphere.sdk.jsonnodes.queries.JsonNodeQuery#of(String)} accepts now also query parameters</li>
  <li class=fixed-in-release>{@link ProductDraftBuilder#of(ProductDraft)} is not leaky anymore, in previous versions not all fields were copied</li>
  </ul>
@@ -861,7 +859,7 @@ import java.util.function.Function;
  <li class=removed-in-release>{@code SetCustomTypeBase#getTypeId()}</li>
  <li class=removed-in-release>{@code SetCustomTypeBase#getTypeKey()}</li>
  <li class=removed-in-release>{@code LocalizedString#ofEnglishLocale(String)}</li>
- <li class=removed-in-release>{@link io.sphere.sdk.search.FilterDsl} <abbr title="copy methods starting with 'with'">withers</abbr> taking {@link io.sphere.sdk.search.FilterExpression} as argument</li>
+ <li class=removed-in-release>{@link io.sphere.sdk.search.FilterDsl} withers taking {@link io.sphere.sdk.search.FilterExpression} as argument</li>
  <li class=removed-in-release>methods {@code getTermFacetResult(final TermFacetExpression<T> facetExpression)}, {@code getRangeFacetResult(final RangeFacetExpression<T> facetExpression)}, and {@code getFilteredFacetResult(final FilteredFacetExpression<T> facetExpression)} in {@link io.sphere.sdk.search.PagedSearchResult}</li>
  <li class=removed-in-release>in search models the methods starting with {@code by}</li>
  <li class=removed-in-release>internal utility classes {@code IterableUtils}, {@code MapUtils}, {@code SetUtils}, {@code StringUtils}, {@code PatternMatcher} and {@code UrlUtils}</li>

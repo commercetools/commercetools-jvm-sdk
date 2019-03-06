@@ -6,7 +6,6 @@ import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Address;
-import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.types.CustomDraft;
@@ -94,7 +93,7 @@ public interface CartDraft extends CustomDraft {
      *  Each address must contain a key which is unique in this cart.
      *  Line items will use these keys to reference the addresses under
      *  their `shippingDetails`
-     * @return
+     * @return {@link List}
      */
     @Nullable
     List<Address> getItemShippingAddresses();

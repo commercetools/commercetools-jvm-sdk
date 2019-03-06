@@ -10,10 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import javax.annotation.Generated;
 import javax.annotation.Nullable;
 import javax.annotation.processing.Messager;
-import javax.lang.model.element.Element;
-import javax.lang.model.element.ExecutableElement;
-import javax.lang.model.element.Modifier;
-import javax.lang.model.element.TypeElement;
+import javax.lang.model.element.*;
 import javax.lang.model.type.MirroredTypeException;
 import javax.lang.model.type.MirroredTypesException;
 import javax.lang.model.type.TypeMirror;
@@ -103,7 +100,8 @@ public class UpdateActionGenerator extends AbstractGenerator<ExecutableElement> 
                 .addJavadoc("Updates the {@code $L} property of a {@link $T}.\n", property.getName(), ClassName.get(resourceType))
                 .addJavadoc("\n")
                 .addJavadoc(includeExampleJavaDoc)
-                .addJavadoc("@see $T#$L()\n", annotatedTypeName, propertyMethod.getSimpleName())
+                //TODO FIX ME
+                //.addJavadoc("@see $T#$L()\n", annotatedTypeName, propertyMethod.getSimpleName())
                 .superclass(ParameterizedTypeName.get(ClassName.get(UpdateActionImpl.class), ClassName.get(resourceType)))
                 .addModifiers(isAbstract ? new Modifier[]{Modifier.ABSTRACT} : new Modifier[]{Modifier.PUBLIC, Modifier.FINAL})
                 .addAnnotation(AnnotationSpec.builder(Generated.class)

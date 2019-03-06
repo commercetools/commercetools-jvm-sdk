@@ -26,7 +26,7 @@ import java.util.concurrent.CompletionStage;
  <p>Execution example:</p>
  {@include.example io.sphere.sdk.sequencegenerators.BigIntegerNumberGeneratorIntegrationTest#firstNumberIsOne()}
 
- <h3 id="create-type">Create number sequence with a given initial value</h3>
+ <h3 id="create-type-given-initial-value">Create number sequence with a given initial value</h3>
 
  <p>It is possible to assign an initial value for the sequence</p>
 

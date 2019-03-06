@@ -32,7 +32,7 @@ public interface ItemShippingDetails {
      * Boolean, {@literal true} if the quantity of the (custom) line item is equal to the sum of the quantities in {@code targets}, {@literal false}
      * otherwise. A cart cannot be ordered when the value is {@literal false} and the error
      * {@link io.sphere.sdk.shippingmethods.errors.InvalidItemShippingDetailsError} will be triggered.
-     * @return
+     * @return boolean value
      */
     @JsonProperty("valid")
     boolean isValid();

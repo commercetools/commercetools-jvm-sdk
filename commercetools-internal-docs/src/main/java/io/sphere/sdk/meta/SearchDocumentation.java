@@ -15,42 +15,7 @@ import io.sphere.sdk.models.Base;
 
  <p>The following examples in this document are based on the search for products. The product data defined in the platform used for the following code examples are:
 
- <table border="1" class="doc-table" summary="table that shows the products used for the code examples">
-    <tr>
-        <th>Product</th>
-         <th colspan="2">Product1 "shoe"</th>
-         <th colspan="2">Product2 "shirt"</th>
-         <th colspan="2">Product3 "dress"</th>
-     </tr>
-     <tr align="center">
-         <th>Variant</th>
-         <th>1</th>
-         <th>2</th>
-         <th>1</th>
-         <th>2</th>
-         <th>1</th>
-         <th>2</th>
-     </tr>
-    <tr align="center">
-         <th>Color</th>
-         <td>blue</td>
-         <td></td>
-         <td>red</td>
-         <td></td>
-         <td>blue</td>
-         <td></td>
-    </tr>
-    <tr align="center">
-         <th>Size</th>
-         <td>38</td>
-         <td>46</td>
-         <td>36</td>
-         <td>44</td>
-         <td>40</td>
-         <td>42</td>
-     </tr>
- </table>
-
+--FIRST_TABLE--
 
 <h3 id=full-text-search>Full Text Search</h3>
 
@@ -156,33 +121,7 @@ import io.sphere.sdk.models.Base;
     <dd>This parameter allows to filter those products used for facets calculation only, without affecting the results whatsoever. All facet calculations are affected except for those facets operating on the same field as the filter, enabling faceted search when combined with Filter Results.</dd>
  </dl>
 
-  <table border="1" class="doc-table" summary="table that shows which filter is applied to which output">
-    <tr>
-        <th>&nbsp;</th>
-        <th>Does it filter results?</th>
-        <th>Does it filter facets?</th>
-    </tr>
-    <tr align="center">
-        <th>Filter Query</th>
-        <td>Yes</td>
-        <td>Yes</td>
-    </tr>
-    <tr align="center">
-        <th>Filter Results</th>
-        <td>Yes</td>
-        <td>No</td>
-    </tr>
-    <tr align="center">
-        <th>Filter Facets</th>
-        <td>No</td>
-        <td>Yes</td>
-    </tr>
-    <tr align="center">
-        <th>No filter</th>
-        <td>No</td>
-        <td>No</td>
-    </tr>
- </table>
+ --SECOND_TABLE--
 
  <p>For further explanation, some diagrams regarding the filter mechanism can be found in the <a href="http://slides.com/lauraluiz/filters-and-facets">Filters and Facets</a> presentation.</p>
 
@@ -240,6 +179,78 @@ import io.sphere.sdk.models.Base;
  {@include.example io.sphere.sdk.products.search.ProductProjectionSearchFacetedSearchIntegrationTest#facetedSearchVerboseExample}
 
  */
+
+//TODO FIX ME
+//-First table :
+/*
+ <table border="1" class="doc-table" summary="table that shows the products used for the code examples">
+    <tr>
+        <th>Product</th>
+         <th colspan="2">Product1 "shoe"</th>
+         <th colspan="2">Product2 "shirt"</th>
+         <th colspan="2">Product3 "dress"</th>
+     </tr>
+     <tr>
+         <th>Variant</th>
+         <th>1</th>
+         <th>2</th>
+         <th>1</th>
+         <th>2</th>
+         <th>1</th>
+         <th>2</th>
+     </tr>
+    <tr>
+         <th>Color</th>
+         <td>blue</td>
+         <td></td>
+         <td>red</td>
+         <td></td>
+         <td>blue</td>
+         <td></td>
+    </tr>
+    <tr>
+         <th>Size</th>
+         <td>38</td>
+         <td>46</td>
+         <td>36</td>
+         <td>44</td>
+         <td>40</td>
+         <td>42</td>
+     </tr>
+ </table>
+
+ */
+//-Second table:
+/*
+    <table border="1" class="doc-table" summary="table that shows which filter is applied to which output">
+    <tr>
+        <th>&nbsp;</th>
+        <th>Does it filter results?</th>
+        <th>Does it filter facets?</th>
+    </tr>
+    <tr align="center">
+        <th>Filter Query</th>
+        <td>Yes</td>
+        <td>Yes</td>
+    </tr>
+    <tr align="center">
+        <th>Filter Results</th>
+        <td>Yes</td>
+        <td>No</td>
+    </tr>
+    <tr align="center">
+        <th>Filter Facets</th>
+        <td>No</td>
+        <td>Yes</td>
+    </tr>
+    <tr align="center">
+        <th>No filter</th>
+        <td>No</td>
+        <td>No</td>
+    </tr>
+ </table>
+*/
+
 public final class SearchDocumentation extends Base {
     private SearchDocumentation() {
     }

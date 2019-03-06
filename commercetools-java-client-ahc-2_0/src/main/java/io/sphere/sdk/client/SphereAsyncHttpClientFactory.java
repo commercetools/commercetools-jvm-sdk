@@ -2,7 +2,6 @@ package io.sphere.sdk.client;
 
 import io.sphere.sdk.http.AsyncHttpClientAdapter;
 import io.sphere.sdk.http.HttpClient;
-import io.sphere.sdk.models.Base;
 import org.asynchttpclient.DefaultAsyncHttpClient;
 import org.asynchttpclient.DefaultAsyncHttpClientConfig;
 
