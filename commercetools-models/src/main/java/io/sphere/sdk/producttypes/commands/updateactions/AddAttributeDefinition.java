@@ -25,7 +25,7 @@ public final class AddAttributeDefinition extends UpdateActionImpl<ProductType> 
     }
 
     /**
-     * @param attributeDefinition
+     * @param attributeDefinition attribute definition
      * @return AddAttributeDefinition update action
      * @deprecated use {@link AddAttributeDefinition#of(AttributeDefinitionDraft)} instead
      */

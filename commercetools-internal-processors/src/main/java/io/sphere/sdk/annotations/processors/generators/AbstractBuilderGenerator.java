@@ -35,8 +35,8 @@ abstract class AbstractBuilderGenerator<A extends Annotation> extends AbstractGe
     /**
      * Returns the annotation value from the given type element used by this generator.
      *
-     * @param typeElement
-     * @return
+     * @param typeElement type element
+     * @return annotation value from the given type element used by this generator.
      */
     protected A getAnnotationValue(final TypeElement typeElement) {
         return typeElement.getAnnotation(annotationType);

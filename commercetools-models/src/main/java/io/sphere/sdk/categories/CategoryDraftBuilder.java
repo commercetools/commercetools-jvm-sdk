@@ -24,6 +24,8 @@ public final class CategoryDraftBuilder extends CategoryDraftBuilderBase<Categor
 
     /**
      * @deprecated use {@link CategoryDraftBuilder#parent(ResourceIdentifier)} instead
+     * @param parent - referencable category parent
+     * @return CategoryDraftBuilder
      */
     @Deprecated
     public CategoryDraftBuilder parent(@Nullable final Referenceable<Category> parent) {

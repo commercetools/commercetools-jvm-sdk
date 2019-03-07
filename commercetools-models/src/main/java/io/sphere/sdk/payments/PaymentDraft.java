@@ -58,6 +58,7 @@ public interface PaymentDraft extends CustomDraft {
 
     /**
      * @deprecated This field will be removed with the next major SDK update.
+     * @return MonetaryAmount
      */
     @Deprecated
     @Nullable
@@ -65,6 +66,7 @@ public interface PaymentDraft extends CustomDraft {
 
     /**
      * @deprecated This field will be removed with the next major SDK update.
+     * @return MonetaryAmount
      */
     @Deprecated
     @Nullable

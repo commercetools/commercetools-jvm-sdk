@@ -39,6 +39,7 @@ public final class PaymentStatusInterfaceCodeSetMessage extends GenericMessageIm
      *
      * @deprecated This field will be removed with the next major SDK update.
      * Instead use the {@link Reference#getId()} method of this {@link #getResource()} method.
+     * @return paymentId
      */
     @Deprecated
     public String getPaymentId() {

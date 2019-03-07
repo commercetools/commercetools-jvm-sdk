@@ -7,7 +7,6 @@ import io.sphere.sdk.models.*;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.PriceDraft;
 import io.sphere.sdk.taxcategories.TaxRate;
-import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
@@ -81,6 +80,11 @@ public final class LineItemImportDraftBuilder extends Base implements Builder<Li
 
     /**
      * @deprecated use LineItemImportDraftBuilder{@link #of(ProductVariantImportDraft, long, PriceDraft, LocalizedString)} instead.
+     * @param variant variant
+     * @param quantity quantity
+     * @param price price
+     * @param name name
+     * @return LineItemImportDraftBuilder
      */
     @Deprecated
     public static LineItemImportDraftBuilder of(final ProductVariantImportDraft variant, final long quantity, final Price price, final LocalizedString name) {

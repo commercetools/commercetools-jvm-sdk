@@ -58,7 +58,7 @@ public interface ProductVariant extends AttributeContainer {
      *
      * By default this flag is null but it can be filled by using {@link io.sphere.sdk.products.search.ProductVariantFilterSearchModel#scopedPrice()}.
      *
-     * @return
+     * @return is scoped price boolean
      */
     @JsonProperty("scopedPriceDiscounted")
     @Nullable

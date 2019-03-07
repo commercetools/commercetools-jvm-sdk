@@ -18,6 +18,12 @@ package io.sphere.sdk.meta;
 
  --started here:
 
+ So you have this:
+ <script src="https://gist.github.com/schleichardt/5c54993cc13750543fb2.js"></script>
+
+ And you can extract the data of one product:
+ <script src="https://gist.github.com/schleichardt/f5008aff1a2b7ad661d0.js"></script>
+
  -ended here:
 
  With a function like
@@ -30,14 +36,6 @@ package io.sphere.sdk.meta;
 
 
  */
-//TODO FIX ME
-//script stuff
-//So you have this:
-//<script src="https://gist.github.com/schleichardt/5c54993cc13750543fb2.js"></script>
-//
-//        And you can extract the data of one product:
-//
-//<script src="https://gist.github.com/schleichardt/f5008aff1a2b7ad661d0.js"></script>
 public final class TestingDocumentation {
     private TestingDocumentation() {
     }

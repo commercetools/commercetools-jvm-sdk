@@ -21,9 +21,7 @@ import java.util.Set;
 
 /**
  * Public utility class to work with JSON from the commercetools platform.
- * <p>
  * <p>If an error occurs, the {@link JsonException} (a {@link RuntimeException}) will be thrown:</p>
- * <p>
  * {@include.example io.sphere.sdk.json.SphereJsonUtilsTest#exceptionHandling()}
  */
 public final class SphereJsonUtils {

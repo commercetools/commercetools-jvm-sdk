@@ -38,13 +38,8 @@ public interface MessageSubscriptionPayload<T> extends Payload<T> {
     @JsonProperty("message")
     Message getMessage();
 
-
-    /**
-     * @return
-     */
     @Nullable
     PayloadNotIncluded getPaylaodNotIncluded();
-
 
     /**
      * Returns true iff. this payload contains a complete message.

@@ -282,32 +282,32 @@
                     <version>${maven-javadoc-plugin.version}</version>
                     <executions>
                         <execution>
-                            <id>attach-javadocs</id>
-                            <phase>package</phase>
+                            <id>aggregate</id>
                             <goals>
-                                <goal>jar</goal>
+                                <goal>aggregate</goal>
                             </goals>
+                            <phase>site</phase>
                         </execution>
                     </executions>
                     <configuration>
-
                         <docfilessubdirs>true</docfilessubdirs>
                         <excludePackageNames>*.internal:*.priv</excludePackageNames>
                         <quiet>true</quiet>
                         <notimestamp>true</notimestamp>
-                        <!--<bottom><![CDATA[-->
-                            <!--<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css'>-->
-                            <!--<script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js'></script>-->
-                            <!--<script>hljs.initHighlightingOnLoad();</script>-->
-                            <!--<script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>-->
-                            <!--<span id='custom-javascripts'></span>-->
-                            <!--<script src='{@docRoot}/resources/javascripts/main.js'></script>-->
-                            <!--<link rel='stylesheet' href='{@docRoot}/resources/stylesheets/main.css'>-->
-                        <!--]]></bottom>-->
+                        <bottom><![CDATA[
+                            <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css'>
+                            <script src='https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js'></script>
+                            <script>hljs.initHighlightingOnLoad();</script>
+                            <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+                            <span id='custom-javascripts'></span>
+                            <script src='{@docRoot}/resources/javascripts/main.js'></script>
+                            <link rel='stylesheet' href='{@docRoot}/resources/stylesheets/main.css'>
+                        ]]></bottom>
                         <encoding>${project.build.sourceEncoding}</encoding>
                         <charset>${project.build.sourceEncoding}</charset>
                         <docencoding>${project.build.sourceEncoding}</docencoding>
-
+                        <doclint>none</doclint>
+                        <additionalJOption>--allow-script-in-comments</additionalJOption>
                         <additionalparam>-Xdoclint:missing,syntax,accessibility,reference ${javadoc.additionalparams}</additionalparam>
                         <taglets>
                             <!-- see https://github.com/commercetools/commercetools-taglets -->

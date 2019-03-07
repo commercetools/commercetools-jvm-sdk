@@ -45,6 +45,7 @@ public interface {{resourceName}}UpdateCommand extends UpdateCommandDsl<{{resour
 
         @param versioned the object to update (so directly a {@link {{resourceName}}{{!}}}) or just the version/ID information of it
         @param updateAction the update to perform
+        @param updateActions the updates to perform
         @return the update command for {{resourceName}}
     */
     static {{resourceName}}UpdateCommand of(final Versioned<{{resourceName}}> versioned, final UpdateAction<{{resourceName}}> updateAction, final UpdateAction<{{resourceName}}>... updateActions) {

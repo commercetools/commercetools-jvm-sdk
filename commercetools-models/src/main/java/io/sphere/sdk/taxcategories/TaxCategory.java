@@ -110,13 +110,10 @@ public interface TaxCategory extends Resource<TaxCategory>, WithKey {
 
     /**
      * Creates a reference for one item of this class by a known ID.
-     * <p>
-     * <p>An example for categories but this applies for other resources, too:</p>
-     * {@include.example io.sphere.sdk.categories.CategoryTest#referenceOfId()}
-     * <p>
-     * <p>If you already have a resource object, then use {@link #toReference()} instead:</p>
-     * <p>
-     * {@include.example io.sphere.sdk.categories.CategoryTest#toReference()}
+     * <p>An example for categories but this applies for other resources, too:
+     * {@include.example io.sphere.sdk.categories.CategoryTest#referenceOfId()}</p>
+     * <p>If you already have a resource object, then use {@link #toReference()} instead:
+     * {@include.example io.sphere.sdk.categories.CategoryTest#toReference()}</p>
      *
      * @param id the ID of the resource which should be referenced.
      * @return reference
