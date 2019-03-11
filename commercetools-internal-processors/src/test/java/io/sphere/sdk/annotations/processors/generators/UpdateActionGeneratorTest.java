@@ -5,7 +5,6 @@ import com.squareup.javapoet.JavaFile;
 import io.sphere.sdk.annotations.processors.generators.examples.ExampleResourceWithUpdateAction;
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.lang.model.element.ExecutableElement;
@@ -16,10 +15,8 @@ import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-//TODO FIX ME
-@Ignore
-public class UpdateActionGeneratorTest  extends AbstractGeneratorTest {
 
+public class UpdateActionGeneratorTest  extends AbstractGeneratorTest {
 
     @Before
     public void setup() {

@@ -6,7 +6,6 @@ import com.squareup.javapoet.JavaFile;
 import io.sphere.sdk.annotations.processors.generators.examples.ExampleResourceWithCustomUpdateAction;
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -18,8 +17,6 @@ import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-//TODO FIX ME
-@Ignore
 public class CustomUpdateActionGeneratorTest  extends AbstractGeneratorTest{
 
     @Rule
@@ -39,10 +36,7 @@ public class CustomUpdateActionGeneratorTest  extends AbstractGeneratorTest{
         assertThat(content).isEqualTo(expectedContent(ExampleResourceWithCustomUpdateAction.class,"getUserName"));
     }
 
-
-
-
-    protected String generateAsString(final Class<?> clazz,String methodName) throws Exception {
+    private String generateAsString(final Class<?> clazz,String methodName) throws Exception {
         final TypeElement typeElement = compilationRule.getElements().getTypeElement(clazz.getCanonicalName());
         Optional<ExecutableElement> elementOptional = ElementFilter.methodsIn(typeElement.getEnclosedElements()).stream().
                 filter(elm ->elm.getSimpleName().toString().equals(methodName)).findAny();
@@ -54,8 +48,7 @@ public class CustomUpdateActionGeneratorTest  extends AbstractGeneratorTest{
         return stringBuilder.toString();
     }
 
-
-    protected String expectedContent(final Class<?> clazz,String methodName) throws Exception {
+    private String expectedContent(final Class<?> clazz,String methodName) throws Exception {
         final TypeElement typeElement = compilationRule.getElements().getTypeElement(clazz.getCanonicalName());
         Optional<ExecutableElement> elementOptional = ElementFilter.methodsIn(typeElement.getEnclosedElements()).stream().
                 filter(elm ->elm.getSimpleName().toString().equals(methodName)).findAny();

@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 import static io.sphere.sdk.client.SphereProjectScope.MANAGE_API_CLIENTS;
 import static io.sphere.sdk.client.SphereProjectScope.MANAGE_MY_ORDERS;
 import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static java.util.Arrays.*;
 
 public class ApiClientCommandIntegrationTest extends IntegrationTest {
 

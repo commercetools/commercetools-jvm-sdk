@@ -23,7 +23,8 @@ public class UserAgentIntegrationTest extends IntegrationTest {
                 assertThat(httpClient.getLastUserAgent())
                         .startsWith("commercetools-jvm-sdk")
                         .contains("JVM-SDK-integration-tests")
-                        .contains(BuildInfo.version());
+                        .contains(BuildInfo.version())
+                        .contains("1.40");
             }
         }
     }

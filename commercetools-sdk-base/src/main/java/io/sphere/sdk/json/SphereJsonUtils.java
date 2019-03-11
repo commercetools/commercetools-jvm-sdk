@@ -185,6 +185,10 @@ public final class SphereJsonUtils {
         return readObjectFromResource(resourcePath, javaType);
     }
 
+    public static InputStream getResourceInputStream(final String resourcePath) {
+        return Thread.currentThread().getContextClassLoader().getResourceAsStream(resourcePath);
+    }
+
     /**
      * Reads a Java object from JSON data (String).
      * <p>

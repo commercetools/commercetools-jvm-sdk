@@ -28,9 +28,9 @@ import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-//TODO FIX
-@Ignore
+
 public class FormattingDocumentationTest {
+
     @Test
     public void createMoney() throws Exception {
         final List<MonetaryAmount> monetaryAmounts = asList(
@@ -49,6 +49,11 @@ public class FormattingDocumentationTest {
         });
     }
 
+    //TODO FIX ME Locale.GERMANY
+    //The problem here is that MonetaryAmountFormat#format produces a String with a very strange encoding (bytes[]).
+    //This happens only when Locale.GERMANY or Locale.GERMAN is used. It works with LOCALE.US
+    //tests are failing because "1000 €" != "1000 €" when the bytes[] of respective strings are totally different for some reason
+    @Ignore
     @Test
     public void formatMoneyByGermanLocale() throws Exception {
         final MonetaryAmountFormat format = MonetaryFormats.getAmountFormat(Locale.GERMANY);
@@ -72,6 +77,11 @@ public class FormattingDocumentationTest {
         assertThat(formatted).isEqualTo("$1,234.56");
     }
 
+    //TODO FIX ME Locale.GERMANY
+    //The problem here is that MonetaryAmountFormat#format produces a String with a very strange encoding (bytes[]).
+    //This happens only when Locale.GERMANY or Locale.GERMAN is used. It works with LOCALE.US
+    //tests are failing because "1000 €" != "1000 €" when the bytes[] of respective strings are totally different for some reason
+    @Ignore
     @Test
     public void formatMoneyCustomLocales() throws Exception {
         final Locale germany = Locale.GERMANY;

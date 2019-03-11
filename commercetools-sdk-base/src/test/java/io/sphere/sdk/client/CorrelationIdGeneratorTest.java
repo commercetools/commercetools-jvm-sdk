@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CorrelationIdGeneratorTest {
 
     @Test
-    public void createCorrelationId() {
+    public void createCorrelationId() throws Exception {
         final String projectKey = "my-project";
 
         final CorrelationIdGenerator correlationIdGenerator =

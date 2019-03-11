@@ -13,6 +13,7 @@ import java.util.concurrent.CompletionStage;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TokensSupplierImplTest {
+
     @Test
     public void httpRequestsContainUserAgents() throws Exception {
         final SphereAuthConfig authConfig = SphereAuthConfig.of("a", "b", "c");

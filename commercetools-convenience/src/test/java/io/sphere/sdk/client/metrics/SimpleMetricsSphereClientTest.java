@@ -9,7 +9,6 @@ import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.projects.queries.ProjectGet;
 import org.assertj.core.api.SoftAssertions;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.*;
@@ -21,8 +20,6 @@ public class SimpleMetricsSphereClientTest {
     public static final String CORRELATION_ID = "ID-123456";
     public static final HttpResponse HTTP_RESPONSE = HttpResponse.of(200, "{}", HttpHeaders.of("X-Correlation-ID", CORRELATION_ID));
 
-    //TODO FIX
-    @Ignore
     @Test
     public void testAll() {
         final SphereClient asyncClient = TestDoubleSphereClientFactory.createHttpTestDouble(intent -> {

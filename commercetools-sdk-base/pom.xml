@@ -62,6 +62,14 @@
         </dependency>
     </dependencies>
     <build>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.felix</groupId>
@@ -100,27 +108,6 @@
 
                         <Embed-Dependency>scope=compile|runtime;artifactId=money-api|moneta</Embed-Dependency>
                     </instructions>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.google.code.maven-replacer-plugin</groupId>
-                <artifactId>maven-replacer-plugin</artifactId>
-                <version>1.4.1</version>
-                <executions>
-                    <execution>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>replace</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <ignoreMissingFile>false</ignoreMissingFile>
-                    <file>/src/main/templates/io/sphere/sdk/meta/BuildInfo.java.template</file>
-                    <outputFile>${project.build.directory}/generated-sources/java/io/sphere/sdk/meta/BuildInfo.java</outputFile>
-                    <regex>false</regex>
-                    <token>version-replaced-through-maven-replacer-plugin</token>
-                    <value>${project.version}</value>
                 </configuration>
             </plugin>
             <plugin>

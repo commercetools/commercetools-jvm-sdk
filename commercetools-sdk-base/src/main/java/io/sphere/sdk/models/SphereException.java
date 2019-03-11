@@ -15,7 +15,6 @@ import java.nio.charset.StandardCharsets;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -202,10 +201,6 @@ public class SphereException extends RuntimeException {
                 .map(b -> ((StringHttpRequestBody) b).getSecuredBody());
     }
 
-
-    private static String getVersionForJavadoc() {
-        return getVersionForJavadoc(BuildInfo.version());
-    }
 
     //package scope for testing
     static String getVersionForJavadoc(final String version) {

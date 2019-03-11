@@ -100,8 +100,7 @@ public class UpdateActionGenerator extends AbstractGenerator<ExecutableElement> 
                 .addJavadoc("Updates the {@code $L} property of a {@link $T}.\n", property.getName(), ClassName.get(resourceType))
                 .addJavadoc("\n")
                 .addJavadoc(includeExampleJavaDoc)
-                //TODO FIX ME
-                //.addJavadoc("@see $T#$L()\n", annotatedTypeName, propertyMethod.getSimpleName())
+                .addJavadoc("@see $T#$L()\n", annotatedTypeName, propertyMethod.getSimpleName())
                 .superclass(ParameterizedTypeName.get(ClassName.get(UpdateActionImpl.class), ClassName.get(resourceType)))
                 .addModifiers(isAbstract ? new Modifier[]{Modifier.ABSTRACT} : new Modifier[]{Modifier.PUBLIC, Modifier.FINAL})
                 .addAnnotation(AnnotationSpec.builder(Generated.class)
