@@ -20,8 +20,6 @@ import static java.util.Collections.singleton;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-//TODO FIX ME
-@Ignore
 @NotOSGiCompatible
 public class DefaultProductAttributeFormatterIntegrationTest extends IntegrationTest {
 
@@ -152,6 +150,8 @@ public class DefaultProductAttributeFormatterIntegrationTest extends Integration
         assertThat(converting(ATTR_NAME_NUMBER, numberAsDoubleMapper)).isEqualTo("5.0");
     }
 
+    //TODO FIX ME
+    @Ignore
     @Test
     public void convertDateTimeSet() {
         assertThat(converting(ATTR_NAME_DATE_TIME_SET)).isEqualTo("11.09.01 22:05, 12.10.02 23:06");
@@ -212,6 +212,8 @@ public class DefaultProductAttributeFormatterIntegrationTest extends Integration
         assertThat(converting(ATTR_NAME_ENUM)).isEqualTo("two");
     }
 
+    //TODO FIX ME
+    @Ignore
     @Test
     public void convertDateTime() {
         assertThat(converting(ATTR_NAME_DATE_TIME)).isEqualTo("11.09.01 22:05");

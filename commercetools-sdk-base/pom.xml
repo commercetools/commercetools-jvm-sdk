@@ -24,14 +24,10 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>javax.money</groupId>
-            <artifactId>money-api</artifactId>
-            <version>${money-api.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.javamoney</groupId>
             <artifactId>moneta</artifactId>
             <version>${moneta.version}</version>
+            <type>pom</type>
         </dependency>
         <dependency>
             <!-- replaces javax.annotation-api from above and is licensed under the APL 2.0 -->
