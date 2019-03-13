@@ -69,7 +69,8 @@ public abstract class AbstractAnnotationProcessor<A extends Annotation> extends 
                 }
             }
         } catch (Throwable e) {
-            this.processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, e.getMessage());
+            //this.processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
 
