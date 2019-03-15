@@ -364,6 +364,8 @@
                         <excludes>
                             <exclude>**/*IntegrationTest*</exclude>
                         </excludes>
+                        <parallel>all</parallel>
+                        <useUnlimitedThreads>true</useUnlimitedThreads>
                         <argLine>
                             --illegal-access=permit
                         </argLine>
