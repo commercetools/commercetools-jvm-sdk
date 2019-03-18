@@ -280,6 +280,7 @@ public class DefaultProductAttributeFormatter extends ProductAttributeConverterB
         return enumValue.getLabel();
     }
 
+    //TODO FIX ME This method works differently, it uses jdk libs
     @Override
     protected String convertDateTime(final ZonedDateTime dateTimeValue, final Attribute attribute, final ProductType productType) {
         final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT).withLocale(locale());

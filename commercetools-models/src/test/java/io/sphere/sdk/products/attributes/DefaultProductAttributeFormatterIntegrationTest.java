@@ -150,7 +150,7 @@ public class DefaultProductAttributeFormatterIntegrationTest extends Integration
         assertThat(converting(ATTR_NAME_NUMBER, numberAsDoubleMapper)).isEqualTo("5.0");
     }
 
-    //TODO FIX ME
+    //TODO FIX ME See: convertDateTime
     @Ignore
     @Test
     public void convertDateTimeSet() {
@@ -212,7 +212,7 @@ public class DefaultProductAttributeFormatterIntegrationTest extends Integration
         assertThat(converting(ATTR_NAME_ENUM)).isEqualTo("two");
     }
 
-    //TODO FIX ME
+    //TODO FIX ME See: DefaultProductAttributeFormatter#convertDateTime
     @Ignore
     @Test
     public void convertDateTime() {
@@ -228,7 +228,6 @@ public class DefaultProductAttributeFormatterIntegrationTest extends Integration
     public void convertBoolean() {
         assertThat(converting(ATTR_NAME_BOOLEAN)).isEqualTo("true");
     }
-
 
     private String converting(final String attributeName) {
         return converting(attributeName, numberAsLongMapper);
