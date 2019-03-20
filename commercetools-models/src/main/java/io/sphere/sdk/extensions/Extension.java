@@ -2,6 +2,7 @@ package io.sphere.sdk.extensions;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
@@ -11,7 +12,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 
-@JsonDeserialize(as=ExtensionImpl.class)
+@JsonDeserialize(as= ExtensionImpl.class)
 @ResourceValue
 @ResourceInfo(pluralName = "extensions", pathElement = "extensions")
 @HasByIdGetEndpoint(javadocSummary = "Retrieves a extension by a known ID.")
@@ -36,6 +37,11 @@ public interface Extension extends Resource<Extension>, WithKey {
     @Nullable
     @HasUpdateAction
     String getKey();
+
+    @IgnoreInQueryModel
+    @HasUpdateAction
+    @Nullable
+    Long getTimeoutInMs();
 
     static TypeReference<Extension> typeReference() {
         return new TypeReference<Extension>() {
