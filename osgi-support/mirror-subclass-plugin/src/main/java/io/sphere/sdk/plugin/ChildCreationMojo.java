@@ -14,7 +14,10 @@ import org.junit.Test;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.util.*;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Enumeration;
+import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.stream.Collectors;
@@ -46,6 +49,8 @@ public class ChildCreationMojo extends AbstractMojo {
 
         try {
 
+
+
             if (artifactsToProcess == null || artifactsToProcess.length == 0)
                 return;
             String outputDir = project.getBuild().getOutputDirectory();
@@ -68,10 +73,13 @@ public class ChildCreationMojo extends AbstractMojo {
                     JarEntry next = entries.nextElement();
                     File outputFile = new File(outputDir + java.io.File.separator + next.getName());
                     if(next.isDirectory()){
-                        outputFile.mkdirs();
                         continue;
                     }
                     InputStream is = jarFile.getInputStream(next);
+                    File parentFile = Paths.get(outputFile.getParent()).toFile();
+                    if( !parentFile.exists()&&!parentFile.isDirectory()){
+                        parentFile.mkdirs();
+                    }
                     FileOutputStream fos = new FileOutputStream(outputFile);
                     while (is.available() > 0) {
                         fos.write(is.read());
