@@ -91,8 +91,8 @@ public class ChannelQueryIntegrationTest extends IntegrationTest {
                         .withGeoLocation(geoLocation);
         withChannel(client(), channelDraft, channel -> {
             final ChannelQuery withinCircleQuery = ChannelQuery.of()
-                    .plusPredicates(m -> m.is(channel));
-                    //.plusPredicates(m -> m.geoLocation().withinCircle(geoLocation, 1.0));
+                    .plusPredicates(m -> m.is(channel))
+                    .plusPredicates(m -> m.geoLocation().withinCircle(geoLocation, 1.0));
             final List<Channel> withinCircleResults = client().executeBlocking(withinCircleQuery).getResults();
             assertThat(withinCircleResults).hasSize(1);
             assertThat(withinCircleResults.get(0)).isEqualTo(channel);

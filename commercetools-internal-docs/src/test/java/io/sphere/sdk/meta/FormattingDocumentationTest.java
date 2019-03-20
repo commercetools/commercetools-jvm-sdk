@@ -92,9 +92,6 @@ public class FormattingDocumentationTest {
         );
 
         assertThat(formatByLanguageAndCountry.format(amount)).as("contains symbol").isEqualTo("1.234,56 €");
-        //TODO FIX ME Money - formatting by language also produces : 1.234,56 €
-        //assertThat(formatByJustLanguage.format(amount)).as("contains not symbol").isEqualTo("EUR 1.234,56");
-
         assertThat(formatByJustLanguage.format(amount)).as("contains not symbol").isEqualTo("1.234,56 €");
     }
 
