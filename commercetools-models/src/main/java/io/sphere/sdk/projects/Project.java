@@ -105,6 +105,14 @@ public interface Project extends CreationTimestamped, WithKey {
     ShippingRateInputType getShippingRateInputType();
 
     /**
+     * If this property is set, it allows to use OAuth2 Bearer tokens issued by another service that provides a RFC 7662-compliant endpoint.
+     * @return external oAuth endpoint
+     */
+    @Nullable
+    @HasUpdateAction
+    ExternalOAuth getExternalOAuth();
+
+    /**
      * Creates a container which contains the full Java type information to deserialize this class from JSON.
      *
      * @see io.sphere.sdk.json.SphereJsonUtils#readObject(byte[], TypeReference)

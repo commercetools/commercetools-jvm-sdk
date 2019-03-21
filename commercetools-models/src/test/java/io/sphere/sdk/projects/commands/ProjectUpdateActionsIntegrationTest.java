@@ -1,12 +1,16 @@
 package io.sphere.sdk.projects.commands;
 
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.projects.ExternalOAuth;
 import io.sphere.sdk.projects.MessagesConfigurationDraft;
 import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.projects.commands.updateactions.*;
 import io.sphere.sdk.projects.queries.ProjectGet;
+import org.assertj.core.api.Assertions;
+import org.junit.After;
 import org.junit.Test;
 
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
@@ -16,8 +20,16 @@ import static io.sphere.sdk.models.DefaultCurrencyUnits.USD;
 
 public class ProjectUpdateActionsIntegrationTest extends ProjectIntegrationTest{
 
+    @After
+    public void unsetExternalAuthForPerformanceReasons(){
+        final Project project = client().executeBlocking(ProjectGet.of());
+        final ProjectUpdateCommand updateCommand = ProjectUpdateCommand.of(project, SetExternalOAuth.ofUnset());
+        final Project updatedProject = client().executeBlocking(updateCommand);
+        Assertions.assertThat(updatedProject.getExternalOAuth()).isNull();
+    }
+
     @Test
-    public void execution() {
+    public void execution() throws Exception{
 
         final Project project = client().executeBlocking(ProjectGet.of());
         final String new_project_name = "NewName";
@@ -27,6 +39,9 @@ public class ProjectUpdateActionsIntegrationTest extends ProjectIntegrationTest{
         final List<String> new_project_languages = new_project_locales.stream().map(Locale::toLanguageTag).collect(Collectors.toList());
         final Boolean new_project_messages_enabled = false;
         final Long delete_days_after_activation = 20L;
+        final URL url = new URL("https://invalid.cmo");
+        final ExternalOAuth externalOAuth = ExternalOAuth.of("customheader: customValue", url);
+
 
 
         final ProjectUpdateCommand updateCommand = ProjectUpdateCommand.of(project, Arrays.asList(
@@ -35,7 +50,8 @@ public class ProjectUpdateActionsIntegrationTest extends ProjectIntegrationTest{
                 ChangeCountries.of(new_project_countries),
                 ChangeLanguages.of(new_project_languages),
                 ChangeMessagesConfiguration.of(MessagesConfigurationDraft.of(new_project_messages_enabled, delete_days_after_activation)),
-                SetShippingRateInputType.ofUnset()
+                SetShippingRateInputType.ofUnset(),
+                SetExternalOAuth.of(externalOAuth)
         ));
 
         final Project updatedProject = client().executeBlocking(updateCommand);
@@ -52,7 +68,7 @@ public class ProjectUpdateActionsIntegrationTest extends ProjectIntegrationTest{
             soft.assertThat(updatedProject.getMessages().isEnabled()).isEqualTo(new_project_messages_enabled);
             soft.assertThat(updatedProject.getMessages().getDeleteDaysAfterCreation()).isEqualTo(delete_days_after_activation);
             soft.assertThat(updatedProject.getShippingRateInputType()).isNull();
-
+            soft.assertThat(updatedProject.getExternalOAuth()).isEqualToIgnoringGivenFields(externalOAuth,"authorizationHeader");
         });
     }
 
