@@ -5,6 +5,7 @@ import io.sphere.sdk.extensions.*;
 import io.sphere.sdk.extensions.commands.updateactions.ChangeDestination;
 import io.sphere.sdk.extensions.commands.updateactions.ChangeTriggers;
 import io.sphere.sdk.extensions.commands.updateactions.SetKey;
+import io.sphere.sdk.extensions.commands.updateactions.SetTimeoutInMs;
 import io.sphere.sdk.extensions.queries.ExtensionQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
@@ -38,9 +39,10 @@ public abstract class AbstractExtensionIntegrationTest extends IntegrationTest {
         ExtensionResourceType extensionResourceType = ExtensionResourceType.CART;
         final List<Trigger> triggers = asList(TriggerBuilder.of(extensionResourceType, asList(TriggerType.CREATE, TriggerType.UPDATE)).build());
         final Destination destination = getDestination();
-        withExtensionDraft(client(), ExtensionDraftBuilder.of(randomKey(), destination, triggers).build(), extension -> {
+        withExtensionDraft(client(), ExtensionDraftBuilder.of(randomKey(), destination, triggers, 1000L).build(), extension -> {
             assertThat(extension.getTriggers()).hasSize(1);
             assertThat(extension.getTriggers().get(0).getResourceTypeId()).isEqualByComparingTo(extensionResourceType);
+            assertThat(extension.getTimeoutInMs()).isEqualTo(1000L);
             return extension;
         });
     }
@@ -82,7 +84,6 @@ public abstract class AbstractExtensionIntegrationTest extends IntegrationTest {
     }
 
 
-
     @Test
     public void setKey() {
 
@@ -94,6 +95,15 @@ public abstract class AbstractExtensionIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Test
+    public void setTimeout() {
+        withExtension(client(), extension -> {
+            final long newTimeout = 500;
+            final Extension updatedExtension = client().executeBlocking(ExtensionUpdateCommand.of(extension, SetTimeoutInMs.of(newTimeout)));
+            assertThat(updatedExtension.getTimeoutInMs()).isEqualTo(newTimeout);
+            return updatedExtension;
+        });
+    }
 
     @Test
     public void changeTriggers(){

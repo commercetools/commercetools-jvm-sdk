@@ -10,7 +10,10 @@ import java.util.List;
 
 @JsonDeserialize(as = ExtensionDraftDsl.class)
 @ResourceDraftValue(
-        factoryMethods = {@FactoryMethod(parameterNames = {"key", "destination", "triggers"}), @FactoryMethod(parameterNames = {"destination", "triggers"})})
+        factoryMethods = {
+                @FactoryMethod(parameterNames = {"key", "destination", "triggers", "timeoutInMs"}),
+                @FactoryMethod(parameterNames = {"key", "destination", "triggers"}),
+                @FactoryMethod(parameterNames = {"destination", "triggers"})})
 public interface ExtensionDraft extends WithKey{
 
     @Override
@@ -21,4 +24,6 @@ public interface ExtensionDraft extends WithKey{
 
     List<Trigger> getTriggers();
 
+    @Nullable
+    Long getTimeoutInMs();
 }
