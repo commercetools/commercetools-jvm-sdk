@@ -105,7 +105,7 @@ public interface Project extends CreationTimestamped, WithKey {
     ShippingRateInputType getShippingRateInputType();
 
     /**
-     * If set this property allows to use OAuth2 Bearer tokens issued by another service that provide a RFC 7662-compliant endpoint.
+     * If this property is set, it allows to use OAuth2 Bearer tokens issued by another service that provides a RFC 7662-compliant endpoint.
      * @return external oAuth endpoint
      */
     @Nullable
