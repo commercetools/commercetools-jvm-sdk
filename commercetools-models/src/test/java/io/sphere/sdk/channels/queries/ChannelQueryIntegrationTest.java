@@ -7,7 +7,6 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Point;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -81,8 +80,6 @@ public class ChannelQueryIntegrationTest extends IntegrationTest {
         });
     }
 
-    //TODO FIX ME - this one is failing because of : .plusPredicates(m -> m.geoLocation().withinCircle(geoLocation, 1.0));
-    @Ignore
     @Test
     public void queryByGeoLocation() {
         final Point geoLocation = Point.of(52.0, 40.0);
