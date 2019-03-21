@@ -154,6 +154,11 @@ import java.util.function.Function;
 
  <h3 class=released-version id="v1_40_0">1.40.0 (25.02.2019)</h3>
  <ul>
+    <li class=new-in-release>added the {@link Project#getExternalOAuth()} to specify external auth providers in the project level</li>
+ </ul>
+
+ <h3 class=released-version id="v1_40_0">1.40.0 (25.02.2019)</h3>
+ <ul>
     <li class=new-in-release>{@link java.time.ZonedDateTime} formatter now always include milliseconds even if they are equal to 0</li>
     <li class=new-in-release>{@link io.sphere.sdk.customobjects.queries.CustomObjectByIdGet} and {@link CustomObjectByKeyGet} now support expansion parameter</li>
     <li class=fixed-in-release>{@link Attribute#of(String, AttributeAccess, Object)} now works properly with Set of {@link Reference}</li>
