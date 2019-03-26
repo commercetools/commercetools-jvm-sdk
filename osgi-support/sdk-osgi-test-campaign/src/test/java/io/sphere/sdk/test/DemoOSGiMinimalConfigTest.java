@@ -65,7 +65,9 @@ public class DemoOSGiMinimalConfigTest {
                 "org.apache.httpcomponents.httpcore",
                 "org.objectweb.asm",
                 "org.objectweb.asm.commons",
-                "org.objectweb.asm.tree"
+                "org.objectweb.asm.tree",
+                "javax.annotation-api",
+                "slf4j.api"
         );
 
         List<String> fragementsList = Arrays.asList(

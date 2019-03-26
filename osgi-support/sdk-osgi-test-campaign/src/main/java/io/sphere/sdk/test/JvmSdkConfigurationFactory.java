@@ -72,11 +72,13 @@ public class JvmSdkConfigurationFactory implements ConfigurationFactory {
                 "net.bytebuddy.byte-buddy",
                 "net.bytebuddy.byte-buddy-agent",
                 "org.mockito.mockito-core",
-                "org.ops4j.pax.logging.pax-logging-api",
+//                "org.ops4j.pax.logging.pax-logging-api",
                 "org.ops4j.pax.logging.pax-logging-service",
                 //dependencies for tests
                 "ch.qos.logback.classic",
-                "ch.qos.logback.core"
+                "ch.qos.logback.core",
+                "javax.annotation-api",
+                "slf4j.api"
 
         );
 
