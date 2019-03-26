@@ -17,7 +17,7 @@ import static java.util.stream.Collectors.toList;
 
 public class IntrospectionUtils {
     public static Stream<String> readClassNames() throws IOException {
-        final String javadocAllClassesFrameHtmlContent = new String(Files.readAllBytes(Paths.get("target/site/apidocs/allclasses-frame.html")));
+        final String javadocAllClassesFrameHtmlContent = new String(Files.readAllBytes(Paths.get("target/site/apidocs/allclasses.html")));
         return streamClassNames(Pattern.compile("title=\"[^ ]+ in ([^\"]+)\" target=\"classFrame\">(?:<span class=\"interfaceName\">)?([^<]+)(?:</span>)?</a>").matcher(javadocAllClassesFrameHtmlContent));
     }
 
