@@ -12,4 +12,6 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 #
-org.javamoney.moneta.internal.PriorityAwareServiceProvider
+org.javamoney.moneta.internal.MoneyAmountFactoryProvider
+org.javamoney.moneta.internal.FastMoneyAmountFactoryProvider
+org.javamoney.moneta.internal.RoundedMoneyAmountFactoryProvider

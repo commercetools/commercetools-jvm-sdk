@@ -3,21 +3,18 @@ package javax.money.spi;
 import org.javamoney.moneta.internal.PriorityAwareServiceProvider;
 
 import javax.annotation.Priority;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.ServiceLoader;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * This class replaces the {@link PriorityAwareServiceProvider} provided since the latest
- * contains some bug that doesen't allow using it with OSGi, these bugs are mainly due to not specifying
- * the {@link ClassLoader} when using {@link ServiceLoader#load(Class, ClassLoader)}
+ * This class implements the (default) {@link ServiceProvider} interface and hereby uses the JDK
+ * {@link ServiceLoader} to load the services required.
  *
+ * @author Anatole Tresch
  */
-public final class OSGiPriorityAwareServiceProvider implements ServiceProvider {
+class CtDefaultServiceProvider implements ServiceProvider {
     /**
      * List of services loaded, per class.
      */
@@ -51,7 +48,7 @@ public final class OSGiPriorityAwareServiceProvider implements ServiceProvider {
         return loadServices(serviceType);
     }
 
-    public static int compareServices(final Object o1,final  Object o2) {
+    public static int compareServices(Object o1, Object o2) {
         int prio1 = 0;
         int prio2 = 0;
         Priority prio1Annot = o1.getClass().getAnnotation(Priority.class);
@@ -81,10 +78,10 @@ public final class OSGiPriorityAwareServiceProvider implements ServiceProvider {
     private <T> List<T> loadServices(final Class<T> serviceType) {
         List<T> services = new ArrayList<>();
         try {
-            for (T t : ServiceLoader.load(serviceType, OSGiPriorityAwareServiceProvider.class.getClassLoader())) {
+            for (T t : ServiceLoader.load(serviceType,Bootstrap.class.getClassLoader())) {
                 services.add(t);
             }
-            services.sort(OSGiPriorityAwareServiceProvider::compareServices);
+            services.sort(PriorityAwareServiceProvider::compareServices);
             @SuppressWarnings("unchecked")
             final List<T> previousServices = (List<T>) servicesLoaded.putIfAbsent(serviceType, (List<Object>) services);
             return Collections.unmodifiableList(previousServices != null ? previousServices : services);
@@ -95,5 +92,4 @@ public final class OSGiPriorityAwareServiceProvider implements ServiceProvider {
             return services;
         }
     }
-
 }
