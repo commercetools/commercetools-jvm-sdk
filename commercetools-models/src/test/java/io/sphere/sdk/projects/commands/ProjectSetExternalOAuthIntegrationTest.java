@@ -17,6 +17,8 @@ import org.junit.Test;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+import static io.sphere.sdk.test.IntegrationTest.newHttpClient;
+import static io.sphere.sdk.test.IntegrationTest.softAssert;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.junit.Assume.assumeTrue;
 
@@ -24,7 +26,7 @@ import static org.junit.Assume.assumeTrue;
  * This test is in a separate test class and uses a separate api client configured from {@link SphereClientConfig#ofEnvironmentVariables(String)}
  * with the 'JVM_SDK_IT_OAUTH' to isolate the changes it does from the other tests.
  */
-public class ProjectSetExternalOAuthIntegrationTest extends IntegrationTest {
+public class ProjectSetExternalOAuthIntegrationTest {
 
     private BlockingSphereClient clientForExternalOAuth2;
 
@@ -45,7 +47,7 @@ public class ProjectSetExternalOAuthIntegrationTest extends IntegrationTest {
 
         final Project project = clientForExternalOAuth2.executeBlocking(ProjectGet.of());
         final ProjectUpdateCommand updateCommand = ProjectUpdateCommand.of(project, SetExternalOAuth.ofUnset());
-        final Project updatedProject = client().executeBlocking(updateCommand);
+        final Project updatedProject = clientForExternalOAuth2.executeBlocking(updateCommand);
         assertThat(updatedProject.getExternalOAuth()).isNull();
     }
 
@@ -53,14 +55,14 @@ public class ProjectSetExternalOAuthIntegrationTest extends IntegrationTest {
     public void setExternalAuth() throws Exception{
         assumeHasExternalOAuth2Config();
 
-        final Project project = client().executeBlocking(ProjectGet.of());
+        final Project project = clientForExternalOAuth2.executeBlocking(ProjectGet.of());
 
         final URL url = new URL("https://invalid.cmo");
         final ExternalOAuth externalOAuth = ExternalOAuth.of("customheader: customValue", url);
 
         final ProjectUpdateCommand updateCommand = ProjectUpdateCommand.of(project, SetExternalOAuth.of(externalOAuth));
 
-        final Project updatedProject = client().executeBlocking(updateCommand);
+        final Project updatedProject = clientForExternalOAuth2.executeBlocking(updateCommand);
 
         softAssert(soft -> {
             soft.assertThat(updatedProject.getExternalOAuth()).isEqualToIgnoringGivenFields(externalOAuth,"authorizationHeader");

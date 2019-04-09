@@ -123,7 +123,7 @@ public abstract class IntegrationTest {
         return underlying;
     }
 
-    protected static HttpClient newHttpClient() {
+    public static HttpClient newHttpClient() {
         //NO SSL Client: this client doesn't perform ssl certification check, which is a necessity to run tests on CI
         CloseableHttpAsyncClient asyncClient = createNoSSLClient();
         return IntegrationTestHttpClient.of(asyncClient);
@@ -215,7 +215,7 @@ public abstract class IntegrationTest {
         };
     }
 
-    protected static void softAssert(final Consumer<SoftAssertions> assertionsConsumer) {
+    public static void softAssert(final Consumer<SoftAssertions> assertionsConsumer) {
         final SoftAssertions softly = new SoftAssertions();
         assertionsConsumer.accept(softly);
         softly.assertAll();
