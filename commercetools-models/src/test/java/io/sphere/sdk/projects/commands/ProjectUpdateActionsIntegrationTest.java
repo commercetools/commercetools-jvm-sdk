@@ -30,7 +30,6 @@ public class ProjectUpdateActionsIntegrationTest extends ProjectIntegrationTest{
 
     @Test
     public void execution() throws Exception{
-
         final Project project = client().executeBlocking(ProjectGet.of());
         final String new_project_name = "NewName";
         final List<String> new_project_currencies = Arrays.asList(USD.getCurrencyCode());
@@ -39,10 +38,6 @@ public class ProjectUpdateActionsIntegrationTest extends ProjectIntegrationTest{
         final List<String> new_project_languages = new_project_locales.stream().map(Locale::toLanguageTag).collect(Collectors.toList());
         final Boolean new_project_messages_enabled = false;
         final Long delete_days_after_activation = 20L;
-        final URL url = new URL("https://invalid.cmo");
-        final ExternalOAuth externalOAuth = ExternalOAuth.of("customheader: customValue", url);
-
-
 
         final ProjectUpdateCommand updateCommand = ProjectUpdateCommand.of(project, Arrays.asList(
                 ChangeName.of(new_project_name),
@@ -50,8 +45,7 @@ public class ProjectUpdateActionsIntegrationTest extends ProjectIntegrationTest{
                 ChangeCountries.of(new_project_countries),
                 ChangeLanguages.of(new_project_languages),
                 ChangeMessagesConfiguration.of(MessagesConfigurationDraft.of(new_project_messages_enabled, delete_days_after_activation)),
-                SetShippingRateInputType.ofUnset(),
-                SetExternalOAuth.of(externalOAuth)
+                SetShippingRateInputType.ofUnset()
         ));
 
         final Project updatedProject = client().executeBlocking(updateCommand);
@@ -68,8 +62,6 @@ public class ProjectUpdateActionsIntegrationTest extends ProjectIntegrationTest{
             soft.assertThat(updatedProject.getMessages().isEnabled()).isEqualTo(new_project_messages_enabled);
             soft.assertThat(updatedProject.getMessages().getDeleteDaysAfterCreation()).isEqualTo(delete_days_after_activation);
             soft.assertThat(updatedProject.getShippingRateInputType()).isNull();
-            soft.assertThat(updatedProject.getExternalOAuth()).isEqualToIgnoringGivenFields(externalOAuth,"authorizationHeader");
         });
     }
-
 }
