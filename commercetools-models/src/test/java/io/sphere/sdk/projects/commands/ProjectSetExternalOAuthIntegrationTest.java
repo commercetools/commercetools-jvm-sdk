@@ -20,14 +20,18 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assume.assumeTrue;
 
+/**
+ * This test is in a separate test class and uses a separate api client configured from {@link SphereClientConfig#ofEnvironmentVariables(String)}
+ * with the 'JVM_SDK_IT_OAUTH' to isolate the changes it does from the other tests.
+ */
 public class ProjectSetExternalOAuthIntegrationTest extends IntegrationTest {
 
     private BlockingSphereClient clientForExtenalOAuth2;
 
     @Before
     public void setup() {
-        assumeTrue(System.getenv("JVM_SDK_OAUTH_PROJECT_KEY") != null);
-        final SphereClientConfig config = SphereClientConfig.ofEnvironmentVariables("JVM_SDK_OAUTH");
+        assumeTrue(System.getenv("JVM_SDK_IT_OAUTH_PROJECT_KEY") != null);
+        final SphereClientConfig config = SphereClientConfig.ofEnvironmentVariables("JVM_SDK_IT_OAUTH");
         final HttpClient httpClient = newHttpClient();
         final SphereAccessTokenSupplier tokenSupplier = SphereAccessTokenSupplier.ofAutoRefresh(config, httpClient, false);
         final SphereClient underlying = SphereClient.of(config, httpClient, tokenSupplier);
