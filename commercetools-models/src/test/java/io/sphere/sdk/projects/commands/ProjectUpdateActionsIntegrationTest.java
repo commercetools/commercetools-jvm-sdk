@@ -18,15 +18,7 @@ import java.util.stream.Collectors;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.USD;
 
-public class ProjectUpdateActionsIntegrationTest extends ProjectIntegrationTest{
-
-    @After
-    public void unsetExternalAuthForPerformanceReasons(){
-        final Project project = client().executeBlocking(ProjectGet.of());
-        final ProjectUpdateCommand updateCommand = ProjectUpdateCommand.of(project, SetExternalOAuth.ofUnset());
-        final Project updatedProject = client().executeBlocking(updateCommand);
-        Assertions.assertThat(updatedProject.getExternalOAuth()).isNull();
-    }
+public class ProjectUpdateActionsIntegrationTest extends ProjectIntegrationTest {
 
     @Test
     public void execution() throws Exception{

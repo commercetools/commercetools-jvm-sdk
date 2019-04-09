@@ -10,7 +10,6 @@ import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.projects.commands.updateactions.*;
 import io.sphere.sdk.projects.queries.ProjectGet;
 import io.sphere.sdk.test.IntegrationTest;
-import org.assertj.core.api.Assertions;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +17,7 @@ import org.junit.Test;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.junit.Assume.assumeTrue;
 
 /**
@@ -26,28 +26,33 @@ import static org.junit.Assume.assumeTrue;
  */
 public class ProjectSetExternalOAuthIntegrationTest extends IntegrationTest {
 
-    private BlockingSphereClient clientForExtenalOAuth2;
+    private BlockingSphereClient clientForExternalOAuth2;
 
     @Before
     public void setup() {
-        assumeTrue(System.getenv("JVM_SDK_IT_OAUTH_PROJECT_KEY") != null);
+        assumeHasExternalOAuth2Config();
+
         final SphereClientConfig config = SphereClientConfig.ofEnvironmentVariables("JVM_SDK_IT_OAUTH");
         final HttpClient httpClient = newHttpClient();
         final SphereAccessTokenSupplier tokenSupplier = SphereAccessTokenSupplier.ofAutoRefresh(config, httpClient, false);
         final SphereClient underlying = SphereClient.of(config, httpClient, tokenSupplier);
-        clientForExtenalOAuth2 = BlockingSphereClient.of(underlying, 30, TimeUnit.SECONDS);
+        clientForExternalOAuth2 = BlockingSphereClient.of(underlying, 30, TimeUnit.SECONDS);
     }
 
     @After
     public void unsetExternalAuthForPerformanceReasons(){
-        final Project project = clientForExtenalOAuth2.executeBlocking(ProjectGet.of());
+        assumeHasExternalOAuth2Config();
+
+        final Project project = clientForExternalOAuth2.executeBlocking(ProjectGet.of());
         final ProjectUpdateCommand updateCommand = ProjectUpdateCommand.of(project, SetExternalOAuth.ofUnset());
         final Project updatedProject = client().executeBlocking(updateCommand);
-        Assertions.assertThat(updatedProject.getExternalOAuth()).isNull();
+        assertThat(updatedProject.getExternalOAuth()).isNull();
     }
 
     @Test
-    public void execution() throws Exception{
+    public void setExternalAuth() throws Exception{
+        assumeHasExternalOAuth2Config();
+
         final Project project = client().executeBlocking(ProjectGet.of());
 
         final URL url = new URL("https://invalid.cmo");
@@ -62,4 +67,7 @@ public class ProjectSetExternalOAuthIntegrationTest extends IntegrationTest {
         });
     }
 
+    private void assumeHasExternalOAuth2Config() {
+        assumeTrue(System.getenv("JVM_SDK_IT_OAUTH_PROJECT_KEY") != null);
+    }
 }
