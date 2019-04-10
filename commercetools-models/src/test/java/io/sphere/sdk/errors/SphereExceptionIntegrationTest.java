@@ -30,6 +30,7 @@ import io.sphere.sdk.models.errors.InvalidJsonInputError;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.utils.VrapHeaders;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -141,6 +142,7 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
         supplierOfOneTimeFetchingToken.close();
     }
 
+    @Ignore("Disabled because there are problems with the external OAuth")
     @Test
     public void apiRequestWithWrongToken() throws Throwable {
         client();
