@@ -11,7 +11,7 @@ public class CustomerCreatePasswordTokenCommandIntegrationTest extends CustomerI
     @Test
     public void execution() throws Exception {
         withCustomer(client(), customer -> {
-            final CustomerToken token = client().executeBlocking(CustomerCreatePasswordTokenCommand.of(customer.getEmail()));
+            final CustomerToken token = client().executeBlocking(CustomerCreatePasswordTokenCommand.of(customer.getEmail(), 20L));
             assertThat(token.getCustomerId()).isEqualTo(customer.getId());
             assertThat(token.getValue().length()).isGreaterThan(0);
             assertThat(token.getId().length()).isGreaterThan(0);

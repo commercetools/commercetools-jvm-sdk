@@ -8,6 +8,7 @@ import io.sphere.sdk.projects.commands.updateactions.*;
 import io.sphere.sdk.projects.queries.ProjectGet;
 import org.assertj.core.api.Assertions;
 import org.junit.After;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.net.URL;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.USD;
 
+@Ignore("Disable because of problems with External OAuth")
 public class ProjectUpdateActionsIntegrationTest extends ProjectIntegrationTest{
 
     @After

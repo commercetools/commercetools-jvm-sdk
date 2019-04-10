@@ -156,6 +156,7 @@ import java.util.function.Function;
  <ul>
     <li class=fixed-in-release>Generated update commands no longer produce "Unchecked generics array creation for varargs" warning</li>
     <li class=new-in-release>Added timeout property to {@link io.sphere.sdk.extensions.Extension} and {@link io.sphere.sdk.extensions.ExtensionDraft}</li>
+    <li class=new-in-release>Added ttlMinutes to {@link io.sphere.sdk.customers.commands.CustomerCreatePasswordTokenCommand} command</li>
  </ul>
 
  <h3 class=released-version id="v1_40_0">1.40.0 (25.02.2019)</h3>
