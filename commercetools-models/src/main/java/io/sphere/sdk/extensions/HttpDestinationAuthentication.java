@@ -9,7 +9,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         include = JsonTypeInfo.As.PROPERTY,
         property = "type")
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = AzureFunctionsAuthenticationImpl.class, name = "AzureFunctions")
+        @JsonSubTypes.Type(value = AzureFunctionsAuthenticationImpl.class, name = "AzureFunctions"),
+        @JsonSubTypes.Type(value = AuthorizationHeaderAuthenticationImpl.class, name = "AuthorizationHeader")
 })
 public interface HttpDestinationAuthentication {
 
