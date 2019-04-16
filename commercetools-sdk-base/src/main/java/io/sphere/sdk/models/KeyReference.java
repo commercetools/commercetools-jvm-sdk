@@ -1,9 +1,11 @@
 package io.sphere.sdk.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import javax.annotation.Nullable;
 
+@JsonDeserialize(as = KeyReferenceImpl.class)
 public interface KeyReference<T>  {
 
     /**

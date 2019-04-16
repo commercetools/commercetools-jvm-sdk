@@ -14,7 +14,7 @@ public class KeyReferenceImpl<T> extends Base implements KeyReference<T> {
     private final T obj;
 
     @JsonCreator
-    KeyReferenceImpl(String key, String typeId, T obj) {
+    KeyReferenceImpl(final String key, final String typeId, @Nullable final T obj) {
         this.key = key;
         this.typeId = typeId;
         this.obj = obj;

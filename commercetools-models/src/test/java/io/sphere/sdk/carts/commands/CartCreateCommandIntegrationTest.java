@@ -4,7 +4,10 @@ import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.carts.queries.CartQuery;
 import io.sphere.sdk.models.Address;
+import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.products.BySkuVariantIdentifier;
+import io.sphere.sdk.stores.Store;
+import io.sphere.sdk.stores.StoreFixtures;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.JsonNodeReferenceResolver;
 import io.sphere.sdk.types.CustomFieldsDraft;
@@ -214,6 +217,20 @@ public class CartCreateCommandIntegrationTest extends IntegrationTest {
         assertThat(cmd.expansionPaths()).isEqualTo(prevCmd.expansionPaths());
     }
 
+    @Test
+    public void createCartWithStoreReference() {
+        StoreFixtures.withStore(client(), store -> {
+            final ResourceIdentifier<Store> storeResourceIdentifier = ResourceIdentifier.ofId(store.getId(), "store");
+            final CartDraft cartDraft = CartDraft.of(EUR).withCountry(DE).withStore(storeResourceIdentifier);
+            final Cart cart = client().executeBlocking(CartCreateCommand.of(cartDraft));
+            assertThat(cart).isNotNull();
+            assertThat(cart.getStore()).isNotNull();
+            assertThat(cart.getStore().getKey()).isEqualTo(store.getKey());
+
+            client().executeBlocking(CartDeleteCommand.of(cart));
+        });
+    }
+    
     private void testInventoryMode(final InventoryMode inventoryMode) {
         final Cart cart = client().executeBlocking(CartCreateCommand.of(CartDraft.of(EUR).withInventoryMode(inventoryMode)));
         assertThat(cart.getInventoryMode()).isEqualTo(inventoryMode);

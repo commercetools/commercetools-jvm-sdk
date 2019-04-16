@@ -8,8 +8,10 @@ import io.sphere.sdk.cartdiscounts.CartDiscount;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.Address;
+import io.sphere.sdk.models.KeyReference;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.orders.Order;
+import io.sphere.sdk.stores.Store;
 import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.TypeDraft;
 
@@ -225,7 +227,11 @@ public interface Cart extends CartLike<Cart> {
     @HasUpdateAction(value = "updateItemShippingAddress", fields = {@PropertySpec(name = "address",type = Address.class)})
     @HasUpdateAction(value = "removeItemShippingAddress", fields = {@PropertySpec(name = "addressKey",type = String.class)})
     List<Address> getItemShippingAddresses();
-
+    
+    @Nullable
+    @IgnoreInQueryModel
+    KeyReference<Store> getStore();
+    
     /**
      * Creates a reference for one item of this class by a known ID.
      *
