@@ -5,7 +5,7 @@ import io.sphere.sdk.expansion.ExpansionPath;
 
 import java.util.List;
 
-public class StoreExpansionModelImpl<T> extends ExpansionModelImpl<T> implements StoreExpansionModel<T> {
+class StoreExpansionModelImpl<T> extends ExpansionModelImpl<T> implements StoreExpansionModel<T> {
 
     StoreExpansionModelImpl(final List<String> parentPath, final String path) {
         super(parentPath, path);

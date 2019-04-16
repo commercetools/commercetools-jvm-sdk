@@ -6,7 +6,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.annotation.Nullable;
 
-public class KeyReferenceImpl<T> extends Base implements KeyReference<T> {
+class KeyReferenceImpl<T> extends Base implements KeyReference<T> {
 
     private final String key;
     private final String typeId;
