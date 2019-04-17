@@ -20,7 +20,7 @@ import javax.annotation.Nullable;
 @HasByIdGetEndpoint(javadocSummary = "Gets a store by ID.", includeExamples = "io.sphere.sdk.stores.queries.StoreGetIntegrationTest#getById()")
 @HasByKeyGetEndpoint(javadocSummary = "Get store by Key", includeExamples = "io.sphere.sdk.stores.queries.StoreGetIntegrationTest#getByKey()")
 @HasCreateCommand(includeExamples = "io.sphere.sdk.stores.commands.StoreCreateCommandIntegrationTest#execute()")
-@HasUpdateCommand(updateWith = "key")
+@HasUpdateCommand()
 @HasDeleteCommand(deleteWith = "key", includeExamples = "io.sphere.sdk.stores.commands.StoreDeleteCommandIntegrationTest#deleteByKey()")
 @HasQueryModel()
 public interface Store extends Resource<Store> {
