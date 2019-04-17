@@ -18,7 +18,7 @@ public interface StoreDraft {
     @Nullable
     LocalizedString getName();
     
-    public static StoreDraft of(final String key, @Nullable final LocalizedString name) {
+    static StoreDraft of(final String key, @Nullable final LocalizedString name) {
         return new StoreDraftDsl(key, name);
     }
     
