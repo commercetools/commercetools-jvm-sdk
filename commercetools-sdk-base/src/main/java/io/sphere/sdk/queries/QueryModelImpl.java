@@ -303,4 +303,8 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
     protected GeoJSONQueryModel<T> geoJSONQueryModel(final String pathName) {
         return new GeoJSONQueryModelImpl<>(this, pathName);
     }
+
+    protected KeyReferenceQueryModelImpl<T> keyReferenceQueryModel(final String pathSegment){
+        return new KeyReferenceQueryModelImpl<>(this, pathSegment);
+    }
 }

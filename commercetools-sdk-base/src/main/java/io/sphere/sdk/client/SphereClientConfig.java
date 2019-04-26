@@ -5,6 +5,7 @@ import io.sphere.sdk.models.Base;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 import static io.sphere.sdk.client.ClientPackage.*;
 
@@ -94,6 +95,11 @@ public final class SphereClientConfig extends Base implements SphereAuthConfig, 
     @Override
     public List<String> getScopes() {
         return scopes;
+    }
+
+    @Override
+    public List<String> getRawScopes() {
+        return scopes.stream().map(s -> s + ":" + projectKey).collect(Collectors.toList());
     }
 
     public SphereClientConfig withApiUrl(final String apiUrl) {

@@ -2,7 +2,8 @@ package io.sphere.sdk.client;
 
 import java.util.List;
 
-import static io.sphere.sdk.client.ClientPackage.*;
+import static io.sphere.sdk.client.ClientPackage.AUTH_URL;
+import static io.sphere.sdk.client.ClientPackage.DEFAULT_SCOPES;
 
 /**
  * Contains the configuration to fetch access keys for the commercetools platform.
@@ -37,6 +38,8 @@ public interface SphereAuthConfig {
         return DEFAULT_SCOPES;
     }
 
+    List<String> getRawScopes();
+    
     static SphereAuthConfig of(final String projectKey, final String clientId, final String clientSecret) {
         return of(projectKey, clientId, clientSecret, AUTH_URL);
     }

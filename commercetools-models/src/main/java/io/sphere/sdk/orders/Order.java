@@ -284,7 +284,7 @@ public interface Order extends CartLike<Order> {
     List<Address> getItemShippingAddresses();
 
     @Nullable
-    @IgnoreInQueryModel
+    @QueryModelHint(type = "KeyReferenceQueryModel<Order>", impl = "return keyReferenceQueryModel(fieldName);")
     KeyReference<Store> getStore();
     
     /**

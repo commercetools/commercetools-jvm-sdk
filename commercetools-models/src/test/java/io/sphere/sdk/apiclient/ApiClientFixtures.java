@@ -52,4 +52,17 @@ public final class ApiClientFixtures {
                 .apiUrl(sphereClientConfig.getApiUrl())
                 .build();
     }
+    
+    public static SphereAuthConfig toMySphereClientConfig(final SphereAuthConfig sphereAuthConfig, final ApiClient apiClient) {
+        final List<SphereScope> scopes = Arrays.stream(apiClient.getScope()
+                .split("\\s")).map(s -> s.split(":"))
+                .map(strings -> strings[0])
+                .map(SphereProjectScope::of)
+                .collect(Collectors.toList());
+
+        return SphereAuthConfigBuilder.ofKeyIdSecret(apiClient.getProjectKey(),apiClient.getId(),apiClient.getSecret())
+                .scopes(scopes)
+                .authUrl(sphereAuthConfig.getAuthUrl())
+                .build();
+    }
 }

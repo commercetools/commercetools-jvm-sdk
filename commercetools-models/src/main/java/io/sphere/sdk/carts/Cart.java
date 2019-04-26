@@ -229,7 +229,7 @@ public interface Cart extends CartLike<Cart> {
     List<Address> getItemShippingAddresses();
     
     @Nullable
-    @IgnoreInQueryModel
+    @QueryModelHint(type = "KeyReferenceQueryModel<Cart>", impl = "return keyReferenceQueryModel(fieldName);")
     KeyReference<Store> getStore();
     
     /**
