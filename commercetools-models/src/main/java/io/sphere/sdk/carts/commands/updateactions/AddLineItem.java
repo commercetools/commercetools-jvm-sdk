@@ -2,6 +2,7 @@ package io.sphere.sdk.carts.commands.updateactions;
 
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.ExternalLineItemTotalPrice;
+import io.sphere.sdk.carts.ItemShippingDetailsDraft;
 import io.sphere.sdk.carts.LineItemDraft;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.commands.UpdateActionImpl;
@@ -46,8 +47,10 @@ public final class AddLineItem extends UpdateActionImpl<Cart> implements CustomD
     private final MonetaryAmount externalPrice;
     @Nullable
     private final ExternalLineItemTotalPrice externalTotalPrice;
-
-    private AddLineItem(@Nullable final String productId, @Nullable final Integer variantId, @Nullable String sku, final Long quantity, @Nullable final ResourceIdentifier<Channel> supplyChannel, @Nullable final ResourceIdentifier<Channel> distributionChannel, @Nullable final CustomFieldsDraft custom, @Nullable final ExternalTaxRateDraft externalTaxRate, @Nullable final MonetaryAmount externalPrice, @Nullable final ExternalLineItemTotalPrice externalTotalPrice) {
+    @Nullable
+    private final ItemShippingDetailsDraft shippingDetails;
+    
+    private AddLineItem(@Nullable final String productId, @Nullable final Integer variantId, @Nullable String sku, final Long quantity, @Nullable final ResourceIdentifier<Channel> supplyChannel, @Nullable final ResourceIdentifier<Channel> distributionChannel, @Nullable final CustomFieldsDraft custom, @Nullable final ExternalTaxRateDraft externalTaxRate, @Nullable final MonetaryAmount externalPrice, @Nullable final ExternalLineItemTotalPrice externalTotalPrice, @Nullable final ItemShippingDetailsDraft shippingDetails) {
         super("addLineItem");
         this.productId = productId;
         this.variantId = variantId;
@@ -59,6 +62,7 @@ public final class AddLineItem extends UpdateActionImpl<Cart> implements CustomD
         this.externalTaxRate = externalTaxRate;
         this.externalPrice = externalPrice;
         this.externalTotalPrice = externalTotalPrice;
+        this.shippingDetails = shippingDetails;
     }
 
     public static AddLineItem of(final ProductIdentifiable product, final int variantId, final long quantity) {
@@ -66,11 +70,11 @@ public final class AddLineItem extends UpdateActionImpl<Cart> implements CustomD
     }
 
     public static AddLineItem of(final String productId, final int variantId, final long quantity) {
-        return new AddLineItem(productId, variantId, null, quantity, null, null, null, null, null, null);
+        return new AddLineItem(productId, variantId, null, quantity, null, null, null, null, null, null, null);
     }
 
     public static AddLineItem of(final LineItemDraft template) {
-        return new AddLineItem(template.getProductId(), template.getVariantId(), template.getSku(), template.getQuantity(), template.getSupplyChannel(), template.getDistributionChannel(), template.getCustom(), template.getExternalTaxRate(), template.getExternalPrice(), template.getExternalTotalPrice());
+        return new AddLineItem(template.getProductId(), template.getVariantId(), template.getSku(), template.getQuantity(), template.getSupplyChannel(), template.getDistributionChannel(), template.getCustom(), template.getExternalTaxRate(), template.getExternalPrice(), template.getExternalTotalPrice(), template.getShippingDetails());
     }
 
     public String getProductId() {
@@ -120,27 +124,32 @@ public final class AddLineItem extends UpdateActionImpl<Cart> implements CustomD
         return externalTotalPrice;
     }
 
+    @Nullable
+    public ItemShippingDetailsDraft getShippingDetails() {
+        return shippingDetails;
+    }
+    
     public AddLineItem withSupplyChannel(final Referenceable<Channel> supplyChannel) {
-        return new AddLineItem(getProductId(), getVariantId(), getSku(), getQuantity(), supplyChannel.toReference(), getDistributionChannel(), getCustom(), getExternalTaxRate(), getExternalPrice(), getExternalTotalPrice());
+        return new AddLineItem(getProductId(), getVariantId(), getSku(), getQuantity(), supplyChannel.toReference(), getDistributionChannel(), getCustom(), getExternalTaxRate(), getExternalPrice(), getExternalTotalPrice(), getShippingDetails());
     }
 
     public AddLineItem withDistributionChannel(final Referenceable<Channel> distributionChannel) {
-        return new AddLineItem(getProductId(), getVariantId(), getSku(), getQuantity(), getSupplyChannel(), distributionChannel.toReference(), getCustom(), getExternalTaxRate(), getExternalPrice(), getExternalTotalPrice());
+        return new AddLineItem(getProductId(), getVariantId(), getSku(), getQuantity(), getSupplyChannel(), distributionChannel.toReference(), getCustom(), getExternalTaxRate(), getExternalPrice(), getExternalTotalPrice(), getShippingDetails());
     }
 
     public AddLineItem withCustom(final CustomFieldsDraft custom) {
-        return new AddLineItem(getProductId(), getVariantId(), getSku(), getQuantity(), getSupplyChannel(), getDistributionChannel(), custom, getExternalTaxRate(), getExternalPrice(), getExternalTotalPrice());
+        return new AddLineItem(getProductId(), getVariantId(), getSku(), getQuantity(), getSupplyChannel(), getDistributionChannel(), custom, getExternalTaxRate(), getExternalPrice(), getExternalTotalPrice(), getShippingDetails());
     }
 
     public AddLineItem withExternalTaxRate(@Nullable final ExternalTaxRateDraft externalTaxRate) {
-        return new AddLineItem(getProductId(), getVariantId(), getSku(), getQuantity(), getSupplyChannel(), getDistributionChannel(), getCustom(), externalTaxRate, getExternalPrice(), getExternalTotalPrice());
+        return new AddLineItem(getProductId(), getVariantId(), getSku(), getQuantity(), getSupplyChannel(), getDistributionChannel(), getCustom(), externalTaxRate, getExternalPrice(), getExternalTotalPrice(), getShippingDetails());
     }
 
     public AddLineItem withExternalPrice(@Nullable final MonetaryAmount externalPrice) {
-        return new AddLineItem(getProductId(), getVariantId(), getSku(), getQuantity(), getSupplyChannel(), getDistributionChannel(), getCustom(), getExternalTaxRate(), externalPrice, getExternalTotalPrice());
+        return new AddLineItem(getProductId(), getVariantId(), getSku(), getQuantity(), getSupplyChannel(), getDistributionChannel(), getCustom(), getExternalTaxRate(), externalPrice, getExternalTotalPrice(), getShippingDetails());
     }
 
     public AddLineItem withExternalTotalPrice(@Nullable final ExternalLineItemTotalPrice externalTotalPrice) {
-        return new AddLineItem(getProductId(), getVariantId(), getSku(), getQuantity(), getSupplyChannel(), getDistributionChannel(), getCustom(), getExternalTaxRate(), getExternalPrice(), externalTotalPrice);
+        return new AddLineItem(getProductId(), getVariantId(), getSku(), getQuantity(), getSupplyChannel(), getDistributionChannel(), getCustom(), getExternalTaxRate(), getExternalPrice(), externalTotalPrice, getShippingDetails());
     }
 }

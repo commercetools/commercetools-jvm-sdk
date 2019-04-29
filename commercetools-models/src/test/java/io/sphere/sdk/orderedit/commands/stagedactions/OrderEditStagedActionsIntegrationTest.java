@@ -29,7 +29,7 @@ import java.util.UUID;
 
 import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withB2cCustomerGroup;
 import static io.sphere.sdk.payments.PaymentFixtures.withPayment;
-import static io.sphere.sdk.products.ProductFixtures.withProduct;
+import static io.sphere.sdk.products.ProductFixtures.withTaxedProduct;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
 
@@ -244,7 +244,7 @@ public class OrderEditStagedActionsIntegrationTest extends IntegrationTest {
 
     @Test
     public void addLineItem() {
-        withProduct(client(), product -> {
+        withTaxedProduct(client(), product -> {
             final LineItemDraft lineItemDraft = LineItemDraft.of(product, 1, 5);
             final AddLineItem addLineItem = AddLineItem.of(lineItemDraft);
             testOrderEditStagedUpdateAction(addLineItem);
