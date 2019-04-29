@@ -6,7 +6,7 @@ import java.util.List;
 
 import static io.sphere.sdk.client.ClientPackage.requireNonBlank;
 
-public class MySphereAuthConfigImpl extends Base implements SphereAuthConfig {
+final class MySphereAuthConfigImpl extends Base implements SphereAuthConfig {
 
     private final String projectKey;
     private final String clientId;

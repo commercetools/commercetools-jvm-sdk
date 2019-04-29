@@ -11,6 +11,7 @@ import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.stores.StoreFixtures;
 import io.sphere.sdk.test.IntegrationTest;
 import org.assertj.core.api.Assertions;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -60,20 +61,21 @@ public class ApiClientCommandIntegrationTest extends IntegrationTest {
         assertThat(deletedRes).isEqualToIgnoringGivenFields(res,"secret");
     }
 
+    @Ignore("Backend does not support the scope at the time of writing the test")
     @Test
-    public void execute() {
-        
+    public void testCustomScope() {
+
         StoreFixtures.withUpdateableStore(client(), firstStore -> {
             StoreFixtures.withStore(client(), secondStore -> {
                 final String projectKey = getSphereClientConfig().getProjectKey();
-                //final String viewOrdersScopeString = "view_orders:" + projectKey + ":" + firstStore.getKey();
-                final String viewOrdersScopeString = "view_orders:" + projectKey;
+                final String viewOrdersScopeString = "view_orders:" + projectKey + ":" + firstStore.getKey();
+                //final String viewOrdersScopeString = "view_orders:" + projectKey;
                 final SphereScope sphereScope = SphereProjectScope.of(viewOrdersScopeString);
 
                 final ApiClientCreateCommand createCommand = ApiClientCreateCommand.of(ApiClientDraftBuilder.of("store-scope-test-client", viewOrdersScopeString).deleteDaysAfterCreation(1).build());
                 final ApiClient apiClient = client().executeBlocking(createCommand);
                 Assertions.assertThat(apiClient).isNotNull();
-                
+
                 final SphereAuthConfig config = MySphereAuthConfigBuilder.ofKeyIdSecret(apiClient.getProjectKey(), apiClient.getId(), apiClient.getSecret())
                         .scopes(Arrays.asList(sphereScope))
                         .authUrl(getSphereClientConfig().getAuthUrl())
@@ -83,7 +85,7 @@ public class ApiClientCommandIntegrationTest extends IntegrationTest {
                 final CompletionStage<String> stringCompletionStage = TokensFacade.fetchAccessToken(config);
                 final String accessToken = blockingWait(stringCompletionStage, 2, SECONDS);
                 assertThat(accessToken).isNotEmpty();
-                
+
                 final SphereClient client = SphereClientFactory.of()
                         .createClient(getSphereClientConfig(), SphereAccessTokenSupplier.ofConstantToken(accessToken));
 
@@ -100,7 +102,7 @@ public class ApiClientCommandIntegrationTest extends IntegrationTest {
 //                        assertThat(orderPagedQueryResult).isNull();
 //                    });
                 client.close();
-                
+
                 final ApiClient deletedRes = client().executeBlocking(ApiClientDeleteCommand.of(apiClient));
                 Assertions.assertThat(deletedRes).isEqualToIgnoringGivenFields(apiClient,"secret", "lastUsedAt");
             });

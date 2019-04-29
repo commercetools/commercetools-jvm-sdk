@@ -2,7 +2,7 @@ package io.sphere.sdk.queries;
 
 import javax.annotation.Nullable;
 
-public final class KeyReferenceQueryModelImpl<T> extends QueryModelImpl<T> implements KeyReferenceQueryModel<T> {
+final class KeyReferenceQueryModelImpl<T> extends QueryModelImpl<T> implements KeyReferenceQueryModel<T> {
 
     public KeyReferenceQueryModelImpl(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);

@@ -7,7 +7,7 @@ import java.util.List;
 
 import static io.sphere.sdk.client.ClientPackage.transformEnumScopeListToStringList;
 
-public class MySphereAuthConfigBuilder extends Base implements Builder<SphereAuthConfig> {
+public final class MySphereAuthConfigBuilder extends Base implements Builder<SphereAuthConfig> {
 
     private String projectKey;
     private String clientId;

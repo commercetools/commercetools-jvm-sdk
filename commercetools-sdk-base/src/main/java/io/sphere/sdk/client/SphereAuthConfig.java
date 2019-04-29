@@ -1,6 +1,7 @@
 package io.sphere.sdk.client;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static io.sphere.sdk.client.ClientPackage.AUTH_URL;
 import static io.sphere.sdk.client.ClientPackage.DEFAULT_SCOPES;
@@ -38,7 +39,9 @@ public interface SphereAuthConfig {
         return DEFAULT_SCOPES;
     }
 
-    List<String> getRawScopes();
+    default List<String> getRawScopes() {
+        return DEFAULT_SCOPES.stream().map(s -> s + ":" + getProjectKey()).collect(Collectors.toList());
+    }
     
     static SphereAuthConfig of(final String projectKey, final String clientId, final String clientSecret) {
         return of(projectKey, clientId, clientSecret, AUTH_URL);
