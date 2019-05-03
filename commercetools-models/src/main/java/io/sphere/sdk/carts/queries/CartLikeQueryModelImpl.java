@@ -97,9 +97,4 @@ public abstract class CartLikeQueryModelImpl<T> extends CustomResourceQueryModel
     public AddressCollectionQueryModel<T> itemShippingAddresses() {
         return addressCollectionQueryModel("itemShippingAddresses");
     }
-    
-//    @Override
-//    public KeyReferenceQueryModel<T> store() {
-//        return keyReferenceQueryModel("store");
-//    }
 }
