@@ -155,6 +155,7 @@ import java.util.function.Function;
  <h3 class=released-version id="v1_42_0">1.42.0</h3>
  <ul>
     <li class=fixed-in-release>Added support for {@link io.sphere.sdk.extensions.AuthorizationHeaderAuthentication} for api extensions.</li>
+    <li class=fixed-in-release>Fixed {@link io.sphere.sdk.orderedits.commands.stagedactions.AddLineItem} staged update action structure</li>
     <li class=new-in-release>Added support for {@link io.sphere.sdk.stores.Store}</li>
  </ul>
 
