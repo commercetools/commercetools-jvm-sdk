@@ -38,4 +38,6 @@ public interface CartLikeQueryModel<T> extends ResourceQueryModel<T>, WithCustom
     LocaleQueryModel<T> locale();
 
     AddressCollectionQueryModel<T> itemShippingAddresses();
+
+    KeyReferenceQueryModel<T> store();
 }

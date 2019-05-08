@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.http.*;
 import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.json.SphereJsonUtils;
-import io.sphere.sdk.meta.BuildInfo;
 import io.sphere.sdk.models.SphereException;
 
 import javax.annotation.Nullable;
@@ -91,9 +90,10 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
         final String projectKey = config.getProjectKey();
         final Map<String, String> data = new HashMap<>();
         data.put("grant_type", isPasswordFlow() ? "password" : "client_credentials");
-        final String scopeValue = config.getScopes().stream()
-                .map(scope -> format("%s:%s", scope, projectKey))
+        final String scopeValue = config.getRawScopes().stream()
+                //.map(scope -> format("%s:%s", scope, projectKey))
                 .collect(joining(" "));
+        
         data.put("scope", scopeValue);
         if (isPasswordFlow()) {
             data.put("username", username);
