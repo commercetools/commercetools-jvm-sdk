@@ -9,6 +9,7 @@ import io.sphere.sdk.discountcodes.DiscountCode;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
+import io.sphere.sdk.types.Custom;
 import io.sphere.sdk.types.CustomFields;
 
 import javax.annotation.Nullable;
@@ -34,7 +35,7 @@ import java.util.List;
 @HasUpdateCommand
 @HasDeleteCommand(javadocSummary = "Deletes a {@link CartDiscount}.")
 @HasQueryModel
-public interface CartDiscount extends Resource<CartDiscount> {
+public interface CartDiscount extends Resource<CartDiscount>, Custom {
     /**
      * Predicate where the discounts should be applied to.
      *

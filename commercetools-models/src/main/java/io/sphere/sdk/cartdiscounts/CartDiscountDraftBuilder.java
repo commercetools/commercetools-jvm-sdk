@@ -2,13 +2,14 @@ package io.sphere.sdk.cartdiscounts;
 
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.types.CustomFields;
+import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
 public final class CartDiscountDraftBuilder extends CartDiscountDraftBuilderBase<CartDiscountDraftBuilder> {
 
-    CartDiscountDraftBuilder(final @Nullable Boolean active, final String cartPredicate, final @Nullable CustomFields custom, final @Nullable LocalizedString description, final LocalizedString name,
+    CartDiscountDraftBuilder(final @Nullable Boolean active, final String cartPredicate, final @Nullable CustomFieldsDraft custom, final @Nullable LocalizedString description, final LocalizedString name,
                              final Boolean requiresDiscountCode, final String sortOrder, final StackingMode stackingMode, final @Nullable CartDiscountTarget target,
                              final @Nullable ZonedDateTime validFrom, final  @Nullable ZonedDateTime validUntil, final CartDiscountValue value) {
         super(active, cartPredicate,custom, description, name, requiresDiscountCode, sortOrder, stackingMode, target, validFrom, validUntil, value);
