@@ -29,4 +29,8 @@ public final class RemoveZone extends UpdateActionImpl<ShippingMethod> {
     public static RemoveZone of(final Referenceable<Zone> zone) {
         return new RemoveZone(zone.toResourceIdentifier());
     }
+
+    public static RemoveZone of(final ResourceIdentifier<Zone> zone) {
+        return new RemoveZone(zone);
+    }
 }
