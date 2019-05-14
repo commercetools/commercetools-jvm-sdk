@@ -36,7 +36,7 @@ public final class SetShippingMethod extends UpdateActionImpl<Cart> {
                 : ofRemove();
     }
 
-    public static SetShippingMethod of(@Nullable final ResourceIdentifier<ShippingMethod> shippingMethod) {
+    public static SetShippingMethod of(final ResourceIdentifier<ShippingMethod> shippingMethod) {
         return  new SetShippingMethod(shippingMethod);
 
     }

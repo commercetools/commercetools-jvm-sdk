@@ -33,7 +33,7 @@ public final class SetSupplyChannel extends UpdateActionImpl<InventoryEntry> {
         return new SetSupplyChannel(channelReference);
     }
 
-    public static SetSupplyChannel of(@Nullable final ResourceIdentifier<Channel> supplyChannel) {
+    public static SetSupplyChannel of(final ResourceIdentifier<Channel> supplyChannel) {
         return new SetSupplyChannel(supplyChannel);
     }
 
