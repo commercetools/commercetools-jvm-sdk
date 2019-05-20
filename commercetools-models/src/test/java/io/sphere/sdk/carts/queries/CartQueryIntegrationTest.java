@@ -6,6 +6,7 @@ import io.sphere.sdk.cartdiscounts.DiscountedLineItemPriceForQuantity;
 import io.sphere.sdk.cartdiscounts.RelativeCartDiscountValue;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.carts.commands.CartCreateCommand;
+import io.sphere.sdk.carts.commands.CartDeleteCommand;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.AddDiscountCode;
 import io.sphere.sdk.carts.commands.updateactions.RemoveDiscountCode;
@@ -15,6 +16,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.orders.OrderFixtures;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.queries.PagedQueryResult;
+import io.sphere.sdk.stores.StoreFixtures;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
 import net.jcip.annotations.NotThreadSafe;
@@ -264,5 +266,32 @@ public class CartQueryIntegrationTest extends IntegrationTest {
                 .plusPredicates(m -> m.locale().is(Locale.GERMAN)));
         assertThat(result.getResults()).hasSize(1);
         assertThat(result.head().get().getId()).isEqualTo(cart.getId());
+    }
+
+    @Test
+    public void inStoreLocale() {
+        StoreFixtures.withStore(client(), store -> {
+            final CartDraft cartDraft = CartDraft.of(EUR).withLocale(Locale.GERMAN).withStore(store.toResourceIdentifier());
+            final Cart cart = client().executeBlocking(CartCreateCommand.of(cartDraft));
+            final PagedQueryResult<Cart> result = client().executeBlocking(CartInStoreQuery.of(store.getKey())
+                    .plusPredicates(m -> m.is(cart))
+                    .plusPredicates(m -> m.locale().is(Locale.GERMAN)));
+            assertThat(result.getResults()).hasSize(1);
+            assertThat(result.head().get().getId()).isEqualTo(cart.getId());
+            client().executeBlocking(CartDeleteCommand.of(cart));
+        });
+    }
+    
+    @Test
+    public void inStoreAnonymousId() {
+        StoreFixtures.withStore(client(), store -> {
+            final String anonymousId = randomKey();
+            final CartDraft cartDraft = CartDraft.of(EUR).withAnonymousId(anonymousId).withStore(store.toResourceIdentifier());
+            final Cart cart = client().executeBlocking(CartCreateCommand.of(cartDraft));
+            final PagedQueryResult<Cart> result = client().executeBlocking(CartQuery.of().withPredicates(m -> m.anonymousId().is(anonymousId)));
+            assertThat(result.getResults()).hasSize(1);
+            assertThat(result.head().get().getId()).isEqualTo(cart.getId());
+            client().executeBlocking(CartDeleteCommand.of(cart));
+        });
     }
 }
