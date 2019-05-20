@@ -1430,7 +1430,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         TaxCategoryFixtures.withTransientTaxCategory(client(), taxCategory ->
                 withUpdateableProduct(client(), product -> {
                     assertThat(product.getTaxCategory()).isNotEqualTo(taxCategory);
-                    final ProductUpdateCommand command = ProductUpdateCommand.of(product, SetTaxCategory.of(taxCategory));
+                    final ProductUpdateCommand command = ProductUpdateCommand.of(product, SetTaxCategory.of(taxCategory.toResourceIdentifier()));
                     final Product updatedProduct = client().executeBlocking(command);
                     assertThat(updatedProduct.getTaxCategory()).isEqualTo(taxCategory.toReference());
                     return updatedProduct;

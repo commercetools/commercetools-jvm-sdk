@@ -5,6 +5,8 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.products.Product;
+import io.sphere.sdk.products.ProductDraft;
+import io.sphere.sdk.products.ProductDraftDsl;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
 import javax.annotation.Nullable;
@@ -27,16 +29,29 @@ public final class SetTaxCategory extends UpdateActionImpl<Product> {
         this.taxCategory = taxCategory;
     }
 
-    public static SetTaxCategory of(@Nullable final Referenceable<TaxCategory> taxCategory) {
+    /**
+     * This method is deprecated, please use {@link SetTaxCategory#of(ResourceIdentifier)}
+     */
+    @Deprecated
+    public static SetTaxCategory ofReferencable(@Nullable final Referenceable<TaxCategory> taxCategory) {
         return new SetTaxCategory(Optional.ofNullable(taxCategory).map(Referenceable::toResourceIdentifier).orElse(null));
     }
 
+    public static SetTaxCategory of(@Nullable final ResourceIdentifier<TaxCategory> taxCategory) {
+        return new SetTaxCategory(taxCategory);
+    }
+    
     public static SetTaxCategory unset() {
         return new SetTaxCategory(null);
     }
 
+
+    /**
+     * This method is deprecated, please use {@link SetTaxCategory#of(ResourceIdentifier)}
+     */
+    @Deprecated
     public static SetTaxCategory to(final Referenceable<TaxCategory> taxCategory) {
-        return of(taxCategory);
+        return ofReferencable(taxCategory);
     }
 
     @Nullable
