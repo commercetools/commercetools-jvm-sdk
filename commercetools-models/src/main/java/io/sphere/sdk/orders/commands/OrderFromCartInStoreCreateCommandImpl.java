@@ -7,7 +7,7 @@ import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.OrderFromCartDraft;
 import io.sphere.sdk.orders.expansion.OrderExpansionModel;
 
-public class OrderFromCartInStoreCreateCommandImpl extends MetaModelCreateCommandImpl<Order, OrderFromCartInStoreCreateCommand, OrderFromCartDraft, OrderExpansionModel<Order>> implements OrderFromCartInStoreCreateCommand {
+final class OrderFromCartInStoreCreateCommandImpl extends MetaModelCreateCommandImpl<Order, OrderFromCartInStoreCreateCommand, OrderFromCartDraft, OrderExpansionModel<Order>> implements OrderFromCartInStoreCreateCommand {
 
     OrderFromCartInStoreCreateCommandImpl(final MetaModelCreateCommandBuilder<Order, OrderFromCartInStoreCreateCommand, OrderFromCartDraft, OrderExpansionModel<Order>> builder) {
         super(builder);

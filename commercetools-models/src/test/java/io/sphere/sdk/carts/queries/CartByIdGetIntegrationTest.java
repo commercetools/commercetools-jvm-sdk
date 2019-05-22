@@ -4,8 +4,6 @@ import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.CartDraft;
 import io.sphere.sdk.carts.commands.CartCreateCommand;
 import io.sphere.sdk.carts.commands.CartDeleteCommand;
-import io.sphere.sdk.carts.commands.CartInStoreByCustomerIdGet;
-import io.sphere.sdk.carts.commands.CartInStoreByIdGet;
 import io.sphere.sdk.customers.CustomerFixtures;
 import io.sphere.sdk.models.DefaultCurrencyUnits;
 import io.sphere.sdk.stores.StoreFixtures;
@@ -40,7 +38,7 @@ public class CartByIdGetIntegrationTest extends IntegrationTest {
     
     @Test
     public void fetchCartInStoreByCustomerId() {
-        StoreFixtures.withStore(client(), store -> {
+        StoreFixtures.withStore(client(), store -> { 
             CustomerFixtures.withCustomer(client(), customer -> {
                 final CartDraft cartDraft = CartDraft.of(DefaultCurrencyUnits.EUR).withStore(store.toResourceIdentifier()).withCustomerId(customer.getId());
                 final CartCreateCommand cartCreateCommand = CartCreateCommand.of(cartDraft);

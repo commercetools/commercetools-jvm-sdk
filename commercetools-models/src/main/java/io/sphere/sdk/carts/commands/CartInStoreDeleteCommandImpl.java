@@ -7,7 +7,7 @@ import io.sphere.sdk.commands.MetaModelByIdDeleteCommandBuilder;
 import io.sphere.sdk.commands.MetaModelByIdDeleteCommandImpl;
 import io.sphere.sdk.models.Versioned;
 
-class CartInStoreDeleteCommandImpl extends MetaModelByIdDeleteCommandImpl<Cart, CartInStoreDeleteCommand, CartExpansionModel<Cart>> implements CartInStoreDeleteCommand {
+final class CartInStoreDeleteCommandImpl extends MetaModelByIdDeleteCommandImpl<Cart, CartInStoreDeleteCommand, CartExpansionModel<Cart>> implements CartInStoreDeleteCommand {
 
     CartInStoreDeleteCommandImpl(final String storeKey, final Versioned<Cart> versioned, final boolean eraseData) {
         super(versioned,eraseData, JsonEndpoint.of(Cart.typeReference(), "/in-store/key=" + storeKey + "/carts"), CartExpansionModel.of(), CartInStoreDeleteCommandImpl::new);

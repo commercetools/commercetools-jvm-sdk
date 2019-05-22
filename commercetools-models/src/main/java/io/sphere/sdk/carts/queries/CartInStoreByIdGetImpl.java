@@ -1,4 +1,4 @@
-package io.sphere.sdk.carts.commands;
+package io.sphere.sdk.carts.queries;
 
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.expansion.CartExpansionModel;
@@ -6,7 +6,7 @@ import io.sphere.sdk.client.JsonEndpoint;
 import io.sphere.sdk.queries.MetaModelGetDslBuilder;
 import io.sphere.sdk.queries.MetaModelGetDslImpl;
 
-public class CartInStoreByIdGetImpl extends MetaModelGetDslImpl<Cart, Cart, CartInStoreByIdGet, CartExpansionModel<Cart>> implements CartInStoreByIdGet {
+final class CartInStoreByIdGetImpl extends MetaModelGetDslImpl<Cart, Cart, CartInStoreByIdGet, CartExpansionModel<Cart>> implements CartInStoreByIdGet {
     
     CartInStoreByIdGetImpl(final String storeKey, final String cartId) {
         super(cartId, JsonEndpoint.of(Cart.typeReference(), "/in-store/key=" + storeKey + "/carts"), CartExpansionModel.of(), CartInStoreByIdGetImpl::new);

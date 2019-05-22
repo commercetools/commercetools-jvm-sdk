@@ -6,6 +6,7 @@ import io.sphere.sdk.cartdiscounts.commands.CartDiscountCreateCommand;
 import io.sphere.sdk.cartdiscounts.commands.CartDiscountDeleteCommand;
 import io.sphere.sdk.carts.commands.CartCreateCommand;
 import io.sphere.sdk.carts.commands.CartDeleteCommand;
+import io.sphere.sdk.carts.commands.CartInStoreCreateCommand;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.*;
 import io.sphere.sdk.client.BlockingSphereClient;
@@ -21,6 +22,7 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.commands.OrderDeleteCommand;
 import io.sphere.sdk.products.Product;
+import io.sphere.sdk.stores.Store;
 import io.sphere.sdk.utils.MoneyImpl;
 
 import javax.money.MonetaryAmount;
@@ -104,6 +106,28 @@ public class CartFixtures {
             assertThat(lineItem.getName()).isEqualTo(product.getMasterData().getStaged().getName());
             assertThat(lineItem.getQuantity()).isEqualTo(quantity);
             f.accept(updatedCart);
+        });
+    }
+    
+    public static void withFilledCartInStore(final BlockingSphereClient client, final Store store, final Consumer<Cart> f) {
+        withTaxedProduct(client, product -> {
+
+            final Cart cart = client.executeBlocking(CartInStoreCreateCommand.of(store.getKey(), CartDraft.of(EUR)
+                    .withCountry(DEFAULT_COUNTRY)
+                    .withShippingAddress(GERMAN_ADDRESS)
+                    .withStore(store.toResourceIdentifier())));
+            assertThat(cart.getLineItems()).hasSize(0);
+            final long quantity = 3;
+            final String productId = product.getId();
+            final AddLineItem action = AddLineItem.of(productId, 1, quantity);
+
+            final Cart updatedCart = client.executeBlocking(CartUpdateCommand.of(cart, action));
+            assertThat(updatedCart.getLineItems()).hasSize(1);
+            final LineItem lineItem = updatedCart.getLineItems().get(0);
+            assertThat(lineItem.getName()).isEqualTo(product.getMasterData().getStaged().getName());
+            assertThat(lineItem.getQuantity()).isEqualTo(quantity);
+            f.accept(updatedCart);
+
         });
     }
 

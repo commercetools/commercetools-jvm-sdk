@@ -1,10 +1,8 @@
 package io.sphere.sdk.orders.commands;
 
 import com.neovisionaries.i18n.CountryCode;
-import io.sphere.sdk.carts.CustomLineItem;
-import io.sphere.sdk.carts.ItemState;
-import io.sphere.sdk.carts.LineItem;
-import io.sphere.sdk.carts.LineItemLike;
+import io.sphere.sdk.carts.*;
+import io.sphere.sdk.carts.commands.CartDeleteCommand;
 import io.sphere.sdk.customers.CustomerFixtures;
 import io.sphere.sdk.messages.queries.MessageQuery;
 import io.sphere.sdk.models.Address;
@@ -35,6 +33,7 @@ import static io.sphere.sdk.orders.OrderFixtures.*;
 import static io.sphere.sdk.payments.PaymentFixtures.withPayment;
 import static io.sphere.sdk.states.StateFixtures.withStandardStates;
 import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
+import static io.sphere.sdk.stores.StoreFixtures.withStore;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.SphereInternalUtils.asSet;
 import static io.sphere.sdk.utils.SphereInternalUtils.setOf;
@@ -835,6 +834,64 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
             final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, SetLocale.of(Locale.GERMAN)));
             assertThat(updatedOrder.getLocale()).isEqualTo(GERMAN);
             return updatedOrder;
+        });
+    }
+
+    @Test
+    public void setLocaleToOrderInStoreByOrderNumber(){
+        withStateByBuilder(client(), builder -> builder.type(StateType.ORDER_STATE), state -> {
+            withStore(client(), store -> {
+                CartFixtures.withFilledCartInStore(client(), store, cart -> {
+                    String orderNumber = SphereTestUtils.randomKey();
+                    final OrderFromCartDraft orderFromCartDraft = OrderFromCartDraftBuilder.of(cart.getId(), cart.getVersion())
+                            .shipmentState(ShipmentState.SHIPPED)
+                            .state(state.toReference())
+                            .orderState(OrderState.CANCELLED)
+                            .orderNumber(orderNumber)
+                            .build();
+                    final Order order = client().executeBlocking(OrderFromCartInStoreCreateCommand.of(store.getKey(), orderFromCartDraft)
+                            .withExpansionPaths(m -> m.cart()));
+                    assertThat(order).isNotNull();
+                    assertThat(order.getStore()).isNotNull();
+                    assertThat(order.getStore().getKey()).isEqualTo(store.getKey());
+
+                    final Order updatedOrder = client().executeBlocking(OrderInStoreUpdateByOrderNumberCommand.of(store.getKey(), orderNumber, order.getVersion(), SetLocale.of(Locale.GERMAN)));
+                    assertThat(updatedOrder).isNotNull();
+                    assertThat(updatedOrder.getLocale()).isEqualTo(Locale.GERMAN);
+
+                    client().executeBlocking(OrderDeleteCommand.of(updatedOrder));
+                    client().executeBlocking(CartDeleteCommand.of(order.getCart().getObj()));
+                });
+            });
+        });
+    }
+
+    @Test
+    public void setLocaleToOrderInStoreById(){
+        withStateByBuilder(client(), builder -> builder.type(StateType.ORDER_STATE), state -> {
+            withStore(client(), store -> {
+                CartFixtures.withFilledCartInStore(client(), store, cart -> {
+                    String orderNumber = SphereTestUtils.randomKey();
+                    final OrderFromCartDraft orderFromCartDraft = OrderFromCartDraftBuilder.of(cart.getId(), cart.getVersion())
+                            .shipmentState(ShipmentState.SHIPPED)
+                            .state(state.toReference())
+                            .orderState(OrderState.CANCELLED)
+                            .orderNumber(orderNumber)
+                            .build();
+                    final Order order = client().executeBlocking(OrderFromCartInStoreCreateCommand.of(store.getKey(), orderFromCartDraft)
+                            .withExpansionPaths(m -> m.cart()));
+                    assertThat(order).isNotNull();
+                    assertThat(order.getStore()).isNotNull();
+                    assertThat(order.getStore().getKey()).isEqualTo(store.getKey());
+
+                    final Order updatedOrder = client().executeBlocking(OrderInStoreUpdateByIdCommand.of(store.getKey(), order, SetLocale.of(Locale.GERMAN)));
+                    assertThat(updatedOrder).isNotNull();
+                    assertThat(updatedOrder.getLocale()).isEqualTo(Locale.GERMAN);
+
+                    client().executeBlocking(OrderDeleteCommand.of(updatedOrder));
+                    client().executeBlocking(CartDeleteCommand.of(order.getCart().getObj()));
+                });
+            });
         });
     }
 
