@@ -231,6 +231,18 @@ public class CartCreateCommandIntegrationTest extends IntegrationTest {
         });
     }
     
+    @Test
+    public void createCartInStore(){
+        StoreFixtures.withStore(client(), store -> {
+            final CartDraft cartDraft = CartDraft.of(EUR).withCountry(DE);
+            final Cart cart = client().executeBlocking(CartInStoreCreateCommand.of(store.getKey(), cartDraft));
+            assertThat(cart).isNotNull();
+            assertThat(cart.getStore()).isNotNull();
+            assertThat(cart.getStore().getKey()).isEqualTo(store.getKey());
+            client().executeBlocking(CartDeleteCommand.of(cart));
+        });
+    }
+    
     private void testInventoryMode(final InventoryMode inventoryMode) {
         final Cart cart = client().executeBlocking(CartCreateCommand.of(CartDraft.of(EUR).withInventoryMode(inventoryMode)));
         assertThat(cart.getInventoryMode()).isEqualTo(inventoryMode);
