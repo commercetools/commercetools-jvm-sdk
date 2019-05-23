@@ -50,6 +50,9 @@ public interface CartDiscountDraft extends CustomDraft {
 
     CartDiscountValue getValue();
 
+    @Nullable
+    String getKey();
+
     /**
      * Allow to add {@link CustomFields} to a {@link CartDiscount}
      * @return the {@link CustomFields} defined at this {@link CartDiscountDraft}

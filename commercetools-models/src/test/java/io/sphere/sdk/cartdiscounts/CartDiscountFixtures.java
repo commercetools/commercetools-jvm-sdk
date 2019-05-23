@@ -4,11 +4,11 @@ import io.sphere.sdk.cartdiscounts.commands.CartDiscountCreateCommand;
 import io.sphere.sdk.cartdiscounts.commands.CartDiscountDeleteCommand;
 import io.sphere.sdk.cartdiscounts.queries.CartDiscountQuery;
 import io.sphere.sdk.client.BlockingSphereClient;
-import io.sphere.sdk.discountcodes.DiscountCode;
 import io.sphere.sdk.discountcodes.commands.DiscountCodeDeleteCommand;
 import io.sphere.sdk.discountcodes.queries.DiscountCodeQuery;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.queries.Query;
+import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.utils.MoneyImpl;
 
 import java.time.ZonedDateTime;
@@ -39,11 +39,13 @@ public class CartDiscountFixtures {
         final LineItemsTarget target = LineItemsTarget.of("1 = 1");
         final String sortOrder = randomSortOrder();
         final boolean requiresDiscountCode = false;
+
         return CartDiscountDraftBuilder.of(name, CartPredicate.of(predicate),
                 value, target, sortOrder, requiresDiscountCode)
                 .validFrom(validFrom)
                 .validUntil(validUntil)
-                .description(description);
+                .description(description)
+                .key(SphereTestUtils.randomKey());
     }
 
     public static CartDiscount defaultCartDiscount(final BlockingSphereClient client) {

@@ -207,6 +207,21 @@ public class CartDiscountUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(updatedDiscount.getValidUntil()).isEqualTo(dateTime);
         });
     }
+    
+    @Test
+    public void setValidUntilUpdatingByKey(){
+        withCartDiscount(client(), cartDiscount -> {
+            final ZonedDateTime dateTime = dateTimeAfterValidFromAndOldValidUntil(cartDiscount);
+
+            assertThat(cartDiscount.getValidUntil()).isNotEqualTo(dateTime);
+
+            final CartDiscount updatedDiscount =
+                    client().executeBlocking(CartDiscountUpdateCommand.ofKey(cartDiscount.getKey(), cartDiscount.getVersion(), SetValidUntil.of(dateTime)));
+
+            assertThat(updatedDiscount.getValidUntil()).isEqualTo(dateTime);
+            return updatedDiscount;
+        });
+    }
 
     @Test
     public void changeStackingMode() throws Exception {
@@ -257,6 +272,17 @@ public class CartDiscountUpdateCommandIntegrationTest extends IntegrationTest {
 
     }
 
+    @Test
+    public void setKey(){
+        withCartDiscount(client(), cartDiscount -> {
+            final String newKey = SphereTestUtils.randomKey();
+            final CartDiscount updatedCartDiscount = client().executeBlocking(CartDiscountUpdateCommand.ofKey(cartDiscount.getKey(), cartDiscount.getVersion(), SetKey.of(newKey)));
+            assertThat(updatedCartDiscount).isNotNull();
+            assertThat(updatedCartDiscount.getKey()).isEqualTo(newKey);
+            return updatedCartDiscount;
+        });
+    }
+    
     private ZonedDateTime dateTimeAfterValidFromAndOldValidUntil(final CartDiscount cartDiscount) {
         return Optional.ofNullable(cartDiscount.getValidUntil())
                 .orElse(Optional.ofNullable(cartDiscount.getValidFrom()).orElse(SphereTestUtils.now()).plusSeconds(1000)).plusSeconds(1);
