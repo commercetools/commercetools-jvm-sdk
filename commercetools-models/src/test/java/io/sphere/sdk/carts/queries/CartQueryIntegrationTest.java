@@ -210,7 +210,7 @@ public class CartQueryIntegrationTest extends IntegrationTest {
         withShippingMethodForGermany(client(), shippingMethod -> {
             withCart(client(), createCartWithShippingAddress(client()), cart -> {
                 final CartUpdateCommand updateCommand =
-                        CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod))
+                        CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod.toResourceIdentifier()))
                                 .plusExpansionPaths(m -> m.shippingInfo().shippingMethod().taxCategory())
                                 .plusExpansionPaths(m -> m.shippingInfo().taxCategory());
                 final Cart cartWithShippingMethod = client().executeBlocking(updateCommand);

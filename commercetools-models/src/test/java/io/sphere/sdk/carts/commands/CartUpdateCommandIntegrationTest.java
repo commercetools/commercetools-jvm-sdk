@@ -433,7 +433,7 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
                 //add shipping method
                 assertThat(cart.getShippingInfo()).isNull();
                 final CartUpdateCommand updateCommand =
-                        CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod))
+                        CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod.toResourceIdentifier()))
                                 .plusExpansionPaths(m -> m.shippingInfo().shippingMethod().taxCategory())
                                 .plusExpansionPaths(m -> m.shippingInfo().taxCategory());
                 final Cart cartWithShippingMethod = client().executeBlocking(updateCommand);
@@ -461,7 +461,7 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
         withDynamicShippingMethodForGermany(client(), CartPredicate.of("customer.email=\"john@example.com\""), shippingMethod -> {
             withCart(client(), createCartWithShippingAddress(client()), cart -> {
                 final CartUpdateCommand updateCommand =
-                        CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod));
+                        CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod.toResourceIdentifier()));
                 assertThatThrownBy(() -> client().executeBlocking(updateCommand)).isInstanceOf(ErrorResponseException.class).hasMessageContaining("does not match");
 
                 return cart;
@@ -669,7 +669,7 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
     public void setShippingMethodTaxAmount() throws Exception {
         withShippingMethodForGermany(client(), shippingMethod -> {
             withCustomLineItemFilledCartWithTaxMode(client(), TaxMode.EXTERNAL_AMOUNT, cart -> {
-                final Cart cartWithShippingMethod = client().executeBlocking(CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod)));
+                final Cart cartWithShippingMethod = client().executeBlocking(CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod.toResourceIdentifier())));
                 assertThat(cartWithShippingMethod.getShippingInfo()).isNotNull();
                 assertThat(cartWithShippingMethod.getShippingInfo().getTaxedPrice()).isNull();
 

@@ -193,7 +193,7 @@ public class TaxRoundingModeIntegrationTest extends IntegrationTest {
                     final PriceDraft priceDraft = PriceDraft.of(MoneyImpl.ofCents(centAmount, EUR)).withCountry(DE);
                     final ProductUpdateCommand setPricesCmd = ProductUpdateCommand.of(product, asList(
                             AddPrice.of(MASTER_VARIANT_ID, priceDraft),
-                            SetTaxCategory.of(taxCategory),
+                            SetTaxCategory.of(taxCategory.toResourceIdentifier()),
                             Publish.of()));
                     final Product productWithPrice = client.executeBlocking(setPricesCmd);
                     operator.accept(productWithPrice);

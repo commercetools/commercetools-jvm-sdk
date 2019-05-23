@@ -1,7 +1,6 @@
 package io.sphere.sdk.shippingmethods.commands.updateactions;
 
 import io.sphere.sdk.commands.UpdateActionImpl;
-import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
@@ -26,7 +25,15 @@ public final class RemoveZone extends UpdateActionImpl<ShippingMethod> {
         return zone;
     }
 
-    public static RemoveZone of(final Referenceable<Zone> zone) {
+    /**
+     * This method is deprecated, please use {@link RemoveZone#of(ResourceIdentifier)}
+     */
+    @Deprecated
+    public static RemoveZone ofReferencable(final Referenceable<Zone> zone) {
         return new RemoveZone(zone.toResourceIdentifier());
+    }
+
+    public static RemoveZone of(final ResourceIdentifier<Zone> zone) {
+        return new RemoveZone(zone);
     }
 }

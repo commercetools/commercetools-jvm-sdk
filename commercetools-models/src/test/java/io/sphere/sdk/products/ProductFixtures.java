@@ -130,7 +130,7 @@ public class ProductFixtures {
     }
 
     private static ProductUpdateCommand createSetTaxesCommand(final TaxCategory taxCategory, final Product product) {
-        return ProductUpdateCommand.of(product, asList(AddPrice.of(MASTER_VARIANT_ID, PRICE), SetTaxCategory.of(taxCategory), Publish.of()));
+        return ProductUpdateCommand.of(product, asList(AddPrice.of(MASTER_VARIANT_ID, PRICE), SetTaxCategory.of(taxCategory.toResourceIdentifier()), Publish.of()));
     }
 
     public static void withUpdateableProduct(final BlockingSphereClient client, final String testName, final Function<Product, Product> f) {

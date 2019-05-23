@@ -117,7 +117,7 @@ public class CartDiscountInActualCartIntegrationTest extends IntegrationTest {
     public void shippingDiscount() {
         withShippingMethodForGermany(client(), shippingMethod -> {
             withCustomerAndFilledCart(client(), (customer, cart) -> {
-                client().executeBlocking(CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod)));
+                client().executeBlocking(CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod.toResourceIdentifier())));
                 CartDiscountFixtures.withCartDiscount(client(), builder -> builder
                         .value(RelativeCartDiscountValue.of(10000))
                         .target(ShippingCostTarget.of())
@@ -147,7 +147,7 @@ public class CartDiscountInActualCartIntegrationTest extends IntegrationTest {
         final Long discountedQuantity = 2L;
         withShippingMethodForGermany(client(), shippingMethod -> {
             withCustomerAndFilledCart(client(), (customer, cart) -> {
-                client().executeBlocking(CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod)));
+                client().executeBlocking(CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod.toResourceIdentifier())));
                 CartDiscountFixtures.withCartDiscount(client(), builder -> builder
                         .value(RelativeCartDiscountValue.of(10000))
                         .target(MultiBuyLineItemsTarget.of("1 = 1", 3L, discountedQuantity, SelectionMode.CHEAPEST))
@@ -185,7 +185,7 @@ public class CartDiscountInActualCartIntegrationTest extends IntegrationTest {
         withShippingMethodForGermany(client(), shippingMethod -> {
             withCustomer(client(), customer -> {
                 withCartHavingDiscountedCustomLineItem(client(),relativeCartDiscountValue, cart -> {
-                    client().executeBlocking(CartUpdateCommand.of(cart, Arrays.asList(SetShippingAddress.of(Address.of(CountryCode.DE)),SetShippingMethod.of(shippingMethod))));
+                    client().executeBlocking(CartUpdateCommand.of(cart, Arrays.asList(SetShippingAddress.of(Address.of(CountryCode.DE)),SetShippingMethod.of(shippingMethod.toResourceIdentifier()))));
                     withCartDiscount(client(), builder -> builder
                             .value(relativeCartDiscountValue)
                             .target(MultiBuyCustomLineItemsTarget.of("1 = 1", 3L, discountedQuantity, SelectionMode.CHEAPEST))
