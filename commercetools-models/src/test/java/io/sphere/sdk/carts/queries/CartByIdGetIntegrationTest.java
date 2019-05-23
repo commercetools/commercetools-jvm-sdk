@@ -6,11 +6,11 @@ import io.sphere.sdk.carts.commands.CartCreateCommand;
 import io.sphere.sdk.carts.commands.CartDeleteCommand;
 import io.sphere.sdk.customers.CustomerFixtures;
 import io.sphere.sdk.models.DefaultCurrencyUnits;
-import io.sphere.sdk.stores.StoreFixtures;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
 import static io.sphere.sdk.carts.CartFixtures.createCartWithCountry;
+import static io.sphere.sdk.stores.StoreFixtures.withStore;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CartByIdGetIntegrationTest extends IntegrationTest {
@@ -25,7 +25,7 @@ public class CartByIdGetIntegrationTest extends IntegrationTest {
 
     @Test
     public void fetchCartInStoreById() {
-        StoreFixtures.withStore(client(), store -> {
+        withStore(client(), store -> {
             final CartDraft cartDraft = CartDraft.of(DefaultCurrencyUnits.EUR).withStore(store.toResourceIdentifier());
             final CartCreateCommand cartCreateCommand = CartCreateCommand.of(cartDraft);
             final Cart cart = client().executeBlocking(cartCreateCommand);
@@ -38,7 +38,8 @@ public class CartByIdGetIntegrationTest extends IntegrationTest {
     
     @Test
     public void fetchCartInStoreByCustomerId() {
-        StoreFixtures.withStore(client(), store -> { 
+        
+        withStore(client(), store -> { 
             CustomerFixtures.withCustomer(client(), customer -> {
                 final CartDraft cartDraft = CartDraft.of(DefaultCurrencyUnits.EUR).withStore(store.toResourceIdentifier()).withCustomerId(customer.getId());
                 final CartCreateCommand cartCreateCommand = CartCreateCommand.of(cartDraft);

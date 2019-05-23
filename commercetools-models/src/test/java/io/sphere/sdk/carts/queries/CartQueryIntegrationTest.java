@@ -13,10 +13,8 @@ import io.sphere.sdk.carts.commands.updateactions.RemoveDiscountCode;
 import io.sphere.sdk.carts.commands.updateactions.SetShippingMethod;
 import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.orders.OrderFixtures;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.stores.StoreFixtures;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
 import net.jcip.annotations.NotThreadSafe;
@@ -30,7 +28,9 @@ import java.util.Locale;
 
 import static io.sphere.sdk.carts.CartFixtures.*;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomerAndCart;
+import static io.sphere.sdk.orders.OrderFixtures.withOrder;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethodForGermany;
+import static io.sphere.sdk.stores.StoreFixtures.withStore;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -236,7 +236,7 @@ public class CartQueryIntegrationTest extends IntegrationTest {
 
     @Test
     public void cartState() {
-        OrderFixtures.withOrder(client(), order -> {
+        withOrder(client(), order -> {
             final CartQuery query = CartQuery.of()
                     .plusPredicates(m -> m.cartState().is(CartState.ORDERED))
                     .plusPredicates(m -> m.is(order.getCart()));
@@ -270,7 +270,7 @@ public class CartQueryIntegrationTest extends IntegrationTest {
 
     @Test
     public void inStoreLocale() {
-        StoreFixtures.withStore(client(), store -> {
+        withStore(client(), store -> {
             final CartDraft cartDraft = CartDraft.of(EUR).withLocale(Locale.GERMAN).withStore(store.toResourceIdentifier());
             final Cart cart = client().executeBlocking(CartCreateCommand.of(cartDraft));
             final PagedQueryResult<Cart> result = client().executeBlocking(CartInStoreQuery.of(store.getKey())
@@ -284,7 +284,7 @@ public class CartQueryIntegrationTest extends IntegrationTest {
     
     @Test
     public void inStoreAnonymousId() {
-        StoreFixtures.withStore(client(), store -> {
+        withStore(client(), store -> {
             final String anonymousId = randomKey();
             final CartDraft cartDraft = CartDraft.of(EUR).withAnonymousId(anonymousId).withStore(store.toResourceIdentifier());
             final Cart cart = client().executeBlocking(CartCreateCommand.of(cartDraft));

@@ -157,7 +157,7 @@ import java.util.function.Function;
     <li class=fixed-in-release>Added support for {@link io.sphere.sdk.extensions.AuthorizationHeaderAuthentication} for api extensions.</li>
     <li class=fixed-in-release>Fixed {@link io.sphere.sdk.orderedits.commands.stagedactions.AddLineItem} staged update action structure</li>
     <li class=new-in-release>Added support for {@link io.sphere.sdk.stores.Store}</li>
-    <li class=new-in-release>Added support commands that allow you to access carts and orders belonging to a specific store.</li>
+    <li class=new-in-release>Added support commands that allow you to access carts and orders belonging to a specific store: {@link io.sphere.sdk.carts.commands.CartInStoreCreateCommand}, {@link io.sphere.sdk.carts.commands.CartInStoreDeleteCommand}, {@link io.sphere.sdk.carts.commands.CartInStoreUpdateCommand}, {@link io.sphere.sdk.carts.queries.CartInStoreByCustomerIdGet}, {@link io.sphere.sdk.carts.queries.CartInStoreByIdGet}, {@link io.sphere.sdk.carts.queries.CartInStoreQuery}, {@link io.sphere.sdk.orders.commands.OrderFromCartInStoreCreateCommand}, {@link io.sphere.sdk.orders.commands.OrderInStoreDeleteByIdCommand}, {@link io.sphere.sdk.orders.commands.OrderInStoreDeleteByOrderNumberCommand}, {@link io.sphere.sdk.orders.commands.OrderInStoreUpdateByIdCommand}, {@link io.sphere.sdk.orders.commands.OrderInStoreUpdateByOrderNumberCommand}, {@link io.sphere.sdk.orders.queries.OrderInStoreByIdGet}, {@link io.sphere.sdk.orders.queries.OrderInStoreByOrderNumberGet}, {@link io.sphere.sdk.orders.queries.OrderInStoreQuery}</li>
  </ul>
 
  <h3 class=released-version id="v1_41_0">1.41.0 (10.04.2019)</h3>
