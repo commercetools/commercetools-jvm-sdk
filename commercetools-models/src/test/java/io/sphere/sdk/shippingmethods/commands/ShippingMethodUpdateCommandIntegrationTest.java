@@ -160,7 +160,7 @@ public class ShippingMethodUpdateCommandIntegrationTest extends IntegrationTest 
 
                 //removeZone
                 final ShippingMethod shippingMethodWithoutZone =
-                        client().executeBlocking(ShippingMethodUpdateCommand.of(shippingMethodWithoutShippingRate, RemoveZone.of(zone)));
+                        client().executeBlocking(ShippingMethodUpdateCommand.of(shippingMethodWithoutShippingRate, RemoveZone.of(zone.toResourceIdentifier())));
                 assertThat(shippingMethodWithoutZone.getZoneRates()).isEqualTo(shippingMethod.getZoneRates());
 
                 return shippingMethodWithoutZone;

@@ -39,7 +39,7 @@ public class ProductReferenceExpansionIntegrationTest extends IntegrationTest {
     public void taxCategory() throws Exception {
         TaxCategoryFixtures.withTransientTaxCategory(client(), taxCategory ->
             withProduct(client(), product -> {
-                final Product productWithTaxCategory = client().executeBlocking(ProductUpdateCommand.of(product, SetTaxCategory.of(taxCategory)));
+                final Product productWithTaxCategory = client().executeBlocking(ProductUpdateCommand.of(product, SetTaxCategory.of(taxCategory.toResourceIdentifier())));
                 assertThat(productWithTaxCategory.getTaxCategory()).isNotNull();
                 final Query<Product> query = ProductQuery.of().
                         bySlug(ProductProjectionType.CURRENT, Locale.ENGLISH, englishSlugOf(product.getMasterData().getStaged())).

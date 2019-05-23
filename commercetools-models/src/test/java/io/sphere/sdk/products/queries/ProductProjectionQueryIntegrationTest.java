@@ -230,7 +230,7 @@ public class ProductProjectionQueryIntegrationTest extends IntegrationTest {
     public void expandTaxCategory() throws Exception {
         TaxCategoryFixtures.withTransientTaxCategory(client(), taxCategory ->
                         withProduct(client(), product -> {
-                            final Product productWithTaxCategory = client().executeBlocking(ProductUpdateCommand.of(product, SetTaxCategory.of(taxCategory)));
+                            final Product productWithTaxCategory = client().executeBlocking(ProductUpdateCommand.of(product, SetTaxCategory.of(taxCategory.toResourceIdentifier())));
                             final ProductProjectionQuery query = ProductProjectionQuery.of(STAGED)
                                     .withPredicates(m -> m.id().is(productWithTaxCategory.getId()))
                                     .withExpansionPaths(m -> m.taxCategory());

@@ -26,11 +26,19 @@ public final class SetSupplyChannel extends UpdateActionImpl<InventoryEntry> {
         this.supplyChannel = supplyChannel;
     }
 
-    public static SetSupplyChannel of(@Nullable final Referenceable<Channel> supplyChannel) {
+    /**
+     * This method is deprecated, please use {@link SetSupplyChannel#of(ResourceIdentifier)}
+     */
+    @Deprecated
+    public static SetSupplyChannel ofReferencable(@Nullable final Referenceable<Channel> supplyChannel) {
         final Reference<Channel> channelReference = Optional.ofNullable(supplyChannel)
                 .map(Referenceable::toReference)
                 .orElse(null);
         return new SetSupplyChannel(channelReference);
+    }
+
+    public static SetSupplyChannel of(@Nullable final ResourceIdentifier<Channel> supplyChannel) {
+        return new SetSupplyChannel(supplyChannel);
     }
 
     @Nullable

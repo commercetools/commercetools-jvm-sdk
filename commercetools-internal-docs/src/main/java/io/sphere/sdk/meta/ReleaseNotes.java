@@ -157,6 +157,11 @@ import java.util.function.Function;
     <li class=fixed-in-release>Added support for {@link io.sphere.sdk.extensions.AuthorizationHeaderAuthentication} for api extensions.</li>
     <li class=fixed-in-release>Fixed {@link io.sphere.sdk.orderedits.commands.stagedactions.AddLineItem} staged update action structure</li>
     <li class=new-in-release>Added support for {@link io.sphere.sdk.stores.Store}</li>
+    <li class=new-in-release>Added new {@link SetShippingMethod#of(ResourceIdentifier)} method</li>
+    <li class=new-in-release>Added new {@link SetSupplyChannel#of(ResourceIdentifier)} method</li>
+    <li class=new-in-release>Added new {@link SetTaxCategory#of(ResourceIdentifier)} method</li>
+    <li class=new-in-release>Added new {@link RemoveZone#of(ResourceIdentifier)} method</li>
+    <li class=change-in-release>Static 'of' methods that accept {@link Referenceable} got their names changed to 'ofReferencable' and are now deprecated. This was done for the following update actions: {@link SetShippingMethod}, {@link SetSupplyChannel}, {@link SetTaxCategory}, {@link RemoveZone}</li>
  </ul>
 
  <h3 class=released-version id="v1_41_0">1.41.0 (10.04.2019)</h3>
