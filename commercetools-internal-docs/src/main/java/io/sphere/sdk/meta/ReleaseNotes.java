@@ -162,6 +162,7 @@ import java.util.function.Function;
     <li class=new-in-release>Added new {@link SetTaxCategory#of(ResourceIdentifier)} method</li>
     <li class=new-in-release>Added new {@link RemoveZone#of(ResourceIdentifier)} method</li>
     <li class=change-in-release>Static 'of' methods that accept {@link Referenceable} got their names changed to 'ofReferencable' and are now deprecated. This was done for the following update actions: {@link SetShippingMethod}, {@link SetSupplyChannel}, {@link SetTaxCategory}, {@link RemoveZone}</li>
+    <li class=new-in-release>Added new field {@link DiscountCode#getApplicationVersion()}</li>
  </ul>
 
  <h3 class=released-version id="v1_41_0">1.41.0 (10.04.2019)</h3>
