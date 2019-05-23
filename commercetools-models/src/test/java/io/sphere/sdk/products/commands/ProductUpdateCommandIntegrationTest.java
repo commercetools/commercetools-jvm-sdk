@@ -31,7 +31,6 @@ import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Sizes;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
-import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.CustomFieldsDraft;
 import io.sphere.sdk.types.CustomFieldsDraftBuilder;
 import io.sphere.sdk.types.Type;
@@ -40,7 +39,6 @@ import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
 import java.time.ZoneOffset;
@@ -52,7 +50,6 @@ import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.productdiscounts.ProductDiscountFixtures.withProductDiscount;
 import static io.sphere.sdk.products.ProductFixtures.*;
-import static io.sphere.sdk.products.ProductFixtures.withProductHavingAssets;
 import static io.sphere.sdk.products.ProductProjectionType.STAGED;
 import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
 import static io.sphere.sdk.states.StateType.PRODUCT_STATE;
@@ -1430,7 +1427,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
         TaxCategoryFixtures.withTransientTaxCategory(client(), taxCategory ->
                 withUpdateableProduct(client(), product -> {
                     assertThat(product.getTaxCategory()).isNotEqualTo(taxCategory);
-                    final ProductUpdateCommand command = ProductUpdateCommand.of(product, SetTaxCategory.of(taxCategory));
+                    final ProductUpdateCommand command = ProductUpdateCommand.of(product, SetTaxCategory.of(taxCategory.toResourceIdentifier()));
                     final Product updatedProduct = client().executeBlocking(command);
                     assertThat(updatedProduct.getTaxCategory()).isEqualTo(taxCategory.toReference());
                     return updatedProduct;

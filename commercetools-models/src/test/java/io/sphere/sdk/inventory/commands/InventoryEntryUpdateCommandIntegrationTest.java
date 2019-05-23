@@ -1,6 +1,5 @@
 package io.sphere.sdk.inventory.commands;
 
-import io.sphere.sdk.channels.ChannelFixtures;
 import io.sphere.sdk.channels.ChannelRole;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.inventory.InventoryEntry;
@@ -54,7 +53,7 @@ public class InventoryEntryUpdateCommandIntegrationTest extends IntegrationTest 
     public void setSupplyChannel() throws Exception {
         withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -> {
             withUpdateableInventoryEntry(client(), entry -> {
-                final UpdateAction<InventoryEntry> action = SetSupplyChannel.of(channel);
+                final UpdateAction<InventoryEntry> action = SetSupplyChannel.of(channel.toResourceIdentifier());
                 final InventoryEntry updatedEntry = client().executeBlocking(InventoryEntryUpdateCommand.of(entry, action));
                 assertThat(updatedEntry.getSupplyChannel()).isEqualTo(channel.toReference());
                 return updatedEntry;
