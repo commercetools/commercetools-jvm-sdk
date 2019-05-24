@@ -146,6 +146,11 @@ io.sphere.sdk.states.commands.updateactions
 io.sphere.sdk.states.expansion
 io.sphere.sdk.states.queries
 io.sphere.sdk.states.relatedupdateactions
+io.sphere.sdk.stores
+io.sphere.sdk.stores.commands
+io.sphere.sdk.stores.commands.updateactions
+io.sphere.sdk.stores.expansion
+io.sphere.sdk.stores.queries
 io.sphere.sdk.subscriptions
 io.sphere.sdk.subscriptions.commands
 io.sphere.sdk.subscriptions.commands.updateactions
