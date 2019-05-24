@@ -7,7 +7,6 @@ import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.products.BySkuVariantIdentifier;
 import io.sphere.sdk.stores.Store;
-import io.sphere.sdk.stores.StoreFixtures;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.JsonNodeReferenceResolver;
 import io.sphere.sdk.types.CustomFieldsDraft;
@@ -25,6 +24,7 @@ import java.util.Locale;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.products.ProductFixtures.withTaxedProduct;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethodForGermany;
+import static io.sphere.sdk.stores.StoreFixtures.withStore;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.types.TypeFixtures.withType;
 import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
@@ -32,7 +32,7 @@ import static java.util.Collections.singletonList;
 import static java.util.Collections.singletonMap;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CartCreateCommandIntegrationTest extends IntegrationTest {
+public class    CartCreateCommandIntegrationTest extends IntegrationTest {
     @BeforeClass
     public static void prepare() {
         client().executeBlocking(TypeQuery.of().withPredicates(m -> m.key().is("json-demo-type-key")))
@@ -219,7 +219,7 @@ public class CartCreateCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void createCartWithStoreReference() {
-        StoreFixtures.withStore(client(), store -> {
+        withStore(client(), store -> {
             final ResourceIdentifier<Store> storeResourceIdentifier = ResourceIdentifier.ofId(store.getId(), "store");
             final CartDraft cartDraft = CartDraft.of(EUR).withCountry(DE).withStore(storeResourceIdentifier);
             final Cart cart = client().executeBlocking(CartCreateCommand.of(cartDraft));
@@ -227,6 +227,18 @@ public class CartCreateCommandIntegrationTest extends IntegrationTest {
             assertThat(cart.getStore()).isNotNull();
             assertThat(cart.getStore().getKey()).isEqualTo(store.getKey());
 
+            client().executeBlocking(CartDeleteCommand.of(cart));
+        });
+    }
+    
+    @Test
+    public void createCartInStore(){
+        withStore(client(), store -> {
+            final CartDraft cartDraft = CartDraft.of(EUR).withCountry(DE);
+            final Cart cart = client().executeBlocking(CartInStoreCreateCommand.of(store.getKey(), cartDraft));
+            assertThat(cart).isNotNull();
+            assertThat(cart.getStore()).isNotNull();
+            assertThat(cart.getStore().getKey()).isEqualTo(store.getKey());
             client().executeBlocking(CartDeleteCommand.of(cart));
         });
     }

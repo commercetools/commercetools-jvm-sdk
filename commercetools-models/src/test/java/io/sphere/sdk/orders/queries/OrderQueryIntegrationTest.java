@@ -2,15 +2,19 @@ package io.sphere.sdk.orders.queries;
 
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.carts.CartFixtures;
+import io.sphere.sdk.carts.commands.CartDeleteCommand;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.customers.CustomerFixtures;
-import io.sphere.sdk.orders.Order;
-import io.sphere.sdk.orders.OrderFixtures;
+import io.sphere.sdk.orders.*;
+import io.sphere.sdk.orders.commands.OrderDeleteCommand;
+import io.sphere.sdk.orders.commands.OrderFromCartInStoreCreateCommand;
 import io.sphere.sdk.orders.commands.OrderUpdateCommand;
 import io.sphere.sdk.orders.commands.updateactions.SetOrderNumber;
 import io.sphere.sdk.orders.commands.updateactions.UpdateSyncInfo;
+import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.queries.QuerySort;
+import io.sphere.sdk.states.StateType;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
@@ -21,6 +25,8 @@ import java.util.function.UnaryOperator;
 import static io.sphere.sdk.channels.ChannelFixtures.persistentChannelOfRole;
 import static io.sphere.sdk.channels.ChannelRole.ORDER_EXPORT;
 import static io.sphere.sdk.orders.OrderFixtures.withOrder;
+import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
+import static io.sphere.sdk.stores.StoreFixtures.withStore;
 import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static java.util.Collections.singletonList;
@@ -126,6 +132,33 @@ public class OrderQueryIntegrationTest extends IntegrationTest {
         assertOrderIsFoundWithPredicate(
                 order -> client().executeBlocking(OrderUpdateCommand.of(order, UpdateSyncInfo.of(channel).withExternalId(externalId))),
                 order -> MODEL.syncInfo().channel().is(channel).and(MODEL.syncInfo().externalId().is(externalId)).and(MODEL.syncInfo().isNotEmpty()));
+    }
+    
+    @Test
+    public void queryOrderInStore() {
+        withStateByBuilder(client(), builder -> builder.type(StateType.ORDER_STATE), state -> {
+            withStore(client(), store -> {
+                CartFixtures.withFilledCartInStore(client(), store,  cart -> {
+                    final OrderFromCartDraft orderFromCartDraft = OrderFromCartDraftBuilder.of(cart.getId(), cart.getVersion())
+                            .shipmentState(ShipmentState.SHIPPED)
+                            .state(state.toReference())
+                            .orderState(OrderState.CANCELLED)
+                            .build();
+                    final Order order = client().executeBlocking(OrderFromCartInStoreCreateCommand.of(store.getKey(), orderFromCartDraft)
+                            .withExpansionPaths(m -> m.cart()));
+                    assertThat(order).isNotNull();
+                    assertThat(order.getStore()).isNotNull();
+                    assertThat(order.getStore().getKey()).isEqualTo(store.getKey());
+                    
+                    final OrderInStoreQuery query = OrderInStoreQuery.of(store.getKey()).withPredicates(m -> m.id().is(order.getId()));
+                    final PagedQueryResult<Order> result = client().executeBlocking(query);
+                    assertThat(result.getResults()).isNotEmpty();
+                    
+                    client().executeBlocking(OrderDeleteCommand.of(order));
+                    client().executeBlocking(CartDeleteCommand.of(order.getCart().getObj()));
+                });
+            });
+        });
     }
 
     private void assertOrderIsFound(final Function<Order, OrderQuery> p) {
