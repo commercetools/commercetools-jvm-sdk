@@ -48,6 +48,7 @@ import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withDynamicSh
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethodForGermany;
 import static io.sphere.sdk.shoppinglists.ShoppingListFixtures.newShoppingListDraftBuilder;
 import static io.sphere.sdk.shoppinglists.ShoppingListFixtures.withShoppingList;
+import static io.sphere.sdk.stores.StoreFixtures.withStore;
 import static io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Colors;
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -773,6 +774,23 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
                 assertThat(lineItem.getProductId()).isEqualTo(product.getId());
 
                 return shoppingList;
+            });
+        });
+    }
+
+    @Test
+    public void cartInStoreSetAnonymousId() throws Exception {
+        withStore(client(), store -> {
+            CartDraft cartDraft = CartDraft.of(EUR).withStore(store.toResourceIdentifier());
+            withCartDraft(client(), cartDraft, cart -> {
+                final String anonymousId = randomString();
+                
+                final Cart updatedCart = client().executeBlocking(CartInStoreUpdateCommand.of(store.getKey(), cart, SetAnonymousId.of(anonymousId)));
+                assertThat(updatedCart).isNotNull();
+                assertThat(updatedCart.getAnonymousId()).isEqualTo(anonymousId);
+                assertThat(updatedCart.getStore()).isNotNull();
+                assertThat(updatedCart.getStore().getKey()).isEqualTo(store.getKey());
+                return updatedCart;
             });
         });
     }
