@@ -5,12 +5,11 @@ import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.TextInputHint;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.types.*;
 import io.sphere.sdk.types.commands.updateactions.*;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -149,7 +148,46 @@ public class TypeUpdateCommandIntegrationTest extends IntegrationTest {
             return updatedType;
         });
     }
-
+    
+    @Test
+    public void changeInputHint() {
+        withUpdateableType(client(), type -> {
+            final String fieldName = "string-field-name";
+            final TextInputHint textInputHint = TextInputHint.MULTI_LINE;
+            final Type updatedType = client().executeBlocking(TypeUpdateCommand.of(type, ChangeInputHint.of(fieldName, textInputHint)));
+            assertThat(updatedType).isNotNull();
+            assertThat(updatedType.getFieldDefinitionByName(fieldName)).isNotNull();
+            assertThat(updatedType.getFieldDefinitionByName(fieldName).getInputHint()).isEqualTo(textInputHint);
+            return updatedType;
+        });
+    }
+    
+    @Test
+    public void changeEnumValueLabel() {
+        withUpdateableType(client(), type -> {
+            final String fieldName = "enum-field-name";
+            final EnumValue value = EnumValue.of("key1", "b");
+            final Type updatedType = client().executeBlocking(TypeUpdateCommand.of(type, ChangeEnumValueLabel.of(fieldName, value)));
+            assertThat(updatedType).isNotNull();
+            assertThat(updatedType.getFieldDefinitionByName(fieldName)).isNotNull();
+            assertThat(((EnumFieldType)updatedType.getFieldDefinitionByName(fieldName).getType()).getValues().get(0)).isEqualTo(value);
+            return updatedType;
+        });
+    }
+    
+    @Test
+    public void changeLocalizedEnumValueLabel() {
+        withUpdateableType(client(), type -> {
+            final String fieldName = "localized-enum-field-name";
+            final LocalizedEnumValue localizedEnumValue = LocalizedEnumValue.of("key1", SphereTestUtils.randomLocalizedString());
+            final Type updatedType = client().executeBlocking(TypeUpdateCommand.of(type, ChangeLocalizedEnumValueLabel.of(fieldName, localizedEnumValue)));
+            assertThat(updatedType).isNotNull();
+            assertThat(updatedType.getFieldDefinitionByName(fieldName)).isNotNull();
+            assertThat(((LocalizedEnumFieldType)updatedType.getFieldDefinitionByName(fieldName).getType()).getValues().get(0)).isEqualTo(localizedEnumValue);
+            return updatedType;
+        });
+    }
+    
     @Test
     public void updateByKey() {
         withUpdateableType(client(), (Type type) -> {
