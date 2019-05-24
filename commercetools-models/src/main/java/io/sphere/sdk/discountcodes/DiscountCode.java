@@ -121,13 +121,6 @@ public interface DiscountCode extends Resource<DiscountCode>, Custom {
     Long getMaxApplications();
 
     /**
-     * The number of times a discount code has been applied.
-     * @return applicationVersion
-     */
-    @Nullable
-    Long getApplicationVersion();
-    
-    /**
      * The discount code can only be applied maxApplicationsPerCustomer times per customer.
      * @return max applications or null
      * @see io.sphere.sdk.discountcodes.commands.updateactions.SetMaxApplicationsPerCustomer
