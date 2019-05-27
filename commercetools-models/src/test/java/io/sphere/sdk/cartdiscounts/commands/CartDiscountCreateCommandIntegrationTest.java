@@ -48,6 +48,7 @@ public class CartDiscountCreateCommandIntegrationTest extends IntegrationTest {
         final LineItemsTarget target = LineItemsTarget.of("1 = 1");
         final String sortOrder = "0.54";
         final boolean requiresDiscountCode = false;
+        final String key = "discount key";
         final CartDiscountDraft discountDraft = CartDiscountDraftBuilder.of(name, CartPredicate.of(predicate),
                 value, target, sortOrder, requiresDiscountCode)
                 .validFrom(validFrom)
@@ -55,6 +56,7 @@ public class CartDiscountCreateCommandIntegrationTest extends IntegrationTest {
                 .description(description)
                 .isActive(false)
                 .stackingMode(StackingMode.STOP_AFTER_THIS_DISCOUNT)
+                .key(key)
                 .build();
 
         cartDiscount = client().executeBlocking(CartDiscountCreateCommand.of(discountDraft));
@@ -69,6 +71,7 @@ public class CartDiscountCreateCommandIntegrationTest extends IntegrationTest {
         assertThat(cartDiscount.getDescription()).isEqualTo(description);
         assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
         assertThat(cartDiscount.getStackingMode()).isEqualTo(StackingMode.STOP_AFTER_THIS_DISCOUNT);
+        assertThat(cartDiscount.getKey()).isEqualTo(key);
     }
 
     @After
@@ -146,6 +149,7 @@ public class CartDiscountCreateCommandIntegrationTest extends IntegrationTest {
         assertThat(cartDiscount.getSortOrder()).isEqualTo("0.45857448");
         assertThat(cartDiscount.isActive()).isTrue();
         assertThat(cartDiscount.getValidUntil()).isEqualTo(ZonedDateTime.of(2001, 9, 11, 14, 0, 0, 0, ZoneId.of("Z")));
+        assertThat(cartDiscount.getKey()).isEqualTo("cart discount key");
 
         client().executeBlocking(CartDiscountDeleteCommand.of(cartDiscount));
     }

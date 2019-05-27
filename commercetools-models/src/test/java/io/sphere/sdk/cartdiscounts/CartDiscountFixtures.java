@@ -38,12 +38,14 @@ public class CartDiscountFixtures {
         final AbsoluteCartDiscountValue value = CartDiscountValue.ofAbsolute(MoneyImpl.of(10, EUR));
         final LineItemsTarget target = LineItemsTarget.of("1 = 1");
         final String sortOrder = randomSortOrder();
+        final String key = "discount key";
         final boolean requiresDiscountCode = false;
         return CartDiscountDraftBuilder.of(name, CartPredicate.of(predicate),
                 value, target, sortOrder, requiresDiscountCode)
                 .validFrom(validFrom)
                 .validUntil(validUntil)
-                .description(description);
+                .description(description)
+                .key(key);
     }
 
     public static CartDiscount defaultCartDiscount(final BlockingSphereClient client) {

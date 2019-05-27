@@ -29,6 +29,21 @@ import static org.assertj.core.api.Assertions.assertThat;
 @NotThreadSafe
 public class CartDiscountUpdateCommandIntegrationTest extends IntegrationTest {
 
+
+    @Test
+    public void setKey() {
+        withPersistentCartDiscount(client(), cartDiscount -> {
+            final String newKey = randomKey();
+
+            assertThat(cartDiscount.getKey()).isNotEqualTo(newKey);
+
+            final CartDiscount updatedDiscount =
+                    client().executeBlocking(CartDiscountUpdateCommand.of(cartDiscount, SetKey.of(newKey)));
+
+            assertThat(updatedDiscount.getKey()).isEqualTo(newKey);
+        });
+    }
+
     @Test
     public void setValidFromAndUntil() {
         withPersistentCartDiscount(client(), cartDiscount -> {

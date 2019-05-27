@@ -28,14 +28,36 @@ import java.util.List;
  */
 @JsonDeserialize(as=CartDiscountImpl.class)
 @ResourceValue
-@HasQueryEndpoint()
+@HasQueryEndpoint(additionalContentsQueryInterface = {"default CartDiscountQuery byName(final Locale locale, final String name) {\n" +
+        "        return withPredicates(m -> m.name().lang(locale).is(name));\n" +
+        "    }\n" +
+        "\n" +
+        "    default CartDiscountQuery byId(final String id) {\n" +
+        "        return withPredicates(m -> m.id().is(id));\n" +
+        "    }\n" +
+        "\n" +
+        "    default CartDiscountQuery byKey(final String key) {\n" +
+        "        return withPredicates(m -> m.key().is(key));\n" +
+        "    }"})
 @ResourceInfo(pluralName = "cart discounts", pathElement = "cart-discounts")
 @HasByIdGetEndpoint(javadocSummary = "Gets a {@link CartDiscount} by a known ID.", includeExamples = "io.sphere.sdk.cartdiscounts.queries.CartDiscountByIdGetIntegrationTest#execution()")
+@HasByKeyGetEndpoint(javadocSummary = "Retrieves a {@link CartDiscount} by a known Key.", includeExamples = "io.sphere.sdk.cartdiscounts.queries.CartDiscountByKeyGetIntegrationTest#execution()")
 @HasCreateCommand(includeExamples = "io.sphere.sdk.cartdiscounts.commands.CartDiscountCreateCommandIntegrationTest#execution()")
 @HasUpdateCommand
-@HasDeleteCommand(javadocSummary = "Deletes a {@link CartDiscount}.")
+@HasDeleteCommand(javadocSummary = "Deletes a {@link CartDiscount}.", includeExamples = "io.sphere.sdk.categories.commands.CartDiscountDeleteCommandIntegrationTest#deleteCartDiscountByKey()",  deleteWith = "key")
 @HasQueryModel
 public interface CartDiscount extends Resource<CartDiscount>, Custom {
+
+    /**
+     * User-specific unique identifier for the CartDiscount.
+     *
+     * @see io.sphere.sdk.cartdiscounts.commands.updateactions.SetKey
+     *
+     * @return the user defined key
+     */
+    @Nullable
+    String getKey();
+
     /**
      * Predicate where the discounts should be applied to.
      *

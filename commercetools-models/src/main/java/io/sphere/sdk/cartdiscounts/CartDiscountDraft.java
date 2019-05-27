@@ -23,6 +23,9 @@ import java.time.ZonedDateTime;
         factoryMethods = @FactoryMethod(parameterNames = {"name", "cartPredicate", "value", "target", "sortOrder", "requiresDiscountCode"},
                                         useLowercaseBooleans = true))
 public interface CartDiscountDraft extends CustomDraft {
+    @Nullable
+    String getKey();
+
     String getCartPredicate();
 
     @Nullable
