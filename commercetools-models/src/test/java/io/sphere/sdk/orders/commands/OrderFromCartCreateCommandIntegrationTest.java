@@ -3,6 +3,7 @@ package io.sphere.sdk.orders.commands;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.cartdiscounts.CartPredicate;
 import io.sphere.sdk.carts.*;
+import io.sphere.sdk.carts.commands.CartDeleteCommand;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.SetCustomerEmail;
 import io.sphere.sdk.carts.queries.CartByIdGet;
@@ -21,6 +22,7 @@ import static io.sphere.sdk.carts.CartFixtures.*;
 import static io.sphere.sdk.products.ProductFixtures.withTaxedProduct;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withDynamicShippingMethodForGermany;
 import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
+import static io.sphere.sdk.stores.StoreFixtures.withStore;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -100,6 +102,28 @@ public class OrderFromCartCreateCommandIntegrationTest extends IntegrationTest {
                 assertThat(order.getShipmentState()).isEqualTo(ShipmentState.SHIPPED);
 
                 client().executeBlocking(OrderDeleteCommand.of(order));
+            });
+        });
+    }
+    
+    @Test
+    public void orderFromCartDraftInStore() {
+        withStateByBuilder(client(), builder -> builder.type(StateType.ORDER_STATE), state -> {
+            withStore(client(), store -> {
+                CartFixtures.withFilledCartInStore(client(), store,  cart -> {
+                    final OrderFromCartDraft orderFromCartDraft = OrderFromCartDraftBuilder.of(cart.getId(), cart.getVersion())
+                            .shipmentState(ShipmentState.SHIPPED)
+                            .state(state.toReference())
+                            .orderState(OrderState.CANCELLED)
+                            .build();
+                    final Order order = client().executeBlocking(OrderFromCartInStoreCreateCommand.of(store.getKey(), orderFromCartDraft)
+                            .withExpansionPaths(m -> m.cart()));
+                    assertThat(order).isNotNull();
+                    assertThat(order.getStore()).isNotNull();
+                    assertThat(order.getStore().getKey()).isEqualTo(store.getKey());
+                    client().executeBlocking(OrderDeleteCommand.of(order));
+                    client().executeBlocking(CartDeleteCommand.of(order.getCart().getObj()));
+                });
             });
         });
     }

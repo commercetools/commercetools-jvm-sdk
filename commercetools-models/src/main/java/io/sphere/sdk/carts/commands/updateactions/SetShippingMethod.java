@@ -2,7 +2,6 @@ package io.sphere.sdk.carts.commands.updateactions;
 
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.commands.UpdateActionImpl;
-import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
@@ -30,15 +29,23 @@ public final class SetShippingMethod extends UpdateActionImpl<Cart> {
         return shippingMethod;
     }
 
-    public static SetShippingMethod of(@Nullable final Referenceable<ShippingMethod> shippingMethod) {
+    /**
+     * This method is deprecated, please use {@link SetShippingMethod#of(ResourceIdentifier)}
+     */
+    @Deprecated
+    public static SetShippingMethod ofReferencable(@Nullable final Referenceable<ShippingMethod> shippingMethod) {
         return shippingMethod != null
                 ? new SetShippingMethod(shippingMethod.toReference())
                 : ofRemove();
     }
 
+    public static SetShippingMethod of(@Nullable final ResourceIdentifier<ShippingMethod> shippingMethod) {
+        return  new SetShippingMethod(shippingMethod);
+    }
+
     public static SetShippingMethod ofId(@Nullable String shippingMethodId) {
         return shippingMethodId != null
-                ? of(ShippingMethod.referenceOfId(shippingMethodId))
+                ? of(ShippingMethod.referenceOfId(shippingMethodId).toResourceIdentifier())
                 : ofRemove();
     }
 

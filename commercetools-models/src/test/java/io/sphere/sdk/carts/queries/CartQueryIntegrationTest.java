@@ -6,13 +6,13 @@ import io.sphere.sdk.cartdiscounts.DiscountedLineItemPriceForQuantity;
 import io.sphere.sdk.cartdiscounts.RelativeCartDiscountValue;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.carts.commands.CartCreateCommand;
+import io.sphere.sdk.carts.commands.CartDeleteCommand;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.AddDiscountCode;
 import io.sphere.sdk.carts.commands.updateactions.RemoveDiscountCode;
 import io.sphere.sdk.carts.commands.updateactions.SetShippingMethod;
 import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.orders.OrderFixtures;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
@@ -28,7 +28,9 @@ import java.util.Locale;
 
 import static io.sphere.sdk.carts.CartFixtures.*;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomerAndCart;
+import static io.sphere.sdk.orders.OrderFixtures.withOrder;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethodForGermany;
+import static io.sphere.sdk.stores.StoreFixtures.withStore;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -208,7 +210,7 @@ public class CartQueryIntegrationTest extends IntegrationTest {
         withShippingMethodForGermany(client(), shippingMethod -> {
             withCart(client(), createCartWithShippingAddress(client()), cart -> {
                 final CartUpdateCommand updateCommand =
-                        CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod))
+                        CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod.toResourceIdentifier()))
                                 .plusExpansionPaths(m -> m.shippingInfo().shippingMethod().taxCategory())
                                 .plusExpansionPaths(m -> m.shippingInfo().taxCategory());
                 final Cart cartWithShippingMethod = client().executeBlocking(updateCommand);
@@ -234,7 +236,7 @@ public class CartQueryIntegrationTest extends IntegrationTest {
 
     @Test
     public void cartState() {
-        OrderFixtures.withOrder(client(), order -> {
+        withOrder(client(), order -> {
             final CartQuery query = CartQuery.of()
                     .plusPredicates(m -> m.cartState().is(CartState.ORDERED))
                     .plusPredicates(m -> m.is(order.getCart()));
@@ -264,5 +266,32 @@ public class CartQueryIntegrationTest extends IntegrationTest {
                 .plusPredicates(m -> m.locale().is(Locale.GERMAN)));
         assertThat(result.getResults()).hasSize(1);
         assertThat(result.head().get().getId()).isEqualTo(cart.getId());
+    }
+
+    @Test
+    public void inStoreLocale() {
+        withStore(client(), store -> {
+            final CartDraft cartDraft = CartDraft.of(EUR).withLocale(Locale.GERMAN).withStore(store.toResourceIdentifier());
+            final Cart cart = client().executeBlocking(CartCreateCommand.of(cartDraft));
+            final PagedQueryResult<Cart> result = client().executeBlocking(CartInStoreQuery.of(store.getKey())
+                    .plusPredicates(m -> m.is(cart))
+                    .plusPredicates(m -> m.locale().is(Locale.GERMAN)));
+            assertThat(result.getResults()).hasSize(1);
+            assertThat(result.head().get().getId()).isEqualTo(cart.getId());
+            client().executeBlocking(CartDeleteCommand.of(cart));
+        });
+    }
+    
+    @Test
+    public void inStoreAnonymousId() {
+        withStore(client(), store -> {
+            final String anonymousId = randomKey();
+            final CartDraft cartDraft = CartDraft.of(EUR).withAnonymousId(anonymousId).withStore(store.toResourceIdentifier());
+            final Cart cart = client().executeBlocking(CartCreateCommand.of(cartDraft));
+            final PagedQueryResult<Cart> result = client().executeBlocking(CartQuery.of().withPredicates(m -> m.anonymousId().is(anonymousId)));
+            assertThat(result.getResults()).hasSize(1);
+            assertThat(result.head().get().getId()).isEqualTo(cart.getId());
+            client().executeBlocking(CartDeleteCommand.of(cart));
+        });
     }
 }
