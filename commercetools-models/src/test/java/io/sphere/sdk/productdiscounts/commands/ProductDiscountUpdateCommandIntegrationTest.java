@@ -24,6 +24,18 @@ public class ProductDiscountUpdateCommandIntegrationTest extends IntegrationTest
             return updatedDiscount;
         });
     }
+    
+    @Test
+    public void changeValueByKey() throws Exception {
+        withUpdateableProductDiscount(client(), discount -> {
+            final ProductDiscountValue productDiscountValue = AbsoluteProductDiscountValue.of(EURO_30);
+
+            final ProductDiscount updatedDiscount = client().executeBlocking(ProductDiscountUpdateCommand.ofKey(discount.getKey(), discount.getVersion(), ChangeValue.of(productDiscountValue)));
+
+            assertThat(updatedDiscount.getValue()).isEqualTo(productDiscountValue);
+            return updatedDiscount;
+        });
+    }
 
     @Test
     public void changePredicate() throws Exception {
@@ -112,6 +124,16 @@ public class ProductDiscountUpdateCommandIntegrationTest extends IntegrationTest
             final ProductDiscount updatedDiscount = client().executeBlocking(ProductDiscountUpdateCommand.of(discount, ChangeSortOrder.of(newSortOrder)));
 
             assertThat(updatedDiscount.getSortOrder()).isEqualTo(newSortOrder);
+            return updatedDiscount;
+        });
+    }
+    
+    @Test
+    public void setKey() throws Exception {
+        withUpdateableProductDiscount(client(), discount -> {
+            final String newKey = randomKey();
+            final ProductDiscount updatedDiscount = client().executeBlocking(ProductDiscountUpdateCommand.of(discount, SetKey.of(newKey)));
+            assertThat(updatedDiscount.getKey()).isEqualTo(newKey);
             return updatedDiscount;
         });
     }
