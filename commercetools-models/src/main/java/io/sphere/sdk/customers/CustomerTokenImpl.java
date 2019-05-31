@@ -11,14 +11,16 @@ class CustomerTokenImpl extends Base implements CustomerToken {
     private final ZonedDateTime createdAt;
     private final ZonedDateTime lastModifiedAt;
     private final String value;
+    private final ZonedDateTime expiresAt;
 
     @JsonCreator
-    public CustomerTokenImpl(final String id, final String customerId, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final String value) {
+    public CustomerTokenImpl(final String id, final String customerId, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final String value, final ZonedDateTime expiresAt) {
         this.id = id;
         this.customerId = customerId;
         this.createdAt = createdAt;
         this.lastModifiedAt = lastModifiedAt;
         this.value = value;
+        this.expiresAt = expiresAt;
     }
 
     @Override
@@ -44,5 +46,10 @@ class CustomerTokenImpl extends Base implements CustomerToken {
     @Override
     public String getValue() {
         return value;
+    }
+
+    @Override
+    public ZonedDateTime getExpiresAt() {
+        return expiresAt;
     }
 }
