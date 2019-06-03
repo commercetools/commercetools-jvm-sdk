@@ -35,6 +35,7 @@ import io.sphere.sdk.customergroups.CustomerGroupDraftBuilder;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.customers.CustomerDraft;
 import io.sphere.sdk.customers.CustomerDraftBuilder;
+import io.sphere.sdk.customers.CustomerToken;
 import io.sphere.sdk.customers.commands.CustomerCreateEmailTokenCommand;
 import io.sphere.sdk.customers.commands.CustomerPasswordResetCommand;
 import io.sphere.sdk.customers.commands.CustomerSignInCommand;
@@ -152,6 +153,10 @@ import java.util.function.Function;
  -->
  -->
 
+ <h3 class=released-version id="v1_43_0">1.43.0</h3>
+ <ul>
+    <li class=new-in-release>Added {@link CustomerToken#getExpiresAt()} field</li>
+ </ul>
  <h3 class=released-version id="v1_42_0">1.42.0 (24.05.2019)</h3>
  <ul>
     <li class=fixed-in-release>Added support for {@link io.sphere.sdk.extensions.AuthorizationHeaderAuthentication} for api extensions.</li>
