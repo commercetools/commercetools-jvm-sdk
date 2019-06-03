@@ -154,7 +154,7 @@ import java.util.function.Function;
  -->
  -->
 
- <h3 class=released-version id="v1_43_0">1.43.0</h3>
+ <h3 class=released-version id="v1_43_0">1.43.0 (03.06.2019)</h3>
  <ul>
     <li class=new-in-release>Added {@link ProductDiscount#getKey()} and {@link ProductDiscountDraft#getKey()} ()} fields.</li>
     <li class=new-in-release>Added {@link ProductByKeyGet}, {@link io.sphere.sdk.products.commands.ProductUpdateCommand#ofKey(String, Long, UpdateAction)}, {@link io.sphere.sdk.productdiscounts.commands.ProductDiscountDeleteCommand#ofKey(String, Long)} commands</li>
