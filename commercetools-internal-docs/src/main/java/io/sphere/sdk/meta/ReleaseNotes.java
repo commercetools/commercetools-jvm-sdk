@@ -160,6 +160,7 @@ import java.util.function.Function;
     <li class=new-in-release>Added {@link ProductByKeyGet}, {@link io.sphere.sdk.products.commands.ProductUpdateCommand#ofKey(String, Long, UpdateAction)}, {@link io.sphere.sdk.productdiscounts.commands.ProductDiscountDeleteCommand#ofKey(String, Long)} commands</li>
     <li class=new-in-release>Added {@link io.sphere.sdk.productdiscounts.commands.updateactions.SetKey} update action</li>
     <li class=new-in-release>Added {@link CustomerToken#getExpiresAt()} field</li>
+    <li class=new-in-release>Added key property to {@link CartDiscount} and {@link CartDiscountDraft}</li>
  </ul>
  
  <h3 class=released-version id="v1_42_0">1.42.0 (24.05.2019)</h3>
@@ -174,7 +175,6 @@ import java.util.function.Function;
     <li class=new-in-release>Added new {@link RemoveZone#of(ResourceIdentifier)} method</li>
     <li class=change-in-release>Static 'of' methods that accept {@link Referenceable} got their names changed to 'ofReferencable' and are now deprecated. This was done for the following update actions: {@link SetShippingMethod}, {@link SetSupplyChannel}, {@link SetTaxCategory}, {@link RemoveZone}</li>
     <li class=new-in-release>Added new {@link Type} update actions : {@link io.sphere.sdk.types.commands.updateactions.ChangeEnumValueLabel}, {@link io.sphere.sdk.types.commands.updateactions.ChangeInputHint}, {@link io.sphere.sdk.types.commands.updateactions.ChangeLocalizedEnumValueLabel}</li>
-    <li class=new-in-release>Added key property to {@link CartDiscount} and {@link CartDiscountDraft}</li>
  </ul>
 
  <h3 class=released-version id="v1_41_0">1.41.0 (10.04.2019)</h3>
