@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.Timestamped;
 
+import java.time.ZonedDateTime;
+
 /**
  * A token belonging to a customer to verify an email address or resetting the password.
  *
@@ -35,6 +37,8 @@ public interface CustomerToken extends Timestamped {
      */
     String getValue();
 
+    ZonedDateTime getExpiresAt();
+    
     /**
      * Creates a container which contains the full Java type information to deserialize this class from JSON.
      *
