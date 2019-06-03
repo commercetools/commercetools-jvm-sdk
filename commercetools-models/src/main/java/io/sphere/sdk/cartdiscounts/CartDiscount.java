@@ -9,6 +9,7 @@ import io.sphere.sdk.discountcodes.DiscountCode;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
+import io.sphere.sdk.models.WithKey;
 import io.sphere.sdk.types.Custom;
 import io.sphere.sdk.types.CustomFields;
 
@@ -31,11 +32,12 @@ import java.util.List;
 @HasQueryEndpoint()
 @ResourceInfo(pluralName = "cart discounts", pathElement = "cart-discounts")
 @HasByIdGetEndpoint(javadocSummary = "Gets a {@link CartDiscount} by a known ID.", includeExamples = "io.sphere.sdk.cartdiscounts.queries.CartDiscountByIdGetIntegrationTest#execution()")
+@HasByKeyGetEndpoint(javadocSummary = "Gets a {@link CartDiscount} by a known key.", includeExamples = "io.sphere.sdk.cartdiscounts.queries.CartDiscountByKeyGetIntegrationTest#execution()")
 @HasCreateCommand(includeExamples = "io.sphere.sdk.cartdiscounts.commands.CartDiscountCreateCommandIntegrationTest#execution()")
-@HasUpdateCommand
-@HasDeleteCommand(javadocSummary = "Deletes a {@link CartDiscount}.")
+@HasUpdateCommand(updateWith = "key")
+@HasDeleteCommand(javadocSummary = "Deletes a {@link CartDiscount}.", deleteWith = {"key","id"})
 @HasQueryModel
-public interface CartDiscount extends Resource<CartDiscount>, Custom {
+public interface CartDiscount extends Resource<CartDiscount>, Custom, WithKey {
     /**
      * Predicate where the discounts should be applied to.
      *
@@ -179,6 +181,10 @@ public interface CartDiscount extends Resource<CartDiscount>, Custom {
     @IgnoreInQueryModel
     @HasUpdateAction
     StackingMode getStackingMode();
+    
+    @HasUpdateAction
+    @Nullable
+    String getKey();
 
     /**
      * A type hint for references which resource type is linked in a reference.

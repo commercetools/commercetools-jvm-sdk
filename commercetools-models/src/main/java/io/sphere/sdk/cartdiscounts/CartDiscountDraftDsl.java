@@ -12,10 +12,10 @@ public final class CartDiscountDraftDsl extends CartDiscountDraftDslBase<CartDis
 
     @JsonCreator
     CartDiscountDraftDsl(final @JsonProperty("isActive") @Nullable Boolean active, final String cartPredicate, @Nullable final CustomFieldsDraft custom, final @Nullable LocalizedString description,
-                         final LocalizedString name, final @JsonProperty("requiresDiscountCode") Boolean requiresDiscountCode,
+                         final String key, final LocalizedString name, final @JsonProperty("requiresDiscountCode") Boolean requiresDiscountCode,
                          final String sortOrder, final StackingMode stackingMode, final @Nullable CartDiscountTarget target, final @Nullable ZonedDateTime validFrom,
                          final @Nullable ZonedDateTime validUntil, final CartDiscountValue value) {
-        super(active, cartPredicate,custom, description, name, requiresDiscountCode, sortOrder, stackingMode, target, validFrom, validUntil, value);
+        super(active, cartPredicate,custom, description, key, name, requiresDiscountCode, sortOrder, stackingMode, target, validFrom, validUntil, value);
     }
 
     /**

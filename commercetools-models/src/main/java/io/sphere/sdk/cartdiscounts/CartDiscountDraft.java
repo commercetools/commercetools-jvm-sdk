@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.WithKey;
 import io.sphere.sdk.types.CustomDraft;
 import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.CustomFieldsDraft;
@@ -22,7 +23,7 @@ import java.time.ZonedDateTime;
         abstractBuilderClass = true,
         factoryMethods = @FactoryMethod(parameterNames = {"name", "cartPredicate", "value", "target", "sortOrder", "requiresDiscountCode"},
                                         useLowercaseBooleans = true))
-public interface CartDiscountDraft extends CustomDraft {
+public interface CartDiscountDraft extends CustomDraft, WithKey {
     String getCartPredicate();
 
     @Nullable
@@ -49,6 +50,9 @@ public interface CartDiscountDraft extends CustomDraft {
     ZonedDateTime getValidUntil();
 
     CartDiscountValue getValue();
+
+    @Nullable
+    String getKey();
 
     /**
      * Allow to add {@link CustomFields} to a {@link CartDiscount}

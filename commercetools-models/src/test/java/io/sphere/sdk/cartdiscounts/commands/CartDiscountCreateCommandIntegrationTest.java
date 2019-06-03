@@ -2,10 +2,12 @@ package io.sphere.sdk.cartdiscounts.commands;
 
 import io.sphere.sdk.cartdiscounts.*;
 import io.sphere.sdk.cartdiscounts.queries.CartDiscountQuery;
+import io.sphere.sdk.cartdiscounts.queries.CartDiscountQueryBuilder;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.products.ByIdVariantIdentifier;
+import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.utils.MoneyImpl;
@@ -148,6 +150,16 @@ public class CartDiscountCreateCommandIntegrationTest extends IntegrationTest {
         assertThat(cartDiscount.getValidUntil()).isEqualTo(ZonedDateTime.of(2001, 9, 11, 14, 0, 0, 0, ZoneId.of("Z")));
 
         client().executeBlocking(CartDiscountDeleteCommand.of(cartDiscount));
+    }
+    
+    @Test
+    public void deleteByKey(){
+        final CartDiscountDraft draft = newCartDiscountDraftBuilder().build();
+        final CartDiscount cartDiscount = client().executeBlocking(CartDiscountCreateCommand.of(draft));
+        assertThat(cartDiscount).isNotNull();
+        client().executeBlocking(CartDiscountDeleteCommand.of(cartDiscount));
+        PagedQueryResult<CartDiscount> result = client().executeBlocking(CartDiscountQueryBuilder.of().plusPredicates(cartQueryModel -> cartQueryModel.id().is(cartDiscount.getId())).build());
+        assertThat(result.getResults()).isEmpty();
     }
 
     private void checkCartDiscountValueSerialization(final CartDiscountValue value) {
