@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.WithKey;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
@@ -14,7 +15,7 @@ import java.time.ZonedDateTime;
         factoryMethods = {@FactoryMethod(parameterNames = {}),
                           @FactoryMethod(parameterNames = {"active", "description", "name", "predicate", "sortOrder", "value"})
 }, abstractBuilderClass = true)
-public interface ProductDiscountDraft{
+public interface ProductDiscountDraft extends WithKey {
     
     @Nullable
     String getKey();
