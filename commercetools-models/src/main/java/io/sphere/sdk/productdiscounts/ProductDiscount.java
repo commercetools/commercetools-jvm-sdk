@@ -8,6 +8,7 @@ import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.WithKey;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
@@ -27,14 +28,19 @@ import java.util.List;
 @HasQueryEndpoint()
 @ResourceInfo(pluralName = "product discounts", pathElement = "product-discounts")
 @HasByIdGetEndpoint
+@HasByKeyGetEndpoint
 @HasCreateCommand(includeExamples = "io.sphere.sdk.productdiscounts.commands.ProductDiscountCreateCommandIntegrationTest#execution()")
-@HasUpdateCommand
-@HasDeleteCommand
+@HasUpdateCommand(updateWith = "key")
+@HasDeleteCommand(deleteWith = {"key","id"})
 @HasQueryModel(additionalContents = "    default BooleanQueryModel<ProductDiscount> isActive() {\n" +
         "        return active();\n" +
         "    }")
-public interface ProductDiscount extends Resource<ProductDiscount> {
+public interface ProductDiscount extends Resource<ProductDiscount>, WithKey {
 
+    @HasUpdateAction
+    @Nullable
+    String getKey();
+    
     LocalizedString getName();
 
     @Nullable

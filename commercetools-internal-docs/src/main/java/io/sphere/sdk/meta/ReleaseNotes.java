@@ -72,6 +72,7 @@ import io.sphere.sdk.payments.*;
 import io.sphere.sdk.payments.messages.PaymentStatusInterfaceCodeSetMessage;
 import io.sphere.sdk.payments.messages.PaymentTransactionStateChangedMessage;
 import io.sphere.sdk.productdiscounts.ProductDiscount;
+import io.sphere.sdk.productdiscounts.ProductDiscountDraft;
 import io.sphere.sdk.productdiscounts.ProductDiscountDraftBuilder;
 import io.sphere.sdk.productdiscounts.queries.MatchingProductDiscountGet;
 import io.sphere.sdk.productdiscounts.queries.ProductDiscountByIdGet;
@@ -155,8 +156,12 @@ import java.util.function.Function;
 
  <h3 class=released-version id="v1_43_0">1.43.0</h3>
  <ul>
+    <li class=new-in-release>Added {@link ProductDiscount#getKey()} and {@link ProductDiscountDraft#getKey()} ()} fields.</li>
+    <li class=new-in-release>Added {@link ProductByKeyGet}, {@link io.sphere.sdk.products.commands.ProductUpdateCommand#ofKey(String, Long, UpdateAction)}, {@link io.sphere.sdk.productdiscounts.commands.ProductDiscountDeleteCommand#ofKey(String, Long)} commands</li>
+    <li class=new-in-release>Added {@link io.sphere.sdk.productdiscounts.commands.updateactions.SetKey} update action</li>
     <li class=new-in-release>Added {@link CustomerToken#getExpiresAt()} field</li>
  </ul>
+ 
  <h3 class=released-version id="v1_42_0">1.42.0 (24.05.2019)</h3>
  <ul>
     <li class=fixed-in-release>Added support for {@link io.sphere.sdk.extensions.AuthorizationHeaderAuthentication} for api extensions.</li>
