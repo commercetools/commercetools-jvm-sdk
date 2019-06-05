@@ -154,6 +154,11 @@ import java.util.function.Function;
  -->
  -->
 
+ <h3 class=released-version id="v1_43_0">1.44.0</h3>
+ <ul>
+    <li class=fixed-in-release>{@link PagedSearchResult#empty()} now creates an instance with the {@link PagedSearchResult#getLimit()} field set to 20, instead of 0</li>
+ </ul>
+ 
  <h3 class=released-version id="v1_43_0">1.43.0 (03.06.2019)</h3>
  <ul>
     <li class=new-in-release>Added {@link ProductDiscount#getKey()} and {@link ProductDiscountDraft#getKey()} ()} fields.</li>
