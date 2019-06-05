@@ -23,7 +23,7 @@ public interface PagedSearchResult<T> extends PagedResult<T> {
      * @return an empty {@code PagedSearchResult}
      */
     static <T> PagedSearchResultImpl<T> empty() {
-        return new PagedSearchResultImpl<T>(0L, 0L, 0L, Collections.emptyList(), Collections.emptyMap(),0L);
+        return new PagedSearchResultImpl<T>(0L, 20L, 0L, Collections.emptyList(), Collections.emptyMap(),0L);
     }
     
     /**
