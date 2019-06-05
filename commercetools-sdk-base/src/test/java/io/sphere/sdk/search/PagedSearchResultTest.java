@@ -1,6 +1,7 @@
 package io.sphere.sdk.search;
 
 import io.sphere.sdk.annotations.NotOSGiCompatible;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.search.model.RangeStats;
 import io.sphere.sdk.search.model.SimpleRangeStats;
 import org.junit.Test;
@@ -85,7 +86,15 @@ public class PagedSearchResultTest {
                         RangeStats.of("0.0", null, 0L, null, "0.0", "0.0", "0.0", 0.0)),
                 simpleRangeStats -> assertThat(simpleRangeStats).isEqualTo(SimpleRangeStats.of(null, null, 6L, "-10.0", "-3.0")));
     }
-
+    
+    @Test
+    public void emptyResultCanBeSerializedToJson() throws Exception {
+        final PagedSearchResult<String> result = PagedSearchResult.empty();
+        final String resultJson = SphereJsonUtils.toJsonString(result);
+        assertThat(resultJson).isNotEmpty();
+    }
+    
+    
     private <T> void testPagedSearchResult(final Consumer<PagedSearchResult<T>> test) {
         final Map<String, FacetResult> facets = new HashMap<>();
         facets.put(TERM_FACET_EXPR.resultPath(), TERM_FACET_RESULT);
