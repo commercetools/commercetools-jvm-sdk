@@ -80,6 +80,11 @@ public class CustomerQueryIntegrationTest extends IntegrationTest {
     public void emailHelper() throws Exception {
         check((model) -> model.email().is(customer.getEmail()));
     }
+    
+    @Test
+    public void key() throws Exception {
+        check((model) -> model.key().is(customer.getKey()));
+    }
 
     @Test
     public void middleName() throws Exception {
@@ -159,7 +164,8 @@ public class CustomerQueryIntegrationTest extends IntegrationTest {
                 .withMiddleName(middleName)
                 .withTitle(title)
                 .withExternalId(randomString()+firstName)
-                .withCustomerNumber(randomKey());
+                .withCustomerNumber(randomKey())
+                .withKey(randomKey());
         final CustomerSignInResult signInResult = client().executeBlocking(CustomerCreateCommand.of(draft));
         final Customer initialCustomer = signInResult.getCustomer();
 
