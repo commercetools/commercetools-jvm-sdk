@@ -45,7 +45,7 @@ public interface SphereClientFactory {
     /**
      * Creates a standard client suitable for online shops.
      *
-     * For the credentials consult <a href="https://admin.sphere.io">the Merchant Center</a>.
+     * For the credentials consult <a href="https://mc.commercetools.com">the Merchant Center</a>.
      * @param projectKey the project identifier
      * @param clientId username
      * @param clientSecret password
@@ -59,7 +59,7 @@ public interface SphereClientFactory {
     /**
      * Creates a standard client suitable for online shops.
      *
-     * For the credentials consult <a href="https://admin.sphere.io">the Merchant Center</a>.
+     * For the credentials consult <a href="https://mc.commercetools.com">the Merchant Center</a>.
      * @param projectKey the project identifier
      * @param clientId username
      * @param clientSecret passwor
