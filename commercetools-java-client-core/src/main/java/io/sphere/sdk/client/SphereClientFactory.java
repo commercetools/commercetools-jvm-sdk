@@ -55,6 +55,22 @@ public interface SphereClientFactory {
         return createClient(SphereClientConfig.of(projectKey, clientId, clientSecret));
     }
 
+
+    /**
+     * Creates a standard client suitable for online shops.
+     *
+     * For the credentials consult <a href="https://admin.sphere.io">the Merchant Center</a>.
+     * @param projectKey the project identifier
+     * @param clientId username
+     * @param clientSecret passwor
+     * @param authUrl authentication url for the Api
+     * @param apiUrl api url for the Api
+     * @return sphere client
+     */
+    default SphereClient createClient(String projectKey, String clientId, String clientSecret, String authUrl, String apiUrl) {
+        return createClient(SphereClientConfig.of(projectKey, clientId, clientSecret,authUrl,apiUrl));
+    }
+
     /**
      * Creates a client which relies on an access token and does not refresh it, it reuses an existing http client.
      *
