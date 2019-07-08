@@ -32,6 +32,9 @@ import io.sphere.sdk.models.Base;
  <p id=instantiation-blocking>Simple instantiation with blocking client:</p>
  {@include.example example.BlockingJavaClientInstantiationExample}
 
+ <p id=instantiation-blocking>For projects in the USA you should specify in addition to the previous parameters the auth and api urls:</p>
+ {@include.example example.JavaClientInstantiationExampleInUSA}
+
  <p id=instantiation-spring>Spring example</p>
 
  <pre><code class=java>{@include.file commercetools-internal-docs/src/main/resources/SpringCommercetoolsConfig.java}</code></pre>
