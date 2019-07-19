@@ -21,8 +21,9 @@ import java.util.List;
         abstractBuilderClass = true,
         copyFactoryMethods = @CopyFactoryMethod(Category.class),
         factoryMethods = @FactoryMethod(parameterNames = {"name", "slug"}))
-public interface CategoryDraft extends CustomDraft, WithLocalizedSlug, MetaAttributes {
+public interface CategoryDraft extends CustomDraft, WithLocalizedSlug, MetaAttributes, WithKey {
 
+    @Override
     @Nullable
     String getKey();
 
