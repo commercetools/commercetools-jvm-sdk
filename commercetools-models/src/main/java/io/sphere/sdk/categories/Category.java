@@ -62,7 +62,7 @@ import java.util.List;
 @HasUpdateCommand(javadocSummary = "Updates a category.")
 @HasDeleteCommand(javadocSummary = "Deletes a category.", includeExamples = "io.sphere.sdk.categories.commands.CategoryDeleteCommandIntegrationTest#execution()", deleteWith = "key")
 @HasQueryModel(baseInterfaces = {"io.sphere.sdk.queries.QueryModel<io.sphere.sdk.categories.Category>"})
-public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAttributes, Custom {
+public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAttributes, Custom, WithKey {
 
 
     /**
@@ -70,6 +70,7 @@ public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAtt
      *
      * @return the user defined key
      */
+    @Override
     @Nullable
     String getKey();
 

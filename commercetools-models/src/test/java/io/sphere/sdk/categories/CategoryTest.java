@@ -2,7 +2,10 @@ package io.sphere.sdk.categories;
 
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.WithKey;
 import org.junit.Test;
+
+import javax.annotation.Nonnull;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -28,6 +31,19 @@ public class CategoryTest {
                 .contains("name=LocalizedString(de -> Jacken, en -> Jackets, it -> Giacche)")
                 .contains("id=32a65cad-9865-413c-ac7b-aab3c51c63e0")
                 .contains("LocalizedString(de -> meta-title-example)");
+    }
+
+    @Test
+    public void categoryImplementsWithKey() {
+        final Category category = getCategory1();
+
+        final String key = getKey(category);
+
+        assertThat(key).isEqualTo(category.getKey());
+    }
+
+    private <T extends WithKey> String getKey(@Nonnull final T resource) {
+        return resource.getKey();
     }
 
     private Category getCategory1() {
