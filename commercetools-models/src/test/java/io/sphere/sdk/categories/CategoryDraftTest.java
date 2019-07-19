@@ -21,7 +21,7 @@ public class CategoryDraftTest {
         assertThat(key).isEqualTo(category.getKey());
     }
 
-    private <T extends WithKey> String getKey(@Nonnull final T resource) {
+    public <T extends WithKey> String getKey(@Nonnull final T resource) {
         return resource.getKey();
     }
 }

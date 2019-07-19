@@ -21,7 +21,7 @@ public class ProductDraftTest {
         assertThat(key).isEqualTo(productDraft.getKey());
     }
 
-    private <T extends WithKey> String getKey(@Nonnull final T resource) {
+    public <T extends WithKey> String getKey(@Nonnull final T resource) {
         return resource.getKey();
     }
 

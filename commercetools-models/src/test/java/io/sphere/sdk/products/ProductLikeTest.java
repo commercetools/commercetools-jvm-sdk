@@ -21,7 +21,7 @@ public class ProductLikeTest {
         assertThat(key).isEqualTo(productLike.getKey());
     }
 
-    private <T extends WithKey> String getKey(@Nonnull final T resource) {
+    public <T extends WithKey> String getKey(@Nonnull final T resource) {
         return resource.getKey();
     }
 
