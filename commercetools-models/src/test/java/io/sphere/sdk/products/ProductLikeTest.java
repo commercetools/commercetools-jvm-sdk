@@ -1,5 +1,6 @@
 package io.sphere.sdk.products;
 
+import io.sphere.sdk.annotations.NotOSGiCompatible;
 import io.sphere.sdk.models.WithKey;
 import org.junit.Test;
 
@@ -9,6 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@NotOSGiCompatible
 public class ProductLikeTest {
 
     @Test
