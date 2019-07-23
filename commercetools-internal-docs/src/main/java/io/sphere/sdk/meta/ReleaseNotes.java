@@ -153,6 +153,11 @@ import java.util.function.Function;
  </ul>
  -->
  -->
+ <!-- TODO: Release date should be added. -->
+ <h3 class=released-version id="v1_44_1">1.45.0 (_DATE_)</h3>
+ <ul>
+ <li class=fixed-in-release>{@link Category}, {@link CategoryDraft}, {@link ProductLike} and {@link ProductDraft} now extend the {@link WithKey} interface.</li>
+ </ul>
 
  <h3 class=released-version id="v1_43_0">1.44.0</h3>
  <ul>
