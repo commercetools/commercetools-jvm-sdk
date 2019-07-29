@@ -27,7 +27,7 @@ import java.util.Set;
         factoryMethods = {@FactoryMethod(parameterNames = {"productType", "name", "slug", "masterVariant"})},
         abstractBuilderClass = true)
 @JsonDeserialize(as = ProductDraftDsl.class)
-public interface ProductDraft extends WithLocalizedSlug, MetaAttributes {
+public interface ProductDraft extends WithLocalizedSlug, MetaAttributes, WithKey {
 
 
     LocalizedString getName();
@@ -80,6 +80,7 @@ public interface ProductDraft extends WithLocalizedSlug, MetaAttributes {
     @JsonProperty("publish")
     Boolean isPublish();
 
+    @Override
     @Nullable
     String getKey();
 }
