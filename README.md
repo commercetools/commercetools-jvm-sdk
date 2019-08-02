@@ -27,19 +27,19 @@ Users gain type-safety, encapsulation, IDE auto completion and an internal domai
 <dependency>
   <groupId>com.commercetools.sdk.jvm.core</groupId>
   <artifactId>commercetools-models</artifactId>
-  <version>1.44.0</version>
+  <version>1.45.0</version>
 </dependency>
 <dependency>
   <groupId>com.commercetools.sdk.jvm.core</groupId>
   <artifactId>commercetools-java-client</artifactId>
-  <version>1.44.0</version>
+  <version>1.45.0</version>
 </dependency>
 
 <!-- experimental -->
 <dependency>
   <groupId>com.commercetools.sdk.jvm.core</groupId>
   <artifactId>commercetools-convenience</artifactId>
-  <version>1.44.0</version>
+  <version>1.45.0</version>
 </dependency>
 ````
 * http://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-models%7C1.44.0%7Cjar
@@ -62,7 +62,7 @@ repositories {
 }
 
 dependencies {
-    def jvmSdkVersion = "1.44.0"
+    def jvmSdkVersion = "1.45.0"
     compile "com.commercetools.sdk.jvm.core:commercetools-models:$jvmSdkVersion"
     compile "com.commercetools.sdk.jvm.core:commercetools-java-client:$jvmSdkVersion"    
     compile "com.commercetools.sdk.jvm.core:commercetools-convenience:$jvmSdkVersion"
