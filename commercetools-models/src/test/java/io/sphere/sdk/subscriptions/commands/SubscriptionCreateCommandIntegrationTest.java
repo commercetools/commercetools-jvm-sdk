@@ -7,6 +7,7 @@ import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import io.sphere.sdk.client.ErrorResponseException;
 import io.sphere.sdk.subscriptions.*;
 import org.junit.AfterClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static io.sphere.sdk.subscriptions.SubscriptionFixtures.*;
@@ -15,6 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Integration tests for {@link SubscriptionCreateCommand}.
  */
+@Ignore
 public class SubscriptionCreateCommandIntegrationTest extends SubscriptionIntegrationTest {
 
     @Test
