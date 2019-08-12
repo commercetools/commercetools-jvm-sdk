@@ -6,6 +6,7 @@ import io.sphere.sdk.subscriptions.SubscriptionFixtures;
 import io.sphere.sdk.subscriptions.SubscriptionIntegrationTest;
 import io.sphere.sdk.subscriptions.queries.SubscriptionQuery;
 import org.junit.AfterClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.function.Supplier;
@@ -19,24 +20,28 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class SubscriptionDeleteCommandIntegrationTest extends SubscriptionIntegrationTest {
 
+    @Ignore
     @Test
     public void deleteByKeyAzureQueue() throws Exception {
         assumeHasAzureSBEnv();
         deleteByKey(SubscriptionFixtures::azureServiceBusSubscriptionDraftBuilder);
     }
 
+    @Ignore
     @Test
     public void deleteByIdAzureQueue() throws Exception {
         assumeHasAzureSBEnv();
         deleteByID(SubscriptionFixtures::azureServiceBusSubscriptionDraftBuilder);
     }
 
+    @Ignore
     @Test
     public void deleteByKeyIronMq() throws Exception {
         assumeHasIronMqEnv();
         deleteByKey(SubscriptionFixtures::ironMqSubscriptionDraftBuilder);
     }
 
+    @Ignore
     @Test
     public void deleteByIdIronMq() throws Exception {
         assumeHasIronMqEnv();
@@ -70,6 +75,7 @@ public class SubscriptionDeleteCommandIntegrationTest extends SubscriptionIntegr
         });
     }
 
+    @Ignore
     @AfterClass
     public static void cleanUPQueues() throws Exception{
         AzureSBUtils.consumeMessages();
