@@ -8,8 +8,8 @@ import io.sphere.sdk.subscriptions.commands.updateactions.ChangeDestination;
 import io.sphere.sdk.subscriptions.commands.updateactions.SetChanges;
 import io.sphere.sdk.subscriptions.commands.updateactions.SetKey;
 import io.sphere.sdk.subscriptions.commands.updateactions.SetMessages;
-import io.sphere.sdk.test.IntegrationTest;
 import org.junit.AfterClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Collections;
@@ -25,42 +25,49 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class SubscriptionUpdateCommandIntegrationTest extends SubscriptionIntegrationTest {
 
+    @Ignore
     @Test
     public void setKeyAzureSBQueue(){
         assumeHasAzureSBEnv();
         setKeyQueue(SubscriptionFixtures::azureServiceBusSubscriptionDraftBuilder);
     }
 
+    @Ignore
     @Test
     public void setChangesAzureSBQueue(){
         assumeHasAzureSBEnv();
         setChangesQueue(SubscriptionFixtures::azureServiceBusSubscriptionDraftBuilder);
     }
 
+    @Ignore
     @Test
     public void setMessageAzureSBQueue(){
         assumeHasAzureSBEnv();
         setMessagesQueue(SubscriptionFixtures::azureServiceBusSubscriptionDraftBuilder);
     }
 
+    @Ignore
     @Test
     public void setKey() {
         assumeHasIronMqEnv();
         setKeyQueue(SubscriptionFixtures::ironMqSubscriptionDraftBuilder);
     }
 
+    @Ignore
     @Test
     public void setChangesIronMq(){
         assumeHasIronMqEnv();
         setChangesQueue(SubscriptionFixtures::ironMqSubscriptionDraftBuilder);
     }
 
+    @Ignore
     @Test
     public void setMessagesIronMq(){
         assumeHasIronMqEnv();
         setMessagesQueue(SubscriptionFixtures::ironMqSubscriptionDraftBuilder);
     }
 
+    @Ignore
     @Test
     public void changeDestination(){
         assumeHasIronMqEnv();
@@ -134,6 +141,7 @@ public class SubscriptionUpdateCommandIntegrationTest extends SubscriptionIntegr
         });
     }
 
+    @Ignore
     @AfterClass
     public static void cleanUPQueues() throws Exception{
         AzureSBUtils.consumeMessages();
