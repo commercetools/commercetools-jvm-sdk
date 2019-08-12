@@ -16,9 +16,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Integration tests for {@link SubscriptionCreateCommand}.
  */
-@Ignore
+
 public class SubscriptionCreateCommandIntegrationTest extends SubscriptionIntegrationTest {
 
+    @Ignore
     @Test
     public void createIronMqChangesSubscription() throws Exception {
         assumeHasIronMqEnv();
@@ -39,6 +40,7 @@ public class SubscriptionCreateCommandIntegrationTest extends SubscriptionIntegr
         }
     }
 
+    @Ignore
     @Test
     public void createAzureSBChangesSubscription() throws Exception {
         assumeHasAzureSBEnv();
@@ -59,6 +61,7 @@ public class SubscriptionCreateCommandIntegrationTest extends SubscriptionIntegr
         }
     }
 
+    @Ignore
     @Test
     public void createIronMqMessagesSubscription() throws Exception {
         assumeHasIronMqEnv();
@@ -79,6 +82,7 @@ public class SubscriptionCreateCommandIntegrationTest extends SubscriptionIntegr
         }
     }
 
+    @Ignore
     @Test
     public void createSqsChangesSubscription() throws Exception {
         assumeHasAwsCliEnv();
@@ -101,6 +105,7 @@ public class SubscriptionCreateCommandIntegrationTest extends SubscriptionIntegr
         }
     }
 
+    @Ignore
     @Test
     public void createSnsChangesSubscription() throws Exception {
         assumeHasAwsCliEnv();
@@ -123,6 +128,7 @@ public class SubscriptionCreateCommandIntegrationTest extends SubscriptionIntegr
         }
     }
 
+    @Ignore
     /**
      * The exception  expected here is due to the fact that the topic doesn't exist
      */
@@ -143,6 +149,7 @@ public class SubscriptionCreateCommandIntegrationTest extends SubscriptionIntegr
         }
     }
 
+    @Ignore
     @AfterClass
     public static void cleanUPQueues() throws Exception{
         AzureSBUtils.consumeMessages();
