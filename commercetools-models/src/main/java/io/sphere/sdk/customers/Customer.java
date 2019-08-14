@@ -9,12 +9,10 @@ import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.customers.commands.CustomerCreatePasswordTokenCommand;
 import io.sphere.sdk.customers.commands.CustomerPasswordResetCommand;
-import io.sphere.sdk.models.Address;
-import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.models.Resource;
-import io.sphere.sdk.models.WithKey;
+import io.sphere.sdk.models.*;
 import io.sphere.sdk.payments.Payment;
 import io.sphere.sdk.reviews.Review;
+import io.sphere.sdk.stores.Store;
 import io.sphere.sdk.types.Custom;
 import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.TypeDraft;
@@ -463,6 +461,10 @@ public interface Customer extends Resource<Customer>, Custom, WithKey {
      */
     @Nullable
     String getSalutation();
+
+    @Nullable
+    @IgnoreInQueryModel
+    List<KeyReference<Store>> getStores();
 
     default List<Address> getShippingAddresses() {
         final Set<String> ids = new HashSet<>(getShippingAddressIds());
