@@ -7,7 +7,7 @@ import io.sphere.sdk.customers.CustomerDraft;
 import io.sphere.sdk.customers.CustomerSignInResult;
 import io.sphere.sdk.customers.expansion.CustomerSignInResultExpansionModel;
 
-public class CustomerInStoreCreateCommandImpl extends MetaModelCreateCommandImpl<CustomerSignInResult, CustomerInStoreCreateCommand, CustomerDraft, CustomerSignInResultExpansionModel<CustomerSignInResult>> implements CustomerInStoreCreateCommand {
+final class CustomerInStoreCreateCommandImpl extends MetaModelCreateCommandImpl<CustomerSignInResult, CustomerInStoreCreateCommand, CustomerDraft, CustomerSignInResultExpansionModel<CustomerSignInResult>> implements CustomerInStoreCreateCommand {
 
     CustomerInStoreCreateCommandImpl(final MetaModelCreateCommandBuilder<CustomerSignInResult, CustomerInStoreCreateCommand, CustomerDraft, CustomerSignInResultExpansionModel<CustomerSignInResult>> builder) {
         super(builder);

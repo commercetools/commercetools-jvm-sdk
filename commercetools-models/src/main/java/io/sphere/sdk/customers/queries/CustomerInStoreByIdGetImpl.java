@@ -6,7 +6,7 @@ import io.sphere.sdk.customers.expansion.CustomerExpansionModel;
 import io.sphere.sdk.queries.MetaModelGetDslBuilder;
 import io.sphere.sdk.queries.MetaModelGetDslImpl;
 
-public class CustomerInStoreByIdGetImpl extends MetaModelGetDslImpl<Customer, Customer, CustomerInStoreByIdGet, CustomerExpansionModel<Customer>> implements CustomerInStoreByIdGet {
+final class CustomerInStoreByIdGetImpl extends MetaModelGetDslImpl<Customer, Customer, CustomerInStoreByIdGet, CustomerExpansionModel<Customer>> implements CustomerInStoreByIdGet {
 
     CustomerInStoreByIdGetImpl(final String storeKey, final String id) {
         super(id, JsonEndpoint.of(Customer.typeReference(), "/in-store/key=" + storeKey + "/customers"), CustomerExpansionModel.of(), CustomerInStoreByIdGetImpl::new);
