@@ -8,7 +8,6 @@ import javax.annotation.Nullable;
 
 public abstract class SetCustomFieldBase<T> extends UpdateActionImpl<T> {
     private final String name;
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @Nullable
     private final JsonNode value;
 
