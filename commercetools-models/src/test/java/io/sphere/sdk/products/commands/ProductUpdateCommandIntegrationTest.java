@@ -1,5 +1,8 @@
 package io.sphere.sdk.products.commands;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.client.BlockingSphereClient;
@@ -55,8 +58,7 @@ import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
 import static io.sphere.sdk.states.StateType.PRODUCT_STATE;
 import static io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.MONEY_ATTRIBUTE_NAME;
 import static io.sphere.sdk.test.SphereTestUtils.*;
-import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
-import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
+import static io.sphere.sdk.types.TypeFixtures.*;
 import static java.util.Collections.*;
 import static java.util.Locale.ENGLISH;
 import static java.util.stream.Collectors.toList;
@@ -1929,6 +1931,34 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                 final Product updated2 = client().executeBlocking(ProductUpdateCommand.of(updatedProduct, SetProductPriceCustomField.ofObject(STRING_FIELD_NAME, "a new value", priceId)));
                 assertThat(getFirstPrice(updated2).getCustom().getFieldAsString(STRING_FIELD_NAME))
                         .isEqualTo("a new value");
+                return updated2;
+            });
+            return type;
+        });
+    }
+
+    @Test
+    public void setProductPriceCustomTypeAndsetProductPriceCustomFieldWithEmptySet() {
+        Map<String, JsonNode> map = new HashMap<>();
+        ArrayNode arrayNode = new ArrayNode(new JsonNodeFactory(true));
+        map.put(STRING_SET_FIELD_NAME, arrayNode);
+        withUpdateableType(client(), type -> {
+            withUpdateablePricedProduct(client(), product -> {
+                final String priceId = getFirstPrice(product).getId();
+                final UpdateAction<Product> updateAction = SetProductPriceCustomType.
+                        ofTypeIdAndJson(type.getId(), map, priceId);
+                final ProductUpdateCommand productUpdateCommand = ProductUpdateCommand.of(product, updateAction);
+                final Product updatedProduct = client().executeBlocking(productUpdateCommand);
+
+                final Price price = getFirstPrice(updatedProduct);
+                assertThat(price.getCustom().getFieldAsStringSet(STRING_SET_FIELD_NAME))
+                        .isEmpty();
+
+                arrayNode.add("a new value");
+                final Product updated2 = client().executeBlocking(ProductUpdateCommand.of(updatedProduct,
+                        SetProductPriceCustomField.ofObject(STRING_SET_FIELD_NAME, arrayNode, priceId)));
+                assertThat(getFirstPrice(updated2).getCustom().getFieldAsStringSet(STRING_SET_FIELD_NAME))
+                        .contains("a new value");
                 return updated2;
             });
             return type;
