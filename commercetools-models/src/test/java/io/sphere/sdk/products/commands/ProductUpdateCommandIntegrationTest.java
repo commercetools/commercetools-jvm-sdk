@@ -1941,6 +1941,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     public void setProductPriceCustomTypeAndsetProductPriceCustomFieldWithEmptySet() {
         Map<String, JsonNode> map = new HashMap<>();
         ArrayNode arrayNode = new ArrayNode(new JsonNodeFactory(true));
+        arrayNode.add("some value");
         map.put(STRING_SET_FIELD_NAME, arrayNode);
         withUpdateableType(client(), type -> {
             withUpdateablePricedProduct(client(), product -> {
@@ -1952,13 +1953,13 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
 
                 final Price price = getFirstPrice(updatedProduct);
                 assertThat(price.getCustom().getFieldAsStringSet(STRING_SET_FIELD_NAME))
-                        .isEmpty();
+                        .contains("some value");
 
-                arrayNode.add("a new value");
+                arrayNode.removeAll();
                 final Product updated2 = client().executeBlocking(ProductUpdateCommand.of(updatedProduct,
                         SetProductPriceCustomField.ofObject(STRING_SET_FIELD_NAME, arrayNode, priceId)));
                 assertThat(getFirstPrice(updated2).getCustom().getFieldAsStringSet(STRING_SET_FIELD_NAME))
-                        .contains("a new value");
+                        .isEmpty();
                 return updated2;
             });
             return type;

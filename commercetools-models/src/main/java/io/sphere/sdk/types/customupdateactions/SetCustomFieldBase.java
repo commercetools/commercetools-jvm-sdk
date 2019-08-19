@@ -1,6 +1,5 @@
 package io.sphere.sdk.types.customupdateactions;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.commands.UpdateActionImpl;
 
