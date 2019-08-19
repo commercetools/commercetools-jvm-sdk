@@ -13,7 +13,7 @@ import io.sphere.sdk.products.Product;
 import java.time.ZonedDateTime;
 
 @JsonDeserialize(as = ProductRemovedFromCategoryMessage.class)//important to override annotation in Message class
-public class ProductRemovedFromCategoryMessage extends GenericMessageImpl<Product> {
+public final class ProductRemovedFromCategoryMessage extends GenericMessageImpl<Product> {
 
     public static final String MESSAGE_TYPE = "ProductRemovedFromCategory";
     public static final MessageDerivateHint<ProductRemovedFromCategoryMessage> MESSAGE_HINT =
