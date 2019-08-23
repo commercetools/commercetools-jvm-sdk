@@ -33,7 +33,7 @@ public class ShippingMethodsByCartGetIntegrationTest extends IntegrationTest {
                 final Cart cartWithShippingAddress = client().executeBlocking(CartUpdateCommand.of(cart, SetShippingAddress.of(GERMAN_ADDRESS)));
 
                 final SphereRequest<List<ShippingMethod>> sphereRequest =
-                        new VrapRequestDecorator<>(ShippingMethodsByCartGet.of(cartWithShippingAddress).plusExpansionPaths(exp -> exp.taxCategory()), "response");
+                        new VrapRequestDecorator<>(ShippingMethodsByCartGet.of(cartWithShippingAddress).plusExpansionPaths(exp -> exp.taxCategory()), "response", "queryParameter");
 
                 final List<ShippingMethod> shippingMethods =
                         client().executeBlocking(sphereRequest);
@@ -61,7 +61,7 @@ public class ShippingMethodsByCartGetIntegrationTest extends IntegrationTest {
                 final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, updateActions));
 
                 final SphereRequest<List<ShippingMethod>> sphereRequest =
-                        new VrapRequestDecorator<>(ShippingMethodsByCartGet.of(updatedCart), "response");
+                        new VrapRequestDecorator<>(ShippingMethodsByCartGet.of(updatedCart), "response", "queryParameter");
 
                 final List<ShippingMethod> shippingMethods =
                         client().executeBlocking(sphereRequest);
