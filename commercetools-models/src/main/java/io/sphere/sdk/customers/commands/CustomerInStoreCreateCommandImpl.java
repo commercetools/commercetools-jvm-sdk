@@ -14,7 +14,7 @@ final class CustomerInStoreCreateCommandImpl extends MetaModelCreateCommandImpl<
     }
 
     CustomerInStoreCreateCommandImpl(final String storeKey, final CustomerDraft body) {
-        super(body, JsonEndpoint.of(CustomerSignInResult.typeReference(), "in-store/key=" + storeKey + "/customers"), CustomerSignInResultExpansionModel.of(), CustomerInStoreCreateCommandImpl::new);
+        super(body, JsonEndpoint.of(CustomerSignInResult.typeReference(), "/in-store/key=" + storeKey + "/customers"), CustomerSignInResultExpansionModel.of(), CustomerInStoreCreateCommandImpl::new);
     }
 
     @Override

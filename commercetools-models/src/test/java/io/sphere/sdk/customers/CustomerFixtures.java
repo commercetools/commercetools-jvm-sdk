@@ -14,12 +14,17 @@ import io.sphere.sdk.customers.commands.updateactions.AddAddress;
 import io.sphere.sdk.customers.commands.updateactions.SetCustomerGroup;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.AddressBuilder;
+import io.sphere.sdk.models.ResourceIdentifier;
+import io.sphere.sdk.stores.Store;
+import io.sphere.sdk.stores.StoreFixtures;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
 
-import static io.sphere.sdk.customergroups.CustomerGroupFixtures.*;
+import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withB2cCustomerGroup;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -73,5 +78,29 @@ public class CustomerFixtures {
 
     public static CustomerDraftDsl newCustomerDraft() {
         return CustomerDraftDsl.of(CUSTOMER_NAME, randomEmail(CustomerFixtures.class), PASSWORD);
+    }
+    
+    public static void withCustomerInStore(final BlockingSphereClient client, final Consumer<Customer> customerConsumer) {
+        StoreFixtures.withStore(client, (store) -> {
+            final List<ResourceIdentifier<Store>> stores = new ArrayList<>();
+            stores.add(ResourceIdentifier.ofId(store.getId()));
+            final CustomerDraft customerDraft = newCustomerDraft().withKey(randomKey()).withStores(stores);
+            final CustomerSignInResult signInResult = client.executeBlocking(CustomerCreateCommand.of(customerDraft));
+            final Customer customer = signInResult.getCustomer();
+            customerConsumer.accept(customer);
+            client.executeBlocking(CustomerDeleteCommand.of(customer));
+        });
+    }
+    
+    public static void withUpdateableCustomerInStore(final BlockingSphereClient client, final UnaryOperator<Customer> operator) {
+        StoreFixtures.withStore(client, (store) -> {
+            final List<ResourceIdentifier<Store>> stores = new ArrayList<>();
+            stores.add(ResourceIdentifier.ofId(store.getId()));
+            final CustomerDraft customerDraft = newCustomerDraft().withKey(randomKey()).withStores(stores);
+            final CustomerSignInResult signInResult = client.executeBlocking(CustomerCreateCommand.of(customerDraft));
+            Customer customer = signInResult.getCustomer();
+            customer = operator.apply(customer);
+            client.executeBlocking(CustomerDeleteCommand.of(customer));
+        });
     }
 }
