@@ -64,7 +64,7 @@ public class CustomerInStoreSignInCommand extends CommandImpl<CustomerSignInResu
 
     @Override
     public HttpRequestIntent httpRequestIntent() {
-        return HttpRequestIntent.of(POST, "/in-store/key={storeKey}/login", SphereJsonUtils.toJsonString(this));
+        return HttpRequestIntent.of(POST, "/in-store/key=" + storeKey + "/login", SphereJsonUtils.toJsonString(this));
     }
 
     public String getEmail() {
