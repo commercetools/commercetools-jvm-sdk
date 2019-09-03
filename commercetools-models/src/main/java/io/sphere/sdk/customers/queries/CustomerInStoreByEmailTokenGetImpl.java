@@ -7,7 +7,7 @@ import io.sphere.sdk.http.UriTemplate;
 import io.sphere.sdk.queries.MetaModelGetDslBuilder;
 import io.sphere.sdk.queries.MetaModelGetDslImpl;
 
-public class CustomerInStoreByEmailTokenGetImpl extends MetaModelGetDslImpl<Customer, Customer, CustomerInStoreByEmailTokenGet, CustomerExpansionModel<Customer>> implements CustomerInStoreByEmailTokenGet {
+final class CustomerInStoreByEmailTokenGetImpl extends MetaModelGetDslImpl<Customer, Customer, CustomerInStoreByEmailTokenGet, CustomerExpansionModel<Customer>> implements CustomerInStoreByEmailTokenGet {
 
     static final UriTemplate GET_BY_EMAIL_TOKEN = UriTemplate.of("/customers/email-token={token}");
 
