@@ -13,7 +13,7 @@ public class CustomerInStoreQueryIntegrationTest extends IntegrationTest {
     @Test
     public void byKey() throws Exception {
         CustomerFixtures.withCustomerInStore(client(), customer -> {
-            final PagedQueryResult<Customer> result = client().executeBlocking(CustomerInStoreQuery.of()
+            final PagedQueryResult<Customer> result = client().executeBlocking(CustomerInStoreQuery.of(customer.getStores().get(0).getKey())
                     .withPredicates(m -> m.key().is(customer.getKey())));
             assertThat(result.getResults().get(0).getId()).isEqualTo(customer.getId());
         });

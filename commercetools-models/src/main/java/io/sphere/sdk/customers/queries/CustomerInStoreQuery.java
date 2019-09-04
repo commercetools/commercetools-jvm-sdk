@@ -33,8 +33,8 @@ public interface CustomerInStoreQuery extends MetaModelQueryDsl<Customer, Custom
         };
     }
 
-    static CustomerQuery of() {
-        return new CustomerQueryImpl();
+    static CustomerInStoreQuery of(final String storeKey) {
+        return new CustomerInStoreQueryImpl(storeKey);
     }
 
     @Override
