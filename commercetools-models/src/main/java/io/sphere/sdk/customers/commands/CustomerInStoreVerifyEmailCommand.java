@@ -11,7 +11,7 @@ import javax.annotation.Nullable;
 
 import static io.sphere.sdk.http.HttpMethod.POST;
 
-public class CustomerInStoreVerifyEmailCommand extends CommandImpl<Customer>  {
+public final class CustomerInStoreVerifyEmailCommand extends CommandImpl<Customer>  {
 
     @Nullable
     private final String id;

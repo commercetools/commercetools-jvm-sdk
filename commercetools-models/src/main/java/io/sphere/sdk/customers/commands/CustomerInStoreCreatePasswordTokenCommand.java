@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
 
 import static io.sphere.sdk.http.HttpMethod.POST;
 
-public class CustomerInStoreCreatePasswordTokenCommand extends CommandImpl<CustomerToken> {
+public final class CustomerInStoreCreatePasswordTokenCommand extends CommandImpl<CustomerToken> {
 
     private final String email;
     @Nullable

@@ -13,7 +13,7 @@ import javax.annotation.Nullable;
 
 import static io.sphere.sdk.http.HttpMethod.POST;
 
-public class CustomerInStoreCreateEmailTokenCommand extends CommandImpl<CustomerToken> {
+public final class CustomerInStoreCreateEmailTokenCommand extends CommandImpl<CustomerToken> {
 
     private final String id;
     @Nullable

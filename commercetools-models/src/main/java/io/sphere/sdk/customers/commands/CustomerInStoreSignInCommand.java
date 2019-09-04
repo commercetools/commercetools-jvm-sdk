@@ -11,7 +11,7 @@ import javax.annotation.Nullable;
 
 import static io.sphere.sdk.http.HttpMethod.POST;
 
-public class CustomerInStoreSignInCommand extends CommandImpl<CustomerSignInResult> {
+public final class CustomerInStoreSignInCommand extends CommandImpl<CustomerSignInResult> {
 
     private final String email;
     private final String password;
