@@ -90,7 +90,7 @@ public final class ProductImageUploadCommand extends CommandImpl<Product> {
      * @return ProductImageUploadCommand the new constructed productImageUploadCommand
      */
     public ProductImageUploadCommand withContentType(final String contentType) {
-        final ProductImageUploadCommand productImageUploadCommand = new ProductImageUploadCommand(body, productId, variant, sku, filename, staged, givenContentType);
+        final ProductImageUploadCommand productImageUploadCommand = new ProductImageUploadCommand(body, productId, variant, sku, filename, staged, contentType);
 
         return productImageUploadCommand;
     }
