@@ -5,7 +5,9 @@ import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Address;
+import io.sphere.sdk.models.KeyReference;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.stores.Store;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
@@ -82,4 +84,6 @@ public interface OrderImportDraft {
     @Nullable
     List<Address> getItemShippingAddresses();
 
+    @Nullable
+    KeyReference<Store> getStore();
 }

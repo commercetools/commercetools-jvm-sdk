@@ -4,6 +4,7 @@ import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.*;
+import io.sphere.sdk.stores.Store;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
@@ -55,6 +56,9 @@ public final class OrderImportDraftBuilder extends Base implements Builder<Order
     @Nullable private List<Address> itemShippingAddresses;
     @Nullable
     private CartOrigin origin;
+    
+    @Nullable
+    private KeyReference<Store> store;
 
     private OrderImportDraftBuilder(final MonetaryAmount totalPrice, final OrderState orderState) {
         this.totalPrice = totalPrice;
@@ -177,6 +181,11 @@ public final class OrderImportDraftBuilder extends Base implements Builder<Order
         return  this;
     }
 
+    public OrderImportDraftBuilder store(@Nullable final KeyReference<Store> store) {
+        this.store = store;
+        return this;
+    }
+    
     /**
      * Creates a builder for {@link OrderImportDraft} with at least one line item.
      * You can add {@link io.sphere.sdk.carts.CustomLineItem}s with {@link #customLineItems(java.util.List)}.
@@ -205,6 +214,6 @@ public final class OrderImportDraftBuilder extends Base implements Builder<Order
 
     @Override
     public OrderImportDraft build() {
-        return new OrderImportDraftImpl(billingAddress, orderNumber, customerId, customerEmail, lineItems, customLineItems, totalPrice, taxedPrice, shippingAddress, customerGroup, country, orderState, shipmentState, paymentState, shippingInfo, completedAt, custom, taxRoundingMode, inventoryMode,taxCalculationMode,origin, itemShippingAddresses);
+        return new OrderImportDraftImpl(billingAddress, orderNumber, customerId, customerEmail, lineItems, customLineItems, totalPrice, taxedPrice, shippingAddress, customerGroup, country, orderState, shipmentState, paymentState, shippingInfo, completedAt, custom, taxRoundingMode, inventoryMode,taxCalculationMode,origin, itemShippingAddresses, store);
     }
 }
