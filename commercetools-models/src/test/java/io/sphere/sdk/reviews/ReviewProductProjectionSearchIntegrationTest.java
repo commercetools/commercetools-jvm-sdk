@@ -23,6 +23,7 @@ import io.sphere.sdk.search.model.RangeStats;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -98,6 +99,7 @@ public class ReviewProductProjectionSearchIntegrationTest extends IntegrationTes
         reviewStages.forEach(stage -> SphereClientUtils.blockingWait(stage, 10, TimeUnit.SECONDS));
     }
 
+    @Ignore
     @Test
     public void searchForReviewsWithAverageRatingGreaterThan2() {
         final List<FacetRange<BigDecimal>> facetRanges = IntStream.range(LOWEST_RATING, HIGHEST_RATING)
@@ -146,6 +148,7 @@ public class ReviewProductProjectionSearchIntegrationTest extends IntegrationTes
         assertThat(reviews).extracting(r -> r.isIncludedInStatistics()).containsOnlyElementsOf(singletonList(true));
     }
 
+    @Ignore
     @Test
     public void searchByCount() {
         final ProductProjectionSearch projectionSearch = ProductProjectionSearch.ofStaged()//in prod it would be current
@@ -170,6 +173,7 @@ public class ReviewProductProjectionSearchIntegrationTest extends IntegrationTes
         });
     }
 
+    @Ignore
     @Test
     public void sortByAverageRating() {
         checkSorting(
@@ -186,6 +190,7 @@ public class ReviewProductProjectionSearchIntegrationTest extends IntegrationTes
         );
     }
 
+    @Ignore
     @Test
     public void sortByLowestRating() {
         checkSorting(
@@ -194,6 +199,7 @@ public class ReviewProductProjectionSearchIntegrationTest extends IntegrationTes
         );
     }
 
+    @Ignore
     @Test
     public void sortByHighestRating() {
         checkSorting(
