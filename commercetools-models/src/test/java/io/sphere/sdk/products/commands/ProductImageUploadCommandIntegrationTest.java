@@ -58,4 +58,34 @@ public class ProductImageUploadCommandIntegrationTest extends IntegrationTest {
             return updatedProduct;
         });
     }
+    
+    @Test
+    public void uploadWithSettingContentType() {
+        withUpdateableProduct(client(),  product -> {
+            final ByIdVariantIdentifier identifier = product.getMasterData().getStaged().getMasterVariant().getIdentifier();
+            File imageFile ;
+            try{
+                imageFile = File.createTempFile("ct_logo_farbe",".gif");
+                imageFile.deleteOnExit();
+                byte[] fileBytes = IOUtils.toByteArray(ClassLoader.getSystemResourceAsStream("ct_logo_farbe.gif"));
+                FileOutputStream outStream = new FileOutputStream(imageFile);
+                outStream.write(fileBytes);
+                outStream.close();
+            }catch(IOException e){
+                imageFile = new File("src/test/resources/ct_logo_farbe.gif");
+            }
+
+            final ProductImageUploadCommand cmd = ProductImageUploadCommand
+                    .ofVariantId(imageFile, identifier)
+                    .withFilename("logo.gif")
+                    .withContentType("image/gif")
+                    .withStaged(true);
+            final Product updatedProduct = client().executeBlocking(cmd);
+            final Image image = updatedProduct.getMasterData().getStaged().getMasterVariant().getImages().get(0);
+            assertThat(image.getDimensions().getHeight()).isEqualTo(102);
+            assertThat(image.getDimensions().getWidth()).isEqualTo(460);
+            assertThat(image.getUrl()).contains("logo");
+            return updatedProduct;
+        });
+    }
 }

@@ -12,6 +12,9 @@
 The JVM SDK enables developers to use Java 8 methods and objects to communicate with the [commercetools platform](http://www.commercetools.com/) (formerly SPHERE.IO) rather than using plain HTTP calls.
 Users gain type-safety, encapsulation, IDE auto completion and an internal domain specific language to discover and formulate valid requests.
 
+## JDK compatibility
+Tested with JDKs: Oracle 1.8.0_221, OpenJDK 1.8.0_221 and Amazon Corretto 8.222.10.1.
+
 ## Using the SDK 
 * install [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 * (since May 19, 2016 new link) [<strong>Javadoc</strong>](http://commercetools.github.io/commercetools-jvm-sdk/apidocs/index.html), there you find also code snippets and insights
