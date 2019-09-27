@@ -159,6 +159,7 @@ import java.util.function.Function;
      <li class=new-in-release>Added support for {@link io.sphere.sdk.products.messages.ProductAddedToCategoryMessage} and {@link io.sphere.sdk.products.messages.ProductRemovedFromCategoryMessage}</li>
      <li class=fixed-in-release>Update actions for setting custom fields now accept empty array values</li>
      <li class=fixed-in-release>Fixed {@link ProductImageUploadCommand#withContentType(String)} ignoring provided content type</li>
+    <li class=new-in-release>Added store key reference to {@link OrderImportDraft}</li>
  </ul>
  
  <h3 class=released-version id="v1_45_0">1.45.0 (02.08.2019)</h3>
