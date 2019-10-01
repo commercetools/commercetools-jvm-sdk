@@ -16,6 +16,8 @@ public class CustomerInStoreCreateCommandIntegrationTest extends CustomerIntegra
             final CustomerSignInResult signInResult = client().executeBlocking(CustomerInStoreCreateCommand.of(store.getKey(), customerDraft));
             final Customer customer = signInResult.getCustomer();
             assertThat(customer).isNotNull();
+            final Customer deletedCustomer = client().executeBlocking(CustomerDeleteCommand.of(customer));
+            assertThat(deletedCustomer).isNotNull();
         });
     }
 }
