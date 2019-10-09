@@ -3,6 +3,7 @@ package io.sphere.sdk.products.search;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.search.PagedSearchResult;
 import io.sphere.sdk.search.SortExpression;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.time.Duration;
@@ -13,6 +14,7 @@ import static io.sphere.sdk.test.SphereTestUtils.ENGLISH;
 import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Ignore
 public class ProductProjectionSearchSortIntegrationTest extends ProductProjectionSearchIntegrationTest {
 
     @Test

@@ -16,6 +16,7 @@ import io.sphere.sdk.search.PagedSearchResult;
 import io.sphere.sdk.search.RangeFacetExpression;
 import io.sphere.sdk.search.RangeFacetResult;
 import io.sphere.sdk.test.IntegrationTest;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -31,6 +32,7 @@ import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Ignore
 public class ProductAvailabilitySearchIntegrationTest extends IntegrationTest {
     @Test
     public void searchForIsOnStock() {

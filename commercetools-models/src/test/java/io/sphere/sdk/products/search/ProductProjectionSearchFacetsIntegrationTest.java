@@ -3,6 +3,7 @@ package io.sphere.sdk.products.search;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.search.*;
 import io.sphere.sdk.search.model.RangeStats;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.time.Duration;
@@ -13,6 +14,7 @@ import static java.math.BigDecimal.ZERO;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Ignore
 public class ProductProjectionSearchFacetsIntegrationTest extends ProductProjectionSearchIntegrationTest {
 
     public static final ProductDataFacetSearchModel PRODUCT_MODEL = ProductProjectionSearchModel.of().facet();

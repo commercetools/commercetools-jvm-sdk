@@ -2,6 +2,7 @@ package io.sphere.sdk.products.search;
 
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.search.*;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.time.Duration;
@@ -11,6 +12,7 @@ import java.util.function.Consumer;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Ignore
 public class ProductProjectionSearchFacetedSearchIntegrationTest extends ProductProjectionSearchIntegrationTest {
 
     private static final ProductProjectionFacetedSearchSearchModel PRODUCT_MODEL = ProductProjectionSearchModel.of().facetedSearch();

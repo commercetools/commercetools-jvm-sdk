@@ -15,6 +15,7 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static io.sphere.sdk.products.ProductsScenario1Fixtures.*;
 
+@Ignore
 public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends ProductProjectionSearchModelIntegrationTest {
 
     private static final ProductProjectionFacetedSearchSearchModel PRODUCT_MODEL = ProductProjectionSearchModel.of().facetedSearch();
