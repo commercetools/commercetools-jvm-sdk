@@ -53,6 +53,7 @@ public class ScopedPriceSearchIntegrationTest extends IntegrationTest {
         productType = client().executeBlocking(ProductTypeCreateCommand.of(productTypeDraft));
     }
 
+    @Ignore
     @Test
     public void filterByValueCentAmountAndCountry() {
         withProductOfPrices(asList(PriceDraft.of(EURO_20), PriceDraft.of(EURO_30).withCountry(DE)), product1 -> {
@@ -78,6 +79,7 @@ public class ScopedPriceSearchIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Ignore
     @Test
     public void sortByCurrentScopedPrice() {
         final List<PriceDraft> prices1 = asList(PriceDraft.of(EURO_20), PriceDraft.of(EURO_30).withCountry(DE));
@@ -86,6 +88,7 @@ public class ScopedPriceSearchIntegrationTest extends IntegrationTest {
         sortCheck(prices1, prices2, sortExpression);
     }
 
+    @Ignore
     @Test
     public void sortByValueScopedPrice() {
         final List<PriceDraft> prices1 = asList(PriceDraft.of(EURO_20), PriceDraft.of(EURO_30).withCountry(DE));
@@ -110,6 +113,7 @@ public class ScopedPriceSearchIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Ignore
     @Test
     public void discounts() {
         withProductOfPrices(asList(PriceDraft.of(EURO_20), PriceDraft.of(EURO_30).withCountry(DE)), product -> {
@@ -167,6 +171,7 @@ public class ScopedPriceSearchIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Ignore
     @Test
     public void sortByScopedPriceDiscounted() {
         withProductOfPrices(asList(PriceDraft.of(EURO_20), PriceDraft.of(EURO_30).withCountry(DE)), product1 -> {
@@ -198,6 +203,7 @@ public class ScopedPriceSearchIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Ignore
     @Test
     public void facetSearchByScopedPriceDiscounted() {
         withProductOfPrices(asList(PriceDraft.of(EURO_20), PriceDraft.of(EURO_30).withCountry(DE)), product1 -> {

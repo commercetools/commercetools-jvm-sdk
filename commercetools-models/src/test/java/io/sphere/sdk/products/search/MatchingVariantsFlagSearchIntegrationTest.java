@@ -21,6 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Ignore
 public class MatchingVariantsFlagSearchIntegrationTest extends ProductProjectionSearchIntegrationTest {
 
+    @Ignore
     @Test
     public void disableMatchingVariantsFlag() {
         final String attributeName = randomKey();

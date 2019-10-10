@@ -17,6 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @Ignore
 public class FullLocaleSearchIntegrationTest extends IntegrationTest {
+    @Ignore
     @Test
     public void searchByFullLocale() {
         final Locale austria = Locale.forLanguageTag("de-AT");

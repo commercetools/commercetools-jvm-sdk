@@ -32,6 +32,7 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
     public static final NamedAttributeAccess<Long> SIZE_ATTRIBUTE_ACCESS = AttributeAccess.ofLong().ofName(ATTR_NAME_SIZE);
     public static final ProductProjectionFilterSearchModel PRODUCT_MODEL = ProductProjectionSearchModel.of().filter();
 
+    @Ignore
     @Test
     public void searchByTextInACertainLanguage() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withText(ENGLISH, "shoe");
@@ -39,6 +40,7 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
                 assertThat(resultIds).containsOnly(product1.getId()));
     }
 
+    @Ignore
     @Test
     public void resultsArePaginated() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
@@ -50,6 +52,7 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
                 assertThat(resultIds).containsOnly(product2.getId()));
     }
 
+    @Ignore
     @Test
     public void paginationExample() {
         final long offset = 10;
@@ -65,6 +68,7 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
         });
     }
 
+    @Ignore
     @Test
     public void allowsExpansion() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withLimit(1L);
@@ -82,6 +86,7 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
         });
     }
 
+    @Ignore
     @Test
     public void fuzzySearch() {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
@@ -93,11 +98,13 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
                 assertThat(client().executeBlocking(search.withFuzzy(true)).getResults()).matches(containsIdentifiable(product2), "included"));
     }
 
+    @Ignore
     @Test
     public void findMatchingVariantByQueryFilter() throws Exception {
         testBlueFilter(filters -> ProductProjectionSearch.ofStaged().withMarkingMatchingVariants(true).withQueryFilters(filters));
     }
 
+    @Ignore
     @Test
     public void findMatchingVariantByResultFilter() throws Exception {
         testBlueFilter(filters -> ProductProjectionSearch.ofStaged().withMarkingMatchingVariants(true).withResultFilters(filters));
@@ -118,6 +125,7 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
         testBlueFilter(filters -> ProductProjectionSearch.ofStaged().withText(ENGLISH, "blue"));
     }
 
+    @Ignore
     @Test
     public void findMatchingVariantByFulltextSearch() throws Exception {
         final Condition<ProductVariant> allMatchingVariants = new Condition<>(variant -> variant.isMatchingVariant(), "all are matching variants");
@@ -126,7 +134,8 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
                 .flatExtracting(p -> p.getAllVariants())
                 .are(allMatchingVariants);
     }
-    
+
+    @Ignore
     @Test
     public void slugExistsExample() {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().bySlug(ENGLISH, SLUG1);
@@ -136,7 +145,8 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
             assertThat(results.get(0).getSlug().get(ENGLISH)).isEqualTo(SLUG1);
         });
     }
-    
+
+    @Ignore
     @Test
     public void slugDontExistsExample() {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().bySlug(ENGLISH, "blafasel");
@@ -145,7 +155,8 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
             assertThat(results).isEmpty();
         });
     }
-    
+
+    @Ignore
     @Test
     public void skuExistsExample() {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().bySku(SKU1);
@@ -157,7 +168,7 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
         });
     }
 
-    
+    @Ignore
     @Test
     public void skuDontExistsExample() {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().bySku("thisSKUshouldn't exist");
@@ -166,7 +177,8 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
             assertThat(results).isEmpty();
         });
     }
-    
+
+    @Ignore
     @Test
     public void multipleSKUsExistsExample() {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().bySku(asList(SKU1, SKU2, SKU3, "thisSKUshouldn't exist"));

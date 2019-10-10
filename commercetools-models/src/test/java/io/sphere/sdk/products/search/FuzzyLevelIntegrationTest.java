@@ -23,6 +23,7 @@ public class FuzzyLevelIntegrationTest extends IntegrationTest {
         ProductFixtures.deleteProductsAndProductTypes(client());
     }
 
+    @Ignore
     @Test
     public void fuzzyLevel() {
         final String searchWord = "abcdfgh";

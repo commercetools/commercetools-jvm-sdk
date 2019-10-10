@@ -19,6 +19,7 @@ public class ProductProjectionSearchFacetedSearchIntegrationTest extends Product
     private static final TermFacetedSearchExpression<ProductProjection> COLOR_FACETED_SEARCH = PRODUCT_MODEL.allVariants().attribute().ofString(ATTR_NAME_COLOR).is("red");
     private static final TermFacetedSearchExpression<ProductProjection> SIZE_FACETED_SEARCH = PRODUCT_MODEL.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).allTerms();
 
+    @Ignore
     @Test
     public void facetedSearchExample() throws Exception {
         final ProductAttributeFacetedSearchSearchModel attributeModel = ProductProjectionSearchModel.of().facetedSearch().allVariants().attribute();
@@ -31,6 +32,7 @@ public class ProductProjectionSearchFacetedSearchIntegrationTest extends Product
                 sizes -> assertThat(sizes).containsOnly(TermStats.of("36.0", 1L)));
     }
 
+    @Ignore
     @Test
     public void facetedSearchVerboseExample() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
@@ -44,6 +46,7 @@ public class ProductProjectionSearchFacetedSearchIntegrationTest extends Product
                 sizes -> assertThat(sizes).containsOnly(TermStats.of("36.0", 1L)));
     }
 
+    @Ignore
     @Test
     public void resultsAndFacetsAreFiltered() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
@@ -57,6 +60,7 @@ public class ProductProjectionSearchFacetedSearchIntegrationTest extends Product
                 sizes -> assertThat(sizes).containsOnly(TermStats.of("36.0", 1L)));
     }
 
+    @Ignore
     @Test
     public void onlyFacetsAreFiltered() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
@@ -69,6 +73,7 @@ public class ProductProjectionSearchFacetedSearchIntegrationTest extends Product
                 sizes -> assertThat(sizes).containsOnly(TermStats.of("36.0", 1L)));
     }
 
+    @Ignore
     @Test
     public void onlyResultsAreFiltered() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
@@ -81,6 +86,7 @@ public class ProductProjectionSearchFacetedSearchIntegrationTest extends Product
                 sizes -> assertThat(sizes).containsOnly(TermStats.of("36.0", 1L), TermStats.of("38.0", 1L), TermStats.of("40.0", 1L), TermStats.of("42.0", 1L), TermStats.of("44.0", 1L), TermStats.of("46.0", 1L)));
     }
 
+    @Ignore
     @Test
     public void filterQueryFiltersBeforeFacetsAreCalculated() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()

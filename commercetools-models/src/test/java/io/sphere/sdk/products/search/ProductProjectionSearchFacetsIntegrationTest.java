@@ -19,6 +19,7 @@ public class ProductProjectionSearchFacetsIntegrationTest extends ProductProject
 
     public static final ProductDataFacetSearchModel PRODUCT_MODEL = ProductProjectionSearchModel.of().facet();
 
+    @Ignore
     @Test
     public void responseContainsRangeFacetsForAttributes() throws Exception {
         final RangeFacetExpression<ProductProjection> facetExpr = PRODUCT_MODEL.allVariants().price().centAmount().onlyGreaterThanOrEqualTo(0L);
@@ -27,6 +28,7 @@ public class ProductProjectionSearchFacetsIntegrationTest extends ProductProject
                 assertThat(result.getFacetResult(facetExpr).getRanges().get(0).getCount()).isGreaterThan(0));
     }
 
+    @Ignore
     @Test
     public void responseContainsTermFacetsForAttributes() throws Exception {
         final TermFacetExpression<ProductProjection> facetExpr = PRODUCT_MODEL.allVariants().attribute().ofString(ATTR_NAME_COLOR).allTerms();
@@ -35,6 +37,7 @@ public class ProductProjectionSearchFacetsIntegrationTest extends ProductProject
                 assertThat(result.getFacetResult(facetExpr).getTerms()).containsOnly(TermStats.of("blue", 2L), TermStats.of("red", 1L)));
     }
 
+    @Ignore
     @Test
     public void termFacetsAreParsed() throws Exception {
         final TermFacetExpression<ProductProjection> facetExpr = PRODUCT_MODEL.allVariants().attribute().ofString(ATTR_NAME_COLOR).allTerms();
@@ -48,6 +51,7 @@ public class ProductProjectionSearchFacetsIntegrationTest extends ProductProject
         });
     }
 
+    @Ignore
     @Test
     public void rangeFacetsAreParsed() throws Exception {
         final RangeFacetExpression<ProductProjection> facetExpr = PRODUCT_MODEL.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).onlyGreaterThanOrEqualTo(ZERO);
@@ -64,6 +68,7 @@ public class ProductProjectionSearchFacetsIntegrationTest extends ProductProject
         });
     }
 
+    @Ignore
     @Test
     public void filteredFacetsAreParsed() throws Exception {
         final FilteredFacetExpression<ProductProjection> facetExpr = PRODUCT_MODEL.allVariants().attribute().ofString(ATTR_NAME_COLOR).onlyTerm("blue");
@@ -74,6 +79,7 @@ public class ProductProjectionSearchFacetsIntegrationTest extends ProductProject
         });
     }
 
+    @Ignore
     @Test
     public void simpleFacetsAreParsed() throws Exception {
         final TermFacetExpression<ProductProjection> facetExpr = TermFacetExpression.of("variants.attributes." + ATTR_NAME_COLOR);
@@ -87,6 +93,7 @@ public class ProductProjectionSearchFacetsIntegrationTest extends ProductProject
         });
     }
 
+    @Ignore
     @Test
     public void termFacetsSupportsAlias() throws Exception {
         final String allFacetAlias = "my-facet";
@@ -106,6 +113,7 @@ public class ProductProjectionSearchFacetsIntegrationTest extends ProductProject
         });
     }
 
+    @Ignore
     @Test
     public void rangeFacetsSupportsAlias() throws Exception {
         final String alias = "my-facet";
@@ -124,6 +132,7 @@ public class ProductProjectionSearchFacetsIntegrationTest extends ProductProject
         });
     }
 
+    @Ignore
     @Test
     public void filteredFacetsSupportsAlias() throws Exception {
         final String alias = "my-facet";

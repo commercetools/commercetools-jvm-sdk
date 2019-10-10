@@ -17,6 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Ignore
 public class ProductProjectionSearchSortIntegrationTest extends ProductProjectionSearchIntegrationTest {
 
+    @Ignore
     @Test
     public void sortByAttributeAscending() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
@@ -25,6 +26,7 @@ public class ProductProjectionSearchSortIntegrationTest extends ProductProjectio
                 assertThat(resultIds).containsExactly(product2.getId(), product1.getId(), product3.getId()));
     }
 
+    @Ignore
     @Test
     public void sortByAttributeDescending() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
@@ -33,6 +35,7 @@ public class ProductProjectionSearchSortIntegrationTest extends ProductProjectio
                 assertThat(resultIds).containsExactly(product1.getId(), product2.getId(), product3.getId()));
     }
 
+    @Ignore
     @Test
     public void sortWithAdditionalParameterByAttributeAscending() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
@@ -41,6 +44,7 @@ public class ProductProjectionSearchSortIntegrationTest extends ProductProjectio
                 assertThat(resultIds).containsExactly(product3.getId(), product2.getId(), product1.getId()));
     }
 
+    @Ignore
     @Test
     public void sortWithAdditionalParameterByAttributeDescending() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
@@ -49,6 +53,7 @@ public class ProductProjectionSearchSortIntegrationTest extends ProductProjectio
                 assertThat(resultIds).containsExactly(product3.getId(), product1.getId(), product2.getId()));
     }
 
+    @Ignore
     @Test
     public void sortWithSimpleExpression() {
         final SortExpression<ProductProjection> sort = SortExpression.of("variants.attributes." + ATTR_NAME_SIZE + " asc.max");
@@ -57,6 +62,7 @@ public class ProductProjectionSearchSortIntegrationTest extends ProductProjectio
                 assertThat(resultIds).containsExactly(product3.getId(), product2.getId(), product1.getId()));
     }
 
+    @Ignore
     @Test
     public void sortByMultipleAttributes() throws Exception {
         final ProductProjectionSearch singleSortedRequest = ProductProjectionSearch.ofStaged()

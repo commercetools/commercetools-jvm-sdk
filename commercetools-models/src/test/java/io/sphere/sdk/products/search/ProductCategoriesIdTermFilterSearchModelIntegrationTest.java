@@ -39,6 +39,7 @@ public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends Int
         setupCategories();
     }
 
+    @Ignore
     @Test
     public void containsAll() {
         final List<String> categoryIds1 = getCategoryIds("A", "B-1", "C-2-2");
@@ -58,6 +59,7 @@ public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends Int
         });
     }
 
+    @Ignore
     @Test
     public void containsAny() {
         final List<String> categoryIds1 = getCategoryIds("A", "B-1", "C-2-2");
@@ -77,6 +79,7 @@ public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends Int
         });
     }
 
+    @Ignore
     @Test
     public void is() {
         final List<String> categoryIds1 = getCategoryIds("A", "B-1", "C-2-2");
@@ -96,6 +99,7 @@ public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends Int
         });
     }
 
+    @Ignore
      @Test
     public void containsAnyIncludingSubtrees() {
          final List<String> categoryIds1 = getCategoryIds("A", "B-1", "C-2-2");
@@ -115,6 +119,7 @@ public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends Int
          });
     }
 
+    @Ignore
     @Test
     public void containsAllIncludingSubtrees() {
         final List<String> categoryIds1 = getCategoryIds("B-1", "C-2-2");
@@ -134,6 +139,7 @@ public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends Int
         });
     }
 
+    @Ignore
     @Test
     public void isInSubtree() {
         final List<String> categoryIds1 = getCategoryIds("B-1", "C-2-2");
@@ -156,6 +162,7 @@ public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends Int
         });
     }
 
+    @Ignore
     @Test
     public void isInSubtreeOrInCategory() {
         final List<String> categoryIds1 = getCategoryIds("C-2-2");
@@ -179,6 +186,7 @@ public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends Int
         });
     }
 
+    @Ignore
     @Test
     public void facet() {
         final List<String> categoryIds1 = getCategoryIds("A", "B-1", "C-2-2");

@@ -34,6 +34,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @Ignore
 public class ProductAvailabilitySearchIntegrationTest extends IntegrationTest {
+    @Ignore
     @Test
     public void searchForIsOnStock() {
         withProductOfStock(client(), 2, product -> {
@@ -47,6 +48,7 @@ public class ProductAvailabilitySearchIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Ignore
     @Test
     public void searchForIsOnStockWithChannel() {
         withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -> {
@@ -63,6 +65,7 @@ public class ProductAvailabilitySearchIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Ignore
     @Test
     public void searchForIsOnStockInChannels() {
         final String nonExistingChannel = "nonExistingChannelId";
@@ -89,6 +92,7 @@ public class ProductAvailabilitySearchIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Ignore
     @Test
     public void searchForIsNotOnStock() {
         withProductOfStock(client(), 0, product -> {
@@ -102,6 +106,7 @@ public class ProductAvailabilitySearchIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Ignore
     @Test
     public void searchForAvailableQuantityRanges() {
         withProductOfStock(client(), 10, productWith10Items -> {
@@ -127,6 +132,7 @@ public class ProductAvailabilitySearchIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Ignore
     @Test
     public void searchForAvailableQuantityRangesInChannels() {
         withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -> {
@@ -156,6 +162,7 @@ public class ProductAvailabilitySearchIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Ignore
     @Test
     public void channelsFilterDsl() {
         final StringHttpRequestBody body = (StringHttpRequestBody) ProductProjectionSearch.ofStaged().plusQueryFilters(m ->
@@ -164,6 +171,7 @@ public class ProductAvailabilitySearchIntegrationTest extends IntegrationTest {
         assertThat(body.getString()).contains("filter.query=variants.availability.channels.channel-id-12.availableQuantity%3Arange%283+to+*%29");
     }
 
+    @Ignore
     @Test
     public void sortByRestockableInDays() {
         withProductOfRestockableInDaysAndChannel(client(), 4, null, product4 -> {
@@ -181,6 +189,7 @@ public class ProductAvailabilitySearchIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Ignore
     @Test
     public void sortByRestockableInDaysWithSupplyChannel() {
         withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -> {
@@ -200,6 +209,7 @@ public class ProductAvailabilitySearchIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Ignore
     @Test
     public void sortByAvailableQuantity() {
         withProductOfStock(client(), 10, productWith10Items -> {
@@ -217,6 +227,7 @@ public class ProductAvailabilitySearchIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Ignore
     @Test
     public void sortByAvailableQuantityWithSupplyChannel() {
         withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -> {
@@ -236,6 +247,7 @@ public class ProductAvailabilitySearchIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Ignore
     @Test
     public void channelsRestockableSortDsl() {
         final StringHttpRequestBody body = (StringHttpRequestBody) ProductProjectionSearch.ofStaged().
@@ -243,6 +255,7 @@ public class ProductAvailabilitySearchIntegrationTest extends IntegrationTest {
         assertThat(body.getString()).contains("sort=variants.availability.channels.channel-id-500.restockableInDays+asc");
     }
 
+    @Ignore
     @Test
     public void newProductVariantFields() {
         withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel1 -> {
