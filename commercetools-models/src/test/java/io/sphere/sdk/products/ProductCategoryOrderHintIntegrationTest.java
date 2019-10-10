@@ -13,6 +13,7 @@ import io.sphere.sdk.test.IntegrationTest;
 import org.assertj.core.api.Condition;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Comparator;
@@ -29,7 +30,7 @@ import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-
+@Ignore
 @NotOSGiCompatible
 public class ProductCategoryOrderHintIntegrationTest extends IntegrationTest {
 
@@ -56,18 +57,21 @@ public class ProductCategoryOrderHintIntegrationTest extends IntegrationTest {
     private static String id4;
     private static String id5;
 
+    @Ignore
     @Test
     public void sortProductsByCategory1() {
         final Comparator<Product> comparator = comparatorOfStagedForCategory(category1Id);
         assertThat(productsSortedBy(comparator)).isEqualTo(asList(id1, id3, id2, id5, id4));
     }
 
+    @Ignore
     @Test
     public void sortProductsByCategory2() {
         final Comparator<Product> comparator = comparatorOfStagedForCategory(category2Id);
         assertThat(productsSortedBy(comparator)).startsWith(id5, id2, id1);
     }
 
+    @Ignore
     @Test
     public void sortProductProjectionsOnQueryByCategory1() {
         QueryResult result = doQuery();
@@ -75,6 +79,7 @@ public class ProductCategoryOrderHintIntegrationTest extends IntegrationTest {
                 .isEqualTo(asList(id4, id1, id3, id2, id5));//query and search sort differently
     }
 
+    @Ignore
     @Test
     public void sortProductProjectionsOnSearchByCategory1() {
         final Comparator<ProductProjection> comparator = comparingCategoryOrderHints(category1Id);
@@ -85,6 +90,7 @@ public class ProductCategoryOrderHintIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Ignore
     @Test
     public void sortProductProjectionsOnQueryByCategory2() {
         final Comparator<ProductProjection> comparator = comparingCategoryOrderHints(category2Id);
@@ -92,6 +98,7 @@ public class ProductCategoryOrderHintIntegrationTest extends IntegrationTest {
         assertThat(result.sortedFromQueryForCategory2).extracting("id").as("query").endsWith(id5, id2, id1);
     }
 
+    @Ignore
     @Test
     public void sortProductProjectionsOnSearchByCategory2() {
         final Comparator<ProductProjection> comparator = comparingCategoryOrderHints(category2Id);
