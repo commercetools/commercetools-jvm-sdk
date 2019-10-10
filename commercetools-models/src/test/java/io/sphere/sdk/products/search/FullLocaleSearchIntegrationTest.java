@@ -3,6 +3,7 @@ package io.sphere.sdk.products.search;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.test.IntegrationTest;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -14,7 +15,9 @@ import static java.util.Locale.ENGLISH;
 import static java.util.Locale.GERMAN;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Ignore
 public class FullLocaleSearchIntegrationTest extends IntegrationTest {
+    @Ignore
     @Test
     public void searchByFullLocale() {
         final Locale austria = Locale.forLanguageTag("de-AT");

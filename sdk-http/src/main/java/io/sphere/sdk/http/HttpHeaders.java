@@ -53,7 +53,7 @@ public final class HttpHeaders extends Base {
      */
     public List<String> getHeader(final String key) {
         return data.stream()
-                .filter(entry -> entry.getName().equals(key))
+                .filter(entry -> entry.getName().equalsIgnoreCase(key))
                 .map(entry -> entry.getValue())
                 .collect(toList());
     }

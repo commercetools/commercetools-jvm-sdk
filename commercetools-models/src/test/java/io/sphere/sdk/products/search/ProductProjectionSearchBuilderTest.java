@@ -1,10 +1,13 @@
 package io.sphere.sdk.products.search;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.*;
 
+@Ignore
 public class ProductProjectionSearchBuilderTest {
+    @Ignore
     @Test
     public void searchRequestIsAsExpected() {
         final ProductProjectionSearch actual = ProductProjectionSearchBuilder.ofCurrent()

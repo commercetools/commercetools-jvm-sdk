@@ -3,6 +3,7 @@ package io.sphere.sdk.products.search;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.search.*;
 import io.sphere.sdk.search.model.RangeStats;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -14,10 +15,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import static io.sphere.sdk.products.ProductsScenario1Fixtures.*;
 
+@Ignore
 public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductProjectionSearchModelIntegrationTest {
 
     public static final ProductProjectionFacetSearchModel FACET = ProductProjectionSearchModel.of().facet();
 
+    @Ignore
     @Test
     public void onBooleanAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofBoolean(ATTR_NAME_BOOLEAN).allTerms(),
@@ -26,6 +29,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                         TermStats.of(BOOL_FALSE, 1L)));
     }
 
+    @Ignore
     @Test
     public void onTextAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofString(ATTR_NAME_TEXT).allTerms(),
@@ -34,6 +38,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                         TermStats.of(TEXT_BAR, 1L)));
     }
 
+    @Ignore
     @Test
     public void onLocTextAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofLocalizedString(ATTR_NAME_LOC_TEXT).locale(ENGLISH).allTerms(),
@@ -42,6 +47,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                         TermStats.of(LOC_TEXT_BAR.get(ENGLISH), 1L)));
     }
 
+    @Ignore
     @Test
     public void onEnumKeyAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofEnum(ATTR_NAME_ENUM).key().allTerms(),
@@ -50,6 +56,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                         TermStats.of(ENUM_THREE.getKey(), 1L)));
     }
 
+    @Ignore
     @Test
     public void onEnumLabelAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofEnum(ATTR_NAME_ENUM).label().allTerms(),
@@ -58,6 +65,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                         TermStats.of(ENUM_THREE.getLabel(), 1L)));
     }
 
+    @Ignore
     @Test
     public void onLocEnumKeyAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofLocalizedEnum(ATTR_NAME_LOC_ENUM).key().allTerms(),
@@ -66,6 +74,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                         TermStats.of(LOC_ENUM_THREE.getKey(), 1L)));
     }
 
+    @Ignore
     @Test
     public void onLocEnumLabelAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofLocalizedEnum(ATTR_NAME_LOC_ENUM).label().locale(GERMAN).allTerms(),
@@ -74,6 +83,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                         TermStats.of(LOC_ENUM_THREE.getLabel().get(GERMAN), 1L)));
     }
 
+    @Ignore
     @Test
     public void onNumberAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofNumber(ATTR_NAME_NUMBER).allTerms(),
@@ -82,6 +92,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                         TermStats.of("10.0", 1L)));
     }
 
+    @Ignore
     @Test
     public void onNumberRangedAttributes() throws Exception {
         testRangeStats(FACET.allVariants().attribute().ofNumber(ATTR_NAME_NUMBER).onlyGreaterThanOrEqualTo(valueOf(0)),
@@ -96,6 +107,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                 });
     }
 
+    @Ignore
     @Test
     public void onMoneyAmountAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofMoney(ATTR_NAME_MONEY).centAmount().allTerms(),
@@ -104,6 +116,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                         TermStats.of("100000", 1L)));
     }
 
+    @Ignore
     @Test
     public void onMoneyAmountRangedAttributes() throws Exception {
         testRangeStats(FACET.allVariants().attribute().ofMoney(ATTR_NAME_MONEY).centAmount().onlyGreaterThanOrEqualTo(0L),
@@ -118,6 +131,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                 });
     }
 
+    @Ignore
     @Test
     public void onMoneyCurrencyAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofMoney(ATTR_NAME_MONEY).currency().allTerms(),
@@ -126,6 +140,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                         TermStats.of("USD", 1L)));
     }
 
+    @Ignore
     @Test
     public void onDateAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofDate(ATTR_NAME_DATE).allTerms(),
@@ -134,6 +149,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                         TermStats.of("2002-10-12", 1L)));
     }
 
+    @Ignore
     @Test
     public void onDateRangedAttributes() throws Exception {
         testRangeStats(FACET.allVariants().attribute().ofDate(ATTR_NAME_DATE).onlyGreaterThanOrEqualTo(DATE_2001),
@@ -148,6 +164,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                 });
     }
 
+    @Ignore
     @Test
     public void onTimeAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofTime(ATTR_NAME_TIME).allTerms(),
@@ -156,6 +173,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                         TermStats.of("23:06:10.204", 1L)));
     }
 
+    @Ignore
     @Test
     public void onTimeRangedAttributes() throws Exception {
         testRangeStats(FACET.allVariants().attribute().ofTime(ATTR_NAME_TIME).onlyGreaterThanOrEqualTo(TIME_22H),
@@ -170,6 +188,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                 });
     }
 
+    @Ignore
     @Test
     public void onDatetimeAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofDateTime(ATTR_NAME_DATE_TIME).allTerms(),
@@ -178,6 +197,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                         TermStats.of("2001-09-11T22:05:09.203+0000", 1L)));
     }
 
+    @Ignore
     @Test
     public void onDatetimeRangedAttributes() throws Exception {
         testRangeStats(FACET.allVariants().attribute().ofDateTime(ATTR_NAME_DATE_TIME).onlyGreaterThanOrEqualTo(DATE_TIME_2001_22H),
@@ -192,6 +212,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                 });
     }
 
+    @Ignore
     @Test
     public void onReferenceAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofReference(ATTR_NAME_REF).id().allTerms(),
@@ -200,6 +221,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                         TermStats.of(productB.getId(), 1L)));
     }
 
+    @Ignore
     @Test
     public void onBooleanSetAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofBooleanSet(ATTR_NAME_BOOLEAN_SET).allTerms(),
@@ -208,6 +230,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                         TermStats.of(BOOL_FALSE, 1L)));
     }
 
+    @Ignore
     @Test
     public void onTextSetAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofStringSet(ATTR_NAME_TEXT_SET).allTerms(),
@@ -216,6 +239,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                         TermStats.of(TEXT_BAR, 1L)));
     }
 
+    @Ignore
     @Test
     public void onLocTextSetAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofLocalizedStringSet(ATTR_NAME_LOC_TEXT_SET).locale(ENGLISH).allTerms(),
@@ -224,6 +248,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                         TermStats.of(LOC_TEXT_BAR.get(ENGLISH), 1L)));
     }
 
+    @Ignore
     @Test
     public void onEnumKeySetAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofEnumSet(ATTR_NAME_ENUM_SET).key().allTerms(),
@@ -232,6 +257,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                         TermStats.of(ENUM_THREE.getKey(), 1L)));
     }
 
+    @Ignore
     @Test
     public void onEnumLabelSetAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofEnumSet(ATTR_NAME_ENUM_SET).label().allTerms(),
@@ -240,6 +266,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                         TermStats.of(ENUM_THREE.getLabel(), 1L)));
     }
 
+    @Ignore
     @Test
     public void onLocEnumKeySetAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofLocalizedEnumSet(ATTR_NAME_LOC_ENUM_SET).key().allTerms(),
@@ -248,6 +275,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                         TermStats.of(LOC_ENUM_THREE.getKey(), 1L)));
     }
 
+    @Ignore
     @Test
     public void onLocEnumLabelSetAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofLocalizedEnumSet(ATTR_NAME_LOC_ENUM_SET).label().locale(GERMAN).allTerms(),
@@ -256,6 +284,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                         TermStats.of(LOC_ENUM_THREE.getLabel().get(GERMAN), 1L)));
     }
 
+    @Ignore
     @Test
     public void onNumberSetAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofNumberSet(ATTR_NAME_NUMBER_SET).allTerms(),
@@ -264,6 +293,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                         TermStats.of("10.0", 1L)));
     }
 
+    @Ignore
     @Test
     public void onNumberRangedSetAttributes() throws Exception {
         testRangeStats(FACET.allVariants().attribute().ofNumberSet(ATTR_NAME_NUMBER_SET).onlyGreaterThanOrEqualTo(valueOf(0)),
@@ -278,6 +308,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                 });
     }
 
+    @Ignore
     @Test
     public void onMoneyAmountSetAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofMoneySet(ATTR_NAME_MONEY_SET).centAmount().allTerms(),
@@ -286,6 +317,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                         TermStats.of("100000", 1L)));
     }
 
+    @Ignore
     @Test
     public void onMoneyAmountRangedSetAttributes() throws Exception {
         testRangeStats(FACET.allVariants().attribute().ofMoneySet(ATTR_NAME_MONEY_SET).centAmount().onlyGreaterThanOrEqualTo(0L),
@@ -300,6 +332,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                 });
     }
 
+    @Ignore
     @Test
     public void onMoneyCurrencySetAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofMoneySet(ATTR_NAME_MONEY_SET).currency().allTerms(),
@@ -308,6 +341,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                         TermStats.of("USD", 1L)));
     }
 
+    @Ignore
     @Test
     public void onDateSetAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofDateSet(ATTR_NAME_DATE_SET).allTerms(),
@@ -316,6 +350,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                         TermStats.of("2002-10-12", 1L)));
     }
 
+    @Ignore
     @Test
     public void onDateRangedSetAttributes() throws Exception {
         testRangeStats(FACET.allVariants().attribute().ofDateSet(ATTR_NAME_DATE_SET).onlyGreaterThanOrEqualTo(DATE_2001),
@@ -330,6 +365,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                 });
     }
 
+    @Ignore
     @Test
     public void onTimeSetAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofTimeSet(ATTR_NAME_TIME_SET).allTerms(),
@@ -338,6 +374,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                         TermStats.of("23:06:10.204", 1L)));
     }
 
+    @Ignore
     @Test
     public void onTimeRangedSetAttributes() throws Exception {
         testRangeStats(FACET.allVariants().attribute().ofTimeSet(ATTR_NAME_TIME_SET).onlyGreaterThanOrEqualTo(TIME_22H),
@@ -352,6 +389,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                 });
     }
 
+    @Ignore
     @Test
     public void onDatetimeSetAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofDateTimeSet(ATTR_NAME_DATE_TIME_SET).allTerms(),
@@ -360,6 +398,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                         TermStats.of("2002-10-12T23:06:10.204+0000", 1L)));
     }
 
+    @Ignore
     @Test
     public void onDatetimeRangedSetAttributes() throws Exception {
         testRangeStats(FACET.allVariants().attribute().ofDateTimeSet(ATTR_NAME_DATE_TIME_SET).onlyGreaterThanOrEqualTo(DATE_TIME_2001_22H),
@@ -374,6 +413,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                 });
     }
 
+    @Ignore
     @Test
     public void onReferenceSetAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofReferenceSet(ATTR_NAME_REF_SET).id().allTerms(),
