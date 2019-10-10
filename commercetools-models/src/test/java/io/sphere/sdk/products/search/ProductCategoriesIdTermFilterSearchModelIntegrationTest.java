@@ -11,6 +11,7 @@ import io.sphere.sdk.search.PagedSearchResult;
 import io.sphere.sdk.test.IntegrationTest;
 import org.assertj.core.api.Condition;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -27,6 +28,7 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Ignore
 public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends IntegrationTest {
 
     private static CategoryTree categoryTree;
@@ -37,6 +39,7 @@ public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends Int
         setupCategories();
     }
 
+    @Ignore
     @Test
     public void containsAll() {
         final List<String> categoryIds1 = getCategoryIds("A", "B-1", "C-2-2");
@@ -56,6 +59,7 @@ public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends Int
         });
     }
 
+    @Ignore
     @Test
     public void containsAny() {
         final List<String> categoryIds1 = getCategoryIds("A", "B-1", "C-2-2");
@@ -75,6 +79,7 @@ public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends Int
         });
     }
 
+    @Ignore
     @Test
     public void is() {
         final List<String> categoryIds1 = getCategoryIds("A", "B-1", "C-2-2");
@@ -94,6 +99,7 @@ public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends Int
         });
     }
 
+    @Ignore
      @Test
     public void containsAnyIncludingSubtrees() {
          final List<String> categoryIds1 = getCategoryIds("A", "B-1", "C-2-2");
@@ -113,6 +119,7 @@ public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends Int
          });
     }
 
+    @Ignore
     @Test
     public void containsAllIncludingSubtrees() {
         final List<String> categoryIds1 = getCategoryIds("B-1", "C-2-2");
@@ -132,6 +139,7 @@ public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends Int
         });
     }
 
+    @Ignore
     @Test
     public void isInSubtree() {
         final List<String> categoryIds1 = getCategoryIds("B-1", "C-2-2");
@@ -154,6 +162,7 @@ public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends Int
         });
     }
 
+    @Ignore
     @Test
     public void isInSubtreeOrInCategory() {
         final List<String> categoryIds1 = getCategoryIds("C-2-2");
@@ -177,6 +186,7 @@ public class ProductCategoriesIdTermFilterSearchModelIntegrationTest extends Int
         });
     }
 
+    @Ignore
     @Test
     public void facet() {
         final List<String> categoryIds1 = getCategoryIds("A", "B-1", "C-2-2");

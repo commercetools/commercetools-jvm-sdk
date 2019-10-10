@@ -4,6 +4,7 @@ import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.attributes.*;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.ProductTypeDraftDsl;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -17,8 +18,10 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Ignore
 public class MatchingVariantsFlagSearchIntegrationTest extends ProductProjectionSearchIntegrationTest {
 
+    @Ignore
     @Test
     public void disableMatchingVariantsFlag() {
         final String attributeName = randomKey();

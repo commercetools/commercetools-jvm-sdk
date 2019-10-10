@@ -6,10 +6,12 @@ import io.sphere.sdk.search.*;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.search.model.RangeStats;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Ignore
 public class FacetResultTest {
     private static final String TERM_FACET_KEY = "variants.attributes.filterColor.key";
     private static final String RANGE_FACET_KEY = "variants.attributes.priceb2c.centAmount";
@@ -24,6 +26,7 @@ public class FacetResultTest {
         searchResult = SphereJsonUtils.readObjectFromResource("facetResult.json", new TypeReference<PagedSearchResult<ProductProjection>>() {});
     }
 
+    @Ignore
     @Test
     public void parsesTermFacetResults() throws Exception {
         final TermFacetResult termFacet = searchResult.getTermFacetResult(TERM_FACET_KEY);
@@ -34,6 +37,7 @@ public class FacetResultTest {
         assertThat(termFacet.getTerms().get(2)).isEqualTo(TermStats.of("4B432E_1", 585L));
     }
 
+    @Ignore
     @Test
     public void parsesRangeFacetResults() throws Exception {
         final RangeFacetResult rangeFacet = searchResult.getRangeFacetResult(RANGE_FACET_KEY);
@@ -48,18 +52,21 @@ public class FacetResultTest {
         assertThat(rangeStats.getMean()).isEqualTo(51622.222345747636);
     }
 
+    @Ignore
     @Test
     public void parsesFilteredFacetResults() throws Exception {
         final FilteredFacetResult filteredFacet = searchResult.getFilteredFacetResult(FILTERED_FACET_KEY);
         assertThat(filteredFacet.getCount()).isEqualTo(2);
     }
 
+    @Ignore
     @Test
     public void parsesFilteredFacetResultsWithProductCounts() throws Exception {
         final FilteredFacetResult filteredFacet = searchResult.getFilteredFacetResult(FILTERED_FACET_COUNTING_PRODUCTS_KEY);
         assertThat(filteredFacet.getProductCount()).isEqualTo(1);
     }
 
+    @Ignore
     @Test
     public void parsesTermFacetResultsProductCounts() throws Exception {
         final TermFacetResult termFacet = searchResult.getTermFacetResult(TERM_FACET_COUNTING_PRODUCTS_KEY);
@@ -68,6 +75,7 @@ public class FacetResultTest {
         assertThat(termFacet.getTerms().get(1).getProductCount()).isEqualTo(195);
     }
 
+    @Ignore
     @Test
     public void parsesRangeFacetResultsProductCounts() throws Exception {
         final RangeFacetResult rangeFacet = searchResult.getRangeFacetResult(RANGE_FACET_COUNTING_PRODUCTS_KEY);
