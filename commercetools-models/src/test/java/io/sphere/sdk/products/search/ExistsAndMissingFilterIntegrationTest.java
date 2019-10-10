@@ -5,6 +5,7 @@ import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.attributes.AttributeDraft;
 import io.sphere.sdk.search.model.ExistsAndMissingFilterSearchModelSupport;
 import io.sphere.sdk.test.IntegrationTest;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -23,6 +24,7 @@ import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ExistsAndMissingFilterIntegrationTest extends IntegrationTest {
+    @Ignore
     @Test
     public void categoriesExists() {
         withCategory(client(), category -> {
@@ -45,6 +47,7 @@ public class ExistsAndMissingFilterIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Ignore
     @Test
     public void categoriesMissing() {
         withCategory(client(), category -> {
@@ -67,6 +70,7 @@ public class ExistsAndMissingFilterIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Ignore
     @Test
     public void state() {
         withState(client(), draft -> draft.type(PRODUCT_STATE), state -> {
@@ -74,6 +78,7 @@ public class ExistsAndMissingFilterIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Ignore
     @Test
     public void forId() {
         final Function<ProductProjectionFilterSearchModel, ExistsAndMissingFilterSearchModelSupport<ProductProjection>> dsl = m -> m.state();
@@ -93,6 +98,7 @@ public class ExistsAndMissingFilterIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Ignore
     @Test
     public void taxCategory() {
         withTaxCategory(client(), taxCategory -> {
@@ -100,6 +106,7 @@ public class ExistsAndMissingFilterIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Ignore
     @Test
     public void sku() {
         checkFilter(builder -> {
@@ -110,12 +117,14 @@ public class ExistsAndMissingFilterIntegrationTest extends IntegrationTest {
         }, m -> m.allVariants().sku());
     }
 
+    @Ignore
     @Test
     public void nameLocale() {
         checkFilter(builder -> builder.name(LocalizedString.of(Locale.GERMAN, "foo")),
                 m -> m.name().locale(Locale.GERMAN));
     }
 
+    @Ignore
     @Test
     public void slugLocale() {
         final Locale locale = Locale.forLanguageTag("de-AT");
@@ -123,6 +132,7 @@ public class ExistsAndMissingFilterIntegrationTest extends IntegrationTest {
                 m -> m.slug().locale(locale));
     }
 
+    @Ignore
     @Test
     public void prices() {
         checkFilter(builder -> {
@@ -134,6 +144,7 @@ public class ExistsAndMissingFilterIntegrationTest extends IntegrationTest {
         }, m -> m.allVariants().prices());
     }
 
+    @Ignore
     @Test
     public void productAttribute() {
         checkFilter(builder -> {

@@ -9,22 +9,21 @@ import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.RetryIntegrationTest;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.slf4j.LoggerFactory;
 
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static io.sphere.sdk.products.ProductsScenario1Fixtures.Data;
-import static io.sphere.sdk.products.ProductsScenario1Fixtures.createScenario;
-import static io.sphere.sdk.products.ProductsScenario1Fixtures.destroy;
+import static io.sphere.sdk.products.ProductsScenario1Fixtures.*;
 import static io.sphere.sdk.test.SphereTestUtils.asList;
 
 @NotOSGiCompatible
+@Ignore
 public abstract class ProductProjectionSearchModelIntegrationTest extends IntegrationTest {
     protected static Data data;
     protected static Product product1;
