@@ -13,6 +13,7 @@ import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.search.PagedSearchResult;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -35,6 +36,7 @@ import static java.util.Collections.singletonList;
  *
  */
 
+@Ignore
 public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     protected static final String EVIL_CHARACTER_WORD = "öóßàç";
 

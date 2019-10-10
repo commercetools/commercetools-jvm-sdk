@@ -12,7 +12,7 @@ public class ProductAttributeSortSearchModelTest {
     public void buildsAscendingSortExpression() throws Exception {
         assertThat(sortModel().asc().expression()).isEqualTo("variants.attributes.size asc");
     }
-
+    
     @Test
     public void buildsDescendingSortExpression() throws Exception {
         assertThat(sortModel().desc().expression()).isEqualTo("variants.attributes.size desc");

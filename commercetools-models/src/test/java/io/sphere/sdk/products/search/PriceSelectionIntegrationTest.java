@@ -18,6 +18,7 @@ import io.sphere.sdk.test.IntegrationTest;
 import org.assertj.core.api.Condition;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -32,6 +33,7 @@ import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
 import static java.util.Collections.emptyList;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Ignore
 public class PriceSelectionIntegrationTest extends IntegrationTest {
     public static final String PRODUCT_TYPE_KEY = PriceSelectionIntegrationTest.class.getSimpleName();
     private static ProductType productType;
@@ -52,6 +54,7 @@ public class PriceSelectionIntegrationTest extends IntegrationTest {
     }
 
 
+    @Ignore
     @Test
     public void selectAPriceByCurrency() {
         final List<PriceDraft> prices = asList(PriceDraft.of(EURO_30), PriceDraft.of(USD_20));
@@ -68,6 +71,7 @@ public class PriceSelectionIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Ignore
     @Test
     public void selectAPriceByCurrencyInProductProjectionQuery() {
         final List<PriceDraft> prices = asList(PriceDraft.of(EURO_30), PriceDraft.of(USD_20));
@@ -82,6 +86,7 @@ public class PriceSelectionIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Ignore
     @Test
     public void selectAPriceByCurrencyInProductProjectionByIdGet() {
         final List<PriceDraft> prices = asList(PriceDraft.of(EURO_30), PriceDraft.of(USD_20));
@@ -94,6 +99,7 @@ public class PriceSelectionIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Ignore
     @Test
     public void selectAPriceByCurrencyInProductByIdGet() {
         final List<PriceDraft> prices = asList(PriceDraft.of(EURO_30), PriceDraft.of(USD_20));
@@ -106,6 +112,7 @@ public class PriceSelectionIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Ignore
     @Test
     public void selectAPriceByCurrencyInProductUpdateCommand() {
         ProductFixtures.withProduct(client(), product -> {
@@ -118,6 +125,7 @@ public class PriceSelectionIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Ignore
     @Test
     public void selectAPriceByCurrencyInProductQuery() {
         final List<PriceDraft> prices = asList(PriceDraft.of(EURO_30), PriceDraft.of(USD_20));
@@ -132,6 +140,7 @@ public class PriceSelectionIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Ignore
     @Test
     public void selectAPriceByCurrencyInProductProjectionByKeyGet() {
         final List<PriceDraft> prices = asList(PriceDraft.of(EURO_30), PriceDraft.of(USD_20));
@@ -142,6 +151,7 @@ public class PriceSelectionIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Ignore
     @Test
     public void selectAPriceByCurrencyInProductByKeyGet() {
         final List<PriceDraft> prices = asList(PriceDraft.of(EURO_30), PriceDraft.of(USD_20));
@@ -152,6 +162,7 @@ public class PriceSelectionIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Ignore
     @Test
     public void verboseTest() {
         withResources((CustomerGroup b2c) -> (CustomerGroup b2b) -> (Channel channel) -> {

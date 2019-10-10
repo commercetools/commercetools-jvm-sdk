@@ -17,6 +17,7 @@ import io.sphere.sdk.search.TermStats;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
@@ -32,6 +33,7 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Ignore
 public class ScopedPriceSearchIntegrationTest extends IntegrationTest {
     public static final String PRODUCT_TYPE_KEY = ScopedPriceSearchIntegrationTest.class.getSimpleName();
     private static ProductType productType;
@@ -51,6 +53,7 @@ public class ScopedPriceSearchIntegrationTest extends IntegrationTest {
         productType = client().executeBlocking(ProductTypeCreateCommand.of(productTypeDraft));
     }
 
+    @Ignore
     @Test
     public void filterByValueCentAmountAndCountry() {
         withProductOfPrices(asList(PriceDraft.of(EURO_20), PriceDraft.of(EURO_30).withCountry(DE)), product1 -> {
@@ -76,6 +79,7 @@ public class ScopedPriceSearchIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Ignore
     @Test
     public void sortByCurrentScopedPrice() {
         final List<PriceDraft> prices1 = asList(PriceDraft.of(EURO_20), PriceDraft.of(EURO_30).withCountry(DE));
@@ -84,6 +88,7 @@ public class ScopedPriceSearchIntegrationTest extends IntegrationTest {
         sortCheck(prices1, prices2, sortExpression);
     }
 
+    @Ignore
     @Test
     public void sortByValueScopedPrice() {
         final List<PriceDraft> prices1 = asList(PriceDraft.of(EURO_20), PriceDraft.of(EURO_30).withCountry(DE));
@@ -108,6 +113,7 @@ public class ScopedPriceSearchIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Ignore
     @Test
     public void discounts() {
         withProductOfPrices(asList(PriceDraft.of(EURO_20), PriceDraft.of(EURO_30).withCountry(DE)), product -> {
@@ -165,6 +171,7 @@ public class ScopedPriceSearchIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Ignore
     @Test
     public void sortByScopedPriceDiscounted() {
         withProductOfPrices(asList(PriceDraft.of(EURO_20), PriceDraft.of(EURO_30).withCountry(DE)), product1 -> {
@@ -196,6 +203,7 @@ public class ScopedPriceSearchIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Ignore
     @Test
     public void facetSearchByScopedPriceDiscounted() {
         withProductOfPrices(asList(PriceDraft.of(EURO_20), PriceDraft.of(EURO_30).withCountry(DE)), product1 -> {

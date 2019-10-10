@@ -3,6 +3,7 @@ package io.sphere.sdk.products.search;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.search.FilterExpression;
 import io.sphere.sdk.search.PagedSearchResult;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.time.Duration;
@@ -19,8 +20,10 @@ import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Ignore
 public class ProductProjectionSearchFiltersIntegrationTest extends ProductProjectionSearchIntegrationTest {
 
+    @Ignore
     @Test
     public void filtersByTerm() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
@@ -29,6 +32,7 @@ public class ProductProjectionSearchFiltersIntegrationTest extends ProductProjec
                 assertThat(resultIds).containsOnly(product2.getId()));
     }
 
+    @Ignore
     @Test
     public void filtersByAnyTerm() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
@@ -37,6 +41,7 @@ public class ProductProjectionSearchFiltersIntegrationTest extends ProductProjec
                 assertThat(resultIds).containsOnly(product1.getId(), product2.getId()));
     }
 
+    @Ignore
     @Test
     public void filtersByRange() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
@@ -45,6 +50,7 @@ public class ProductProjectionSearchFiltersIntegrationTest extends ProductProjec
                 assertThat(resultIds).containsOnly(product1.getId(), product2.getId()));
     }
 
+    @Ignore
     @Test
     public void filtersByAnyRange() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
@@ -53,6 +59,7 @@ public class ProductProjectionSearchFiltersIntegrationTest extends ProductProjec
                 assertThat(resultIds).containsOnly(product1.getId(), product2.getId()));
     }
 
+    @Ignore
     @Test
     public void filtersByAllRanges() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
@@ -61,6 +68,7 @@ public class ProductProjectionSearchFiltersIntegrationTest extends ProductProjec
                 assertThat(resultIds).containsOnly(product3.getId()));
     }
 
+    @Ignore
     @Test
     public void simpleFilterByRange() throws Exception {
         final FilterExpression<ProductProjection> filterExpr = FilterExpression.of("variants.attributes." + ATTR_NAME_SIZE + ":range(44 to *)");
@@ -69,6 +77,7 @@ public class ProductProjectionSearchFiltersIntegrationTest extends ProductProjec
                 assertThat(resultIds).containsOnly(product1.getId(), product2.getId()));
     }
 
+    @Ignore
     @Test
     public void filterByValueAsString() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
@@ -77,6 +86,7 @@ public class ProductProjectionSearchFiltersIntegrationTest extends ProductProjec
                 assertThat(resultIds).containsOnly(product1.getId(), product2.getId()));
     }
 
+    @Ignore
     @Test
     public void filterByEvilCharacterWord() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
@@ -87,6 +97,7 @@ public class ProductProjectionSearchFiltersIntegrationTest extends ProductProjec
         });
     }
 
+    @Ignore
     @Test
     public void filterBySku() {
         final List<String> skus = Stream.of(product1, product2)
@@ -101,6 +112,7 @@ public class ProductProjectionSearchFiltersIntegrationTest extends ProductProjec
         });
     }
 
+    @Ignore
     @Test
     public void filterByProductVariantKey() {
         final List<String> keys = Stream.of(product1, product2)
@@ -116,6 +128,7 @@ public class ProductProjectionSearchFiltersIntegrationTest extends ProductProjec
         });
     }
 
+    @Ignore
     @Test
     public void filterByProductKey() {
         final List<String> keys = Stream.of(product1, product2)

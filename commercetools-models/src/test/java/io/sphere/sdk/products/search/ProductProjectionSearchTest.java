@@ -5,6 +5,7 @@ import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.search.FilterExpression;
 import io.sphere.sdk.search.model.RangeTermFacetSearchModel;
 import org.assertj.core.api.iterable.Extractor;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.money.CurrencyUnit;
@@ -22,6 +23,7 @@ import static java.util.Locale.ENGLISH;
 import static java.util.Locale.GERMAN;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Ignore
 public class ProductProjectionSearchTest {
     private static final ProductProjectionFilterSearchModel FILTER_MODEL = ProductProjectionSearchModel.of().filter();
     private static final ProductDataFacetSearchModel FACET_MODEL = ProductProjectionSearchModel.of().facet();
@@ -36,6 +38,7 @@ public class ProductProjectionSearchTest {
             .build();
     public static final ProductProjectionSearch SEARCH_WITH_FULL_PRICE_SELECTION = ProductProjectionSearch.ofStaged().withPriceSelection(FULL_PRICE_SELECTION);
 
+    @Ignore
     @Test
     public void canAccessProductName() throws Exception {
         assertThat(FACET_MODEL.name().locale(ENGLISH).allTerms().expression()).isEqualTo("name.en");
@@ -43,6 +46,7 @@ public class ProductProjectionSearchTest {
         assertThat(SORT_MODEL.name().locale(ENGLISH).asc().expression()).isEqualTo("name.en asc");
     }
 
+    @Ignore
     @Test
     public void canAccessCreatedAt() throws Exception {
         assertThat(FACET_MODEL.createdAt().allTerms().expression()).isEqualTo("createdAt");
@@ -50,6 +54,7 @@ public class ProductProjectionSearchTest {
         assertThat(SORT_MODEL.createdAt().desc().expression()).isEqualTo("createdAt desc");
     }
 
+    @Ignore
     @Test
     public void canAccessLastModifiedAt() throws Exception {
         assertThat(FACET_MODEL.lastModifiedAt().allTerms().expression()).isEqualTo("lastModifiedAt");
@@ -57,18 +62,21 @@ public class ProductProjectionSearchTest {
         assertThat(SORT_MODEL.lastModifiedAt().asc().expression()).isEqualTo("lastModifiedAt asc");
     }
 
+    @Ignore
     @Test
     public void canAccessCategories() throws Exception {
         assertThat(FACET_MODEL.categories().id().allTerms().expression()).isEqualTo("categories.id");
         assertThat(FILTER_MODEL.categories().id().is("some-id")).extracting(expression()).containsExactly("categories.id:\"some-id\"");
     }
 
+    @Ignore
     @Test
     public void canAccessProductType() throws Exception {
         assertThat(FACET_MODEL.productType().id().allTerms().expression()).isEqualTo("productType.id");
         assertThat(FILTER_MODEL.productType().id().is("some-id")).extracting(expression()).containsExactly("productType.id:\"some-id\"");
     }
 
+    @Ignore
     @Test
     public void canAccessPriceAmount() throws Exception {
         assertThat(FACET_MODEL.allVariants().price().centAmount().allTerms().expression()).isEqualTo("variants.price.centAmount");
@@ -76,12 +84,14 @@ public class ProductProjectionSearchTest {
         assertThat(SORT_MODEL.allVariants().price().descWithMinValue().expression()).isEqualTo("price desc.min");
     }
 
+    @Ignore
     @Test
     public void canAccessPriceCurrency() throws Exception {
         assertThat(FACET_MODEL.allVariants().price().currency().allTerms().expression()).isEqualTo("variants.price.currencyCode");
         assertThat(FILTER_MODEL.allVariants().price().currency().is(currency("EUR"))).extracting(expression()).containsExactly("variants.price.currencyCode:\"EUR\"");
     }
 
+    @Ignore
     @Test
     public void canAccessScopedPriceDiscounted() throws Exception {
         assertThat(FACET_MODEL.allVariants().scopedPriceDiscounted().allTerms().expression()).isEqualTo("variants.scopedPriceDiscounted");
@@ -89,6 +99,7 @@ public class ProductProjectionSearchTest {
         assertThat(SORT_MODEL.allVariants().scopedPriceDiscounted().asc().expression()).isEqualTo("variants.scopedPriceDiscounted asc");
     }
 
+    @Ignore
     @Test
     public void canAccessSku() throws Exception {
         final String sku = "sku-test";
@@ -96,6 +107,7 @@ public class ProductProjectionSearchTest {
         assertThat(SORT_MODEL.allVariants().sku().asc().expression()).isEqualTo("variants.sku asc");
     }
 
+    @Ignore
     @Test
     public void canAccessTextCustomAttributes() throws Exception {
         final String attrName = "brand";
@@ -104,6 +116,7 @@ public class ProductProjectionSearchTest {
         assertThat(SORT_ATTR.ofString(attrName).ascWithMaxValue().expression()).isEqualTo("variants.attributes.brand asc.max");
     }
 
+    @Ignore
     @Test
     public void canAccessLocTextCustomAttributes() throws Exception {
         final String attrName = "material";
@@ -112,6 +125,7 @@ public class ProductProjectionSearchTest {
         assertThat(SORT_ATTR.ofLocalizedString(attrName).locale(ENGLISH).descWithMinValue().expression()).isEqualTo("variants.attributes.material.en desc.min");
     }
 
+    @Ignore
     @Test
     public void canAccessBooleanCustomAttributes() throws Exception {
         final String attrName = "isHandmade";
@@ -120,6 +134,7 @@ public class ProductProjectionSearchTest {
         assertThat(SORT_ATTR.ofBoolean(attrName).ascWithMaxValue().expression()).isEqualTo("variants.attributes.isHandmade asc.max");
     }
 
+    @Ignore
     @Test
     public void canAccessNumberCustomAttributes() throws Exception {
         final String attrName = "length";
@@ -128,6 +143,7 @@ public class ProductProjectionSearchTest {
         assertThat(SORT_ATTR.ofNumber(attrName).descWithMinValue().expression()).isEqualTo("variants.attributes.length desc.min");
     }
 
+    @Ignore
     @Test
     public void canCreateDateAttributeExpressions() throws Exception {
         final String attrName = "expirationDate";
@@ -136,6 +152,7 @@ public class ProductProjectionSearchTest {
         assertThat(SORT_ATTR.ofDateTime(attrName).ascWithMaxValue().expression()).isEqualTo("variants.attributes.expirationDate asc.max");
     }
 
+    @Ignore
     @Test
     public void canCreateTimeAttributeExpressions() throws Exception {
         final String attrName = "deliveryHours";
@@ -144,6 +161,7 @@ public class ProductProjectionSearchTest {
         assertThat(SORT_ATTR.ofTime(attrName).descWithMinValue().expression()).isEqualTo("variants.attributes.deliveryHours desc.min");
     }
 
+    @Ignore
     @Test
     public void canCreateDateTimeAttributeExpressions() throws Exception {
         final String attrName = "createdDate";
@@ -152,6 +170,7 @@ public class ProductProjectionSearchTest {
         assertThat(SORT_ATTR.ofDateTime(attrName).ascWithMaxValue().expression()).isEqualTo("variants.attributes.createdDate asc.max");
     }
 
+    @Ignore
     @Test
     public void canAccessEnumKeyCustomAttributes() throws Exception {
         final String attrName = "originCountry";
@@ -160,6 +179,7 @@ public class ProductProjectionSearchTest {
         assertThat(SORT_ATTR.ofEnum(attrName).key().descWithMinValue().expression()).isEqualTo("variants.attributes.originCountry.key desc.min");
     }
 
+    @Ignore
     @Test
     public void canAccessEnumLabelCustomAttributes() throws Exception {
         final String attrName = "originCountry";
@@ -168,6 +188,7 @@ public class ProductProjectionSearchTest {
         assertThat(SORT_ATTR.ofEnum(attrName).label().ascWithMaxValue().expression()).isEqualTo("variants.attributes.originCountry.label asc.max");
     }
 
+    @Ignore
     @Test
     public void canAccessMoneyCentAmountCustomAttributes() throws Exception {
         final String attrName = "originalPrice";
@@ -176,6 +197,7 @@ public class ProductProjectionSearchTest {
         assertThat(SORT_ATTR.ofMoney(attrName).centAmount().ascWithMaxValue().expression()).isEqualTo("variants.attributes.originalPrice.centAmount asc.max");
     }
 
+    @Ignore
     @Test
     public void canAccessCurrencyCustomAttributes() throws Exception {
         final String attrName = "originalPrice";
@@ -184,6 +206,7 @@ public class ProductProjectionSearchTest {
         assertThat(SORT_ATTR.ofMoney(attrName).currency().descWithMinValue().expression()).isEqualTo("variants.attributes.originalPrice.currencyCode desc.min");
     }
 
+    @Ignore
     @Test
     public void canAccessReferenceCustomAttributes() throws Exception {
         final String attrName = "recommendedProduct";
@@ -191,6 +214,7 @@ public class ProductProjectionSearchTest {
         assertThat(FILTER_ATTR.ofReference(attrName).id().is("some-id")).extracting(expression()).containsExactly("variants.attributes.recommendedProduct.id:\"some-id\"");
     }
 
+    @Ignore
     @Test
     public void canAccessLocEnumKeyCustomAttributes() throws Exception {
         final String attrName = "color";
@@ -199,6 +223,7 @@ public class ProductProjectionSearchTest {
         assertThat(SORT_ATTR.ofLocalizedEnum(attrName).key().descWithMinValue().expression()).isEqualTo("variants.attributes.color.key desc.min");
     }
 
+    @Ignore
     @Test
     public void canAccessLocEnumLabelCustomAttributes() throws Exception {
         final String attrName = "color";
@@ -207,6 +232,7 @@ public class ProductProjectionSearchTest {
         assertThat(SORT_ATTR.ofLocalizedEnum(attrName).label().locale(ENGLISH).ascWithMaxValue().expression()).isEqualTo("variants.attributes.color.label.en asc.max");
     }
 
+    @Ignore
     @Test
     public void usesAlias() throws Exception {
         final RangeTermFacetSearchModel<ProductProjection, BigDecimal> path = FACET_ATTR.ofNumber("size");
@@ -215,6 +241,7 @@ public class ProductProjectionSearchTest {
         assertThat(path.withAlias("my-facet").onlyLessThan(valueOf(38)).expression()).isEqualTo("variants.attributes.size:range(* to 38) as my-facet");
     }
 
+    @Ignore
     @Test
     public void unicode() throws Exception {
         final StringHttpRequestBody body = (StringHttpRequestBody) ProductProjectionSearch.ofStaged().withText(GERMAN, "öón").httpRequestIntent().getBody();
@@ -223,6 +250,7 @@ public class ProductProjectionSearchTest {
         assertThat(path).isEqualTo(expected);
     }
 
+    @Ignore
     @Test
     public void priceSelectionParameterCanBeAdded() {
         assertThat(SEARCH_WITH_FULL_PRICE_SELECTION.httpRequestIntent().getBody().toString())
@@ -230,6 +258,7 @@ public class ProductProjectionSearchTest {
         assertThat(SEARCH_WITH_FULL_PRICE_SELECTION.getPriceSelection()).isEqualTo(FULL_PRICE_SELECTION);
     }
 
+    @Ignore
     @Test
     public void priceSelectionCanBeRefined() {
         final PriceSelectionDsl priceSelectionWithoutCustomerGroup = FULL_PRICE_SELECTION.withPriceCustomerGroup(null);
@@ -241,6 +270,7 @@ public class ProductProjectionSearchTest {
         assertThat(priceSearchWithoutCustomer.getPriceSelection()).isEqualTo(priceSelectionWithoutCustomerGroup);
     }
 
+    @Ignore
     @Test
     public void removePriceSelection() {
         final ProductProjectionSearch priceSelectionRemoved = SEARCH_WITH_FULL_PRICE_SELECTION.withPriceSelection(null);
@@ -248,6 +278,7 @@ public class ProductProjectionSearchTest {
         assertThat(priceSelectionRemoved.getPriceSelection()).isNull();
     }
 
+    @Ignore
     @Test
     public void categorySubtree() {
         final List<String> expressionsWithoutSubtrees =
@@ -264,6 +295,7 @@ public class ProductProjectionSearchTest {
         assertThat(collect.get(0)).isEqualTo(expected);
     }
 
+    @Ignore
     @Test
     public void existFilter() {
         final List<FilterExpression<ProductProjection>> exists = FILTER_MODEL.categories().exists();
