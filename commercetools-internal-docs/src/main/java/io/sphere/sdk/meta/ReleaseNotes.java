@@ -160,6 +160,7 @@ import java.util.function.Function;
      <li class=fixed-in-release>Update actions for setting custom fields now accept empty array values</li>
      <li class=fixed-in-release>Fixed {@link ProductImageUploadCommand#withContentType(String)} ignoring provided content type</li>
      <li class=fixed-in-release>{@link HttpHeaders#getHeader(String) now treats headers as case insensitive}</li></li>
+     <li class=new-in-release>Added {@link Customer#getStores()} field</li>
  </ul>
  
  <h3 class=released-version id="v1_45_0">1.45.0 (02.08.2019)</h3>
