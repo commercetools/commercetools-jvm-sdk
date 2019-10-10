@@ -14,9 +14,10 @@ import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Ignore
+
 public class CategoriesWithAncestorsIntegrationTest extends IntegrationTest {
     @SuppressWarnings("unchecked")
+    @Ignore
     @Test
     public void isInSubtree() {
         withCategoryAndParentCategory(client(), (Category cat, Category parent) -> {
