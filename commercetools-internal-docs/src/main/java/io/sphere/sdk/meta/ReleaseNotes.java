@@ -159,6 +159,7 @@ import java.util.function.Function;
      <li class=new-in-release>Added support for {@link io.sphere.sdk.products.messages.ProductAddedToCategoryMessage} and {@link io.sphere.sdk.products.messages.ProductRemovedFromCategoryMessage}</li>
      <li class=fixed-in-release>Update actions for setting custom fields now accept empty array values</li>
      <li class=fixed-in-release>Fixed {@link ProductImageUploadCommand#withContentType(String)} ignoring provided content type</li>
+    <li class=new-in-release>Added store key reference to {@link OrderImportDraft}</li>
      <li class=fixed-in-release>{@link HttpHeaders#getHeader(String) now treats headers as case insensitive}</li></li>
      <li class=new-in-release>Added {@link Customer#getStores()} field</li>
  </ul>
