@@ -12,6 +12,7 @@ import io.sphere.sdk.products.attributes.AttributeAccess;
 import io.sphere.sdk.products.attributes.AttributeImportDraft;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shippingmethods.ShippingRate;
+import io.sphere.sdk.stores.Store;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxRate;
@@ -41,6 +42,7 @@ import static io.sphere.sdk.customers.CustomerFixtures.withCustomerInGroup;
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.products.ProductFixtures.*;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethodForGermany;
+import static io.sphere.sdk.stores.StoreFixtures.withStore;
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.defaultTaxCategory;
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTransientTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -513,7 +515,45 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Test
+    public void minimalOrderInStore() {
+        withStore(client(), store -> {
+            withProduct(client(), product -> {
+                final String productId = product.getId();
+                final int variantId = 1;
+                final LocalizedString name = en("a name");
+                final long quantity = 1;
+                final Price price = Price.of(EURO_10);
+                final OrderState orderState = OrderState.OPEN;
+                final MonetaryAmount amount = EURO_10;
+                final ProductVariantImportDraft variant = ProductVariantImportDraftBuilder.of(productId, variantId).build();
+                final KeyReference<Store> storeKeyReference = KeyReference.of(store.getKey(), "store");
+                
+                final LineItemImportDraft lineItemImportDraft = LineItemImportDraftBuilder.of(variant, quantity, price, name).build();
+                final OrderImportDraft orderImportDraft = OrderImportDraftBuilder.ofLineItems(amount, orderState, asList(lineItemImportDraft))
+                        .country(DE).store(storeKeyReference).build();
+                final OrderImportCommand cmd = OrderImportCommand.of(orderImportDraft);
 
+                final Order order = client().executeBlocking(cmd);
+
+                assertThat(order.getOrderState()).isEqualTo(orderState);
+                assertThat(order.getTotalPrice()).isEqualTo(amount);
+                assertThat(order.getLineItems()).hasSize(1);
+                assertThat(order.getCountry()).isEqualTo(DE);
+                assertThat(order.getCart()).isNull();
+                assertThat(order.getStore().getKey()).isEqualTo(storeKeyReference.getKey());
+                final LineItem lineItem = order.getLineItems().get(0);
+                assertThat(lineItem.getName()).isEqualTo(name);
+                assertThat(lineItem.getProductId()).isEqualTo(productId);
+                assertThat(lineItem.getVariant().getId()).isEqualTo(variantId);
+                assertThat(lineItem.getName()).isEqualTo(name);
+                assertThat(lineItem.getQuantity()).isEqualTo(quantity);
+
+                client().executeBlocking(OrderDeleteCommand.of(order));
+            });
+        });
+    }
+    
     public void assertEqualPrice(final Price price,final PriceDraft priceDraft){
         assertThat(priceDraft).isEqualTo(PriceDraft.of(price));
     }
