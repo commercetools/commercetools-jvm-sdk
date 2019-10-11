@@ -154,7 +154,7 @@ import java.util.function.Function;
  -->
  -->
 
- <h3 class=released-version id="v1_47_0">1.46.0 (11.10.2019)</h3>
+ <h3 class=released-version id="v1_47_0">1.47.0 (11.10.2019)</h3>
  <ul>
      <li class=fixed-in-release>Fixed {@link ProductImageUploadCommand#withContentType(String)} ignoring provided content type</li>
      <li class=new-in-release>Added store key reference to {@link OrderImportDraft}</li>
