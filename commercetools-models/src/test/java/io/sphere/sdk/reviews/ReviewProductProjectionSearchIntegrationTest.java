@@ -44,6 +44,7 @@ import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Ignore
 @NotOSGiCompatible
 public class ReviewProductProjectionSearchIntegrationTest extends IntegrationTest {
 
@@ -123,6 +124,7 @@ public class ReviewProductProjectionSearchIntegrationTest extends IntegrationTes
         });
     }
 
+    @Ignore
     @Test
     public void getReviewsForOneProduct() {
         final String productId = product.getId();
@@ -135,6 +137,7 @@ public class ReviewProductProjectionSearchIntegrationTest extends IntegrationTes
         assertThat(reviews).extracting(r -> r.getTarget().getId()).containsOnlyElementsOf(singletonList(productId));
     }
 
+    @Ignore
     @Test
     public void getApprovedReviewsForOneProduct() {
         final String productId = product.getId();
@@ -182,6 +185,7 @@ public class ReviewProductProjectionSearchIntegrationTest extends IntegrationTes
         );
     }
 
+    @Ignore
     @Test
     public void sortByCount() {
         checkSorting(
@@ -208,6 +212,7 @@ public class ReviewProductProjectionSearchIntegrationTest extends IntegrationTes
         );
     }
 
+    @Ignore
     @Test
     public void facetAndFilter() {
         final ReviewRatingStatisticsFacetedSearchSearchModel<ProductProjection> reviewRatingsModel
