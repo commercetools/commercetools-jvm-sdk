@@ -82,7 +82,12 @@ public final class SphereProjectScope extends Base implements SphereScope {
     /** Grants access to the APIs for viewing api clients*/
     public final static SphereProjectScope VIEW_API_CLIENTS = SphereProjectScope.of("view_api_clients");
 
+    /** Grants access to all the APIs for creating, deleting and viewing Discount Codes */
+    public final static SphereProjectScope MANAGE_DISCOUNT_CODES = SphereProjectScope.of("manage_discount_codes");
 
+    /** Grants access to the APIs for viewing Discount Codes */
+    public final static SphereProjectScope VIEW_DISCOUNT_CODES = SphereProjectScope.of("view_discount_codes");
+    
     private SphereProjectScope(final String scope) {
         this.scope = scope;
     }
