@@ -156,6 +156,7 @@ import java.util.function.Function;
  <h3 class=released-version id="v1_48_0">1.48.0</h3>
  <ul>
     <li class=new-in-release>Added new scopes to {@link io.sphere.sdk.client.SphereProjectScope}</li>
+    <li class=new-in-release>Added new customer update actions: {@link io.sphere.sdk.customers.commands.updateactions.AddStore}, {@link io.sphere.sdk.customers.commands.updateactions.SetStores}, {@link io.sphere.sdk.customers.commands.updateactions.RemoveStore}</li>
  </ul>
  
  <h3 class=released-version id="v1_47_0">1.47.0 (11.10.2019)</h3>
