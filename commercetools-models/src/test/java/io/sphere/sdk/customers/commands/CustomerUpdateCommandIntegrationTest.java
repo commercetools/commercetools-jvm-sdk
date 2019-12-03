@@ -1,22 +1,23 @@
 package io.sphere.sdk.customers.commands;
 
 import io.sphere.sdk.commands.UpdateAction;
-import io.sphere.sdk.customers.Customer;
-import io.sphere.sdk.customers.CustomerDraft;
-import io.sphere.sdk.customers.CustomerIntegrationTest;
-import io.sphere.sdk.customers.CustomerName;
+import io.sphere.sdk.customers.*;
 import io.sphere.sdk.customers.commands.updateactions.*;
 import io.sphere.sdk.customers.messages.*;
 import io.sphere.sdk.messages.queries.MessageQuery;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.AddressBuilder;
+import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
+import io.sphere.sdk.stores.Store;
+import io.sphere.sdk.stores.StoreFixtures;
 import io.sphere.sdk.test.utils.VrapRequestDecorator;
 import net.jcip.annotations.NotThreadSafe;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Predicate;
@@ -468,6 +469,56 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
                     client().executeBlocking(CustomerUpdateCommand.of(customer, updateAction));
 
             assertThat(updatedCustomer.getShippingAddressIds()).isEmpty();
+        });
+    }
+    
+    @Test
+    public void setStores() {
+        StoreFixtures.withStore(client(), store -> {
+            CustomerFixtures.withUpdateableCustomer(client(), customer -> {
+                ResourceIdentifier<Store> storeResourceIdentifier = ResourceIdentifier.ofKey(store.getKey());
+                List<ResourceIdentifier<Store>> stores = new ArrayList<>();
+                stores.add(storeResourceIdentifier);
+                SetStores updateAction = SetStores.of(stores);
+                final Customer updatedCustomer =
+                        client().executeBlocking(CustomerUpdateCommand.of(customer, updateAction));
+                assertThat(updatedCustomer.getStores().stream().anyMatch(storeKeyReference -> storeKeyReference.getKey().equals(storeResourceIdentifier.getKey()))).isTrue();
+                return updatedCustomer;
+            });
+        });
+    }
+    
+    @Test
+    public void addStore() {
+        StoreFixtures.withStore(client(), store -> {
+            CustomerFixtures.withUpdateableCustomer(client(), customer -> {
+                ResourceIdentifier<Store> storeResourceIdentifier = ResourceIdentifier.ofKey(store.getKey());
+                AddStore updateAction = AddStore.of(storeResourceIdentifier);
+                final Customer updatedCustomer =
+                        client().executeBlocking(CustomerUpdateCommand.of(customer, updateAction));
+                assertThat(updatedCustomer.getStores().stream().anyMatch(storeKeyReference -> storeKeyReference.getKey().equals(storeResourceIdentifier.getKey()))).isTrue();
+                return updatedCustomer;
+            });
+        });
+    }
+
+    @Test
+    public void removeStore() {
+        StoreFixtures.withStore(client(), store -> {
+            CustomerFixtures.withUpdateableCustomer(client(), customer -> {
+                ResourceIdentifier<Store> storeResourceIdentifier = ResourceIdentifier.ofKey(store.getKey());
+                AddStore addStore = AddStore.of(storeResourceIdentifier);
+                Customer updatedCustomer =
+                        client().executeBlocking(CustomerUpdateCommand.of(customer, addStore));
+                assertThat(updatedCustomer.getStores().stream().anyMatch(storeKeyReference -> storeKeyReference.getKey().equals(storeResourceIdentifier.getKey()))).isTrue();
+                
+                RemoveStore removeStore = RemoveStore.of(storeResourceIdentifier);
+                updatedCustomer =
+                        client().executeBlocking(CustomerUpdateCommand.of(updatedCustomer, removeStore));
+                assertThat(updatedCustomer.getStores().stream().noneMatch(storeKeyReference -> storeKeyReference.getKey().equals(storeResourceIdentifier.getKey()))).isTrue();
+
+                return updatedCustomer;
+            });
         });
     }
 }
