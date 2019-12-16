@@ -157,7 +157,7 @@ import java.util.function.Function;
  <ul>
     <li class=new-in-release>Added new scopes to {@link io.sphere.sdk.client.SphereProjectScope}</li>
     <li class=new-in-release>Added new customer update actions: {@link io.sphere.sdk.customers.commands.updateactions.AddStore}, {@link io.sphere.sdk.customers.commands.updateactions.SetStores}, {@link io.sphere.sdk.customers.commands.updateactions.RemoveStore}</li>
-    <li class=fixed-in-release>Fixed {@link io.sphere.sdk.orders.messages.OrderMessage} json deserialization bug where type filed wouldn't get deserialized </li>
+    <li class=fixed-in-release>Fixed {@link io.sphere.sdk.orders.messages.OrderMessage} json deserialization bug where <code>type</code> field wouldn't get deserialized </li>
  </ul>
  
  <h3 class=released-version id="v1_47_0">1.47.0 (11.10.2019)</h3>
