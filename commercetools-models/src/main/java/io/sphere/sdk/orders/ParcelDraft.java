@@ -22,11 +22,19 @@ public interface ParcelDraft {
         return new ParcelDraftDsl(null ,measurements, trackingData);
     }
 
+    static ParcelDraft of(final ParcelMeasurements measurements, final TrackingData trackingData, final List<DeliveryItem> items) {
+        return new ParcelDraftDsl(items ,measurements, trackingData);
+    }
+
     static ParcelDraft of(final ParcelMeasurements measurements) {
         return new ParcelDraftDsl(null, measurements, null);
     }
 
     static ParcelDraft of(final TrackingData trackingData) {
         return new ParcelDraftDsl(null, null, trackingData);
+    }
+
+    static ParcelDraft of(final TrackingData trackingData, final List<DeliveryItem> items) {
+        return new ParcelDraftDsl(items, null, trackingData);
     }
 }
