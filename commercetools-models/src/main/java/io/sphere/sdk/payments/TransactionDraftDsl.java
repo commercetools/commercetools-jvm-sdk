@@ -8,7 +8,7 @@ import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.Optional;
 
-final class TransactionDraftDsl extends TransactionDraftDslBase<TransactionDraftDsl> {
+public final class TransactionDraftDsl extends TransactionDraftDslBase<TransactionDraftDsl> {
     @JsonCreator
     TransactionDraftDsl(final MonetaryAmount amount, final @Nullable String interactionId,
                         final @Nullable TransactionState state, final @Nullable ZonedDateTime timestamp, final TransactionType type) {
