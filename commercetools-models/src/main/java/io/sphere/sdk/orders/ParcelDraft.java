@@ -30,7 +30,7 @@ public interface ParcelDraft {
         return new ParcelDraftDsl(null, null, trackingData);
     }
 
-    static ParcelDraft of(final TrackingData trackingData, List<DeliveryItem> deliveryItems) { 
+    static ParcelDraft of(final TrackingData trackingData, final List<DeliveryItem> deliveryItems) { 
         return new ParcelDraftDsl(deliveryItems, null, trackingData); 
     }
 }
