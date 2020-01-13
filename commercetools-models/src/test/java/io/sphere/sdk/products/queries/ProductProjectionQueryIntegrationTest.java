@@ -1,5 +1,6 @@
 package io.sphere.sdk.products.queries;
 
+import io.sphere.sdk.http.NameValuePair;
 import io.sphere.sdk.products.attributes.AttributeAccess;
 import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 import io.sphere.sdk.categories.Category;
@@ -19,6 +20,7 @@ import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
+import org.assertj.core.util.Lists;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -140,6 +142,18 @@ public class ProductProjectionQueryIntegrationTest extends IntegrationTest {
     public void queryById() throws Exception {
         with2products("queryById", (p1, p2) -> {
             final Query<ProductProjection> query1 = ProductProjectionQuery.of(STAGED).withPredicates(m -> m.id().isIn(asList(p1.getId(), p2.getId())));
+            assertThat(ids(client().executeBlocking(query1))).containsOnly(p1.getId(), p2.getId());
+
+            final Query<ProductProjection> query = ProductProjectionQuery.of(STAGED).withPredicates(m -> m.id().is(p1.getId()));
+            assertThat(ids(client().executeBlocking(query))).containsOnly(p1.getId());
+        });
+    }
+
+    @Test
+    public void queryByParametrizedId() throws Exception {
+        with2products("queryByParametrizedId", (p1, p2) -> {
+            final Query<ProductProjection> query1 = ProductProjectionQuery.of(STAGED).withPredicates(QueryPredicate.of("id in (:id1, :id2)")).withQueryParam(NameValuePair.of("id1", p1.getId())).withQueryParam(NameValuePair.of("id2", p2.getId()));
+
             assertThat(ids(client().executeBlocking(query1))).containsOnly(p1.getId(), p2.getId());
 
             final Query<ProductProjection> query = ProductProjectionQuery.of(STAGED).withPredicates(m -> m.id().is(p1.getId()));
