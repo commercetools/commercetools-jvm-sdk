@@ -157,6 +157,7 @@ import java.util.function.Function;
  <h3 class=released-version id="v1_49_0">1.49.0</h3>
  <ul>
     <li class=fixed-in-release>{@link TransactionDraftDsl} is now public</li>
+    <li class=new-in-release>{@link io.sphere.sdk.client.correlationid.CorrelationIdRequestDecorator} to attach a user-defined correlation id value as a header for the header with key "X-Correlation-ID" on CTP requests.</li>
  </ul>
  
  <h3 class=released-version id="v1_48_0">1.48.0 (16.12.2019)</h3>
