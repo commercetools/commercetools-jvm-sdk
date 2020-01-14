@@ -61,6 +61,7 @@ import io.sphere.sdk.inventory.InventoryEntryDraft;
 import io.sphere.sdk.inventory.InventoryEntryDraftBuilder;
 import io.sphere.sdk.inventory.commands.updateactions.SetSupplyChannel;
 import io.sphere.sdk.json.SphereJsonUtils;
+import io.sphere.sdk.messages.GenericMessageImpl;
 import io.sphere.sdk.messages.Message;
 import io.sphere.sdk.messages.UserProvidedIdentifiers;
 import io.sphere.sdk.models.*;
@@ -157,6 +158,7 @@ import java.util.function.Function;
  <h3 class=released-version id="v1_49_0">1.49.0</h3>
  <ul>
     <li class=fixed-in-release>{@link TransactionDraftDsl} is now public</li>
+ <li class=fixed-in-release>fixed {@link io.sphere.sdk.messages.GenericMessageImpl} json deserialization where {@link GenericMessageImpl#getResourceUserProvidedIdentifiers()} was missing </li>
  </ul>
  
  <h3 class=released-version id="v1_48_0">1.48.0 (16.12.2019)</h3>
