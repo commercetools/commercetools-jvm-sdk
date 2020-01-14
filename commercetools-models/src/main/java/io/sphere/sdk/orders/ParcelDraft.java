@@ -29,4 +29,8 @@ public interface ParcelDraft {
     static ParcelDraft of(final TrackingData trackingData) {
         return new ParcelDraftDsl(null, null, trackingData);
     }
+
+    static ParcelDraft of(final TrackingData trackingData, final List<DeliveryItem> deliveryItems) { 
+        return new ParcelDraftDsl(deliveryItems, null, trackingData); 
+    }
 }

@@ -157,6 +157,7 @@ import java.util.function.Function;
  <h3 class=released-version id="v1_49_0">1.49.0</h3>
  <ul>
     <li class=fixed-in-release>{@link TransactionDraftDsl} is now public</li>
+    <li class=new-in-release>Added new method {@link ParcelDraft#of(TrackingData, List)}</li>
  </ul>
  
  <h3 class=released-version id="v1_48_0">1.48.0 (16.12.2019)</h3>
