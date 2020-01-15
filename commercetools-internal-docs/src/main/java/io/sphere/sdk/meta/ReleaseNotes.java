@@ -158,6 +158,7 @@ import java.util.function.Function;
  <ul>
     <li class=fixed-in-release>{@link TransactionDraftDsl} is now public</li>
     <li class=new-in-release>Added new method {@link ParcelDraft#of(TrackingData, List)}</li>
+    <li class=new-in-release>{@link io.sphere.sdk.client.correlationid.CorrelationIdRequestDecorator} to attach a user-defined correlation id as a value for a header with key "X-Correlation-ID" on requests going to the commercetools platform.</li>
  </ul>
  
  <h3 class=released-version id="v1_48_0">1.48.0 (16.12.2019)</h3>
