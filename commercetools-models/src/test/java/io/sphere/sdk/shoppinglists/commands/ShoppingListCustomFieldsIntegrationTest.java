@@ -44,7 +44,7 @@ public class ShoppingListCustomFieldsIntegrationTest extends IntegrationTest {
                 assertThat(updatedShoppingList.getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference()))
                         .isEqualTo("a value");
 
-                return shoppingList;
+                return updatedShoppingList;
             });
             return type;
         });
