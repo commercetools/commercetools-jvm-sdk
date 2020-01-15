@@ -3,7 +3,7 @@ package io.sphere.sdk.carts;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 
-public class CartsConfigurationImpl extends Base implements CartsConfiguration {
+class CartsConfigurationImpl extends Base implements CartsConfiguration {
     
     private Integer deleteDaysAfterLastModification;
 
