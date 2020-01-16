@@ -6,6 +6,8 @@ import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.annotations.HasUpdateAction;
 import io.sphere.sdk.annotations.PropertySpec;
 import io.sphere.sdk.annotations.ResourceValue;
+import io.sphere.sdk.carts.CartsConfiguration;
+import io.sphere.sdk.carts.ShoppingListsConfiguration;
 import io.sphere.sdk.models.CreationTimestamped;
 import io.sphere.sdk.models.WithKey;
 
@@ -112,6 +114,12 @@ public interface Project extends CreationTimestamped, WithKey {
     @HasUpdateAction
     ExternalOAuth getExternalOAuth();
 
+    @HasUpdateAction(value = "changeCartsConfiguration", fields = {@PropertySpec(name = "cartsConfiguration", type = CartsConfiguration.class)})
+    CartsConfiguration getCarts();
+    
+    @HasUpdateAction(value = "changeShoppingListsConfiguration", fields = {@PropertySpec(name = "shoppingListsConfiguration", type = ShoppingListsConfiguration.class)})
+    ShoppingListsConfiguration getShoppingLists();
+    
     /**
      * Creates a container which contains the full Java type information to deserialize this class from JSON.
      *
