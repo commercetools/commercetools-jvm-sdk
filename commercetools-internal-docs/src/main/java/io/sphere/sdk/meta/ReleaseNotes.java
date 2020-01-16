@@ -61,6 +61,7 @@ import io.sphere.sdk.inventory.InventoryEntryDraft;
 import io.sphere.sdk.inventory.InventoryEntryDraftBuilder;
 import io.sphere.sdk.inventory.commands.updateactions.SetSupplyChannel;
 import io.sphere.sdk.json.SphereJsonUtils;
+import io.sphere.sdk.messages.GenericMessageImpl;
 import io.sphere.sdk.messages.Message;
 import io.sphere.sdk.messages.UserProvidedIdentifiers;
 import io.sphere.sdk.models.*;
@@ -160,6 +161,7 @@ import java.util.function.Function;
     <li class=new-in-release>Added new method {@link ParcelDraft#of(TrackingData, List)}</li>
     <li class=new-in-release>Added support for carts and shopping lists configuration to {@link Project} </li>
     <li class=new-in-release>{@link io.sphere.sdk.client.correlationid.CorrelationIdRequestDecorator} to attach a user-defined correlation id as a value for a header with key "X-Correlation-ID" on requests going to the commercetools platform.</li>
+    <li class=fixed-in-release>fixed {@link io.sphere.sdk.messages.GenericMessageImpl} json deserialization where {@link GenericMessageImpl#getResourceUserProvidedIdentifiers()} was missing </li>
  </ul>
  
  <h3 class=released-version id="v1_48_0">1.48.0 (16.12.2019)</h3>
