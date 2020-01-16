@@ -29,6 +29,7 @@ io.sphere.sdk.channels.commands.updateactions
 io.sphere.sdk.channels.expansion
 io.sphere.sdk.channels.queries
 io.sphere.sdk.client
+io.sphere.sdk.client.correlationid
 io.sphere.sdk.client.metrics
 io.sphere.sdk.commands
 io.sphere.sdk.customergroups
