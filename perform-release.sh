@@ -10,6 +10,12 @@ git diff --exit-code >/dev/null 2>&1
 GIT_STATUS=$?
 set -e
 
+export JAVA_HOME=$JDK_18_x64
+echo "Java version: " 
+echo $JAVA_HOME
+export PATH=$JAVA_HOME/bin:$PATH
+java -version
+
 if [[ ! GIT_STATUS -eq 0 ]]
 then
     echo "Aborting due to uncommited changes"
