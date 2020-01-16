@@ -15,6 +15,7 @@ import io.sphere.sdk.models.Base;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nullable;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -218,6 +219,14 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     @Override
     public C plusExpansionPaths(final Function<E, ExpansionPathContainer<T>> m) {
         return plusExpansionPaths(m.apply(expansionModel).expansionPaths());
+    }
+
+    @Override
+    public C withQueryParam(NameValuePair param) {
+        final List<NameValuePair> params = additionalHttpQueryParameters();
+        final List<NameValuePair> resultingParameters = new LinkedList<>(params);
+        resultingParameters.add(param);
+        return withAdditionalHttpQueryParameters(resultingParameters);
     }
 
     @Override

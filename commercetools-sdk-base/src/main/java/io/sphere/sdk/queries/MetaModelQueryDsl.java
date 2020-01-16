@@ -1,6 +1,7 @@
 package io.sphere.sdk.queries;
 
 import io.sphere.sdk.expansion.MetaModelReferenceExpansionDsl;
+import io.sphere.sdk.http.NameValuePair;
 
 import java.util.List;
 import java.util.function.Function;
@@ -79,4 +80,6 @@ public interface MetaModelQueryDsl<T, C extends MetaModelQueryDsl<T, C, Q, E>, Q
      * @see #withSort(Function)
      */
     C plusSort(final Function<Q, QuerySort<T>> sortFunction);
+
+    C withQueryParam(NameValuePair param);
 }

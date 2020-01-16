@@ -1,6 +1,8 @@
 package io.sphere.sdk.projects.commands;
 
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.carts.CartsConfiguration;
+import io.sphere.sdk.carts.ShoppingListsConfiguration;
 import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.projects.commands.updateactions.*;
 import io.sphere.sdk.projects.queries.ProjectGet;
@@ -25,7 +27,9 @@ public abstract class ProjectIntegrationTest extends IntegrationTest {
     private static final List<Locale> PROJECT_LOCALES = Arrays.asList(Locale.GERMAN, new Locale("de", "AT"), Locale.ENGLISH);
     private static final List<String> PROJECT_LANGUAGES = PROJECT_LOCALES.stream().map(Locale::toLanguageTag).collect(Collectors.toList());
     private static final Boolean PROJECT_MESSAGES_ENABLED = true;
-
+    private static final CartsConfiguration CARTS_CONFIGURATION = CartsConfiguration.of(10);
+    private static final ShoppingListsConfiguration SHOPPING_LISTS_CONFIGURATION = ShoppingListsConfiguration.of(10);
+    
     @BeforeClass
     @AfterClass
     public static void resetProject() {
@@ -36,7 +40,9 @@ public abstract class ProjectIntegrationTest extends IntegrationTest {
                 ChangeCountries.of(PROJECT_COUNTRIES),
                 ChangeLanguages.of(PROJECT_LANGUAGES),
                 ChangeMessagesEnabled.of(PROJECT_MESSAGES_ENABLED),
-                SetShippingRateInputType.ofUnset()
+                SetShippingRateInputType.ofUnset(),
+                ChangeCartsConfiguration.of(CARTS_CONFIGURATION),
+                ChangeShoppingListsConfiguration.of(SHOPPING_LISTS_CONFIGURATION)
         ));
 
         final Project updatedProject = client().executeBlocking(updateCommand);
@@ -52,6 +58,8 @@ public abstract class ProjectIntegrationTest extends IntegrationTest {
             soft.assertThat(updatedProject.getCurrencyUnits()).as("currencies as unit").contains(EUR);
             soft.assertThat(updatedProject.getMessages().isEnabled()).isEqualTo(PROJECT_MESSAGES_ENABLED);
             soft.assertThat(updatedProject.getShippingRateInputType()).isNull();
+            soft.assertThat(updatedProject.getCarts().getDeleteDaysAfterLastModification()).isEqualTo(10);
+            soft.assertThat(updatedProject.getShoppingLists().getDeleteDaysAfterLastModification()).isEqualTo(10);
         });
     }
 

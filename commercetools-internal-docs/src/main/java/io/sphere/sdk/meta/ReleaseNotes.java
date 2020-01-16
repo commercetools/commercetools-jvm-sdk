@@ -158,6 +158,9 @@ import java.util.function.Function;
  <h3 class=released-version id="v1_49_0">1.49.0</h3>
  <ul>
     <li class=fixed-in-release>{@link TransactionDraftDsl} is now public</li>
+    <li class=new-in-release>Added new method {@link ParcelDraft#of(TrackingData, List)}</li>
+    <li class=new-in-release>Added support for carts and shopping lists configuration to {@link Project} </li>
+    <li class=new-in-release>{@link io.sphere.sdk.client.correlationid.CorrelationIdRequestDecorator} to attach a user-defined correlation id as a value for a header with key "X-Correlation-ID" on requests going to the commercetools platform.</li>
     <li class=fixed-in-release>fixed {@link io.sphere.sdk.messages.GenericMessageImpl} json deserialization where {@link GenericMessageImpl#getResourceUserProvidedIdentifiers()} was missing </li>
  </ul>
  
