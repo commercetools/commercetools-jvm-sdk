@@ -45,6 +45,7 @@ set -e
 export JAVA_HOME=$JDK_18_x64
 echo "Java version: " 
 echo $JAVA_HOME
+java -version
 
 if [[ ! ${GIT_STATUS} -eq 0 ]]
 then
