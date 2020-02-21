@@ -54,7 +54,7 @@ import io.sphere.sdk.models.Base;
 
 <h3 id=full-text-search>Full Text Search</h3>
 
- <p>With {@link io.sphere.sdk.products.search.ProductProjectionSearch} you can perform a full-text search for a specific language. On the <a href="http://dev.commercetools.io/http-api-projects-products-search.html#search-text">Full-Text Search</a> documentation page you can explore which fields are included for the search and other additional information.</p>
+ <p>With {@link io.sphere.sdk.products.search.ProductProjectionSearch} you can perform a full-text search for a specific language. On the <a href="http://docs.commercetools.com/http-api-projects-products-search.html#search-text">Full-Text Search</a> documentation page you can explore which fields are included for the search and other additional information.</p>
 
  <p>The following example uses {@link io.sphere.sdk.search.SearchDsl#withText(java.util.Locale, String)} to search for all products containing the word "shoe" in English:</p>
 
@@ -74,13 +74,13 @@ import io.sphere.sdk.models.Base;
 
 <h3 id=sorting>Sorting</h3>
 
- <p>Any attribute you can sort by, allows both sort directions, ascending and descending. On the <a href="http://dev.commercetools.io/http-api-projects-products-search.html#search-sorting">Sorting</a> documentation page you can explore for which fields you can sort for. Use {@link io.sphere.sdk.products.search.ProductProjectionSortSearchModel} class to build sort expressions easily.</p>
+ <p>Any attribute you can sort by, allows both sort directions, ascending and descending. On the <a href="http://docs.commercetools.com/http-api-projects-products-search.html#search-sorting">Sorting</a> documentation page you can explore for which fields you can sort for. Use {@link io.sphere.sdk.products.search.ProductProjectionSortSearchModel} class to build sort expressions easily.</p>
 
  <p>The code sample below shows a request for all products which will be sorted by size in an ascending direction:</p>
 
  {@include.example io.sphere.sdk.products.search.ProductProjectionSearchSortIntegrationTest#sortByAttributeAscending()}
 
- <p>When sorting on multi-valued attributes, such as attributes from product variants, you can also choose which value should be used for sorting. By default, the value selected is the best-matching according to the sorting direction, or in other words, the minimum value for ascending and the maximum value for descending sort. This behaviour can be easily inverted, as explained in the <a href="http://dev.commercetools.io/http-api-projects-products-search.html#search-sorting-attribute">Sorting by Attributes</a> documentation page.</p>
+ <p>When sorting on multi-valued attributes, such as attributes from product variants, you can also choose which value should be used for sorting. By default, the value selected is the best-matching according to the sorting direction, or in other words, the minimum value for ascending and the maximum value for descending sort. This behaviour can be easily inverted, as explained in the <a href="http://docs.commercetools.com/http-api-projects-products-search.html#search-sorting-attribute">Sorting by Attributes</a> documentation page.</p>
 
  <p>In the following example the products are sorted by size in an ascending direction, but sorted using the highest size value within each product variants instead:</p>
 
@@ -103,7 +103,7 @@ import io.sphere.sdk.models.Base;
 
  <h4 id=facet-expressions>Expressions</h4>
 
- <p>Facets calculate statistical counts based on the values associated with an attribute. Building facet expressions is very easy thanks to the {@link io.sphere.sdk.products.search.ProductProjectionFacetSearchModel} class. You can consult the <a href="http://dev.commercetools.io/http-api-projects-products-search.html#search-facets">Facets</a> HTTP API documentation for more information.</p>
+ <p>Facets calculate statistical counts based on the values associated with an attribute. Building facet expressions is very easy thanks to the {@link io.sphere.sdk.products.search.ProductProjectionFacetSearchModel} class. You can consult the <a href="http://docs.commercetools.com/http-api-projects-products-search.html#search-facets">Facets</a> HTTP API documentation for more information.</p>
 
  <p>There are three types of facets: {@link io.sphere.sdk.search.TermFacetResult}, {@link io.sphere.sdk.search.RangeFacetResult} and {@link io.sphere.sdk.search.FilteredFacetResult}. Next are presented example codes of each type to better illustrate how these facet types work.</p>
 
@@ -127,7 +127,7 @@ import io.sphere.sdk.models.Base;
 
  <h4 id=facet-alias>Alias</h4>
 
- <p>Additionally, facets allow to specify an alias which will then replace the attribute path in the result. This functionality allows to calculate different types of facets on the same attribute. There is an extended explanation with examples in the API documentation for <a href="http://dev.commercetools.io/http-api-projects-products-search.html#search-facets">Facets</a>.</p>
+ <p>Additionally, facets allow to specify an alias which will then replace the attribute path in the result. This functionality allows to calculate different types of facets on the same attribute. There is an extended explanation with examples in the API documentation for <a href="http://docs.commercetools.com/http-api-projects-products-search.html#search-facets">Facets</a>.</p>
 
  <p>In order to use it, the SDK offers a method that allows to define the desired alias:</p>
 
@@ -188,7 +188,7 @@ import io.sphere.sdk.models.Base;
 
  <h4 id=filter-expressions>Expressions</h4>
 
- <p>You can easily build filter expressions with the {@link io.sphere.sdk.products.search.ProductProjectionFilterSearchModel} class. For more details, check the HTTP API documentation for <a href="http://dev.commercetools.io/http-api-projects-products-search.html#search-filters">Filters</a>.</p>
+ <p>You can easily build filter expressions with the {@link io.sphere.sdk.products.search.ProductProjectionFilterSearchModel} class. For more details, check the HTTP API documentation for <a href="http://docs.commercetools.com/http-api-projects-products-search.html#search-filters">Filters</a>.</p>
 
  <p>In the following example only the products with red color are returned:</p>
 
