@@ -334,7 +334,7 @@ public class CategoryUpdateCommandIntegrationTest extends IntegrationTest {
     @Test
     public void setAssetSources() {
         withCategoryHavingAssets(client(), category -> {
-            final AssetSource assetSource = AssetSourceBuilder.ofUri("http://dev.commercetools.com/assets/img/CT-logo.svg")
+            final AssetSource assetSource = AssetSourceBuilder.ofUri("https://docs.commercetools.com/assets/img/CT-logo.svg")
                     .key("commercetools-logo")
                     .contentType("image/svg+xml")
                     .build();
@@ -345,7 +345,7 @@ public class CategoryUpdateCommandIntegrationTest extends IntegrationTest {
             final Asset updatedAsset = updatedCategory.getAssets().get(0);
             assertThat(updatedAsset.getSources()).hasSize(1);
             final AssetSource source = updatedAsset.getSources().get(0);
-            assertThat(source.getUri()).isEqualTo("http://dev.commercetools.com/assets/img/CT-logo.svg");
+            assertThat(source.getUri()).isEqualTo("https://docs.commercetools.com/assets/img/CT-logo.svg");
             assertThat(source.getKey()).isEqualTo("commercetools-logo");
             assertThat(source.getContentType()).isEqualTo("image/svg+xml");
         });

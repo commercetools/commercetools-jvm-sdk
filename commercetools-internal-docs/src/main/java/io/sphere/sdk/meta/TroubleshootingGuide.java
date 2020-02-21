@@ -41,7 +41,7 @@ package io.sphere.sdk.meta;
 
  <h4>Possible solutions</h4>
  It could be the case that you use a build tool like Maven which has other code in it depending on an older Jackson version.
- The <a href="http://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#Transitive_Dependencies">Maven way of getting transitive dependencies</a> may cause that you
+ The <a href="https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#Transitive_Dependencies">Maven way of getting transitive dependencies</a> may cause that you
  use an outdated Jackson version and you need to explicitly pull it up like with:
 
  <pre>{@code <dependency>
@@ -100,7 +100,7 @@ package io.sphere.sdk.meta;
  [error] http request: HttpRequestIntent[httpMethod=POST,path=/tax-categories/b5a012ae-0824-4935-b935-943e4253b5c7,headers={},body=StringHttpRequestBody[body={"version":1,"actions":[{"action":"addTaxRate","taxRate":{"id":null,"name":"de7","amount":0.07,"includedInPrice":true,"country":"DE","state":null}}]}]]
  [error] http response: HttpResponseImpl[statusCode=400,headers={Transfer-Encoding=[chunked], Server=[nginx], Access-Control-Allow-Origin=[*], X-Served-By=[app08.sphere.prod.commercetools.de], X-Correlation-ID=[nginx-cfd1585f-971e-4b43-9fce-b72bba93d8e0], Access-Control-Allow-Methods=[GET, POST, DELETE, OPTIONS], Connection=[close], X-Served-Config=[sphere-projects-ws-1.0], Date=[Fri, 14 Aug 2015 11:36:45 GMT], Access-Control-Allow-Headers=[Accept, Authorization, Content-Type, Origin], Content-Type=[application/json; charset=utf-8]},responseBody={123,34,115,116,97,116,117,115,67,111,100,101,34,58,52,48,48,44,34,109,101,115,115,97,103,101,34,58,34,68,117,112,108,105,99,97,116,101,32,116,97,120,32,114,97,116,101,32,102,111,114,32,68,69,46,34,44,34,101,114,114,111,114,115,34,58,91,123,34,99,111,100,101,34,58,34,73,110,118,97,108,105,100,79,112,101,114,97,116,105,111,110,34,44,34,109,101,115,115,97,103,101,34,58,34,68,117,112,108,105,99,97,116,101,32,116,97,120,32,114,97,116,101,32,102,111,114,32,68,69,46,34,125,93,125},associatedRequest=<null>,bodyAsStringForDebugging={"statusCode":400,"message":"Duplicate tax rate for DE.","errors":[{"code":"InvalidOperation","message":"Duplicate tax rate for DE."}]}]
  [error] additional notes: []
- [error] Javadoc: http://commercetools.github.io/commercetools-jvm-sdk/javadoc/1.0.0-RC1-SNAPSHOT/io/sphere/sdk/client/ErrorResponseException.html
+ [error] Javadoc: https://commercetools.github.io/commercetools-jvm-sdk/apidocs/io/sphere/sdk/client/ErrorResponseException.html
  [error] , took 0.229 sec
  [error]     at io.sphere.sdk.client.ExceptionFactory.lambda$of$31(ExceptionFactory.java:52)
  [error]     at io.sphere.sdk.client.ExceptionFactory$$Lambda$143/1461123310.apply(Unknown Source)

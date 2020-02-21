@@ -9,8 +9,8 @@ import static java.util.Collections.singletonList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 final class ClientPackage {
-    public static final String API_URL = "https://api.sphere.io";
-    public static final String AUTH_URL = "https://auth.sphere.io";
+    public static final String API_URL = "https://api.europe-west1.gcp.commercetools.com";
+    public static final String AUTH_URL = "https://auth.europe-west1.gcp.commercetools.com";
     public static final List<SphereScope> DEFAULT_PROJECT_SCOPES = singletonList(SphereProjectScope.MANAGE_PROJECT);
     public static final List<String> DEFAULT_SCOPES = transformEnumScopeListToStringList(DEFAULT_PROJECT_SCOPES);
 

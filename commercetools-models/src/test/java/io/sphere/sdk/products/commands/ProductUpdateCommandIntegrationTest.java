@@ -1119,7 +1119,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     public void setMetaDescription() throws Exception {
         withUpdateableProduct(client(), product -> {
             final LocalizedString metaDescription = LocalizedString
-                    .of(ENGLISH, "SPHERE.IO&#8482; is the first Platform-as-a-Service solution for eCommerce.");
+                    .of(ENGLISH, "commercetools&#8482; is the first Platform-as-a-Service solution for eCommerce.");
             final SetMetaDescription action = SetMetaDescription.of(metaDescription);
 
             final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, action));
@@ -1134,7 +1134,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     public void setMetaTitle() throws Exception {
         withUpdateableProduct(client(), product -> {
             final LocalizedString metaTitle = LocalizedString
-                    .of(ENGLISH, "commercetools SPHERE.IO&#8482; - Next generation eCommerce");
+                    .of(ENGLISH, "commercetools&#8482; - Next generation eCommerce");
             final SetMetaTitle action = SetMetaTitle.of(metaTitle);
 
             final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, action));
@@ -1149,8 +1149,8 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     public void setMetaAttributes() throws Exception {
         withUpdateableProduct(client(), product -> {
             final MetaAttributes metaAttributes = MetaAttributes.metaAttributesOf(ENGLISH,
-                    "commercetools SPHERE.IO&#8482; - Next generation eCommerce",
-                    "SPHERE.IO&#8482; is the first and leading Platform-as-a-Service solution for eCommerce.",
+                    "commercetools&#8482; - Next generation eCommerce",
+                    "commercetools&#8482; is the first and leading Platform-as-a-Service solution for eCommerce.",
                     "Platform-as-a-Service, e-commerce, http, api, tool");
             final List<UpdateAction<Product>> updateActions =
                     MetaAttributesUpdateActions.of(metaAttributes);
@@ -1168,8 +1168,8 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     public void productProjectionCanBeUsedToUpdateAProduct() throws Exception {
         withUpdateableProduct(client(), product -> {
             final MetaAttributes metaAttributes = MetaAttributes.metaAttributesOf(ENGLISH,
-                    "commercetools SPHERE.IO&#8482; - Next generation eCommerce",
-                    "SPHERE.IO&#8482; is the first and leading Platform-as-a-Service solution for eCommerce.",
+                    "commercetools&#8482; - Next generation eCommerce",
+                    "commercetools&#8482; is the first and leading Platform-as-a-Service solution for eCommerce.",
                     "Platform-as-a-Service, e-commerce, http, api, tool");
             final List<UpdateAction<Product>> updateActions =
                     MetaAttributesUpdateActions.of(metaAttributes);
@@ -2650,7 +2650,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     public void setAssetSourcesByVariantId() throws Exception {
         withProductHavingAssets(client(), product -> {
             assertThat(product.getMasterData().hasStagedChanges()).isFalse();
-            final AssetSource assetSource = AssetSourceBuilder.ofUri("http://dev.commercetools.com/assets/img/CT-logo.svg")
+            final AssetSource assetSource = AssetSourceBuilder.ofUri("https://docs.commercetools.com/assets/img/CT-logo.svg")
                     .key("commercetools-logo")
                     .contentType("image/svg+xml")
                     .build();
@@ -2662,7 +2662,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             final Product updatedProduct = client().executeBlocking(cmd);
 
             AssetSource source = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0).getSources().get(0);
-            assertThat(source.getUri()).isEqualTo("http://dev.commercetools.com/assets/img/CT-logo.svg");
+            assertThat(source.getUri()).isEqualTo("https://docs.commercetools.com/assets/img/CT-logo.svg");
             assertThat(source.getKey()).isEqualTo("commercetools-logo");
             assertThat(source.getContentType()).isEqualTo("image/svg+xml");
             return updatedProduct;
@@ -2673,7 +2673,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     public void setAssetSourcesBySku() throws Exception {
         withProductHavingAssets(client(), product -> {
             assertThat(product.getMasterData().hasStagedChanges()).isFalse();
-            final AssetSource assetSource = AssetSourceBuilder.ofUri("http://dev.commercetools.com/assets/img/CT-logo.svg")
+            final AssetSource assetSource = AssetSourceBuilder.ofUri("https://docs.commercetools.com/assets/img/CT-logo.svg")
                     .key("commercetools-logo")
                     .contentType("image/svg+xml")
                     .build();
@@ -2685,7 +2685,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             final Product updatedProduct = client().executeBlocking(cmd);
 
             AssetSource source = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0).getSources().get(0);
-            assertThat(source.getUri()).isEqualTo("http://dev.commercetools.com/assets/img/CT-logo.svg");
+            assertThat(source.getUri()).isEqualTo("https://docs.commercetools.com/assets/img/CT-logo.svg");
             assertThat(source.getKey()).isEqualTo("commercetools-logo");
             assertThat(source.getContentType()).isEqualTo("image/svg+xml");
             return updatedProduct;
@@ -2702,7 +2702,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     public void setAssetSourcesByVariantIdWithStaged(final Boolean staged) {
         withProductHavingAssets(client(), product -> {
             assertThat(product.getMasterData().hasStagedChanges()).isFalse();
-            final AssetSource assetSource = AssetSourceBuilder.ofUri("http://dev.commercetools.com/assets/img/CT-logo.svg")
+            final AssetSource assetSource = AssetSourceBuilder.ofUri("https://docs.commercetools.com/assets/img/CT-logo.svg")
                     .key("commercetools-logo")
                     .contentType("image/svg+xml")
                     .build();
@@ -2714,7 +2714,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             final Product updatedProduct = client().executeBlocking(cmd);
 
             AssetSource source = updatedProduct.getMasterData().getStaged().getMasterVariant().getAssets().get(0).getSources().get(0);
-            assertThat(source.getUri()).isEqualTo("http://dev.commercetools.com/assets/img/CT-logo.svg");
+            assertThat(source.getUri()).isEqualTo("https://docs.commercetools.com/assets/img/CT-logo.svg");
             assertThat(source.getKey()).isEqualTo("commercetools-logo");
             assertThat(source.getContentType()).isEqualTo("image/svg+xml");
             assertThat(updatedProduct.getMasterData().hasStagedChanges()).isEqualTo(staged);

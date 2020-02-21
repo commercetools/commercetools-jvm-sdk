@@ -60,7 +60,7 @@ public final class AwsCredentials extends Base {
      * @see #AWS_ACCESS_KEY_ID_ENV
      * @see #AWS_SECRET_ACCESS_KEY_ENV
      *
-     * @see <a href="http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-environment"></a>
+     * @see <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html#cli-environment"></a>
      */
     public static AwsCredentials ofAwsCliEnv() {
         return ofEnv(AWS_ACCESS_KEY_ID_ENV, AWS_SECRET_ACCESS_KEY_ENV);

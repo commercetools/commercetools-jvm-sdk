@@ -62,7 +62,7 @@ public class SphereClientConfigTest {
     @Test
     public void withApiUrl() throws Exception {
         final SphereClientConfig initial = SphereClientConfig.of("a", "b", "b");
-        assertThat(initial.getApiUrl()).isEqualTo("https://api.sphere.io");
+        assertThat(initial.getApiUrl()).isEqualTo("https://api.europe-west1.gcp.commercetools.com");
         final SphereClientConfig updated = initial.withApiUrl("another");
         assertThat(updated.getApiUrl()).isEqualTo("another");
     }
@@ -70,7 +70,7 @@ public class SphereClientConfigTest {
     @Test
     public void withAuthUrl() throws Exception {
         final SphereClientConfig initial = SphereClientConfig.of("a", "b", "b");
-        assertThat(initial.getAuthUrl()).isEqualTo("https://auth.sphere.io");
+        assertThat(initial.getAuthUrl()).isEqualTo("https://auth.europe-west1.gcp.commercetools.com");
         final SphereClientConfig updated = initial.withAuthUrl("another");
         assertThat(updated.getAuthUrl()).isEqualTo("another");
     }
@@ -83,8 +83,8 @@ public class SphereClientConfigTest {
                 "export foo_CLIENT_ID=\"YOUR client id\"\n" +
                 "export foo_CLIENT_SECRET=\"YOUR client secret\"\n" +
                 "#optional:\n" +
-                "export foo_API_URL=\"https://api.sphere.io\"\n" +
-                "export foo_AUTH_URL=\"https://auth.sphere.io\"\n" +
+                "export foo_API_URL=\"https://api.europe-west1.gcp.commercetools.com\"\n" +
+                "export foo_AUTH_URL=\"https://auth.europe-west1.gcp.commercetools.com\"\n" +
                 "export foo_SCOPES=\"manage_project\"";
         assertThatThrownBy(() -> SphereClientConfigUtils.ofEnvironmentVariables("foo", key -> null))
                 .isInstanceOf(IllegalArgumentException.class)
@@ -114,6 +114,6 @@ public class SphereClientConfigTest {
             map.put("foo_CLIENT_SECRET", "c");
             return map.get(key);
         });
-        assertThat(config).isEqualTo(SphereClientConfig.of("a", "b", "c", "https://auth.sphere.io", "https://api.sphere.io"));
+        assertThat(config).isEqualTo(SphereClientConfig.of("a", "b", "c", "https://auth.europe-west1.gcp.commercetools.com", "https://api.europe-west1.gcp.commercetools.com"));
     }
 }

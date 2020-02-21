@@ -130,7 +130,7 @@ public class CategoryFixtures {
     }
 
     private static AssetDraft getAssetDraft2() {
-        final AssetSource assetSource1 = AssetSourceBuilder.ofUri("http://dev.commercetools.com/assets/img/CT-logo.svg")
+        final AssetSource assetSource1 = AssetSourceBuilder.ofUri("https://docs.commercetools.com/assets/img/CT-logo.svg")
                 .key(randomKey())
                 .contentType("image/svg+xml")
                 .build();

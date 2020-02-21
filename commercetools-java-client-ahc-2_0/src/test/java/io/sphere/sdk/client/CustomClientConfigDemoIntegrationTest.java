@@ -44,7 +44,7 @@ public class CustomClientConfigDemoIntegrationTest {
     public void customClient() {
         final HttpClient httpClient = createCustomHttpClient();
         final CompletionStage<HttpResponse> completionStage =
-                httpClient.execute(HttpRequest.of(GET, "http://commercetools.com"));
+                httpClient.execute(HttpRequest.of(GET, "https://commercetools.com"));
         final HttpResponse httpResponse = completionStage.toCompletableFuture().join();
         assertThat(httpResponse.getStatusCode()).isLessThanOrEqualTo(302);
         httpClient.close();

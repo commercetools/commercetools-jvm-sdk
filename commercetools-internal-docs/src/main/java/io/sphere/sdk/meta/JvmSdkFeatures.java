@@ -16,7 +16,7 @@ import io.sphere.sdk.models.Base;
 <h3>Good defaults for toString(), equals() and hashCode()</h3>
 <p>The SDK's implementation classes extend {@link Base} which provides default implementations for the methods by using
  reflection following the suggestions of
- <a href="http://www.oracle.com/technetwork/java/effectivejava-136174.html">Effective Java</a>.</p>
+ <a href="https://www.oracle.com/technetwork/java/effectivejava-136174.html">Effective Java</a>.</p>
 
 <h3>Domain models are immutable</h3>
 <p>Domain models are no plain old Java objects since the client does not pose control over them, but needs to send

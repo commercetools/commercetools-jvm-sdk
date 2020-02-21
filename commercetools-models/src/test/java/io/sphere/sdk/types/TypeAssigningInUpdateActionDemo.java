@@ -26,7 +26,7 @@ public class TypeAssigningInUpdateActionDemo {
 
         final Map<String, Object> fieldValues = new HashMap<>();
         fieldValues.put("state", "published");//in the type it was enum, but for enums only keys are set
-        fieldValues.put("imageUrl", "http://www.commercetools.com/assets/img/CT-logo.svg");
+        fieldValues.put("imageUrl", "https://docs.commercetools.com/assets/img/CT-logo.svg");
         final Set<Reference<Category>> relatedCategories =
                 new HashSet<>(asList(category1.toReference(), category2.toReference()));
         fieldValues.put("relatedCategories", relatedCategories);
@@ -38,7 +38,7 @@ public class TypeAssigningInUpdateActionDemo {
         final CustomFields custom = updatedCategory.getCustom();
         assertThat(custom.getFieldAsEnumKey("state")).isEqualTo("published");
         assertThat(custom.getFieldAsString("imageUrl"))
-                .isEqualTo("http://www.commercetools.com/assets/img/CT-logo.svg");
+                .isEqualTo("https://docs.commercetools.com/assets/img/CT-logo.svg");
         final TypeReference<Set<Reference<Category>>> typeReference =
                 new TypeReference<Set<Reference<Category>>>() { };
         assertThat(custom.getField("relatedCategories", typeReference))

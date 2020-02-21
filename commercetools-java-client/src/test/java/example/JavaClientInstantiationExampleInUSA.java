@@ -10,8 +10,8 @@ public class JavaClientInstantiationExampleInUSA {
                 "jvm-sdk-dev-1", //replace with your project key
                 "ELqF0rykXD2fyS8s-IhIPKfQ", //replace with your client id
                 "222222222222222222222222222222226",
-                "https://auth.commercetools.co/",
-                "https://api.commercetools.co"
+                "https://auth.us-central1.gcp.commercetools.com/",
+                "https://api.us-central1.gcp.commercetools.com"
         );
     }
 }

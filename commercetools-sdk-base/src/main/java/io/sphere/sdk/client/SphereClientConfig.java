@@ -118,8 +118,8 @@ public final class SphereClientConfig extends Base implements SphereAuthConfig, 
     export EXAMPLE_PROJECT_KEY="YOUR project key"
     export EXAMPLE_CLIENT_ID="YOUR client id"
     export EXAMPLE_CLIENT_SECRET="YOUR client secret"
-    export EXAMPLE_AUTH_URL="https://auth.sphere.io" #optional parameter
-    export EXAMPLE_API_URL="https://api.sphere.io" #optional parameter
+    export EXAMPLE_AUTH_URL="https://auth.europe-west1.gcp.commercetools.com" #optional parameter
+    export EXAMPLE_API_URL="https://api.europe-west1.gcp.commercetools.com" #optional parameter
     export EXAMPLE_SCOPES="manage_project" #optional parameter
     #separate multiple elements with a comma
     #export EXAMPLE_SCOPES="manage_customers,view_orders"
@@ -149,8 +149,8 @@ public final class SphereClientConfig extends Base implements SphereAuthConfig, 
     commercetools.clientId=YOUR client id without quotes
     commercetools.clientSecret=YOUR client secret without quotes
     #optional:
-    commercetools.authUrl=https://auth.sphere.io
-    commercetools.apiUrl=https://api.sphere.io
+    commercetools.authUrl=https://auth.europe-west1.gcp.commercetools.com
+    commercetools.apiUrl=https://api.europe-west1.gcp.commercetools.com
     commercetools.scopes=manage_project
     #separate multiple scopes with a comma
     #commercetools.scopes=manage_customers,view_orders

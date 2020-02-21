@@ -596,7 +596,7 @@ import java.util.function.Function;
  The previously returned {@link Reference} instances provided a {@link Reference#getObj()} method
  that is not available from {@link ResourceIdentifier}. If you relied on the {@link Reference#getObj()} method to retrieve the id or key of the referenced object, you now have
  to use the {@link ResourceIdentifier#getId()} and {@link ResourceIdentifier#getKey()} as exposed by the {@link ResourceIdentifier} interface.
- <li class=change-in-release>Updated <a href="http://javamoney.github.io/ri.html#welcome-to-moneta---the-jsr-354-reference-implementation">moneta</a> to version 1.1</li>
+ <li class=change-in-release>Updated <a href="https://javamoney.github.io/ri.html#welcome-to-moneta---the-jsr-354-reference-implementation">moneta</a> to version 1.1</li>
  <li class=change-in-release>Changed {@link io.sphere.sdk.client.SphereProjectScope} from an enum to a class and added missing scopes. This change doesn't require changes to your source code,
  but requires a recompilation of all projects that depend on this class.</li>
  </ul>
@@ -869,8 +869,8 @@ import java.util.function.Function;
 
  <h3 class=released-version id="v1_0_0">1.0.0 (03.06.2016)</h3>
  <ul>
- <li class=new-in-release>a new commercetools landing page for the JVM SDK is available at <a href="https://dev.commercetools.com/jvm/">https://dev.commercetools.com/jvm/</a></li>
- <li class=new-in-release>the GitHub repository has been relocated to <a href="https://github.com/commercetools/commercetools-jvm-sdk">https://github.com/commercetools/commercetools-jvm-sdk</a>, it was formerly under the SPHERE.IO branding</li>
+ <li class=new-in-release>a new commercetools landing page for the JVM SDK is available at <a href="https://docs.commercetools.com/sdk/jvm-sdk">https://docs.commercetools.com/sdk/jvm-sdk</a></li>
+ <li class=new-in-release>the GitHub repository has been relocated to <a href="https://github.com/commercetools/commercetools-jvm-sdk">https://github.com/commercetools/commercetools-jvm-sdk</a></li>
  <li class=new-in-release>{@link io.sphere.sdk.client.RetrySphereClientDecorator} to deal with server errors and retry requests</li>
  <li class=new-in-release>{@link ProductProjectionSearch#withFuzzyLevel(java.lang.Integer)} to configure the fuzzy level in the product search</li>
  <li class=change-in-release>a lot of classes without public available constructors have been converted to interfaces
@@ -994,7 +994,7 @@ import java.util.function.Function;
  <li class=change-in-release>The class {@link io.sphere.sdk.products.commands.updateactions.SetSku} executes the action {@code setSku} which is staged,
  previous to this version it was {@code setSKU} (upper case 'K' and 'U')
  which updates in staged and current and has been moved to the deprecated class {@code LegacySetSku}.
- See also <a href="http://dev.commercetools.com/http-api-projects-products.html#set-sku" target="_blank">the HTTP API doc of SetSku.</a></li>
+ See also <a href="https://docs.commercetools.com/http-api-projects-products.html#set-sku" target="_blank">the HTTP API doc of SetSku.</a></li>
  <li class=change-in-release>{@link io.sphere.sdk.customers.commands.CustomerCreateEmailTokenCommand}, {@link io.sphere.sdk.customers.commands.CustomerVerifyEmailCommand} and {@link io.sphere.sdk.customers.commands.CustomerPasswordResetCommand} do not use anymore optimistic concurrency control,
  so it won't fail with {@link io.sphere.sdk.client.ConcurrentModificationException} and it is not necessary to load the customer version.
  <br>Deprecated methods:
@@ -1536,7 +1536,7 @@ PagedSearchResult<ProductProjection> result = client.execute(search);
  <li class=change-in-release>The {@code ProductProjectionSearchModel} has been improved with better naming and better documentation.</li>
  <li class=change-in-release>Sort related classes for the Query API have been renamed with a "Query" prefix, to distinguish them from the Search API sort classes.</li>
  <li class=change-in-release>{@code io.sphere.sdk.queries.Predicate} has been renamed to {@link io.sphere.sdk.queries.QueryPredicate}.</li>
- <li class=change-in-release>The JVM SDK itself uses for tests the <a href="http://joel-costigliola.github.io/assertj/">assertj</a> assertion methods instead of fest assertions.</li>
+ <li class=change-in-release>The JVM SDK itself uses for tests the <a href="https://joel-costigliola.github.io/assertj/">assertj</a> assertion methods instead of fest assertions.</li>
  <li class=change-in-release>{@code io.sphere.sdk.products.commands.updateactions.SetMetaAttributes} has been removed since it is deprecated in the commercetools platform.
  Use {@link SetMetaTitle},
  {@link SetMetaDescription},
@@ -1733,7 +1733,7 @@ PagedSearchResult<ProductProjection> result = client.execute(search);
  <h3>1.0.0-M6</h3>
 
  <ul>
- <li>Usage of <a href="http://javamoney.java.net/">Java money</a> instead of custom implementation.</li>
+ <li>Usage of <a href="https://javamoney.java.net/">Java money</a> instead of custom implementation.</li>
  <li>Introduce {@link io.sphere.sdk.products.queries.ProductProjectionQuery}.</li>
  <li>Introduce {@link io.sphere.sdk.meta.QueryDocumentation} to document the query API.</li>
  </ul>
