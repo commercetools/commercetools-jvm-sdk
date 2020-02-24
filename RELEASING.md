@@ -15,7 +15,7 @@
     
 1. https://oss.sonatype.org/ click "release" for commercetools/sphere stuff in "Staging Repositories"
 1. update GitHub release on https://github.com/commercetools/commercetools-jvm-sdk/releases
-1. add version badges to http://dev.commercetools.com/release-notes.html
+1. add version badges to https://docs.commercetools.com/release-notes.html
 1. update version in the GitHub README
 
 
@@ -26,4 +26,4 @@
 
 ## location of artefacts
 * https://oss.sonatype.org/content/repositories/snapshots/com/commercetools/sdk/jvm/core/commercetools-models/
-* http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22commercetools-models%22
+* https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22commercetools-models%22

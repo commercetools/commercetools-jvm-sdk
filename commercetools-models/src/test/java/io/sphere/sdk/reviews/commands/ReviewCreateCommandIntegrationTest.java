@@ -58,7 +58,7 @@ public class ReviewCreateCommandIntegrationTest extends IntegrationTest {
                 withProduct(client(), (Product product) -> {
                     withState(client(), StateDraft.of("initial-review-state", StateType.REVIEW_STATE), (State state) -> {
                         final CustomFieldsDraft extraFields = CustomFieldsDraft.ofTypeKeyAndObjects(type.getKey(), singletonMap("screenshotUrls",
-                                Collections.singleton("http://www.commercetools.com/assets/img/CT-logo.svg")));
+                                Collections.singleton("https://docs.commercetools.com/assets/img/CT-logo.svg")));
                         final ReviewDraft reviewDraft = ReviewDraftBuilder.ofTitle("Commercetools rocks")
                                 .authorName("John Smith")
                                 .text("It is great.")
@@ -77,7 +77,7 @@ public class ReviewCreateCommandIntegrationTest extends IntegrationTest {
 
                         assertThat(review.getAuthorName()).isEqualTo("John Smith");
                         assertThat(review.getCustom().getFieldAsStringSet("screenshotUrls"))
-                                .containsExactly("http://www.commercetools.com/assets/img/CT-logo.svg");
+                                .containsExactly("https://docs.commercetools.com/assets/img/CT-logo.svg");
                         assertThat(review.getCustomer()).isEqualTo(customer.toReference());
                         assertThat(review.getKey()).isEqualTo("review1");
                         assertThat(review.getUniquenessValue()).isEqualTo(product.getId() + "+" + customer.getId());

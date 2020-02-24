@@ -392,7 +392,7 @@ public class ProductFixtures {
     }
 
     private static AssetDraft getAssetDraft2() {
-        final AssetSource assetSource1 = AssetSourceBuilder.ofUri("http://dev.commercetools.com/assets/img/CT-logo.svg")
+        final AssetSource assetSource1 = AssetSourceBuilder.ofUri("https://docs.commercetools.com/assets/img/CT-logo.svg")
                 .key(randomKey())
                 .contentType("image/svg+xml")
                 .build();
@@ -404,6 +404,6 @@ public class ProductFixtures {
     }
 
     public static Image createExternalImage() {
-        return Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
+        return Image.ofWidthAndHeight("https://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
     }
 }

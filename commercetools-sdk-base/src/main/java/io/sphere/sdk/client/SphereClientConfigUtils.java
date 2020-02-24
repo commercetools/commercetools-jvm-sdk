@@ -53,8 +53,8 @@ final class SphereClientConfigUtils {
                         "export " + buildEnvKey(prefix, ENVIRONMENT_VARIABLE_CLIENT_ID_SUFFIX) + "=\"YOUR client id\"\n" +
                         "export " + buildEnvKey(prefix, ENVIRONMENT_VARIABLE_CLIENT_SECRET_SUFFIX) + "=\"YOUR client secret\"\n" +
                         "#optional:\n" +
-                        "export " + buildEnvKey(prefix, ENVIRONMENT_VARIABLE_API_URL_SUFFIX) + "=\"https://api.sphere.io\"\n" +
-                        "export " + buildEnvKey(prefix, ENVIRONMENT_VARIABLE_AUTH_URL_SUFFIX) + "=\"https://auth.sphere.io\"\n" +
+                        "export " + buildEnvKey(prefix, ENVIRONMENT_VARIABLE_API_URL_SUFFIX) + "=\"https://api.europe-west1.gcp.commercetools.com\"\n" +
+                        "export " + buildEnvKey(prefix, ENVIRONMENT_VARIABLE_AUTH_URL_SUFFIX) + "=\"https://auth.europe-west1.gcp.commercetools.com\"\n" +
                         "export " + buildEnvKey(prefix, ENVIRONMENT_VARIABLE_SCOPES_SUFFIX) + "=\"manage_project\""
         );
     }
@@ -107,8 +107,8 @@ final class SphereClientConfigUtils {
                         "" + buildPropKey(prefix, PROPERTIES_KEY_CLIENT_ID_SUFFIX) + "=YOUR client id\n" +
                         "" + buildPropKey(prefix, PROPERTIES_KEY_CLIENT_SECRET_SUFFIX) + "=YOUR client secret\n" +
                         "#optional:\n" +
-                        "" + buildPropKey(prefix, PROPERTIES_KEY_API_URL_SUFFIX) + "=https://api.sphere.io\n" +
-                        "" + buildPropKey(prefix, PROPERTIES_KEY_AUTH_URL_SUFFIX) + "=https://auth.sphere.io\n" +
+                        "" + buildPropKey(prefix, PROPERTIES_KEY_API_URL_SUFFIX) + "=https://api.europe-west1.gcp.commercetools.com\n" +
+                        "" + buildPropKey(prefix, PROPERTIES_KEY_AUTH_URL_SUFFIX) + "=https://auth.europe-west1.gcp.commercetools.com\n" +
                         "" + buildPropKey(prefix, PROPERTIES_KEY_SCOPES_SUFFIX) + "=manage_project" +
                         "#don't use quotes for the property values\n"
         );

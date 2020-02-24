@@ -192,7 +192,7 @@ Like for predicates, you can traverse the query model tree in the same way to sp
  <h3 id=pagination-for-large-offsets>Pagination for large offsets</h3>
 
  Using big offsets can slow down the query and has an impact on other requests since the DB is busy with that expensive query.
- See <a href="http://stackoverflow.com/a/7228190">http://stackoverflow.com/a/7228190 for more information.</a>
+ See <a href="https://stackoverflow.com/a/7228190">https://stackoverflow.com/a/7228190 for more information.</a>
 
  <p>For some cases, like iterating through a whole collection for imports/exports the offset parameter can be avoided by using a predicate id &gt; $lastId.</p>
 

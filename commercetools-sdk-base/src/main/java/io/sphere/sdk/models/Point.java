@@ -6,7 +6,7 @@ import java.util.Arrays;
 /**
  * Represents a GeoJSON point.
  *
- * @see <a href="http://geojson.org/geojson-spec.html#point">GeoJSON Point</a>
+ * @see <a href="https://geojson.org/geojson-spec.html#point">GeoJSON Point</a>
  */
 public interface Point extends GeoJSON {
     /**

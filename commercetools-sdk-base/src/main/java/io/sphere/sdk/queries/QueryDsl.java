@@ -87,7 +87,7 @@ public interface QueryDsl<T, C extends QueryDsl<T, C>> extends ResourceQuery<T>,
 
     /**
      * Creates a new instance which a limited amount of results.
-     * <p><a href="http://dev.commercetools.com/http-api.html#limit">Limit restrictions on the API.</a></p>
+     * <p><a href="https://docs.commercetools.com/http-api.html#limit">Limit restrictions on the API.</a></p>
      * @param limit the maximum amount of items of {@code T} which should be included in the {@link PagedQueryResult}.
      * @return copy of this item with modified limit settings
      * @see PagedQueryResult#getResults()
@@ -96,7 +96,7 @@ public interface QueryDsl<T, C extends QueryDsl<T, C>> extends ResourceQuery<T>,
 
     /**
      * Creates a new instance which a limited amount of results.
-     * <p><a href="http://dev.commercetools.com/http-api.html#limit">Limit restrictions on the API.</a></p>
+     * <p><a href="https://docs.commercetools.com/http-api.html#limit">Limit restrictions on the API.</a></p>
      * @param limit the maximum amount of items of {@code T} which should be included in the {@link PagedQueryResult}.
      * @return copy of this item with modified limit settings
      * @see PagedQueryResult#getResults()

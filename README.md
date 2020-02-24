@@ -2,25 +2,25 @@
 
 
 
-<img src="http://dev.commercetools.com/assets/img/CT-logo.svg" width="550px" alt="CT-logo"></img>
+<img src="https://docs.commercetools.com/assets/img/CT-logo.svg" width="550px" alt="CT-logo"></img>
 
 [![][travis img]][travis]
 [![][maven img]][maven]
 [![][snyk img]][snyk]
 [![][license img]][license]
 
-The JVM SDK enables developers to use Java 8 methods and objects to communicate with the [commercetools platform](http://www.commercetools.com/) (formerly SPHERE.IO) rather than using plain HTTP calls.
+The JVM SDK enables developers to use Java 8 methods and objects to communicate with the [commercetools platform](https://www.commercetools.com/) rather than using plain HTTP calls.
 Users gain type-safety, encapsulation, IDE auto completion and an internal domain specific language to discover and formulate valid requests.
 
 ## JDK compatibility
 Tested with JDKs: Oracle 1.8.0_221, OpenJDK 1.8.0_221 and Amazon Corretto 8.222.10.1.
 
 ## Using the SDK 
-* install [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-* (since May 19, 2016 new link) [<strong>Javadoc</strong>](http://commercetools.github.io/commercetools-jvm-sdk/apidocs/index.html), there you find also code snippets and insights
-    * [Getting Started](http://commercetools.github.io/commercetools-jvm-sdk/apidocs/io/sphere/sdk/meta/GettingStarted.html)
-    * [Release Notes](http://commercetools.github.io/commercetools-jvm-sdk/apidocs/io/sphere/sdk/meta/ReleaseNotes.html)
-    * [Contributing](http://commercetools.github.io/commercetools-jvm-sdk/apidocs/io/sphere/sdk/meta/ContributorDocumentation.html)
+* install [Java 8](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+* (since May 19, 2016 new link) [<strong>Javadoc</strong>](https://commercetools.github.io/commercetools-jvm-sdk/apidocs/index.html), there you find also code snippets and insights
+    * [Getting Started](https://commercetools.github.io/commercetools-jvm-sdk/apidocs/io/sphere/sdk/meta/GettingStarted.html)
+    * [Release Notes](https://commercetools.github.io/commercetools-jvm-sdk/apidocs/io/sphere/sdk/meta/ReleaseNotes.html)
+    * [Contributing](https://commercetools.github.io/commercetools-jvm-sdk/apidocs/io/sphere/sdk/meta/ContributorDocumentation.html)
  
 ## Installation
 
@@ -45,9 +45,9 @@ Tested with JDKs: Oracle 1.8.0_221, OpenJDK 1.8.0_221 and Amazon Corretto 8.222.
   <version>1.49.0</version>
 </dependency>
 ````
-* http://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-models%7C1.49.0%7Cjar
-* http://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-java-client%7C1.49.0%7Cjar
-* http://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-convenience%7C1.49.0%7Cjar
+* https://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-models%7C1.49.0%7Cjar
+* https://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-java-client%7C1.49.0%7Cjar
+* https://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-convenience%7C1.49.0%7Cjar
 
 ### Modules
 * `commercetools-java-client`: alias for commercetools-java-client-ahc-2_0
@@ -84,7 +84,7 @@ see https://github.com/commercetools/commercetools-jvm-sdk-scala-add-ons
 Useful code from external developers
 
 * https://github.com/commercetools/commercetools-jvm-sdk-contrib
-* contains also ProductImageUploadCommand from http://dev.commercetools.com/http-api-projects-products.html#upload-a-product-image
+* contains also ProductImageUploadCommand from https://docs.commercetools.com/http-api-projects-products.html#upload-a-product-image
 
 
 ## Short-term roadmap
@@ -125,7 +125,7 @@ Useful code from external developers
 
 ## Executing integration tests
 
-1. create a NEW API client in the Admin Center (`https://admin.sphere.io/YOUR_PROJECT_KEY/developers/clients`) with all available permissions (at the time of writing it is manage_payments manage_my_profile manage_orders view_products view_customers view_payments view_types manage_my_orders manage_types manage_customers manage_products view_orders manage_project), the by default created client has just `manage_project`
+1. create a NEW API client in the Admin Center (`https://mc.commercetools.com/YOUR_PROJECT_KEY/settings/developer/api-clients`) with all available permissions (at the time of writing it is manage_payments manage_my_profile manage_orders view_products view_customers view_payments view_types manage_my_orders manage_types manage_customers manage_products view_orders manage_project), the by default created client has just `manage_project`
 1. in the Admin Center in the "DANGER ZONE" activate the checkbox "ENABLE MESSAGES" within the "Messages Settings"
 1. set "de", "de-AT", "en" as languages in the Admin Center
 1. set at least one country in the Admin Center
@@ -136,8 +136,8 @@ Useful code from external developers
 projectKey=YOUR project key without quotes
 clientId=YOUR client id without quotes
 clientSecret=YOUR client secret without quotes
-apiUrl=https://api.sphere.io
-authUrl=https://auth.sphere.io
+apiUrl=https://api.europe-west1.gcp.commercetools.com
+authUrl=https://auth.europe-west1.gcp.commercetools.com
 ```
 
 1. use `./mvnw verify` to execute all integration tests
@@ -155,7 +155,7 @@ authUrl=https://auth.sphere.io
 [snyk]:https://snyk.io/test/github/commercetools/commercetools-jvm-sdk
 [snyk img]:https://snyk.io/test/github/commercetools/commercetools-jvm-sdk/badge.svg
 
-[maven]:http://search.maven.org/#search|gav|1|g:"com.commercetools.sdk.jvm.core"%20AND%20a:"commercetools-models"
+[maven]:https://search.maven.org/#search|gav|1|g:"com.commercetools.sdk.jvm.core"%20AND%20a:"commercetools-models"
 [maven img]:https://maven-badges.herokuapp.com/maven-central/com.commercetools.sdk.jvm.core/commercetools-models/badge.svg
 
 [license]:LICENSE.md

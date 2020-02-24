@@ -13,7 +13,7 @@ public final class SphereAsyncHttpClientFactory extends SphereHttpClientFactory 
     @Deprecated
     public static HttpClient create() {
         /*
-        http://static.javadoc.io/org.asynchttpclient/async-http-client/2.0.0-RC9/org/asynchttpclient/AsyncHttpClientConfig.html
+        https://static.javadoc.io/org.asynchttpclient/async-http-client/2.0.0-RC9/org/asynchttpclient/AsyncHttpClientConfig.html
          */
         final DefaultAsyncHttpClientConfig config = new DefaultAsyncHttpClientConfig.Builder()
                 .setEnabledProtocols(new String[]{"TLSv1.1", "TLSv1.2"})

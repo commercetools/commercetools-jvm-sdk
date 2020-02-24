@@ -10,7 +10,7 @@
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
@@ -339,7 +339,7 @@
                         <javaApiLinks>
                             <property>
                                 <name>api_${java.version}</name>
-                                <value>http://docs.oracle.com/javase/${java.major.version}/docs/api/</value>
+                                <value>https://docs.oracle.com/javase/${java.major.version}/docs/api/</value>
                             </property>
                         </javaApiLinks>
                     </configuration>
@@ -468,7 +468,7 @@
             </plugin>
             <plugin>
                 <!--
-                http://revapi.org/modules/revapi-maven-plugin/examples/comparing-specific-artifacts.html
+                https://revapi.org/modules/revapi-maven-plugin/examples/comparing-specific-artifacts.html
 
                 mvn clean package -Darguments="-DskipTests" -DskipTests -Pjavadoc-jdk-8u121
 

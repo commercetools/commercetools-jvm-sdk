@@ -25,7 +25,7 @@ import io.sphere.sdk.models.errors.InvalidJsonInputError;
  * <h3>Errors</h3>
  *
  * If a command cannot be performed due to unfulfilled preconditions
- * the platform can return one error response with multiple errors (<a href="http://dev.commercetools.io/http-api-errors.html">listing of error codes</a>).
+ * the platform can return one error response with multiple errors (<a href="https://docs.commercetools.com/http-api-errors.html">listing of error codes</a>).
  * The JVM SDK will then put a {@link io.sphere.sdk.client.ErrorResponseException} into a {@link java.util.concurrent.CompletionStage}.
  *
  * The following example shows how to distinguish errors by error code:

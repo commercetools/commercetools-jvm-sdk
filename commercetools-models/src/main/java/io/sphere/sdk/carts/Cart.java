@@ -52,7 +52,7 @@ public interface Cart extends CartLike<Cart> {
      * @return ID of this resource type
      */
     static String resourceTypeId() {
-        return "order";//sic http://dev.commercetools.io/http-api-projects-custom-fields.html#customizable-resource
+        return "order";//sic https://docs.commercetools.com/http-api-projects-custom-fields.html#customizable-resource
     }
 
     /**

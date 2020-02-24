@@ -96,7 +96,7 @@ public class CustomerSignInCommandIntegrationTest extends CustomerIntegrationTes
     @Test
     public void executionWithInvalidEmail() throws Exception {
         withCustomer(client(), customer -> {
-            assertThatThrownBy(() -> client().executeBlocking(CustomerSignInCommand.of("notpresent@null.sphere.io", PASSWORD)))
+            assertThatThrownBy(() -> client().executeBlocking(CustomerSignInCommand.of("notpresent@null.europe-west1.gcp.commercetools.com", PASSWORD)))
                     .isInstanceOf(ErrorResponseException.class)
                     .matches(e -> ((ErrorResponseException) e).hasErrorCode(CustomerInvalidCredentials.CODE));
         });

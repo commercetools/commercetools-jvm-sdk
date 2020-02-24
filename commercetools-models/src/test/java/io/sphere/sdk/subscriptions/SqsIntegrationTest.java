@@ -60,7 +60,7 @@ public abstract class SqsIntegrationTest extends SubscriptionIntegrationTest {
 
     /**
      * Waits for the test subscription message.
-     * (as documented at http://dev.commercetools.com/http-api-projects-subscriptions.html#create-a-subscription)
+     * (as documented at https://docs.commercetools.com/http-api-projects-subscriptions.html#create-a-subscription)
      */
     protected void waitForSubscriptionTestMessage() {
         assertEventually(() -> {

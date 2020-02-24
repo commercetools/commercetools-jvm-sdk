@@ -28,7 +28,7 @@ import java.util.function.Supplier;
  <p>Using futures (We use it here as synonym for {@link java.util.concurrent.CompletableFuture} and {@link java.util.concurrent.CompletionStage}.) can be very handy for executing code in parallel.</p>
 
  <p>You can use future APIs to run code in separate Threads so that the result will not be immediately available, but in the future.
- The overhead of creating a future can be lower than the <a href="http://stackoverflow.com/a/5483105">overhead of creating new Thread</a>.</p>
+ The overhead of creating a future can be lower than the <a href="https://stackoverflow.com/a/5483105">overhead of creating new Thread</a>.</p>
 
  <h3 id="mixing-async-and-sync">Mixing synchronous and asynchronous computations</h3>
 
@@ -491,13 +491,13 @@ Since Java 8, the JDK provides <a href="https://docs.oracle.com/javase/tutorial/
  handle for recover, ergebnis kann noch mal angepasst werden im nächsten stage
  handle kann auch optional zuruückgeben
 
- http://stackoverflow.com/questions/25338376/completablefuture-withfallback-handle-only-some-errors
+ https://stackoverflow.com/questions/25338376/completablefuture-withfallback-handle-only-some-errors
 
  side effect, log error
 
  timeout with exception
  timeout with defaultvalue
- http://stackoverflow.com/questions/23575067/timeout-with-default-value-in-java-8-completablefuture
+ https://stackoverflow.com/questions/23575067/timeout-with-default-value-in-java-8-completablefuture
 
  rethrow exception if not matching
 
@@ -1292,10 +1292,10 @@ onSuccess
  <h3 id="further-sources">Further read and sources</h3>
 
 <ul>
- <li><a href="http://docs.oracle.com/javase/8/docs/api/index.html?java/util/concurrent/CompletableFuture.html">CompletableFuture</a></li>
- <li><a href="http://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletionStage.html">CompletionStage</a></li>
- <li><a href="http://www.nurkiewicz.com/2013/05/java-8-definitive-guide-to.html">Java 8: Definitive guide to CompletableFuture</a></li>
- <li><a href="http://www.nurkiewicz.com/2013/05/java-8-completablefuture-in-action.html">Java 8: CompletableFuture in action</a></li>
+ <li><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/concurrent/CompletableFuture.html">CompletableFuture</a></li>
+ <li><a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletionStage.html">CompletionStage</a></li>
+ <li><a href="https://www.nurkiewicz.com/2013/05/java-8-definitive-guide-to.html">Java 8: Definitive guide to CompletableFuture</a></li>
+ <li><a href="https://www.nurkiewicz.com/2013/05/java-8-completablefuture-in-action.html">Java 8: CompletableFuture in action</a></li>
  </ul>
 
 

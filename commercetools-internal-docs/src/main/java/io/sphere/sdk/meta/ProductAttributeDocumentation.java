@@ -180,7 +180,7 @@ import io.sphere.sdk.products.attributes.AttributeAccess;
 
  {@include.example io.sphere.sdk.producttypes.NestedAttributeIntegrationTest}
 
- <p>A general explanation can be found in the  <a href="http://dev.commercetools.io/tutorials-nested-types.html">HTTP API tutorial</a>.</p>
+ <p>A general explanation can be found in the  <a href="https://docs.commercetools.com/tutorial-nested-types.html">HTTP API tutorial</a>.</p>
  */
 public final class ProductAttributeDocumentation {
     private ProductAttributeDocumentation() {

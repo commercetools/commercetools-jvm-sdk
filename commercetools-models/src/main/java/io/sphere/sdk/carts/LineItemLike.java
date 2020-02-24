@@ -27,7 +27,7 @@ public interface LineItemLike extends Custom {
      *
      * Gets discount information for groups of line items.
      *
-     * See also <a href="http://stackoverflow.com/a/35576069/5320693" target="_blank">more infos at stackoverflow</a>.
+     * See also <a href="https://stackoverflow.com/a/35576069/5320693" target="_blank">more infos at stackoverflow</a>.
      *
      * @return discount infos
      */
