@@ -30,7 +30,6 @@ class KeyReferenceImpl<T> extends Base implements KeyReference<T> {
         return typeId;
     }
     
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Nullable
     public T getObj() {
         return obj;

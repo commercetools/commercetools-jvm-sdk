@@ -47,7 +47,6 @@ public interface Reference<T> extends Referenceable<T>, Identifiable<T>, Resourc
      *
      * @return The value of the referenced object or null.
      */
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Nullable
     T getObj();
 

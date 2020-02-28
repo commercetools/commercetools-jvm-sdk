@@ -9,6 +9,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
+import io.sphere.sdk.models.KeyReference;
+import io.sphere.sdk.models.Reference;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -75,7 +77,9 @@ public final class SphereJsonUtils {
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
                 .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
                 .configure(MapperFeature.USE_GETTERS_AS_SETTERS, false)
-                .setSerializationInclusion(JsonInclude.Include.NON_NULL);
+                .setSerializationInclusion(JsonInclude.Include.NON_NULL)
+                .addMixIn(Reference.class, ReferenceMixIn.class)
+                .addMixIn(KeyReference.class, ReferenceMixIn.class);
     }
 
     /**
