@@ -20,7 +20,6 @@ public interface KeyReference<T>  {
      */
     String getTypeId();
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Nullable
     T getObj();
     

@@ -28,7 +28,6 @@ final class ReferenceImpl<T> extends Base implements Reference<T> {
     }
 
     @Nullable
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public T getObj() {
         return obj;
     }
