@@ -155,6 +155,11 @@ import java.util.function.Function;
  -->
  -->
 
+ <h3 class=released-version id="v1_50_0">1.50.0 (05.03.2020)</h3>
+ <ul>
+ <li class=fixed-in-release>Replace old default ct urls (https://api.sphere.io, https://auth.sphere.io) with new default urls (https://api.europe-west1.gcp.commercetools.com, https://auth.europe-west1.gcp.commercetools.com)</li>
+ </ul>
+
  <h3 class=released-version id="v1_49_0">1.49.0 (16.01.2020)</h3>
  <ul>
     <li class=fixed-in-release>{@link TransactionDraftDsl} is now public</li>
