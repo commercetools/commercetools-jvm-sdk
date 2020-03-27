@@ -350,6 +350,7 @@ public class ProductFixtures {
                     .prices(priceDrafts)
                     .build();
             final ProductDraft productDraft = ProductDraftBuilder.of(productType,  randomSlug(),  randomSlug(), masterVariant)
+                    .publish(true)
                     .build();
             ProductFixtures.withProduct(client, () -> productDraft, productConsumer);
         });
