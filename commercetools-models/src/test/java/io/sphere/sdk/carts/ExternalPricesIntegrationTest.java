@@ -15,6 +15,7 @@ import static io.sphere.sdk.carts.CartFixtures.withCartWithLineItems;
 import static io.sphere.sdk.carts.CartFixtures.withEmptyCartAndProduct;
 import static io.sphere.sdk.carts.LineItemPriceMode.*;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
+import static io.sphere.sdk.products.ProductFixtures.withTaxedProduct;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,7 +24,7 @@ public class ExternalPricesIntegrationTest extends IntegrationTest {
 
     @Test
     public void createCartWithALineItemWithAnExternalPrice() {
-        withProduct(client(), product -> {
+        withTaxedProduct(client(), product -> {
             final int quantity = 5;
             final int variantId = 1;
             final MonetaryAmount externalPrice = EURO_12;
@@ -40,7 +41,7 @@ public class ExternalPricesIntegrationTest extends IntegrationTest {
 
     @Test
     public void createCartWithALineItemWithExternalTotalPrice() {
-        withProduct(client(), product -> {
+        withTaxedProduct(client(), product -> {
             final int quantity = 5;
             final int variantId = 1;
             final MonetaryAmount price = EURO_20;
@@ -117,7 +118,7 @@ public class ExternalPricesIntegrationTest extends IntegrationTest {
 
     @Test
     public void removeLineItemWithExternalPrice() throws Exception {
-        withProduct(client(), product -> {
+        withTaxedProduct(client(), product -> {
             final int quantity = 5;
             final int variantId = 1;
             final MonetaryAmount initialExternalPrice = EURO_20;
@@ -140,7 +141,7 @@ public class ExternalPricesIntegrationTest extends IntegrationTest {
 
     @Test
     public void removeLineItemWithExternalTotalPrice() throws Exception {
-        withProduct(client(), product -> {
+        withTaxedProduct(client(), product -> {
             final int quantity = 5;
             final int variantId = 1;
             final MonetaryAmount price = EURO_1;
@@ -168,7 +169,7 @@ public class ExternalPricesIntegrationTest extends IntegrationTest {
 
     @Test
     public void changeLineItemQuantityWithExternalPrice() throws Exception {
-        withProduct(client(), product -> {
+        withTaxedProduct(client(), product -> {
             final int quantity = 5;
             final int variantId = 1;
             final MonetaryAmount initialExternalPrice = EURO_20;
@@ -192,7 +193,7 @@ public class ExternalPricesIntegrationTest extends IntegrationTest {
 
     @Test
     public void changeLineItemQuantityWithExternalTotalPrice() throws Exception {
-        withProduct(client(), product -> {
+        withTaxedProduct(client(), product -> {
             final int quantity = 5;
             final int variantId = 1;
             final MonetaryAmount price = EURO_1;
