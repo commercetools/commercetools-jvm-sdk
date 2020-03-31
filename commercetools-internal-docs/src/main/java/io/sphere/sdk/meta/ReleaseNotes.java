@@ -154,7 +154,7 @@ import java.util.function.Function;
  </ul>
  -->
  -->
- <h3 class=released-version id="v1_50_1">1.50.1 (31.03.2020)</h3>
+ <h3 class=released-version id="v1_51_0">1.51.0 (31.03.2020)</h3>
  <ul>
  <li class=fixed-in-release>Fix formatting of {@link GeoJSONQueryModel#withinCircle(Point, Double)} with default locale not using '.' as decimal delimiter.</li>
  </ul>
