@@ -375,6 +375,12 @@
   <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;? extends <a href="../../../../../io/sphere/sdk/commands/UpdateAction.html" title="interface in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&gt;&nbsp;updateActions)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerChangePasswordCommand</a></code></td>
+<td class="colLast"><span class="typeNameLabel">CustomerChangePasswordCommand.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html#of-io.sphere.sdk.models.Versioned-java.lang.String-java.lang.String-">of</a></span>(<a href="../../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;customer,
+  <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;currentPassword,
+  <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;newPassword)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/customers/commands/CustomerPasswordResetCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerPasswordResetCommand</a></code></td>
 <td class="colLast"><span class="typeNameLabel">CustomerPasswordResetCommand.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerPasswordResetCommand.html#of-io.sphere.sdk.models.Versioned-java.lang.String-java.lang.String-">of</a></span>(<a href="../../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;customer,
   <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;tokenValue,
@@ -383,12 +389,6 @@
 <div class="block"><span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/customers/commands/CustomerPasswordResetCommand.html#ofTokenAndPassword-java.lang.String-java.lang.String-"><code>CustomerPasswordResetCommand.ofTokenAndPassword(String, String)</code></a> instead</span></div>
 </div>
 </td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerChangePasswordCommand</a></code></td>
-<td class="colLast"><span class="typeNameLabel">CustomerChangePasswordCommand.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html#of-io.sphere.sdk.models.Versioned-java.lang.String-java.lang.String-">of</a></span>(<a href="../../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;customer,
-  <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;currentPassword,
-  <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</a>&nbsp;newPassword)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/customers/commands/CustomerInStoreUpdateCommand.html" title="interface in io.sphere.sdk.customers.commands">CustomerInStoreUpdateCommand</a></code></td>
@@ -528,7 +528,7 @@
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&gt;</code></td>
-<td class="colLast"><span class="typeNameLabel">CustomerInStoreByPasswordTokenGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerInStoreByPasswordTokenGet.html#expansionPaths--">expansionPaths</a></span>()</code>&nbsp;</td>
+<td class="colLast"><span class="typeNameLabel">CustomerByPasswordTokenGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByPasswordTokenGet.html#expansionPaths--">expansionPaths</a></span>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code><a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&gt;</code></td>
@@ -536,19 +536,19 @@
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&gt;</code></td>
-<td class="colLast"><span class="typeNameLabel">CustomerByPasswordTokenGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByPasswordTokenGet.html#expansionPaths--">expansionPaths</a></span>()</code>&nbsp;</td>
+<td class="colLast"><span class="typeNameLabel">CustomerByEmailTokenGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByEmailTokenGet.html#expansionPaths--">expansionPaths</a></span>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code><a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&gt;</code></td>
-<td class="colLast"><span class="typeNameLabel">CustomerByEmailTokenGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByEmailTokenGet.html#expansionPaths--">expansionPaths</a></span>()</code>&nbsp;</td>
+<td class="colLast"><span class="typeNameLabel">CustomerInStoreByPasswordTokenGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerInStoreByPasswordTokenGet.html#expansionPaths--">expansionPaths</a></span>()</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&gt;</code></td>
-<td class="colLast"><span class="typeNameLabel">CustomerByKeyGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByKeyGet.html#expansionPaths--">expansionPaths</a></span>()</code>&nbsp;</td>
+<td class="colLast"><span class="typeNameLabel">CustomerByIdGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByIdGet.html#expansionPaths--">expansionPaths</a></span>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code><a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&gt;</code></td>
-<td class="colLast"><span class="typeNameLabel">CustomerByIdGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByIdGet.html#expansionPaths--">expansionPaths</a></span>()</code>&nbsp;</td>
+<td class="colLast"><span class="typeNameLabel">CustomerByKeyGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByKeyGet.html#expansionPaths--">expansionPaths</a></span>()</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="interface in io.sphere.sdk.queries">StringQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;</code></td>
@@ -636,28 +636,28 @@
 <td class="colLast"><span class="typeNameLabel">CustomerByIdGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByIdGet.html#of-io.sphere.sdk.models.Identifiable-">of</a></span>(<a href="../../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;resource)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/customers/queries/CustomerInStoreByPasswordTokenGet.html" title="interface in io.sphere.sdk.customers.queries">CustomerInStoreByPasswordTokenGet</a></code></td>
-<td class="colLast"><span class="typeNameLabel">CustomerInStoreByPasswordTokenGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerInStoreByPasswordTokenGet.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">plusExpansionPaths</a></span>(<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;expansionPath)</code>&nbsp;</td>
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByPasswordTokenGet.html" title="interface in io.sphere.sdk.customers.queries">CustomerByPasswordTokenGet</a></code></td>
+<td class="colLast"><span class="typeNameLabel">CustomerByPasswordTokenGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByPasswordTokenGet.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">plusExpansionPaths</a></span>(<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;expansionPath)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/customers/queries/CustomerInStoreByEmailTokenGet.html" title="interface in io.sphere.sdk.customers.queries">CustomerInStoreByEmailTokenGet</a></code></td>
 <td class="colLast"><span class="typeNameLabel">CustomerInStoreByEmailTokenGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerInStoreByEmailTokenGet.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">plusExpansionPaths</a></span>(<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;expansionPath)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByPasswordTokenGet.html" title="interface in io.sphere.sdk.customers.queries">CustomerByPasswordTokenGet</a></code></td>
-<td class="colLast"><span class="typeNameLabel">CustomerByPasswordTokenGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByPasswordTokenGet.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">plusExpansionPaths</a></span>(<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;expansionPath)</code>&nbsp;</td>
-</tr>
-<tr class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByEmailTokenGet.html" title="interface in io.sphere.sdk.customers.queries">CustomerByEmailTokenGet</a></code></td>
 <td class="colLast"><span class="typeNameLabel">CustomerByEmailTokenGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByEmailTokenGet.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">plusExpansionPaths</a></span>(<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;expansionPath)</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByKeyGet.html" title="interface in io.sphere.sdk.customers.queries">CustomerByKeyGet</a></code></td>
-<td class="colLast"><span class="typeNameLabel">CustomerByKeyGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByKeyGet.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">plusExpansionPaths</a></span>(<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;expansionPath)</code>&nbsp;</td>
-</tr>
 <tr class="altColor">
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/customers/queries/CustomerInStoreByPasswordTokenGet.html" title="interface in io.sphere.sdk.customers.queries">CustomerInStoreByPasswordTokenGet</a></code></td>
+<td class="colLast"><span class="typeNameLabel">CustomerInStoreByPasswordTokenGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerInStoreByPasswordTokenGet.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">plusExpansionPaths</a></span>(<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;expansionPath)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByIdGet.html" title="interface in io.sphere.sdk.customers.queries">CustomerByIdGet</a></code></td>
 <td class="colLast"><span class="typeNameLabel">CustomerByIdGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByIdGet.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">plusExpansionPaths</a></span>(<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;expansionPath)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByKeyGet.html" title="interface in io.sphere.sdk.customers.queries">CustomerByKeyGet</a></code></td>
+<td class="colLast"><span class="typeNameLabel">CustomerByKeyGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByKeyGet.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">plusExpansionPaths</a></span>(<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;expansionPath)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/customers/queries/CustomerInStoreQueryBuilder.html" title="class in io.sphere.sdk.customers.queries">CustomerInStoreQueryBuilder</a></code></td>
@@ -844,29 +844,29 @@
 <td class="colLast"><span class="typeNameLabel">CustomerQueryBuilder.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerQueryBuilder.html#sortMulti-java.util.function.Function-">sortMulti</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Function.html?is-external=true" title="class or interface in java.util.function">Function</a>&lt;<a href="../../../../../io/sphere/sdk/customers/queries/CustomerQueryModel.html" title="interface in io.sphere.sdk.customers.queries">CustomerQueryModel</a>,<a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&gt;&gt;&nbsp;m)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/customers/queries/CustomerInStoreByPasswordTokenGet.html" title="interface in io.sphere.sdk.customers.queries">CustomerInStoreByPasswordTokenGet</a></code></td>
-<td class="colLast"><span class="typeNameLabel">CustomerInStoreByPasswordTokenGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerInStoreByPasswordTokenGet.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths</a></span>(<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;expansionPath)</code>&nbsp;</td>
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByPasswordTokenGet.html" title="interface in io.sphere.sdk.customers.queries">CustomerByPasswordTokenGet</a></code></td>
+<td class="colLast"><span class="typeNameLabel">CustomerByPasswordTokenGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByPasswordTokenGet.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths</a></span>(<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;expansionPath)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/customers/queries/CustomerInStoreByEmailTokenGet.html" title="interface in io.sphere.sdk.customers.queries">CustomerInStoreByEmailTokenGet</a></code></td>
 <td class="colLast"><span class="typeNameLabel">CustomerInStoreByEmailTokenGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerInStoreByEmailTokenGet.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths</a></span>(<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;expansionPath)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByPasswordTokenGet.html" title="interface in io.sphere.sdk.customers.queries">CustomerByPasswordTokenGet</a></code></td>
-<td class="colLast"><span class="typeNameLabel">CustomerByPasswordTokenGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByPasswordTokenGet.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths</a></span>(<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;expansionPath)</code>&nbsp;</td>
-</tr>
-<tr class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByEmailTokenGet.html" title="interface in io.sphere.sdk.customers.queries">CustomerByEmailTokenGet</a></code></td>
 <td class="colLast"><span class="typeNameLabel">CustomerByEmailTokenGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByEmailTokenGet.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths</a></span>(<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;expansionPath)</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByKeyGet.html" title="interface in io.sphere.sdk.customers.queries">CustomerByKeyGet</a></code></td>
-<td class="colLast"><span class="typeNameLabel">CustomerByKeyGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByKeyGet.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths</a></span>(<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;expansionPath)</code>&nbsp;</td>
-</tr>
 <tr class="altColor">
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/customers/queries/CustomerInStoreByPasswordTokenGet.html" title="interface in io.sphere.sdk.customers.queries">CustomerInStoreByPasswordTokenGet</a></code></td>
+<td class="colLast"><span class="typeNameLabel">CustomerInStoreByPasswordTokenGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerInStoreByPasswordTokenGet.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths</a></span>(<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;expansionPath)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByIdGet.html" title="interface in io.sphere.sdk.customers.queries">CustomerByIdGet</a></code></td>
 <td class="colLast"><span class="typeNameLabel">CustomerByIdGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByIdGet.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths</a></span>(<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;expansionPath)</code>&nbsp;</td>
 </tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByKeyGet.html" title="interface in io.sphere.sdk.customers.queries">CustomerByKeyGet</a></code></td>
+<td class="colLast"><span class="typeNameLabel">CustomerByKeyGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByKeyGet.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths</a></span>(<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;expansionPath)</code>&nbsp;</td>
+</tr>
 <tr class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/customers/queries/CustomerInStoreQuery.html" title="interface in io.sphere.sdk.customers.queries">CustomerInStoreQuery</a></code></td>
 <td class="colLast"><span class="typeNameLabel">CustomerInStoreQuery.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerInStoreQuery.html#withExpansionPaths-java.util.function.Function-">withExpansionPaths</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Function.html?is-external=true" title="class or interface in java.util.function">Function</a>&lt;<a href="../../../../../io/sphere/sdk/customers/expansion/CustomerExpansionModel.html" title="interface in io.sphere.sdk.customers.expansion">CustomerExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;,<a href="../../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html" title="interface in io.sphere.sdk.expansion">ExpansionPathContainer</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&gt;&nbsp;m)</code>&nbsp;</td>
@@ -882,30 +882,30 @@
 <tr class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/customers/queries/CustomerQuery.html" title="interface in io.sphere.sdk.customers.queries">CustomerQuery</a></code></td>
 <td class="colLast"><span class="typeNameLabel">CustomerQuery.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerQuery.html#withExpansionPaths-java.util.function.Function-">withExpansionPaths</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Function.html?is-external=true" title="class or interface in java.util.function">Function</a>&lt;<a href="../../../../../io/sphere/sdk/customers/expansion/CustomerExpansionModel.html" title="interface in io.sphere.sdk.customers.expansion">CustomerExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;,<a href="../../../../../io/sphere/sdk/expansion/ExpansionPathContainer.html" title="interface in io.sphere.sdk.expansion">ExpansionPathContainer</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&gt;&nbsp;m)</code>&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/customers/queries/CustomerInStoreByPasswordTokenGet.html" title="interface in io.sphere.sdk.customers.queries">CustomerInStoreByPasswordTokenGet</a></code></td>
-<td class="colLast"><span class="typeNameLabel">CustomerInStoreByPasswordTokenGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerInStoreByPasswordTokenGet.html#withExpansionPaths-java.util.List-">withExpansionPaths</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&gt;&nbsp;expansionPaths)</code>&nbsp;</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/customers/queries/CustomerInStoreByEmailTokenGet.html" title="interface in io.sphere.sdk.customers.queries">CustomerInStoreByEmailTokenGet</a></code></td>
-<td class="colLast"><span class="typeNameLabel">CustomerInStoreByEmailTokenGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerInStoreByEmailTokenGet.html#withExpansionPaths-java.util.List-">withExpansionPaths</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&gt;&nbsp;expansionPaths)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByPasswordTokenGet.html" title="interface in io.sphere.sdk.customers.queries">CustomerByPasswordTokenGet</a></code></td>
 <td class="colLast"><span class="typeNameLabel">CustomerByPasswordTokenGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByPasswordTokenGet.html#withExpansionPaths-java.util.List-">withExpansionPaths</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&gt;&nbsp;expansionPaths)</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/customers/queries/CustomerInStoreByEmailTokenGet.html" title="interface in io.sphere.sdk.customers.queries">CustomerInStoreByEmailTokenGet</a></code></td>
+<td class="colLast"><span class="typeNameLabel">CustomerInStoreByEmailTokenGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerInStoreByEmailTokenGet.html#withExpansionPaths-java.util.List-">withExpansionPaths</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&gt;&nbsp;expansionPaths)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByEmailTokenGet.html" title="interface in io.sphere.sdk.customers.queries">CustomerByEmailTokenGet</a></code></td>
 <td class="colLast"><span class="typeNameLabel">CustomerByEmailTokenGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByEmailTokenGet.html#withExpansionPaths-java.util.List-">withExpansionPaths</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&gt;&nbsp;expansionPaths)</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByKeyGet.html" title="interface in io.sphere.sdk.customers.queries">CustomerByKeyGet</a></code></td>
-<td class="colLast"><span class="typeNameLabel">CustomerByKeyGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByKeyGet.html#withExpansionPaths-java.util.List-">withExpansionPaths</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&gt;&nbsp;expansionPaths)</code>&nbsp;</td>
-</tr>
 <tr class="altColor">
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/customers/queries/CustomerInStoreByPasswordTokenGet.html" title="interface in io.sphere.sdk.customers.queries">CustomerInStoreByPasswordTokenGet</a></code></td>
+<td class="colLast"><span class="typeNameLabel">CustomerInStoreByPasswordTokenGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerInStoreByPasswordTokenGet.html#withExpansionPaths-java.util.List-">withExpansionPaths</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&gt;&nbsp;expansionPaths)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByIdGet.html" title="interface in io.sphere.sdk.customers.queries">CustomerByIdGet</a></code></td>
 <td class="colLast"><span class="typeNameLabel">CustomerByIdGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByIdGet.html#withExpansionPaths-java.util.List-">withExpansionPaths</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&gt;&nbsp;expansionPaths)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByKeyGet.html" title="interface in io.sphere.sdk.customers.queries">CustomerByKeyGet</a></code></td>
+<td class="colLast"><span class="typeNameLabel">CustomerByKeyGet.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/queries/CustomerByKeyGet.html#withExpansionPaths-java.util.List-">withExpansionPaths</a></span>(<a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html?is-external=true" title="class or interface in java.util">List</a>&lt;<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&gt;&nbsp;expansionPaths)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/customers/queries/CustomerInStoreQuery.html" title="interface in io.sphere.sdk.customers.queries">CustomerInStoreQuery</a></code></td>
@@ -1027,11 +1027,11 @@
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;</code></td>
-<td class="colLast"><span class="typeNameLabel">PaymentDraftBuilder.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/payments/PaymentDraftBuilder.html#getCustomer--">getCustomer</a></span>()</code>&nbsp;</td>
+<td class="colLast"><span class="typeNameLabel">PaymentDraftDsl.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/payments/PaymentDraftDsl.html#getCustomer--">getCustomer</a></span>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;</code></td>
-<td class="colLast"><span class="typeNameLabel">PaymentDraftDsl.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/payments/PaymentDraftDsl.html#getCustomer--">getCustomer</a></span>()</code>&nbsp;</td>
+<td class="colLast"><span class="typeNameLabel">PaymentDraftBuilder.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/payments/PaymentDraftBuilder.html#getCustomer--">getCustomer</a></span>()</code>&nbsp;</td>
 </tr>
 </tbody>
 </table>
@@ -1211,19 +1211,19 @@
 <tbody>
 <tr class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;</code></td>
-<td class="colLast"><span class="typeNameLabel">ShoppingList.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/shoppinglists/ShoppingList.html#getCustomer--">getCustomer</a></span>()</code>&nbsp;</td>
+<td class="colLast"><span class="typeNameLabel">ShoppingListDraft.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/shoppinglists/ShoppingListDraft.html#getCustomer--">getCustomer</a></span>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;</code></td>
-<td class="colLast"><span class="typeNameLabel">ShoppingListDraft.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/shoppinglists/ShoppingListDraft.html#getCustomer--">getCustomer</a></span>()</code>&nbsp;</td>
+<td class="colLast"><span class="typeNameLabel">ShoppingList.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/shoppinglists/ShoppingList.html#getCustomer--">getCustomer</a></span>()</code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;</code></td>
-<td class="colLast"><span class="typeNameLabel">ShoppingListDraftBuilder.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/shoppinglists/ShoppingListDraftBuilder.html#getCustomer--">getCustomer</a></span>()</code>&nbsp;</td>
+<td class="colLast"><span class="typeNameLabel">ShoppingListDraftDsl.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/shoppinglists/ShoppingListDraftDsl.html#getCustomer--">getCustomer</a></span>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/models/Reference.html" title="interface in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;</code></td>
-<td class="colLast"><span class="typeNameLabel">ShoppingListDraftDsl.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/shoppinglists/ShoppingListDraftDsl.html#getCustomer--">getCustomer</a></span>()</code>&nbsp;</td>
+<td class="colLast"><span class="typeNameLabel">ShoppingListDraftBuilder.</span><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/shoppinglists/ShoppingListDraftBuilder.html#getCustomer--">getCustomer</a></span>()</code>&nbsp;</td>
 </tr>
 </tbody>
 </table>
