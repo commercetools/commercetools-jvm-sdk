@@ -10,6 +10,7 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedStringEntry;
 
 import javax.annotation.Nullable;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -310,6 +311,14 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     @Override
     public C plusExpansionPaths(final Function<E, ExpansionPathContainer<T>> m) {
         return plusExpansionPaths(m.apply(expansionModel).expansionPaths());
+    }
+
+    @Override
+    public C withAdditionalQueryParameter(final NameValuePair pair) {
+        final List<NameValuePair> params = additionalQueryParameters();
+        final List<NameValuePair> resultingParameters = new LinkedList<>(params);
+        resultingParameters.add(pair);
+        return withAdditionalQueryParameters(resultingParameters);
     }
 
     protected C withAdditionalQueryParameters(final List<NameValuePair> pairs) {
