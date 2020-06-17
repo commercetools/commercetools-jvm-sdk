@@ -22,6 +22,8 @@ public interface ExternalTaxRateDraft {
     @Nullable
     String getState();
 
+    Boolean isIncludedInPrice();
+
     /**
      * For countries (e.g. the US) where the total tax is a combination of multiple taxes (e.g. state and local taxes).
      * @return sub rates or null
