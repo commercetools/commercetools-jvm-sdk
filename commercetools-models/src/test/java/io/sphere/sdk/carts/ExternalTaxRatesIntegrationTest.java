@@ -145,7 +145,7 @@ public class ExternalTaxRatesIntegrationTest extends IntegrationTest {
                 final String taxRateName = "special tax";
                 final double taxRate = 0.20;
                 final ExternalTaxRateDraft externalTaxRate =
-                        ExternalTaxRateDraftBuilder.ofAmount(taxRate, taxRateName, DE).includedInPrice(true).build();
+                        ExternalTaxRateDraftBuilder.ofAmount(taxRate, taxRateName, DE).includedInPrice(false).build();
 
                 final SetLineItemTaxRate setLineItemTaxRate = SetLineItemTaxRate.of(lineItem.getId(), externalTaxRate);
                 final Cart cartWithTaxedLineItem =
@@ -153,7 +153,7 @@ public class ExternalTaxRatesIntegrationTest extends IntegrationTest {
 
                 final LineItem taxedLineItem = cartWithTaxedLineItem.getLineItems().get(0);
                 assertThat(taxedLineItem.getTaxRate().getName()).isEqualTo(taxRateName);
-                assertThat(taxedLineItem.getTaxRate().isIncludedInPrice()).isEqualTo(true);
+                assertThat(taxedLineItem.getTaxRate().isIncludedInPrice()).isEqualTo(false);
                 assertThat(taxedLineItem.getTotalPrice()).isEqualTo(EURO_30);
                 assertThat(taxedLineItem.getTaxedPrice().getTotalGross()).isEqualTo(EURO_36);
                 assertThat(taxedLineItem.getTaxedPrice().getTotalNet()).isEqualTo(EURO_30);
