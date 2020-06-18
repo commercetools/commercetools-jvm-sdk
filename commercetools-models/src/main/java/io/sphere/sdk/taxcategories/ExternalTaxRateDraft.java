@@ -22,6 +22,7 @@ public interface ExternalTaxRateDraft {
     @Nullable
     String getState();
 
+    @Nullable
     Boolean isIncludedInPrice();
 
     /**

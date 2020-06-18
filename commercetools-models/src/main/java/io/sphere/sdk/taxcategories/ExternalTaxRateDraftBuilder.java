@@ -16,6 +16,7 @@ public final class ExternalTaxRateDraftBuilder extends Base implements Builder<E
     private String state;
     @Nullable
     private List<SubRate> subRates;
+    @Nullable
     private Boolean includedInPrice;
 
     private ExternalTaxRateDraftBuilder(final String name, final CountryCode country) {
