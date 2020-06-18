@@ -16,6 +16,8 @@ public final class ExternalTaxRateDraftBuilder extends Base implements Builder<E
     private String state;
     @Nullable
     private List<SubRate> subRates;
+    @Nullable
+    private Boolean includedInPrice;
 
     private ExternalTaxRateDraftBuilder(final String name, final CountryCode country) {
         this.name = name;
@@ -45,8 +47,13 @@ public final class ExternalTaxRateDraftBuilder extends Base implements Builder<E
         return this;
     }
 
+    public ExternalTaxRateDraftBuilder includedInPrice(final Boolean includedInPrice) {
+        this.includedInPrice = includedInPrice;
+        return this;
+    }
+
     @Override
     public ExternalTaxRateDraft build() {
-        return new ExternalTaxRateDraftImpl(amount, name, country, state, subRates);
+        return new ExternalTaxRateDraftImpl(amount, name, country, state, subRates, includedInPrice);
     }
 }

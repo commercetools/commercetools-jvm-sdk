@@ -118,10 +118,7 @@ import io.sphere.sdk.subscriptions.AzureServiceBusDestination;
 import io.sphere.sdk.subscriptions.MessageSubscriptionPayload;
 import io.sphere.sdk.subscriptions.Payload;
 import io.sphere.sdk.subscriptions.Subscription;
-import io.sphere.sdk.taxcategories.TaxCategory;
-import io.sphere.sdk.taxcategories.TaxCategoryDraft;
-import io.sphere.sdk.taxcategories.TaxCategoryDraftBuilder;
-import io.sphere.sdk.taxcategories.TaxRate;
+import io.sphere.sdk.taxcategories.*;
 import io.sphere.sdk.types.*;
 import io.sphere.sdk.zones.ZoneDraftBuilder;
 
@@ -154,6 +151,10 @@ import java.util.function.Function;
  </ul>
  -->
  -->
+ <h3 class=released-version id="v1_52_0">1.52.0 (23.06.2020)</h3>
+ <ul>
+ <li class=new-in-release>Added missing {@link ExternalTaxRateDraft#isIncludedInPrice()} and added it to builder {@link ExternalTaxRateDraftBuilder#includedInPrice()}</li>
+ </ul>
  <h3 class=released-version id="v1_51_0">1.51.0 (31.03.2020)</h3>
  <ul>
  <li class=fixed-in-release>Fix formatting of {@link GeoJSONQueryModel#withinCircle(Point, Double)} with default locale not using '.' as decimal delimiter.</li>

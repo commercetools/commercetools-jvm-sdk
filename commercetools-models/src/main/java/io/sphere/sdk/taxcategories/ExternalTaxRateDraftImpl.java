@@ -15,13 +15,15 @@ final class ExternalTaxRateDraftImpl extends Base implements ExternalTaxRateDraf
     private final String state;
     @Nullable
     private final List<SubRate> subRates;
+    private final Boolean includedInPrice;
 
-    public ExternalTaxRateDraftImpl(final Double amount, final String name, final CountryCode country, final String state, final List<SubRate> subRates) {
+    public ExternalTaxRateDraftImpl(final Double amount, final String name, final CountryCode country, final String state, final List<SubRate> subRates, final Boolean includedInPrice) {
         this.amount = amount;
         this.name = name;
         this.country = country;
         this.state = state;
         this.subRates = subRates;
+        this.includedInPrice = includedInPrice;
     }
 
     @Override
@@ -44,6 +46,11 @@ final class ExternalTaxRateDraftImpl extends Base implements ExternalTaxRateDraf
     @Nullable
     public String getState() {
         return state;
+    }
+
+    @Override
+    public Boolean isIncludedInPrice() {
+        return includedInPrice;
     }
 
     @Override
