@@ -1,6 +1,7 @@
 package io.sphere.sdk.search;
 
 import io.sphere.sdk.expansion.MetaModelReferenceExpansionDsl;
+import io.sphere.sdk.http.NameValuePair;
 
 /**
  *
@@ -14,4 +15,5 @@ import io.sphere.sdk.expansion.MetaModelReferenceExpansionDsl;
 public interface MetaModelSearchDsl<T, C extends MetaModelSearchDsl<T, C, S, L, F, E>, S, L, F, E> extends ResourceSearch<T>, SearchDsl<T, C>,
         MetaModelSortDsl<T, C, S>, MetaModelFilterDsl<T, C, L>, MetaModelFacetDsl<T, C, F>, MetaModelReferenceExpansionDsl<T, C, E>, FacetedSearchDsl<T, C> {
 
+    C withAdditionalQueryParameter(final NameValuePair pair);
 }

@@ -154,6 +154,7 @@ import java.util.function.Function;
  <h3 class=released-version id="v1_52_0">1.52.0 (23.06.2020)</h3>
  <ul>
  <li class=new-in-release>Added missing {@link ExternalTaxRateDraft#isIncludedInPrice()} and added it to builder {@link ExternalTaxRateDraftBuilder#includedInPrice()}</li>
+ <li class=new-in-release>Added support for additional query parameters for updates {@link io.sphere.sdk.commands.UpdateCommandDsl#withAdditionalHttpQueryParameters(NameValuePair)} and search endpoints {@link io.sphere.sdk.search.MetaModelSearchDsl#withAdditionalQueryParameter(NameValuePair)}.</li>
  </ul>
  <h3 class=released-version id="v1_51_0">1.51.0 (31.03.2020)</h3>
  <ul>

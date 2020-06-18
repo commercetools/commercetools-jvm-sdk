@@ -1,5 +1,6 @@
 package io.sphere.sdk.commands;
 
+import io.sphere.sdk.http.NameValuePair;
 import io.sphere.sdk.models.ResourceView;
 import io.sphere.sdk.models.Versioned;
 
@@ -32,4 +33,6 @@ public interface UpdateCommandDsl<T extends ResourceView<T, T>, C extends Update
     C plusUpdateActions(List<? extends UpdateAction<T>> updateActions);
 
     C withUpdateActions(List<? extends UpdateAction<T>> updateActions);
+
+    C withAdditionalHttpQueryParameters(final NameValuePair pair);
 }

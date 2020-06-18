@@ -15,6 +15,7 @@ import io.sphere.sdk.models.ResourceView;
 import io.sphere.sdk.models.Versioned;
 
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Function;
 
@@ -178,5 +179,13 @@ public class MetaModelUpdateCommandDslImpl<T extends ResourceView<T, T>, C exten
 
     protected C withAdditionalHttpQueryParameters(final List<NameValuePair> pairs) {
         return copyBuilder().additionalHttpQueryParameters(pairs).build();
+    }
+
+    @Override
+    public C withAdditionalHttpQueryParameters(final NameValuePair pair) {
+        final List<NameValuePair> params = additionalHttpQueryParameters();
+        final List<NameValuePair> resultingParameters = new LinkedList<>(params);
+        resultingParameters.add(pair);
+        return withAdditionalHttpQueryParameters(resultingParameters);
     }
 }
