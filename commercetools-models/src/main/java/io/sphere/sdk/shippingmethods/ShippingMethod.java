@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.carts.CartShippingInfo;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.models.Resource;
@@ -65,6 +66,10 @@ public interface ShippingMethod extends Resource<ShippingMethod> {
     @Nullable
     @IgnoreInQueryModel
     String getDescription();
+
+    @Nullable
+    @IgnoreInQueryModel
+    LocalizedString getLocalizedDescription();
 
     Reference<TaxCategory> getTaxCategory();
 

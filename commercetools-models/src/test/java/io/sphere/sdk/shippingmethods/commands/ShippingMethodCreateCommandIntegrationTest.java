@@ -2,6 +2,7 @@ package io.sphere.sdk.shippingmethods.commands;
 
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.cartdiscounts.CartPredicate;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.shippingmethods.*;
 import io.sphere.sdk.shippingmethods.queries.ShippingMethodQuery;
 import io.sphere.sdk.taxcategories.TaxCategoryDraft;
@@ -20,6 +21,7 @@ import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingM
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.zones.ZoneFixtures.withZone;
+import static java.util.Locale.ENGLISH;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ShippingMethodCreateCommandIntegrationTest extends IntegrationTest {
@@ -46,7 +48,7 @@ public class ShippingMethodCreateCommandIntegrationTest extends IntegrationTest 
             withTaxCategory(client(), TaxCategoryDraft.of("taxcat", asList(taxRate)), taxCategory -> {
                 final ZoneRateDraft zoneRate = ZoneRateDraftBuilder.of(zone.toResourceIdentifier(), asList(ShippingRate.of(MoneyImpl.of(30, currencyUnit)))).build();
                 final ShippingMethodDraft draft =
-                        ShippingMethodDraft.of("standard shipping", "description", taxCategory, asList(zoneRate));
+                        ShippingMethodDraft.of("standard shipping", "description", LocalizedString.of(ENGLISH, "description"), taxCategory, asList(zoneRate));
                 final ShippingMethod shippingMethod = client().executeBlocking(ShippingMethodCreateCommand.of(draft));
                 //deletion
                 client().executeBlocking(ShippingMethodDeleteCommand.of(shippingMethod));
@@ -62,7 +64,7 @@ public class ShippingMethodCreateCommandIntegrationTest extends IntegrationTest 
             withTaxCategory(client(), TaxCategoryDraft.of("taxcat", asList(taxRate)), taxCategory -> {
                 final ZoneRateDraft zoneRateDraft = ZoneRateDraftBuilder.of(zone.toResourceIdentifier(), asList(ShippingRate.of(MoneyImpl.of(30, currencyUnit)))).build();
                 final ShippingMethodDraft draft =
-                        ShippingMethodDraftBuilder.of("standard shipping", "description", taxCategory.toReference(), asList(zoneRateDraft), false)
+                        ShippingMethodDraftBuilder.of("standard shipping", "description", LocalizedString.of(ENGLISH, "description"), taxCategory.toReference(), asList(zoneRateDraft), false)
                                 .predicate(CartPredicate.of("customer.email = \"john@example.com\""))
                                 .build();
                 final ShippingMethod shippingMethod = client().executeBlocking(ShippingMethodCreateCommand.of(draft));
