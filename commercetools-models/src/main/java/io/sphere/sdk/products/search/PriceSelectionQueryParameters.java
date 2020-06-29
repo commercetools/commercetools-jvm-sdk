@@ -17,7 +17,9 @@ public final class PriceSelectionQueryParameters extends Base {
     public static final String PRICE_COUNTRY = "priceCountry";
     public static final String PRICE_CUSTOMER_GROUP = "priceCustomerGroup";
     public static final String PRICE_CHANNEL = "priceChannel";
-    public static final List<String> ALL_PARAMETERS = asList(PRICE_CURRENCY, PRICE_COUNTRY, PRICE_CUSTOMER_GROUP, PRICE_CHANNEL);
+    public static final String STORE_PROJECTION = "storeProjection";
+    public static final String LOCALE_PROJECTION = "localeProjection";
+    public static final List<String> ALL_PARAMETERS = asList(PRICE_CURRENCY, PRICE_COUNTRY, PRICE_CUSTOMER_GROUP, PRICE_CHANNEL, STORE_PROJECTION, LOCALE_PROJECTION);
 
     private PriceSelectionQueryParameters() {
     }
@@ -40,6 +42,8 @@ public final class PriceSelectionQueryParameters extends Base {
             addParamIfNotNull(resultingParameters, PRICE_COUNTRY, priceSelection.getPriceCountry());
             addParamIfNotNull(resultingParameters, PRICE_CUSTOMER_GROUP, priceSelection.getPriceCustomerGroup());
             addParamIfNotNull(resultingParameters, PRICE_CHANNEL, priceSelection.getPriceChannel());
+            addParamIfNotNull(resultingParameters, STORE_PROJECTION, priceSelection.getStoreProjection());
+            addParamIfNotNull(resultingParameters, LOCALE_PROJECTION, priceSelection.getLocaleProjection());
         }
         return resultingParameters;
     }

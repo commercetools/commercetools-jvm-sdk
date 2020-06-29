@@ -21,6 +21,10 @@ public interface PriceSelection {
     String getPriceCustomerGroup();
     @Nullable
     String getPriceChannel();
+    @Nullable
+    String getStoreProjection();
+    @Nullable
+    String getLocaleProjection();
 
     static PriceSelectionDsl ofCurrencyCode(final String currencyCode) {
         return PriceSelectionBuilder.ofCurrencyCode(currencyCode).build();
