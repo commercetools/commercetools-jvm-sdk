@@ -10,6 +10,11 @@ import io.sphere.sdk.test.SphereTestUtils;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
+
 public class StoreDeleteCommandIntegrationTest extends IntegrationTest {
     
     @Test
@@ -17,7 +22,8 @@ public class StoreDeleteCommandIntegrationTest extends IntegrationTest {
 
         final String key = SphereTestUtils.randomKey();
         final LocalizedString name = SphereTestUtils.randomLocalizedString();
-        final StoreDraft storeDraft = StoreDraft.of(key, name);
+        final List<Locale> languages = Collections.singletonList(Locale.ENGLISH);
+        final StoreDraft storeDraft = StoreDraft.of(key, name, languages);
         final Store store = client().executeBlocking(StoreCreateCommand.of(storeDraft));
         Assertions.assertThat(store).isNotNull();
 
@@ -33,7 +39,8 @@ public class StoreDeleteCommandIntegrationTest extends IntegrationTest {
 
         final String key = SphereTestUtils.randomKey();
         final LocalizedString name = SphereTestUtils.randomLocalizedString();
-        final StoreDraft storeDraft = StoreDraft.of(key, name);
+        final List<Locale> languages = Collections.singletonList(Locale.ENGLISH);
+        final StoreDraft storeDraft = StoreDraft.of(key, name, languages);
         final Store store = client().executeBlocking(StoreCreateCommand.of(storeDraft));
         Assertions.assertThat(store).isNotNull();
 

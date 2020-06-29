@@ -7,6 +7,9 @@ import io.sphere.sdk.stores.commands.StoreDeleteCommand;
 import io.sphere.sdk.test.SphereTestUtils;
 import org.assertj.core.api.Assertions;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -23,7 +26,8 @@ public class StoreFixtures {
     public static void withStore(final BlockingSphereClient client, final Consumer<Store> consumer) {
         final String key = SphereTestUtils.randomKey();
         final LocalizedString name = SphereTestUtils.randomLocalizedString();
-        final StoreDraft storeDraft = StoreDraft.of(key, name);
+        final List<Locale> languages = Arrays.asList(Locale.ENGLISH);;
+        final StoreDraft storeDraft = StoreDraft.of(key, name, languages);
         withStore(client, storeDraft, consumer);
     }
     
@@ -37,7 +41,8 @@ public class StoreFixtures {
     public static void withUpdateableStore(final BlockingSphereClient client, final Function<Store, Store> f) {
         final String key = SphereTestUtils.randomKey();
         final LocalizedString name = SphereTestUtils.randomLocalizedString();
-        final StoreDraft storeDraft = StoreDraft.of(key, name);
+        final List<Locale> languages = Arrays.asList(Locale.ENGLISH);;
+        final StoreDraft storeDraft = StoreDraft.of(key, name, languages);
         withUpdateableStore(client, storeDraft, f);
     }
 }
