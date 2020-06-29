@@ -64,7 +64,7 @@ public class ShippingMethodFixtures {
 
     public static void withUpdateableShippingMethod(final BlockingSphereClient client, final Function<ShippingMethod, ShippingMethod> f) {
         withTaxCategory(client, taxCategory -> {
-            final ShippingMethodDraft draft = ShippingMethodDraft.of(randomString(), "test shipping method", LocalizedString.ofEnglish(randomString()), taxCategory, asList());
+            final ShippingMethodDraft draft = ShippingMethodDraft.of(randomString(), "test shipping method", taxCategory, asList());
             final ShippingMethod shippingMethod = client.executeBlocking(ShippingMethodCreateCommand.of(draft));
             final ShippingMethod possiblyUpdatedShippingMethod = f.apply(shippingMethod);
             client.executeBlocking(ShippingMethodDeleteCommand.of(possiblyUpdatedShippingMethod));
@@ -88,7 +88,7 @@ public class ShippingMethodFixtures {
     public static void withUpdateableDynamicShippingMethod(final BlockingSphereClient client, final CartPredicate cartPredicate, final Function<ShippingMethod, ShippingMethod> f) {
         withTaxCategory(client, taxCategory -> {
             final ShippingMethodDraft draft = ShippingMethodDraftBuilder
-                    .of(randomString(), "test shipping method", LocalizedString.ofEnglish(randomString()), taxCategory.toReference(), asList(), false)
+                    .of(randomString(), "test shipping method", taxCategory.toReference(), asList(), false)
                     .predicate(cartPredicate)
                     .build();
             final ShippingMethod shippingMethod = client.executeBlocking(ShippingMethodCreateCommand.of(draft));
@@ -100,7 +100,7 @@ public class ShippingMethodFixtures {
 
     public static void withUpdateableShippingMethod(final BlockingSphereClient client, final UnaryOperator<ShippingMethodDraftBuilder> builderMapper, final Function<ShippingMethod, ShippingMethod> f) {
         withTaxCategory(client, taxCategory -> {
-            final ShippingMethodDraftBuilder builder = ShippingMethodDraftBuilder.of(randomString(), "test shipping method", LocalizedString.ofEnglish(randomString()), taxCategory.toReference(), asList(), false);
+            final ShippingMethodDraftBuilder builder = ShippingMethodDraftBuilder.of(randomString(), "test shipping method", taxCategory.toReference(), asList(), false);
             final ShippingMethodDraft draft = builderMapper.apply(builder).build();
             final ShippingMethod shippingMethod = client.executeBlocking(ShippingMethodCreateCommand.of(draft));
             final ShippingMethod possiblyUpdatedShippingMethod = f.apply(shippingMethod);
@@ -110,7 +110,7 @@ public class ShippingMethodFixtures {
 
     public static void withUpdateableShippingMethod(final BlockingSphereClient client, final Consumer<ShippingMethod> consumer) {
         withTaxCategory(client, taxCategory -> {
-            final ShippingMethodDraft draft = ShippingMethodDraft.of(randomString(), "test shipping method", LocalizedString.ofEnglish(randomString()), taxCategory, asList());
+            final ShippingMethodDraft draft = ShippingMethodDraft.of(randomString(), "test shipping method", taxCategory, asList());
             final ShippingMethod shippingMethod = client.executeBlocking(ShippingMethodCreateCommand.of(draft));
             consumer.accept(shippingMethod);
         });

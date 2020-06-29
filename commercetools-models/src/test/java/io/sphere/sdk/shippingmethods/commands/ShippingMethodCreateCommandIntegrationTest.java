@@ -48,7 +48,23 @@ public class ShippingMethodCreateCommandIntegrationTest extends IntegrationTest 
             withTaxCategory(client(), TaxCategoryDraft.of("taxcat", asList(taxRate)), taxCategory -> {
                 final ZoneRateDraft zoneRate = ZoneRateDraftBuilder.of(zone.toResourceIdentifier(), asList(ShippingRate.of(MoneyImpl.of(30, currencyUnit)))).build();
                 final ShippingMethodDraft draft =
-                        ShippingMethodDraft.of("standard shipping", "description", LocalizedString.of(ENGLISH, "description"), taxCategory, asList(zoneRate));
+                        ShippingMethodDraft.of("standard shipping", "description", taxCategory, asList(zoneRate));
+                final ShippingMethod shippingMethod = client().executeBlocking(ShippingMethodCreateCommand.of(draft));
+                //deletion
+                client().executeBlocking(ShippingMethodDeleteCommand.of(shippingMethod));
+            });
+        }, COUNTRY_CODE);
+    }
+
+    @Test
+    public void executionWithLocalizedDescription() throws Exception {
+        final CurrencyUnit currencyUnit = USD;
+        final TaxRateDraft taxRate = TaxRateDraft.of("x20", 0.20, true, COUNTRY_CODE);
+        withZone(client(), zone -> {
+            withTaxCategory(client(), TaxCategoryDraft.of("taxcat", asList(taxRate)), taxCategory -> {
+                final ZoneRateDraft zoneRate = ZoneRateDraftBuilder.of(zone.toResourceIdentifier(), asList(ShippingRate.of(MoneyImpl.of(30, currencyUnit)))).build();
+                final ShippingMethodDraft draft =
+                        ShippingMethodDraft.of("standard shipping", LocalizedString.of(ENGLISH, "description"), taxCategory, asList(zoneRate));
                 final ShippingMethod shippingMethod = client().executeBlocking(ShippingMethodCreateCommand.of(draft));
                 //deletion
                 client().executeBlocking(ShippingMethodDeleteCommand.of(shippingMethod));
@@ -64,7 +80,25 @@ public class ShippingMethodCreateCommandIntegrationTest extends IntegrationTest 
             withTaxCategory(client(), TaxCategoryDraft.of("taxcat", asList(taxRate)), taxCategory -> {
                 final ZoneRateDraft zoneRateDraft = ZoneRateDraftBuilder.of(zone.toResourceIdentifier(), asList(ShippingRate.of(MoneyImpl.of(30, currencyUnit)))).build();
                 final ShippingMethodDraft draft =
-                        ShippingMethodDraftBuilder.of("standard shipping", "description", LocalizedString.of(ENGLISH, "description"), taxCategory.toReference(), asList(zoneRateDraft), false)
+                        ShippingMethodDraftBuilder.of("standard shipping", "description", taxCategory.toReference(), asList(zoneRateDraft), false)
+                                .predicate(CartPredicate.of("customer.email = \"john@example.com\""))
+                                .build();
+                final ShippingMethod shippingMethod = client().executeBlocking(ShippingMethodCreateCommand.of(draft));
+                //deletion
+                client().executeBlocking(ShippingMethodDeleteCommand.of(shippingMethod));
+            });
+        }, COUNTRY_CODE);
+    }
+
+    @Test
+    public void createShippingMethodWithPredicateAndLocalizedDescription() throws Exception {
+        final CurrencyUnit currencyUnit = USD;
+        final TaxRateDraft taxRate = TaxRateDraft.of("x20", 0.20, true, COUNTRY_CODE);
+        withZone(client(), zone -> {
+            withTaxCategory(client(), TaxCategoryDraft.of("taxcat", asList(taxRate)), taxCategory -> {
+                final ZoneRateDraft zoneRateDraft = ZoneRateDraftBuilder.of(zone.toResourceIdentifier(), asList(ShippingRate.of(MoneyImpl.of(30, currencyUnit)))).build();
+                final ShippingMethodDraft draft =
+                        ShippingMethodDraftBuilder.of("standard shipping", LocalizedString.of(ENGLISH, "description"), taxCategory.toReference(), asList(zoneRateDraft), false)
                                 .predicate(CartPredicate.of("customer.email = \"john@example.com\""))
                                 .build();
                 final ShippingMethod shippingMethod = client().executeBlocking(ShippingMethodCreateCommand.of(draft));

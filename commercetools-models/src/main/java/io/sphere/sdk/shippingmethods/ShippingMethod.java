@@ -69,6 +69,7 @@ public interface ShippingMethod extends Resource<ShippingMethod> {
 
     @Nullable
     @IgnoreInQueryModel
+    @HasUpdateAction
     LocalizedString getLocalizedDescription();
 
     Reference<TaxCategory> getTaxCategory();
