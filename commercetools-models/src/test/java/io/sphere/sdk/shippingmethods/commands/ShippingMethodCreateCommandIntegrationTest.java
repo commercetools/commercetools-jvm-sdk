@@ -62,10 +62,12 @@ public class ShippingMethodCreateCommandIntegrationTest extends IntegrationTest 
         final TaxRateDraft taxRate = TaxRateDraft.of("x20", 0.20, true, COUNTRY_CODE);
         withZone(client(), zone -> {
             withTaxCategory(client(), TaxCategoryDraft.of("taxcat", asList(taxRate)), taxCategory -> {
+                LocalizedString localizedDescription = LocalizedString.of(ENGLISH, "description");
                 final ZoneRateDraft zoneRate = ZoneRateDraftBuilder.of(zone.toResourceIdentifier(), asList(ShippingRate.of(MoneyImpl.of(30, currencyUnit)))).build();
                 final ShippingMethodDraft draft =
-                        ShippingMethodDraft.of("standard shipping", LocalizedString.of(ENGLISH, "description"), taxCategory, asList(zoneRate));
+                        ShippingMethodDraft.of("standard shipping", localizedDescription, taxCategory, asList(zoneRate));
                 final ShippingMethod shippingMethod = client().executeBlocking(ShippingMethodCreateCommand.of(draft));
+                assertThat(shippingMethod.getLocalizedDescription()).isEqualTo(localizedDescription);
                 //deletion
                 client().executeBlocking(ShippingMethodDeleteCommand.of(shippingMethod));
             });
@@ -96,12 +98,14 @@ public class ShippingMethodCreateCommandIntegrationTest extends IntegrationTest 
         final TaxRateDraft taxRate = TaxRateDraft.of("x20", 0.20, true, COUNTRY_CODE);
         withZone(client(), zone -> {
             withTaxCategory(client(), TaxCategoryDraft.of("taxcat", asList(taxRate)), taxCategory -> {
+                LocalizedString localizedDescription = LocalizedString.of(ENGLISH, "description");
                 final ZoneRateDraft zoneRateDraft = ZoneRateDraftBuilder.of(zone.toResourceIdentifier(), asList(ShippingRate.of(MoneyImpl.of(30, currencyUnit)))).build();
                 final ShippingMethodDraft draft =
-                        ShippingMethodDraftBuilder.of("standard shipping", LocalizedString.of(ENGLISH, "description"), taxCategory.toReference(), asList(zoneRateDraft), false)
+                        ShippingMethodDraftBuilder.of("standard shipping", localizedDescription, taxCategory.toReference(), asList(zoneRateDraft), false)
                                 .predicate(CartPredicate.of("customer.email = \"john@example.com\""))
                                 .build();
                 final ShippingMethod shippingMethod = client().executeBlocking(ShippingMethodCreateCommand.of(draft));
+                assertThat(shippingMethod.getLocalizedDescription()).isEqualTo(localizedDescription);
                 //deletion
                 client().executeBlocking(ShippingMethodDeleteCommand.of(shippingMethod));
             });
