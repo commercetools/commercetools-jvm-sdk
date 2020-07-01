@@ -1,6 +1,7 @@
 package io.sphere.sdk.shippingmethods.commands;
 
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
@@ -45,6 +46,20 @@ public class ShippingMethodUpdateCommandIntegrationTest extends IntegrationTest 
     }
 
     @Test
+    public void updateByKeyWithLocalizedDescription() throws Exception {
+        final String key = randomKey();
+        withUpdateableShippingMethod(client(), builder -> builder.key(key), shippingMethod -> {
+            final LocalizedString newLocalizedDescription = LocalizedString.ofEnglish(randomString());
+            assertThat(shippingMethod.getLocalizedDescription()).isNotEqualTo(newLocalizedDescription);
+            final ShippingMethodUpdateCommand cmd = ShippingMethodUpdateCommand.ofKey(key, shippingMethod.getVersion(), SetLocalizedDescription.of(newLocalizedDescription));
+            final ShippingMethod updatedShippingMethod = client().executeBlocking(cmd);
+            assertThat(updatedShippingMethod.getLocalizedDescription()).isEqualTo(newLocalizedDescription);
+
+            return updatedShippingMethod;
+        });
+    }
+
+    @Test
     public void setDescription() throws Exception {
         withUpdateableShippingMethod(client(), shippingMethod -> {
             final String newDescription = randomString();
@@ -52,6 +67,19 @@ public class ShippingMethodUpdateCommandIntegrationTest extends IntegrationTest 
             final ShippingMethodUpdateCommand cmd = ShippingMethodUpdateCommand.of(shippingMethod, SetDescription.of(newDescription));
             final ShippingMethod updatedShippingMethod = client().executeBlocking(cmd);
             assertThat(updatedShippingMethod.getDescription()).isEqualTo(newDescription);
+            return updatedShippingMethod;
+        });
+    }
+
+    @Test
+    public void setLocalizedDescription() throws Exception {
+        withUpdateableShippingMethod(client(), shippingMethod -> {
+            final LocalizedString newLocalizedDescription = LocalizedString.ofEnglish(randomString());
+            assertThat(shippingMethod.getLocalizedDescription()).isNotEqualTo(newLocalizedDescription);
+            final ShippingMethodUpdateCommand cmd = ShippingMethodUpdateCommand.of(shippingMethod, SetLocalizedDescription.of(newLocalizedDescription));
+            final ShippingMethod updatedShippingMethod = client().executeBlocking(cmd);
+            assertThat(updatedShippingMethod.getLocalizedDescription()).isEqualTo(newLocalizedDescription);
+
             return updatedShippingMethod;
         });
     }
