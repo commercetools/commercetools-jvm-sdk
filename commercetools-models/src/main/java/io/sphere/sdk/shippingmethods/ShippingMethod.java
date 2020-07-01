@@ -63,6 +63,7 @@ public interface ShippingMethod extends Resource<ShippingMethod> {
 
     String getName();
 
+    @Deprecated
     @Nullable
     @IgnoreInQueryModel
     String getDescription();

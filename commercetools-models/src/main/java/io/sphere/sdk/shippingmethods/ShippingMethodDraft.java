@@ -27,6 +27,7 @@ public interface ShippingMethodDraft {
 
     String getName();
 
+    @Deprecated
     @Nullable
     String getDescription();
 
