@@ -26,7 +26,6 @@ public class StoreFixtures {
     public static void withStore(final BlockingSphereClient client, final Consumer<Store> consumer) {
         final String key = SphereTestUtils.randomKey();
         final LocalizedString name = SphereTestUtils.randomLocalizedString();
-        final List<String> languages = Arrays.asList(Locale.ENGLISH.toLanguageTag());
         final StoreDraft storeDraft = StoreDraft.of(key, name);
         withStore(client, storeDraft, consumer);
     }
@@ -41,7 +40,6 @@ public class StoreFixtures {
     public static void withUpdateableStore(final BlockingSphereClient client, final Function<Store, Store> f) {
         final String key = SphereTestUtils.randomKey();
         final LocalizedString name = SphereTestUtils.randomLocalizedString();
-        final List<String> languages = Arrays.asList(Locale.ENGLISH.toLanguageTag());
         final StoreDraft storeDraft = StoreDraft.of(key, name);
         withUpdateableStore(client, storeDraft, f);
     }

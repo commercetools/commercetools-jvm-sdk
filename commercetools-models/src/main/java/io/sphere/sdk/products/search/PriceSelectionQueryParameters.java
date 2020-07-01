@@ -65,6 +65,8 @@ public final class PriceSelectionQueryParameters extends Base {
                 .priceCountryCode(map.get(PRICE_COUNTRY))
                 .priceCustomerGroupId(map.get(PRICE_CUSTOMER_GROUP))
                 .priceChannelId(map.get(PRICE_CHANNEL))
+                .storeProjection(map.get(STORE_PROJECTION))
+                .localeProjection(map.get(LOCALE_PROJECTION))
                 .build();
     }
 

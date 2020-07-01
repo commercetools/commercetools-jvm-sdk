@@ -9,8 +9,9 @@ import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
+
+import java.util.Arrays;
 import java.util.List;
-import static java.util.Arrays.asList;
 
 public class StoreUpdateCommandIntegrationTest extends IntegrationTest {
     
@@ -27,9 +28,10 @@ public class StoreUpdateCommandIntegrationTest extends IntegrationTest {
     @Test
     public void setLanguages() {
         StoreFixtures.withUpdateableStore(client(), store -> {
-            final List<String> newLanguage = asList("en");
-            final Store updatedStore = client().executeBlocking(StoreUpdateCommand.of(store, SetLanguages.of(newLanguage)));
-            Assertions.assertThat(updatedStore.getLanguages()).isEqualTo(newLanguage);
+            final List<String> newLanguages = Arrays.asList("en", "de");
+            final Store updatedStore = client().executeBlocking(StoreUpdateCommand.of(store, SetLanguages.of(newLanguages)));
+            Assertions.assertThat(updatedStore.getLanguages()).isEqualTo(newLanguages);
+
             return updatedStore;
         });
     }

@@ -6,8 +6,6 @@ import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
-
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
@@ -23,8 +21,7 @@ import java.util.List;
 @HasByIdGetEndpoint(javadocSummary = "Gets a store by ID.", includeExamples = "io.sphere.sdk.stores.queries.StoreGetIntegrationTest#getById()")
 @HasByKeyGetEndpoint(javadocSummary = "Get store by Key", includeExamples = "io.sphere.sdk.stores.queries.StoreGetIntegrationTest#getByKey()")
 @HasCreateCommand(includeExamples = "io.sphere.sdk.stores.commands.StoreCreateCommandIntegrationTest#execute()")
-//@HasUpdateCommand(includeExamples = "io.sphere.sdk.stores.commands.StoreUpdateCommandIntegrationTest#setNameByKey()")
-@HasUpdateCommand
+@HasUpdateCommand(includeExamples = "io.sphere.sdk.stores.commands.StoreUpdateCommandIntegrationTest#setNameByKey()")
 @HasDeleteCommand(deleteWith = "key", includeExamples = "io.sphere.sdk.stores.commands.StoreDeleteCommandIntegrationTest#deleteByKey()")
 @HasQueryModel()
 public interface Store extends Resource<Store> {

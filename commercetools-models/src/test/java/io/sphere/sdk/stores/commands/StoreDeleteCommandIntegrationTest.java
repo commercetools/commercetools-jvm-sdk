@@ -22,7 +22,6 @@ public class StoreDeleteCommandIntegrationTest extends IntegrationTest {
 
         final String key = SphereTestUtils.randomKey();
         final LocalizedString name = SphereTestUtils.randomLocalizedString();
-        final List<Locale> languages = Collections.singletonList(Locale.ENGLISH);
         final StoreDraft storeDraft = StoreDraft.of(key, name);
         final Store store = client().executeBlocking(StoreCreateCommand.of(storeDraft));
         Assertions.assertThat(store).isNotNull();
@@ -39,7 +38,6 @@ public class StoreDeleteCommandIntegrationTest extends IntegrationTest {
 
         final String key = SphereTestUtils.randomKey();
         final LocalizedString name = SphereTestUtils.randomLocalizedString();
-        final List<Locale> languages = Collections.singletonList(Locale.ENGLISH);
         final StoreDraft storeDraft = StoreDraft.of(key, name);
         final Store store = client().executeBlocking(StoreCreateCommand.of(storeDraft));
         Assertions.assertThat(store).isNotNull();
