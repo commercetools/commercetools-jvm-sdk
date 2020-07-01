@@ -7,6 +7,8 @@ import io.sphere.sdk.models.LocalizedString;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -22,10 +24,10 @@ public interface StoreDraft {
     LocalizedString getName();
 
     @Nullable
-    List<Locale> getLanguages();
+    List<String> getLanguages();
     
-    static StoreDraft of(final String key, @Nullable final LocalizedString name, @Nullable final List<Locale> languages) {
-        return new StoreDraftDsl(key, languages, name);
+    static StoreDraft of(final String key, @Nullable final LocalizedString name) {
+        return new StoreDraftDsl(key, Collections.emptyList(), name);
     }
     
 }
