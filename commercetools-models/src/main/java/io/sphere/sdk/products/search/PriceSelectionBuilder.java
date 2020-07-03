@@ -10,6 +10,7 @@ import io.sphere.sdk.models.Referenceable;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.money.CurrencyUnit;
+import java.util.List;
 import java.util.Optional;
 
 public final class PriceSelectionBuilder extends Base implements Builder<PriceSelectionDsl> {
@@ -24,7 +25,7 @@ public final class PriceSelectionBuilder extends Base implements Builder<PriceSe
     @Nullable
     private String storeProjection;
     @Nullable
-    private String localeProjection;
+    private List <String> localeProjection;
 
     private PriceSelectionBuilder(@Nonnull final String priceCurrency) {
         this.priceCurrency = priceCurrency;
@@ -91,8 +92,13 @@ public final class PriceSelectionBuilder extends Base implements Builder<PriceSe
         return this;
     }
 
-    public PriceSelectionBuilder localeProjection(@Nullable final String localeProjection) {
+    public PriceSelectionBuilder localeProjection(@Nullable final List<String> localeProjection) {
         this.localeProjection = localeProjection;
+        return this;
+    }
+
+    public PriceSelectionBuilder plusLocaleProjection(@Nullable final String localeProjection) {
+        this.getLocaleProjection().add(localeProjection);
         return this;
     }
 
@@ -122,7 +128,7 @@ public final class PriceSelectionBuilder extends Base implements Builder<PriceSe
     }
 
     @Nullable
-    public String getLocaleProjection() {
+    public List<String> getLocaleProjection() {
         return localeProjection;
     }
 

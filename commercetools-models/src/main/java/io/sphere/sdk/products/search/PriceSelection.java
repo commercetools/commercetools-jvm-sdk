@@ -3,6 +3,7 @@ package io.sphere.sdk.products.search;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.money.CurrencyUnit;
+import java.util.List;
 
 /**
  * Parameters to select prices in {@link ProductProjectionSearch}.
@@ -24,7 +25,7 @@ public interface PriceSelection {
     @Nullable
     String getStoreProjection();
     @Nullable
-    String getLocaleProjection();
+    List<String> getLocaleProjection();
 
     static PriceSelectionDsl ofCurrencyCode(final String currencyCode) {
         return PriceSelectionBuilder.ofCurrencyCode(currencyCode).build();

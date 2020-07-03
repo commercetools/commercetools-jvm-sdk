@@ -4,9 +4,7 @@ import io.sphere.sdk.http.NameValuePair;
 import io.sphere.sdk.models.Base;
 
 import javax.annotation.Nullable;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
@@ -37,13 +35,16 @@ public final class PriceSelectionQueryParameters extends Base {
                 .filter(pair -> !ALL_PARAMETERS.contains(pair.getName()))
                 .collect(toList());
         final List<NameValuePair> resultingParameters = new LinkedList<>(currentParametersWithoutPriceSelectionParameters);
+
         if (priceSelection != null && priceSelection.getPriceCurrency() != null) {
             addParamIfNotNull(resultingParameters, PRICE_CURRENCY, priceSelection.getPriceCurrency());
             addParamIfNotNull(resultingParameters, PRICE_COUNTRY, priceSelection.getPriceCountry());
             addParamIfNotNull(resultingParameters, PRICE_CUSTOMER_GROUP, priceSelection.getPriceCustomerGroup());
             addParamIfNotNull(resultingParameters, PRICE_CHANNEL, priceSelection.getPriceChannel());
             addParamIfNotNull(resultingParameters, STORE_PROJECTION, priceSelection.getStoreProjection());
-            addParamIfNotNull(resultingParameters, LOCALE_PROJECTION, priceSelection.getLocaleProjection());
+            for (int i = 0; i < priceSelection.getLocaleProjection().size(); i++) {
+                addParamIfNotNull(resultingParameters, LOCALE_PROJECTION, priceSelection.getLocaleProjection().get(i));
+            }
         }
         return resultingParameters;
     }
@@ -66,7 +67,7 @@ public final class PriceSelectionQueryParameters extends Base {
                 .priceCustomerGroupId(map.get(PRICE_CUSTOMER_GROUP))
                 .priceChannelId(map.get(PRICE_CHANNEL))
                 .storeProjection(map.get(STORE_PROJECTION))
-                .localeProjection(map.get(LOCALE_PROJECTION))
+                .localeProjection(Collections.singletonList(map.get(LOCALE_PROJECTION)))
                 .build();
     }
 
