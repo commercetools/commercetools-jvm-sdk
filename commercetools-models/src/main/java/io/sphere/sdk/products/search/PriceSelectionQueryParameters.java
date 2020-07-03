@@ -42,9 +42,7 @@ public final class PriceSelectionQueryParameters extends Base {
             addParamIfNotNull(resultingParameters, PRICE_CUSTOMER_GROUP, priceSelection.getPriceCustomerGroup());
             addParamIfNotNull(resultingParameters, PRICE_CHANNEL, priceSelection.getPriceChannel());
             addParamIfNotNull(resultingParameters, STORE_PROJECTION, priceSelection.getStoreProjection());
-            for (int i = 0; i < priceSelection.getLocaleProjection().size(); i++) {
-                addParamIfNotNull(resultingParameters, LOCALE_PROJECTION, priceSelection.getLocaleProjection().get(i));
-            }
+priceSelection.getLocaleProjection.forEach(parameter -> addParamIfNotNull(resultingParameters, LOCALE_PROJECTION, parameter));
         }
         return resultingParameters;
     }
