@@ -15,6 +15,7 @@ import java.util.Locale;
 @JsonDeserialize(as = StoreDraftDsl.class)
 @ResourceDraftValue(factoryMethods = {
         @FactoryMethod(parameterNames = {"key"}),
+        @FactoryMethod(parameterNames = {"key", "name"}),
         @FactoryMethod(parameterNames = {"key", "name", "languages"})})
 public interface StoreDraft {
     

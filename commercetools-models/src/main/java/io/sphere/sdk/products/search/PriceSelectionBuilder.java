@@ -13,6 +13,8 @@ import javax.money.CurrencyUnit;
 import java.util.List;
 import java.util.Optional;
 
+import static java.util.Collections.emptyList;
+
 public final class PriceSelectionBuilder extends Base implements Builder<PriceSelectionDsl> {
     @Nonnull
     private String priceCurrency;
@@ -25,7 +27,7 @@ public final class PriceSelectionBuilder extends Base implements Builder<PriceSe
     @Nullable
     private String storeProjection;
     @Nullable
-    private List <String> localeProjection;
+    private List <String> localeProjection = emptyList();
 
     private PriceSelectionBuilder(@Nonnull final String priceCurrency) {
         this.priceCurrency = priceCurrency;
@@ -98,7 +100,8 @@ public final class PriceSelectionBuilder extends Base implements Builder<PriceSe
     }
 
     public PriceSelectionBuilder plusLocaleProjection(@Nullable final String localeProjection) {
-        this.getLocaleProjection().add(localeProjection);
+        this.localeProjection = emptyList();
+        this.localeProjection.add(localeProjection);
         return this;
     }
 

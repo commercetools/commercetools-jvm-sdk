@@ -114,6 +114,7 @@ import io.sphere.sdk.shoppinglists.ShoppingListDraft;
 import io.sphere.sdk.shoppinglists.expansion.LineItemExpansionModel;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.states.StateDraftDsl;
+import io.sphere.sdk.stores.commands.updateactions.SetLanguages;
 import io.sphere.sdk.subscriptions.AzureServiceBusDestination;
 import io.sphere.sdk.subscriptions.MessageSubscriptionPayload;
 import io.sphere.sdk.subscriptions.Payload;
@@ -121,6 +122,8 @@ import io.sphere.sdk.subscriptions.Subscription;
 import io.sphere.sdk.taxcategories.*;
 import io.sphere.sdk.types.*;
 import io.sphere.sdk.zones.ZoneDraftBuilder;
+import io.sphere.sdk.stores.Store;
+import io.sphere.sdk.stores.StoreDraft;
 
 import javax.money.CurrencyUnit;
 import java.time.Duration;
@@ -157,6 +160,9 @@ import java.util.function.Function;
  <li class=new-in-release>Added support for additional query parameters for updates {@link io.sphere.sdk.commands.UpdateCommandDsl#withAdditionalHttpQueryParameters(NameValuePair)} and search endpoints {@link io.sphere.sdk.search.MetaModelSearchDsl#withAdditionalQueryParameter(NameValuePair)}.</li>
  <li class=new-in-release>Added missing {@link ShippingMethodDraft#getLocalizedDescription()} and added it to builder {@link ShippingMethodDraftBuilder#localizedDescription()}</li>
  <li class=new-in-release>Added support for additional action {@link io.sphere.sdk.shippingmethods.commands.updateactions.SetLocalizedDescription} and deprecated the attribute "description" and the action "setDescription" </li>
+ <li class=new-in-release>Added {@link Store#getLanguages()} and {@link StoreDraft#getLanguages()} and added update action {@link io.sphere.sdk.stores.commands.updateactions.SetLanguages} </li>
+ <li class=new-in-release>Added query parameterson ProductProjection {@link PriceSelection#getLocaleProjection()} and {@link PriceSelection#getStoreProjection()} and also in the {@link PriceSelectionBuilder }  </li>
+ </ul>
  </ul>
  <h3 class=released-version id="v1_51_0">1.51.0 (31.03.2020)</h3>
  <ul>
