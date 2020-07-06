@@ -105,7 +105,10 @@ public final class PriceSelectionBuilder extends Base implements Builder<PriceSe
     }
 
     public PriceSelectionBuilder plusLocaleProjection(@Nullable final String localeProjection) {
-        this.localeProjection = new ArrayList<>();
+        if (this.localeProjection == null) {
+            this.localeProjection = new ArrayList<>();
+        }
+
         this.localeProjection.add(localeProjection);
         return this;
     }
