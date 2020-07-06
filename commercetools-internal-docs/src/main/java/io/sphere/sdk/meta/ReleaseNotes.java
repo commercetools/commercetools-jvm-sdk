@@ -161,7 +161,7 @@ import java.util.function.Function;
  <li class=new-in-release>Added missing {@link ShippingMethodDraft#getLocalizedDescription()} and added it to builder {@link ShippingMethodDraftBuilder#localizedDescription()}</li>
  <li class=new-in-release>Added support for additional action {@link io.sphere.sdk.shippingmethods.commands.updateactions.SetLocalizedDescription} and deprecated the attribute "description" and the action "setDescription" </li>
  <li class=new-in-release>Added {@link Store#getLanguages()} and {@link StoreDraft#getLanguages()} and added update action {@link io.sphere.sdk.stores.commands.updateactions.SetLanguages} </li>
- <li class=new-in-release>Added query parameterson ProductProjection {@link PriceSelection#getLocaleProjection()} and {@link PriceSelection#getStoreProjection()} and also in the {@link PriceSelectionBuilder }  </li>
+ <li class=new-in-release>Added query parameters in ProductProjection {@link PriceSelection#getLocaleProjection()} and {@link PriceSelection#getStoreProjection()} and also in the {@link PriceSelectionBuilder }  </li>
  </ul>
  </ul>
  <h3 class=released-version id="v1_51_0">1.51.0 (31.03.2020)</h3>

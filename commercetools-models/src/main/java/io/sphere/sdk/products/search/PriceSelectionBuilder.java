@@ -14,8 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static java.util.Collections.emptyList;
-
 public final class PriceSelectionBuilder extends Base implements Builder<PriceSelectionDsl> {
     @Nonnull
     private String priceCurrency;
@@ -28,7 +26,7 @@ public final class PriceSelectionBuilder extends Base implements Builder<PriceSe
     @Nullable
     private String storeProjection;
     @Nullable
-    private List <String> localeProjection = emptyList();
+    private List <String> localeProjection = new ArrayList<>();
 
     private PriceSelectionBuilder(@Nonnull final String priceCurrency) {
         this.priceCurrency = priceCurrency;
@@ -97,6 +95,12 @@ public final class PriceSelectionBuilder extends Base implements Builder<PriceSe
 
     public PriceSelectionBuilder localeProjection(@Nullable final List<String> localeProjection) {
         this.localeProjection = localeProjection;
+        return this;
+    }
+
+    public PriceSelectionBuilder localeProjection(@Nullable final String localeProjection) {
+        this.localeProjection = new ArrayList<>();
+        this.localeProjection.add(localeProjection);
         return this;
     }
 

@@ -86,7 +86,7 @@ public final class PriceSelectionDsl extends Base implements PriceSelection {
         return newBuilder().localeProjection(localeProjection).build();
     }
 
-    public PriceSelectionDsl withPlusLocaleProjection(@Nullable final String localeProjection) {
+    public PriceSelectionDsl plusLocaleProjection(@Nullable final String localeProjection) {
         return newBuilder().plusLocaleProjection(localeProjection).build();
     }
 

@@ -7,10 +7,7 @@ import io.sphere.sdk.models.LocalizedString;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 @JsonDeserialize(as = StoreDraftDsl.class)
 @ResourceDraftValue(factoryMethods = {
@@ -28,7 +25,7 @@ public interface StoreDraft {
     List<String> getLanguages();
     
     static StoreDraft of(final String key, @Nullable final LocalizedString name) {
-        return new StoreDraftDsl(key, Collections.emptyList(), name);
+        return new StoreDraftDsl(key, new ArrayList<>(), name);
     }
     
 }
