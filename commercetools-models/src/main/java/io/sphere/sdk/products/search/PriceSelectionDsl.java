@@ -9,6 +9,7 @@ import io.sphere.sdk.models.Referenceable;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.money.CurrencyUnit;
+import java.util.List;
 
 public final class PriceSelectionDsl extends Base implements PriceSelection {
     @Nonnull
@@ -19,12 +20,18 @@ public final class PriceSelectionDsl extends Base implements PriceSelection {
     private final String priceCustomerGroup;
     @Nullable
     private final String priceChannel;
+    @Nullable
+    private final String storeProjection;
+    @Nullable
+    private final List<String> localeProjection;
 
-    PriceSelectionDsl(@Nonnull final String priceCurrency, final String priceCountry, final String priceCustomerGroup, final String priceChannel) {
+    PriceSelectionDsl(@Nonnull final String priceCurrency, final String priceCountry, final String priceCustomerGroup, final String priceChannel, final String storeProjection, final List<String> localeProjection) {
         this.priceChannel = priceChannel;
         this.priceCurrency = priceCurrency;
         this.priceCountry = priceCountry;
         this.priceCustomerGroup = priceCustomerGroup;
+        this.storeProjection = storeProjection;
+        this.localeProjection = localeProjection;
     }
 
     public static PriceSelectionDsl ofCurrencyCode(final String currencyCode) {
@@ -70,7 +77,18 @@ public final class PriceSelectionDsl extends Base implements PriceSelection {
     public PriceSelectionDsl withPriceChannel(@Nullable final Referenceable<Channel> priceChannel) {
         return newBuilder().priceChannel(priceChannel).build();
     }
-    
+
+    public PriceSelectionDsl withStoreProjection(@Nullable final String storeProjection) {
+        return newBuilder().storeProjection(storeProjection).build();
+    }
+
+    public PriceSelectionDsl withLocaleProjection(@Nullable final List<String> localeProjection) {
+        return newBuilder().localeProjection(localeProjection).build();
+    }
+
+    public PriceSelectionDsl plusLocaleProjection(@Nullable final String localeProjection) {
+        return newBuilder().plusLocaleProjection(localeProjection).build();
+    }
 
     @Override
     @Nullable
@@ -94,5 +112,17 @@ public final class PriceSelectionDsl extends Base implements PriceSelection {
     @Nullable
     public String getPriceCustomerGroup() {
         return priceCustomerGroup;
+    }
+
+    @Override
+    @Nullable
+    public String getStoreProjection() {
+        return storeProjection;
+    }
+
+    @Override
+    @Nullable
+    public List<String> getLocaleProjection() {
+        return localeProjection;
     }
 }

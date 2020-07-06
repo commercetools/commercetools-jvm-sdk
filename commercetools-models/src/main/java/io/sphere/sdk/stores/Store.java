@@ -7,6 +7,7 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
 import javax.annotation.Nullable;
+import java.util.List;
 
 /**
  * Stores let you model the context your customers shop in, e.g. physical retail locations, brand stores, or country-specific stores.
@@ -30,6 +31,10 @@ public interface Store extends Resource<Store> {
     @Nullable
     @HasUpdateAction
     LocalizedString getName();
+
+    @Nullable
+    @HasUpdateAction
+    List<String> getLanguages();
     
     /**
      * Creates a container which contains the full Java type information to deserialize this class from JSON.

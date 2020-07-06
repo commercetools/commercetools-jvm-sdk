@@ -4,9 +4,7 @@ import io.sphere.sdk.http.NameValuePair;
 import io.sphere.sdk.models.Base;
 
 import javax.annotation.Nullable;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
@@ -17,7 +15,9 @@ public final class PriceSelectionQueryParameters extends Base {
     public static final String PRICE_COUNTRY = "priceCountry";
     public static final String PRICE_CUSTOMER_GROUP = "priceCustomerGroup";
     public static final String PRICE_CHANNEL = "priceChannel";
-    public static final List<String> ALL_PARAMETERS = asList(PRICE_CURRENCY, PRICE_COUNTRY, PRICE_CUSTOMER_GROUP, PRICE_CHANNEL);
+    public static final String STORE_PROJECTION = "storeProjection";
+    public static final String LOCALE_PROJECTION = "localeProjection";
+    public static final List<String> ALL_PARAMETERS = asList(PRICE_CURRENCY, PRICE_COUNTRY, PRICE_CUSTOMER_GROUP, PRICE_CHANNEL, STORE_PROJECTION, LOCALE_PROJECTION);
 
     private PriceSelectionQueryParameters() {
     }
@@ -35,11 +35,14 @@ public final class PriceSelectionQueryParameters extends Base {
                 .filter(pair -> !ALL_PARAMETERS.contains(pair.getName()))
                 .collect(toList());
         final List<NameValuePair> resultingParameters = new LinkedList<>(currentParametersWithoutPriceSelectionParameters);
+
         if (priceSelection != null && priceSelection.getPriceCurrency() != null) {
             addParamIfNotNull(resultingParameters, PRICE_CURRENCY, priceSelection.getPriceCurrency());
             addParamIfNotNull(resultingParameters, PRICE_COUNTRY, priceSelection.getPriceCountry());
             addParamIfNotNull(resultingParameters, PRICE_CUSTOMER_GROUP, priceSelection.getPriceCustomerGroup());
             addParamIfNotNull(resultingParameters, PRICE_CHANNEL, priceSelection.getPriceChannel());
+            addParamIfNotNull(resultingParameters, STORE_PROJECTION, priceSelection.getStoreProjection());
+            priceSelection.getLocaleProjection().forEach(parameter -> addParamIfNotNull(resultingParameters, LOCALE_PROJECTION, parameter));
         }
         return resultingParameters;
     }
@@ -61,6 +64,8 @@ public final class PriceSelectionQueryParameters extends Base {
                 .priceCountryCode(map.get(PRICE_COUNTRY))
                 .priceCustomerGroupId(map.get(PRICE_CUSTOMER_GROUP))
                 .priceChannelId(map.get(PRICE_CHANNEL))
+                .storeProjection(map.get(STORE_PROJECTION))
+                .localeProjection(Collections.singletonList(map.get(LOCALE_PROJECTION)))
                 .build();
     }
 

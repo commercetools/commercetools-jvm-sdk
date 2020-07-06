@@ -10,6 +10,11 @@ import io.sphere.sdk.test.SphereTestUtils;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
+
 public class StoreDeleteCommandIntegrationTest extends IntegrationTest {
     
     @Test

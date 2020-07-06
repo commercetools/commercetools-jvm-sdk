@@ -10,6 +10,8 @@ import io.sphere.sdk.models.Referenceable;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.money.CurrencyUnit;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public final class PriceSelectionBuilder extends Base implements Builder<PriceSelectionDsl> {
@@ -21,6 +23,10 @@ public final class PriceSelectionBuilder extends Base implements Builder<PriceSe
     private String priceCustomerGroup;
     @Nullable
     private String priceChannel;
+    @Nullable
+    private String storeProjection;
+    @Nullable
+    private List <String> localeProjection = new ArrayList<>();
 
     private PriceSelectionBuilder(@Nonnull final String priceCurrency) {
         this.priceCurrency = priceCurrency;
@@ -38,7 +44,9 @@ public final class PriceSelectionBuilder extends Base implements Builder<PriceSe
         return ofCurrencyCode(template.getPriceCurrency())
                 .priceCountryCode(template.getPriceCountry())
                 .priceCustomerGroupId(template.getPriceCustomerGroup())
-                .priceChannelId(template.getPriceChannel());
+                .priceChannelId(template.getPriceChannel())
+                .storeProjection(template.getStoreProjection())
+                .localeProjection(template.getLocaleProjection());
     }
 
     public PriceSelectionBuilder priceCurrencyCode(@Nonnull final String priceCurrencyCode) {
@@ -80,6 +88,31 @@ public final class PriceSelectionBuilder extends Base implements Builder<PriceSe
         return this;
     }
 
+    public PriceSelectionBuilder storeProjection(@Nullable final String storeProjection) {
+        this.storeProjection = storeProjection;
+        return this;
+    }
+
+    public PriceSelectionBuilder localeProjection(@Nullable final List<String> localeProjection) {
+        this.localeProjection = localeProjection;
+        return this;
+    }
+
+    public PriceSelectionBuilder localeProjection(@Nullable final String localeProjection) {
+        this.localeProjection = new ArrayList<>();
+        this.localeProjection.add(localeProjection);
+        return this;
+    }
+
+    public PriceSelectionBuilder plusLocaleProjection(@Nullable final String localeProjection) {
+        if (this.localeProjection == null) {
+            this.localeProjection = new ArrayList<>();
+        }
+
+        this.localeProjection.add(localeProjection);
+        return this;
+    }
+
     @Nullable
     public String getPriceChannel() {
         return priceChannel;
@@ -100,8 +133,18 @@ public final class PriceSelectionBuilder extends Base implements Builder<PriceSe
         return priceCustomerGroup;
     }
 
+    @Nullable
+    public String getStoreProjection() {
+        return storeProjection;
+    }
+
+    @Nullable
+    public List<String> getLocaleProjection() {
+        return localeProjection;
+    }
+
     @Override
     public PriceSelectionDsl build() {
-        return new PriceSelectionDsl(priceCurrency, priceCountry, priceCustomerGroup, priceChannel);
+        return new PriceSelectionDsl(priceCurrency, priceCountry, priceCustomerGroup, priceChannel, storeProjection, localeProjection);
     }
 }
