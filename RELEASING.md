@@ -15,7 +15,6 @@
     
 1. https://oss.sonatype.org/ click "release" for commercetools/sphere stuff in "Staging Repositories"
 1. update GitHub release on https://github.com/commercetools/commercetools-jvm-sdk/releases
-1. add version badges to https://docs.commercetools.com/release-notes.html
 1. update version in the GitHub README
 
 
