@@ -9,7 +9,6 @@ import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shippingmethods.expansion.ShippingMethodExpansionModel;
 
 import javax.annotation.Nullable;
-import javax.money.CurrencyUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

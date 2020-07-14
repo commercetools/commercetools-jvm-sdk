@@ -6,8 +6,6 @@ import io.sphere.sdk.queries.MetaModelGetDsl;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shippingmethods.expansion.ShippingMethodExpansionModel;
 
-import javax.annotation.Nullable;
-import javax.money.CurrencyUnit;
 import java.util.List;
 
 /**
@@ -23,5 +21,4 @@ public interface ShippingMethodsByOrderEditGet extends MetaModelGetDsl<List<Ship
     static ShippingMethodsByOrderEditGet of(final OrderEdit orderEdit, final CountryCode countryCode, final String state) {
         return new ShippingMethodsByOrderEditGetImpl(orderEdit, countryCode, state);
     }
-
 }
