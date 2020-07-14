@@ -154,6 +154,12 @@ import java.util.function.Function;
  </ul>
  -->
  -->
+ <h3 class=released-version id="v1_53_0">1.53.0 (10.08.2020)</h3>
+ <ul>
+ <li class=new-in-release>Added new {@link io.sphere.sdk.shippingmethods.queries.ShippingMethodsByOrderEditGet}.</li>
+ <li class=new-in-release>Added new {@link io.sphere.sdk.inventory.messages.InventoryEntryCreatedMessage}.</li>
+ </ul>
+
  <h3 class=released-version id="v1_52_0">1.52.0 (07.07.2020)</h3>
  <ul>
  <li class=new-in-release>Added missing {@link ExternalTaxRateDraft#isIncludedInPrice()} and added it to builder {@link ExternalTaxRateDraftBuilder#includedInPrice()}</li>
