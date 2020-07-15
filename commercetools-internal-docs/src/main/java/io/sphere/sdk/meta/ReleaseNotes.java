@@ -157,6 +157,7 @@ import java.util.function.Function;
  <h3 class=released-version id="v1_53_0">1.53.0 (10.08.2020)</h3>
  <ul>
  <li class=new-in-release>Added new {@link io.sphere.sdk.shippingmethods.queries.ShippingMethodsByOrderEditGet}.</li>
+ <li class=new-in-release>Added new {@link io.sphere.sdk.inventory.messages.InventoryEntryCreatedMessage}.</li>
  </ul>
 
  <h3 class=released-version id="v1_52_0">1.52.0 (07.07.2020)</h3>
@@ -168,6 +169,7 @@ import java.util.function.Function;
  <li class=new-in-release>Added {@link Store#getLanguages()} and {@link StoreDraft#getLanguages()} and added update action {@link io.sphere.sdk.stores.commands.updateactions.SetLanguages} </li>
  <li class=new-in-release>Added query parameters in ProductProjection {@link PriceSelection#getLocaleProjection()} and {@link PriceSelection#getStoreProjection()} and also in the {@link PriceSelectionBuilder }  </li>
  </ul>
+
  </ul>
  <h3 class=released-version id="v1_51_0">1.51.0 (31.03.2020)</h3>
  <ul>
