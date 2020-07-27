@@ -15,13 +15,18 @@ public class StateDeleteCommandIntegrationTest extends IntegrationTest {
     @Before
     public void setUp() throws Exception {
         cleanUpByKey(client(), KEY);
-
     }
 
     @Test
     public void execution() throws Exception {
         final State state = getState();
         final State deletedState = client().executeBlocking(StateDeleteCommand.of(state));
+    }
+
+    @Test
+    public void deleteByKey() throws Exception {
+        final State state = getState();
+        final State deletedState = client().executeBlocking(StateDeleteCommand.ofKey(state.getKey(), state.getVersion()));
     }
 
     private State getState() {

@@ -1,13 +1,19 @@
 package io.sphere.sdk.states.commands;
 
+import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.states.State;
+import io.sphere.sdk.states.StateFixtures;
 import io.sphere.sdk.states.StateRole;
 import io.sphere.sdk.states.StateType;
 import io.sphere.sdk.states.commands.updateactions.*;
 import io.sphere.sdk.states.queries.StateByIdGet;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.zones.Zone;
+import io.sphere.sdk.zones.ZoneFixtures;
+import io.sphere.sdk.zones.commands.ZoneUpdateCommand;
+import io.sphere.sdk.zones.commands.updateactions.SetKey;
 import org.junit.Test;
 
 import java.util.LinkedList;
@@ -130,4 +136,21 @@ public class StateUpdateCommandIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Test
+    public void updateByKey() throws Exception {
+        StateFixtures.withUpdateableState(client(), state -> {
+            final String newKey = randomKey();
+            assertThat(state.getKey()).isNotEqualTo(newKey);
+            final StateUpdateCommand command = StateUpdateCommand.of(state, ChangeKey.of(newKey));
+            final State updatedState = client().executeBlocking(command);
+            assertThat(updatedState.getKey()).isEqualTo(newKey);
+
+            final String newKey2 = randomKey();
+            final StateUpdateCommand commandByKey = StateUpdateCommand.ofKey(updatedState.getKey(), updatedState.getVersion(), ChangeKey.of(newKey2));
+            final State updatedState2 = client().executeBlocking(commandByKey);
+            assertThat(updatedState2.getKey()).isEqualTo(newKey2);
+
+            return updatedState2;
+        });
+    }
 }
