@@ -42,8 +42,6 @@ import java.util.Set;
 @HasDeleteCommand(javadocSummary = "Deletes a state.", includeExamples = "io.sphere.sdk.states.commands.StateDeleteCommandIntegrationTest#execution()", deleteWith = {"key","id"})
 @HasQueryModel
 public interface State extends Resource<State>, WithKey {
-    @HasUpdateAction
-    @Nullable
     String getKey();
 
     StateType getType();
