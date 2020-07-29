@@ -124,6 +124,9 @@ import io.sphere.sdk.types.*;
 import io.sphere.sdk.zones.ZoneDraftBuilder;
 import io.sphere.sdk.stores.Store;
 import io.sphere.sdk.stores.StoreDraft;
+import io.sphere.sdk.states.queries.StateByKeyGet;
+import io.sphere.sdk.inventory.messages.InventoryEntryCreatedMessage;
+import io.sphere.sdk.shippingmethods.queries.ShippingMethodsByOrderEditGet;
 
 import javax.money.CurrencyUnit;
 import java.time.Duration;
@@ -156,8 +159,9 @@ import java.util.function.Function;
  -->
  <h3 class=released-version id="v1_53_0">1.53.0 (10.08.2020)</h3>
  <ul>
- <li class=new-in-release>Added new {@link io.sphere.sdk.shippingmethods.queries.ShippingMethodsByOrderEditGet}.</li>
- <li class=new-in-release>Added new {@link io.sphere.sdk.inventory.messages.InventoryEntryCreatedMessage}.</li>
+ <li class=new-in-release>Added new {@link ShippingMethodsByOrderEditGet}.</li>
+ <li class=new-in-release>Added new {@link InventoryEntryCreatedMessage}.</li>
+ <li class=new-in-release>Added new {@link StateByKeyGet} and now update and delete can be by Key as well.</li>
  </ul>
 
  <h3 class=released-version id="v1_52_0">1.52.0 (07.07.2020)</h3>
