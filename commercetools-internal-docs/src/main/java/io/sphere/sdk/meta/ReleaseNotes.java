@@ -162,6 +162,7 @@ import java.util.function.Function;
  <li class=new-in-release>Added new {@link ShippingMethodsByOrderEditGet}.</li>
  <li class=new-in-release>Added new {@link InventoryEntryCreatedMessage}.</li>
  <li class=new-in-release>Added new {@link StateByKeyGet} and now update and delete can be by Key as well.</li>
+ <li class=new-in-release>Added new field in the CartsConfiguration {@link CartsConfiguration#getCountryTaxRateFallbackEnabled()} and the related update action changeCountryTaxRateFallbackEnabled in the Project {@link Project#} </li>
  </ul>
 
  <h3 class=released-version id="v1_52_0">1.52.0 (07.07.2020)</h3>
