@@ -1,20 +1,24 @@
 package io.sphere.sdk.projects.commands;
 
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.CartsConfiguration;
 import io.sphere.sdk.carts.ShoppingListsConfiguration;
+import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.projects.commands.updateactions.*;
 import io.sphere.sdk.projects.queries.ProjectGet;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
+import static io.sphere.sdk.carts.CartFixtures.withCart;
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.models.DefaultCurrencyUnits.USD;
 
@@ -27,7 +31,8 @@ public abstract class ProjectIntegrationTest extends IntegrationTest {
     private static final List<Locale> PROJECT_LOCALES = Arrays.asList(Locale.GERMAN, new Locale("de", "AT"), Locale.ENGLISH);
     private static final List<String> PROJECT_LANGUAGES = PROJECT_LOCALES.stream().map(Locale::toLanguageTag).collect(Collectors.toList());
     private static final Boolean PROJECT_MESSAGES_ENABLED = true;
-    private static final CartsConfiguration CARTS_CONFIGURATION = CartsConfiguration.of(10);
+    private static final Boolean COUNTRY_TAX_RATE_FALLBACK_ENABLED = false;
+    private static final CartsConfiguration CARTS_CONFIGURATION = CartsConfiguration.of(10, false);
     private static final ShoppingListsConfiguration SHOPPING_LISTS_CONFIGURATION = ShoppingListsConfiguration.of(10);
     
     @BeforeClass
@@ -42,7 +47,8 @@ public abstract class ProjectIntegrationTest extends IntegrationTest {
                 ChangeMessagesEnabled.of(PROJECT_MESSAGES_ENABLED),
                 SetShippingRateInputType.ofUnset(),
                 ChangeCartsConfiguration.of(CARTS_CONFIGURATION),
-                ChangeShoppingListsConfiguration.of(SHOPPING_LISTS_CONFIGURATION)
+                ChangeShoppingListsConfiguration.of(SHOPPING_LISTS_CONFIGURATION),
+                ChangeCountryTaxRateFallbackEnabled.of(COUNTRY_TAX_RATE_FALLBACK_ENABLED)
         ));
 
         final Project updatedProject = client().executeBlocking(updateCommand);
@@ -59,6 +65,7 @@ public abstract class ProjectIntegrationTest extends IntegrationTest {
             soft.assertThat(updatedProject.getMessages().isEnabled()).isEqualTo(PROJECT_MESSAGES_ENABLED);
             soft.assertThat(updatedProject.getShippingRateInputType()).isNull();
             soft.assertThat(updatedProject.getCarts().getDeleteDaysAfterLastModification()).isEqualTo(10);
+            soft.assertThat(updatedProject.getCarts().getCountryTaxRateFallbackEnabled()).isEqualTo(false);
             soft.assertThat(updatedProject.getShoppingLists().getDeleteDaysAfterLastModification()).isEqualTo(10);
         });
     }

@@ -6,9 +6,17 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 public interface CartsConfiguration {
     
     Integer getDeleteDaysAfterLastModification();
+    Boolean getCountryTaxRateFallbackEnabled();
 
     static CartsConfiguration of(final Integer deleteDaysAfterLastModification) {
         return CartsConfigurationImpl.of(deleteDaysAfterLastModification);
     }
-    
+
+    static CartsConfiguration of(final Boolean countryTaxRateFallbackEnabled) {
+        return CartsConfigurationImpl.of(countryTaxRateFallbackEnabled);
+    }
+
+    static CartsConfiguration of(final Integer deleteDaysAfterLastModification, final Boolean countryTaxRateFallbackEnabled) {
+        return CartsConfigurationImpl.of(deleteDaysAfterLastModification, countryTaxRateFallbackEnabled);
+    }
 }
