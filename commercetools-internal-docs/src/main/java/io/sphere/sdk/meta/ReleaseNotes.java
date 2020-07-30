@@ -156,7 +156,7 @@ import java.util.function.Function;
  -->
  <h3 class=released-version id="v1_52_1">1.52.1 (31.07.2020)</h3>
  <ul>
- <li class=new-in-release>Fixed bug for localeProjection and storeProjection, now these 2 fields will be manage directly from ProductProjectionSearch</li>
+ <li class=new-in-release>Fixed bug for localeProjection and storeProjection, now these 2 fields will be manage directly from {@link ProductProjectionSearch}, {@link ProductProjectionQuery}, {@link ProductProjectionByKeyGet} and {@link ProductProjectionByIdGet} </li>
  </ul>
  <h3 class=released-version id="v1_52_0">1.52.0 (07.07.2020)</h3>
  <ul>
