@@ -20,6 +20,11 @@ final class ProductProjectionSearchImpl extends MetaModelSearchDslImpl<ProductPr
         ProductProjectionFilterSearchModel, ProductProjectionFacetSearchModel, ProductProjectionExpansionModel<ProductProjection>> implements ProductProjectionSearch {
 
     private static final String MARK_MATCHING_VARIANTS = "markMatchingVariants";
+//    @Nullable
+//    private final String storeProjection;
+//    @Nullable
+//    private final List<String> localeProjection;
+//
 
     ProductProjectionSearchImpl(final ProductProjectionType productProjectionType){
         super("/product-projections/search", ProductProjectionSearch.resultTypeReference(), ProductProjectionSearchModel.of().sort(),
@@ -67,5 +72,18 @@ final class ProductProjectionSearchImpl extends MetaModelSearchDslImpl<ProductPr
     @Override
     public PriceSelection getPriceSelection() {
         return extractPriceSelectionFromHttpQueryParameters(additionalQueryParameters());
+    }
+
+
+    @Override
+    @Nullable
+    public String getStoreProjection() {
+        return null;
+    }
+
+    @Override
+    @Nullable
+    public List<String> getLocaleProjection() {
+        return null;
     }
 }

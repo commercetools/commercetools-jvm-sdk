@@ -236,4 +236,10 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
 
     @Nullable
     PriceSelection getPriceSelection();
+
+    @Nullable
+    String getStoreProjection();
+
+    @Nullable
+    List<String> getLocaleProjection();
 }
