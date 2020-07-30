@@ -8,6 +8,8 @@ import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.queries.QuerySort;
 import io.sphere.sdk.queries.ResourceMetaModelQueryDslBuilderImpl;
 
+import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
@@ -17,6 +19,11 @@ import java.util.function.Function;
 
  */
 public final class ProductProjectionQueryBuilder extends ResourceMetaModelQueryDslBuilderImpl<ProductProjectionQueryBuilder, ProductProjection, ProductProjectionQuery, ProductProjectionQueryModel, ProductProjectionExpansionModel<ProductProjection>> {
+
+    @Nullable
+    private String storeProjection;
+    @Nullable
+    private List <String> localeProjection = new ArrayList<>();
 
     private ProductProjectionQueryBuilder(final ProductProjectionQuery template) {
         super(template);
@@ -142,5 +149,30 @@ public final class ProductProjectionQueryBuilder extends ResourceMetaModelQueryD
     @Override
     public ProductProjectionQueryBuilder expansionPaths(final Function<ProductProjectionExpansionModel<ProductProjection>, ExpansionPathContainer<ProductProjection>> m) {
         return super.expansionPaths(m);
+    }
+
+    public ProductProjectionQueryBuilder storeProjection(@Nullable final String storeProjection) {
+        this.storeProjection = storeProjection;
+        return this;
+    }
+
+    public ProductProjectionQueryBuilder localeProjection(@Nullable final List<String> localeProjection) {
+        this.localeProjection = localeProjection;
+        return this;
+    }
+
+    public ProductProjectionQueryBuilder localeProjection(@Nullable final String localeProjection) {
+        this.localeProjection = new ArrayList<>();
+        this.localeProjection.add(localeProjection);
+        return this;
+    }
+
+    public ProductProjectionQueryBuilder plusLocaleProjection(@Nullable final String localeProjection) {
+        if (this.localeProjection == null) {
+            this.localeProjection = new ArrayList<>();
+        }
+
+        this.localeProjection.add(localeProjection);
+        return this;
     }
 }

@@ -42,4 +42,16 @@ final class ProductProjectionQueryImpl extends MetaModelQueryDslImpl<ProductProj
     public PriceSelection getPriceSelection() {
         return extractPriceSelectionFromHttpQueryParameters(additionalHttpQueryParameters());
     }
+
+    @Override
+    @Nullable
+    public String getStoreProjection() {
+        return null;
+    }
+
+    @Override
+    @Nullable
+    public List<String> getLocaleProjection() {
+        return null;
+    }
 }

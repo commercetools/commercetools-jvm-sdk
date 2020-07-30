@@ -20,11 +20,6 @@ final class ProductProjectionSearchImpl extends MetaModelSearchDslImpl<ProductPr
         ProductProjectionFilterSearchModel, ProductProjectionFacetSearchModel, ProductProjectionExpansionModel<ProductProjection>> implements ProductProjectionSearch {
 
     private static final String MARK_MATCHING_VARIANTS = "markMatchingVariants";
-//    @Nullable
-//    private final String storeProjection;
-//    @Nullable
-//    private final List<String> localeProjection;
-//
 
     ProductProjectionSearchImpl(final ProductProjectionType productProjectionType){
         super("/product-projections/search", ProductProjectionSearch.resultTypeReference(), ProductProjectionSearchModel.of().sort(),

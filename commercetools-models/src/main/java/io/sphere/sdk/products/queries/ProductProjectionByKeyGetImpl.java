@@ -35,4 +35,16 @@ final class ProductProjectionByKeyGetImpl extends MetaModelGetDslImpl<ProductPro
     public PriceSelection getPriceSelection() {
         return extractPriceSelectionFromHttpQueryParameters(additionalQueryParameters());
     }
+
+    @Override
+    @Nullable
+    public String getStoreProjection() {
+        return null;
+    }
+
+    @Override
+    @Nullable
+    public List<String> getLocaleProjection() {
+        return null;
+    }
 }

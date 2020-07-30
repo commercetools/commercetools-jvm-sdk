@@ -8,6 +8,7 @@ import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
 import io.sphere.sdk.products.search.PriceSelectionRequestDsl;
 import io.sphere.sdk.queries.MetaModelGetDsl;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public interface ProductProjectionByIdGet extends MetaModelGetDsl<ProductProjection, ProductProjection, ProductProjectionByIdGet, ProductProjectionExpansionModel<ProductProjection>>, PriceSelectionRequestDsl<ProductProjectionByIdGet> {
@@ -47,4 +48,10 @@ public interface ProductProjectionByIdGet extends MetaModelGetDsl<ProductProject
 
     @Override
     ProductProjectionByIdGet withExpansionPaths(final List<ExpansionPath<ProductProjection>> expansionPaths);
+
+    @Nullable
+    String getStoreProjection();
+
+    @Nullable
+    List<String> getLocaleProjection();
 }
