@@ -9,6 +9,7 @@ import io.sphere.sdk.queries.MetaModelQueryDslBuilder;
 import io.sphere.sdk.queries.MetaModelQueryDslImpl;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 
 import static io.sphere.sdk.products.search.PriceSelectionQueryParameters.*;
@@ -18,6 +19,12 @@ import static java.util.Collections.singletonList;
  {@doc.gen summary product projections}
  */
 final class ProductProjectionQueryImpl extends MetaModelQueryDslImpl<ProductProjection, ProductProjectionQuery, ProductProjectionQueryModel, ProductProjectionExpansionModel<ProductProjection>> implements ProductProjectionQuery {
+
+    @Nullable
+    private String storeProjection;
+
+    @Nullable
+    private final List<String> localeProjection = new ArrayList<>();
 
     ProductProjectionQueryImpl(final ProductProjectionType productProjectionType){
         super(ProductProjectionEndpoint.ENDPOINT.endpoint(), ProductProjectionQuery.resultTypeReference(), ProductProjectionQueryModel.of(), ProductProjectionExpansionModel.of(), ProductProjectionQueryImpl::new, additionalParametersOf(productProjectionType));
@@ -44,14 +51,13 @@ final class ProductProjectionQueryImpl extends MetaModelQueryDslImpl<ProductProj
     }
 
     @Override
-    @Nullable
-    public String getStoreProjection() {
-        return null;
+    public String storeProjection() {
+        return storeProjection;
     }
 
     @Override
     @Nullable
-    public List<String> getLocaleProjection() {
-        return null;
+    public List<String> localeProjection() {
+        return localeProjection;
     }
 }

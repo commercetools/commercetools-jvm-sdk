@@ -121,8 +121,8 @@ public interface ProductProjectionQuery extends MetaModelQueryDsl<ProductProject
     ProductProjectionQuery withPriceSelection(@Nullable final PriceSelection priceSelection);
 
     @Nullable
-    String getStoreProjection();
+    String storeProjection();
 
     @Nullable
-    List<String> getLocaleProjection();
+    List<String> localeProjection();
 }

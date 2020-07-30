@@ -9,6 +9,7 @@ import io.sphere.sdk.queries.MetaModelGetDslBuilder;
 import io.sphere.sdk.queries.MetaModelGetDslImpl;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -24,6 +25,12 @@ final class ProductProjectionByKeyGetImpl extends MetaModelGetDslImpl<ProductPro
         super(builder);
     }
 
+    @Nullable
+    private String storeProjection;
+
+    @Nullable
+    private final List<String> localeProjection = new ArrayList<>();
+
     @Override
     public ProductProjectionByKeyGet withPriceSelection(@Nullable final PriceSelection priceSelection) {
         final List<NameValuePair> resultingParameters = getQueryParametersWithPriceSelection(priceSelection, additionalQueryParameters());
@@ -37,14 +44,13 @@ final class ProductProjectionByKeyGetImpl extends MetaModelGetDslImpl<ProductPro
     }
 
     @Override
-    @Nullable
-    public String getStoreProjection() {
-        return null;
+    public String storeProjection() {
+        return storeProjection;
     }
 
     @Override
     @Nullable
-    public List<String> getLocaleProjection() {
-        return null;
+    public List<String> localeProjection() {
+        return localeProjection;
     }
 }

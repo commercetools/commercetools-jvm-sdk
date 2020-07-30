@@ -50,8 +50,8 @@ public interface ProductProjectionByIdGet extends MetaModelGetDsl<ProductProject
     ProductProjectionByIdGet withExpansionPaths(final List<ExpansionPath<ProductProjection>> expansionPaths);
 
     @Nullable
-    String getStoreProjection();
+    String storeProjection();
 
     @Nullable
-    List<String> getLocaleProjection();
+    List<String> localeProjection();
 }
