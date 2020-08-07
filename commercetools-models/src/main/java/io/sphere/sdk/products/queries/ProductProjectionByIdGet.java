@@ -11,7 +11,7 @@ import io.sphere.sdk.queries.MetaModelGetDsl;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public interface ProductProjectionByIdGet extends MetaModelGetDsl<ProductProjection, ProductProjection, ProductProjectionByIdGet, ProductProjectionExpansionModel<ProductProjection>>, PriceSelectionRequestDsl<ProductProjectionByIdGet> {
+public interface ProductProjectionByIdGet extends MetaModelGetDsl<ProductProjection, ProductProjection, ProductProjectionByIdGet, ProductProjectionExpansionModel<ProductProjection>>, PriceSelectionRequestDsl<ProductProjectionByIdGet>, StoreProjectionRequestDsl<ProductProjectionByIdGet>, LocaleProjectionRequestDsl<ProductProjectionByIdGet> {
 
     static ProductProjectionByIdGet of(final ProductIdentifiable product, final ProductProjectionType projectionType) {
         return of(product.getId(), projectionType);
@@ -50,8 +50,8 @@ public interface ProductProjectionByIdGet extends MetaModelGetDsl<ProductProject
     ProductProjectionByIdGet withExpansionPaths(final List<ExpansionPath<ProductProjection>> expansionPaths);
 
     @Nullable
-    String storeProjection();
+    ProductProjectionQuery getStoreProjection();
 
     @Nullable
-    List<String> localeProjection();
+    ProductProjectionQuery getLocaleProjection();
 }

@@ -168,10 +168,6 @@ public final class ProductProjectionQueryBuilder extends ResourceMetaModelQueryD
     }
 
     public ProductProjectionQueryBuilder plusLocaleProjection(@Nullable final String localeProjection) {
-        if (this.localeProjection == null) {
-            this.localeProjection = new ArrayList<>();
-        }
-
         this.localeProjection.add(localeProjection);
         return this;
     }

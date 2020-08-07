@@ -3,12 +3,14 @@ package io.sphere.sdk.products.search;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
+import io.sphere.sdk.http.NameValuePair;
 import io.sphere.sdk.models.LocalizedStringEntry;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
 import io.sphere.sdk.search.*;
+import io.sphere.sdk.stores.Store;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -230,6 +232,10 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
      * {@include.example io.sphere.sdk.products.search.MatchingVariantsFlagSearchIntegrationTest#disableMatchingVariantsFlag()}
      */
     ProductProjectionSearch withMarkingMatchingVariants(final Boolean markMatchingVariants);
+
+    ProductProjectionSearch withLocaleProjection(@Nullable final List<String> localeProjection);
+
+    ProductProjectionSearch withStoreProjection(@Nullable final Store storeProjection);
 
     @Nullable
     Boolean isMarkingMatchingVariants();

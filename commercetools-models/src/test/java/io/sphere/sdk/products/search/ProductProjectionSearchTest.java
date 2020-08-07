@@ -38,6 +38,8 @@ public class ProductProjectionSearchTest {
             .build();
     public static final ProductProjectionSearch SEARCH_WITH_FULL_PRICE_SELECTION = ProductProjectionSearch.ofStaged().withPriceSelection(FULL_PRICE_SELECTION);
 
+    public static final ProductProjectionSearch SEARCH_WITH_LOCALE_PROJECTION = ProductProjectionSearch.ofStaged().withPriceSelection(FULL_PRICE_SELECTION);
+
     @Ignore
     @Test
     public void canAccessProductName() throws Exception {

@@ -7,12 +7,13 @@ import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
 import io.sphere.sdk.products.search.PriceSelection;
 import io.sphere.sdk.queries.MetaModelGetDslBuilder;
 import io.sphere.sdk.queries.MetaModelGetDslImpl;
+import io.sphere.sdk.stores.Store;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static io.sphere.sdk.products.queries.ProductProjectionQueryParameters.*;
 import static io.sphere.sdk.products.search.PriceSelectionQueryParameters.extractPriceSelectionFromHttpQueryParameters;
 import static io.sphere.sdk.products.search.PriceSelectionQueryParameters.getQueryParametersWithPriceSelection;
 
@@ -25,17 +26,24 @@ final class ProductProjectionByKeyGetImpl extends MetaModelGetDslImpl<ProductPro
         super(builder);
     }
 
-    @Nullable
-    private String storeProjection;
-
-    @Nullable
-    private final List<String> localeProjection = new ArrayList<>();
-
     @Override
     public ProductProjectionByKeyGet withPriceSelection(@Nullable final PriceSelection priceSelection) {
         final List<NameValuePair> resultingParameters = getQueryParametersWithPriceSelection(priceSelection, additionalQueryParameters());
         return withAdditionalQueryParameters(resultingParameters);
     }
+
+    @Override
+    public ProductProjectionByKeyGet withStoreProjection(@Nullable final Store storeProjection) {
+        final List<NameValuePair> resultingParameters = getQueryParametersWithStoreProjection(storeProjection, additionalQueryParameters());
+        return withAdditionalQueryParameters(resultingParameters);
+    }
+
+    @Override
+    public ProductProjectionByKeyGet withLocaleProjection(@Nullable final List<String> localeProjection) {
+        final List<NameValuePair> resultingParameters = getQueryParametersWithLocaleProjection(localeProjection, additionalQueryParameters());
+        return withAdditionalQueryParameters(resultingParameters);
+    }
+
 
     @Nullable
     @Override
@@ -43,14 +51,15 @@ final class ProductProjectionByKeyGetImpl extends MetaModelGetDslImpl<ProductPro
         return extractPriceSelectionFromHttpQueryParameters(additionalQueryParameters());
     }
 
+    @Nullable
     @Override
-    public String storeProjection() {
-        return storeProjection;
+    public ProductProjectionQuery getStoreProjection() {
+        return extractStoreProjectionFromHttpQueryParameters(additionalQueryParameters());
     }
 
-    @Override
     @Nullable
-    public List<String> localeProjection() {
-        return localeProjection;
+    @Override
+    public ProductProjectionQuery getLocaleProjection() {
+        return extractLocaleProjectionFromHttpQueryParameters(additionalQueryParameters());
     }
 }

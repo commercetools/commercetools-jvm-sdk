@@ -4,14 +4,19 @@ import io.sphere.sdk.http.NameValuePair;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
+import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
 import io.sphere.sdk.search.MetaModelSearchDslBuilder;
 import io.sphere.sdk.search.MetaModelSearchDslImpl;
+import io.sphere.sdk.stores.Store;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static io.sphere.sdk.products.queries.ProductProjectionQueryParameters.getQueryParametersWithLocaleProjection;
+import static io.sphere.sdk.products.queries.ProductProjectionQueryParameters.getQueryParametersWithStoreProjection;
 import static io.sphere.sdk.products.search.PriceSelectionQueryParameters.extractPriceSelectionFromHttpQueryParameters;
 import static io.sphere.sdk.products.search.PriceSelectionQueryParameters.getQueryParametersWithPriceSelection;
 import static java.util.Collections.singletonList;
@@ -53,6 +58,18 @@ final class ProductProjectionSearchImpl extends MetaModelSearchDslImpl<ProductPr
         return withAdditionalQueryParameters(parameters);
     }
 
+    @Override
+    public ProductProjectionSearch withLocaleProjection(@Nullable List<String> localeProjection) {
+        final List<NameValuePair> resultingParameters = getQueryParametersWithLocaleProjection(localeProjection, additionalQueryParameters());
+        return withAdditionalQueryParameters(resultingParameters);
+    }
+
+    @Override
+    public ProductProjectionSearch withStoreProjection(@Nullable Store storeProjection) {
+        final List<NameValuePair> resultingParameters = getQueryParametersWithStoreProjection(storeProjection, additionalQueryParameters());
+        return withAdditionalQueryParameters(resultingParameters);
+    }
+
     @Nullable
     @Override
     public Boolean isMarkingMatchingVariants() {
@@ -71,13 +88,11 @@ final class ProductProjectionSearchImpl extends MetaModelSearchDslImpl<ProductPr
 
 
     @Override
-    @Nullable
     public String getStoreProjection() {
         return null;
     }
 
     @Override
-    @Nullable
     public List<String> getLocaleProjection() {
         return null;
     }

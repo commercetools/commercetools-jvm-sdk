@@ -15,7 +15,7 @@ import java.util.List;
  *
  * {@include.example io.sphere.sdk.products.queries.ProductProjectionByKeyGetIntegrationTest#execution()}
  */
-public interface ProductProjectionByKeyGet extends MetaModelGetDsl<ProductProjection, ProductProjection, ProductProjectionByKeyGet, ProductProjectionExpansionModel<ProductProjection>>, PriceSelectionRequestDsl<ProductProjectionByKeyGet> {
+public interface ProductProjectionByKeyGet extends MetaModelGetDsl<ProductProjection, ProductProjection, ProductProjectionByKeyGet, ProductProjectionExpansionModel<ProductProjection>>, PriceSelectionRequestDsl<ProductProjectionByKeyGet>, StoreProjectionRequestDsl<ProductProjectionByKeyGet>, LocaleProjectionRequestDsl<ProductProjectionByKeyGet> {
 
     static ProductProjectionByKeyGet ofStaged(final String key) {
         return of(key, ProductProjectionType.STAGED);
@@ -42,8 +42,8 @@ public interface ProductProjectionByKeyGet extends MetaModelGetDsl<ProductProjec
     ProductProjectionByKeyGet withExpansionPaths(final List<ExpansionPath<ProductProjection>> expansionPaths);
 
     @Nullable
-    String storeProjection();
+    ProductProjectionQuery getStoreProjection();
 
     @Nullable
-    List<String> localeProjection();
+    ProductProjectionQuery getLocaleProjection();
 }
