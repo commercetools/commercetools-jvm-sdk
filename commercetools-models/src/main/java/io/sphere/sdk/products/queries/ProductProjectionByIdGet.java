@@ -5,12 +5,13 @@ import io.sphere.sdk.products.ProductIdentifiable;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
+import io.sphere.sdk.products.search.LocaleSelectionRequestDsl;
 import io.sphere.sdk.products.search.PriceSelectionRequestDsl;
 import io.sphere.sdk.queries.MetaModelGetDsl;
 
 import java.util.List;
 
-public interface ProductProjectionByIdGet extends MetaModelGetDsl<ProductProjection, ProductProjection, ProductProjectionByIdGet, ProductProjectionExpansionModel<ProductProjection>>, PriceSelectionRequestDsl<ProductProjectionByIdGet> {
+public interface ProductProjectionByIdGet extends MetaModelGetDsl<ProductProjection, ProductProjection, ProductProjectionByIdGet, ProductProjectionExpansionModel<ProductProjection>>, PriceSelectionRequestDsl<ProductProjectionByIdGet>, LocaleSelectionRequestDsl<ProductProjectionByIdGet> {
 
     static ProductProjectionByIdGet of(final ProductIdentifiable product, final ProductProjectionType projectionType) {
         return of(product.getId(), projectionType);

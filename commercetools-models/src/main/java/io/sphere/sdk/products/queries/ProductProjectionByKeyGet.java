@@ -4,6 +4,7 @@ import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
+import io.sphere.sdk.products.search.LocaleSelectionRequestDsl;
 import io.sphere.sdk.products.search.PriceSelectionRequestDsl;
 import io.sphere.sdk.queries.MetaModelGetDsl;
 
@@ -14,7 +15,7 @@ import java.util.List;
  *
  * {@include.example io.sphere.sdk.products.queries.ProductProjectionByKeyGetIntegrationTest#execution()}
  */
-public interface ProductProjectionByKeyGet extends MetaModelGetDsl<ProductProjection, ProductProjection, ProductProjectionByKeyGet, ProductProjectionExpansionModel<ProductProjection>>, PriceSelectionRequestDsl<ProductProjectionByKeyGet> {
+public interface ProductProjectionByKeyGet extends MetaModelGetDsl<ProductProjection, ProductProjection, ProductProjectionByKeyGet, ProductProjectionExpansionModel<ProductProjection>>, PriceSelectionRequestDsl<ProductProjectionByKeyGet>, LocaleSelectionRequestDsl<ProductProjectionByKeyGet> {
 
     static ProductProjectionByKeyGet ofStaged(final String key) {
         return of(key, ProductProjectionType.STAGED);

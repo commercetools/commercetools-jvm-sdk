@@ -21,7 +21,7 @@ import java.util.function.Function;
  * Consult the documentation for <a href="{@docRoot}/io/sphere/sdk/meta/SearchDocumentation.html">Product Search API</a> for more information.
  */
 public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProjection, ProductProjectionSearch, ProductProjectionSortSearchModel,
-        ProductProjectionFilterSearchModel, ProductProjectionFacetSearchModel, ProductProjectionExpansionModel<ProductProjection>>, PriceSelectionRequestDsl<ProductProjectionSearch> {
+        ProductProjectionFilterSearchModel, ProductProjectionFacetSearchModel, ProductProjectionExpansionModel<ProductProjection>>, PriceSelectionRequestDsl<ProductProjectionSearch>, LocaleSelectionRequestDsl<ProductProjectionSearch> {
 
     /**
      * Creates a container which contains the full Java type information to deserialize the query result (NOT this class) from JSON.
@@ -230,6 +230,8 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
      * {@include.example io.sphere.sdk.products.search.MatchingVariantsFlagSearchIntegrationTest#disableMatchingVariantsFlag()}
      */
     ProductProjectionSearch withMarkingMatchingVariants(final Boolean markMatchingVariants);
+
+    ProductProjectionSearch withLocaleSelection(@Nullable final LocaleSelection localeSelection);
 
     @Nullable
     Boolean isMarkingMatchingVariants();

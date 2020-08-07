@@ -4,6 +4,7 @@ import io.sphere.sdk.http.NameValuePair;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
+import io.sphere.sdk.products.search.LocaleSelection;
 import io.sphere.sdk.products.search.PriceSelection;
 import io.sphere.sdk.queries.MetaModelGetDslBuilder;
 import io.sphere.sdk.queries.MetaModelGetDslImpl;
@@ -14,6 +15,8 @@ import java.util.List;
 
 import static io.sphere.sdk.products.search.PriceSelectionQueryParameters.extractPriceSelectionFromHttpQueryParameters;
 import static io.sphere.sdk.products.search.PriceSelectionQueryParameters.getQueryParametersWithPriceSelection;
+import static io.sphere.sdk.products.search.LocaleSelectionQueryParameters.extractLocaleSelectionFromHttpQueryParameters;
+import static io.sphere.sdk.products.search.LocaleSelectionQueryParameters.getQueryParametersWithLocaleSelection;
 
 final class ProductProjectionByKeyGetImpl extends MetaModelGetDslImpl<ProductProjection, ProductProjection, ProductProjectionByKeyGet, ProductProjectionExpansionModel<ProductProjection>> implements ProductProjectionByKeyGet {
     ProductProjectionByKeyGetImpl(final String key, final ProductProjectionType projectionType) {
@@ -34,5 +37,17 @@ final class ProductProjectionByKeyGetImpl extends MetaModelGetDslImpl<ProductPro
     @Override
     public PriceSelection getPriceSelection() {
         return extractPriceSelectionFromHttpQueryParameters(additionalQueryParameters());
+    }
+
+    @Override
+    public ProductProjectionByKeyGet withLocaleSelection(@Nullable LocaleSelection localeSelection) {
+        final List<NameValuePair> resultingParameters = getQueryParametersWithLocaleSelection(localeSelection, additionalQueryParameters());
+        return withAdditionalQueryParameters(resultingParameters);
+    }
+
+    @Nullable
+    @Override
+    public LocaleSelection getLocaleSelection() {
+        return extractLocaleSelectionFromHttpQueryParameters(additionalQueryParameters());
     }
 }
