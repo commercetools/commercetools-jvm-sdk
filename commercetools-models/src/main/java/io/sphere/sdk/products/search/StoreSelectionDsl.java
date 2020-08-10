@@ -14,7 +14,7 @@ public final class StoreSelectionDsl extends Base implements StoreSelection {
     }
 
     public StoreSelectionDsl withStoreProjection(@Nullable final String storeProjection) {
-        return StoreSelectionBuilder.of(storeProjection).storeProjection(storeProjection).build();
+        return StoreSelectionBuilder.of(storeProjection).build();
     }
 
     @Nullable

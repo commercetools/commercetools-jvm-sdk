@@ -6,24 +6,24 @@ import io.sphere.sdk.models.Builder;
 import javax.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public final class LocaleSelectionBuilder extends Base implements Builder<LocaleSelectionDsl> {
     @Nullable
     private List <String> localeProjection = new ArrayList<>();
 
-    LocaleSelectionBuilder localeProjection (@Nullable final List<String> localeProjection) {
+    LocaleSelectionBuilder(@Nullable final List<String> localeProjection) {
         this.localeProjection = localeProjection;
-        return this;
     }
 
-    LocaleSelectionBuilder localeProjection(@Nullable final String localeProjection) {
+    private LocaleSelectionBuilder localeProjection(@Nullable final String localeProjection) {
         this.localeProjection = new ArrayList<>();
         this.localeProjection.add(localeProjection);
         return this;
     }
 
-    LocaleSelectionBuilder plusLocaleProjection(@Nullable final String localeProjection) {
+    private LocaleSelectionBuilder plusLocaleProjection(@Nullable final String localeProjection) {
         if (this.localeProjection == null) {
             this.localeProjection = new ArrayList<>();
         }
@@ -32,7 +32,7 @@ public final class LocaleSelectionBuilder extends Base implements Builder<Locale
     }
 
     public static LocaleSelectionBuilder of(@Nullable final String localeProjection) {
-        return new LocaleSelectionBuilder();
+        return new LocaleSelectionBuilder(Collections.singletonList(localeProjection));
     }
 
     @Nullable

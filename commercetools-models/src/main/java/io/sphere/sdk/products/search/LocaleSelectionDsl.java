@@ -3,6 +3,7 @@ package io.sphere.sdk.products.search;
 import io.sphere.sdk.models.Base;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.List;
 
 public final class LocaleSelectionDsl extends Base implements LocaleSelection {
@@ -14,11 +15,11 @@ public final class LocaleSelectionDsl extends Base implements LocaleSelection {
     }
 
     public LocaleSelectionDsl withLocaleProjection(@Nullable final List<String> localeProjection) {
-        return LocaleSelectionBuilder.of(localeProjection.toString()).localeProjection(localeProjection).build();
+        return LocaleSelectionBuilder.of(localeProjection.toString()).build();
     }
 
     public LocaleSelectionDsl plusLocaleProjection(@Nullable final String localeProjection) {
-        return LocaleSelectionBuilder.of(localeProjection.toString()).plusLocaleProjection(localeProjection).build();
+        return LocaleSelectionBuilder.of(localeProjection).build();
     }
 
     @Nullable

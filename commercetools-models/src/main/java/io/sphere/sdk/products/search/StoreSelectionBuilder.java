@@ -11,13 +11,12 @@ public final class StoreSelectionBuilder extends Base implements Builder<StoreSe
     @Nullable
     private String storeProjection;
 
-    StoreSelectionBuilder storeProjection(@Nullable final String storeProjection) {
+    StoreSelectionBuilder(@Nullable final String storeProjection) {
         this.storeProjection = storeProjection;
-        return this;
     }
 
     public static StoreSelectionBuilder of(@Nullable final String storeProjection) {
-        return new StoreSelectionBuilder();
+        return new StoreSelectionBuilder(storeProjection);
     }
 
     @Nullable
