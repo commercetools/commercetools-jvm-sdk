@@ -17,7 +17,7 @@ public final class LocaleSelectionBuilder extends Base implements Builder<Locale
         return this;
     }
 
-    public LocaleSelectionBuilder localeProjection(@Nullable final String localeProjection) {
+    LocaleSelectionBuilder localeProjection(@Nullable final String localeProjection) {
         this.localeProjection = new ArrayList<>();
         this.localeProjection.add(localeProjection);
         return this;
