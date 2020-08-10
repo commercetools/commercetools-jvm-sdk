@@ -9,7 +9,7 @@ public final class LocaleSelectionDsl extends Base implements LocaleSelection {
     @Nullable
     private final List<String> localeProjection;
 
-    public LocaleSelectionDsl(@Nullable List<String> localeProjection) {
+    LocaleSelectionDsl(@Nullable List<String> localeProjection) {
         this.localeProjection = localeProjection;
     }
 

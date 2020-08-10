@@ -12,7 +12,7 @@ public final class LocaleSelectionBuilder extends Base implements Builder<Locale
     @Nullable
     private List <String> localeProjection = new ArrayList<>();
 
-    public LocaleSelectionBuilder localeProjection(@Nullable final List<String> localeProjection) {
+    LocaleSelectionBuilder localeProjection (@Nullable final List<String> localeProjection) {
         this.localeProjection = localeProjection;
         return this;
     }
