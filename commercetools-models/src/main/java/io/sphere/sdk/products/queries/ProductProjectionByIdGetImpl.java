@@ -6,6 +6,7 @@ import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
 import io.sphere.sdk.products.search.LocaleSelection;
 import io.sphere.sdk.products.search.PriceSelection;
+import io.sphere.sdk.products.search.StoreSelection;
 import io.sphere.sdk.queries.MetaModelGetDslBuilder;
 import io.sphere.sdk.queries.MetaModelGetDslImpl;
 
@@ -15,8 +16,8 @@ import java.util.List;
 
 import static io.sphere.sdk.products.search.PriceSelectionQueryParameters.extractPriceSelectionFromHttpQueryParameters;
 import static io.sphere.sdk.products.search.PriceSelectionQueryParameters.getQueryParametersWithPriceSelection;
-import static io.sphere.sdk.products.search.LocaleSelectionQueryParameters.extractLocaleSelectionFromHttpQueryParameters;
-import static io.sphere.sdk.products.search.LocaleSelectionQueryParameters.getQueryParametersWithLocaleSelection;
+import static io.sphere.sdk.products.search.LocaleSelectionQueryParameters.*;
+import static io.sphere.sdk.products.search.StoreSelectionQueryParameters.*;
 
 final class ProductProjectionByIdGetImpl extends MetaModelGetDslImpl<ProductProjection, ProductProjection, ProductProjectionByIdGet, ProductProjectionExpansionModel<ProductProjection>> implements ProductProjectionByIdGet {
     ProductProjectionByIdGetImpl(final String id, final ProductProjectionType projectionType) {
@@ -49,5 +50,17 @@ final class ProductProjectionByIdGetImpl extends MetaModelGetDslImpl<ProductProj
     @Override
     public LocaleSelection getLocaleSelection() {
         return extractLocaleSelectionFromHttpQueryParameters(additionalQueryParameters());
+    }
+
+    @Override
+    public ProductProjectionByIdGet withStoreSelection(@Nullable final StoreSelection storeSelection) {
+        final List<NameValuePair> resultingParameters = getQueryParametersWithStoreSelection(storeSelection, additionalQueryParameters());
+        return withAdditionalQueryParameters(resultingParameters);
+    }
+
+    @Nullable
+    @Override
+    public StoreSelection getStoreSelection() {
+        return extractStoreSelectionFromHttpQueryParameters(additionalQueryParameters());
     }
 }

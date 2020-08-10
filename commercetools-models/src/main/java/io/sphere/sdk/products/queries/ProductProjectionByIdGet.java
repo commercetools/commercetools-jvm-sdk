@@ -7,11 +7,12 @@ import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
 import io.sphere.sdk.products.search.LocaleSelectionRequestDsl;
 import io.sphere.sdk.products.search.PriceSelectionRequestDsl;
+import io.sphere.sdk.products.search.StoreSelectionRequestDsl;
 import io.sphere.sdk.queries.MetaModelGetDsl;
 
 import java.util.List;
 
-public interface ProductProjectionByIdGet extends MetaModelGetDsl<ProductProjection, ProductProjection, ProductProjectionByIdGet, ProductProjectionExpansionModel<ProductProjection>>, PriceSelectionRequestDsl<ProductProjectionByIdGet>, LocaleSelectionRequestDsl<ProductProjectionByIdGet> {
+public interface ProductProjectionByIdGet extends MetaModelGetDsl<ProductProjection, ProductProjection, ProductProjectionByIdGet, ProductProjectionExpansionModel<ProductProjection>>, PriceSelectionRequestDsl<ProductProjectionByIdGet>, LocaleSelectionRequestDsl<ProductProjectionByIdGet>, StoreSelectionRequestDsl<ProductProjectionByIdGet> {
 
     static ProductProjectionByIdGet of(final ProductIdentifiable product, final ProductProjectionType projectionType) {
         return of(product.getId(), projectionType);

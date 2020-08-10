@@ -6,6 +6,7 @@ import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
 import io.sphere.sdk.products.search.LocaleSelection;
 import io.sphere.sdk.products.search.PriceSelection;
+import io.sphere.sdk.products.search.StoreSelection;
 import io.sphere.sdk.queries.MetaModelQueryDslBuilder;
 import io.sphere.sdk.queries.MetaModelQueryDslImpl;
 
@@ -14,6 +15,7 @@ import java.util.List;
 
 import static io.sphere.sdk.products.search.PriceSelectionQueryParameters.*;
 import static io.sphere.sdk.products.search.LocaleSelectionQueryParameters.*;
+import static io.sphere.sdk.products.search.StoreSelectionQueryParameters.*;
 import static java.util.Collections.singletonList;
 
 /**
@@ -55,5 +57,17 @@ final class ProductProjectionQueryImpl extends MetaModelQueryDslImpl<ProductProj
     @Override
     public LocaleSelection getLocaleSelection() {
         return extractLocaleSelectionFromHttpQueryParameters(additionalHttpQueryParameters());
+    }
+
+    @Override
+    public ProductProjectionQuery withStoreSelection(@Nullable final StoreSelection storeSelection) {
+        final List<NameValuePair> resultingParameters = getQueryParametersWithStoreSelection(storeSelection, additionalHttpQueryParameters());
+        return withAdditionalHttpQueryParameters(resultingParameters);
+    }
+
+    @Nullable
+    @Override
+    public StoreSelection getStoreSelection() {
+        return extractStoreSelectionFromHttpQueryParameters(additionalHttpQueryParameters());
     }
 }
