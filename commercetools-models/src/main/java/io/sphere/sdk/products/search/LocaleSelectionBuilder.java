@@ -23,7 +23,7 @@ public final class LocaleSelectionBuilder extends Base implements Builder<Locale
         return this;
     }
 
-    public LocaleSelectionBuilder plusLocaleProjection(@Nullable final String localeProjection) {
+    LocaleSelectionBuilder plusLocaleProjection(@Nullable final String localeProjection) {
         if (this.localeProjection == null) {
             this.localeProjection = new ArrayList<>();
         }
