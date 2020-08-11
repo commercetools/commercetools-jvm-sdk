@@ -1,21 +1,20 @@
 package io.sphere.sdk.products.queries;
 
-import io.sphere.sdk.http.NameValuePair;
-import io.sphere.sdk.products.attributes.AttributeAccess;
-import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
 import io.sphere.sdk.categories.commands.updateactions.ChangeParent;
 import io.sphere.sdk.channels.ChannelFixtures;
 import io.sphere.sdk.channels.ChannelRole;
+import io.sphere.sdk.http.NameValuePair;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.MetaAttributes;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.*;
+import io.sphere.sdk.products.attributes.AttributeAccess;
+import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.*;
 import io.sphere.sdk.products.search.LocaleSelection;
-import io.sphere.sdk.products.search.PriceSelection;
 import io.sphere.sdk.products.search.StoreSelection;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
@@ -23,9 +22,7 @@ import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.stores.StoreFixtures;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.test.IntegrationTest;
-import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.utils.MoneyImpl;
-import org.assertj.core.util.Lists;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -284,13 +281,10 @@ public class ProductProjectionQueryIntegrationTest extends IntegrationTest {
     @Test
     public void selectAProductByLocaleProjectionInProductProjectionQuery() {
         final String localeProjection = "en_en";
-        withProduct(client(), product -> {
-            final ProductProjectionQuery request = ProductProjectionQuery.ofStaged()
-                    .withPredicates(m -> m.id().is(product.getId()))//to limit the test scope
-                    .withLocaleSelection(LocaleSelection.of(localeProjection));//locale selection config
-            final PagedQueryResult<ProductProjection> result = client().executeBlocking(request);
-            assertThat(result.getCount()).isEqualTo(1);
-        });
+        final ProductProjectionQuery request = ProductProjectionQuery.ofStaged()
+                .withPredicates(m -> m.id().is("product_id"))//to limit the test scope
+                .withLocaleSelection(LocaleSelection.of(localeProjection));//locale selection config
+        assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=%5Ben_en");
     }
 
     @Test

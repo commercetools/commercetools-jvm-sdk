@@ -25,6 +25,6 @@ public final class LocaleSelectionDsl extends Base implements LocaleSelection {
     @Nullable
     @Override
     public List<String> getLocaleProjection() {
-        return null;
+        return localeProjection;
     }
 }
