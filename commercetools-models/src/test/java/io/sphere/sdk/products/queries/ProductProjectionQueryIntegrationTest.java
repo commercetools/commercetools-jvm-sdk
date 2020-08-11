@@ -16,9 +16,11 @@ import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.*;
 import io.sphere.sdk.products.search.LocaleSelection;
 import io.sphere.sdk.products.search.PriceSelection;
+import io.sphere.sdk.products.search.StoreSelection;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.queries.QueryPredicate;
+import io.sphere.sdk.stores.StoreFixtures;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
@@ -288,6 +290,20 @@ public class ProductProjectionQueryIntegrationTest extends IntegrationTest {
                     .withLocaleSelection(LocaleSelection.of(localeProjection));//locale selection config
             final PagedQueryResult<ProductProjection> result = client().executeBlocking(request);
             assertThat(result.getCount()).isEqualTo(1);
+        });
+    }
+
+    @Test
+    public void selectAProductByStoreProjectionInProductProjectionQuery() {
+
+        StoreFixtures.withStore(client(), store -> {
+            withProduct(client(), product -> {
+                final ProductProjectionQuery request = ProductProjectionQuery.ofStaged()
+                        .withPredicates(m -> m.id().is(product.getId()))//to limit the test scope
+                        .withStoreSelection(StoreSelection.of(store.getKey()));//store selection config
+                final PagedQueryResult<ProductProjection> result = client().executeBlocking(request);
+                assertThat(result.getCount()).isEqualTo(1);
+            });
         });
     }
 
