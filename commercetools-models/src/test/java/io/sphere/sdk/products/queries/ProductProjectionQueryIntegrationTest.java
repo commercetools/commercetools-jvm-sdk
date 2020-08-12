@@ -5,6 +5,7 @@ import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
 import io.sphere.sdk.categories.commands.updateactions.ChangeParent;
 import io.sphere.sdk.channels.ChannelFixtures;
 import io.sphere.sdk.channels.ChannelRole;
+import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.http.NameValuePair;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.MetaAttributes;
@@ -15,10 +16,12 @@ import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.*;
 import io.sphere.sdk.products.search.LocaleSelection;
+import io.sphere.sdk.products.search.ProductProjectionSearch;
 import io.sphere.sdk.products.search.StoreSelection;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.queries.QueryPredicate;
+import io.sphere.sdk.search.PagedSearchResult;
 import io.sphere.sdk.stores.StoreFixtures;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.test.IntegrationTest;
@@ -280,22 +283,26 @@ public class ProductProjectionQueryIntegrationTest extends IntegrationTest {
 
     @Test
     public void selectAProductByLocaleProjectionInProductProjectionQuery() {
-        final String localeProjection = "en_en";
-        final ProductProjectionQuery request = ProductProjectionQuery.ofStaged()
-                .withPredicates(m -> m.id().is("product_id"))//to limit the test scope
-                .withLocaleSelection(LocaleSelection.of(localeProjection));//locale selection config
-        assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=%5Ben_en");
+        String localeProjection = "en-EN";
+        BlockingSphereClient client = client();
+        ProductFixtures.withProduct(client, product -> {
+            final ProductProjectionQuery request = ProductProjectionQuery.ofStaged()
+                    .withPredicates(m -> m.id().is(product.getId()))
+                    .withLocaleSelection(LocaleSelection.of(localeProjection));
+            assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=%5Ben-EN%5D");
+        });
     }
 
     @Test
     public void selectAProductByStoreProjectionInProductProjectionQuery() {
-
-        StoreFixtures.withStore(client(), store -> {
-            withProduct(client(), product -> {
+        BlockingSphereClient client = client();
+        StoreFixtures.withStore(client, store -> {
+            withProduct(client, product -> {
                 final ProductProjectionQuery request = ProductProjectionQuery.ofStaged()
-                        .withPredicates(m -> m.id().is(product.getId()))//to limit the test scope
-                        .withStoreSelection(StoreSelection.of(store.getKey()));//store selection config
-                final PagedQueryResult<ProductProjection> result = client().executeBlocking(request);
+                        .withPredicates(m -> m.id().is(product.getId()))
+                        .withStoreSelection(StoreSelection.of(store.getKey()));
+                assertThat(request.httpRequestIntent().getPath()).contains("storeProjection=" + store.getKey());
+                final PagedQueryResult<ProductProjection> result = client.executeBlocking(request);
                 assertThat(result.getCount()).isEqualTo(1);
             });
         });

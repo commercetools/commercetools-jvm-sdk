@@ -121,4 +121,7 @@ public interface ProductProjectionQuery extends MetaModelQueryDsl<ProductProject
 
     @Override
     ProductProjectionQuery withLocaleSelection(@Nullable final LocaleSelection localeSelection);
+
+    @Override
+    ProductProjectionQuery withStoreSelection(@Nullable final StoreSelection storeSelection);
 }

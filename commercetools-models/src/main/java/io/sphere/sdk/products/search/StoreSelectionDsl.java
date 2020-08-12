@@ -20,6 +20,6 @@ public final class StoreSelectionDsl extends Base implements StoreSelection {
     @Nullable
     @Override
     public String getStoreProjection() {
-        return null;
+        return storeProjection;
     }
 }

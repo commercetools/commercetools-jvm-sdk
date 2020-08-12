@@ -15,6 +15,7 @@ import java.util.stream.Stream;
 import static io.sphere.sdk.products.search.PriceSelectionQueryParameters.extractPriceSelectionFromHttpQueryParameters;
 import static io.sphere.sdk.products.search.PriceSelectionQueryParameters.getQueryParametersWithPriceSelection;
 import static io.sphere.sdk.products.search.LocaleSelectionQueryParameters.*;
+import static io.sphere.sdk.products.search.StoreSelectionQueryParameters.*;
 import static java.util.Collections.singletonList;
 
 final class ProductProjectionSearchImpl extends MetaModelSearchDslImpl<ProductProjection, ProductProjectionSearch, ProductProjectionSortSearchModel,
@@ -60,6 +61,12 @@ final class ProductProjectionSearchImpl extends MetaModelSearchDslImpl<ProductPr
         return withAdditionalQueryParameters(resultingParameters);
     }
 
+    @Override
+    public ProductProjectionSearch withStoreSelection(@Nullable StoreSelection storeSelection) {
+        final List<NameValuePair> resultingParameters = getQueryParametersWithStoreSelection(storeSelection, additionalQueryParameters());
+        return withAdditionalQueryParameters(resultingParameters);
+    }
+
     @Nullable
     @Override
     public Boolean isMarkingMatchingVariants() {
@@ -80,5 +87,11 @@ final class ProductProjectionSearchImpl extends MetaModelSearchDslImpl<ProductPr
     @Override
     public LocaleSelection getLocaleSelection() {
         return extractLocaleSelectionFromHttpQueryParameters(additionalQueryParameters());
+    }
+
+    @Nullable
+    @Override
+    public StoreSelection getStoreSelection() {
+        return extractStoreSelectionFromHttpQueryParameters(additionalQueryParameters());
     }
 }
