@@ -15,8 +15,4 @@ public interface CartsConfiguration {
     static CartsConfiguration of(final Boolean countryTaxRateFallbackEnabled) {
         return CartsConfigurationImpl.of(countryTaxRateFallbackEnabled);
     }
-
-    static CartsConfiguration of(final Integer deleteDaysAfterLastModification, final Boolean countryTaxRateFallbackEnabled) {
-        return CartsConfigurationImpl.of(deleteDaysAfterLastModification, countryTaxRateFallbackEnabled);
-    }
 }
