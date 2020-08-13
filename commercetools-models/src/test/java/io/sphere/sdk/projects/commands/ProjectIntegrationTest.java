@@ -31,8 +31,7 @@ public abstract class ProjectIntegrationTest extends IntegrationTest {
     private static final List<Locale> PROJECT_LOCALES = Arrays.asList(Locale.GERMAN, new Locale("de", "AT"), Locale.ENGLISH);
     private static final List<String> PROJECT_LANGUAGES = PROJECT_LOCALES.stream().map(Locale::toLanguageTag).collect(Collectors.toList());
     private static final Boolean PROJECT_MESSAGES_ENABLED = true;
-    private static final Boolean COUNTRY_TAX_RATE_FALLBACK_ENABLED = false;
-    private static final CartsConfiguration CARTS_CONFIGURATION = CartsConfiguration.of(10, false);
+    private static final CartsConfiguration CARTS_CONFIGURATION = CartsConfiguration.of(10);
     private static final ShoppingListsConfiguration SHOPPING_LISTS_CONFIGURATION = ShoppingListsConfiguration.of(10);
     
     @BeforeClass
@@ -47,8 +46,7 @@ public abstract class ProjectIntegrationTest extends IntegrationTest {
                 ChangeMessagesEnabled.of(PROJECT_MESSAGES_ENABLED),
                 SetShippingRateInputType.ofUnset(),
                 ChangeCartsConfiguration.of(CARTS_CONFIGURATION),
-                ChangeShoppingListsConfiguration.of(SHOPPING_LISTS_CONFIGURATION),
-                ChangeCountryTaxRateFallbackEnabled.of(COUNTRY_TAX_RATE_FALLBACK_ENABLED)
+                ChangeShoppingListsConfiguration.of(SHOPPING_LISTS_CONFIGURATION)
         ));
 
         final Project updatedProject = client().executeBlocking(updateCommand);
@@ -65,7 +63,6 @@ public abstract class ProjectIntegrationTest extends IntegrationTest {
             soft.assertThat(updatedProject.getMessages().isEnabled()).isEqualTo(PROJECT_MESSAGES_ENABLED);
             soft.assertThat(updatedProject.getShippingRateInputType()).isNull();
             soft.assertThat(updatedProject.getCarts().getDeleteDaysAfterLastModification()).isEqualTo(10);
-            soft.assertThat(updatedProject.getCarts().getCountryTaxRateFallbackEnabled()).isEqualTo(false);
             soft.assertThat(updatedProject.getShoppingLists().getDeleteDaysAfterLastModification()).isEqualTo(10);
         });
     }
