@@ -18,7 +18,15 @@ public final class LocaleSelectionDsl extends Base implements LocaleSelection {
         return LocaleSelectionBuilder.of(localeProjection.toString()).build();
     }
 
+    public LocaleSelectionDsl withLocaleProjection(@Nullable final String localeProjection) {
+        return LocaleSelectionBuilder.of(localeProjection).build();
+    }
+
     public LocaleSelectionDsl plusLocaleProjection(@Nullable final String localeProjection) {
+        return LocaleSelectionBuilder.of(localeProjection).build();
+    }
+
+    public LocaleSelectionDsl plusLocaleProjection(@Nullable final List<String> localeProjection) {
         return LocaleSelectionBuilder.of(localeProjection).build();
     }
 

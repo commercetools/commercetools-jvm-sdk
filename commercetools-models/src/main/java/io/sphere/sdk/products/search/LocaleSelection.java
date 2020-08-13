@@ -18,4 +18,9 @@ public interface LocaleSelection {
     {
         return LocaleSelectionBuilder.of(localeProjection).build();
     }
+
+    static LocaleSelectionDsl of(final List<String> localeProjection)
+    {
+        return LocaleSelectionBuilder.of(localeProjection).build();
+    }
 }

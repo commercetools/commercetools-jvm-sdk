@@ -23,6 +23,14 @@ public final class LocaleSelectionBuilder extends Base implements Builder<Locale
         return this;
     }
 
+    private LocaleSelectionBuilder localeProjection(@Nullable final List<String> localeProjection) {
+        if (this.localeProjection == null) {
+            this.localeProjection = new ArrayList<>();
+        }
+        this.localeProjection.addAll(localeProjection);
+        return this;
+    }
+
     private LocaleSelectionBuilder plusLocaleProjection(@Nullable final String localeProjection) {
         if (this.localeProjection == null) {
             this.localeProjection = new ArrayList<>();
@@ -31,8 +39,20 @@ public final class LocaleSelectionBuilder extends Base implements Builder<Locale
         return this;
     }
 
+    private LocaleSelectionBuilder plusLocaleProjection(@Nullable final List<String> localeProjection) {
+        if (this.localeProjection == null) {
+            this.localeProjection = new ArrayList<>();
+        }
+        this.localeProjection.addAll(localeProjection);
+        return this;
+    }
+
     public static LocaleSelectionBuilder of(@Nullable final String localeProjection) {
         return new LocaleSelectionBuilder(Collections.singletonList(localeProjection));
+    }
+
+    public static LocaleSelectionBuilder of(@Nullable final List<String> localeProjection) {
+        return new LocaleSelectionBuilder(localeProjection);
     }
 
     @Nullable

@@ -30,6 +30,7 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -282,7 +283,7 @@ public class ProductProjectionQueryIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void selectAProductByLocaleProjectionInProductProjectionQuery() {
+    public void selectProductByLocaleProjectionInProductProjectionQuery() {
         String localeProjection = "en-EN";
         BlockingSphereClient client = client();
         ProductFixtures.withProduct(client, product -> {
@@ -294,7 +295,19 @@ public class ProductProjectionQueryIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void selectAProductByStoreProjectionInProductProjectionQuery() {
+    public void selectProductByListOfLocaleProjectionsInProductProjectionQuery() {
+        final List<String> localeProjection = Arrays.asList("en-EN", "it-IT");
+        BlockingSphereClient client = client();
+        ProductFixtures.withProduct(client, product -> {
+            final ProductProjectionQuery request = ProductProjectionQuery.ofStaged()
+                    .withPredicates(m -> m.id().is(product.getId()))
+                    .withLocaleSelection(LocaleSelection.of(localeProjection));
+            assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=%5Ben-EN%2C+it-IT%5D");
+        });
+    }
+
+    @Test
+    public void selectProductByStoreProjectionInProductProjectionQuery() {
         BlockingSphereClient client = client();
         StoreFixtures.withStore(client, store -> {
             withProduct(client, product -> {

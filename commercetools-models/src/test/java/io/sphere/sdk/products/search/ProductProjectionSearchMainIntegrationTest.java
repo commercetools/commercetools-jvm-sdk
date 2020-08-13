@@ -17,6 +17,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -39,7 +40,7 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
     public static final ProductProjectionFilterSearchModel PRODUCT_MODEL = ProductProjectionSearchModel.of().filter();
 
     @Test
-    public void selectAProductByLocaleProjectionInProductProjectionSearch() {
+    public void selectProductByLocaleProjectionInProductProjectionSearch() {
         final String localeProjection = "en-EN";
         ProductFixtures.withProduct(client(), product -> {
             final ProductProjectionSearch searchRequest = ProductProjectionSearch.ofStaged()
@@ -50,7 +51,18 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
     }
 
     @Test
-    public void selectAProductByStoreProjectionInProductProjectionSearch() {
+    public void selectProductByListOfLocaleProjectionsInProductProjectionSearch() {
+        final List<String> localeProjection = Arrays.asList("en-EN", "it-IT");
+        ProductFixtures.withProduct(client(), product -> {
+            final ProductProjectionSearch searchRequest = ProductProjectionSearch.ofStaged()
+                    .withQueryFilters(m -> m.id().is(product.getId()))
+                    .withLocaleSelection(LocaleSelection.of(localeProjection));
+            assertThat(searchRequest.httpRequestIntent().getBody().toString()).contains("localeProjection=%5Ben-EN%2C+it-IT%5D");
+        });
+    }
+
+    @Test
+    public void selectProductByStoreProjectionInProductProjectionSearch() {
         BlockingSphereClient client = client();
         StoreFixtures.withStore(client, store -> {
             ProductFixtures.withProduct(client, product -> {

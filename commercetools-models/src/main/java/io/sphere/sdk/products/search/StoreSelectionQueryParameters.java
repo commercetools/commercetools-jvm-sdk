@@ -13,46 +13,36 @@ import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 
 public final class StoreSelectionQueryParameters extends Base {
-    public static final String LOCALE_PROJECTION = "localeProjection";
     public static final String STORE_PROJECTION = "storeProjection";
-    public static final List<String> ALL_PARAMETERS = asList(LOCALE_PROJECTION, STORE_PROJECTION);
 
     private StoreSelectionQueryParameters() {
     }
 
-    /**
-     * SDK internal method to to add price selection query parameters to the additional query parameters list.
-     * If {@code localeSelection} is null, the price selection parameters will be removed.
-     *
-     * @param localeSelection the new price selection which should be applied or null to remove the price selection
-     * @param currentParameters list containing the additional query parameters, won't be changed
-     * @return a new list with additional query parameters where the localeSelection is applied
-     */
-    public static List<NameValuePair> getQueryParametersWithStoreSelection(@Nullable final StoreSelection localeSelection, final List<NameValuePair> currentParameters) {
+    public static List<NameValuePair> getQueryParametersWithStoreSelection(@Nullable final StoreSelection storeSelection, final List<NameValuePair> currentParameters) {
         final List<NameValuePair> currentParametersWithoutStoreSelectionParameters = currentParameters.stream()
-                .filter(pair -> !ALL_PARAMETERS.contains(pair.getName()))
+                .filter(pair -> !STORE_PROJECTION.contains(pair.getName()))
                 .collect(toList());
         final List<NameValuePair> resultingParameters = new LinkedList<>(currentParametersWithoutStoreSelectionParameters);
 
-        if (localeSelection != null && localeSelection.getStoreProjection() != null) {
-            addParamIfNotNull(resultingParameters, STORE_PROJECTION, localeSelection.getStoreProjection().toString());
+        if (storeSelection != null && storeSelection.getStoreProjection() != null) {
+            addParamIfNotNull(resultingParameters, STORE_PROJECTION, storeSelection.getStoreProjection().toString());
         }
         return resultingParameters;
     }
 
     @Nullable
     public static StoreSelection extractStoreSelectionFromHttpQueryParameters(final List<NameValuePair> additionalHttpQueryParameters) {
-        final List<NameValuePair> localeSelectionCandidates = additionalHttpQueryParameters
+        final List<NameValuePair> storeSelectionCandidates = additionalHttpQueryParameters
                 .stream()
-                .filter(pair -> ALL_PARAMETERS.contains(pair.getName()))
+                .filter(pair -> STORE_PROJECTION.contains(pair.getName()))
                 .collect(Collectors.toList());
-        final boolean containsStoreSelection = localeSelectionCandidates.stream()
+        final boolean containsStoreSelection = storeSelectionCandidates.stream()
                 .anyMatch(pair -> STORE_PROJECTION.equals(pair.getName()));
-        return containsStoreSelection ? extractStoreSelection(localeSelectionCandidates) : null;
+        return containsStoreSelection ? extractStoreSelection(storeSelectionCandidates) : null;
     }
 
-    private static StoreSelection extractStoreSelection(final List<NameValuePair> localeSelectionCandidates) {
-        final Map<String, String> map = NameValuePair.convertToStringMap(localeSelectionCandidates);
+    private static StoreSelection extractStoreSelection(final List<NameValuePair> storeSelectionCandidates) {
+        final Map<String, String> map = NameValuePair.convertToStringMap(storeSelectionCandidates);
         return StoreSelectionBuilder.of(map.get(STORE_PROJECTION))
                 .build();
     }
