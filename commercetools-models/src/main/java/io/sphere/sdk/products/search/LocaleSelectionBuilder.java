@@ -51,7 +51,7 @@ public final class LocaleSelectionBuilder extends Base implements Builder<Locale
         return new LocaleSelectionBuilder(Collections.singletonList(localeProjection));
     }
 
-    public static LocaleSelectionBuilder of(@Nullable final List<String> localeProjection) {
+    public static LocaleSelectionBuilder of(final List<String> localeProjection) {
         return new LocaleSelectionBuilder(localeProjection);
     }
 
