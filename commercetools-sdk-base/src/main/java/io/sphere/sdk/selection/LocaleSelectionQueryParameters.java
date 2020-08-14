@@ -1,4 +1,4 @@
-package io.sphere.sdk.products.search;
+package io.sphere.sdk.selection;
 
 import io.sphere.sdk.http.NameValuePair;
 import io.sphere.sdk.models.Base;
@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 
 public final class LocaleSelectionQueryParameters extends Base {
@@ -23,6 +22,15 @@ public final class LocaleSelectionQueryParameters extends Base {
                 .filter(pair -> !LOCALE_PROJECTION.equals(pair.getName()))
                 .collect(toList());
         final List<NameValuePair> resultingParameters = new LinkedList<>(currentParametersWithoutLocaleSelectionParameters);
+
+        if (localeSelection != null && localeSelection.getLocaleProjection() != null) {
+            addParamIfNotNull(resultingParameters, LOCALE_PROJECTION, localeSelection.getLocaleProjection().toString());
+        }
+        return resultingParameters;
+    }
+
+    public static List<NameValuePair> getQueryParametersPlusLocaleSelection(@Nullable final LocaleSelection localeSelection, final List<NameValuePair> currentParameters) {
+        final List<NameValuePair> resultingParameters = new LinkedList<>(currentParameters);
 
         if (localeSelection != null && localeSelection.getLocaleProjection() != null) {
             addParamIfNotNull(resultingParameters, LOCALE_PROJECTION, localeSelection.getLocaleProjection().toString());

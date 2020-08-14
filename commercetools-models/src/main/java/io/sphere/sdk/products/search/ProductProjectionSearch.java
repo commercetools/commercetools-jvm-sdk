@@ -9,6 +9,10 @@ import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
 import io.sphere.sdk.search.*;
+import io.sphere.sdk.selection.LocaleSelection;
+import io.sphere.sdk.selection.LocaleSelectionRequestDsl;
+import io.sphere.sdk.selection.StoreSelection;
+import io.sphere.sdk.selection.StoreSelectionRequestDsl;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -232,6 +236,8 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
     ProductProjectionSearch withMarkingMatchingVariants(final Boolean markMatchingVariants);
 
     ProductProjectionSearch withLocaleSelection(@Nullable final LocaleSelection localeSelection);
+
+    ProductProjectionSearch plusLocaleSelection(@Nullable final LocaleSelection localeSelection);
 
     ProductProjectionSearch withStoreSelection(@Nullable final StoreSelection storeSelection);
 

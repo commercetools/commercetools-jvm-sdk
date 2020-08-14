@@ -5,9 +5,9 @@ import io.sphere.sdk.products.ProductIdentifiable;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
-import io.sphere.sdk.products.search.LocaleSelectionRequestDsl;
+import io.sphere.sdk.selection.LocaleSelectionRequestDsl;
 import io.sphere.sdk.products.search.PriceSelectionRequestDsl;
-import io.sphere.sdk.products.search.StoreSelectionRequestDsl;
+import io.sphere.sdk.selection.StoreSelectionRequestDsl;
 import io.sphere.sdk.queries.MetaModelGetDsl;
 
 import java.util.List;

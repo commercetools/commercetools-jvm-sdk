@@ -1,11 +1,10 @@
-package io.sphere.sdk.products.search;
+package io.sphere.sdk.selection;
 
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.utils.SphereInternalUtils;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +29,11 @@ public final class LocaleSelectionDsl extends Base implements LocaleSelection {
     }
 
     public LocaleSelectionDsl plusLocaleProjection(@Nullable final String localeProjection) {
+        this.localeProjection =  SphereInternalUtils.listOf(Optional.ofNullable(this.localeProjection).orElseGet(ArrayList::new), localeProjection);
+        return this;
+    }
+
+    public LocaleSelectionDsl plusLocaleProjection1(@Nullable final String localeProjection) {
         this.localeProjection =  SphereInternalUtils.listOf(Optional.ofNullable(this.localeProjection).orElseGet(ArrayList::new), localeProjection);
         return this;
     }

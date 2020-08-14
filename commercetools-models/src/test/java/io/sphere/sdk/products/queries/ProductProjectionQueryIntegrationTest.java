@@ -15,8 +15,8 @@ import io.sphere.sdk.products.attributes.AttributeAccess;
 import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.*;
-import io.sphere.sdk.products.search.LocaleSelection;
-import io.sphere.sdk.products.search.StoreSelection;
+import io.sphere.sdk.selection.LocaleSelection;
+import io.sphere.sdk.selection.StoreSelection;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.queries.QueryPredicate;
@@ -309,8 +309,9 @@ public class ProductProjectionQueryIntegrationTest extends IntegrationTest {
         ProductFixtures.withProduct(client, product -> {
             final ProductProjectionQuery request = ProductProjectionQuery.ofStaged()
                     .withPredicates(m -> m.id().is(product.getId()))
-                    .withLocaleSelection(LocaleSelection.of(localeProjectionEN).plusLocaleProjection(localeProjectionDE));
-            assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=%5Ben-EN%2C+de-DE%5D");
+                    .withLocaleSelection(LocaleSelection.of(localeProjectionDE))
+                    .plusLocaleSelection(LocaleSelection.of(localeProjectionEN));
+            assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=%5Bde-DE%5D&localeProjection=%5Ben-EN%5D");
         });
     }
 
@@ -322,8 +323,9 @@ public class ProductProjectionQueryIntegrationTest extends IntegrationTest {
         ProductFixtures.withProduct(client, product -> {
             final ProductProjectionQuery request = ProductProjectionQuery.ofStaged()
                     .withPredicates(m -> m.id().is(product.getId()))
-                    .withLocaleSelection(LocaleSelection.of(localeProjectionEN).plusLocaleProjection(localeProjectionList));
-            assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=%5Ben-EN%2C+de-DE%2C+it-IT%5D");
+                    .withLocaleSelection(LocaleSelection.of(localeProjectionEN))
+                    .plusLocaleSelection(LocaleSelection.of(localeProjectionList));
+            assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=%5Ben-EN%5D&localeProjection=%5Bde-DE%2C+it-IT%5D");
         });
     }
 

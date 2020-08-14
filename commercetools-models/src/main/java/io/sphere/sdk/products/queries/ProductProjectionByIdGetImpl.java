@@ -4,9 +4,9 @@ import io.sphere.sdk.http.NameValuePair;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
-import io.sphere.sdk.products.search.LocaleSelection;
+import io.sphere.sdk.selection.LocaleSelection;
 import io.sphere.sdk.products.search.PriceSelection;
-import io.sphere.sdk.products.search.StoreSelection;
+import io.sphere.sdk.selection.StoreSelection;
 import io.sphere.sdk.queries.MetaModelGetDslBuilder;
 import io.sphere.sdk.queries.MetaModelGetDslImpl;
 
@@ -16,8 +16,8 @@ import java.util.List;
 
 import static io.sphere.sdk.products.search.PriceSelectionQueryParameters.extractPriceSelectionFromHttpQueryParameters;
 import static io.sphere.sdk.products.search.PriceSelectionQueryParameters.getQueryParametersWithPriceSelection;
-import static io.sphere.sdk.products.search.LocaleSelectionQueryParameters.*;
-import static io.sphere.sdk.products.search.StoreSelectionQueryParameters.*;
+import static io.sphere.sdk.selection.LocaleSelectionQueryParameters.*;
+import static io.sphere.sdk.selection.StoreSelectionQueryParameters.*;
 
 final class ProductProjectionByIdGetImpl extends MetaModelGetDslImpl<ProductProjection, ProductProjection, ProductProjectionByIdGet, ProductProjectionExpansionModel<ProductProjection>> implements ProductProjectionByIdGet {
     ProductProjectionByIdGetImpl(final String id, final ProductProjectionType projectionType) {

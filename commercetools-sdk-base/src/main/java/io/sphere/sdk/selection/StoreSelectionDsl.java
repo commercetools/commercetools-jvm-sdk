@@ -1,9 +1,8 @@
-package io.sphere.sdk.products.search;
+package io.sphere.sdk.selection;
 
 import io.sphere.sdk.models.Base;
 
 import javax.annotation.Nullable;
-import java.util.List;
 
 public final class StoreSelectionDsl extends Base implements StoreSelection {
     @Nullable

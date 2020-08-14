@@ -12,6 +12,7 @@ import io.sphere.sdk.queries.MetaModelQueryDsl;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.queries.QuerySort;
+import io.sphere.sdk.selection.*;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -121,6 +122,8 @@ public interface ProductProjectionQuery extends MetaModelQueryDsl<ProductProject
 
     @Override
     ProductProjectionQuery withLocaleSelection(@Nullable final LocaleSelection localeSelection);
+
+    ProductProjectionQuery plusLocaleSelection(@Nullable final LocaleSelection localeSelection);
 
     @Override
     ProductProjectionQuery withStoreSelection(@Nullable final StoreSelection storeSelection);

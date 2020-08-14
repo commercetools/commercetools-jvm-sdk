@@ -1,4 +1,4 @@
-package io.sphere.sdk.products.search;
+package io.sphere.sdk.selection;
 
 import javax.annotation.Nullable;
 

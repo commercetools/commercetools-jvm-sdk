@@ -4,8 +4,11 @@ import io.sphere.sdk.http.NameValuePair;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
+import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.search.MetaModelSearchDslBuilder;
 import io.sphere.sdk.search.MetaModelSearchDslImpl;
+import io.sphere.sdk.selection.LocaleSelection;
+import io.sphere.sdk.selection.StoreSelection;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -14,8 +17,8 @@ import java.util.stream.Stream;
 
 import static io.sphere.sdk.products.search.PriceSelectionQueryParameters.extractPriceSelectionFromHttpQueryParameters;
 import static io.sphere.sdk.products.search.PriceSelectionQueryParameters.getQueryParametersWithPriceSelection;
-import static io.sphere.sdk.products.search.LocaleSelectionQueryParameters.*;
-import static io.sphere.sdk.products.search.StoreSelectionQueryParameters.*;
+import static io.sphere.sdk.selection.LocaleSelectionQueryParameters.*;
+import static io.sphere.sdk.selection.StoreSelectionQueryParameters.*;
 import static java.util.Collections.singletonList;
 
 final class ProductProjectionSearchImpl extends MetaModelSearchDslImpl<ProductProjection, ProductProjectionSearch, ProductProjectionSortSearchModel,
@@ -58,6 +61,12 @@ final class ProductProjectionSearchImpl extends MetaModelSearchDslImpl<ProductPr
     @Override
     public ProductProjectionSearch withLocaleSelection(@Nullable final LocaleSelection localeSelection) {
         final List<NameValuePair> resultingParameters = getQueryParametersWithLocaleSelection(localeSelection, additionalQueryParameters());
+        return withAdditionalQueryParameters(resultingParameters);
+    }
+
+    @Override
+    public ProductProjectionSearch plusLocaleSelection(@Nullable final LocaleSelection localeSelection) {
+        final List<NameValuePair> resultingParameters = getQueryParametersPlusLocaleSelection(localeSelection, additionalQueryParameters());
         return withAdditionalQueryParameters(resultingParameters);
     }
 
