@@ -20,7 +20,7 @@ public final class StoreSelectionQueryParameters extends Base {
 
     public static List<NameValuePair> getQueryParametersWithStoreSelection(@Nullable final StoreSelection storeSelection, final List<NameValuePair> currentParameters) {
         final List<NameValuePair> currentParametersWithoutStoreSelectionParameters = currentParameters.stream()
-                .filter(pair -> !STORE_PROJECTION.contains(pair.getName()))
+                .filter(pair -> !STORE_PROJECTION.equals(pair.getName()))
                 .collect(toList());
         final List<NameValuePair> resultingParameters = new LinkedList<>(currentParametersWithoutStoreSelectionParameters);
 
@@ -34,7 +34,7 @@ public final class StoreSelectionQueryParameters extends Base {
     public static StoreSelection extractStoreSelectionFromHttpQueryParameters(final List<NameValuePair> additionalHttpQueryParameters) {
         final List<NameValuePair> storeSelectionCandidates = additionalHttpQueryParameters
                 .stream()
-                .filter(pair -> STORE_PROJECTION.contains(pair.getName()))
+                .filter(pair -> STORE_PROJECTION.equals(pair.getName()))
                 .collect(Collectors.toList());
         final boolean containsStoreSelection = storeSelectionCandidates.stream()
                 .anyMatch(pair -> STORE_PROJECTION.equals(pair.getName()));

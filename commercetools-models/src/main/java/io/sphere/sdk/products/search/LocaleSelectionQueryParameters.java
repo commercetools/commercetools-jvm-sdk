@@ -20,7 +20,7 @@ public final class LocaleSelectionQueryParameters extends Base {
 
     public static List<NameValuePair> getQueryParametersWithLocaleSelection(@Nullable final LocaleSelection localeSelection, final List<NameValuePair> currentParameters) {
         final List<NameValuePair> currentParametersWithoutLocaleSelectionParameters = currentParameters.stream()
-                .filter(pair -> !LOCALE_PROJECTION.contains(pair.getName()))
+                .filter(pair -> !LOCALE_PROJECTION.equals(pair.getName()))
                 .collect(toList());
         final List<NameValuePair> resultingParameters = new LinkedList<>(currentParametersWithoutLocaleSelectionParameters);
 
@@ -34,7 +34,7 @@ public final class LocaleSelectionQueryParameters extends Base {
     public static LocaleSelection extractLocaleSelectionFromHttpQueryParameters(final List<NameValuePair> additionalHttpQueryParameters) {
         final List<NameValuePair> localeSelectionCandidates = additionalHttpQueryParameters
                 .stream()
-                .filter(pair -> LOCALE_PROJECTION.contains(pair.getName()))
+                .filter(pair -> LOCALE_PROJECTION.equals(pair.getName()))
                 .collect(Collectors.toList());
         final boolean containsLocaleSelection = localeSelectionCandidates.stream()
                 .anyMatch(pair -> LOCALE_PROJECTION.equals(pair.getName()));

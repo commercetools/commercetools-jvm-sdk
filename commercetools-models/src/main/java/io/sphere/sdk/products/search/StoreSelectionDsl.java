@@ -13,6 +13,10 @@ public final class StoreSelectionDsl extends Base implements StoreSelection {
         this.storeProjection = storeProjection;
     }
 
+    public static StoreSelectionDsl of(final String storeSelection) {
+        return StoreSelectionBuilder.of(storeSelection).build();
+    }
+
     public StoreSelectionDsl withStoreProjection(@Nullable final String storeProjection) {
         return StoreSelectionBuilder.of(storeProjection).build();
     }

@@ -16,12 +16,10 @@ import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.*;
 import io.sphere.sdk.products.search.LocaleSelection;
-import io.sphere.sdk.products.search.ProductProjectionSearch;
 import io.sphere.sdk.products.search.StoreSelection;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.queries.QueryPredicate;
-import io.sphere.sdk.search.PagedSearchResult;
 import io.sphere.sdk.stores.StoreFixtures;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.test.IntegrationTest;
@@ -30,10 +28,7 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.time.Duration;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
@@ -303,6 +298,32 @@ public class ProductProjectionQueryIntegrationTest extends IntegrationTest {
                     .withPredicates(m -> m.id().is(product.getId()))
                     .withLocaleSelection(LocaleSelection.of(localeProjection));
             assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=%5Ben-EN%2C+it-IT%5D");
+        });
+    }
+
+    @Test
+    public void selectProductByTwoLocaleProjectionsInProductProjectionQuery() {
+        final String localeProjectionEN = "en-EN";
+        final String localeProjectionDE = "de-DE";
+        BlockingSphereClient client = client();
+        ProductFixtures.withProduct(client, product -> {
+            final ProductProjectionQuery request = ProductProjectionQuery.ofStaged()
+                    .withPredicates(m -> m.id().is(product.getId()))
+                    .withLocaleSelection(LocaleSelection.of(localeProjectionEN).plusLocaleProjection(localeProjectionDE));
+            assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=%5Ben-EN%2C+de-DE%5D");
+        });
+    }
+
+    @Test
+    public void selectProductByAListOfLocaleProjectionsInProductProjectionQuery() {
+        final String localeProjectionEN = "en-EN";
+        final List<String> localeProjectionList = asList("de-DE", "it-IT");
+        BlockingSphereClient client = client();
+        ProductFixtures.withProduct(client, product -> {
+            final ProductProjectionQuery request = ProductProjectionQuery.ofStaged()
+                    .withPredicates(m -> m.id().is(product.getId()))
+                    .withLocaleSelection(LocaleSelection.of(localeProjectionEN).plusLocaleProjection(localeProjectionList));
+            assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=%5Ben-EN%2C+de-DE%2C+it-IT%5D");
         });
     }
 
