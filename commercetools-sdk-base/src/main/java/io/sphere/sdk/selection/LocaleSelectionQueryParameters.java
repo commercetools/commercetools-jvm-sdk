@@ -24,7 +24,7 @@ public final class LocaleSelectionQueryParameters extends Base {
         final List<NameValuePair> resultingParameters = new LinkedList<>(currentParametersWithoutLocaleSelectionParameters);
 
         if (localeSelection != null && localeSelection.getLocaleProjection() != null) {
-            addParamIfNotNull(resultingParameters, LOCALE_PROJECTION, localeSelection.getLocaleProjection().toString());
+            localeSelection.getLocaleProjection().forEach(s -> addParamIfNotNull(resultingParameters, LOCALE_PROJECTION, s));
         }
         return resultingParameters;
     }
@@ -33,7 +33,7 @@ public final class LocaleSelectionQueryParameters extends Base {
         final List<NameValuePair> resultingParameters = new LinkedList<>(currentParameters);
 
         if (localeSelection != null && localeSelection.getLocaleProjection() != null) {
-            addParamIfNotNull(resultingParameters, LOCALE_PROJECTION, localeSelection.getLocaleProjection().toString());
+            localeSelection.getLocaleProjection().forEach(s -> addParamIfNotNull(resultingParameters, LOCALE_PROJECTION, s));
         }
         return resultingParameters;
     }

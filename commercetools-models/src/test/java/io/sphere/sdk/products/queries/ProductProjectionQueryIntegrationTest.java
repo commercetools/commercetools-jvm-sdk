@@ -285,7 +285,7 @@ public class ProductProjectionQueryIntegrationTest extends IntegrationTest {
             final ProductProjectionQuery request = ProductProjectionQuery.ofStaged()
                     .withPredicates(m -> m.id().is(product.getId()))
                     .withLocaleSelection(LocaleSelection.of(localeProjection));
-            assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=%5Ben-EN%5D");
+            assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=en-EN");
         });
     }
 
@@ -297,7 +297,8 @@ public class ProductProjectionQueryIntegrationTest extends IntegrationTest {
             final ProductProjectionQuery request = ProductProjectionQuery.ofStaged()
                     .withPredicates(m -> m.id().is(product.getId()))
                     .withLocaleSelection(LocaleSelection.of(localeProjection));
-            assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=%5Ben-EN%2C+it-IT%5D");
+            assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=it-IT");
+            assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=en-EN");
         });
     }
 
@@ -311,9 +312,24 @@ public class ProductProjectionQueryIntegrationTest extends IntegrationTest {
                     .withPredicates(m -> m.id().is(product.getId()))
                     .withLocaleSelection(LocaleSelection.of(localeProjectionDE))
                     .plusLocaleSelection(LocaleSelection.of(localeProjectionEN));
-            assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=%5Bde-DE%5D");
-            assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=%5Ben-EN%5D");
+            assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=de-DE");
+            assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=en-EN");
         });
+    }
+
+    @Test
+    public void testLocaleSelectionBuilder() {
+        final List<String> localeProjection1 = LocaleSelection.of("ig-NG").withLocaleProjection("en-US").plusLocaleProjection("de-DE").plusLocaleProjection(Arrays.asList("de-AT", "fr-FR")).getLocaleProjection();
+        assertThat(localeProjection1).containsOnly("en-US", "de-AT", "de-DE", "fr-FR");
+
+        final List<String> localeProjection2 = LocaleSelection.of("en-US").withLocaleProjection("de-DE").getLocaleProjection();
+        assertThat(localeProjection2).containsOnly("de-DE");
+
+        final List<String> localeProjection3 = LocaleSelection.of("ig-NG").withLocaleProjection(Arrays.asList("en-US", "de-DE")).getLocaleProjection();
+        assertThat(localeProjection3).containsOnly("de-DE", "en-US");
+
+        final List<String> localeProjection4 = LocaleSelection.of("ig-NG").plusLocaleProjection("de-AT").withLocaleProjection("de-DE").getLocaleProjection();
+        assertThat(localeProjection4).containsOnly("de-DE");
     }
 
     @Test
@@ -326,8 +342,8 @@ public class ProductProjectionQueryIntegrationTest extends IntegrationTest {
                     .withPredicates(m -> m.id().is(product.getId()))
                     .withLocaleSelection(LocaleSelection.of(localeProjectionEN))
                     .plusLocaleSelection(LocaleSelection.of(localeProjectionList));
-            assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=%5Bde-DE%5D");
-            assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=%5Ben-EN%5D");
+            assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=de-DE");
+            assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=en-EN");
         });
     }
 
