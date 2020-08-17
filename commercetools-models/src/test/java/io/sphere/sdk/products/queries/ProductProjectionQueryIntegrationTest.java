@@ -318,6 +318,21 @@ public class ProductProjectionQueryIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void selectProductByLocaleSelectionWithTwoLocaleProjectionsInProductProjectionQuery() {
+        final String localeProjectionEN = "en-EN";
+        final String localeProjectionDE = "de-DE";
+        BlockingSphereClient client = client();
+        ProductFixtures.withProduct(client, product -> {
+            final ProductProjectionQuery request = ProductProjectionQuery.ofStaged()
+                    .withPredicates(m -> m.id().is(product.getId()))
+                    .withLocaleSelection(LocaleSelection.of(localeProjectionDE).plusLocaleProjection(localeProjectionEN));
+            assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=de-DE");
+            assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=en-EN");
+        });
+    }
+
+
+    @Test
     public void testLocaleSelectionBuilder() {
         final List<String> localeProjection1 = LocaleSelection.of("ig-NG").withLocaleProjection("en-US").plusLocaleProjection("de-DE").plusLocaleProjection(Arrays.asList("de-AT", "fr-FR")).getLocaleProjection();
         assertThat(localeProjection1).containsOnly("en-US", "de-AT", "de-DE", "fr-FR");
