@@ -46,7 +46,7 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
             final ProductProjectionSearch searchRequest = ProductProjectionSearch.ofStaged()
                     .withQueryFilters(m -> m.id().is(product.getId()))
                     .withLocaleSelection(LocaleSelection.of(localeProjection));
-            assertThat(searchRequest.httpRequestIntent().getBody().toString()).contains("localeProjection=%5Ben-EN%5D");
+            assertThat(searchRequest.httpRequestIntent().getBody().toString()).contains("localeProjection=en-EN");
         });
     }
 
@@ -57,7 +57,8 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
             final ProductProjectionSearch searchRequest = ProductProjectionSearch.ofStaged()
                     .withQueryFilters(m -> m.id().is(product.getId()))
                     .withLocaleSelection(LocaleSelection.of(localeProjection));
-            assertThat(searchRequest.httpRequestIntent().getBody().toString()).contains("localeProjection=%5Ben-EN%2C+it-IT%5D");
+            assertThat(searchRequest.httpRequestIntent().getBody().toString()).contains("localeProjection=en-EN");
+            assertThat(searchRequest.httpRequestIntent().getBody().toString()).contains("localeProjection=it-IT");
         });
     }
     @Test
@@ -70,8 +71,8 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
                     .withQueryFilters(m -> m.id().is(product.getId()))
                     .withLocaleSelection(LocaleSelection.of(localeProjectionDE))
                     .plusLocaleSelection(LocaleSelection.of(localeProjectionEN));
-            assertThat(searchRequest.httpRequestIntent().getBody().toString()).contains("localeProjection=%5Ben-EN%5D");
-            assertThat(searchRequest.httpRequestIntent().getBody().toString()).contains("localeProjection=%5Bde-DE%5D");
+            assertThat(searchRequest.httpRequestIntent().getBody().toString()).contains("localeProjection=en-EN");
+            assertThat(searchRequest.httpRequestIntent().getBody().toString()).contains("localeProjection=de-DE");
         });
     }
 
@@ -85,8 +86,8 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
                     .withQueryFilters(m -> m.id().is(product.getId()))
                     .withLocaleSelection(LocaleSelection.of(localeProjectionEN))
                     .plusLocaleSelection(LocaleSelection.of(localeProjectionList));
-            assertThat(searchRequest.httpRequestIntent().getBody().toString()).contains("localeProjection=%5Ben-EN%5D");
-            assertThat(searchRequest.httpRequestIntent().getBody().toString()).contains("localeProjection=%5Bde-DE%5D");
+            assertThat(searchRequest.httpRequestIntent().getBody().toString()).contains("localeProjection=en-EN");
+            assertThat(searchRequest.httpRequestIntent().getBody().toString()).contains("localeProjection=de-DE");
         });
     }
 
@@ -235,7 +236,7 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
             final List<ProductProjection> results = result.getResults();
             assertThat(results.size()).isEqualTo(1);
             assertThat(results.get(0).getAllVariants().stream().anyMatch(variant -> SKU1.equals(variant.getSku()))).isEqualTo(true);
-            
+
         });
     }
 
