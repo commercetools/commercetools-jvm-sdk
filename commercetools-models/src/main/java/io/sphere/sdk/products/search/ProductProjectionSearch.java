@@ -9,6 +9,10 @@ import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
 import io.sphere.sdk.search.*;
+import io.sphere.sdk.selection.LocaleSelection;
+import io.sphere.sdk.selection.LocaleSelectionRequestDsl;
+import io.sphere.sdk.selection.StoreSelection;
+import io.sphere.sdk.selection.StoreSelectionRequestDsl;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -21,7 +25,7 @@ import java.util.function.Function;
  * Consult the documentation for <a href="{@docRoot}/io/sphere/sdk/meta/SearchDocumentation.html">Product Search API</a> for more information.
  */
 public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProjection, ProductProjectionSearch, ProductProjectionSortSearchModel,
-        ProductProjectionFilterSearchModel, ProductProjectionFacetSearchModel, ProductProjectionExpansionModel<ProductProjection>>, PriceSelectionRequestDsl<ProductProjectionSearch> {
+        ProductProjectionFilterSearchModel, ProductProjectionFacetSearchModel, ProductProjectionExpansionModel<ProductProjection>>, PriceSelectionRequestDsl<ProductProjectionSearch>, LocaleSelectionRequestDsl<ProductProjectionSearch>, StoreSelectionRequestDsl<ProductProjectionSearch> {
 
     /**
      * Creates a container which contains the full Java type information to deserialize the query result (NOT this class) from JSON.
@@ -230,6 +234,12 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
      * {@include.example io.sphere.sdk.products.search.MatchingVariantsFlagSearchIntegrationTest#disableMatchingVariantsFlag()}
      */
     ProductProjectionSearch withMarkingMatchingVariants(final Boolean markMatchingVariants);
+
+    ProductProjectionSearch withLocaleSelection(@Nullable final LocaleSelection localeSelection);
+
+    ProductProjectionSearch plusLocaleSelection(@Nullable final LocaleSelection localeSelection);
+
+    ProductProjectionSearch withStoreSelection(@Nullable final StoreSelection storeSelection);
 
     @Nullable
     Boolean isMarkingMatchingVariants();

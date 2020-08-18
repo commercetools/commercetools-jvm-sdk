@@ -154,6 +154,10 @@ import java.util.function.Function;
  </ul>
  -->
  -->
+ <h3 class=released-version id="v1_52_1">1.52.1 (17.08.2020)</h3>
+ <ul>
+ <li class=fixed-in-release>Fixed storeProjection and localeProjection as query parameter in Product Projection and not anymore in the proceSelection </li>
+ </ul>
  <h3 class=released-version id="v1_52_0">1.52.0 (07.07.2020)</h3>
  <ul>
  <li class=new-in-release>Added missing {@link ExternalTaxRateDraft#isIncludedInPrice()} and added it to builder {@link ExternalTaxRateDraftBuilder#includedInPrice()}</li>

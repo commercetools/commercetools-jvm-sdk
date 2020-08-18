@@ -6,13 +6,13 @@ import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
-import io.sphere.sdk.products.search.PriceSelection;
-import io.sphere.sdk.products.search.PriceSelectionRequestDsl;
+import io.sphere.sdk.products.search.*;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.queries.MetaModelQueryDsl;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.queries.QuerySort;
+import io.sphere.sdk.selection.*;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -22,7 +22,7 @@ import java.util.function.Function;
 /**
  {@doc.gen summary product projections}
  */
-public interface ProductProjectionQuery extends MetaModelQueryDsl<ProductProjection, ProductProjectionQuery, ProductProjectionQueryModel, ProductProjectionExpansionModel<ProductProjection>>, PriceSelectionRequestDsl<ProductProjectionQuery> {
+public interface ProductProjectionQuery extends MetaModelQueryDsl<ProductProjection, ProductProjectionQuery, ProductProjectionQueryModel, ProductProjectionExpansionModel<ProductProjection>>, PriceSelectionRequestDsl<ProductProjectionQuery>, LocaleSelectionRequestDsl<ProductProjectionQuery>, StoreSelectionRequestDsl<ProductProjectionQuery> {
     /**
      * Creates a container which contains the full Java type information to deserialize the query result (NOT this class) from JSON.
      *
@@ -119,4 +119,12 @@ public interface ProductProjectionQuery extends MetaModelQueryDsl<ProductProject
      */
     @Override
     ProductProjectionQuery withPriceSelection(@Nullable final PriceSelection priceSelection);
+
+    @Override
+    ProductProjectionQuery withLocaleSelection(@Nullable final LocaleSelection localeSelection);
+
+    ProductProjectionQuery plusLocaleSelection(@Nullable final LocaleSelection localeSelection);
+
+    @Override
+    ProductProjectionQuery withStoreSelection(@Nullable final StoreSelection storeSelection);
 }
