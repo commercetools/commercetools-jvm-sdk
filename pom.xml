@@ -262,7 +262,7 @@
                         <compilerArguments>
                             <parameters/>
                             <!--<Werror />--><!--  actually this setting breaks the build for annotation processing -->
-                            <Xlint:all xmlns:Xlint=""/>
+                            <Xlint:all/>
                             <!--<arg>-Xlint:unchecked</arg>-->
                             <!--<arg>-Xlint:-options</arg>-->
                             <!--<arg>-Xlint:-path</arg>-->
