@@ -164,6 +164,11 @@ import java.util.function.Function;
  <li class=new-in-release>Added new {@link StateByKeyGet} and now update and delete can be by Key as well.</li>
  </ul>
 
+ <h3 class=released-version id="v1_52_1">1.52.1 (17.08.2020)</h3>
+ <ul>
+ <li class=fixed-in-release>Fixed storeProjection and localeProjection as query parameter in Product Projection and not anymore in the proceSelection </li>
+ </ul>
+
  <h3 class=released-version id="v1_52_0">1.52.0 (07.07.2020)</h3>
  <ul>
  <li class=new-in-release>Added missing {@link ExternalTaxRateDraft#isIncludedInPrice()} and added it to builder {@link ExternalTaxRateDraftBuilder#includedInPrice()}</li>
@@ -193,14 +198,14 @@ import java.util.function.Function;
     <li class=new-in-release>{@link io.sphere.sdk.client.correlationid.CorrelationIdRequestDecorator} to attach a user-defined correlation id as a value for a header with key "X-Correlation-ID" on requests going to the commercetools platform.</li>
     <li class=fixed-in-release>fixed {@link io.sphere.sdk.messages.GenericMessageImpl} json deserialization where {@link GenericMessageImpl#getResourceUserProvidedIdentifiers()} was missing </li>
  </ul>
- 
+
  <h3 class=released-version id="v1_48_0">1.48.0 (16.12.2019)</h3>
  <ul>
     <li class=new-in-release>Added new scopes to {@link io.sphere.sdk.client.SphereProjectScope}</li>
     <li class=new-in-release>Added new customer update actions: {@link io.sphere.sdk.customers.commands.updateactions.AddStore}, {@link io.sphere.sdk.customers.commands.updateactions.SetStores}, {@link io.sphere.sdk.customers.commands.updateactions.RemoveStore}</li>
     <li class=fixed-in-release>Fixed {@link io.sphere.sdk.orders.messages.OrderMessage} json deserialization bug where <code>type</code> field wouldn't get deserialized </li>
  </ul>
- 
+
  <h3 class=released-version id="v1_47_0">1.47.0 (11.10.2019)</h3>
  <ul>
      <li class=fixed-in-release>Fixed {@link ProductImageUploadCommand#withContentType(String)} ignoring provided content type</li>
@@ -214,7 +219,7 @@ import java.util.function.Function;
      <li class=new-in-release>Added support for {@link io.sphere.sdk.products.messages.ProductAddedToCategoryMessage} and {@link io.sphere.sdk.products.messages.ProductRemovedFromCategoryMessage}</li>
      <li class=fixed-in-release>Update actions for setting custom fields now accept empty array values</li>
  </ul>
- 
+
  <h3 class=released-version id="v1_45_0">1.45.0 (02.08.2019)</h3>
  <ul>
      <li class=fixed-in-release>{@link Category}, {@link CategoryDraft}, {@link ProductLike} and {@link ProductDraft} now extend the {@link WithKey} interface.</li>
@@ -224,7 +229,7 @@ import java.util.function.Function;
  <ul>
     <li class=fixed-in-release>{@link PagedSearchResult#empty()} now creates an instance with the {@link PagedSearchResult#getLimit()} field set to 20, instead of 0</li>
  </ul>
- 
+
  <h3 class=released-version id="v1_43_0">1.43.0 (03.06.2019)</h3>
  <ul>
     <li class=new-in-release>Added {@link ProductDiscount#getKey()} and {@link ProductDiscountDraft#getKey()} ()} fields.</li>
@@ -233,7 +238,7 @@ import java.util.function.Function;
     <li class=new-in-release>Added {@link CustomerToken#getExpiresAt()} field</li>
     <li class=new-in-release>Added key property to {@link CartDiscount} and {@link CartDiscountDraft}</li>
  </ul>
- 
+
  <h3 class=released-version id="v1_42_0">1.42.0 (24.05.2019)</h3>
  <ul>
     <li class=fixed-in-release>Added support for {@link io.sphere.sdk.extensions.AuthorizationHeaderAuthentication} for api extensions.</li>
@@ -255,7 +260,7 @@ import java.util.function.Function;
     <li class=new-in-release>Added ttlMinutes to {@link io.sphere.sdk.customers.commands.CustomerCreatePasswordTokenCommand} command</li>
     <li class=new-in-release>added the {@link Project#getExternalOAuth()} to specify external auth providers in the project level</li>
  </ul>
- 
+
  <h3 class=released-version id="v1_40_0">1.40.0 (25.02.2019)</h3>
  <ul>
     <li class=new-in-release>{@link java.time.ZonedDateTime} formatter now always include milliseconds even if they are equal to 0</li>
@@ -389,7 +394,7 @@ import java.util.function.Function;
  <li class=change-in-release>Correct typo on {@link SetAssetCustomType#ofSkuAndAssetKey(String, String, CustomFieldsDraft)}, previously named ofSkuAndAssetKeyAndAssetKey</li>
  <li class=change-in-release>Added support for Order extensions {@link ExtensionResourceType#ORDER}</li>
  </ul>
- 
+
  <h3 class=released-version id="v1_30_0">1.30.0 (08.03.2018)</h3>
  <ul>
  <li class=new-in-release>
@@ -472,7 +477,7 @@ import java.util.function.Function;
  {@link io.sphere.sdk.categories.commands.updateactions.SetAssetSources}, {@link io.sphere.sdk.categories.commands.updateactions.SetAssetCustomType},
  {@link io.sphere.sdk.categories.commands.updateactions.SetAssetCustomField}.
  </li>
- 
+
  <li class=new-in-release>
  Added optional property position on update actions {@link AddAsset#getPosition()} and {@link io.sphere.sdk.categories.commands.updateactions.AddAsset#getPosition()}
  </li>

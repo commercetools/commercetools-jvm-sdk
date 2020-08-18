@@ -1,33 +1,34 @@
 package io.sphere.sdk.products.queries;
 
-import io.sphere.sdk.http.NameValuePair;
-import io.sphere.sdk.products.attributes.AttributeAccess;
-import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
 import io.sphere.sdk.categories.commands.updateactions.ChangeParent;
 import io.sphere.sdk.channels.ChannelFixtures;
 import io.sphere.sdk.channels.ChannelRole;
+import io.sphere.sdk.client.BlockingSphereClient;
+import io.sphere.sdk.http.NameValuePair;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.MetaAttributes;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.*;
+import io.sphere.sdk.products.attributes.AttributeAccess;
+import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.*;
+import io.sphere.sdk.selection.LocaleSelection;
+import io.sphere.sdk.selection.StoreSelection;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.queries.QueryPredicate;
+import io.sphere.sdk.stores.StoreFixtures;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
-import org.assertj.core.util.Lists;
 import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.time.Duration;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
@@ -272,6 +273,106 @@ public class ProductProjectionQueryIntegrationTest extends IntegrationTest {
                         assertThat(results.get(0).getId()).isEqualTo(product.getId());
                     });
                 });
+            });
+        });
+    }
+
+    @Test
+    public void selectProductByLocaleProjectionInProductProjectionQuery() {
+        String localeProjection = "en-EN";
+        BlockingSphereClient client = client();
+        ProductFixtures.withProduct(client, product -> {
+            final ProductProjectionQuery request = ProductProjectionQuery.ofStaged()
+                    .withPredicates(m -> m.id().is(product.getId()))
+                    .withLocaleSelection(LocaleSelection.of(localeProjection));
+            assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=en-EN");
+        });
+    }
+
+    @Test
+    public void selectProductByListOfLocaleProjectionsInProductProjectionQuery() {
+        final List<String> localeProjection = Arrays.asList("en-EN", "it-IT");
+        BlockingSphereClient client = client();
+        ProductFixtures.withProduct(client, product -> {
+            final ProductProjectionQuery request = ProductProjectionQuery.ofStaged()
+                    .withPredicates(m -> m.id().is(product.getId()))
+                    .withLocaleSelection(LocaleSelection.of(localeProjection));
+            assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=it-IT");
+            assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=en-EN");
+        });
+    }
+
+    @Test
+    public void selectProductByTwoLocaleProjectionsInProductProjectionQuery() {
+        final String localeProjectionEN = "en-EN";
+        final String localeProjectionDE = "de-DE";
+        BlockingSphereClient client = client();
+        ProductFixtures.withProduct(client, product -> {
+            final ProductProjectionQuery request = ProductProjectionQuery.ofStaged()
+                    .withPredicates(m -> m.id().is(product.getId()))
+                    .withLocaleSelection(LocaleSelection.of(localeProjectionDE))
+                    .plusLocaleSelection(LocaleSelection.of(localeProjectionEN));
+            assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=de-DE");
+            assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=en-EN");
+        });
+    }
+
+    @Test
+    public void selectProductByLocaleSelectionWithTwoLocaleProjectionsInProductProjectionQuery() {
+        final String localeProjectionEN = "en-EN";
+        final String localeProjectionDE = "de-DE";
+        BlockingSphereClient client = client();
+        ProductFixtures.withProduct(client, product -> {
+            final ProductProjectionQuery request = ProductProjectionQuery.ofStaged()
+                    .withPredicates(m -> m.id().is(product.getId()))
+                    .withLocaleSelection(LocaleSelection.of(localeProjectionDE).plusLocaleProjection(localeProjectionEN));
+            assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=de-DE");
+            assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=en-EN");
+        });
+    }
+
+
+    @Test
+    public void testLocaleSelectionBuilder() {
+        final List<String> localeProjection1 = LocaleSelection.of("ig-NG").withLocaleProjection("en-US").plusLocaleProjection("de-DE").plusLocaleProjection(Arrays.asList("de-AT", "fr-FR")).getLocaleProjection();
+        assertThat(localeProjection1).containsOnly("en-US", "de-AT", "de-DE", "fr-FR");
+
+        final List<String> localeProjection2 = LocaleSelection.of("en-US").withLocaleProjection("de-DE").getLocaleProjection();
+        assertThat(localeProjection2).containsOnly("de-DE");
+
+        final List<String> localeProjection3 = LocaleSelection.of("ig-NG").withLocaleProjection(Arrays.asList("en-US", "de-DE")).getLocaleProjection();
+        assertThat(localeProjection3).containsOnly("de-DE", "en-US");
+
+        final List<String> localeProjection4 = LocaleSelection.of("ig-NG").plusLocaleProjection("de-AT").withLocaleProjection("de-DE").getLocaleProjection();
+        assertThat(localeProjection4).containsOnly("de-DE");
+    }
+
+    @Test
+    public void selectProductByAListOfLocaleProjectionsInProductProjectionQuery() {
+        final String localeProjectionEN = "en-EN";
+        final List<String> localeProjectionList = asList("de-DE");
+        BlockingSphereClient client = client();
+        ProductFixtures.withProduct(client, product -> {
+            final ProductProjectionQuery request = ProductProjectionQuery.ofStaged()
+                    .withPredicates(m -> m.id().is(product.getId()))
+                    .withLocaleSelection(LocaleSelection.of(localeProjectionEN))
+                    .plusLocaleSelection(LocaleSelection.of(localeProjectionList));
+            assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=de-DE");
+            assertThat(request.httpRequestIntent().getPath()).contains("localeProjection=en-EN");
+        });
+    }
+
+    @Test
+    public void selectProductByStoreProjectionInProductProjectionQuery() {
+        BlockingSphereClient client = client();
+        StoreFixtures.withStore(client, store -> {
+            withProduct(client, product -> {
+                final ProductProjectionQuery request = ProductProjectionQuery.ofStaged()
+                        .withPredicates(m -> m.id().is(product.getId()))
+                        .withStoreSelection(StoreSelection.of(store.getKey()));
+                assertThat(request.httpRequestIntent().getPath()).contains("storeProjection=" + store.getKey());
+                final PagedQueryResult<ProductProjection> result = client.executeBlocking(request);
+                assertThat(result.getCount()).isEqualTo(1);
             });
         });
     }

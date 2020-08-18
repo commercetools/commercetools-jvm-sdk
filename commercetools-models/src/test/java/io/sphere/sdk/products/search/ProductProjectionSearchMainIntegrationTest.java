@@ -1,22 +1,29 @@
 package io.sphere.sdk.products.search;
 
+import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.models.Identifiable;
+import io.sphere.sdk.products.ProductFixtures;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.products.attributes.AttributeAccess;
 import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 import io.sphere.sdk.search.FilterExpression;
 import io.sphere.sdk.search.PagedSearchResult;
+import io.sphere.sdk.selection.LocaleSelection;
+import io.sphere.sdk.selection.StoreSelection;
+import io.sphere.sdk.stores.StoreFixtures;
 import org.assertj.core.api.Condition;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.test.SphereTestUtils.ENGLISH;
 import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static java.lang.Math.max;
@@ -25,12 +32,77 @@ import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Ignore
+
 public class ProductProjectionSearchMainIntegrationTest extends ProductProjectionSearchIntegrationTest {
 
     public static final NamedAttributeAccess<String> COLOR_ATTRIBUTE_ACCESS = AttributeAccess.ofString().ofName(ATTR_NAME_COLOR);
     public static final NamedAttributeAccess<Long> SIZE_ATTRIBUTE_ACCESS = AttributeAccess.ofLong().ofName(ATTR_NAME_SIZE);
     public static final ProductProjectionFilterSearchModel PRODUCT_MODEL = ProductProjectionSearchModel.of().filter();
+
+    @Test
+    public void selectProductByLocaleProjectionInProductProjectionSearch() {
+        final String localeProjection = "en-EN";
+        ProductFixtures.withProduct(client(), product -> {
+            final ProductProjectionSearch searchRequest = ProductProjectionSearch.ofStaged()
+                    .withQueryFilters(m -> m.id().is(product.getId()))
+                    .withLocaleSelection(LocaleSelection.of(localeProjection));
+            assertThat(searchRequest.httpRequestIntent().getBody().toString()).contains("localeProjection=en-EN");
+        });
+    }
+
+    @Test
+    public void selectProductByListOfLocaleProjectionsInProductProjectionSearch() {
+        final List<String> localeProjection = Arrays.asList("en-EN", "it-IT");
+        ProductFixtures.withProduct(client(), product -> {
+            final ProductProjectionSearch searchRequest = ProductProjectionSearch.ofStaged()
+                    .withQueryFilters(m -> m.id().is(product.getId()))
+                    .withLocaleSelection(LocaleSelection.of(localeProjection));
+            assertThat(searchRequest.httpRequestIntent().getBody().toString()).contains("localeProjection=en-EN");
+            assertThat(searchRequest.httpRequestIntent().getBody().toString()).contains("localeProjection=it-IT");
+        });
+    }
+    @Test
+    public void selectProductByTwoLocaleProjectionsInProductProjectionSearch() {
+        final String localeProjectionEN = "en-EN";
+        final String localeProjectionDE = "de-DE";
+        BlockingSphereClient client = client();
+        ProductFixtures.withProduct(client, product -> {
+            final ProductProjectionSearch searchRequest = ProductProjectionSearch.ofStaged()
+                    .withQueryFilters(m -> m.id().is(product.getId()))
+                    .withLocaleSelection(LocaleSelection.of(localeProjectionDE))
+                    .plusLocaleSelection(LocaleSelection.of(localeProjectionEN));
+            assertThat(searchRequest.httpRequestIntent().getBody().toString()).contains("localeProjection=en-EN");
+            assertThat(searchRequest.httpRequestIntent().getBody().toString()).contains("localeProjection=de-DE");
+        });
+    }
+
+    @Test
+    public void selectProductByAListOfLocaleProjectionsInProductProjectionSearch() {
+        final String localeProjectionEN = "en-EN";
+        final List<String> localeProjectionList = asList("de-DE");
+        BlockingSphereClient client = client();
+        ProductFixtures.withProduct(client, product -> {
+            final ProductProjectionSearch searchRequest = ProductProjectionSearch.ofStaged()
+                    .withQueryFilters(m -> m.id().is(product.getId()))
+                    .withLocaleSelection(LocaleSelection.of(localeProjectionEN))
+                    .plusLocaleSelection(LocaleSelection.of(localeProjectionList));
+            assertThat(searchRequest.httpRequestIntent().getBody().toString()).contains("localeProjection=en-EN");
+            assertThat(searchRequest.httpRequestIntent().getBody().toString()).contains("localeProjection=de-DE");
+        });
+    }
+
+    @Test
+    public void selectProductByStoreProjectionInProductProjectionSearch() {
+        BlockingSphereClient client = client();
+        StoreFixtures.withStore(client, store -> {
+            ProductFixtures.withProduct(client, product -> {
+                final ProductProjectionSearch searchRequest = ProductProjectionSearch.ofStaged()
+                        .withQueryFilters(m -> m.id().is(product.getId()))
+                        .withStoreSelection(StoreSelection.of(store.getKey()));
+                assertThat(searchRequest.httpRequestIntent().getBody().toString()).contains("storeProjection=" + store.getKey());
+            });
+        });
+    }
 
     @Ignore
     @Test
@@ -164,7 +236,7 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
             final List<ProductProjection> results = result.getResults();
             assertThat(results.size()).isEqualTo(1);
             assertThat(results.get(0).getAllVariants().stream().anyMatch(variant -> SKU1.equals(variant.getSku()))).isEqualTo(true);
-            
+
         });
     }
 
