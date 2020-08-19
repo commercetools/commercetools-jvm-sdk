@@ -3,7 +3,7 @@
     <groupId>com.commercetools.sdk.jvm.core</groupId>
     <artifactId>commercetools-jvm-sdk</artifactId>
     <packaging>pom</packaging>
-    <version>1.53.0-SNAPSHOT</version>
+    <version>1.54.0-SNAPSHOT</version>
     <name>commercetools JVM SDK</name>
     <description>Java bindings for the commercetools platform</description>
     <url>https://github.com/commercetools/commercetools-jvm-sdk</url>
@@ -262,7 +262,7 @@
                         <compilerArguments>
                             <parameters/>
                             <!--<Werror />--><!--  actually this setting breaks the build for annotation processing -->
-                            <Xlint:all xmlns:Xlint=""/>
+                            <Xlint:all/>
                             <!--<arg>-Xlint:unchecked</arg>-->
                             <!--<arg>-Xlint:-options</arg>-->
                             <!--<arg>-Xlint:-path</arg>-->
@@ -542,6 +542,7 @@
                         <configuration>
                             <serverId>ossrh</serverId>
                             <nexusUrl>https://oss.sonatype.org</nexusUrl>
+                            <skipStagingRepositoryClose>true</skipStagingRepositoryClose>
                         </configuration>
                     </plugin>
                 </plugins>
