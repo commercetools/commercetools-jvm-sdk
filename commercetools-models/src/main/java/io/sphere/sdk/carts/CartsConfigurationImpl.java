@@ -13,7 +13,6 @@ class CartsConfigurationImpl extends Base implements CartsConfiguration {
         this.deleteDaysAfterLastModification = deleteDaysAfterLastModification;
     }
 
-    @JsonCreator
     public CartsConfigurationImpl(Boolean countryTaxRateFallbackEnabled) {
         this.countryTaxRateFallbackEnabled = countryTaxRateFallbackEnabled;
     }
@@ -22,13 +21,14 @@ class CartsConfigurationImpl extends Base implements CartsConfiguration {
     public Integer getDeleteDaysAfterLastModification() {
         return this.deleteDaysAfterLastModification;
     }
-    
-    static CartsConfiguration of(final Integer deleteDaysAfterLastModification) {
-        return new CartsConfigurationImpl(deleteDaysAfterLastModification);
-    }
+
     @Override
     public Boolean getCountryTaxRateFallbackEnabled() {
         return this.countryTaxRateFallbackEnabled;
+    }
+    
+    static CartsConfiguration of(final Integer deleteDaysAfterLastModification) {
+        return new CartsConfigurationImpl(deleteDaysAfterLastModification);
     }
 
     static CartsConfiguration of(final Boolean countryTaxRateFallbackEnabled) {

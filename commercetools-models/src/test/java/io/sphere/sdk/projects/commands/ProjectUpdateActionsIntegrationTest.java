@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.USD;
 
-@Ignore("Disable because of problems with External OAuth")
+
 public class ProjectUpdateActionsIntegrationTest extends ProjectIntegrationTest{
 
     @After
@@ -30,6 +30,21 @@ public class ProjectUpdateActionsIntegrationTest extends ProjectIntegrationTest{
         Assertions.assertThat(updatedProject.getExternalOAuth()).isNull();
     }
 
+    @Test
+    public void changeCountryTaxRateFallbackEnabledIsTrue(){
+        final Project project = client().executeBlocking(ProjectGet.of());
+
+        if ((project.getCarts().getCountryTaxRateFallbackEnabled()).equals(false)) {
+            final ProjectUpdateCommand updateCommand = ProjectUpdateCommand.of(project, ChangeCountryTaxRateFallbackEnabled.of(true));
+            final Project updatedProject = client().executeBlocking(updateCommand);
+            Assertions.assertThat(updatedProject.getCarts().getCountryTaxRateFallbackEnabled()).isEqualTo(true);
+            final ProjectUpdateCommand reverseCommand = ProjectUpdateCommand.of(updatedProject, ChangeCountryTaxRateFallbackEnabled.of(false));
+            final Project reversedProject = client().executeBlocking(reverseCommand);
+            Assertions.assertThat(reversedProject.getCarts().getCountryTaxRateFallbackEnabled()).isEqualTo(false);
+        }
+    }
+
+    @Ignore("Disable because of problems with External OAuth")
     @Test
     public void execution() throws Exception{
 

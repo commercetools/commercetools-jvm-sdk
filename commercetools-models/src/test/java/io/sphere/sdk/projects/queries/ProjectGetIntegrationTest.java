@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.util.Locale;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProjectGetIntegrationTest extends IntegrationTest {
     @Test
@@ -24,5 +25,12 @@ public class ProjectGetIntegrationTest extends IntegrationTest {
             soft.assertThat(project.getMessages().isEnabled()).isTrue();
             //there is a test for trialUntil missing since some ci test projects don't possess a value for this field
         });
+    }
+
+    @Test
+    public void getCountryTaxRateFallbackEnabled() {
+        final Project project = client().executeBlocking(ProjectGet.of());
+
+        assertThat(project.getCarts().getCountryTaxRateFallbackEnabled()).isEqualTo(false);
     }
 }

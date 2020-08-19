@@ -115,7 +115,6 @@ public interface Project extends CreationTimestamped, WithKey {
     ExternalOAuth getExternalOAuth();
 
     @HasUpdateAction(value = "changeCountryTaxRateFallbackEnabled", fields = {@PropertySpec(name = "countryTaxRateFallbackEnabled", type = Boolean.class)})
-
     @HasUpdateAction(value = "changeCartsConfiguration", fields = {@PropertySpec(name = "cartsConfiguration", type = CartsConfiguration.class)})
     CartsConfiguration getCarts();
     
