@@ -129,6 +129,7 @@ io.sphere.sdk.reviews.search
 io.sphere.sdk.search
 io.sphere.sdk.search.model
 io.sphere.sdk.search.tokenizer
+io.sphere.sdk.selection
 io.sphere.sdk.sequencegenerators
 io.sphere.sdk.shippingmethods
 io.sphere.sdk.shippingmethods.commands
