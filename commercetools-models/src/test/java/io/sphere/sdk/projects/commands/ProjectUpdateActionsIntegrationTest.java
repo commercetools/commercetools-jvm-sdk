@@ -7,6 +7,7 @@ import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.projects.commands.updateactions.*;
 import io.sphere.sdk.projects.queries.ProjectGet;
 import org.assertj.core.api.Assertions;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.After;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -31,17 +32,17 @@ public class ProjectUpdateActionsIntegrationTest extends ProjectIntegrationTest{
     }
 
     @Test
-    public void changeCountryTaxRateFallbackEnabledIsTrue(){
+    public void checkChangeCountryTaxRateFallbackEnabledIsWorking(){
         final Project project = client().executeBlocking(ProjectGet.of());
+        final Boolean countryTaxRateFallbackEnabledActual = project.getCarts().getCountryTaxRateFallbackEnabled();
 
-        if ((project.getCarts().getCountryTaxRateFallbackEnabled()).equals(false)) {
-            final ProjectUpdateCommand updateCommand = ProjectUpdateCommand.of(project, ChangeCountryTaxRateFallbackEnabled.of(true));
-            final Project updatedProject = client().executeBlocking(updateCommand);
-            Assertions.assertThat(updatedProject.getCarts().getCountryTaxRateFallbackEnabled()).isEqualTo(true);
-            final ProjectUpdateCommand reverseCommand = ProjectUpdateCommand.of(updatedProject, ChangeCountryTaxRateFallbackEnabled.of(false));
-            final Project reversedProject = client().executeBlocking(reverseCommand);
-            Assertions.assertThat(reversedProject.getCarts().getCountryTaxRateFallbackEnabled()).isEqualTo(false);
-        }
+        final ProjectUpdateCommand updateCommand = ProjectUpdateCommand.of(project, ChangeCountryTaxRateFallbackEnabled.of(!countryTaxRateFallbackEnabledActual));
+        final Project updatedProject = client().executeBlocking(updateCommand);
+        assertThat(updatedProject.getCarts().getCountryTaxRateFallbackEnabled()).isEqualTo(!countryTaxRateFallbackEnabledActual);
+        final ProjectUpdateCommand reverseCommand = ProjectUpdateCommand.of(updatedProject, ChangeCountryTaxRateFallbackEnabled.of(countryTaxRateFallbackEnabledActual));
+        final Project reversedProject = client().executeBlocking(reverseCommand);
+        assertThat(reversedProject.getCarts().getCountryTaxRateFallbackEnabled()).isEqualTo(countryTaxRateFallbackEnabledActual);
+
     }
 
     @Ignore("Disable because of problems with External OAuth")

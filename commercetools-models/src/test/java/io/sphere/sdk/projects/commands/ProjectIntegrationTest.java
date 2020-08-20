@@ -1,24 +1,20 @@
 package io.sphere.sdk.projects.commands;
 
 import com.neovisionaries.i18n.CountryCode;
-import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.CartsConfiguration;
 import io.sphere.sdk.carts.ShoppingListsConfiguration;
-import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.projects.commands.updateactions.*;
 import io.sphere.sdk.projects.queries.ProjectGet;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
-import static io.sphere.sdk.carts.CartFixtures.withCart;
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.models.DefaultCurrencyUnits.USD;
 
