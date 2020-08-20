@@ -157,15 +157,20 @@ import java.util.function.Function;
  </ul>
  -->
  -->
- <h3 class=released-version id="v1_53_0">1.53.0 (10.08.2020)</h3>
+
+ <h3 class=released-version id="v1_54_0">1.54.0 (15.09.2020)</h3>
+ <ul>
+ <li class=new-in-release>Added new field in the CartsConfiguration {@link CartsConfiguration#getCountryTaxRateFallbackEnabled()} and the related update action changeCountryTaxRateFallbackEnabled in the Project {@link Project#} </li>
+ </ul>
+
+ <h3 class=released-version id="v1_53_0">1.53.0 (18.08.2020)</h3>
  <ul>
  <li class=new-in-release>Added new {@link ShippingMethodsByOrderEditGet}.</li>
  <li class=new-in-release>Added new {@link InventoryEntryCreatedMessage}.</li>
  <li class=new-in-release>Added new {@link StateByKeyGet} and now update and delete can be by Key as well.</li>
- <li class=new-in-release>Added new field in the CartsConfiguration {@link CartsConfiguration#getCountryTaxRateFallbackEnabled()} and the related update action changeCountryTaxRateFallbackEnabled in the Project {@link Project#} </li>
  </ul>
 
- <h3 class=released-version id="v1_52_1">1.52.1 (17.08.2020)</h3>
+ <h3 class=released-version id="v1_52_1">1.52.1 (18.08.2020)</h3>
  <ul>
  <li class=fixed-in-release>Fixed storeProjection and localeProjection as query parameter in Product Projection and not anymore in the proceSelection </li>
  </ul>
