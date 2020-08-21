@@ -7,6 +7,7 @@ import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.projects.commands.updateactions.*;
 import io.sphere.sdk.projects.queries.ProjectGet;
 import org.assertj.core.api.Assertions;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.After;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.USD;
 
-@Ignore("Disable because of problems with External OAuth")
+
 public class ProjectUpdateActionsIntegrationTest extends ProjectIntegrationTest{
 
     @After
@@ -30,6 +31,21 @@ public class ProjectUpdateActionsIntegrationTest extends ProjectIntegrationTest{
         Assertions.assertThat(updatedProject.getExternalOAuth()).isNull();
     }
 
+    @Test
+    public void checkChangeCountryTaxRateFallbackEnabledIsWorking(){
+        final Project project = client().executeBlocking(ProjectGet.of());
+        final Boolean countryTaxRateFallbackEnabledActual = project.getCarts().getCountryTaxRateFallbackEnabled();
+
+        final ProjectUpdateCommand updateCommand = ProjectUpdateCommand.of(project, ChangeCountryTaxRateFallbackEnabled.of(!countryTaxRateFallbackEnabledActual));
+        final Project updatedProject = client().executeBlocking(updateCommand);
+        assertThat(updatedProject.getCarts().getCountryTaxRateFallbackEnabled()).isEqualTo(!countryTaxRateFallbackEnabledActual);
+        final ProjectUpdateCommand reverseCommand = ProjectUpdateCommand.of(updatedProject, ChangeCountryTaxRateFallbackEnabled.of(countryTaxRateFallbackEnabledActual));
+        final Project reversedProject = client().executeBlocking(reverseCommand);
+        assertThat(reversedProject.getCarts().getCountryTaxRateFallbackEnabled()).isEqualTo(countryTaxRateFallbackEnabledActual);
+
+    }
+
+    @Ignore("Disable because of problems with External OAuth")
     @Test
     public void execution() throws Exception{
 
