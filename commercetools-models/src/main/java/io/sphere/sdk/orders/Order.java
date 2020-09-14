@@ -284,7 +284,6 @@ public interface Order extends CartLike<Order> {
     List<Address> getItemShippingAddresses();
 
     @Nullable
-    @HasUpdateAction(value = "setStore", fields = {@PropertySpec(name = "store",type = Store.class)})
     @QueryModelHint(type = "KeyReferenceQueryModel<Order>", impl = "return keyReferenceQueryModel(fieldName);")
     KeyReference<Store> getStore();
     

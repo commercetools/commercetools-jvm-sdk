@@ -14,10 +14,15 @@ import io.sphere.sdk.orders.messages.*;
 import io.sphere.sdk.orders.queries.OrderByIdGet;
 import io.sphere.sdk.orders.queries.OrderQuery;
 import io.sphere.sdk.payments.Payment;
+import io.sphere.sdk.products.Product;
+import io.sphere.sdk.products.commands.ProductUpdateCommand;
+import io.sphere.sdk.products.commands.updateactions.SetTaxCategory;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.states.StateType;
+import io.sphere.sdk.stores.StoreFixtures;
+import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
 import net.jcip.annotations.NotThreadSafe;
@@ -31,6 +36,7 @@ import static com.neovisionaries.i18n.CountryCode.DE;
 import static io.sphere.sdk.channels.ChannelFixtures.withOrderExportChannel;
 import static io.sphere.sdk.orders.OrderFixtures.*;
 import static io.sphere.sdk.payments.PaymentFixtures.withPayment;
+import static io.sphere.sdk.products.ProductFixtures.withUpdateableProduct;
 import static io.sphere.sdk.states.StateFixtures.withStandardStates;
 import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
 import static io.sphere.sdk.stores.StoreFixtures.withStore;
@@ -941,5 +947,18 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
                 return updatedOrder;
             });
         });
+    }
+
+    @Test
+    public void setStore() throws Exception {
+        StoreFixtures.withStore(client(), store ->
+                withOrderInStore(client(),store, order -> {
+                    assertThat(order.getStore()).isNotEqualTo(store);
+                    final OrderUpdateCommand command = OrderUpdateCommand.of(order, SetStore.of(store.toResourceIdentifier()));
+                    final Order updatedOrder = client().executeBlocking(command);
+                    assertThat(updatedOrder.getStore().getKey()).isEqualTo(store.getKey());
+                    return updatedOrder;
+                })
+        );
     }
 }
