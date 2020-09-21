@@ -3,7 +3,7 @@ package io.sphere.sdk.projects.error;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.errors.SphereError;
 
-public class LanguageUsedInStores extends SphereError {
+public final class LanguageUsedInStores extends SphereError {
 
     public static final String CODE = "LanguageUsedInStores";
 
