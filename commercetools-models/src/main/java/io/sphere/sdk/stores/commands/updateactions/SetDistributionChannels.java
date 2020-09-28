@@ -2,10 +2,12 @@ package io.sphere.sdk.stores.commands.updateactions;
 
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.commands.UpdateActionImpl;
-import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.stores.Store;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Set a Distribution Channel.
@@ -17,18 +19,18 @@ import io.sphere.sdk.stores.Store;
  * @see Store#getDistributionChannels()
  */
 public class SetDistributionChannels extends UpdateActionImpl<Store> {
-    private final ResourceIdentifier<Channel> distributionChannels;
+    private final List<ResourceIdentifier<Channel>> distributionChannels;
 
-    private SetDistributionChannels(final Reference<Channel> distributionChannels) {
-        super("setDistributionChannel");
+    private SetDistributionChannels(final List<ResourceIdentifier<Channel>> distributionChannels) {
+        super("setDistributionChannels");
         this.distributionChannels = distributionChannels;
     }
 
-    public ResourceIdentifier<Channel> getDistributionChannel() {
+    public List<ResourceIdentifier<Channel>> getDistributionChannels() {
         return distributionChannels;
     }
 
-    public static SetDistributionChannels of(final Referenceable<Channel> distributionChannels) {
-        return new SetDistributionChannels(distributionChannels.toReference());
+    public static SetDistributionChannels of(final List<Referenceable<Channel>> distributionChannels) {
+        return new SetDistributionChannels(distributionChannels.stream().map(Referenceable::toResourceIdentifier).collect(Collectors.toList()));
     }
 }

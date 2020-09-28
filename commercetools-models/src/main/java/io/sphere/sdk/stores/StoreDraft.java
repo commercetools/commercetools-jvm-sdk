@@ -17,9 +17,9 @@ import java.util.*;
         @FactoryMethod(parameterNames = {"key", "name"}),
         @FactoryMethod(parameterNames = {"key", "name", "languages"})})
 public interface StoreDraft {
-    
+
     String getKey();
-    
+
     @Nullable
     LocalizedString getName();
 
@@ -27,11 +27,10 @@ public interface StoreDraft {
     List<String> getLanguages();
 
     @Nullable
-    ResourceIdentifier<Channel> getDistributionChannels();
-    
-    static StoreDraft of(final String key, @Nullable final LocalizedString name) {
+    List<ResourceIdentifier<Channel>> getDistributionChannels();
+
+    static StoreDraftDsl of(final String key, @Nullable final LocalizedString name) {
         return new StoreDraftDsl(null, key, new ArrayList<>(), name);
-//        return new StoreDraftDsl(key, new ArrayList<>(), name);
     }
-    
+
 }
