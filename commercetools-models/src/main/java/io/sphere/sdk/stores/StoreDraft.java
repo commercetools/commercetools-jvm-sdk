@@ -3,7 +3,9 @@ package io.sphere.sdk.stores;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
+import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.ResourceIdentifier;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -23,9 +25,13 @@ public interface StoreDraft {
 
     @Nullable
     List<String> getLanguages();
+
+    @Nullable
+    ResourceIdentifier<Channel> getDistributionChannels();
     
     static StoreDraft of(final String key, @Nullable final LocalizedString name) {
-        return new StoreDraftDsl(key, new ArrayList<>(), name);
+        return new StoreDraftDsl(null, key, new ArrayList<>(), name);
+//        return new StoreDraftDsl(key, new ArrayList<>(), name);
     }
     
 }

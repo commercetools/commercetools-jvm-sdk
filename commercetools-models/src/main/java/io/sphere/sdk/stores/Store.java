@@ -3,6 +3,7 @@ package io.sphere.sdk.stores;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.*;
+import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
@@ -35,7 +36,15 @@ public interface Store extends Resource<Store> {
     @Nullable
     @HasUpdateAction
     List<String> getLanguages();
-    
+
+    /**
+     * Optional connection to particular supplier.
+     * @return channel or null
+     * @see io.sphere.sdk.stores.commands.updateactions.SetDistributionChannels
+     */
+    @Nullable
+    Reference<Channel> getDistributionChannels();
+
     /**
      * Creates a container which contains the full Java type information to deserialize this class from JSON.
      *
