@@ -8,7 +8,7 @@ import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.stores.Store;
 
 /**
- * Adds a Distribution Channel.
+ * Add a Distribution Channel.
  *
  * {@doc.gen intro}
  *

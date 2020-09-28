@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  *
  * @see Store#getDistributionChannels()
  */
-public class SetDistributionChannels extends UpdateActionImpl<Store> {
+public final class SetDistributionChannels extends UpdateActionImpl<Store> {
     private final List<ResourceIdentifier<Channel>> distributionChannels;
 
     private SetDistributionChannels(final List<ResourceIdentifier<Channel>> distributionChannels) {

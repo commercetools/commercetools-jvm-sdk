@@ -16,7 +16,7 @@ import io.sphere.sdk.stores.Store;
  *
  * @see Store#getDistributionChannels()
  */
-public class RemoveDistributionChannel extends UpdateActionImpl<Store> {
+public final class RemoveDistributionChannel extends UpdateActionImpl<Store> {
     private final ResourceIdentifier<Channel> distributionChannel;
 
     private RemoveDistributionChannel(final Reference<Channel> distributionChannel) {
