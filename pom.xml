@@ -96,7 +96,7 @@
         <nv-i18n.version>1.18</nv-i18n.version>
         <commons-lang3>3.4</commons-lang3>
         <commons-io.version>2.4</commons-io.version>
-        <moneta.version>1.1</moneta.version>
+        <moneta.version>1.2.1</moneta.version>
         <slf4j.version>1.7.21</slf4j.version>
         <logback.version>1.1.7</logback.version>
         <jsr305.version>3.0.1</jsr305.version>
