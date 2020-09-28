@@ -7,9 +7,9 @@ import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.ResourceIdentifier;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @JsonDeserialize(as = StoreDraftDsl.class)
 @ResourceDraftValue(factoryMethods = {

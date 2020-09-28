@@ -5,9 +5,7 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.models.ResourceIdentifier;
-import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.stores.Store;
-import io.sphere.sdk.zones.Zone;
 
 /**
  * Adds a Distribution Channel.

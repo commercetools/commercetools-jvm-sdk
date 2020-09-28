@@ -1,16 +1,11 @@
 package io.sphere.sdk.stores.commands;
 
 import io.sphere.sdk.channels.ChannelDraft;
-import io.sphere.sdk.channels.ChannelFixtures;
 import io.sphere.sdk.channels.ChannelRole;
 import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.shoppinglists.ShoppingList;
-import io.sphere.sdk.shoppinglists.commands.ShoppingListUpdateCommand;
-import io.sphere.sdk.shoppinglists.commands.updateactions.SetCustomer;
 import io.sphere.sdk.stores.Store;
 import io.sphere.sdk.stores.StoreDraft;
 import io.sphere.sdk.stores.StoreDraftDsl;
-import io.sphere.sdk.stores.StoreFixtures;
 import io.sphere.sdk.stores.commands.updateactions.*;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
@@ -21,10 +16,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static io.sphere.sdk.channels.ChannelFixtures.withChannel;
-import static io.sphere.sdk.channels.ChannelFixtures.withChannelOfRole;
 import static io.sphere.sdk.stores.StoreFixtures.withUpdateableStore;
 import static io.sphere.sdk.test.SphereTestUtils.*;
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class StoreUpdateCommandIntegrationTest extends IntegrationTest {
 
