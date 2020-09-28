@@ -96,6 +96,7 @@ import io.sphere.sdk.producttypes.*;
 import io.sphere.sdk.producttypes.commands.updateactions.ChangeInputHint;
 import io.sphere.sdk.producttypes.commands.updateactions.RemoveEnumValues;
 import io.sphere.sdk.projects.Project;
+import io.sphere.sdk.projects.error.LanguageUsedInStores;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.reviews.ReviewDraft;
 import io.sphere.sdk.reviews.ReviewDraftBuilder;
@@ -163,6 +164,7 @@ import java.util.function.Function;
  <li class=new-in-release>Added new field in the CartsConfiguration {@link CartsConfiguration#getCountryTaxRateFallbackEnabled()} and the related update action changeCountryTaxRateFallbackEnabled in the Project {@link Project#} </li>
  <li class=new-in-release>Support setStore update action {@link Order#getStore()} and OrderStoreSet message {@link io.sphere.sdk.orders.messages.OrderStoreSetMessage} </li>
  <li class=new-in-release>Support distributionChannels field to Store and add update action {@link io.sphere.sdk.stores.commands.updateactions.SetDistributionChannels}, {@link io.sphere.sdk.stores.commands.updateactions.AddDistributionChannel} and {@link io.sphere.sdk.stores.commands.updateactions.RemoveDistributionChannel}</li>
+ <li class=new-in-release>Support LanguageUsedInStore error {@link io.sphere.sdk.projects.error.LanguageUsedInStores}</li>
  </ul>
 
  <h3 class=released-version id="v1_53_0">1.53.0 (18.08.2020)</h3>
