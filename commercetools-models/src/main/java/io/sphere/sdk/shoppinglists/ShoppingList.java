@@ -71,6 +71,10 @@ public interface ShoppingList extends Resource<ShoppingList>, Custom {
     @Nullable
     Integer getDeleteDaysAfterLastModification();
 
+    @HasUpdateAction
+    @Nullable
+    String getAnonymousId();
+
     /**
      * Creates a container which contains the full Java type information to deserialize this class from JSON.
      *

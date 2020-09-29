@@ -2,6 +2,7 @@ package io.sphere.sdk.shoppinglists;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.FactoryMethod;
+import io.sphere.sdk.annotations.HasUpdateAction;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.LocalizedString;
@@ -46,4 +47,7 @@ public interface ShoppingListDraft {
 
     @Nullable
     Integer getDeleteDaysAfterLastModification();
+
+    @Nullable
+    String getAnonymousId();
 }
