@@ -164,6 +164,7 @@ import java.util.function.Function;
  <li class=new-in-release>Added new field in the CartsConfiguration {@link CartsConfiguration#getCountryTaxRateFallbackEnabled()} and the related update action changeCountryTaxRateFallbackEnabled in the Project {@link Project#} </li>
  <li class=new-in-release>Support setStore update action {@link Order#getStore()} and OrderStoreSet message {@link io.sphere.sdk.orders.messages.OrderStoreSetMessage} </li>
  <li class=new-in-release>Support LanguageUsedInStore error {@link io.sphere.sdk.projects.error.LanguageUsedInStores}</li>
+ <li class=new-in-release>Support AnonymousId for ShoppingLists {@link ShoppingList#getAnonymousId()}</li>
  </ul>
 
  <h3 class=released-version id="v1_53_0">1.53.0 (18.08.2020)</h3>
