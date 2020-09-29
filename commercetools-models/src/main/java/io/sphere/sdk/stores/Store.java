@@ -3,6 +3,7 @@ package io.sphere.sdk.stores;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.*;
+import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
@@ -25,9 +26,9 @@ import java.util.List;
 @HasDeleteCommand(deleteWith = "key", includeExamples = "io.sphere.sdk.stores.commands.StoreDeleteCommandIntegrationTest#deleteByKey()")
 @HasQueryModel()
 public interface Store extends Resource<Store> {
-    
+
     String getKey();
-    
+
     @Nullable
     @HasUpdateAction
     LocalizedString getName();
@@ -35,7 +36,16 @@ public interface Store extends Resource<Store> {
     @Nullable
     @HasUpdateAction
     List<String> getLanguages();
-    
+
+    /**
+     * Optional connection to particular supplier.
+     * @return channel or null
+     * @see io.sphere.sdk.stores.commands.updateactions.SetDistributionChannels
+     */
+    @Nullable
+    @IgnoreInQueryModel
+    List<Reference<Channel>> getDistributionChannels();
+
     /**
      * Creates a container which contains the full Java type information to deserialize this class from JSON.
      *
@@ -63,7 +73,7 @@ public interface Store extends Resource<Store> {
     static String referenceTypeId() {
         return "store";
     }
-    
+
     @Override
     default Reference<Store> toReference() {
         return Reference.of(referenceTypeId(), getId(), this);
@@ -72,5 +82,5 @@ public interface Store extends Resource<Store> {
     static Reference<Store> referenceOfId(final String id) {
         return Reference.of(referenceTypeId(), id);
     }
-    
+
 }

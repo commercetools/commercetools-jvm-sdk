@@ -163,6 +163,7 @@ import java.util.function.Function;
  <ul>
  <li class=new-in-release>Added new field in the CartsConfiguration {@link CartsConfiguration#getCountryTaxRateFallbackEnabled()} and the related update action changeCountryTaxRateFallbackEnabled in the Project {@link Project#} </li>
  <li class=new-in-release>Support setStore update action {@link Order#getStore()} and OrderStoreSet message {@link io.sphere.sdk.orders.messages.OrderStoreSetMessage} </li>
+ <li class=new-in-release>Support distributionChannels field to Store and add update action {@link io.sphere.sdk.stores.commands.updateactions.SetDistributionChannels}, {@link io.sphere.sdk.stores.commands.updateactions.AddDistributionChannel} and {@link io.sphere.sdk.stores.commands.updateactions.RemoveDistributionChannel}</li>
  <li class=new-in-release>Support LanguageUsedInStore error {@link io.sphere.sdk.projects.error.LanguageUsedInStores}</li>
  </ul>
 
