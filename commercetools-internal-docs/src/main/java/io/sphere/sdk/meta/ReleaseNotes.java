@@ -165,6 +165,7 @@ import java.util.function.Function;
  <li class=new-in-release>Support setStore update action {@link Order#getStore()} and OrderStoreSet message {@link io.sphere.sdk.orders.messages.OrderStoreSetMessage} </li>
  <li class=new-in-release>Support distributionChannels field to Store and add update action {@link io.sphere.sdk.stores.commands.updateactions.SetDistributionChannels}, {@link io.sphere.sdk.stores.commands.updateactions.AddDistributionChannel} and {@link io.sphere.sdk.stores.commands.updateactions.RemoveDistributionChannel}</li>
  <li class=new-in-release>Support LanguageUsedInStore error {@link io.sphere.sdk.projects.error.LanguageUsedInStores}</li>
+ <li class=new-in-release>Support AnonymousId for ShoppingLists {@link ShoppingList#getAnonymousId()}</li>
  </ul>
 
  <h3 class=released-version id="v1_53_0">1.53.0 (18.08.2020)</h3>
