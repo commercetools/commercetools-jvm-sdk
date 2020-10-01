@@ -13,6 +13,7 @@ import io.sphere.sdk.models.errors.DuplicateFieldError;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.CompletableFutureUtils;
 import net.jcip.annotations.NotThreadSafe;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.math.BigInteger;
@@ -49,6 +50,7 @@ public class BigIntegerNumberGeneratorIntegrationTest extends IntegrationTest {
         assertThat(firstNumber).isEqualTo(BigInteger.ONE);
     }
 
+    @Ignore
     @Test
     public void checkNumbersBiggerThanLongMax() {
         final BigInteger overSized = BigInteger.valueOf(Long.MAX_VALUE).add(BigInteger.TEN);
