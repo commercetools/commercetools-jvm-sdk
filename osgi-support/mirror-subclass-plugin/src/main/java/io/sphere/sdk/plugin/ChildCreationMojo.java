@@ -71,6 +71,8 @@ public class ChildCreationMojo extends AbstractMojo {
                         outputFile.mkdirs();
                         continue;
                     }
+                    if (!outputFile.toPath().normalize().startsWith(outputDir))
+                        throw new Exception("Bad zip entry");
                     InputStream is = jarFile.getInputStream(next);
                     FileOutputStream fos = new FileOutputStream(outputFile);
                     while (is.available() > 0) {
