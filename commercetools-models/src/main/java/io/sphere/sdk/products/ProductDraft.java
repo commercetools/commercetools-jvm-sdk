@@ -67,7 +67,7 @@ public interface ProductDraft extends WithLocalizedSlug, MetaAttributes, WithKey
     CategoryOrderHints getCategoryOrderHints();
 
     @Nullable
-    Reference<State> getState();
+    ResourceIdentifier<State> getState();
 
     /**
      * Flag for publishing the product immediately.

@@ -170,6 +170,8 @@ import java.util.function.Function;
  <li class=new-in-release>Support LanguageUsedInStore error {@link io.sphere.sdk.projects.error.LanguageUsedInStores}</li>
  <li class=new-in-release>Support AnonymousId for ShoppingLists {@link ShoppingList#getAnonymousId()}</li>
  <li class=new-in-release>Updated <a href="https://javamoney.github.io/ri.html#welcome-to-moneta---the-jsr-354-reference-implementation">moneta</a> to version 1.2</li>
+ <li class=new-in-release>Changed state to ResourceIdentifier for product draft  {@link ProductDraft#getState()}</li>
+ <li class=new-in-release>Changed customer to ResourceIdentifier for shopping list draft  {@link ShoppingListDraft#getCustomer()}</li>
  </ul>
 
  <h3 class=released-version id="v1_53_0">1.53.0 (18.08.2020)</h3>
