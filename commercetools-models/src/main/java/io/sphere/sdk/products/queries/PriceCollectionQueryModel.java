@@ -1,5 +1,6 @@
 package io.sphere.sdk.products.queries;
 
+import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.types.queries.CustomQueryModel;
@@ -27,7 +28,7 @@ public interface PriceCollectionQueryModel<T> extends CollectionQueryModel<T>, P
     ReferenceOptionalQueryModel<T, CustomerGroup> customerGroup();
 
     @Override
-    ReferenceOptionalQueryModel<T, CustomerGroup> channel();
+    ReferenceOptionalQueryModel<T, Channel> channel();
 
     @Override
     CustomQueryModel<T> custom();
