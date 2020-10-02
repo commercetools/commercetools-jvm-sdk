@@ -162,6 +162,7 @@ import java.util.function.Function;
  <h3 class=released-version id="v1_54_0">1.54.0 (01.10.2020)</h3>
  <ul>
  <li class=fixed-in-release>Fixed possible thread safe issue in HighPrecisionMoney usage</li>
+ <li class=fixed-in-release>Fixed type for {@link PriceCollectionQueryModel#channel()}</li>
  </ul>
  <ul>
  <li class=new-in-release>Added new field in the CartsConfiguration {@link CartsConfiguration#getCountryTaxRateFallbackEnabled()} and the related update action changeCountryTaxRateFallbackEnabled in the Project {@link Project#} </li>

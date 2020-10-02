@@ -1,5 +1,6 @@
 package io.sphere.sdk.products.queries;
 
+import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.queries.CountryQueryModel;
 import io.sphere.sdk.queries.MoneyQueryModel;
@@ -19,7 +20,7 @@ public interface PriceQueryModel<T> extends WithCustomQueryModel<T> {
 
     ReferenceOptionalQueryModel<T, CustomerGroup> customerGroup();
 
-    ReferenceOptionalQueryModel<T, CustomerGroup> channel();
+    ReferenceOptionalQueryModel<T, Channel> channel();
 
     PriceTierQueryModel<T> tiers();
 }
