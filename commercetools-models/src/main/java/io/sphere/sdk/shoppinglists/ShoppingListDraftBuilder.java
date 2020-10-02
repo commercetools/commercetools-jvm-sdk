@@ -13,7 +13,7 @@ import java.util.Optional;
 
 public class ShoppingListDraftBuilder extends ShoppingListDraftBuilderBase<ShoppingListDraftBuilder> {
 
-    public ShoppingListDraftBuilder(String anonymousId, CustomFieldsDraft custom, ResourceIdentifier<Customer> customer, Integer deleteDaysAfterLastModification, LocalizedString description, String key, List<LineItemDraft> lineItems, LocalizedString name, LocalizedString slug, List<TextLineItemDraft> textLineItems) {
+    ShoppingListDraftBuilder(String anonymousId, CustomFieldsDraft custom, ResourceIdentifier<Customer> customer, Integer deleteDaysAfterLastModification, LocalizedString description, String key, List<LineItemDraft> lineItems, LocalizedString name, LocalizedString slug, List<TextLineItemDraft> textLineItems) {
         super(anonymousId, custom, customer, deleteDaysAfterLastModification, description, key, lineItems, name, slug, textLineItems);
     }
 
