@@ -29,7 +29,7 @@ public final class ProductDraftBuilder extends ProductDraftBuilderBase<ProductDr
                         @Nullable final Boolean publish,
                         final SearchKeywords searchKeywords,
                         final LocalizedString slug,
-                        @Nullable final Reference<State> state,
+                        @Nullable final ResourceIdentifier<State> state,
                         @Nullable final ResourceIdentifier<TaxCategory> taxCategory,
                         final List<ProductVariantDraft> variants) {
         super(categories, categoryOrderHints, description, key, masterVariant, metaDescription, metaKeywords, metaTitle,
@@ -97,8 +97,12 @@ public final class ProductDraftBuilder extends ProductDraftBuilderBase<ProductDr
 
 
     public ProductDraftBuilder state(@Nullable final Referenceable<State> state) {
-        this.state = Optional.ofNullable(state).map(Referenceable::toReference).orElse(null);
+        this.state = Optional.ofNullable(state).map(Referenceable::toResourceIdentifier).orElse(null);
         return ProductDraftBuilder.this;
+    }
+
+    public ProductDraftBuilder state(@Nullable Reference<State> state) {
+        return super.state(state);
     }
 
     public ProductDraftBuilder taxCategory(@Nullable Referenceable<TaxCategory> taxCategory) {
