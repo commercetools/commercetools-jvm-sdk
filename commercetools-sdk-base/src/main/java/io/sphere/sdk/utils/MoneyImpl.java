@@ -3,7 +3,6 @@ package io.sphere.sdk.utils;
 import io.sphere.sdk.models.Base;
 import org.javamoney.moneta.Money;
 import org.javamoney.moneta.function.MonetaryQueries;
-import org.javamoney.moneta.internal.JDKCurrencyProvider;
 
 import javax.annotation.Nonnull;
 import javax.money.*;
@@ -12,7 +11,6 @@ import java.util.Optional;
 
 public final class MoneyImpl extends Base implements MonetaryAmount {
     private final MonetaryAmount money;
-    private static final JDKCurrencyProvider CURRENCY_PROVIDER = new JDKCurrencyProvider();
 
     private MoneyImpl(final MonetaryAmount money) {
         this.money = money;
@@ -268,7 +266,7 @@ public final class MoneyImpl extends Base implements MonetaryAmount {
 
     public static CurrencyUnit createCurrencyByCode(final String currencyCode) {
         CurrencyQuery query = CurrencyQueryBuilder.of().setCurrencyCodes(currencyCode).build();
-        return CURRENCY_PROVIDER.getCurrencies(query).stream().findFirst().orElseThrow(() -> new UnknownCurrencyException(currencyCode));
+        return CurrencyUtils.CURRENCY_PROVIDER.getCurrencies(query).stream().findFirst().orElseThrow(() -> new UnknownCurrencyException(currencyCode));
     }
 
     public static MonetaryAmount of(final String amount, final CurrencyUnit currencyUnit) {

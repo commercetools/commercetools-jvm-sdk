@@ -159,13 +159,17 @@ import java.util.function.Function;
  -->
  -->
 
- <h3 class=released-version id="v1_54_0">1.54.0 (15.09.2020)</h3>
+ <h3 class=released-version id="v1_54_0">1.54.0 (01.10.2020)</h3>
+ <ul>
+ <li class=fixed-in-release>Fixed possible thread safe issue in HighPrecisionMoney usage</li>
+ </ul>
  <ul>
  <li class=new-in-release>Added new field in the CartsConfiguration {@link CartsConfiguration#getCountryTaxRateFallbackEnabled()} and the related update action changeCountryTaxRateFallbackEnabled in the Project {@link Project#} </li>
  <li class=new-in-release>Support setStore update action {@link Order#getStore()} and OrderStoreSet message {@link io.sphere.sdk.orders.messages.OrderStoreSetMessage} </li>
  <li class=new-in-release>Support distributionChannels field to Store and add update action {@link io.sphere.sdk.stores.commands.updateactions.SetDistributionChannels}, {@link io.sphere.sdk.stores.commands.updateactions.AddDistributionChannel} and {@link io.sphere.sdk.stores.commands.updateactions.RemoveDistributionChannel}</li>
  <li class=new-in-release>Support LanguageUsedInStore error {@link io.sphere.sdk.projects.error.LanguageUsedInStores}</li>
  <li class=new-in-release>Support AnonymousId for ShoppingLists {@link ShoppingList#getAnonymousId()}</li>
+ <li class=new-in-release>Updated <a href="https://javamoney.github.io/ri.html#welcome-to-moneta---the-jsr-354-reference-implementation">moneta</a> to version 1.2</li>
  </ul>
 
  <h3 class=released-version id="v1_53_0">1.53.0 (18.08.2020)</h3>

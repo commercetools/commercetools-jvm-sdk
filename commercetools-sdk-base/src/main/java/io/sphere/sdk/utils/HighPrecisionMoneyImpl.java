@@ -2,7 +2,6 @@ package io.sphere.sdk.utils;
 
 import io.sphere.sdk.models.Base;
 import org.javamoney.moneta.Money;
-import org.javamoney.moneta.internal.JDKCurrencyProvider;
 
 import javax.money.*;
 import java.math.BigDecimal;
@@ -10,13 +9,12 @@ import java.util.Optional;
 
 
 /**
- * A variant of {@link MoneyImpl}, this class can be used when the user intends to pass to high precision 
- * price, the fractions taken into account can be specified in fractions digits, and it allows to fractionDigits up or down 
+ * A variant of {@link MoneyImpl}, this class can be used when the user intends to pass to high precision
+ * price, the fractions taken into account can be specified in fractions digits, and it allows to fractionDigits up or down
  * the platform precision for a particular price.
  */
 public final class HighPrecisionMoneyImpl extends Base implements MonetaryAmount {
     private final MonetaryAmount money;
-    private static final JDKCurrencyProvider CURRENCY_PROVIDER = new JDKCurrencyProvider();
     private final int fractionDigits;
 
     private HighPrecisionMoneyImpl(final MonetaryAmount money, final int fractionsDigit) {
@@ -278,6 +276,6 @@ public final class HighPrecisionMoneyImpl extends Base implements MonetaryAmount
 
     public static CurrencyUnit createCurrencyByCode(final String currencyCode) {
         CurrencyQuery query = CurrencyQueryBuilder.of().setCurrencyCodes(currencyCode).build();
-        return CURRENCY_PROVIDER.getCurrencies(query).stream().findFirst().orElseThrow(() -> new UnknownCurrencyException(currencyCode));
+        return CurrencyUtils.CURRENCY_PROVIDER.getCurrencies(query).stream().findFirst().orElseThrow(() -> new UnknownCurrencyException(currencyCode));
     }
 }
