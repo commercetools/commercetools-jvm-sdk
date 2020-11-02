@@ -4,6 +4,7 @@ import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.SetCustomShippingMethod;
 import io.sphere.sdk.carts.commands.updateactions.SetShippingRateInput;
 import io.sphere.sdk.carts.queries.CartByIdGet;
+import io.sphere.sdk.client.ErrorResponseException;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.projects.CartScoreDraftBuilder;
 import io.sphere.sdk.projects.Project;
@@ -18,6 +19,7 @@ import io.sphere.sdk.taxcategories.ExternalTaxRateDraft;
 import io.sphere.sdk.taxcategories.ExternalTaxRateDraftBuilder;
 import org.junit.Test;
 
+import java.time.Duration;
 import java.util.Arrays;
 
 import static io.sphere.sdk.carts.CartFixtures.withCartDraft;
@@ -53,18 +55,24 @@ public class ShippingRateScoreIntegrationTest extends ProjectIntegrationTest {
 
             final SetCustomShippingMethod action =
                     SetCustomShippingMethod.ofExternalTaxCalculation("name", shippingRate, externalTaxRate);
-            final Cart cartWithShippingMethod = client().executeBlocking(CartUpdateCommand.of(cart, action));
 
-            assertEventually(() -> {
-                final Cart cartWithShippingMethodWithScore1 = client().executeBlocking(CartUpdateCommand.of(cartWithShippingMethod,
-                        SetShippingRateInput.of(ScoreShippingRateInputDraftBuilder.of(1L).build())));
-                assertThat(cartWithShippingMethodWithScore1.getShippingRateInput()).isInstanceOf(ScoreShippingRateInput.class);
-                assertThat(cartWithShippingMethodWithScore1.getShippingInfo().getPrice()).isEqualTo(EURO_20);
+            assertEventually(Duration.ofSeconds(60), Duration.ofMillis(100), () -> {
+                final Cart cart1 = client().executeBlocking(CartByIdGet.of(cart));
+                try {
+                    final Cart cartWithShippingMethod = client().executeBlocking(CartUpdateCommand.of(cart1, action));
 
-                final Cart cartWithShippingMethodWithScore0 = client().executeBlocking(CartUpdateCommand.of(cartWithShippingMethodWithScore1,
-                        SetShippingRateInput.of(ScoreShippingRateInputDraftBuilder.of(0L).build())));
-                assertThat(cartWithShippingMethodWithScore0.getShippingRateInput()).isInstanceOf(ScoreShippingRateInput.class);
-                assertThat(cartWithShippingMethodWithScore0.getShippingInfo().getPrice()).isEqualTo(EURO_40);
+                    final Cart cartWithShippingMethodWithScore1 = client().executeBlocking(CartUpdateCommand.of(cartWithShippingMethod,
+                            SetShippingRateInput.of(ScoreShippingRateInputDraftBuilder.of(1L).build())));
+                    assertThat(cartWithShippingMethodWithScore1.getShippingRateInput()).isInstanceOf(ScoreShippingRateInput.class);
+                    assertThat(cartWithShippingMethodWithScore1.getShippingInfo().getPrice()).isEqualTo(EURO_20);
+
+                    final Cart cartWithShippingMethodWithScore0 = client().executeBlocking(CartUpdateCommand.of(cartWithShippingMethodWithScore1,
+                            SetShippingRateInput.of(ScoreShippingRateInputDraftBuilder.of(0L).build())));
+                    assertThat(cartWithShippingMethodWithScore0.getShippingRateInput()).isInstanceOf(ScoreShippingRateInput.class);
+                    assertThat(cartWithShippingMethodWithScore0.getShippingInfo().getPrice()).isEqualTo(EURO_40);
+                } catch (ErrorResponseException e) {
+                    throw new AssertionError(e);
+                }
             });
 
             return client().executeBlocking(CartByIdGet.of(cart));
