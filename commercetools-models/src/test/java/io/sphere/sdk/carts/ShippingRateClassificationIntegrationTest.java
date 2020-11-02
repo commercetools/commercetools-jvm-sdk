@@ -3,6 +3,7 @@ package io.sphere.sdk.carts;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.SetCustomShippingMethod;
 import io.sphere.sdk.carts.commands.updateactions.SetShippingRateInput;
+import io.sphere.sdk.carts.queries.CartByIdGet;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.LocalizedString;
@@ -60,12 +61,14 @@ public class ShippingRateClassificationIntegrationTest extends ProjectIntegratio
                     SetCustomShippingMethod.ofExternalTaxCalculation("name", shippingRate, externalTaxRate);
             final Cart cartWithShippingMethod = client().executeBlocking(CartUpdateCommand.of(cart, action));
 
-            final Cart cartWithShippingMethodWithClassification = client().executeBlocking(CartUpdateCommand.of(cartWithShippingMethod,
-                    SetShippingRateInput.of(ClassificationShippingRateInputDraftBuilder.of("Small").build())));
-            assertThat(cartWithShippingMethodWithClassification.getShippingRateInput()).isInstanceOf(ClassificationShippingRateInput.class);
-            assertThat(cartWithShippingMethodWithClassification.getShippingInfo().getPrice()).isEqualTo(EURO_20);
+            assertEventually(() -> {
+                final Cart cartWithShippingMethodWithClassification = client().executeBlocking(CartUpdateCommand.of(cartWithShippingMethod,
+                        SetShippingRateInput.of(ClassificationShippingRateInputDraftBuilder.of("Small").build())));
+                assertThat(cartWithShippingMethodWithClassification.getShippingRateInput()).isInstanceOf(ClassificationShippingRateInput.class);
+                assertThat(cartWithShippingMethodWithClassification.getShippingInfo().getPrice()).isEqualTo(EURO_20);
+            });
 
-            return cartWithShippingMethodWithClassification;
+            return client().executeBlocking(CartByIdGet.of(cart));
         });
     }
 
