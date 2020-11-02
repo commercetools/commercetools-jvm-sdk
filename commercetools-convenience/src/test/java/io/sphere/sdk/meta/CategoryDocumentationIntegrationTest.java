@@ -46,6 +46,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 
+import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static io.sphere.sdk.utils.SphereInternalUtils.asSet;
 import static java.lang.String.format;
@@ -84,12 +85,14 @@ public class CategoryDocumentationIntegrationTest extends IntegrationTest {
     public void fetchAll_withMapper() throws Exception {
         final CompletionStage<List<Category>> categoriesStage = QueryExecutionUtils
             .queryAll(client(), CategoryQuery.of(), category -> category, 500);
-        final List<Category> categories = SphereClientUtils
-            .blockingWait(categoriesStage, Duration.ofMinutes(1));
+        assertEventually(() -> {
+            final List<Category> categories = SphereClientUtils
+                    .blockingWait(categoriesStage, Duration.ofMinutes(1));
 
-        assertThat(categories)
-            .hasSize(15)
-            .matches(cats -> cats.parallelStream().anyMatch(cat -> cat.getSlug().get(ENGLISH).equals("boots-women")));
+            assertThat(categories)
+                    .hasSize(15)
+                    .matches(cats -> cats.parallelStream().anyMatch(cat -> cat.getSlug().get(ENGLISH).equals("boots-women")));
+        });
     }
 
     @Test
@@ -97,22 +100,27 @@ public class CategoryDocumentationIntegrationTest extends IntegrationTest {
 
         final CompletionStage<List<String>> categoriesStage = QueryExecutionUtils
             .queryAll(client(), CategoryQuery.of(), Category::getExternalId, 3);
-        final List<String> externalIds = SphereClientUtils
-            .blockingWait(categoriesStage, Duration.ofMinutes(1));
 
-        assertThat(externalIds).hasSize(15);
-        IntStream.range(0, externalIds.size()).forEach(index -> assertThat(externalIds).contains(index + ""));
+        assertEventually(() -> {
+            final List<String> externalIds = SphereClientUtils
+                    .blockingWait(categoriesStage, Duration.ofMinutes(1));
+
+            assertThat(externalIds).hasSize(15);
+            IntStream.range(0, externalIds.size()).forEach(index -> assertThat(externalIds).contains(index + ""));
+        });
     }
 
     @Test
     public void fetchAllExternalIdsWithNonUniformPageSizes() throws Exception {
         final CompletionStage<List<String>> categoriesStage = QueryExecutionUtils
             .queryAll(client(), CategoryQuery.of(), Category::getExternalId, 4);
-        final List<String> externalIds = SphereClientUtils
-            .blockingWait(categoriesStage, Duration.ofMinutes(1));
+        assertEventually(() -> {
+            final List<String> externalIds = SphereClientUtils
+                    .blockingWait(categoriesStage, Duration.ofMinutes(1));
 
-        assertThat(externalIds).hasSize(15);
-        IntStream.range(0, externalIds.size()).forEach(index -> assertThat(externalIds).contains(index + ""));
+            assertThat(externalIds).hasSize(15);
+            IntStream.range(0, externalIds.size()).forEach(index -> assertThat(externalIds).contains(index + ""));
+        });
     }
 
     @Test
