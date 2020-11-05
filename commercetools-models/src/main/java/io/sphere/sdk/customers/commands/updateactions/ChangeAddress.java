@@ -18,22 +18,24 @@ import static java.lang.String.format;
 public final class ChangeAddress extends UpdateActionImpl<Customer> {
     private final Address address;
     private final String addressId;
+    private final String addressKey;
 
-    private ChangeAddress(final String addressId, final Address address) {
+    private ChangeAddress(final String addressId, final Address address, String addressKey) {
         super("changeAddress");
         this.address = address;
         this.addressId = addressId;
+        this.addressKey = addressKey;
     }
 
-    public static ChangeAddress of(final String addressId, final Address address) {
-        return new ChangeAddress(addressId, address);
+    public static ChangeAddress of(final String addressId, final String addressKey, final Address address) {
+        return new ChangeAddress(addressId, address, addressKey);
     }
 
     public static ChangeAddress ofOldAddressToNewAddress(final Address oldAddress, final Address newAddress) {
         if (oldAddress.getId() == null) {
             throw new IllegalArgumentException(format("The address %s should have an id.", oldAddress));
         }
-        return of(oldAddress.getId(), newAddress);
+        return of(oldAddress.getId(), oldAddress.getKey(), newAddress);
     }
 
     public Address getAddress() {
@@ -42,5 +44,9 @@ public final class ChangeAddress extends UpdateActionImpl<Customer> {
 
     public String getAddressId() {
         return addressId;
+    }
+
+    public String getAddressKey() {
+        return addressKey;
     }
 }

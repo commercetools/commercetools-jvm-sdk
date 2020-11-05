@@ -17,24 +17,30 @@ import static java.lang.String.format;
  */
 public final class RemoveAddress extends UpdateActionImpl<Customer> {
     private final String addressId;
+    private final String addressKey;
 
-    private RemoveAddress(final String addressId) {
+    private RemoveAddress(final String addressId, String addressKey) {
         super("removeAddress");
         this.addressId = addressId;
+        this.addressKey = addressKey;
     }
 
-    public static RemoveAddress of(final String addressId) {
-        return new RemoveAddress(addressId);
+    public static RemoveAddress of(final String addressId, final String addressKey) {
+        return new RemoveAddress(addressId, addressKey);
     }
 
     public static RemoveAddress of(final Address address) {
         if (address.getId() == null) {
             throw new IllegalArgumentException(format("The address %s should have an id.", address));
         }
-        return of(address.getId());
+        return of(address.getId(), address.getKey());
     }
 
     public String getAddressId() {
         return addressId;
+    }
+
+    public String getAddressKey() {
+        return addressKey;
     }
 }
