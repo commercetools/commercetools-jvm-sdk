@@ -18,21 +18,23 @@ import static java.lang.String.format;
  */
 public final class SetDefaultBillingAddress extends UpdateActionImpl<Customer> {
     private final String addressId;
+    private final String addressKey;
 
-    private SetDefaultBillingAddress(@Nullable final String addressId) {
+    private SetDefaultBillingAddress(@Nullable final String addressId, String addressKey) {
         super("setDefaultBillingAddress");
         this.addressId = addressId;
+        this.addressKey = addressKey;
     }
 
-    public static SetDefaultBillingAddress of(@Nullable final String addressId) {
-        return new SetDefaultBillingAddress(addressId);
+    public static SetDefaultBillingAddress of(@Nullable final String addressId, @Nullable final String addressKey) {
+        return new SetDefaultBillingAddress(addressId, addressKey);
     }
 
     public static SetDefaultBillingAddress ofAddress(final Address address) {
         if (address.getId() == null) {
             throw new IllegalArgumentException(format("The address %s should have an id.", address));
         }
-        return of(address.getId());
+        return of(address.getId(), address.getKey());
     }
 
     @Nullable
