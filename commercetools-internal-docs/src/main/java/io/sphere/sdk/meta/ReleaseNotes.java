@@ -158,7 +158,10 @@ import java.util.function.Function;
  </ul>
  -->
  -->
-
+ <h3 class=released-version id="v1_55_0">1.54.0 (01.10.2020)</h3>
+ <ul>
+ <li class=fixed-in-release>Support customer address by key selection for updates</li>
+ </ul>
  <h3 class=released-version id="v1_54_0">1.54.0 (01.10.2020)</h3>
  <ul>
  <li class=fixed-in-release>Fixed possible thread safe issue in HighPrecisionMoney usage</li>
