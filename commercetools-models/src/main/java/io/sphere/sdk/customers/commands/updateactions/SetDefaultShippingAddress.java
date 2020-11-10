@@ -20,11 +20,10 @@ import static java.lang.String.format;
 public final class SetDefaultShippingAddress extends UpdateActionImpl<Customer> {
     @Nullable
     private final String addressId;
-
-    @Nullable
     private final String addressKey;
 
-    private SetDefaultShippingAddress(@Nullable final String addressId, @Nullable String addressKey) {
+
+    private SetDefaultShippingAddress(@Nullable final String addressId, @Nullable final String addressKey) {
         super("setDefaultShippingAddress");
         this.addressId = addressId;
         this.addressKey = addressKey;
@@ -32,6 +31,10 @@ public final class SetDefaultShippingAddress extends UpdateActionImpl<Customer> 
 
     public static SetDefaultShippingAddress of(@Nullable final String addressId, @Nullable final String addressKey) {
         return new SetDefaultShippingAddress(addressId, addressKey);
+    }
+
+    public static SetDefaultShippingAddress of(@Nullable final String addressId) {
+        return new SetDefaultShippingAddress(addressId, null);
     }
 
     public static SetDefaultShippingAddress ofAddress(final Address address) {

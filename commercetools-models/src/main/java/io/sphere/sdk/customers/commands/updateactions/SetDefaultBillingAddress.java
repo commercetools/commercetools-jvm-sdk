@@ -30,6 +30,10 @@ public final class SetDefaultBillingAddress extends UpdateActionImpl<Customer> {
         return new SetDefaultBillingAddress(addressId, addressKey);
     }
 
+    public static SetDefaultBillingAddress of(@Nullable final String addressId) {
+        return new SetDefaultBillingAddress(addressId, null);
+    }
+
     public static SetDefaultBillingAddress ofAddress(final Address address) {
         if (address.getId() == null) {
             throw new IllegalArgumentException(format("The address %s should have an id.", address));

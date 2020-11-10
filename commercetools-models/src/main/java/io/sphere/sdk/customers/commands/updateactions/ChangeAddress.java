@@ -27,6 +27,10 @@ public final class ChangeAddress extends UpdateActionImpl<Customer> {
         this.addressKey = addressKey;
     }
 
+    public static ChangeAddress of(final String addressId, final Address address) {
+        return new ChangeAddress(addressId, address, address.getKey());
+    }
+
     public static ChangeAddress of(final String addressId, final String addressKey, final Address address) {
         return new ChangeAddress(addressId, address, addressKey);
     }
