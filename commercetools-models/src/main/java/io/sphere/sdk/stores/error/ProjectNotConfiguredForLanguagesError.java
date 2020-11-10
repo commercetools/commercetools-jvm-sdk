@@ -7,7 +7,7 @@ import io.sphere.sdk.models.errors.SphereError;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ProjectNotConfiguredForLanguagesError extends SphereError {
+public final class ProjectNotConfiguredForLanguagesError extends SphereError {
     public static final String CODE = "ProjectNotConfiguredForLanguages";
 
     private final List<String> languages;

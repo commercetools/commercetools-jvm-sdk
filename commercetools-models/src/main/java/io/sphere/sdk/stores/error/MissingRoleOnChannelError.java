@@ -9,7 +9,7 @@ import io.sphere.sdk.models.errors.SphereError;
 import javax.annotation.Nullable;
 
 
-public class MissingRoleOnChannelError  extends SphereError {
+public final class MissingRoleOnChannelError  extends SphereError {
     public static final String CODE = "MissingRoleOnChannel";
 
     @Nullable
