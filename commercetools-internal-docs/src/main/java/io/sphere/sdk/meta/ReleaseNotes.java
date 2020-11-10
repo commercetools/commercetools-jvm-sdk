@@ -158,7 +158,11 @@ import java.util.function.Function;
  </ul>
  -->
  -->
-
+ <h3 class=released-version id="v1_55_0">1.55.0 (01.12.2020)</h3>
+ <ul>
+ <li class=fixed-in-release>Support customer address by key selection for updates</li>
+ <li class=new-in-release>Support errors for store {@link io.sphere.sdk.stores.error.ProjectNotConfiguredForLanguagesError} and {@link io.sphere.sdk.stores.error.MissingRoleOnChannelError} </li>
+ </ul>
  <h3 class=released-version id="v1_54_0">1.54.0 (01.10.2020)</h3>
  <ul>
  <li class=fixed-in-release>Fixed possible thread safe issue in HighPrecisionMoney usage</li>
