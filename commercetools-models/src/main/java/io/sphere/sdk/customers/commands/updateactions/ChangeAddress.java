@@ -29,7 +29,7 @@ public final class ChangeAddress extends UpdateActionImpl<Customer> {
     @Nullable
     private final String addressKey;
 
-    private ChangeAddress(@Nullable final String addressId, final Address address, @Nullable String addressKey) {
+    private ChangeAddress(@Nullable final String addressId, final Address address, @Nullable final String addressKey) {
         super("changeAddress");
         this.address = address;
         this.addressId = addressId;
