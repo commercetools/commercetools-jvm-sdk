@@ -29,8 +29,8 @@ public final class SetDefaultShippingAddress extends UpdateActionImpl<Customer> 
         this.addressKey = addressKey;
     }
 
-    public static SetDefaultShippingAddress of(@Nullable final String addressId, @Nullable final String addressKey) {
-        return new SetDefaultShippingAddress(addressId, addressKey);
+    public static SetDefaultShippingAddress of(@Nullable final String addressKey) {
+        return new SetDefaultShippingAddress(null, addressKey);
     }
 
     public static SetDefaultShippingAddress of(@Nullable final String addressId) {
