@@ -45,7 +45,7 @@ public final class ChangeAddress extends UpdateActionImpl<Customer> {
     }
 
     public static ChangeAddress ofOldAddressToNewAddress(final Address oldAddress, final Address newAddress) {
-        if (oldAddress.getId() == null & oldAddress.getKey() == null) {
+        if (oldAddress.getId() == null && oldAddress.getKey() == null) {
             throw new IllegalArgumentException(format("The address %s should have an id or a key.", oldAddress));
         }
         if (oldAddress.getId() != null) {
