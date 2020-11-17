@@ -29,8 +29,8 @@ public final class RemoveAddress extends UpdateActionImpl<Customer> {
         return new RemoveAddress(addressId, null);
     }
 
-    public static RemoveAddress of(final String addressId, final String addressKey) {
-        return new RemoveAddress(addressId, addressKey);
+    public static RemoveAddress of(final String addressKey) {
+        return new RemoveAddress(null, addressKey);
     }
 
     public static RemoveAddress of(final Address address) {
