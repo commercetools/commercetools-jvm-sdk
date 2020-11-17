@@ -4,6 +4,8 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.Address;
 
+import javax.annotation.Nullable;
+
 import static java.lang.String.format;
 
 /**
@@ -16,10 +18,12 @@ import static java.lang.String.format;
  * @see Customer
  */
 public final class RemoveAddress extends UpdateActionImpl<Customer> {
+    @Nullable
     private final String addressId;
+    @Nullable
     private final String addressKey;
 
-    private RemoveAddress(final String addressId, String addressKey) {
+    private RemoveAddress(@Nullable final String addressId, @Nullable String addressKey) {
         super("removeAddress");
         this.addressId = addressId;
         this.addressKey = addressKey;
@@ -29,15 +33,19 @@ public final class RemoveAddress extends UpdateActionImpl<Customer> {
         return new RemoveAddress(addressId, null);
     }
 
-    public static RemoveAddress of(final String addressKey) {
+    public static RemoveAddress ofKey(final String addressKey) {
         return new RemoveAddress(null, addressKey);
     }
 
     public static RemoveAddress of(final Address address) {
-        if (address.getId() == null) {
-            throw new IllegalArgumentException(format("The address %s should have an id.", address));
+        if (address.getId() == null && address.getKey() == null) {
+            throw new IllegalArgumentException(format("The address %s should have an id or a key.", address));
         }
-        return of(address.getId(), address.getKey());
+        if (address.getId() != null) {
+            return of(address.getId());
+        } else {
+            return ofKey(address.getKey());
+        }
     }
 
     public String getAddressId() {

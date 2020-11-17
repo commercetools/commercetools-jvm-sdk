@@ -20,6 +20,7 @@ import static java.lang.String.format;
 public final class SetDefaultShippingAddress extends UpdateActionImpl<Customer> {
     @Nullable
     private final String addressId;
+    @Nullable
     private final String addressKey;
 
 
@@ -29,7 +30,7 @@ public final class SetDefaultShippingAddress extends UpdateActionImpl<Customer> 
         this.addressKey = addressKey;
     }
 
-    public static SetDefaultShippingAddress of(@Nullable final String addressKey) {
+    public static SetDefaultShippingAddress ofKey(@Nullable final String addressKey) {
         return new SetDefaultShippingAddress(null, addressKey);
     }
 
@@ -38,10 +39,14 @@ public final class SetDefaultShippingAddress extends UpdateActionImpl<Customer> 
     }
 
     public static SetDefaultShippingAddress ofAddress(final Address address) {
-        if (address.getId() == null) {
-            throw new IllegalArgumentException(format("The address %s should have an id.", address));
+        if (address.getId() == null && address.getKey() == null) {
+            throw new IllegalArgumentException(format("The address %s should have an id and key.", address));
         }
-        return of(address.getId(), address.getKey());
+        if (address.getId() != null) {
+            return of(address.getId());
+        } else {
+            return ofKey(address.getKey());
+        }
     }
 
     @Nullable
