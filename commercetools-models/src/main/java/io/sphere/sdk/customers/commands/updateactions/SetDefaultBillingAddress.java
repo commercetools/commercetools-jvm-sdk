@@ -18,25 +18,40 @@ import static java.lang.String.format;
  */
 public final class SetDefaultBillingAddress extends UpdateActionImpl<Customer> {
     private final String addressId;
+    private final String addressKey;
 
-    private SetDefaultBillingAddress(@Nullable final String addressId) {
+    private SetDefaultBillingAddress(@Nullable final String addressId, @Nullable final String addressKey) {
         super("setDefaultBillingAddress");
         this.addressId = addressId;
+        this.addressKey = addressKey;
+    }
+
+    public static SetDefaultBillingAddress ofKey(@Nullable final String addressKey) {
+        return new SetDefaultBillingAddress(null, addressKey);
     }
 
     public static SetDefaultBillingAddress of(@Nullable final String addressId) {
-        return new SetDefaultBillingAddress(addressId);
+        return new SetDefaultBillingAddress(addressId, null);
     }
 
     public static SetDefaultBillingAddress ofAddress(final Address address) {
-        if (address.getId() == null) {
-            throw new IllegalArgumentException(format("The address %s should have an id.", address));
+        if (address.getId() == null && address.getKey() == null) {
+            throw new IllegalArgumentException(format("The address %s should have an id or a key.", address));
         }
-        return of(address.getId());
+        if (address.getId() != null) {
+            return of(address.getId());
+        } else {
+            return ofKey(address.getKey());
+        }
     }
 
     @Nullable
     public String getAddressId() {
         return addressId;
+    }
+
+    @Nullable
+    public String getAddressKey() {
+        return addressKey;
     }
 }
