@@ -6,6 +6,7 @@ import io.sphere.sdk.client.SphereAccessTokenSupplier;
 import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.client.SphereClientConfig;
 import io.sphere.sdk.http.HttpClient;
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.retry.RetryAction;
 import io.sphere.sdk.retry.RetryContext;
 import io.sphere.sdk.retry.RetryPredicate;
@@ -24,7 +25,7 @@ import static java.lang.String.format;
  * To create a Sphere Client with retry logic which computes a exponential backoff time delay in milliseconds.
  * And handle all the configurations for the creation of client.
  */
-public final class RetryableSphereClientWithExponentialBackoff {
+public final class RetryableSphereClientWithExponentialBackoff extends Base {
     protected static final long DEFAULT_MAX_DELAY = 60000;
     protected static final long DEFAULT_INITIAL_RETRY_DELAY = 200;
     protected static final int DEFAULT_MAX_RETRY_ATTEMPT = 5;
