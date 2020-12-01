@@ -89,6 +89,25 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void addLineItemMaxQuantity() throws Exception {
+        withEmptyCartAndProduct(client(), (cart, product) -> {
+            assertThat(cart.getLineItems()).isEmpty();
+            final long quantity = Long.MAX_VALUE;
+            final String productId = product.getId();
+            final AddLineItem action = AddLineItem.of(productId, MASTER_VARIANT_ID, quantity);
+
+            final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, action));
+            assertThat(updatedCart.getLineItems()).hasSize(1);
+            final LineItem lineItem = updatedCart.getLineItems().get(0);
+            assertThat(lineItem.getName()).isEqualTo(product.getMasterData().getStaged().getName());
+            assertThat(lineItem.getQuantity()).isEqualTo(quantity);
+            assertThat(lineItem.getProductSlug()).isEqualTo(product.getMasterData().getStaged().getSlug());
+            assertThat(lineItem.getVariant().getIdentifier()).isEqualTo(ByIdVariantIdentifier.of(lineItem.getProductId(), lineItem.getVariant().getId()));
+            assertThat(lineItem.getDiscountedPricePerQuantity()).isNotNull().isEmpty();
+        });
+    }
+
+    @Test
     public void addLineItemOfDraftOfSku() throws Exception {
         withEmptyCartAndProduct(client(), (cart, product) -> {
             assertThat(cart.getLineItems()).isEmpty();
@@ -784,7 +803,7 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
             CartDraft cartDraft = CartDraft.of(EUR).withStore(store.toResourceIdentifier());
             withCartDraft(client(), cartDraft, cart -> {
                 final String anonymousId = randomString();
-                
+
                 final Cart updatedCart = client().executeBlocking(CartInStoreUpdateCommand.of(store.getKey(), cart, SetAnonymousId.of(anonymousId)));
                 assertThat(updatedCart).isNotNull();
                 assertThat(updatedCart.getAnonymousId()).isEqualTo(anonymousId);
