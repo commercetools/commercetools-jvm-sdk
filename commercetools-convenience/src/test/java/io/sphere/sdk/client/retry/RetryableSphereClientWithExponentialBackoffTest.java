@@ -18,6 +18,7 @@ import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.HttpStatusCode;
 import io.sphere.sdk.models.Versioned;
+import io.sphere.sdk.retry.RetryAction;
 import io.sphere.sdk.retry.RetryContext;
 import org.junit.Test;
 
@@ -231,8 +232,6 @@ public class RetryableSphereClientWithExponentialBackoffTest {
 
     @Test
     public void calculateExponentialRandomBackoff_withRetries_ShouldReturnRandomisedDurations() {
-        final RetryableSphereClientWithExponentialBackoff retryableSphereClientWithExponentialBackoff =
-            of_RetryableSphereClientWithExponentialBackoff();
         long maxDelay = 0;
         for (long failedRetryAttempt = 1; failedRetryAttempt <= 10; failedRetryAttempt++) {
 
@@ -251,7 +250,7 @@ public class RetryableSphereClientWithExponentialBackoffTest {
             Retry 10: 60000 millisecond
             */
             final Duration duration =
-                    retryableSphereClientWithExponentialBackoff.calculateDurationWithExponentialRandomBackoff(
+                RetryAction.calculateDurationWithExponentialRandomBackoff(
                             failedRetryAttempt, DEFAULT_INITIAL_RETRY_DELAY, DEFAULT_MAX_DELAY);
 
             assertThat(duration.toMillis())
