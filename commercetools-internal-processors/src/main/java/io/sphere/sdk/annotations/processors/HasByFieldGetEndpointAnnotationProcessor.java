@@ -39,7 +39,7 @@ public abstract class HasByFieldGetEndpointAnnotationProcessor<A extends Annotat
         map.put("endpointSuffix", endpointSuffix);
         final String fieldName = uncapitalize(removeStart(removeEnd(endpointSuffix, "Get"), "By"));
         map.put("fieldName", fieldName);
-        final String identifier = "key".equals(fieldName) ? ("\"key=\" + key") : fieldName;
+        final String identifier = "key".equals(fieldName) ? ("\"key=\" + urlEncode(key)") : fieldName;
         map.put("identifier", identifier);
         final ResourceInfo resourceInfo = typeElement.getAnnotation(ResourceInfo.class);
         map.put("resourcePluralName", resourceInfo.pluralName());

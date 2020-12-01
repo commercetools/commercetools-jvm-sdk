@@ -19,9 +19,11 @@ import static io.sphere.sdk.products.search.PriceSelectionQueryParameters.getQue
 import static io.sphere.sdk.selection.LocaleSelectionQueryParameters.*;
 import static io.sphere.sdk.selection.StoreSelectionQueryParameters.*;
 
+import static io.sphere.sdk.client.SphereRequestUtils.urlEncode;
+
 final class ProductProjectionByKeyGetImpl extends MetaModelGetDslImpl<ProductProjection, ProductProjection, ProductProjectionByKeyGet, ProductProjectionExpansionModel<ProductProjection>> implements ProductProjectionByKeyGet {
     ProductProjectionByKeyGetImpl(final String key, final ProductProjectionType projectionType) {
-        super(ProductProjectionEndpoint.ENDPOINT, "key=" + key, ProductProjectionExpansionModel.of(), ProductProjectionByKeyGetImpl::new, Collections.singletonList(NameValuePair.of("staged", projectionType.isStaged().toString())));
+        super(ProductProjectionEndpoint.ENDPOINT, "key=" + urlEncode(key), ProductProjectionExpansionModel.of(), ProductProjectionByKeyGetImpl::new, Collections.singletonList(NameValuePair.of("staged", projectionType.isStaged().toString())));
     }
 
     public ProductProjectionByKeyGetImpl(final MetaModelGetDslBuilder<ProductProjection, ProductProjection, ProductProjectionByKeyGet, ProductProjectionExpansionModel<ProductProjection>> builder) {

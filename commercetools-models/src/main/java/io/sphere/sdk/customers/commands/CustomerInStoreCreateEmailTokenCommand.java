@@ -13,6 +13,8 @@ import javax.annotation.Nullable;
 
 import static io.sphere.sdk.http.HttpMethod.POST;
 
+import static io.sphere.sdk.client.SphereRequestUtils.urlEncode;
+
 public final class CustomerInStoreCreateEmailTokenCommand extends CommandImpl<CustomerToken> {
 
     private final String id;
@@ -20,7 +22,7 @@ public final class CustomerInStoreCreateEmailTokenCommand extends CommandImpl<Cu
     private final Long version;
     private final Integer ttlMinutes;
     private final String storeKey;
-    
+
     private CustomerInStoreCreateEmailTokenCommand(final String storeKey, final String id, final Long version, final Integer ttlMinutes) {
         this.id = id;
         this.version = version;
@@ -65,7 +67,7 @@ public final class CustomerInStoreCreateEmailTokenCommand extends CommandImpl<Cu
     public Long getVersion() {
         return version;
     }
-    
+
     @Override
     protected JavaType jacksonJavaType() {
         return SphereJsonUtils.convertToJavaType(CustomerToken.typeReference());
@@ -73,6 +75,6 @@ public final class CustomerInStoreCreateEmailTokenCommand extends CommandImpl<Cu
 
     @Override
     public HttpRequestIntent httpRequestIntent() {
-        return HttpRequestIntent.of(POST, "/in-store/key=" + storeKey + "/customers/email-token", SphereJsonUtils.toJsonString(this));
+        return HttpRequestIntent.of(POST, "/in-store/key=" + urlEncode(storeKey) + "/customers/email-token", SphereJsonUtils.toJsonString(this));
     }
 }
