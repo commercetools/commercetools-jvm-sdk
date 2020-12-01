@@ -11,6 +11,8 @@ import javax.annotation.Nullable;
 
 import static io.sphere.sdk.http.HttpMethod.POST;
 
+import static io.sphere.sdk.client.SphereRequestUtils.urlEncode;
+
 public final class CustomerInStorePasswordResetCommand extends CommandImpl<Customer> {
 
     @Nullable
@@ -28,7 +30,7 @@ public final class CustomerInStorePasswordResetCommand extends CommandImpl<Custo
         this.newPassword = newPassword;
         this.storeKey = storeKey;
     }
-    
+
     /**
      * Creates a command that can set a new password for a customer with a certain token.
      * @param tokenValue value of the token belonging to a customer
@@ -46,7 +48,7 @@ public final class CustomerInStorePasswordResetCommand extends CommandImpl<Custo
 
     @Override
     public HttpRequestIntent httpRequestIntent() {
-        return HttpRequestIntent.of(POST, "/in-store/key=" + storeKey + "/customers/password/reset", SphereJsonUtils.toJsonString(this));
+        return HttpRequestIntent.of(POST, "/in-store/key=" + urlEncode(storeKey) + "/customers/password/reset", SphereJsonUtils.toJsonString(this));
     }
 
     public String getTokenValue() {

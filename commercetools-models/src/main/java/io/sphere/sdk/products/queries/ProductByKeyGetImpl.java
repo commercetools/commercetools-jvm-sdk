@@ -13,9 +13,11 @@ import java.util.List;
 import static io.sphere.sdk.products.search.PriceSelectionQueryParameters.extractPriceSelectionFromHttpQueryParameters;
 import static io.sphere.sdk.products.search.PriceSelectionQueryParameters.getQueryParametersWithPriceSelection;
 
+import static io.sphere.sdk.client.SphereRequestUtils.urlEncode;
+
 final class ProductByKeyGetImpl extends MetaModelGetDslImpl<Product, Product, ProductByKeyGet, ProductExpansionModel<Product>> implements ProductByKeyGet {
     ProductByKeyGetImpl(final String key) {
-        super("key=" + key, ProductEndpoint.ENDPOINT, ProductExpansionModel.of(), ProductByKeyGetImpl::new);
+        super("key=" + urlEncode(key), ProductEndpoint.ENDPOINT, ProductExpansionModel.of(), ProductByKeyGetImpl::new);
     }
 
     public ProductByKeyGetImpl(final MetaModelGetDslBuilder<Product, Product, ProductByKeyGet, ProductExpansionModel<Product>> builder) {

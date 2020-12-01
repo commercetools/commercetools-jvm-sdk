@@ -7,6 +7,8 @@ import io.sphere.sdk.customers.CustomerDraft;
 import io.sphere.sdk.customers.CustomerSignInResult;
 import io.sphere.sdk.customers.expansion.CustomerSignInResultExpansionModel;
 
+import static io.sphere.sdk.client.SphereRequestUtils.urlEncode;
+
 final class CustomerInStoreCreateCommandImpl extends MetaModelCreateCommandImpl<CustomerSignInResult, CustomerInStoreCreateCommand, CustomerDraft, CustomerSignInResultExpansionModel<CustomerSignInResult>> implements CustomerInStoreCreateCommand {
 
     CustomerInStoreCreateCommandImpl(final MetaModelCreateCommandBuilder<CustomerSignInResult, CustomerInStoreCreateCommand, CustomerDraft, CustomerSignInResultExpansionModel<CustomerSignInResult>> builder) {
@@ -14,7 +16,7 @@ final class CustomerInStoreCreateCommandImpl extends MetaModelCreateCommandImpl<
     }
 
     CustomerInStoreCreateCommandImpl(final String storeKey, final CustomerDraft body) {
-        super(body, JsonEndpoint.of(CustomerSignInResult.typeReference(), "/in-store/key=" + storeKey + "/customers"), CustomerSignInResultExpansionModel.of(), CustomerInStoreCreateCommandImpl::new);
+        super(body, JsonEndpoint.of(CustomerSignInResult.typeReference(), "/in-store/key=" + urlEncode(storeKey) + "/customers"), CustomerSignInResultExpansionModel.of(), CustomerInStoreCreateCommandImpl::new);
     }
 
     @Override

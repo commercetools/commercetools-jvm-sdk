@@ -7,6 +7,8 @@ import io.sphere.sdk.http.UriTemplate;
 import io.sphere.sdk.queries.MetaModelGetDslBuilder;
 import io.sphere.sdk.queries.MetaModelGetDslImpl;
 
+import static io.sphere.sdk.client.SphereRequestUtils.urlEncode;
+
 final class CustomerInStoreByEmailTokenGetImpl extends MetaModelGetDslImpl<Customer, Customer, CustomerInStoreByEmailTokenGet, CustomerExpansionModel<Customer>> implements CustomerInStoreByEmailTokenGet {
 
     static final UriTemplate GET_BY_EMAIL_TOKEN = UriTemplate.of("/customers/email-token={token}");
@@ -16,12 +18,12 @@ final class CustomerInStoreByEmailTokenGetImpl extends MetaModelGetDslImpl<Custo
     }
 
     private static JsonEndpoint<Customer> buildEndpoint(final String storeKey, final String token) {
-        final String endpoint = "/in-store/key=" + storeKey + "/customers/email-token=" + token;
+        final String endpoint = "/in-store/key=" + urlEncode(storeKey) + "/customers/email-token=" + token;
         return JsonEndpoint.of(Customer.typeReference(), endpoint);
     }
 
     public CustomerInStoreByEmailTokenGetImpl(final MetaModelGetDslBuilder<Customer, Customer, CustomerInStoreByEmailTokenGet, CustomerExpansionModel<Customer>> builder) {
         super(builder);
     }
-    
+
 }

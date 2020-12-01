@@ -7,6 +7,8 @@ import {{package}}.{{resourceName}};
 import {{package}}.expansion.{{resourceName}}ExpansionModel;
 import io.sphere.sdk.client.JsonEndpoint;
 
+import static io.sphere.sdk.client.SphereRequestUtils.urlEncode;
+
 final class {{resourceName}}{{endpointSuffix}}Impl extends MetaModelGetDslImpl<{{resourceName}}, {{resourceName}}, {{resourceName}}{{endpointSuffix}}, {{resourceName}}ExpansionModel<{{resourceName}}>> implements {{resourceName}}{{endpointSuffix}} {
     {{resourceName}}{{endpointSuffix}}Impl(final String {{fieldName}}) {
         super({{{identifier}}}, JsonEndpoint.of({{resourceName}}.typeReference(), "/{{pathElement}}"), {{resourceName}}ExpansionModel.of(), {{resourceName}}{{endpointSuffix}}Impl::new);

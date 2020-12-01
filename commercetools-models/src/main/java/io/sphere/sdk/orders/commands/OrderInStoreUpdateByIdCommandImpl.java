@@ -10,14 +10,16 @@ import io.sphere.sdk.orders.expansion.OrderExpansionModel;
 
 import java.util.List;
 
+import static io.sphere.sdk.client.SphereRequestUtils.urlEncode;
+
 final class OrderInStoreUpdateByIdCommandImpl extends MetaModelUpdateCommandDslImpl<Order, OrderInStoreUpdateByIdCommand, OrderExpansionModel<Order>> implements OrderInStoreUpdateByIdCommand {
 
     OrderInStoreUpdateByIdCommandImpl(final String storeKey, final Versioned<Order> versioned, final List<? extends UpdateAction<Order>> updateActions) {
-        super(versioned, updateActions, JsonEndpoint.of(Order.typeReference(), "/in-store/key=" + storeKey + "/orders"), OrderInStoreUpdateByIdCommandImpl::new, OrderExpansionModel.of());
+        super(versioned, updateActions, JsonEndpoint.of(Order.typeReference(), "/in-store/key=" + urlEncode(storeKey) + "/orders"), OrderInStoreUpdateByIdCommandImpl::new, OrderExpansionModel.of());
     }
 
     OrderInStoreUpdateByIdCommandImpl(final MetaModelUpdateCommandDslBuilder<Order, OrderInStoreUpdateByIdCommand, OrderExpansionModel<Order>> builder) {
         super(builder);
     }
-    
+
 }

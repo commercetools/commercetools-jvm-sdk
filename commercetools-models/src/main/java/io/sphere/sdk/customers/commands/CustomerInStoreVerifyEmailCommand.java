@@ -11,6 +11,8 @@ import javax.annotation.Nullable;
 
 import static io.sphere.sdk.http.HttpMethod.POST;
 
+import static io.sphere.sdk.client.SphereRequestUtils.urlEncode;
+
 public final class CustomerInStoreVerifyEmailCommand extends CommandImpl<Customer>  {
 
     @Nullable
@@ -34,9 +36,9 @@ public final class CustomerInStoreVerifyEmailCommand extends CommandImpl<Custome
 
     @Override
     public HttpRequestIntent httpRequestIntent() {
-        return HttpRequestIntent.of(POST, "/in-store/key=" + storeKey + "/customers/email/confirm", SphereJsonUtils.toJsonString(this));
+        return HttpRequestIntent.of(POST, "/in-store/key=" + urlEncode(storeKey) + "/customers/email/confirm", SphereJsonUtils.toJsonString(this));
     }
-    
+
     /**
      * Creates a command to verify the email of a customer.
      * @param tokenValue the value of the token which customer email address should be confirmed
@@ -54,7 +56,7 @@ public final class CustomerInStoreVerifyEmailCommand extends CommandImpl<Custome
     public static CustomerInStoreVerifyEmailCommand ofCustomerToken(final String storeKey, final CustomerToken customerToken) {
         return ofTokenValue(storeKey, customerToken.getValue());
     }
-    
+
     public String getTokenValue() {
         return tokenValue;
     }
