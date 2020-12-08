@@ -10,6 +10,8 @@ import javax.annotation.Nullable;
 
 import static io.sphere.sdk.http.HttpMethod.POST;
 
+import static io.sphere.sdk.client.SphereRequestUtils.urlEncode;
+
 public final class CustomerInStoreCreatePasswordTokenCommand extends CommandImpl<CustomerToken> {
 
     private final String email;
@@ -39,7 +41,7 @@ public final class CustomerInStoreCreatePasswordTokenCommand extends CommandImpl
 
     @Override
     public HttpRequestIntent httpRequestIntent() {
-        return HttpRequestIntent.of(POST, "/in-store/key=" + storeKey + "/customers/password-token", SphereJsonUtils.toJsonString(this));
+        return HttpRequestIntent.of(POST, "/in-store/key=" + urlEncode(storeKey) + "/customers/password-token", SphereJsonUtils.toJsonString(this));
     }
 
     public String getEmail() {

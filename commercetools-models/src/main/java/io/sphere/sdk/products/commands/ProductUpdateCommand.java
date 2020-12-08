@@ -13,6 +13,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static io.sphere.sdk.client.SphereRequestUtils.urlEncode;
+
 /**
 
  {@doc.gen list actions}
@@ -32,7 +34,7 @@ public interface ProductUpdateCommand extends UpdateCommandDsl<Product, ProductU
     }
 
     static ProductUpdateCommand ofKey(final String key, final Long version, final List<? extends UpdateAction<Product>> updateActions) {
-        final Versioned<Product> versioned = Versioned.of("key=" + key, version);//hack for simple reuse
+        final Versioned<Product> versioned = Versioned.of("key=" + urlEncode(key), version);//hack for simple reuse
         return of(versioned, updateActions);
     }
 

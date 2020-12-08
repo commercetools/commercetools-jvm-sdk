@@ -9,11 +9,12 @@ import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.models.Versioned;
 
 import java.util.List;
+import static io.sphere.sdk.client.SphereRequestUtils.urlEncode;
 
 class CartInStoreUpdateCommandImpl extends MetaModelUpdateCommandDslImpl<Cart, CartInStoreUpdateCommand, CartExpansionModel<Cart>> implements CartInStoreUpdateCommand {
 
     CartInStoreUpdateCommandImpl(final String storeKey, final Versioned<Cart> versioned, final List<? extends UpdateAction<Cart>> updateActions) {
-        super(versioned, updateActions, JsonEndpoint.of(Cart.typeReference(), "/in-store/key=" + storeKey + "/carts"), CartInStoreUpdateCommandImpl::new, CartExpansionModel.of());
+        super(versioned, updateActions, JsonEndpoint.of(Cart.typeReference(), "/in-store/key=" + urlEncode(storeKey) + "/carts"), CartInStoreUpdateCommandImpl::new, CartExpansionModel.of());
     }
 
     CartInStoreUpdateCommandImpl(final MetaModelUpdateCommandDslBuilder<Cart, CartInStoreUpdateCommand, CartExpansionModel<Cart>> builder) {

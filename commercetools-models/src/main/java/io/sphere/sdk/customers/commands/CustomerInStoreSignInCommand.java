@@ -11,6 +11,8 @@ import javax.annotation.Nullable;
 
 import static io.sphere.sdk.http.HttpMethod.POST;
 
+import static io.sphere.sdk.client.SphereRequestUtils.urlEncode;
+
 public final class CustomerInStoreSignInCommand extends CommandImpl<CustomerSignInResult> {
 
     private final String email;
@@ -23,7 +25,7 @@ public final class CustomerInStoreSignInCommand extends CommandImpl<CustomerSign
     private final AnonymousCartSignInMode anonymousCartSignInMode;
     @Nullable
     private final Boolean updateProductData;
-    
+
     private final String storeKey;
 
     private CustomerInStoreSignInCommand(final String storeKey, final String email, final String password, @Nullable final String anonymousCartId, @Nullable final String anonymousId, final AnonymousCartSignInMode anonymousCartSignInMode,
@@ -64,7 +66,7 @@ public final class CustomerInStoreSignInCommand extends CommandImpl<CustomerSign
 
     @Override
     public HttpRequestIntent httpRequestIntent() {
-        return HttpRequestIntent.of(POST, "/in-store/key=" + storeKey + "/login", SphereJsonUtils.toJsonString(this));
+        return HttpRequestIntent.of(POST, "/in-store/key=" + urlEncode(storeKey) + "/login", SphereJsonUtils.toJsonString(this));
     }
 
     public String getEmail() {
@@ -89,5 +91,5 @@ public final class CustomerInStoreSignInCommand extends CommandImpl<CustomerSign
     public AnonymousCartSignInMode getAnonymousCartSignInMode() {
         return anonymousCartSignInMode;
     }
-    
+
 }
