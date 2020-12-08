@@ -33,10 +33,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 
-import static io.sphere.sdk.client.retry.RetryableSphereClientWithExponentialBackoff.DEFAULT_INITIAL_RETRY_DELAY;
-import static io.sphere.sdk.client.retry.RetryableSphereClientWithExponentialBackoff.DEFAULT_MAX_DELAY;
-import static io.sphere.sdk.client.retry.RetryableSphereClientWithExponentialBackoff.DEFAULT_MAX_PARALLEL_REQUESTS;
-import static io.sphere.sdk.client.retry.RetryableSphereClientWithExponentialBackoff.DEFAULT_MAX_RETRY_ATTEMPT;
+import static io.sphere.sdk.client.retry.RetryableSphereClientFactory.DEFAULT_INITIAL_RETRY_DELAY;
+import static io.sphere.sdk.client.retry.RetryableSphereClientFactory.DEFAULT_MAX_DELAY;
+import static io.sphere.sdk.client.retry.RetryableSphereClientFactory.DEFAULT_MAX_PARALLEL_REQUESTS;
+import static io.sphere.sdk.client.retry.RetryableSphereClientFactory.DEFAULT_MAX_RETRY_ATTEMPT;
 import static io.sphere.sdk.http.HttpStatusCode.BAD_GATEWAY_502;
 import static io.sphere.sdk.http.HttpStatusCode.GATEWAY_TIMEOUT_504;
 import static io.sphere.sdk.http.HttpStatusCode.SERVICE_UNAVAILABLE_503;
@@ -45,14 +45,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.mock;
 
-public class RetryableSphereClientWithExponentialBackoffTest {
+public class RetryableSphereClientFactoryTest {
 
     @Test
     public void of_WithClientConfigAndDefaults_ReturnsSphereClient() {
         final SphereClientConfig clientConfig =
                 SphereClientConfig.of("project-key", "client-id", "client-secret");
         final SphereClient sphereClient =
-            RetryableSphereClientWithExponentialBackoff.of(clientConfig, mock(HttpClient.class)).build();
+            RetryableSphereClientFactory.of(clientConfig, mock(HttpClient.class)).build();
 
         assertThat(sphereClient.getConfig().getProjectKey()).isEqualTo("project-key");
     }
@@ -62,7 +62,7 @@ public class RetryableSphereClientWithExponentialBackoffTest {
         final SphereClientConfig clientConfig =
                 SphereClientConfig.of("project-key", "client-id", "client-secret");
 
-        final SphereClient sphereClient = RetryableSphereClientWithExponentialBackoff
+        final SphereClient sphereClient = RetryableSphereClientFactory
                 .of(clientConfig, mock(HttpClient.class))
                 .withMaxDelay(DEFAULT_MAX_DELAY)
                 .withInitialDelay(DEFAULT_INITIAL_RETRY_DELAY)
@@ -79,7 +79,7 @@ public class RetryableSphereClientWithExponentialBackoffTest {
         final SphereClientConfig clientConfig =
             SphereClientConfig.of("project-key", "client-id", "client-secret");
 
-        assertThatThrownBy(() -> RetryableSphereClientWithExponentialBackoff
+        assertThatThrownBy(() -> RetryableSphereClientFactory
             .of(clientConfig, mock(HttpClient.class))
             .withMaxDelay(1)
             .withInitialDelay(2).build())
@@ -91,7 +91,7 @@ public class RetryableSphereClientWithExponentialBackoffTest {
         final SphereClientConfig clientConfig =
             SphereClientConfig.of("project-key", "client-id", "client-secret");
 
-        assertThatThrownBy(() -> RetryableSphereClientWithExponentialBackoff
+        assertThatThrownBy(() -> RetryableSphereClientFactory
             .of(clientConfig, mock(HttpClient.class))
             .withMaxRetryAttempt(-1).build())
             .isInstanceOf(IllegalArgumentException.class);
@@ -102,7 +102,7 @@ public class RetryableSphereClientWithExponentialBackoffTest {
         final SphereClientConfig clientConfig =
             SphereClientConfig.of("project-key", "client-id", "client-secret");
 
-        assertThatThrownBy(() -> RetryableSphereClientWithExponentialBackoff
+        assertThatThrownBy(() -> RetryableSphereClientFactory
             .of(clientConfig, mock(HttpClient.class))
             .withMaxParallelRequests(0).build())
             .isInstanceOf(IllegalArgumentException.class);
@@ -112,13 +112,13 @@ public class RetryableSphereClientWithExponentialBackoffTest {
     public void of_withRetryDecorator_ShouldRetryWhen500HttpResponse() {
         //preparation
         final long maxRetryAttempt = 1L;
-        final Function<RetryContext, Duration> durationFunction = retryContext -> Duration.ofSeconds(1);
+        final RetryAction retryAction = RetryAction.ofExponentialBackoff(maxRetryAttempt, 1000, 1);
 
         final FakeUnderlyingClient fakeUnderlyingClient = FakeUnderlyingClient.of(HttpStatusCode.INTERNAL_SERVER_ERROR_500);
-        final RetryableSphereClientWithExponentialBackoff client = fakeUnderlyingClient.toRetryClient();
+        final RetryableSphereClientFactory client = fakeUnderlyingClient.toRetryClient();
 
         final SphereClient decoratedSphereClient = client.decorateSphereClient(
-            fakeUnderlyingClient.getSphereClient(), maxRetryAttempt, durationFunction, DEFAULT_MAX_PARALLEL_REQUESTS);
+            fakeUnderlyingClient.getSphereClient(), retryAction, DEFAULT_MAX_PARALLEL_REQUESTS);
 
         final CustomerUpdateCommand customerUpdateCommand = getCustomerUpdateCommand();
 
@@ -136,13 +136,13 @@ public class RetryableSphereClientWithExponentialBackoffTest {
     public void of_withRetryDecorator_ShouldRetryWhen502HttpResponse() {
         //preparation
         final long maxRetryAttempt = 1L;
-        final Function<RetryContext, Duration> durationFunction = retryContext -> Duration.ofSeconds(1);
+        final RetryAction retryAction = RetryAction.ofExponentialBackoff(maxRetryAttempt, 1000, 1);
 
         final FakeUnderlyingClient fakeUnderlyingClient = FakeUnderlyingClient.of(BAD_GATEWAY_502);
-        final RetryableSphereClientWithExponentialBackoff client = fakeUnderlyingClient.toRetryClient();
+        final RetryableSphereClientFactory client = fakeUnderlyingClient.toRetryClient();
 
         final SphereClient decoratedSphereClient = client.decorateSphereClient(
-            fakeUnderlyingClient.getSphereClient(), maxRetryAttempt, durationFunction, DEFAULT_MAX_PARALLEL_REQUESTS);
+            fakeUnderlyingClient.getSphereClient(), retryAction, DEFAULT_MAX_PARALLEL_REQUESTS);
 
         final CustomerUpdateCommand customerUpdateCommand = getCustomerUpdateCommand();
 
@@ -161,13 +161,13 @@ public class RetryableSphereClientWithExponentialBackoffTest {
     public void of_withRetryDecorator_ShouldRetryWhen503HttpResponse() {
         //preparation
         final long maxRetryAttempt = 2L;
-        final Function<RetryContext, Duration> durationFunction = retryContext -> Duration.ofSeconds(2);
+        final RetryAction retryAction = RetryAction.ofExponentialBackoff(maxRetryAttempt, 1000, 1);
 
         final FakeUnderlyingClient fakeUnderlyingClient = FakeUnderlyingClient.of(SERVICE_UNAVAILABLE_503);
-        final RetryableSphereClientWithExponentialBackoff client = fakeUnderlyingClient.toRetryClient();
+        final RetryableSphereClientFactory client = fakeUnderlyingClient.toRetryClient();
 
         final SphereClient decoratedSphereClient = client.decorateSphereClient(
-            fakeUnderlyingClient.getSphereClient(), maxRetryAttempt, durationFunction, DEFAULT_MAX_PARALLEL_REQUESTS);
+            fakeUnderlyingClient.getSphereClient(), retryAction, DEFAULT_MAX_PARALLEL_REQUESTS);
 
         final CustomerUpdateCommand customerUpdateCommand = getCustomerUpdateCommand();
 
@@ -185,13 +185,13 @@ public class RetryableSphereClientWithExponentialBackoffTest {
     public void of_withRetryDecorator_ShouldRetryWhen504HttpResponse() {
         //preparation
         final long maxRetryAttempt = 3L;
-        final Function<RetryContext, Duration> durationFunction = retryContext -> Duration.ofSeconds(1);
+        final RetryAction retryAction = RetryAction.ofExponentialBackoff(maxRetryAttempt, 1000, 1);
 
         final FakeUnderlyingClient fakeUnderlyingClient = FakeUnderlyingClient.of(GATEWAY_TIMEOUT_504);
-        final RetryableSphereClientWithExponentialBackoff client = fakeUnderlyingClient.toRetryClient();
+        final RetryableSphereClientFactory client = fakeUnderlyingClient.toRetryClient();
 
         final SphereClient decoratedSphereClient = client.decorateSphereClient(
-            fakeUnderlyingClient.getSphereClient(), maxRetryAttempt, durationFunction, DEFAULT_MAX_PARALLEL_REQUESTS);
+            fakeUnderlyingClient.getSphereClient(), retryAction, DEFAULT_MAX_PARALLEL_REQUESTS);
 
         final CustomerUpdateCommand customerUpdateCommand = getCustomerUpdateCommand();
 
@@ -210,13 +210,13 @@ public class RetryableSphereClientWithExponentialBackoffTest {
     public void of_withRetryDecorator_ShouldNotRetryWhen400HttpResponse() {
         //preparation
         final long maxRetryAttempt = 2L;
-        final Function<RetryContext, Duration> durationFunction = retryContext -> Duration.ofSeconds(2);
+        final RetryAction retryAction = RetryAction.ofExponentialBackoff(maxRetryAttempt, 1000, 1);
 
         final FakeUnderlyingClient fakeUnderlyingClient = FakeUnderlyingClient.of(HttpStatusCode.BAD_REQUEST_400, "{\"statusCode\":\"400\"}");
-        final RetryableSphereClientWithExponentialBackoff client = fakeUnderlyingClient.toRetryClient();
+        final RetryableSphereClientFactory client = fakeUnderlyingClient.toRetryClient();
 
         final SphereClient decoratedSphereClient = client.decorateSphereClient(
-            fakeUnderlyingClient.getSphereClient(), maxRetryAttempt, durationFunction, DEFAULT_MAX_PARALLEL_REQUESTS);
+            fakeUnderlyingClient.getSphereClient(), retryAction, DEFAULT_MAX_PARALLEL_REQUESTS);
 
         final CustomerUpdateCommand customerUpdateCommand = getCustomerUpdateCommand();
 
@@ -259,10 +259,10 @@ public class RetryableSphereClientWithExponentialBackoffTest {
         }
     }
 
-    private RetryableSphereClientWithExponentialBackoff of_RetryableSphereClientWithExponentialBackoff() {
+    private RetryableSphereClientFactory of_RetryableSphereClientWithExponentialBackoff() {
         final SphereClientConfig clientConfig =
             SphereClientConfig.of("project-key", "client-id", "client-secret");
-        return RetryableSphereClientWithExponentialBackoff.of(clientConfig, mock(HttpClient.class));
+        return RetryableSphereClientFactory.of(clientConfig, mock(HttpClient.class));
     }
 
     private CustomerUpdateCommand getCustomerUpdateCommand() {
@@ -310,10 +310,10 @@ public class RetryableSphereClientWithExponentialBackoffTest {
         public void close() {
         }
 
-        private RetryableSphereClientWithExponentialBackoff toRetryClient() {
+        private RetryableSphereClientFactory toRetryClient() {
             final SphereClientConfig clientConfig =
                 SphereClientConfig.of("project-key", "client-id", "client-secret");
-            return RetryableSphereClientWithExponentialBackoff.of(clientConfig, this);
+            return RetryableSphereClientFactory.of(clientConfig, this);
         }
     }
 }

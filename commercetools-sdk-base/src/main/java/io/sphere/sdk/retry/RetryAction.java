@@ -146,6 +146,17 @@ public interface RetryAction extends Function<RetryContext, RetryStrategy> {
     }
 
     /**
+     * Retry in the future with exponential backoff strategy.
+     * @param maxAttempts maximum amount of attempts until giving up and throwing the latest Exception
+     * @param initialRetryDelay initial time to wait before retrying in milliseconds
+     * @param maxDelay maximum time to wait before retrying in milliseconds
+     * @return action
+     */
+    static RetryAction ofExponentialBackoff(final long maxAttempts, final long initialRetryDelay, final long maxDelay) {
+        return ofScheduledRetry(maxAttempts, c -> calculateDurationWithExponentialRandomBackoff(c.getAttempt(), initialRetryDelay, maxDelay));
+    }
+
+    /**
      * Computes a exponential backoff time delay in milliseconds to be used in retries, the delay grows with failed
      * retry attempts count with a randomness interval.
      * (see: <a href="https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter"/>)

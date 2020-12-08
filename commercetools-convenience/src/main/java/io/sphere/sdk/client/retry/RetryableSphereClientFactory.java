@@ -25,7 +25,7 @@ import static java.lang.String.format;
  * To create a Sphere Client with retry logic which computes a exponential backoff time delay in milliseconds.
  * And handle all the configurations for the creation of client.
  */
-public final class RetryableSphereClientWithExponentialBackoff extends Base {
+public final class RetryableSphereClientFactory extends Base {
     protected static final long DEFAULT_MAX_DELAY = 60000;
     protected static final long DEFAULT_INITIAL_RETRY_DELAY = 200;
     protected static final int DEFAULT_MAX_RETRY_ATTEMPT = 5;
@@ -40,9 +40,9 @@ public final class RetryableSphereClientWithExponentialBackoff extends Base {
     private int maxParallelRequests;
     private List<Integer> statusCodesToRetry;
 
-    private RetryableSphereClientWithExponentialBackoff(
-        @Nonnull final SphereClientConfig sphereClientConfig,
-        @Nonnull final HttpClient httpClient) {
+    private RetryableSphereClientFactory(
+            @Nonnull final SphereClientConfig sphereClientConfig,
+            @Nonnull final HttpClient httpClient) {
 
         this.sphereClientConfig = sphereClientConfig;
         this.httpClient = httpClient;
@@ -54,53 +54,56 @@ public final class RetryableSphereClientWithExponentialBackoff extends Base {
     }
 
     /**
-     * Creates a new instance of {@link RetryableSphereClientWithExponentialBackoff} given a {@link SphereClientConfig}
+     * Creates a new instance of {@link RetryableSphereClientFactory} given a {@link SphereClientConfig}
      * responsible for creation of a SphereClient.
      *
      * @param sphereClientConfig the client configuration for the client.
-     * @param httpClient client to execute requests
-     * @return the instantiated {@link RetryableSphereClientWithExponentialBackoff}.
+     * @param httpClient         client to execute requests
+     * @return the instantiated {@link RetryableSphereClientFactory}.
      */
-    public static RetryableSphereClientWithExponentialBackoff of(
-        @Nonnull final SphereClientConfig sphereClientConfig,
-        @Nonnull final HttpClient httpClient) {
+    public static RetryableSphereClientFactory of(
+            @Nonnull final SphereClientConfig sphereClientConfig,
+            @Nonnull final HttpClient httpClient) {
 
-        return new RetryableSphereClientWithExponentialBackoff(sphereClientConfig, httpClient);
+        return new RetryableSphereClientFactory(sphereClientConfig, httpClient);
     }
 
     /**
      * Sets the maxDelay value value in milliseconds.
+     *
      * @param maxDelay - build with maxDelay value.
-     * @return {@link RetryableSphereClientWithExponentialBackoff} with given maxDelay value.
+     * @return {@link RetryableSphereClientFactory} with given maxDelay value.
      */
-    public RetryableSphereClientWithExponentialBackoff withMaxDelay(final long maxDelay) {
+    public RetryableSphereClientFactory withMaxDelay(final long maxDelay) {
         this.maxDelay = maxDelay;
         return this;
     }
 
     /**
      * Sets the initialDelay value in milliseconds.
+     *
      * @param initialDelay - build with initialDelay value.
-     *        If initialDelay is equal or greater than maxDelay then, a {@link IllegalArgumentException} will be thrown.
-     * @return {@link RetryableSphereClientWithExponentialBackoff} with given initialDelay value.
+     *                     If initialDelay is equal or greater than maxDelay then, a {@link IllegalArgumentException} will be thrown.
+     * @return {@link RetryableSphereClientFactory} with given initialDelay value.
      */
-    public RetryableSphereClientWithExponentialBackoff withInitialDelay(final long initialDelay) {
+    public RetryableSphereClientFactory withInitialDelay(final long initialDelay) {
         if (initialDelay < maxDelay) {
             this.initialRetryDelay = initialDelay;
         } else {
             throw new IllegalArgumentException(
-                format("InitialDelay %s is less than MaxDelay %s.", initialDelay, maxDelay));
+                    format("InitialDelay %s is less than MaxDelay %s.", initialDelay, maxDelay));
         }
         return this;
     }
 
     /**
      * Sets the Max Retry value, It should be greater than 1 for the Retry attempt.
+     *
      * @param maxRetryAttempt - build with maxRetries value.
-     *        If maxRetryAttempt is less than 1 then, a {@link IllegalArgumentException} will be thrown.
-     * @return {@link RetryableSphereClientWithExponentialBackoff} with given maxRetries value.
+     *                        If maxRetryAttempt is less than 1 then, a {@link IllegalArgumentException} will be thrown.
+     * @return {@link RetryableSphereClientFactory} with given maxRetries value.
      */
-    public RetryableSphereClientWithExponentialBackoff withMaxRetryAttempt(final int maxRetryAttempt) {
+    public RetryableSphereClientFactory withMaxRetryAttempt(final int maxRetryAttempt) {
         if (maxRetryAttempt > 0) {
             this.maxRetryAttempt = maxRetryAttempt;
         } else {
@@ -111,63 +114,62 @@ public final class RetryableSphereClientWithExponentialBackoff extends Base {
 
     /**
      * Sets the Max Parallel Requests value, It should be always positive number.
+     *
      * @param maxParallelRequests - build with maxParallelRequests value.
-     *        If maxParallelRequests is less than 1 then, a {@link IllegalArgumentException} will be thrown.
-     * @return {@link RetryableSphereClientWithExponentialBackoff} with given maxParallelRequests value.
+     *                            If maxParallelRequests is less than 1 then, a {@link IllegalArgumentException} will be thrown.
+     * @return {@link RetryableSphereClientFactory} with given maxParallelRequests value.
      */
-    public RetryableSphereClientWithExponentialBackoff withMaxParallelRequests(final int maxParallelRequests) {
+    public RetryableSphereClientFactory withMaxParallelRequests(final int maxParallelRequests) {
         if (maxParallelRequests > 0) {
             this.maxParallelRequests = maxParallelRequests;
         } else {
             throw new IllegalArgumentException(
-                format("MaxParallelRequests %s cannot be less than 0", maxParallelRequests));
+                    format("MaxParallelRequests %s cannot be less than 0", maxParallelRequests));
         }
         return this;
     }
 
     /**
      * Sets the Retry Error Status Codes.
+     *
      * @param statusCodesToRetry - build with retryErrorStatusCodes.
-     * @return {@link RetryableSphereClientWithExponentialBackoff} with given retryErrorStatusCodes.
+     * @return {@link RetryableSphereClientFactory} with given retryErrorStatusCodes.
      */
-    public RetryableSphereClientWithExponentialBackoff withStatusCodesToRetry(final List<Integer> statusCodesToRetry) {
+    public RetryableSphereClientFactory withStatusCodesToRetry(final List<Integer> statusCodesToRetry) {
         this.statusCodesToRetry = statusCodesToRetry;
         return this;
     }
 
     /**
      * creates a SphereClient using the class configuration values.
+     *
      * @return the instantiated {@link SphereClient}
      */
     public SphereClient build() {
         final SphereClient underlyingClient = createUnderlyingSphereClient(httpClient, sphereClientConfig);
-        return decorateSphereClient(underlyingClient, maxRetryAttempt,
-            context -> RetryAction.calculateDurationWithExponentialRandomBackoff(context.getAttempt(),
-                        initialRetryDelay, maxDelay), maxParallelRequests);
+        return decorateSphereClient(underlyingClient, RetryAction.ofExponentialBackoff(maxRetryAttempt, initialRetryDelay, maxDelay), maxParallelRequests);
     }
 
     private SphereClient createUnderlyingSphereClient(
-        @Nonnull final HttpClient httpClient,
-        @Nonnull final SphereClientConfig clientConfig) {
+            @Nonnull final HttpClient httpClient,
+            @Nonnull final SphereClientConfig clientConfig) {
         final SphereAccessTokenSupplier tokenSupplier =
                 SphereAccessTokenSupplier.ofAutoRefresh(clientConfig, httpClient, false);
         return SphereClient.of(clientConfig, httpClient, tokenSupplier);
     }
 
-    protected SphereClient decorateSphereClient(@Nonnull final SphereClient underlyingClient,
-                                                final long maxRetryAttempt,
-                                                @Nonnull final Function<RetryContext, Duration> durationFunction,
-                                                final int maxParallelRequests) {
-        final SphereClient retryClient = withRetry(underlyingClient, maxRetryAttempt, durationFunction);
+    protected SphereClient decorateSphereClient(
+            @Nonnull final SphereClient underlyingClient,
+            @Nonnull final RetryAction retryAction,
+            final int maxParallelRequests) {
+        final SphereClient retryClient = withRetry(underlyingClient, retryAction);
         return withLimitedParallelRequests(retryClient, maxParallelRequests);
     }
 
-    private SphereClient withRetry(@Nonnull final SphereClient delegate, long maxRetryAttempt,
-                                   @Nonnull final Function<RetryContext, Duration> durationFunction) {
-        final RetryAction scheduledRetry = RetryAction.ofScheduledRetry(maxRetryAttempt, durationFunction);
+    private SphereClient withRetry(@Nonnull final SphereClient delegate, final RetryAction retryAction) {
         final RetryPredicate http5xxMatcher = RetryPredicate.ofMatchingStatusCodes(
-            errCode -> statusCodesToRetry.stream().anyMatch(i -> i.equals(errCode)));
-        final List<RetryRule> retryRules = Collections.singletonList(RetryRule.of(http5xxMatcher, scheduledRetry));
+                errCode -> statusCodesToRetry.stream().anyMatch(i -> i.equals(errCode)));
+        final List<RetryRule> retryRules = Collections.singletonList(RetryRule.of(http5xxMatcher, retryAction));
         return RetrySphereClientDecorator.of(delegate, retryRules);
     }
 
