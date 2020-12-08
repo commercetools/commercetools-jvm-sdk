@@ -8,16 +8,13 @@ import io.sphere.sdk.client.SphereClientConfig;
 import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.retry.RetryAction;
-import io.sphere.sdk.retry.RetryContext;
 import io.sphere.sdk.retry.RetryPredicate;
 import io.sphere.sdk.retry.RetryRule;
 
 import javax.annotation.Nonnull;
-import java.time.Duration;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Function;
 
 import static java.lang.String.format;
 
@@ -25,7 +22,7 @@ import static java.lang.String.format;
  * To create a Sphere Client with retry logic which computes a exponential backoff time delay in milliseconds.
  * And handle all the configurations for the creation of client.
  */
-public final class RetryableSphereClientFactory extends Base {
+public final class RetryableSphereClientBuilder extends Base {
     protected static final long DEFAULT_MAX_DELAY = 60000;
     protected static final long DEFAULT_INITIAL_RETRY_DELAY = 200;
     protected static final int DEFAULT_MAX_RETRY_ATTEMPT = 5;
@@ -40,7 +37,7 @@ public final class RetryableSphereClientFactory extends Base {
     private int maxParallelRequests;
     private List<Integer> statusCodesToRetry;
 
-    private RetryableSphereClientFactory(
+    private RetryableSphereClientBuilder(
             @Nonnull final SphereClientConfig sphereClientConfig,
             @Nonnull final HttpClient httpClient) {
 
@@ -54,27 +51,27 @@ public final class RetryableSphereClientFactory extends Base {
     }
 
     /**
-     * Creates a new instance of {@link RetryableSphereClientFactory} given a {@link SphereClientConfig}
+     * Creates a new instance of {@link RetryableSphereClientBuilder} given a {@link SphereClientConfig}
      * responsible for creation of a SphereClient.
      *
      * @param sphereClientConfig the client configuration for the client.
      * @param httpClient         client to execute requests
-     * @return the instantiated {@link RetryableSphereClientFactory}.
+     * @return the instantiated {@link RetryableSphereClientBuilder}.
      */
-    public static RetryableSphereClientFactory of(
+    public static RetryableSphereClientBuilder of(
             @Nonnull final SphereClientConfig sphereClientConfig,
             @Nonnull final HttpClient httpClient) {
 
-        return new RetryableSphereClientFactory(sphereClientConfig, httpClient);
+        return new RetryableSphereClientBuilder(sphereClientConfig, httpClient);
     }
 
     /**
      * Sets the maxDelay value value in milliseconds.
      *
      * @param maxDelay - build with maxDelay value.
-     * @return {@link RetryableSphereClientFactory} with given maxDelay value.
+     * @return {@link RetryableSphereClientBuilder} with given maxDelay value.
      */
-    public RetryableSphereClientFactory withMaxDelay(final long maxDelay) {
+    public RetryableSphereClientBuilder withMaxDelay(final long maxDelay) {
         this.maxDelay = maxDelay;
         return this;
     }
@@ -84,9 +81,9 @@ public final class RetryableSphereClientFactory extends Base {
      *
      * @param initialDelay - build with initialDelay value.
      *                     If initialDelay is equal or greater than maxDelay then, a {@link IllegalArgumentException} will be thrown.
-     * @return {@link RetryableSphereClientFactory} with given initialDelay value.
+     * @return {@link RetryableSphereClientBuilder} with given initialDelay value.
      */
-    public RetryableSphereClientFactory withInitialDelay(final long initialDelay) {
+    public RetryableSphereClientBuilder withInitialDelay(final long initialDelay) {
         if (initialDelay < maxDelay) {
             this.initialRetryDelay = initialDelay;
         } else {
@@ -101,9 +98,9 @@ public final class RetryableSphereClientFactory extends Base {
      *
      * @param maxRetryAttempt - build with maxRetries value.
      *                        If maxRetryAttempt is less than 1 then, a {@link IllegalArgumentException} will be thrown.
-     * @return {@link RetryableSphereClientFactory} with given maxRetries value.
+     * @return {@link RetryableSphereClientBuilder} with given maxRetries value.
      */
-    public RetryableSphereClientFactory withMaxRetryAttempt(final int maxRetryAttempt) {
+    public RetryableSphereClientBuilder withMaxRetryAttempt(final int maxRetryAttempt) {
         if (maxRetryAttempt > 0) {
             this.maxRetryAttempt = maxRetryAttempt;
         } else {
@@ -117,9 +114,9 @@ public final class RetryableSphereClientFactory extends Base {
      *
      * @param maxParallelRequests - build with maxParallelRequests value.
      *                            If maxParallelRequests is less than 1 then, a {@link IllegalArgumentException} will be thrown.
-     * @return {@link RetryableSphereClientFactory} with given maxParallelRequests value.
+     * @return {@link RetryableSphereClientBuilder} with given maxParallelRequests value.
      */
-    public RetryableSphereClientFactory withMaxParallelRequests(final int maxParallelRequests) {
+    public RetryableSphereClientBuilder withMaxParallelRequests(final int maxParallelRequests) {
         if (maxParallelRequests > 0) {
             this.maxParallelRequests = maxParallelRequests;
         } else {
@@ -133,9 +130,9 @@ public final class RetryableSphereClientFactory extends Base {
      * Sets the Retry Error Status Codes.
      *
      * @param statusCodesToRetry - build with retryErrorStatusCodes.
-     * @return {@link RetryableSphereClientFactory} with given retryErrorStatusCodes.
+     * @return {@link RetryableSphereClientBuilder} with given retryErrorStatusCodes.
      */
-    public RetryableSphereClientFactory withStatusCodesToRetry(final List<Integer> statusCodesToRetry) {
+    public RetryableSphereClientBuilder withStatusCodesToRetry(final List<Integer> statusCodesToRetry) {
         this.statusCodesToRetry = statusCodesToRetry;
         return this;
     }
