@@ -158,6 +158,10 @@ import java.util.function.Function;
  </ul>
  -->
  -->
+ <h3 class=released-version id="v1_56_0">1.56.0 (18.12.2020)</h3>
+ <ul>
+ <li class=fixed-in-release>Support customer address by key selection for {@link AddShippingAddressId}, {@link io.sphere.sdk.customers.commands.updateactions.AddBillingAddressId}, {@link io.sphere.sdk.customers.commands.updateactions.RemoveBillingAddressId} and {@link io.sphere.sdk.customers.commands.updateactions.RemoveShippingAddressId}</li>
+ </ul>
  <h3 class=released-version id="v1_55_0">1.55.0 (01.12.2020)</h3>
  <ul>
  <li class=fixed-in-release>Support customer address by key selection for updates</li>
