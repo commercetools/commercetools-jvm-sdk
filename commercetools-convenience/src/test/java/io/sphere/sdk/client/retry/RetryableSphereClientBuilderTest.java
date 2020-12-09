@@ -40,8 +40,7 @@ import static io.sphere.sdk.http.HttpStatusCode.BAD_GATEWAY_502;
 import static io.sphere.sdk.http.HttpStatusCode.GATEWAY_TIMEOUT_504;
 import static io.sphere.sdk.http.HttpStatusCode.SERVICE_UNAVAILABLE_503;
 import static java.util.Collections.singletonList;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
 public class RetryableSphereClientBuilderTest {
@@ -121,11 +120,10 @@ public class RetryableSphereClientBuilderTest {
 
         final CustomerUpdateCommand customerUpdateCommand = getCustomerUpdateCommand();
 
-//        assertThat(decoratedSphereClient.execute(customerUpdateCommand))
-//                .failsWithin(2, TimeUnit.SECONDS) // first retry will be in 1 second, see: durationFunction.
-//                .withThrowableOfType(ExecutionException.class)
-//                .withCauseExactlyInstanceOf(InternalServerErrorException.class)
-//                .withMessageContaining("500");
+        assertThatThrownBy(() -> decoratedSphereClient.execute(customerUpdateCommand))
+                .isInstanceOf(ExecutionException.class)
+                .hasCauseExactlyInstanceOf(InternalServerErrorException.class)
+                .hasMessageContaining("500");
 
         // first request + retry.
         assertThat(fakeUnderlyingClient.getRetryCount()).isEqualTo(2);
@@ -146,11 +144,10 @@ public class RetryableSphereClientBuilderTest {
         final CustomerUpdateCommand customerUpdateCommand = getCustomerUpdateCommand();
 
 
-//        assertThat(decoratedSphereClient.execute(customerUpdateCommand))
-//            .failsWithin(2, TimeUnit.SECONDS) // first retry will be in 1 second, see: durationFunction.
-//            .withThrowableOfType(ExecutionException.class)
-//            .withCauseExactlyInstanceOf(BadGatewayException.class)
-//            .withMessageContaining("502");
+        assertThatThrownBy(() -> decoratedSphereClient.execute(customerUpdateCommand))
+                .isInstanceOf(ExecutionException.class)
+                .hasCauseExactlyInstanceOf(BadGatewayException.class)
+                .hasMessageContaining("502");
 
         // first request + retry.
         assertThat(fakeUnderlyingClient.getRetryCount()).isEqualTo(2);
@@ -171,11 +168,11 @@ public class RetryableSphereClientBuilderTest {
         final CustomerUpdateCommand customerUpdateCommand = getCustomerUpdateCommand();
 
         // test and assert
-//        assertThat(decoratedSphereClient.execute(customerUpdateCommand))
-//            .failsWithin(5, TimeUnit.SECONDS) // first retry will be in 2 second, see: durationFunction.
-//            .withThrowableOfType(ExecutionException.class)
-//            .withCauseExactlyInstanceOf(ServiceUnavailableException.class)
-//            .withMessageContaining("503");
+        assertThatThrownBy(() -> decoratedSphereClient.execute(customerUpdateCommand))
+                .isInstanceOf(ExecutionException.class)
+                .hasCauseExactlyInstanceOf(ServiceUnavailableException.class)
+                .hasMessageContaining("503");
+
         // first request + retries
         assertThat(fakeUnderlyingClient.getRetryCount()).isEqualTo(3);
     }
@@ -195,11 +192,10 @@ public class RetryableSphereClientBuilderTest {
         final CustomerUpdateCommand customerUpdateCommand = getCustomerUpdateCommand();
 
         // test and assert
-//        assertThat(decoratedSphereClient.execute(customerUpdateCommand))
-//            .failsWithin(4, TimeUnit.SECONDS)
-//            .withThrowableOfType(ExecutionException.class)
-//            .withCauseExactlyInstanceOf(GatewayTimeoutException.class)
-//            .withMessageContaining("504");
+        assertThatThrownBy(() -> decoratedSphereClient.execute(customerUpdateCommand))
+            .isInstanceOf(ExecutionException.class)
+            .hasCauseExactlyInstanceOf(GatewayTimeoutException.class)
+            .hasMessageContaining("504");
 
         // first request + retries
         assertThat(fakeUnderlyingClient.getRetryCount()).isEqualTo(4);
@@ -219,11 +215,10 @@ public class RetryableSphereClientBuilderTest {
 
         final CustomerUpdateCommand customerUpdateCommand = getCustomerUpdateCommand();
 
-//        assertThat(decoratedSphereClient.execute(customerUpdateCommand))
-//            .failsWithin(1, TimeUnit.SECONDS)
-//            .withThrowableOfType(ExecutionException.class)
-//            .withCauseExactlyInstanceOf(ErrorResponseException.class)
-//            .withMessageContaining("400");
+        assertThatThrownBy(() -> decoratedSphereClient.execute(customerUpdateCommand))
+            .isInstanceOf(ExecutionException.class)
+            .hasCauseExactlyInstanceOf(ErrorResponseException.class)
+            .hasMessageContaining("400");
 
         // No retry, only first request.
         assertThat(fakeUnderlyingClient.getRetryCount()).isEqualTo(1);
