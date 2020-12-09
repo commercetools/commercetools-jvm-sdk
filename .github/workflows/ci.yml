@@ -1,0 +1,29 @@
+on:
+  - workflow_dispatch
+#  - pull_request
+#  - push
+
+name: CI
+
+jobs:
+
+  integrationTest:
+    name: "Integration tests"
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v2
+
+      - name: "Setup java"
+        uses: actions/setup-java@v1
+        with:
+          java-version: '8'
+
+      - run:
+          mvn clean install  javadoc:aggregate -DskipTests
+          && mvn exec:java -pl commercetools-internal-docs -Dexec.mainClass="introspection.rules.RulesMain" -Dexec.classpathScope="test"
+          && mvn exec:java -pl commercetools-models -Dexec.mainClass="io.sphere.sdk.client.MainMethodThreadLeakTest" -Dexec.classpathScope="test"
+          && mvn test verify -pl commercetools-convenience,commercetools-internal-docs,commercetools-internal-processors,commercetools-java-client-ahc-1_8,commercetools-java-client-ahc-1_9,commercetools-java-client-ahc-2_0
+          && mvn test verify -pl osgi-support/sdk-osgi-test-campaign/ -Dtest=OSGiTestSuite
