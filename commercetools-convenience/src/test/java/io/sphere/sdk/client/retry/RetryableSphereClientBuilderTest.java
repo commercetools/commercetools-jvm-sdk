@@ -120,7 +120,7 @@ public class RetryableSphereClientBuilderTest {
 
         final CustomerUpdateCommand customerUpdateCommand = getCustomerUpdateCommand();
 
-        assertThatThrownBy(() -> decoratedSphereClient.execute(customerUpdateCommand))
+        assertThatThrownBy(() -> decoratedSphereClient.execute(customerUpdateCommand).toCompletableFuture().get())
                 .isInstanceOf(ExecutionException.class)
                 .hasCauseExactlyInstanceOf(InternalServerErrorException.class)
                 .hasMessageContaining("500");
@@ -144,7 +144,7 @@ public class RetryableSphereClientBuilderTest {
         final CustomerUpdateCommand customerUpdateCommand = getCustomerUpdateCommand();
 
 
-        assertThatThrownBy(() -> decoratedSphereClient.execute(customerUpdateCommand))
+        assertThatThrownBy(() -> decoratedSphereClient.execute(customerUpdateCommand).toCompletableFuture().get())
                 .isInstanceOf(ExecutionException.class)
                 .hasCauseExactlyInstanceOf(BadGatewayException.class)
                 .hasMessageContaining("502");
@@ -168,7 +168,7 @@ public class RetryableSphereClientBuilderTest {
         final CustomerUpdateCommand customerUpdateCommand = getCustomerUpdateCommand();
 
         // test and assert
-        assertThatThrownBy(() -> decoratedSphereClient.execute(customerUpdateCommand))
+        assertThatThrownBy(() -> decoratedSphereClient.execute(customerUpdateCommand).toCompletableFuture().get())
                 .isInstanceOf(ExecutionException.class)
                 .hasCauseExactlyInstanceOf(ServiceUnavailableException.class)
                 .hasMessageContaining("503");
@@ -192,7 +192,7 @@ public class RetryableSphereClientBuilderTest {
         final CustomerUpdateCommand customerUpdateCommand = getCustomerUpdateCommand();
 
         // test and assert
-        assertThatThrownBy(() -> decoratedSphereClient.execute(customerUpdateCommand))
+        assertThatThrownBy(() -> decoratedSphereClient.execute(customerUpdateCommand).toCompletableFuture().get())
             .isInstanceOf(ExecutionException.class)
             .hasCauseExactlyInstanceOf(GatewayTimeoutException.class)
             .hasMessageContaining("504");
@@ -215,7 +215,7 @@ public class RetryableSphereClientBuilderTest {
 
         final CustomerUpdateCommand customerUpdateCommand = getCustomerUpdateCommand();
 
-        assertThatThrownBy(() -> decoratedSphereClient.execute(customerUpdateCommand))
+        assertThatThrownBy(() -> decoratedSphereClient.execute(customerUpdateCommand).toCompletableFuture().get())
             .isInstanceOf(ExecutionException.class)
             .hasCauseExactlyInstanceOf(ErrorResponseException.class)
             .hasMessageContaining("400");
