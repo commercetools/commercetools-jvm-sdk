@@ -35,3 +35,8 @@ jobs:
           && mvn exec:java -pl commercetools-models -Dexec.mainClass="io.sphere.sdk.client.MainMethodThreadLeakTest" -Dexec.classpathScope="test"
           && mvn test verify -pl commercetools-convenience,commercetools-internal-docs,commercetools-internal-processors,commercetools-java-client-ahc-1_8,commercetools-java-client-ahc-1_9,commercetools-java-client-ahc-2_0
           && mvn test verify -pl osgi-support/sdk-osgi-test-campaign/ -Dtest=OSGiTestSuite
+        env:
+          JVM_SDK_IT_CLIENT_ID: ${{ secrets.JVM_SDK_IT_CLIENT_ID }}
+          JVM_SDK_IT_CLIENT_SECRET: ${{ secrets.JVM_SDK_IT_CLIENT_SECRET }}
+          JVM_SDK_IT_PROJECT_KEY: ${{ secrets.JVM_SDK_IT_PROJECT_KEY }}
+          JVM_SDK_IT_SCOPES: ${{ secrets.JVM_SDK_IT_SCOPES }}
