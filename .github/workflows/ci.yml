@@ -1,7 +1,7 @@
 on:
   - workflow_dispatch
 #  - pull_request
-#  - push
+  - push
 
 name: CI
 
@@ -15,6 +15,14 @@ jobs:
     steps:
       - name: "Checkout"
         uses: actions/checkout@v2
+
+      - name: "Cache maven repository"
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
 
       - name: "Setup java"
         uses: actions/setup-java@v1
