@@ -1,7 +1,7 @@
 on:
   - workflow_dispatch
 #  - pull_request
-#  - push
+  - push
 
 name: CI
 
@@ -12,18 +12,39 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      JVM_SDK_IT_CLIENT_ID: ${{ secrets.JVM_SDK_IT_CLIENT_ID }}
+      JVM_SDK_IT_CLIENT_SECRET: ${{ secrets.JVM_SDK_IT_CLIENT_SECRET }}
+      JVM_SDK_IT_PROJECT_KEY: ${{ secrets.JVM_SDK_IT_PROJECT_KEY }}
+      JVM_SDK_IT_SCOPES: ${{ secrets.JVM_SDK_IT_SCOPES }}
+      JVM_SDK_IT_AUTH_URL: ${{ secrets.JVM_SDK_IT_AUTH_URL }}
+      JVM_SDK_IT_API_URL: ${{ secrets.JVM_SDK_IT_API_URL }}
+      JVM_SDK_IT_OAUTH_CLIENT_ID: ${{ secrets.JVM_SDK_IT_CLIENT_ID }}
+      JVM_SDK_IT_OAUTH_CLIENT_SECRET: ${{ secrets.JVM_SDK_IT_CLIENT_SECRET }}
+      JVM_SDK_IT_OAUTH_PROJECT_KEY: ${{ secrets.JVM_SDK_IT_PROJECT_KEY }}
+      JVM_SDK_IT_OAUTH_SCOPES: ${{ secrets.JVM_SDK_IT_SCOPES }}
+      JVM_SDK_IT_OAUTH_AUTH_URL: ${{ secrets.JVM_SDK_IT_AUTH_URL }}
+      JVM_SDK_IT_OAUTH_API_URL: ${{ secrets.JVM_SDK_IT_API_URL }}
+
     steps:
       - name: "Checkout"
         uses: actions/checkout@v2
+
+      - name: "Cache maven repository"
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
 
       - name: "Setup java"
         uses: actions/setup-java@v1
         with:
           java-version: '8'
 
-      - run:
-          mvn clean install  javadoc:aggregate -DskipTests
-          && mvn exec:java -pl commercetools-internal-docs -Dexec.mainClass="introspection.rules.RulesMain" -Dexec.classpathScope="test"
-          && mvn exec:java -pl commercetools-models -Dexec.mainClass="io.sphere.sdk.client.MainMethodThreadLeakTest" -Dexec.classpathScope="test"
-          && mvn test verify -pl commercetools-convenience,commercetools-internal-docs,commercetools-internal-processors,commercetools-java-client-ahc-1_8,commercetools-java-client-ahc-1_9,commercetools-java-client-ahc-2_0
-          && mvn test verify -pl osgi-support/sdk-osgi-test-campaign/ -Dtest=OSGiTestSuite
+      - run: mvn -Pbintray,javadoc-jdk-8u121 clean install javadoc:aggregate -DskipTests
+      - run: mvn exec:java -pl commercetools-internal-docs -Dexec.mainClass="introspection.rules.RulesMain" -Dexec.classpathScope="test"
+      - run: mvn exec:java -pl commercetools-models -Dexec.mainClass="io.sphere.sdk.client.MainMethodThreadLeakTest" -Dexec.classpathScope="test"
+      - run: mvn test verify -pl commercetools-convenience,commercetools-internal-docs,commercetools-internal-processors,commercetools-java-client-ahc-1_8,commercetools-java-client-ahc-1_9,commercetools-java-client-ahc-2_0
+      - run: mvn test verify -pl osgi-support/sdk-osgi-test-campaign/ -Dtest=OSGiTestSuite
