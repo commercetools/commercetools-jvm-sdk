@@ -43,3 +43,38 @@ jobs:
           JVM_SDK_IT_OAUTH_CLIENT_ID: ${{ secrets.JVM_SDK_IT_CLIENT_ID }}
           JVM_SDK_IT_OAUTH_CLIENT_SECRET: ${{ secrets.JVM_SDK_IT_CLIENT_SECRET }}
           JVM_SDK_IT_OAUTH_PROJECT_KEY: ${{ secrets.JVM_SDK_IT_PROJECT_KEY }}
+  osgiTest:
+    name: "OSGI tests"
+
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    needs:
+      - integrationTest
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v2
+
+      - name: "Cache maven repository"
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: "Setup java"
+        uses: actions/setup-java@v1
+        with:
+          java-version: '8'
+
+      - run:
+          mvn -Pbintray,javadoc-jdk-8u121 clean install javadoc:aggregate -DskipTests
+          && mvn test verify -pl osgi-support/sdk-osgi-test-campaign/ -Dtest=OSGiTestSuite
+        env:
+          JVM_SDK_IT_CLIENT_ID: ${{ secrets.JVM_SDK_IT_CLIENT_ID }}
+          JVM_SDK_IT_CLIENT_SECRET: ${{ secrets.JVM_SDK_IT_CLIENT_SECRET }}
+          JVM_SDK_IT_PROJECT_KEY: ${{ secrets.JVM_SDK_IT_PROJECT_KEY }}
+          JVM_SDK_IT_SCOPES: ${{ secrets.JVM_SDK_IT_SCOPES }}
+          JVM_SDK_IT_OAUTH_CLIENT_ID: ${{ secrets.JVM_SDK_IT_CLIENT_ID }}
+          JVM_SDK_IT_OAUTH_CLIENT_SECRET: ${{ secrets.JVM_SDK_IT_CLIENT_SECRET }}
+          JVM_SDK_IT_OAUTH_PROJECT_KEY: ${{ secrets.JVM_SDK_IT_PROJECT_KEY }}
