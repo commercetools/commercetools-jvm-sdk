@@ -300,30 +300,30 @@
                         </additionalparam>
                         <taglets>
                             <!-- see https://github.com/commercetools/commercetools-taglets -->
-<!--                            <taglet>-->
-<!--                                <tagletClass>com.commercetools.sdk.jvm.taglets.DocumentationTaglet</tagletClass>-->
-<!--                                <tagletArtifact>-->
-<!--                                    <groupId>com.commercetools.build.taglets</groupId>-->
-<!--                                    <artifactId>commercetools-taglets</artifactId>-->
-<!--                                    <version>${commercetools-taglets.version}</version>-->
-<!--                                </tagletArtifact>-->
-<!--                            </taglet>-->
-<!--                            <taglet>-->
-<!--                                <tagletClass>com.commercetools.sdk.jvm.taglets.CodeTaglet</tagletClass>-->
-<!--                                <tagletArtifact>-->
-<!--                                    <groupId>com.commercetools.build.taglets</groupId>-->
-<!--                                    <artifactId>commercetools-taglets</artifactId>-->
-<!--                                    <version>${commercetools-taglets.version}</version>-->
-<!--                                </tagletArtifact>-->
-<!--                            </taglet>-->
-<!--                            <taglet>-->
-<!--                                <tagletClass>com.commercetools.build.taglets.FileIncludeTaglet</tagletClass>-->
-<!--                                <tagletArtifact>-->
-<!--                                    <groupId>com.commercetools.build.taglets</groupId>-->
-<!--                                    <artifactId>commercetools-taglets</artifactId>-->
-<!--                                    <version>${commercetools-taglets.version}</version>-->
-<!--                                </tagletArtifact>-->
-<!--                            </taglet>-->
+                            <taglet>
+                                <tagletClass>com.commercetools.sdk.jvm.taglets.DocumentationTaglet</tagletClass>
+                                <tagletArtifact>
+                                    <groupId>com.commercetools.build.taglets</groupId>
+                                    <artifactId>commercetools-taglets</artifactId>
+                                    <version>${commercetools-taglets.version}</version>
+                                </tagletArtifact>
+                            </taglet>
+                            <taglet>
+                                <tagletClass>com.commercetools.sdk.jvm.taglets.CodeTaglet</tagletClass>
+                                <tagletArtifact>
+                                    <groupId>com.commercetools.build.taglets</groupId>
+                                    <artifactId>commercetools-taglets</artifactId>
+                                    <version>${commercetools-taglets.version}</version>
+                                </tagletArtifact>
+                            </taglet>
+                            <taglet>
+                                <tagletClass>com.commercetools.build.taglets.FileIncludeTaglet</tagletClass>
+                                <tagletArtifact>
+                                    <groupId>com.commercetools.build.taglets</groupId>
+                                    <artifactId>commercetools-taglets</artifactId>
+                                    <version>${commercetools-taglets.version}</version>
+                                </tagletArtifact>
+                            </taglet>
                         </taglets>
                         <excludedocfilessubdir>
                             commercetools-internal-docs:commercetools-java-client-internal-test:commercetools-test-lib
