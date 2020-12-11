@@ -27,6 +27,12 @@
             <groupId>org.javamoney</groupId>
             <artifactId>moneta</artifactId>
             <version>${moneta.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.money</groupId>
+                    <artifactId>money-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>javax.money</groupId>
