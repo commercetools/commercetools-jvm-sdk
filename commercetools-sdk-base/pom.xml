@@ -24,13 +24,8 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>javax.money</groupId>
-            <artifactId>money-api</artifactId>
-            <version>${money-api.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.javamoney</groupId>
-            <artifactId>moneta</artifactId>
+            <groupId>org.javamoney.moneta</groupId>
+            <artifactId>moneta-core</artifactId>
             <version>${moneta.version}</version>
         </dependency>
         <dependency>
