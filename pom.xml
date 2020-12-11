@@ -117,8 +117,8 @@
         <maven-source-plugin.version>3.0.0</maven-source-plugin.version>
         <maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
         <mockito.version>2.9.0</mockito.version>
-        <money-api.version>1.0.3</money-api.version>
-        <moneta.version>1.2.1</moneta.version>
+        <money-api.version>1.0.1</money-api.version>
+        <moneta.version>1.1</moneta.version>
         <netty.version>4.0.54.Final</netty.version>
         <nexus-staging-maven-plugin.version>1.6.6</nexus-staging-maven-plugin.version>
         <nv-i18n.version>1.18</nv-i18n.version>
@@ -300,30 +300,30 @@
                         </additionalparam>
                         <taglets>
                             <!-- see https://github.com/commercetools/commercetools-taglets -->
-                            <taglet>
-                                <tagletClass>com.commercetools.sdk.jvm.taglets.DocumentationTaglet</tagletClass>
-                                <tagletArtifact>
-                                    <groupId>com.commercetools.build.taglets</groupId>
-                                    <artifactId>commercetools-taglets</artifactId>
-                                    <version>${commercetools-taglets.version}</version>
-                                </tagletArtifact>
-                            </taglet>
-                            <taglet>
-                                <tagletClass>com.commercetools.sdk.jvm.taglets.CodeTaglet</tagletClass>
-                                <tagletArtifact>
-                                    <groupId>com.commercetools.build.taglets</groupId>
-                                    <artifactId>commercetools-taglets</artifactId>
-                                    <version>${commercetools-taglets.version}</version>
-                                </tagletArtifact>
-                            </taglet>
-                            <taglet>
-                                <tagletClass>com.commercetools.build.taglets.FileIncludeTaglet</tagletClass>
-                                <tagletArtifact>
-                                    <groupId>com.commercetools.build.taglets</groupId>
-                                    <artifactId>commercetools-taglets</artifactId>
-                                    <version>${commercetools-taglets.version}</version>
-                                </tagletArtifact>
-                            </taglet>
+<!--                            <taglet>-->
+<!--                                <tagletClass>com.commercetools.sdk.jvm.taglets.DocumentationTaglet</tagletClass>-->
+<!--                                <tagletArtifact>-->
+<!--                                    <groupId>com.commercetools.build.taglets</groupId>-->
+<!--                                    <artifactId>commercetools-taglets</artifactId>-->
+<!--                                    <version>${commercetools-taglets.version}</version>-->
+<!--                                </tagletArtifact>-->
+<!--                            </taglet>-->
+<!--                            <taglet>-->
+<!--                                <tagletClass>com.commercetools.sdk.jvm.taglets.CodeTaglet</tagletClass>-->
+<!--                                <tagletArtifact>-->
+<!--                                    <groupId>com.commercetools.build.taglets</groupId>-->
+<!--                                    <artifactId>commercetools-taglets</artifactId>-->
+<!--                                    <version>${commercetools-taglets.version}</version>-->
+<!--                                </tagletArtifact>-->
+<!--                            </taglet>-->
+<!--                            <taglet>-->
+<!--                                <tagletClass>com.commercetools.build.taglets.FileIncludeTaglet</tagletClass>-->
+<!--                                <tagletArtifact>-->
+<!--                                    <groupId>com.commercetools.build.taglets</groupId>-->
+<!--                                    <artifactId>commercetools-taglets</artifactId>-->
+<!--                                    <version>${commercetools-taglets.version}</version>-->
+<!--                                </tagletArtifact>-->
+<!--                            </taglet>-->
                         </taglets>
                         <excludedocfilessubdir>
                             commercetools-internal-docs:commercetools-java-client-internal-test:commercetools-test-lib
