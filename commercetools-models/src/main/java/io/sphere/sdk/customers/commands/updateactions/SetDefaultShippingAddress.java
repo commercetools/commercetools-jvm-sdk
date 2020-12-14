@@ -30,17 +30,17 @@ public final class SetDefaultShippingAddress extends UpdateActionImpl<Customer> 
         this.addressKey = addressKey;
     }
 
-    public static SetDefaultShippingAddress ofKey(@Nullable final String addressKey) {
+    public static SetDefaultShippingAddress ofKey(final String addressKey) {
         return new SetDefaultShippingAddress(null, addressKey);
     }
 
-    public static SetDefaultShippingAddress of(@Nullable final String addressId) {
+    public static SetDefaultShippingAddress of(final String addressId) {
         return new SetDefaultShippingAddress(addressId, null);
     }
 
     public static SetDefaultShippingAddress ofAddress(final Address address) {
         if (address.getId() == null && address.getKey() == null) {
-            throw new IllegalArgumentException(format("The address %s should have an id and key.", address));
+            throw new IllegalArgumentException(format("The address %s should have an id or a key.", address));
         }
         if (address.getId() != null) {
             return of(address.getId());

@@ -3,6 +3,8 @@ package io.sphere.sdk.customers.commands.updateactions;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.customers.Customer;
 
+import javax.annotation.Nullable;
+
 import static java.lang.String.format;
 
 /**
@@ -16,17 +18,25 @@ import static java.lang.String.format;
  */
 public final class AddShippingAddressId extends UpdateActionImpl<Customer> {
     private final String addressId;
+    private final String addressKey;
 
-    private AddShippingAddressId(final String addressId) {
+    private AddShippingAddressId(@Nullable final String addressId, @Nullable final String addressKey) {
         super("addShippingAddressId");
         this.addressId = addressId;
+        this.addressKey = addressKey;
     }
 
     public static AddShippingAddressId of(final String addressId) {
-        return new AddShippingAddressId(addressId);
+        return new AddShippingAddressId(addressId, null);
+    }
+
+    public static AddShippingAddressId ofKey(final String addressKey) {
+        return new AddShippingAddressId(null, addressKey);
     }
 
     public String getAddressId() {
         return addressId;
     }
+
+    public String getAddressKey() {return addressKey; }
 }
