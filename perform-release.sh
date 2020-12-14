@@ -11,7 +11,7 @@ GIT_STATUS=$?
 set -e
 
 export JAVA_HOME=$JDK_18_x64
-echo "Java version: " 
+echo "Java version: "
 echo $JAVA_HOME
 export PATH=$JAVA_HOME/bin:$PATH
 java -version
@@ -26,7 +26,7 @@ RELEASE_VERSION=$(getVersion)
 echo "Performing release ${RELEASE_VERSION}"
 
 echo "Deploying release ${RELEASE_VERSION}"
-./mvnw clean deploy -pl "!osgi-support, !osgi-support/mirror-subclass-plugin, !osgi-support/sdk-osgi-test-campaign, !osgi-support/commercetools-tests-fragment" -DskipTests -Prelease,javadoc-jdk-8u121
+./mvnw clean deploy -pl "!osgi-support, !osgi-support/sdk-osgi-test-campaign, !osgi-support/commercetools-tests-fragment" -DskipTests -Prelease,javadoc-jdk-8u121
 
 git tag -a v${RELEASE_VERSION} -m 'TASK Release v${RELEASE_VERSION}'
 CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD`

@@ -26,11 +26,11 @@ public final class SetDefaultBillingAddress extends UpdateActionImpl<Customer> {
         this.addressKey = addressKey;
     }
 
-    public static SetDefaultBillingAddress ofKey(@Nullable final String addressKey) {
+    public static SetDefaultBillingAddress ofKey(final String addressKey) {
         return new SetDefaultBillingAddress(null, addressKey);
     }
 
-    public static SetDefaultBillingAddress of(@Nullable final String addressId) {
+    public static SetDefaultBillingAddress of(final String addressId) {
         return new SetDefaultBillingAddress(addressId, null);
     }
 
