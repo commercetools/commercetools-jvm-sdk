@@ -99,7 +99,7 @@
         <gson.version>2.5</gson.version>
         <handlebars.version>4.0.6</handlebars.version>
         <httpasyncclient.version>4.1.1</httpasyncclient.version>
-        <jackson.version>2.10.5.1</jackson.version>
+        <jackson.version>2.11.0</jackson.version>
         <jacoco.version>0.7.5.201505241946</jacoco.version>
         <javadoc.additionalparams/>
         <jsr305.version>3.0.1</jsr305.version>
