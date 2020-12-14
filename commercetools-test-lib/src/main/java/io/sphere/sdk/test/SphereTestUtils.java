@@ -216,7 +216,8 @@ public final class SphereTestUtils {
 
     public static void assertEventually(final Runnable block) {
         final Boolean useLongTimeout = "true".equals(System.getenv("TRAVIS"))
-                || StringUtils.isNotEmpty(System.getenv("TEAMCITY_VERSION"));
+                || StringUtils.isNotEmpty(System.getenv("TEAMCITY_VERSION"))
+                || StringUtils.isNoneEmpty(System.getenv("GITHUB_WORKSPACE"));
         final Duration maxWaitTime = Duration.ofSeconds(useLongTimeout ? 60 : 30);
         final Duration waitBeforeRetry = Duration.ofMillis(100);
         assertEventually(maxWaitTime, waitBeforeRetry, block);
