@@ -20,6 +20,7 @@ import io.sphere.sdk.types.CustomFieldsDraft;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
@@ -139,7 +140,7 @@ public class ProductCreateCommandIntegrationTest extends IntegrationTest {
             assertThat(product.getMasterData().isPublished()).isTrue();
             assertThat(product.getMasterData().getCurrent().getSlug()).isEqualTo(slug);
 
-            assertEventually(() -> {
+            assertEventually(Duration.ofSeconds(120), Duration.ofMillis(200), () -> {
                 final ProductProjectionSearch search = ProductProjectionSearch.ofCurrent()
                         .withQueryFilters(m -> m.id().is(product.getId()));
                 final PagedSearchResult<ProductProjection> searchResult = client().executeBlocking(search);
