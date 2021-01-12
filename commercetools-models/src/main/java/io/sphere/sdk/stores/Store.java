@@ -47,6 +47,15 @@ public interface Store extends Resource<Store> {
     List<Reference<Channel>> getDistributionChannels();
 
     /**
+     * Optional connection to particular supplier.
+     * @return channel or null
+     * @see io.sphere.sdk.stores.commands.updateactions.SetSupplyChannels
+     */
+    @Nullable
+    @IgnoreInQueryModel
+    List<Reference<Channel>> getSupplyChannels();
+
+    /**
      * Creates a container which contains the full Java type information to deserialize this class from JSON.
      *
      * @see io.sphere.sdk.json.SphereJsonUtils#readObject(byte[], TypeReference)

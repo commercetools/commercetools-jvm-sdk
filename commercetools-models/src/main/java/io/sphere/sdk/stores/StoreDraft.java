@@ -29,8 +29,11 @@ public interface StoreDraft {
     @Nullable
     List<ResourceIdentifier<Channel>> getDistributionChannels();
 
+    @Nullable
+    List<ResourceIdentifier<Channel>> getSupplyChannels();
+
     static StoreDraftDsl of(final String key, @Nullable final LocalizedString name) {
-        return new StoreDraftDsl(null, key, new ArrayList<>(), name);
+        return new StoreDraftDsl(null, key, new ArrayList<>(), name, null);
     }
 
 }
