@@ -158,6 +158,10 @@ import java.util.function.Function;
  </ul>
  -->
  -->
+ <h3 class=released-version id="v1_57_0">1.57.0 (01.02.2021)</h3>
+ <ul>
+ <li class=new-in-release>Support supplyChannels field to Store and add update action {@link io.sphere.sdk.stores.commands.updateactions.SetSupplyChannels}, {@link io.sphere.sdk.stores.commands.updateactions.AddSupplyChannel} and {@link io.sphere.sdk.stores.commands.updateactions.RemoveSupplyChannel}</li>
+ </ul>
  <h3 class=released-version id="v1_56_0">1.56.0 (04.12.2020)</h3>
  <ul>
  <li class=fixed-in-release>Fixed requests for resources by key with special characters by url encoding the key</li>
