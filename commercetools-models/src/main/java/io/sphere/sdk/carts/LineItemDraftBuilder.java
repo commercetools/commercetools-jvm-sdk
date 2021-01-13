@@ -11,12 +11,13 @@ import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
 public final class LineItemDraftBuilder extends LineItemDraftBuilderBase<LineItemDraftBuilder> {
 
-    LineItemDraftBuilder(@Nullable CustomFieldsDraft custom, @Nullable ResourceIdentifier<Channel> distributionChannel, @Nullable MonetaryAmount externalPrice, @Nullable ExternalTaxRateDraft externalTaxRate, @Nullable ExternalLineItemTotalPrice externalTotalPrice, String productId, @Nullable Long quantity, @Nullable final ItemShippingDetailsDraft shippingDetails, @Nullable String sku, @Nullable ResourceIdentifier<Channel> supplyChannel, @Nullable Integer variantId) {
-        super(custom, distributionChannel, externalPrice, externalTaxRate, externalTotalPrice, productId, quantity,shippingDetails, sku, supplyChannel, variantId);
+    LineItemDraftBuilder(@Nullable ZonedDateTime addedAt, @Nullable CustomFieldsDraft custom, @Nullable ResourceIdentifier<Channel> distributionChannel, @Nullable MonetaryAmount externalPrice, @Nullable ExternalTaxRateDraft externalTaxRate, @Nullable ExternalLineItemTotalPrice externalTotalPrice, String productId, @Nullable Long quantity, @Nullable final ItemShippingDetailsDraft shippingDetails, @Nullable String sku, @Nullable ResourceIdentifier<Channel> supplyChannel, @Nullable Integer variantId) {
+        super(addedAt, custom, distributionChannel, externalPrice, externalTaxRate, externalTotalPrice, productId, quantity,shippingDetails, sku, supplyChannel, variantId);
     }
 
     /**

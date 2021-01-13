@@ -36,6 +36,7 @@ import org.junit.Test;
 
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -133,6 +134,33 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(lineItem.getVariant().getIdentifier()).isEqualTo(ByIdVariantIdentifier.of(lineItem.getProductId(), lineItem.getVariant().getId()));
             assertThat(lineItem.getSupplyChannel().toReference()).isEqualTo(inventorySupplyChannel.toReference());
             assertThat(lineItem.getDistributionChannel().toReference()).isEqualTo(distributionChannel.toReference());
+            assertThat(lineItem.getDiscountedPricePerQuantity()).isNotNull().isEmpty();
+        });
+    }
+
+    @Test
+    public void addLineItemOfDraftOfAddedAt() throws Exception {
+        withEmptyCartAndProduct(client(), (cart, product) -> {
+            assertThat(cart.getLineItems()).isEmpty();
+
+            final long quantity = 3;
+            final ZonedDateTime addedAt = ZonedDateTime.now();
+            final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
+            final LineItemDraft lineItemDraft =
+                    io.sphere.sdk.carts.LineItemDraftBuilder.ofSku(sku, quantity)
+                            .addedAt(addedAt)
+                            .build();
+
+            final AddLineItem action = AddLineItem.of(lineItemDraft);
+
+            final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, action));
+            assertThat(updatedCart.getLineItems()).hasSize(1);
+            final LineItem lineItem = updatedCart.getLineItems().get(0);
+            assertThat(lineItem.getName()).isEqualTo(product.getMasterData().getStaged().getName());
+            assertThat(lineItem.getQuantity()).isEqualTo(quantity);
+            assertThat(lineItem.getProductSlug()).isEqualTo(product.getMasterData().getStaged().getSlug());
+            assertThat(lineItem.getVariant().getIdentifier()).isEqualTo(ByIdVariantIdentifier.of(lineItem.getProductId(), lineItem.getVariant().getId()));
+            assertThat(lineItem.getAddedAt()).isEqualTo(addedAt);
             assertThat(lineItem.getDiscountedPricePerQuantity()).isNotNull().isEmpty();
         });
     }

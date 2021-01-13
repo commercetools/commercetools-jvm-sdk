@@ -17,6 +17,7 @@ import io.sphere.sdk.types.CustomFields;
 
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -36,8 +37,8 @@ final class LineItemImpl extends LineItemImplBase {
                  @Nullable final ItemShippingDetails shippingDetails,
                  final Set<ItemState> state, @Nullable final Reference<Channel> supplyChannel,
                  @Nullable final TaxRate taxRate, @Nullable final TaxedItemPrice taxedPrice,
-                 final MonetaryAmount totalPrice, final ObjectNode variant) {
-        super(custom, discountedPricePerQuantity, distributionChannel, id, lineItemMode, name, price, priceMode, productId, productSlug,
+                 final MonetaryAmount totalPrice, final ObjectNode variant, final ZonedDateTime addedAt) {
+        super(addedAt, custom, discountedPricePerQuantity, distributionChannel, id, lineItemMode, name, price, priceMode, productId, productSlug,
                 productType, quantity, shippingDetails, state, supplyChannel, taxRate, taxedPrice, totalPrice, asVariant(variant, productId));
 
     }
