@@ -139,7 +139,7 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void addLineItemOfDraftOfAddedAt() throws Exception {
+    public void addLineItemOfDraftOfAddedAt() {
         withEmptyCartAndProduct(client(), (cart, product) -> {
             assertThat(cart.getLineItems()).isEmpty();
 
