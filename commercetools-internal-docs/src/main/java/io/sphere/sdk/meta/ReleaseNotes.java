@@ -5,10 +5,7 @@ import io.sphere.sdk.apiclient.ApiClient;
 import io.sphere.sdk.apiclient.ApiClientDraft;
 import io.sphere.sdk.cartdiscounts.*;
 import io.sphere.sdk.carts.*;
-import io.sphere.sdk.carts.commands.updateactions.AddCustomLineItem;
-import io.sphere.sdk.carts.commands.updateactions.RemoveLineItem;
-import io.sphere.sdk.carts.commands.updateactions.SetCustomShippingMethod;
-import io.sphere.sdk.carts.commands.updateactions.SetShippingMethod;
+import io.sphere.sdk.carts.commands.updateactions.*;
 import io.sphere.sdk.carts.expansion.CartExpansionModel;
 import io.sphere.sdk.carts.expansion.ShippingInfoExpansionModel;
 import io.sphere.sdk.carts.queries.CartByIdGet;
@@ -158,6 +155,10 @@ import java.util.function.Function;
  </ul>
  -->
  -->
+ <h3 class=released-version id="v1_57_0">1.57.0 (01.02.2021)</h3>
+ <ul>
+ <li class=new-in-release>Support addedAt to LineItem in the Cart and support the relative action with the new field {@link AddLineItem#getAddedAt()}</li>
+ </ul>
  <h3 class=released-version id="v1_56_0">1.56.0 (04.12.2020)</h3>
  <ul>
  <li class=fixed-in-release>Fixed requests for resources by key with special characters by url encoding the key</li>

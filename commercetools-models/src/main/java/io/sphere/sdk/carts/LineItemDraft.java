@@ -11,6 +11,7 @@ import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
+import java.time.ZonedDateTime;
 
 /**
  * Draft for a new line item.
@@ -60,6 +61,9 @@ public interface LineItemDraft {
 
     @Nullable
     ExternalLineItemTotalPrice getExternalTotalPrice();
+
+    @Nullable
+    ZonedDateTime getAddedAt();
 
     /**
      * Container for the sub-quantity of the line item quantity for the specific address
