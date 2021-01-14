@@ -99,4 +99,63 @@ public class StoreUpdateCommandIntegrationTest extends IntegrationTest {
             });
         });
     }
+
+    @Test
+    public void setSupplyChannels() {
+        final LocalizedString name = randomSlug();
+        final LocalizedString description = randomSlug();
+        final ChannelDraft channelDraft =
+                ChannelDraft.of(randomKey())
+                        .withName(name)
+                        .withRoles(ChannelRole.INVENTORY_SUPPLY)
+                        .withDescription(description);
+        withChannel(client(), channelDraft, channel -> {
+            withUpdateableStore(client(), store -> {
+                final Store updatedStore = client().executeBlocking(StoreUpdateCommand.of(store, SetSupplyChannels.of(asList(channel))));
+                Assertions.assertThat(updatedStore.getSupplyChannels().stream().findFirst().get()).isEqualTo(channel.toReference());
+
+                return updatedStore;
+            });
+        });
+    }
+
+    @Test
+    public void addSupplyChannel() {
+        final LocalizedString name = randomSlug();
+        final LocalizedString description = randomSlug();
+        final ChannelDraft channelDraft =
+                ChannelDraft.of(randomKey())
+                        .withName(name)
+                        .withRoles(ChannelRole.INVENTORY_SUPPLY)
+                        .withDescription(description);
+        withChannel(client(), channelDraft, channel -> {
+            withUpdateableStore(client(), store -> {
+                final Store updatedStore = client().executeBlocking(StoreUpdateCommand.of(store, AddSupplyChannel.of(channel)));
+                Assertions.assertThat(updatedStore.getSupplyChannels().stream().findFirst().get()).isEqualTo(channel.toReference());
+
+                return updatedStore;
+            });
+        });
+    }
+
+    @Test
+    public void removeSupplyChannel() {
+        final LocalizedString name = randomSlug();
+        final LocalizedString description = randomSlug();
+        final ChannelDraft channelDraft =
+                ChannelDraft.of(randomKey())
+                        .withName(name)
+                        .withRoles(ChannelRole.INVENTORY_SUPPLY)
+                        .withDescription(description);
+        withChannel(client(), channelDraft, channel -> {
+            final StoreDraftDsl storeDraft = StoreDraft.of("removeChannelStore", LocalizedString.ofEnglish("removeChannelStore")).withSupplyChannels(asList(channel.toReference()));
+            withUpdateableStore(client(), storeDraft, store -> {
+                final Store updatedStore = client().executeBlocking(StoreUpdateCommand.of(store, RemoveSupplyChannel.of(channel)));
+                Assertions.assertThat(updatedStore.getSupplyChannels()).isEmpty();
+
+                return updatedStore;
+            });
+        });
+    }
+
 }
