@@ -148,7 +148,7 @@ public class StoreUpdateCommandIntegrationTest extends IntegrationTest {
                         .withRoles(ChannelRole.INVENTORY_SUPPLY)
                         .withDescription(description);
         withChannel(client(), channelDraft, channel -> {
-            final StoreDraftDsl storeDraft = StoreDraft.of("removeChannelStore", LocalizedString.ofEnglish("removeChannelStore")).withSupplyChannels(asList(channel.toReference()));
+            final StoreDraftDsl storeDraft = StoreDraft.of("removeSupplyChannelStore", LocalizedString.ofEnglish("removeSupplyChannelStore")).withSupplyChannels(asList(channel.toReference()));
             withUpdateableStore(client(), storeDraft, store -> {
                 final Store updatedStore = client().executeBlocking(StoreUpdateCommand.of(store, RemoveSupplyChannel.of(channel)));
                 Assertions.assertThat(updatedStore.getSupplyChannels()).isEmpty();
