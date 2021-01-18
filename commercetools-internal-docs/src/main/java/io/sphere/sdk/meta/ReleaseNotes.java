@@ -160,6 +160,7 @@ import java.util.function.Function;
  <li class=new-in-release>Support supplyChannels field to Store and add update action {@link io.sphere.sdk.stores.commands.updateactions.SetSupplyChannels}, {@link io.sphere.sdk.stores.commands.updateactions.AddSupplyChannel} and {@link io.sphere.sdk.stores.commands.updateactions.RemoveSupplyChannel}</li>
  <li class=new-in-release>Support addedAt to LineItem in the Cart and support the relative action with the new field {@link AddLineItem#getAddedAt()}</li>
  <li class=new-in-release>Support {@link io.sphere.sdk.products.messages.ProductVariantAddedMessage}</li>
+ <li class=new-in-release>Support discount codes in {@link CartDraft#getDiscountCodes()}</li>
  </ul>
  <h3 class=released-version id="v1_56_0">1.56.0 (04.12.2020)</h3>
  <ul>
