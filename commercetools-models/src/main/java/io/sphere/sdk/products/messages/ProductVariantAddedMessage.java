@@ -11,7 +11,7 @@ import io.sphere.sdk.products.ProductVariant;
 
 import java.time.ZonedDateTime;
 
-public class ProductVariantAddedMessage extends GenericMessageImpl<Product> {
+public final class ProductVariantAddedMessage extends GenericMessageImpl<Product> {
     public static final String MESSAGE_TYPE = "ProductVariantAdded";
     public static final MessageDerivateHint<ProductVariantAddedMessage> MESSAGE_HINT =
             MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, ProductVariantAddedMessage.class, Product.referenceTypeId());
