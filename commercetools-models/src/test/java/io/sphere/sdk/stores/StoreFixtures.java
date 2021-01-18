@@ -7,9 +7,6 @@ import io.sphere.sdk.stores.commands.StoreDeleteCommand;
 import io.sphere.sdk.test.SphereTestUtils;
 import org.assertj.core.api.Assertions;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
 import java.util.function.Consumer;
 import java.util.function.Function;
 

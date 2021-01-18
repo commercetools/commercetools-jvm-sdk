@@ -23,6 +23,7 @@ import io.sphere.sdk.products.Price;
 import io.sphere.sdk.reviews.Review;
 import io.sphere.sdk.shoppinglists.ShoppingList;
 import io.sphere.sdk.shoppinglists.TextLineItem;
+import io.sphere.sdk.stores.Store;
 import io.sphere.sdk.types.commands.TypeCreateCommand;
 import io.sphere.sdk.types.commands.TypeDeleteCommand;
 
@@ -69,7 +70,8 @@ public class TypeFixtures {
                     DiscountCode.referenceTypeId(),
                     CartDiscount.referenceTypeId(),
                     CustomerGroup.referenceTypeId(),
-                    OrderEdit.referenceTypeId()
+                    OrderEdit.referenceTypeId(),
+                    Store.referenceTypeId()
             )
     );
     public static final String STRING_FIELD_NAME = "string-field-name";

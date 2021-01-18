@@ -2,6 +2,7 @@ package io.sphere.sdk.stores.commands;
 
 import io.sphere.sdk.channels.ChannelDraft;
 import io.sphere.sdk.channels.ChannelRole;
+import io.sphere.sdk.json.TypeReferences;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.stores.Store;
 import io.sphere.sdk.stores.StoreDraft;
@@ -18,6 +19,9 @@ import java.util.List;
 import static io.sphere.sdk.channels.ChannelFixtures.withChannel;
 import static io.sphere.sdk.stores.StoreFixtures.withUpdateableStore;
 import static io.sphere.sdk.test.SphereTestUtils.*;
+import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
+import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class StoreUpdateCommandIntegrationTest extends IntegrationTest {
 
@@ -158,4 +162,45 @@ public class StoreUpdateCommandIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Test
+    public void setCustomType() {
+        withUpdateableType(client(), type -> {
+            withUpdateableStore(client(), store -> {
+                final StoreUpdateCommand storeUpdateCommand = StoreUpdateCommand.of(store,
+                        SetCustomType.ofTypeIdAndObjects(type.getId(), STRING_FIELD_NAME, "a value"));
+                final Store updatedStore = client().executeBlocking(storeUpdateCommand);
+
+                assertThat(updatedStore.getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference()))
+                        .isEqualTo("a value");
+
+                return updatedStore;
+            });
+            return type;
+        });
+    }
+
+    @Test
+    public void setCustomField() {
+        withUpdateableType(client(), type -> {
+
+
+            withUpdateableStore(client(), store -> {
+                final Store storeWithCustomType = client().executeBlocking(StoreUpdateCommand.of(store,
+                        SetCustomType.ofTypeIdAndObjects(type.getId(), STRING_FIELD_NAME, "a value")));
+
+                assertThat(storeWithCustomType.getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference()))
+                        .isEqualTo("a value");
+
+                final String newValue = randomString();
+                final Store storeWithCustomField = client().executeBlocking(StoreUpdateCommand.of(storeWithCustomType,
+                        SetCustomField.ofObject(STRING_FIELD_NAME, newValue)));
+
+                assertThat(storeWithCustomField.getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference()))
+                        .isEqualTo(newValue);
+
+                return storeWithCustomField;
+            });
+            return type;
+        });
+    }
 }
