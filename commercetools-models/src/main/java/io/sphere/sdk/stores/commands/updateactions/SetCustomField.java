@@ -5,7 +5,7 @@ import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.stores.Store;
 import io.sphere.sdk.types.customupdateactions.SetCustomFieldBase;
 
-public class SetCustomField extends SetCustomFieldBase<Store> {
+public final class SetCustomField extends SetCustomFieldBase<Store> {
 
     private SetCustomField(final String name, final JsonNode value) {
         super(name, value);
