@@ -33,6 +33,10 @@ public final class SetCustomerGroup extends UpdateActionImpl<Cart> {
         return new SetCustomerGroup(resourceIdentifier);
     }
 
+    public static SetCustomerGroup of(@Nullable final ResourceIdentifier<CustomerGroup> customerGroup) {
+        return new SetCustomerGroup(customerGroup);
+    }
+
     public ResourceIdentifier<CustomerGroup> getCustomerGroup() {
         return customerGroup;
     }

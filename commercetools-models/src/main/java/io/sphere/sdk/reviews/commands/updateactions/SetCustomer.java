@@ -33,6 +33,14 @@ public final class SetCustomer extends UpdateActionImpl<Review> {
         return new SetCustomer(resourceIdentifier);
     }
 
+    public static SetCustomer of(@Nullable final ResourceIdentifier<Customer> customer) {
+        return new SetCustomer(customer);
+    }
+
+    public static SetCustomer ofUnset() {
+        return new SetCustomer(null);
+    }
+
     @Nullable
     public ResourceIdentifier<Customer> getCustomer() {
         return customer;

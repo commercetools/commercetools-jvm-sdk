@@ -4,6 +4,7 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.models.ResourceIdentifiable;
 import io.sphere.sdk.models.ResourceIdentifier;
 
 import javax.annotation.Nullable;
@@ -22,14 +23,20 @@ public final class SetCustomerGroup extends UpdateActionImpl<Customer> {
     @Nullable
     private final ResourceIdentifier<CustomerGroup> customerGroup;
 
-    private SetCustomerGroup(final Referenceable<CustomerGroup> customerGroup) {
+    private SetCustomerGroup(final ResourceIdentifier<CustomerGroup> customerGroup) {
         super("setCustomerGroup");
-        this.customerGroup = Optional.ofNullable(customerGroup)
-                .map(x -> x.toReference().filled(null))
-                .orElse(null);
+        this.customerGroup = customerGroup;
     }
 
     public static SetCustomerGroup of(@Nullable final Referenceable<CustomerGroup> customerGroup) {
+        final ResourceIdentifier<CustomerGroup> resourceIdentifier = Optional.ofNullable(customerGroup)
+                .map(ResourceIdentifiable::toResourceIdentifier)
+                .orElse(null);
+        return new SetCustomerGroup(resourceIdentifier);
+    }
+
+
+    public static SetCustomerGroup of(@Nullable final ResourceIdentifier<CustomerGroup> customerGroup) {
         return new SetCustomerGroup(customerGroup);
     }
 

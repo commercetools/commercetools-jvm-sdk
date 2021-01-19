@@ -35,8 +35,12 @@ public final class SetCustomer extends UpdateActionImpl<ShoppingList> {
         return new SetCustomer(resourceIdentifier);
     }
 
+    public static SetCustomer of(@Nullable final ResourceIdentifier<Customer> customer) {
+        return new SetCustomer(customer);
+    }
+
     public static SetCustomer ofUnset() {
-        return of(null);
+        return new SetCustomer(null);
     }
 
     @Nullable
