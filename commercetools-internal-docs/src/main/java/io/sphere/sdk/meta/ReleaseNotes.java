@@ -161,6 +161,7 @@ import java.util.function.Function;
  <li class=new-in-release>Support addedAt to LineItem in the Cart and support the relative action with the new field {@link AddLineItem#getAddedAt()}</li>
  <li class=new-in-release>Support {@link io.sphere.sdk.products.messages.ProductVariantAddedMessage}</li>
  <li class=new-in-release>Support discount codes in {@link CartDraft#getDiscountCodes()}</li>
+ <li class=new-in-release>Add lastModifiedAt to {@link LineItem#getLastModifiedAt()}</li>
  </ul>
  <h3 class=released-version id="v1_56_0">1.56.0 (04.12.2020)</h3>
  <ul>
