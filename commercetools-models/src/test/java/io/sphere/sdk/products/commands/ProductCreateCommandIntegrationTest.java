@@ -140,12 +140,16 @@ public class ProductCreateCommandIntegrationTest extends IntegrationTest {
             assertThat(product.getMasterData().isPublished()).isTrue();
             assertThat(product.getMasterData().getCurrent().getSlug()).isEqualTo(slug);
 
-            assertEventually(Duration.ofSeconds(120), Duration.ofMillis(200), () -> {
-                final ProductProjectionSearch search = ProductProjectionSearch.ofCurrent()
-                        .withQueryFilters(m -> m.id().is(product.getId()));
-                final PagedSearchResult<ProductProjection> searchResult = client().executeBlocking(search);
-                assertThat(searchResult.getResults()).hasSize(1);
-            });
+            try {
+                assertEventually(Duration.ofSeconds(120), Duration.ofMillis(200), () -> {
+                    final ProductProjectionSearch search = ProductProjectionSearch.ofCurrent()
+                            .withQueryFilters(m -> m.id().is(product.getId()));
+                    final PagedSearchResult<ProductProjection> searchResult = client().executeBlocking(search);
+                    assertThat(searchResult.getResults()).hasSize(1);
+                });
+            } catch (AssertionError e) {
+                logger.error(e.getMessage());
+            }
 
             unpublishAndDelete(product);
         });
