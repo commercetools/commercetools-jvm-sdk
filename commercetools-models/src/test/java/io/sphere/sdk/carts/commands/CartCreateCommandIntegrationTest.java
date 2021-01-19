@@ -1,8 +1,11 @@
 package io.sphere.sdk.carts.commands;
 
+import com.google.common.collect.Lists;
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.cartdiscounts.CartDiscountFixtures;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.carts.queries.CartQuery;
+import io.sphere.sdk.discountcodes.DiscountCodeFixtures;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.products.BySkuVariantIdentifier;
@@ -198,6 +201,16 @@ public class    CartCreateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void createWithDiscount() throws Exception {
+        DiscountCodeFixtures.withPersistentDiscountCode(client(), discountCode -> {
+            final CartDraft cartDraft = CartDraft.of(EUR).withCountry(DE).withDiscountCodes(Lists.newArrayList(discountCode.getCode()));
+            final Cart cart = client().executeBlocking(CartCreateCommand.of(cartDraft));
+
+            assertThat(cart.getDiscountCodes().get(0).getDiscountCode().getId()).isEqualTo( discountCode.getId());
+        });
+    }
+
+    @Test
     public void anonymousCartId() throws Exception {
         final String anonymousId = randomKey();
         final CartDraft cartDraft = CartDraft.of(EUR).withCountry(DE)
@@ -230,7 +243,7 @@ public class    CartCreateCommandIntegrationTest extends IntegrationTest {
             client().executeBlocking(CartDeleteCommand.of(cart));
         });
     }
-    
+
     @Test
     public void createCartInStore(){
         withStore(client(), store -> {
@@ -242,7 +255,7 @@ public class    CartCreateCommandIntegrationTest extends IntegrationTest {
             client().executeBlocking(CartDeleteCommand.of(cart));
         });
     }
-    
+
     private void testInventoryMode(final InventoryMode inventoryMode) {
         final Cart cart = client().executeBlocking(CartCreateCommand.of(CartDraft.of(EUR).withInventoryMode(inventoryMode)));
         assertThat(cart.getInventoryMode()).isEqualTo(inventoryMode);

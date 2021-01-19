@@ -3,8 +3,10 @@ package io.sphere.sdk.carts;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.annotations.FactoryMethod;
+import io.sphere.sdk.annotations.QueryModelHint;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.customergroups.CustomerGroup;
+import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
@@ -98,9 +100,12 @@ public interface CartDraft extends CustomDraft {
      */
     @Nullable
     List<Address> getItemShippingAddresses();
-    
+
     @Nullable
     ResourceIdentifier<Store> getStore();
+
+    @Nullable
+    List<String> getDiscountCodes();
 
     static CartDraftDsl of(final CurrencyUnit currency) {
         return CartDraftDsl.of(currency);
