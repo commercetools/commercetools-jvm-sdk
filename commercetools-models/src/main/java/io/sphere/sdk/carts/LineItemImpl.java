@@ -30,6 +30,7 @@ final class LineItemImpl extends LineItemImplBase {
     LineItemImpl(final CustomFields custom,
                  final List<DiscountedLineItemPriceForQuantity> discountedPricePerQuantity,
                  @Nullable final Reference<Channel> distributionChannel, final String id,
+                 final ZonedDateTime lastModifiedAt,
                  final LineItemMode lineItemMode, final LocalizedString name, final Price price,
                  final LineItemPriceMode priceMode, final String productId,
                  @Nullable final LocalizedString productSlug,
@@ -38,7 +39,7 @@ final class LineItemImpl extends LineItemImplBase {
                  final Set<ItemState> state, @Nullable final Reference<Channel> supplyChannel,
                  @Nullable final TaxRate taxRate, @Nullable final TaxedItemPrice taxedPrice,
                  final MonetaryAmount totalPrice, final ObjectNode variant, final ZonedDateTime addedAt) {
-        super(addedAt, custom, discountedPricePerQuantity, distributionChannel, id, lineItemMode, name, price, priceMode, productId, productSlug,
+        super(addedAt, custom, discountedPricePerQuantity, distributionChannel, id, lastModifiedAt, lineItemMode, name, price, priceMode, productId, productSlug,
                 productType, quantity, shippingDetails, state, supplyChannel, taxRate, taxedPrice, totalPrice, asVariant(variant, productId));
 
     }
