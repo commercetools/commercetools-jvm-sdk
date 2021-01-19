@@ -38,7 +38,7 @@ public interface StoreDraft {
     CustomFieldsDraft getCustom();
 
     static StoreDraftDsl of(final String key, @Nullable final LocalizedString name) {
-        return new StoreDraftDsl(null, null, key, new ArrayList<>(), null, null);
+        return new StoreDraftDsl(null, null, key, new ArrayList<>(), name, null);
     }
 
 }
