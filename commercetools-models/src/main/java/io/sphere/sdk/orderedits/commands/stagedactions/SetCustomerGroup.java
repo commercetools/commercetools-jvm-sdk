@@ -20,15 +20,11 @@ public final class SetCustomerGroup extends OrderEditStagedUpdateActionBase {
         this.customerGroup = customerGroup;
     }
 
-    public static SetCustomerGroup of(@Nullable final Referenceable<CustomerGroup> customerGroup) {
+    public static SetCustomerGroup of(@Nullable final ResourceIdentifiable<CustomerGroup> customerGroup) {
         final ResourceIdentifier<CustomerGroup> resourceIdentifier = Optional.ofNullable(customerGroup)
                 .map(ResourceIdentifiable::toResourceIdentifier)
                 .orElse(null);
         return new SetCustomerGroup(resourceIdentifier);
-    }
-
-    public static SetCustomerGroup of(@Nullable final ResourceIdentifier<CustomerGroup> customerGroup) {
-        return new SetCustomerGroup(customerGroup);
     }
 
     public ResourceIdentifier<CustomerGroup> getCustomerGroup() {
