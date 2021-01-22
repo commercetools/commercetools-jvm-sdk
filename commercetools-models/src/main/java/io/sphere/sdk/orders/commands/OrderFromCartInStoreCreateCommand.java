@@ -17,4 +17,8 @@ public interface OrderFromCartInStoreCreateCommand extends DraftBasedCreateComma
     static OrderFromCartInStoreCreateCommand of(final String storeKey, final Versioned<Cart> cart) {
         return new OrderFromCartInStoreCreateCommandImpl(storeKey, OrderFromCartDraft.of(cart));
     }
+
+    static OrderFromCartInStoreCreateCommand of(final String storeKey, final Cart cart) {
+        return new OrderFromCartInStoreCreateCommandImpl(storeKey, OrderFromCartDraft.of(cart));
+    }
 }

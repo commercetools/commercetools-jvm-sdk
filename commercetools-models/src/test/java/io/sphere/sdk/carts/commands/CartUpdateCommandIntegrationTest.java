@@ -841,4 +841,15 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
             });
         });
     }
+
+    @Test
+    public void setKey() {
+        withCart(client(), cart -> {
+            assertThat(cart.getKey()).isNull();
+            final String key = randomKey();
+            final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, SetKey.of(key)));
+            assertThat(updatedCart.getKey()).isEqualTo(key);
+            return updatedCart;
+        });
+    }
 }

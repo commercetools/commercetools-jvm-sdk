@@ -25,6 +25,10 @@ final class OrderFromCartCreateCommandImpl extends MetaModelCreateCommandImpl<Or
         return new OrderFromCartCreateCommandImpl(OrderFromCartDraft.of(cart));
     }
 
+    public static OrderFromCartCreateCommandImpl of(final Cart cart) {
+        return new OrderFromCartCreateCommandImpl(OrderFromCartDraft.of(cart));
+    }
+
     @Override
     public OrderFromCartCreateCommand withDraft(final OrderFromCartDraft draft) {
         return new OrderFromCartCreateCommandImpl(copyBuilder().draft(draft));

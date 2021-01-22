@@ -18,6 +18,10 @@ public interface OrderFromCartCreateCommand extends DraftBasedCreateCommandDsl<O
         return new OrderFromCartCreateCommandImpl(draft);
     }
 
+    static OrderFromCartCreateCommand of(final Cart cart) {
+        return new OrderFromCartCreateCommandImpl(OrderFromCartDraft.of(cart));
+    }
+
     static OrderFromCartCreateCommand of(final Versioned<Cart> cart) {
         return new OrderFromCartCreateCommandImpl(OrderFromCartDraft.of(cart));
     }

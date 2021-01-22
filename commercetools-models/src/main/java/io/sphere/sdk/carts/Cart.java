@@ -39,9 +39,11 @@ import java.util.List;
 @HasQueryEndpoint()
 @ResourceInfo(pluralName = "carts", pathElement = "carts")
 @HasByIdGetEndpoint(javadocSummary = "Gets a cart by ID.", includeExamples = "io.sphere.sdk.carts.queries.CartByIdGetIntegrationTest#fetchById()")
+@HasByKeyGetEndpoint (javadocSummary = "Gets a cart by Key.", includeExamples = "io.sphere.sdk.carts.queries.CartByKeyGetIntegrationTest#fetchByKey()")
 @HasCreateCommand(javadocSummary = "Creates a cart.", includeExamples = {"io.sphere.sdk.carts.commands.CartCreateCommandIntegrationTest#execution()", "io.sphere.sdk.carts.commands.CartCreateCommandIntegrationTest#fullExample()"})
 @HasUpdateCommand(javadocSummary = "Updates a cart.")
-@HasDeleteCommand(javadocSummary = "Deletes a cart.", canEraseUsersData = true)
+@HasDeleteCommand(javadocSummary = "Deletes a cart", canEraseUsersData = true, deleteWith = {"key","id"}, includeExamples = "io.sphere.sdk.cart.commands.CartDeleteCommandByKeyIntegrationTest#execution()")
+//        (javadocSummary = "Deletes a cart.", canEraseUsersData = true)
 @HasQueryModel(implBaseClass = "CartLikeQueryModelImpl<Cart>", baseInterfaces = {"CartLikeQueryModel<Cart>"})
 public interface Cart extends CartLike<Cart> {
 
@@ -87,6 +89,9 @@ public interface Cart extends CartLike<Cart> {
     default Reference<Cart> toReference() {
         return Reference.of(referenceTypeId(), getId(), this);
     }
+
+    @Nullable
+    String getKey();
 
     @HasUpdateAction
     @Nullable
