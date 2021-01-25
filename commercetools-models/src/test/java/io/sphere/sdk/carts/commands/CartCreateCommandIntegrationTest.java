@@ -1,8 +1,6 @@
 package io.sphere.sdk.carts.commands;
 
-import com.google.common.collect.Lists;
 import com.neovisionaries.i18n.CountryCode;
-import io.sphere.sdk.cartdiscounts.CartDiscountFixtures;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.carts.queries.CartQuery;
 import io.sphere.sdk.discountcodes.DiscountCodeFixtures;
@@ -203,7 +201,7 @@ public class    CartCreateCommandIntegrationTest extends IntegrationTest {
     @Test
     public void createWithDiscount() throws Exception {
         DiscountCodeFixtures.withPersistentDiscountCode(client(), discountCode -> {
-            final CartDraft cartDraft = CartDraft.of(EUR).withCountry(DE).withDiscountCodes(Lists.newArrayList(discountCode.getCode()));
+            final CartDraft cartDraft = CartDraft.of(EUR).withCountry(DE).withDiscountCodes(singletonList(discountCode.getCode()));
             final Cart cart = client().executeBlocking(CartCreateCommand.of(cartDraft));
 
             assertThat(cart.getDiscountCodes().get(0).getDiscountCode().getId()).isEqualTo( discountCode.getId());

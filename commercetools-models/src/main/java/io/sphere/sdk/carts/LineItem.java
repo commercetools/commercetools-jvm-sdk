@@ -94,6 +94,9 @@ public interface LineItem extends LineItemLike {
     @Nullable
     ItemShippingDetails getShippingDetails();
 
+    @Nullable
+    ZonedDateTime getLastModifiedAt();
+
     /**
      * An identifier for this resource which supports {@link CustomFields}.
      * @see TypeDraft#getResourceTypeIds()

@@ -162,6 +162,9 @@ import java.util.function.Function;
  <li class=new-in-release>Support new field in the Store {@link Store#getCustom()} adding related updated actions {@link io.sphere.sdk.stores.commands.updateactions.SetCustomField} and {@link io.sphere.sdk.stores.commands.updateactions.SetCustomType}</li>
  <li class=new-in-release>Support {@link io.sphere.sdk.products.messages.ProductVariantAddedMessage}</li>
  <li class=new-in-release>Support discount codes in {@link CartDraft#getDiscountCodes()}</li>
+ <li class=new-in-release>Support resource identifier to set customer groups in {@link io.sphere.sdk.customers.commands.updateactions.SetCustomerGroup}, {@link io.sphere.sdk.orderedits.commands.stagedactions.SetCustomerGroup}, {@link SetCustomerGroup}</li>
+ <li class=new-in-release>Support resource identifier to set customer in {@link io.sphere.sdk.reviews.commands.updateactions.SetCustomer}, {@link io.sphere.sdk.shoppinglists.commands.updateactions.SetCustomer}</li>
+ <li class=new-in-release>Add lastModifiedAt to {@link LineItem#getLastModifiedAt()}</li>
  </ul>
  <h3 class=released-version id="v1_56_0">1.56.0 (04.12.2020)</h3>
  <ul>
