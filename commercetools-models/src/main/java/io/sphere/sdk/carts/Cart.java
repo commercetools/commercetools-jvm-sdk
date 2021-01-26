@@ -42,7 +42,7 @@ import java.util.List;
 @HasByKeyGetEndpoint (javadocSummary = "Gets a cart by Key.", includeExamples = "io.sphere.sdk.carts.queries.CartByKeyGetIntegrationTest#fetchByKeyWithUpdateAction()")
 @HasCreateCommand(javadocSummary = "Creates a cart.", includeExamples = {"io.sphere.sdk.carts.commands.CartCreateCommandIntegrationTest#execution()", "io.sphere.sdk.carts.commands.CartCreateCommandIntegrationTest#fullExample()"})
 @HasUpdateCommand(javadocSummary = "Updates a cart.")
-@HasDeleteCommand(javadocSummary = "Deletes a cart", canEraseUsersData = true, deleteWith = {"key","id"}, includeExamples = "io.sphere.sdk.cart.commands.CartDeleteCommandByKeyIntegrationTest#execution()")
+@HasDeleteCommand(javadocSummary = "Deletes a cart", canEraseUsersData = true, deleteWith = {"key","id"}, includeExamples = "io.sphere.sdk.carts.commands.CartDeleteCommandIntegrationTest#deleteCartByKey()")
 @HasQueryModel(implBaseClass = "CartLikeQueryModelImpl<Cart>", baseInterfaces = {"CartLikeQueryModel<Cart>"})
 public interface Cart extends CartLike<Cart> {
 
@@ -231,11 +231,11 @@ public interface Cart extends CartLike<Cart> {
     @HasUpdateAction(value = "updateItemShippingAddress", fields = {@PropertySpec(name = "address",type = Address.class)})
     @HasUpdateAction(value = "removeItemShippingAddress", fields = {@PropertySpec(name = "addressKey",type = String.class)})
     List<Address> getItemShippingAddresses();
-    
+
     @Nullable
     @QueryModelHint(type = "KeyReferenceQueryModel<Cart>", impl = "return keyReferenceQueryModel(fieldName);")
     KeyReference<Store> getStore();
-    
+
     /**
      * Creates a reference for one item of this class by a known ID.
      *

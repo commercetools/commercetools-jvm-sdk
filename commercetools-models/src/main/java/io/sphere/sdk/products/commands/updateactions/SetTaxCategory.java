@@ -28,6 +28,8 @@ public final class SetTaxCategory extends UpdateActionImpl<Product> {
 
     /**
      * This method is deprecated, please use {@link SetTaxCategory#of(ResourceIdentifier)}
+     * @param taxCategory tax category to be set
+     * @return update action
      */
     @Deprecated
     public static SetTaxCategory ofReferencable(@Nullable final Referenceable<TaxCategory> taxCategory) {

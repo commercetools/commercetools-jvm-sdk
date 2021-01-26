@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandIntegrationTest#key()}
+ * {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandIntegrationTest#setKey()}
  */
 public final class SetKey extends UpdateActionImpl<Cart> {
     @Nullable
