@@ -48,11 +48,11 @@ public interface OrderFromCartDraft {
     ShipmentState getShipmentState();
 
     static OrderFromCartDraft of(final Versioned<Cart> cart, @Nullable final String orderNumber, @Nullable final PaymentState paymentState) {
-        return OrderFromCartDraftDsl.of(ResourceIdentifier.ofId(cart.getId()), cart.getVersion(), orderNumber, paymentState);
+        return OrderFromCartDraftDsl.of(cart.getId(), cart.getVersion(), orderNumber, paymentState);
     }
 
     static OrderFromCartDraft of(final Versioned<Cart> cart) {
-        return OrderFromCartDraftDsl.of(ResourceIdentifier.ofId(cart.getId()), cart.getVersion(), null, null);
+        return OrderFromCartDraftDsl.of(cart.getId(), cart.getVersion(), null, null);
     }
 
     static OrderFromCartDraft of(final ResourceIdentifier<Cart> cartResourceIdentifier, final Long version, @Nullable final String orderNumber, @Nullable final PaymentState paymentState) {
