@@ -5,6 +5,7 @@ import io.sphere.sdk.apiclient.ApiClient;
 import io.sphere.sdk.apiclient.ApiClientDraft;
 import io.sphere.sdk.cartdiscounts.*;
 import io.sphere.sdk.carts.*;
+import io.sphere.sdk.carts.commands.CartReplicationDraft;
 import io.sphere.sdk.carts.commands.updateactions.*;
 import io.sphere.sdk.carts.expansion.CartExpansionModel;
 import io.sphere.sdk.carts.expansion.ShippingInfoExpansionModel;
@@ -161,6 +162,8 @@ import java.util.function.Function;
  <li class=new-in-release>Support addedAt to LineItem in the Cart and support the relative action with the new field {@link AddLineItem#getAddedAt()}</li>
  <li class=new-in-release>Support {@link io.sphere.sdk.products.messages.ProductVariantAddedMessage}</li>
  <li class=new-in-release>Support discount codes in {@link CartDraft#getDiscountCodes()}</li>
+ <li class=new-in-release>Support key to Cart {@link Cart#getKey()}, support update action {@link SetKey}, support {@link io.sphere.sdk.carts.queries.CartByKeyGet}, support {@link CartReplicationDraft#getKey()}</li>
+ <li class=new-in-release>Deprecated {@link OrderFromCartDraft#getId()} and related methods, it has been replaced with support {@link OrderFromCartDraft#getCart()}; support of method for the Cart {@link OrderFromCartDraft#of(Cart)}</li>
  <li class=new-in-release>Support resource identifier to set customer groups in {@link io.sphere.sdk.customers.commands.updateactions.SetCustomerGroup}, {@link io.sphere.sdk.orderedits.commands.stagedactions.SetCustomerGroup}, {@link SetCustomerGroup}</li>
  <li class=new-in-release>Support resource identifier to set customer in {@link io.sphere.sdk.reviews.commands.updateactions.SetCustomer}, {@link io.sphere.sdk.shoppinglists.commands.updateactions.SetCustomer}</li>
  <li class=new-in-release>Add lastModifiedAt to {@link LineItem#getLastModifiedAt()}</li>
@@ -200,7 +203,7 @@ import java.util.function.Function;
 
  <h3 class=released-version id="v1_52_1">1.52.1 (18.08.2020)</h3>
  <ul>
- <li class=fixed-in-release>Fixed storeProjection and localeProjection as query parameter in Product Projection and not anymore in the proceSelection </li>
+ <li class=fixed-in-release>Fixed storeProjection and localeProjection as query parameter in Product Projection and not anymore in the priceSelection </li>
  </ul>
 
  <h3 class=released-version id="v1_52_0">1.52.0 (07.07.2020)</h3>

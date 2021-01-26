@@ -3,6 +3,7 @@ package io.sphere.sdk.orders.commands;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.commands.DraftBasedCreateCommandDsl;
 import io.sphere.sdk.expansion.MetaModelReferenceExpansionDsl;
+import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.OrderFromCartDraft;
@@ -16,5 +17,9 @@ public interface OrderFromCartInStoreCreateCommand extends DraftBasedCreateComma
 
     static OrderFromCartInStoreCreateCommand of(final String storeKey, final Versioned<Cart> cart) {
         return new OrderFromCartInStoreCreateCommandImpl(storeKey, OrderFromCartDraft.of(cart));
+    }
+
+    static OrderFromCartInStoreCreateCommand of(final String storeKey, final ResourceIdentifier<Cart> cartResourceIdentifier, Long version) {
+        return new OrderFromCartInStoreCreateCommandImpl(storeKey, OrderFromCartDraft.of(cartResourceIdentifier, version));
     }
 }

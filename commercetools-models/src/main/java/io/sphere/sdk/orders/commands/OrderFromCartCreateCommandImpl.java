@@ -3,6 +3,8 @@ package io.sphere.sdk.orders.commands;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.commands.MetaModelCreateCommandBuilder;
 import io.sphere.sdk.commands.MetaModelCreateCommandImpl;
+import io.sphere.sdk.models.ResourceIdentifiable;
+import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.OrderFromCartDraft;
@@ -23,6 +25,10 @@ final class OrderFromCartCreateCommandImpl extends MetaModelCreateCommandImpl<Or
 
     public static OrderFromCartCreateCommandImpl of(final Versioned<Cart> cart) {
         return new OrderFromCartCreateCommandImpl(OrderFromCartDraft.of(cart));
+    }
+
+    public static OrderFromCartCreateCommandImpl of(final ResourceIdentifier<Cart> cartResourceIdentifier, Long version) {
+        return new OrderFromCartCreateCommandImpl(OrderFromCartDraft.of(cartResourceIdentifier, version));
     }
 
     @Override
