@@ -35,7 +35,7 @@ public class DiscountCodeFixtures {
                 .name(en("sample discount code"))
                 .description(en("sample discount code descr."))
                 .isActive(true)
-                .maxApplications(5L)
+                .maxApplications(1000L)
                 .maxApplicationsPerCustomer(1L);
     }
 

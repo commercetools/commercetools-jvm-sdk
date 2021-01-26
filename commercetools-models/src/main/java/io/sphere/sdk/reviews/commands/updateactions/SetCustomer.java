@@ -26,11 +26,15 @@ public final class SetCustomer extends UpdateActionImpl<Review> {
         this.customer = customer;
     }
 
-    public static SetCustomer of(@Nullable final Referenceable<Customer> customer) {
+    public static SetCustomer of(final ResourceIdentifiable<Customer> customer) {
         final ResourceIdentifier<Customer> resourceIdentifier = Optional.ofNullable(customer)
                 .map(ResourceIdentifiable::toResourceIdentifier)
                 .orElse(null);
         return new SetCustomer(resourceIdentifier);
+    }
+
+    public static SetCustomer ofUnset() {
+        return new SetCustomer(null);
     }
 
     @Nullable

@@ -164,6 +164,9 @@ import java.util.function.Function;
  <li class=new-in-release>Support discount codes in {@link CartDraft#getDiscountCodes()}</li>
  <li class=new-in-release>Support key to Cart {@link Cart#getKey()}, support update action {@link SetKey}, support {@link io.sphere.sdk.carts.queries.CartByKeyGet}, support {@link CartReplicationDraft#getKey()}</li>
  <li class=new-in-release>Deprecated {@link OrderFromCartDraft#getId()} and related methods, it has been replaced with support {@link OrderFromCartDraft#getCart()}; support of method for the Cart {@link OrderFromCartDraft#of(Cart)}</li>
+ <li class=new-in-release>Support resource identifier to set customer groups in {@link io.sphere.sdk.customers.commands.updateactions.SetCustomerGroup}, {@link io.sphere.sdk.orderedits.commands.stagedactions.SetCustomerGroup}, {@link SetCustomerGroup}</li>
+ <li class=new-in-release>Support resource identifier to set customer in {@link io.sphere.sdk.reviews.commands.updateactions.SetCustomer}, {@link io.sphere.sdk.shoppinglists.commands.updateactions.SetCustomer}</li>
+ <li class=new-in-release>Add lastModifiedAt to {@link LineItem#getLastModifiedAt()}</li>
  </ul>
  <h3 class=released-version id="v1_56_0">1.56.0 (04.12.2020)</h3>
  <ul>
