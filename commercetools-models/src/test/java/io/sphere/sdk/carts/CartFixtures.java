@@ -13,6 +13,8 @@ import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.discountcodes.DiscountCode;
+import io.sphere.sdk.discountcodes.DiscountCodeDraft;
+import io.sphere.sdk.discountcodes.DiscountCodeDraftBuilder;
 import io.sphere.sdk.discountcodes.DiscountCodeDraftDsl;
 import io.sphere.sdk.discountcodes.commands.DiscountCodeCreateCommand;
 import io.sphere.sdk.discountcodes.commands.DiscountCodeDeleteCommand;
@@ -29,6 +31,7 @@ import javax.money.MonetaryAmount;
 import java.util.List;
 import java.util.function.*;
 
+import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.defaultCartDiscount;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomerAndCart;
 import static io.sphere.sdk.products.ProductFixtures.withTaxedProduct;
@@ -279,6 +282,32 @@ public class CartFixtures {
                     .build();
             final CartDiscount cartDiscount = client.executeBlocking(CartDiscountCreateCommand.of(draft));
             final DiscountCode discountCode = client.executeBlocking(DiscountCodeCreateCommand.of(DiscountCodeDraftDsl.of(randomKey(), cartDiscount)));
+            final Cart updatedCart = user.apply(cart, discountCode);
+            client.executeBlocking(CartDeleteCommand.of(updatedCart));
+            client.executeBlocking(DiscountCodeDeleteCommand.of(discountCode));
+            client.executeBlocking(CartDiscountDeleteCommand.of(cartDiscount));
+        });
+    }
+
+    public static void withCartAndPersistentDiscountCode(final BlockingSphereClient client, final BiFunction<Cart, DiscountCode, Cart> user) {
+        withCustomerAndCart(client, (customer, cart) -> {
+            final CartDiscountDraft draft = CartDiscountFixtures.newCartDiscountDraftBuilder()
+                    .cartPredicate(CartPredicate.of(format("customer.id = \"%s\"", customer.getId())))
+                    .requiresDiscountCode(true)
+                    .isActive(true)
+                    .validFrom(null)
+                    .validUntil(null)
+                    .build();
+            final CartDiscount cartDiscount = client.executeBlocking(CartDiscountCreateCommand.of(draft));
+            final DiscountCodeDraft discountCodeDraft = DiscountCodeDraftBuilder.of(randomKey(), cartDiscount)
+                                                .name(en("sample discount code"))
+                                                .description(en("sample discount code descr."))
+                                                .isActive(true)
+                                                .maxApplications(1000L)
+                                                .maxApplicationsPerCustomer(1L)
+                                                .build();
+
+            final DiscountCode discountCode = client.executeBlocking(DiscountCodeCreateCommand.of(discountCodeDraft));
             final Cart updatedCart = user.apply(cart, discountCode);
             client.executeBlocking(CartDeleteCommand.of(updatedCart));
             client.executeBlocking(DiscountCodeDeleteCommand.of(discountCode));
