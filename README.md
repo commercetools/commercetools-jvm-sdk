@@ -6,7 +6,6 @@
 
 [![][travis img]][travis]
 [![][maven img]][maven]
-[![][snyk img]][snyk]
 [![][license img]][license]
 
 The JVM SDK enables developers to use Java 8 methods and objects to communicate with the [commercetools platform](https://www.commercetools.com/) rather than using plain HTTP calls.
@@ -151,9 +150,6 @@ authUrl=https://auth.europe-west1.gcp.commercetools.com
 
 [travis]:https://travis-ci.org/commercetools/commercetools-jvm-sdk
 [travis img]:https://travis-ci.org/commercetools/commercetools-jvm-sdk.svg?branch=master
-
-[snyk]:https://snyk.io/test/github/commercetools/commercetools-jvm-sdk
-[snyk img]:https://snyk.io/test/github/commercetools/commercetools-jvm-sdk/badge.svg
 
 [maven]:https://search.maven.org/#search|gav|1|g:"com.commercetools.sdk.jvm.core"%20AND%20a:"commercetools-models"
 [maven img]:https://maven-badges.herokuapp.com/maven-central/com.commercetools.sdk.jvm.core/commercetools-models/badge.svg
