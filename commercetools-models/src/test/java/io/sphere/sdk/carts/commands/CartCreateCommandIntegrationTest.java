@@ -1,14 +1,9 @@
 package io.sphere.sdk.carts.commands;
 
-import com.google.common.collect.Lists;
 import com.neovisionaries.i18n.CountryCode;
-import io.sphere.sdk.cartdiscounts.CartPredicate;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.carts.commands.updateactions.AddDiscountCode;
 import io.sphere.sdk.carts.queries.CartQuery;
-import io.sphere.sdk.discountcodes.*;
-import io.sphere.sdk.discountcodes.commands.DiscountCodeCreateCommand;
-import io.sphere.sdk.discountcodes.commands.DiscountCodeCreateCommandIntegrationTest;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.products.BySkuVariantIdentifier;
@@ -24,16 +19,10 @@ import io.sphere.sdk.types.queries.TypeQuery;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
-import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.withPersistentCartDiscount;
-import static io.sphere.sdk.carts.CartFixtures.withCartAndDiscountCode;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
-import static io.sphere.sdk.discountcodes.DiscountCodeFixtures.withDiscountCode;
 import static io.sphere.sdk.products.ProductFixtures.withTaxedProduct;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethodForGermany;
 import static io.sphere.sdk.stores.StoreFixtures.withStore;
