@@ -82,6 +82,15 @@ public class CartFixtures {
         delete(client, cartLike);
     }
 
+    public static void withCartWithKey(final BlockingSphereClient client, final UnaryOperator<Cart> operator) {
+        final Cart cart = createCartWithCountry(client);
+        final String key = randomKey();
+        final Cart updatedCart = client.executeBlocking(CartUpdateCommand.of(cart, SetKey.of(key)));
+        assertThat(updatedCart.getKey()).isEqualTo(key);
+        final Cart cartToDelete = operator.apply(cart);
+        client.executeBlocking(CartDeleteCommand.of(cartToDelete));
+    }
+
     private static void delete(final BlockingSphereClient client, final CartLike<?> cartLike) {
         if (cartLike instanceof Cart) {
             final Cart cart = (Cart) cartLike;

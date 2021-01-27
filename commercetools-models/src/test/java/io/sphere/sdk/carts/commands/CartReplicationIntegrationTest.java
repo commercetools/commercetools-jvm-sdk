@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import static io.sphere.sdk.carts.CartFixtures.withCart;
 import static org.assertj.core.api.Assertions.assertThat;
+import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static io.sphere.sdk.orders.OrderFixtures.*;
 
 public class CartReplicationIntegrationTest extends IntegrationTest {
@@ -20,6 +21,18 @@ public class CartReplicationIntegrationTest extends IntegrationTest {
             assertThat(replicatedCart).isNotNull();
             assertThat(cart.getCartState()).isEqualByComparingTo(CartState.ACTIVE);
            return replicatedCart;
+        });
+    }
+
+    @Test
+    public void replicateCartFromCartWithKey(){
+        withCart(client(), cart -> {
+            String cartKey = randomKey();
+            CartReplicationDraft cartReplicationDraft = CartReplicationDraftBuilder.of(cart.toReference()).key(cartKey).build();
+            final Cart replicatedCart = client().executeBlocking(CartReplicationCommand.of(cartReplicationDraft));
+            assertThat(replicatedCart).isNotNull();
+            assertThat(cart.getCartState()).isEqualByComparingTo(CartState.ACTIVE);
+            return replicatedCart;
         });
     }
 

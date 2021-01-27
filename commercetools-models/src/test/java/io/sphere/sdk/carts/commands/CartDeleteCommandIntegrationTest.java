@@ -1,8 +1,11 @@
 package io.sphere.sdk.carts.commands;
 
+import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.CartDraft;
+import io.sphere.sdk.carts.CartDraftBuilder;
 import io.sphere.sdk.carts.CartFixtures;
+import io.sphere.sdk.carts.commands.updateactions.SetKey;
 import io.sphere.sdk.carts.queries.CartByIdGet;
 import io.sphere.sdk.carts.queries.CartQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
@@ -11,8 +14,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import static io.sphere.sdk.stores.StoreFixtures.withStore;
-import static io.sphere.sdk.test.SphereTestUtils.DE;
-import static io.sphere.sdk.test.SphereTestUtils.EUR;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CartDeleteCommandIntegrationTest extends IntegrationTest {
@@ -37,5 +39,19 @@ public class CartDeleteCommandIntegrationTest extends IntegrationTest {
             PagedQueryResult<Cart> result = client().executeBlocking(CartQuery.of().withPredicates(cartQueryModel -> cartQueryModel.id().is(cart.getId())));
             assertThat(result.getResults().size()).isZero();
         });
+    }
+
+    @Test
+    public void deleteCartByKey(){
+        final CartDraft cartDraft = CartDraftBuilder.of(EUR).country(DE).build();
+        final Cart cart = client().executeBlocking(CartCreateCommand.of(cartDraft));
+        final String key = randomKey();
+        final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, SetKey.of(key)));
+        assertThat(updatedCart.getKey()).isEqualTo(key);
+
+        client().executeBlocking(CartDeleteCommand.ofKey(key, updatedCart.getVersion()));
+
+        final PagedQueryResult<Cart> queryResult = client().executeBlocking(CartQuery.of().withPredicates(cartQueryModel -> cartQueryModel.key().is(updatedCart.getKey())));
+        assertThat(queryResult.getResults()).isEmpty();
     }
 }
