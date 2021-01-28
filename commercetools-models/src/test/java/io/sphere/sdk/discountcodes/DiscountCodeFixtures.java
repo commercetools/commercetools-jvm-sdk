@@ -30,7 +30,7 @@ public class DiscountCodeFixtures {
     }
 
     public static DiscountCodeDraftBuilder discountCodeDraftBuilder(BlockingSphereClient client, String code) {
-        final CartDiscount cartDiscount = defaultCartDiscount(client);
+        final CartDiscount cartDiscount = defaultCartDiscount(client, true);
         return DiscountCodeDraftBuilder.of(code, cartDiscount)
                 .name(en("sample discount code"))
                 .description(en("sample discount code descr."))
