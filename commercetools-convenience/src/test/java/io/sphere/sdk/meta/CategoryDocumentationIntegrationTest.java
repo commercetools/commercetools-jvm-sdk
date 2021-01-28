@@ -101,7 +101,7 @@ public class CategoryDocumentationIntegrationTest extends IntegrationTest {
         final CompletionStage<List<String>> categoriesStage = QueryExecutionUtils
             .queryAll(client(), CategoryQuery.of(), Category::getExternalId, 3);
 
-        assertEventually(() -> {
+        assertEventually(Duration.ofSeconds(120), Duration.ofMillis(100), () -> {
             final List<String> externalIds = SphereClientUtils
                     .blockingWait(categoriesStage, Duration.ofMinutes(1));
 
@@ -114,7 +114,7 @@ public class CategoryDocumentationIntegrationTest extends IntegrationTest {
     public void fetchAllExternalIdsWithNonUniformPageSizes() throws Exception {
         final CompletionStage<List<String>> categoriesStage = QueryExecutionUtils
             .queryAll(client(), CategoryQuery.of(), Category::getExternalId, 4);
-        assertEventually(() -> {
+        assertEventually(Duration.ofSeconds(120), Duration.ofMillis(100), () -> {
             final List<String> externalIds = SphereClientUtils
                     .blockingWait(categoriesStage, Duration.ofMinutes(1));
 

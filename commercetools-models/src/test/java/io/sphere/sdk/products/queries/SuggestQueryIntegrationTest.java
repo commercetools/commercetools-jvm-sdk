@@ -20,6 +20,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.time.Duration;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -88,7 +89,7 @@ public class SuggestQueryIntegrationTest extends IntegrationTest {
         final SuggestQuery suggestQuery = SuggestQuery.of(LocalizedStringEntry.of(Locale.ENGLISH, "knife"))
                 .withStaged(true);
 
-        assertEventually(() -> {
+        assertEventually(Duration.ofSeconds(120), Duration.ofMillis(100), () -> {
             final SuggestionResult suggestionResult = client().executeBlocking(suggestQuery);
 
             assertThat(suggestionResult.getSuggestionsForLocale(Locale.ENGLISH))
@@ -110,7 +111,7 @@ public class SuggestQueryIntegrationTest extends IntegrationTest {
         final SuggestQuery suggestQuery = SuggestQuery.of(LocalizedStringEntry.of(Locale.GERMAN, "offiz"))
                 .withStaged(true);
 
-        assertEventually(() -> {
+        assertEventually(Duration.ofSeconds(120), Duration.ofMillis(100), () -> {
             final SuggestionResult suggestionResult = client().executeBlocking(suggestQuery);
 
             assertThat(suggestionResult.getSuggestionsForLocale(Locale.GERMAN))
@@ -136,7 +137,7 @@ public class SuggestQueryIntegrationTest extends IntegrationTest {
         final SuggestQuery suggestQuery = SuggestQuery.of(keywords)
                 .withStaged(true);
 
-        assertEventually(() -> {
+        assertEventually(Duration.ofSeconds(120), Duration.ofMillis(100), () -> {
             final SuggestionResult suggestionResult = client().executeBlocking(suggestQuery);
 
             assertThat(suggestionResult.getSuggestionsForLocale(Locale.GERMAN))
@@ -161,7 +162,7 @@ public class SuggestQueryIntegrationTest extends IntegrationTest {
         final SuggestQuery suggestQuery = SuggestQuery.of(LocalizedStringEntry.of(Locale.ENGLISH, "knive"))
                 .withStaged(true).withFuzzy(true);
 
-        assertEventually(() -> {
+        assertEventually(Duration.ofSeconds(120), Duration.ofMillis(100), () -> {
             final SuggestionResult suggestionResult = client().executeBlocking(suggestQuery);
 
             assertThat(suggestionResult.getSuggestionsForLocale(Locale.ENGLISH))

@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import static io.sphere.sdk.states.StateFixtures.cleanUpByKey;
 import static io.sphere.sdk.states.StateFixtures.createStateByKey;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 
 public class StateDeleteCommandIntegrationTest extends IntegrationTest {
 
@@ -20,13 +21,19 @@ public class StateDeleteCommandIntegrationTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
         final State state = getState();
-        final State deletedState = client().executeBlocking(StateDeleteCommand.of(state));
+        assertEventually(() -> {
+            final State deletedState = client().executeBlocking(StateDeleteCommand.of(state));
+        });
+
     }
 
     @Test
     public void deleteByKey() throws Exception {
         final State state = getState();
-        final State deletedState = client().executeBlocking(StateDeleteCommand.ofKey(state.getKey(), state.getVersion()));
+
+        assertEventually(() -> {
+            final State deletedState = client().executeBlocking(StateDeleteCommand.ofKey(state.getKey(), state.getVersion()));
+        });
     }
 
     private State getState() {
