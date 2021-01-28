@@ -49,14 +49,23 @@ public class CartDiscountFixtures {
     }
 
     public static CartDiscount defaultCartDiscount(final BlockingSphereClient client) {
-        return getCartDiscount(client, CartDiscountFixtures.class.getSimpleName() + "default-4");
+        return defaultCartDiscount(client, false);
+    }
+
+    public static CartDiscount defaultCartDiscount(final BlockingSphereClient client, final boolean active) {
+        return getCartDiscount(client, CartDiscountFixtures.class.getSimpleName() + "default-4", active);
     }
 
     private static CartDiscount getCartDiscount(final BlockingSphereClient client, final String name) {
+        return getCartDiscount(client, name, false);
+    }
+
+    private static CartDiscount getCartDiscount(final BlockingSphereClient client, final String name, final boolean active) {
         final Query<CartDiscount> query = CartDiscountQuery.of().withPredicates(m -> m.name().lang(ENGLISH).is(name));
         return client.executeBlocking(query).head().orElseGet(() -> {
             final CartDiscountDraft draft = newCartDiscountDraftBuilder()
                     .requiresDiscountCode(true)
+                    .isActive(active)
                     .name(LocalizedString.ofEnglish(name))
                     .build();
             return client.executeBlocking(CartDiscountCreateCommand.of(draft));
