@@ -7,6 +7,8 @@ import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
+import io.sphere.sdk.types.Custom;
+
 import javax.annotation.Nullable;
 import java.util.List;
 
@@ -25,7 +27,7 @@ import java.util.List;
 @HasUpdateCommand(includeExamples = "io.sphere.sdk.stores.commands.StoreUpdateCommandIntegrationTest#setNameByKey()")
 @HasDeleteCommand(deleteWith = "key", includeExamples = "io.sphere.sdk.stores.commands.StoreDeleteCommandIntegrationTest#deleteByKey()")
 @HasQueryModel()
-public interface Store extends Resource<Store> {
+public interface Store extends Resource<Store>, Custom {
 
     String getKey();
 

@@ -6,6 +6,8 @@ import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.ResourceIdentifier;
+import io.sphere.sdk.types.CustomFields;
+import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -32,8 +34,11 @@ public interface StoreDraft {
     @Nullable
     List<ResourceIdentifier<Channel>> getSupplyChannels();
 
+    @Nullable
+    CustomFieldsDraft getCustom();
+
     static StoreDraftDsl of(final String key, @Nullable final LocalizedString name) {
-        return new StoreDraftDsl(null, key, new ArrayList<>(), name, null);
+        return new StoreDraftDsl(null, null, key, new ArrayList<>(), name, null);
     }
 
 }
