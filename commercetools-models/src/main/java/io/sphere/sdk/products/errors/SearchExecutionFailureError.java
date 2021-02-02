@@ -1,6 +1,7 @@
-package io.sphere.sdk.models.errors;
+package io.sphere.sdk.products.errors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import io.sphere.sdk.models.errors.SphereError;
 
 
 public final class SearchExecutionFailureError extends SphereError {

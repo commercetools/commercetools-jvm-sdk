@@ -1,6 +1,7 @@
-package io.sphere.sdk.models.errors;
+package io.sphere.sdk.productdiscounts.errors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import io.sphere.sdk.models.errors.SphereError;
 
 
 public final class NoMatchingProductDiscountFoundError extends SphereError {
