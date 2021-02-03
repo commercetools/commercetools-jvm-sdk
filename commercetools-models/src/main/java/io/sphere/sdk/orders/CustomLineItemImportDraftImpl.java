@@ -1,7 +1,6 @@
 package io.sphere.sdk.orders;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.sphere.sdk.carts.ItemShippingDetails;
 import io.sphere.sdk.carts.ItemShippingDetailsDraft;
 import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.models.LocalizedString;

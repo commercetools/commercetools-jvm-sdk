@@ -1,12 +1,10 @@
 package io.sphere.sdk.orders;
 
-import io.sphere.sdk.carts.ItemShippingDetails;
 import io.sphere.sdk.carts.ItemShippingDetailsDraft;
 import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxRate;
-import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.CustomFieldsDraft;
 import org.apache.commons.lang3.RandomStringUtils;
 
