@@ -1,11 +1,13 @@
 package io.sphere.sdk.orders;
 
 import io.sphere.sdk.carts.ItemShippingDetails;
+import io.sphere.sdk.carts.ItemShippingDetailsDraft;
 import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxRate;
 import io.sphere.sdk.types.CustomFields;
+import io.sphere.sdk.types.CustomFieldsDraft;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import javax.annotation.Nullable;
@@ -24,11 +26,11 @@ public final class CustomLineItemImportDraftBuilder extends Base implements Buil
     private TaxRate taxRate;
 
     @Nullable
-    private final CustomFields custom;
+    private final CustomFieldsDraft custom;
 
-    @Nullable private final ItemShippingDetails shippingDetails;
+    @Nullable private final ItemShippingDetailsDraft shippingDetails;
 
-    private CustomLineItemImportDraftBuilder(final LocalizedString name, final MonetaryAmount money, final Long quantity, final Reference<TaxCategory> taxCategory, final CustomFields custom, final ItemShippingDetails shippingDetails) {
+    private CustomLineItemImportDraftBuilder(final LocalizedString name, final MonetaryAmount money, final Long quantity, final Reference<TaxCategory> taxCategory, final CustomFieldsDraft custom, final ItemShippingDetailsDraft shippingDetails) {
         this.name = name;
         this.money = money;
         this.quantity = quantity;
@@ -41,9 +43,18 @@ public final class CustomLineItemImportDraftBuilder extends Base implements Buil
         return of(name, quantity, money, taxCategory.toReference(), null, null);
     }
 
-    public static CustomLineItemImportDraftBuilder of(final LocalizedString name, final long quantity, final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory, final CustomFields custom, final ItemShippingDetails shippingDetails) {
+    public static CustomLineItemImportDraftBuilder of(final LocalizedString name, final long quantity, final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory, final CustomFieldsDraft custom, final ItemShippingDetailsDraft shippingDetails) {
         return new CustomLineItemImportDraftBuilder(name, money, quantity, taxCategory.toReference(), custom, shippingDetails);
     }
+
+    public static CustomLineItemImportDraftBuilder of(final LocalizedString name, final long quantity, final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory, final ItemShippingDetailsDraft shippingDetails) {
+        return new CustomLineItemImportDraftBuilder(name, money, quantity, taxCategory.toReference(), null, shippingDetails);
+    }
+
+    public static CustomLineItemImportDraftBuilder of(final LocalizedString name, final long quantity, final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory, final CustomFieldsDraft custom) {
+        return new CustomLineItemImportDraftBuilder(name, money, quantity, taxCategory.toReference(), custom, null);
+    }
+
 
     public CustomLineItemImportDraftBuilder id(final String id) {
         this.id = id;

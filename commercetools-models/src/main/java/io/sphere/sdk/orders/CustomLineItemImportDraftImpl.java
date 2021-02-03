@@ -1,12 +1,13 @@
 package io.sphere.sdk.orders;
 
 import io.sphere.sdk.carts.ItemShippingDetails;
+import io.sphere.sdk.carts.ItemShippingDetailsDraft;
 import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxRate;
-import io.sphere.sdk.types.CustomFields;
+import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
@@ -25,15 +26,15 @@ final class CustomLineItemImportDraftImpl implements CustomLineItemImportDraft {
     private final TaxRate taxRate;
 
     @Nullable
-    private final CustomFields custom;
+    private final CustomFieldsDraft custom;
 
-    @Nullable private final ItemShippingDetails shippingDetails;
+    @Nullable private final ItemShippingDetailsDraft shippingDetails;
 
     public CustomLineItemImportDraftImpl(final String id, final LocalizedString name, final MonetaryAmount money, final String slug, final Long quantity, @Nullable final Set<ItemState> state, final Reference<TaxCategory> taxCategory, @Nullable final TaxRate taxRate) {
         this(id, name, money, slug, quantity, state, taxCategory, taxRate, null, null);
     }
 
-    public CustomLineItemImportDraftImpl(final String id, final LocalizedString name, final MonetaryAmount money, final String slug, final Long quantity, @Nullable final Set<ItemState> state, final Reference<TaxCategory> taxCategory, @Nullable final TaxRate taxRate, @Nullable final CustomFields custom, @Nullable  final ItemShippingDetails shippingDetails) {
+    public CustomLineItemImportDraftImpl(final String id, final LocalizedString name, final MonetaryAmount money, final String slug, final Long quantity, @Nullable final Set<ItemState> state, final Reference<TaxCategory> taxCategory, @Nullable final TaxRate taxRate, @Nullable final CustomFieldsDraft custom, @Nullable  final ItemShippingDetailsDraft shippingDetails) {
         this.id = id;
         this.name = name;
         this.money = money;
@@ -89,13 +90,13 @@ final class CustomLineItemImportDraftImpl implements CustomLineItemImportDraft {
 
     @Nullable
     @Override
-    public CustomFields getCustom() {
+    public CustomFieldsDraft getCustom() {
         return custom;
     }
 
     @Nullable
     @Override
-    public ItemShippingDetails getShippingDetails() {
+    public ItemShippingDetailsDraft getShippingDetails() {
         return shippingDetails;
     }
 }

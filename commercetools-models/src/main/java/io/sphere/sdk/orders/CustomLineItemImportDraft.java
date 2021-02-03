@@ -3,12 +3,14 @@ package io.sphere.sdk.orders;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.carts.ItemShippingDetails;
+import io.sphere.sdk.carts.ItemShippingDetailsDraft;
 import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxRate;
 import io.sphere.sdk.types.Custom;
+import io.sphere.sdk.types.CustomDraft;
 
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
@@ -18,7 +20,7 @@ import java.util.Set;
  * @see CustomLineItemImportDraftBuilder
  */
 @JsonDeserialize(as = CustomLineItemImportDraftImpl.class)
-public interface CustomLineItemImportDraft extends Custom {
+public interface CustomLineItemImportDraft extends CustomDraft {
 
     LocalizedString getName();
 
@@ -42,5 +44,5 @@ public interface CustomLineItemImportDraft extends Custom {
      * @return ItemShippingDetails
      */
     @Nullable
-    ItemShippingDetails getShippingDetails();
+    ItemShippingDetailsDraft getShippingDetails();
 }
