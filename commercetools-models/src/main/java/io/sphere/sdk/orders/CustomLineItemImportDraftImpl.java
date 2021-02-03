@@ -1,5 +1,6 @@
 package io.sphere.sdk.orders;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.carts.ItemShippingDetails;
 import io.sphere.sdk.carts.ItemShippingDetailsDraft;
 import io.sphere.sdk.carts.ItemState;
@@ -34,6 +35,7 @@ final class CustomLineItemImportDraftImpl implements CustomLineItemImportDraft {
         this(id, name, money, slug, quantity, state, taxCategory, taxRate, null, null);
     }
 
+    @JsonCreator
     public CustomLineItemImportDraftImpl(final String id, final LocalizedString name, final MonetaryAmount money, final String slug, final Long quantity, @Nullable final Set<ItemState> state, final Reference<TaxCategory> taxCategory, @Nullable final TaxRate taxRate, @Nullable final CustomFieldsDraft custom, @Nullable  final ItemShippingDetailsDraft shippingDetails) {
         this.id = id;
         this.name = name;
