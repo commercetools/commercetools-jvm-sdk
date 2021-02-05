@@ -29,24 +29,24 @@ Tested with JDKs: Oracle 1.8.0_221, OpenJDK 1.8.0_221 and Amazon Corretto 8.222.
 <dependency>
   <groupId>com.commercetools.sdk.jvm.core</groupId>
   <artifactId>commercetools-models</artifactId>
-  <version>1.53.0</version>
+  <version>1.58.0</version>
 </dependency>
 <dependency>
   <groupId>com.commercetools.sdk.jvm.core</groupId>
   <artifactId>commercetools-java-client</artifactId>
-  <version>1.53.0</version>
+  <version>1.58.0</version>
 </dependency>
 
 <!-- experimental -->
 <dependency>
   <groupId>com.commercetools.sdk.jvm.core</groupId>
   <artifactId>commercetools-convenience</artifactId>
-  <version>1.53.0</version>
+  <version>1.58.0</version>
 </dependency>
 ````
-* https://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-models%7C1.53.0%7Cjar
-* https://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-java-client%7C1.53.0%7Cjar
-* https://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-convenience%7C1.53.0%7Cjar
+* https://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-models%7C1.58.0%7Cjar
+* https://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-java-client%7C1.58.0%7Cjar
+* https://search.maven.org/#artifactdetails%7Ccom.commercetools.sdk.jvm.core%7Ccommercetools-convenience%7C1.58.0%7Cjar
 
 ### Modules
 * `commercetools-java-client`: alias for commercetools-java-client-ahc-2_0
@@ -64,7 +64,7 @@ repositories {
 }
 
 dependencies {
-    def jvmSdkVersion = "1.53.0"
+    def jvmSdkVersion = "1.58.0"
     compile "com.commercetools.sdk.jvm.core:commercetools-models:$jvmSdkVersion"
     compile "com.commercetools.sdk.jvm.core:commercetools-java-client:$jvmSdkVersion"    
     compile "com.commercetools.sdk.jvm.core:commercetools-convenience:$jvmSdkVersion"

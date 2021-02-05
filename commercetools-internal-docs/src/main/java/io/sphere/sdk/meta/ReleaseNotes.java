@@ -156,7 +156,11 @@ import java.util.function.Function;
  </ul>
  -->
  -->
- <h3 class=released-version id="v1_57_0">1.57.0 (01.02.2021)</h3>
+ <h3 class=released-version id="v1_60_0">1.60.0 (01.03.2021)</h3>
+ <ul>
+ <li class=new-in-release>Support custom fields and itemShippingDetails in OrderImport for CustomLineItems {@link CustomLineItemImportDraft#getShippingDetails()}</li>
+ </ul>
+ <h3 class=released-version id="v1_58_0">1.58.0 (01.02.2021)</h3>
  <ul>
  <li class=new-in-release>Support supplyChannels field to Store and add update action {@link io.sphere.sdk.stores.commands.updateactions.SetSupplyChannels}, {@link io.sphere.sdk.stores.commands.updateactions.AddSupplyChannel} and {@link io.sphere.sdk.stores.commands.updateactions.RemoveSupplyChannel}</li>
  <li class=new-in-release>Support addedAt to LineItem in the Cart and support the relative action with the new field {@link AddLineItem#getAddedAt()}</li>

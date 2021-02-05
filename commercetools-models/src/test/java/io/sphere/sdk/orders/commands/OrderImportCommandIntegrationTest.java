@@ -21,6 +21,7 @@ import io.sphere.sdk.test.JsonNodeReferenceResolver;
 import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.CustomFieldsDraft;
+import io.sphere.sdk.types.Type;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
@@ -28,10 +29,7 @@ import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -528,7 +526,7 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
                 final MonetaryAmount amount = EURO_10;
                 final ProductVariantImportDraft variant = ProductVariantImportDraftBuilder.of(productId, variantId).build();
                 final KeyReference<Store> storeKeyReference = KeyReference.of(store.getKey(), "store");
-                
+
                 final LineItemImportDraft lineItemImportDraft = LineItemImportDraftBuilder.of(variant, quantity, price, name).build();
                 final OrderImportDraft orderImportDraft = OrderImportDraftBuilder.ofLineItems(amount, orderState, asList(lineItemImportDraft))
                         .country(DE).store(storeKeyReference).build();
@@ -553,7 +551,94 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
             });
         });
     }
-    
+
+    @Test
+    public void customLineItemCustomTyppe() throws Exception {
+        withUpdateableType(client(), type -> {
+            withTransientTaxCategory(client(), taxCategory -> withProduct(client(), product -> {
+                final LocalizedString name = randomSlug();
+                final long quantity = 16;
+                final MonetaryAmount money = EURO_20;
+                final Reference<TaxCategory> taxCategoryReference = defaultTaxCategory(client()).toReference();
+                final String id = "an id";
+                final String slug = "a-slug";
+                final TaxRate taxRate = taxCategory.getTaxRates().get(0);
+                final String value = "foo";
+                final CustomLineItemImportDraft customLineItem = CustomLineItemImportDraftBuilder.of(name, quantity, money, taxCategoryReference, CustomFieldsDraft.ofTypeIdAndObjects(type.getId(), singletonMap(STRING_FIELD_NAME, value)))
+                        .id(id)
+                        .slug(slug)
+                        .taxRate(taxRate)
+                        .build();
+                final List<CustomLineItemImportDraft> customLineItems = asList(customLineItem);
+                testOrderAspect(
+                        builder -> builder.customLineItems(customLineItems),
+                        order -> {
+                            assertThat(order.getCustomLineItems()).hasSize(1);
+                            final CustomLineItem actual = order.getCustomLineItems().get(0);
+                            assertThat(actual.getMoney()).isEqualTo(money);
+                            assertThat(actual.getQuantity()).isEqualTo(quantity);
+                            assertThat(actual.getName()).isEqualTo(name);
+                            assertThat(actual.getSlug()).isEqualTo(slug);
+                            assertThat(actual.getTaxCategory()).isEqualTo(taxCategoryReference);
+                            assertThat(actual.getTaxRate()).isEqualTo(taxRate);
+                            assertThat(actual.getCustom().getFieldAsString(STRING_FIELD_NAME)).isEqualTo(value);
+                        }
+                );
+            }));
+            return type;
+        });
+    }
+
+    @Test
+    public void itemShippingDetails() throws Exception {
+            withTransientTaxCategory(client(), taxCategory -> withProduct(client(), product -> {
+                final LocalizedString name = randomSlug();
+                final long quantity = 16;
+                final MonetaryAmount money = EURO_20;
+                final Reference<TaxCategory> taxCategoryReference = defaultTaxCategory(client()).toReference();
+                final String id = "an id";
+                final String slug = "a-slug";
+                final TaxRate taxRate = taxCategory.getTaxRates().get(0);
+                final String value = "foo";
+
+                final List<Address> itemShippingAddresses = createAddressArray();
+                final String addressKey1 = itemShippingAddresses.get(0).getKey();
+                final String addressKey2 = itemShippingAddresses.get(1).getKey();
+
+                final ItemShippingDetailsDraft itemShippingDetailsDraft = ItemShippingDetailsDraftBuilder.of(Arrays.asList(ItemShippingTargetBuilder.of(addressKey1, 2L).build(),ItemShippingTargetBuilder.of(addressKey2, 14L).build())).build();
+
+                final CustomLineItemImportDraft customLineItem = CustomLineItemImportDraftBuilder.of(name, quantity, money, taxCategoryReference, itemShippingDetailsDraft)
+                        .id(id)
+                        .slug(slug)
+                        .taxRate(taxRate)
+                        .build();
+                final List<CustomLineItemImportDraft> customLineItems = asList(customLineItem);
+                testOrderAspect(
+                        builder -> builder.itemShippingAddresses(itemShippingAddresses).customLineItems(customLineItems),
+                        order -> {
+                            assertThat(order.getCustomLineItems()).hasSize(1);
+                            final CustomLineItem actual = order.getCustomLineItems().get(0);
+                            assertThat(actual.getMoney()).isEqualTo(money);
+                            assertThat(actual.getQuantity()).isEqualTo(quantity);
+                            assertThat(actual.getName()).isEqualTo(name);
+                            assertThat(actual.getSlug()).isEqualTo(slug);
+                            assertThat(actual.getTaxCategory()).isEqualTo(taxCategoryReference);
+                            assertThat(actual.getTaxRate()).isEqualTo(taxRate);
+                            assertThat(actual.getShippingDetails().getTargetsMap().get(addressKey1)).isEqualTo(2);
+                            assertThat(actual.getShippingDetails().getTargetsMap().get(addressKey2)).isEqualTo(14);
+                        }
+                );
+            }));
+    }
+
+    public final static List<Address> createAddressArray() {
+        final Address address1 = Address.of(CountryCode.DE).withKey(SphereTestUtils.randomKey());
+        final Address address2 = Address.of(CountryCode.FR).withKey(SphereTestUtils.randomKey());
+        final Address address3 = Address.of(CountryCode.MA).withKey(SphereTestUtils.randomKey());
+        final Address address4 = Address.of(CountryCode.IT).withKey(SphereTestUtils.randomKey());
+        return Arrays.asList(address1, address2, address3, address4);
+    }
+
     public void assertEqualPrice(final Price price,final PriceDraft priceDraft){
         assertThat(priceDraft).isEqualTo(PriceDraft.of(price));
     }
