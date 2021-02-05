@@ -17,15 +17,15 @@ public class InvalidItemShippingDetailsError extends SphereError {
         this.itemId = itemId;
     }
 
+    public static InvalidItemShippingDetailsError of(final String message, final String subject, final String itemId) {
+        return new InvalidItemShippingDetailsError(message, subject, itemId);
+    }
+
     public String getItemId() {
         return itemId;
     }
 
     public String getSubject() {
         return subject;
-    }
-
-    public static InvalidItemShippingDetailsError of(final String message, final String subject, final String itemId) {
-        return new InvalidItemShippingDetailsError(message, subject, itemId);
     }
 }

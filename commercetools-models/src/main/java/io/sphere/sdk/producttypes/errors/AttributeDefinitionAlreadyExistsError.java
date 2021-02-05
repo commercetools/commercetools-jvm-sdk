@@ -2,7 +2,6 @@ package io.sphere.sdk.producttypes.errors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.errors.SphereError;
-import io.sphere.sdk.products.attributes.Attribute;
 
 
 public final class AttributeDefinitionAlreadyExistsError extends SphereError {

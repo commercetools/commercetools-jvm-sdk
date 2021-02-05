@@ -28,6 +28,10 @@ public class MatchingPriceNotFoundError extends SphereError {
         this.channel = channel;
     }
 
+    public static MatchingPriceNotFoundError of(final String message, final String productId, final int variantId, final String currency, final String country, final Reference<CustomerGroup> customerGroup, Reference<Channel> channel) {
+        return new MatchingPriceNotFoundError(message, productId, variantId, currency, country, customerGroup, channel);
+    }
+
     public String getProductId() {
         return productId;
     }
@@ -50,9 +54,5 @@ public class MatchingPriceNotFoundError extends SphereError {
 
     public Reference<Channel> getChannel() {
         return channel;
-    }
-
-    public static MatchingPriceNotFoundError of(final String message, final String productId, final int variantId, final String currency, final String country, final Reference<CustomerGroup> customerGroup, Reference<Channel> channel) {
-        return new MatchingPriceNotFoundError(message, productId, variantId, currency, country, customerGroup, channel);
     }
 }

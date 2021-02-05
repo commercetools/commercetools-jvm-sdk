@@ -19,6 +19,10 @@ public class MissingTaxRateForCountryError extends SphereError {
         this.state = state;
     }
 
+    public static MissingTaxRateForCountryError of(final String message, final String taxCategoryId, final String country, final String state) {
+        return new MissingTaxRateForCountryError(message, taxCategoryId, country, state);
+    }
+
     public String getCountry() {
         return country;
     }
@@ -30,10 +34,5 @@ public class MissingTaxRateForCountryError extends SphereError {
     public String getTaxCategoryId() {
         return taxCategoryId;
     }
-
-    public static MissingTaxRateForCountryError of(final String message, final String taxCategoryId, final String country, final String state) {
-        return new MissingTaxRateForCountryError(message, taxCategoryId, country, state);
-    }
-
 
 }
