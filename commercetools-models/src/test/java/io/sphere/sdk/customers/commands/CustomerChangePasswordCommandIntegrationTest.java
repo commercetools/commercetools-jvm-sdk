@@ -2,17 +2,17 @@ package io.sphere.sdk.customers.commands;
 
 import io.sphere.sdk.client.ErrorResponseException;
 import io.sphere.sdk.client.SphereClient;
-import io.sphere.sdk.customers.Customer;
-import io.sphere.sdk.customers.CustomerIntegrationTest;
-import io.sphere.sdk.customers.CustomerSignInResult;
+import io.sphere.sdk.customers.*;
 import io.sphere.sdk.customers.errors.CustomerInvalidCredentials;
 import io.sphere.sdk.customers.errors.CustomerInvalidCurrentPassword;
+import io.sphere.sdk.customers.errors.CustomerWeakPassword;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.concurrent.CompletionStage;
 
-import static io.sphere.sdk.customers.CustomerFixtures.PASSWORD;
-import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
+import static io.sphere.sdk.customers.CustomerFixtures.*;
+import static io.sphere.sdk.test.SphereTestUtils.randomEmail;
 import static io.sphere.sdk.test.SphereTestUtils.randomInt;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
@@ -51,6 +51,18 @@ public class CustomerChangePasswordCommandIntegrationTest extends CustomerIntegr
             final ErrorResponseException errorResponseException = (ErrorResponseException) throwable;
             assertThat(errorResponseException.hasErrorCode(CustomerInvalidCurrentPassword.CODE)).isTrue();
         });
+    }
+
+//    this method should work checking the password and asserting that is weak but there is no Exception throwed
+    @Ignore
+    @Test
+    public void weakPassword() throws Exception {
+        final String password = "newsecret";
+        final CustomerDraft customerDraft = CustomerDraftDsl.of(CustomerName.ofFirstAndLastName("John", "Smith"), randomEmail(CustomerFixtures.class), password);
+        final Throwable throwable = catchThrowable(() ->  client().executeBlocking(CustomerCreateCommand.of(customerDraft)));
+        assertThat(throwable).isInstanceOf(ErrorResponseException.class);
+        final ErrorResponseException errorResponseException = (ErrorResponseException) throwable;
+        assertThat(errorResponseException.hasErrorCode(CustomerWeakPassword.CODE)).isTrue();
     }
 
     @Test

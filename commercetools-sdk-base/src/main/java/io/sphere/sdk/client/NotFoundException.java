@@ -16,4 +16,8 @@ public class NotFoundException extends ClientErrorException {
     public NotFoundException() {
         super(404);
     }
+
+    public NotFoundException(final String message) {
+        super(message, 404);
+    }
 }

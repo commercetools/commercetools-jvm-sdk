@@ -1,4 +1,4 @@
-package io.sphere.sdk.orderedits.errors;
+package io.sphere.sdk.shippingmethods.errors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.errors.SphereError;
