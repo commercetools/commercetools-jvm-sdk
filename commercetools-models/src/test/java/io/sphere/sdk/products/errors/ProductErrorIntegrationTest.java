@@ -68,7 +68,7 @@ public class ProductErrorIntegrationTest extends IntegrationTest {
             final Throwable throwable = catchThrowable(() -> client()
                     .executeBlocking(ProductUpdateCommand.of(product, updateAction)));
 
-           0  assertThat(throwable).isInstanceOf(ErrorResponseException.class);
+            assertThat(throwable).isInstanceOf(ErrorResponseException.class);
             final ErrorResponseException e = (ErrorResponseException) throwable;
             assertThat(e.hasErrorCode(DuplicateAttributeValuesError.CODE)).isTrue();
             assertThat(e.getErrors().get(0).getCode()).isEqualTo(DuplicateAttributeValuesError.CODE);
