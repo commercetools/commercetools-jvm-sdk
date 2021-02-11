@@ -101,4 +101,28 @@ public class ProductTypeErrorIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Test
+    public void attributeNameDoesNotExist() {
+        withUpdateableProductType(client(), productType -> {
+            final String attributeName = "temperature";
+
+            final EnumValue value = EnumValue.of("cold", "cold");
+
+            final Throwable throwable = catchThrowable(() -> client().executeBlocking(
+                    ProductTypeUpdateCommand.of(productType, AddEnumValue.of(attributeName, value))
+            ));
+
+            assertThat(throwable).isInstanceOf(ErrorResponseException.class);
+            final ErrorResponseException e = (ErrorResponseException) throwable;
+            assertThat(e.hasErrorCode(AttributeNameDoesNotExistError.CODE)).isTrue();
+            assertThat(e.getErrors().get(0).getCode()).isEqualTo(AttributeNameDoesNotExistError.CODE);
+            final AttributeNameDoesNotExistError error = e.getErrors().get(0).as(AttributeNameDoesNotExistError.class);
+            assertThat(productType.findAttribute(attributeName)).isNotPresent();
+            assertThat(error.getInvalidAttributeName()).isEqualTo(attributeName);
+
+            return productType;
+        });
+    }
+
+
 }
