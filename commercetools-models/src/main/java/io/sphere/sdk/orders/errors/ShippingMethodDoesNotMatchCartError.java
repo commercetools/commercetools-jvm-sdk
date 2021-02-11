@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.errors.SphereError;
 
 public class ShippingMethodDoesNotMatchCartError extends SphereError {
-    public static final String CODE = "DoesNotMatchCart";
+    public static final String CODE = "ShippingMethodDoesNotMatchCart";
 
     @JsonCreator
     private  ShippingMethodDoesNotMatchCartError(final String message) {
