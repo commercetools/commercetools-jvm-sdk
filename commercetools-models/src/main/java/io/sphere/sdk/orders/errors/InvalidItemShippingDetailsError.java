@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.errors.SphereError;
 
 
-public class InvalidItemShippingDetailsError extends SphereError {
+public final class InvalidItemShippingDetailsError extends SphereError {
     public static final String CODE = "InvalidItemShippingDetails";
 
     private final String subject;

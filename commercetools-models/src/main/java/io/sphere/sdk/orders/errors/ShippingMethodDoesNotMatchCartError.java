@@ -3,7 +3,7 @@ package io.sphere.sdk.orders.errors;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.errors.SphereError;
 
-public class ShippingMethodDoesNotMatchCartError extends SphereError {
+public final class ShippingMethodDoesNotMatchCartError extends SphereError {
     public static final String CODE = "ShippingMethodDoesNotMatchCart";
 
     @JsonCreator

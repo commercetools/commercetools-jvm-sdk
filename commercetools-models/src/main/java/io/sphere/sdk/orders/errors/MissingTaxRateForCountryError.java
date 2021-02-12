@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.errors.SphereError;
 
 
-public class MissingTaxRateForCountryError extends SphereError {
+public final class MissingTaxRateForCountryError extends SphereError {
     public static final String CODE = "MissingTaxRateForCountry";
     private final String taxCategoryId;
     private final String country;

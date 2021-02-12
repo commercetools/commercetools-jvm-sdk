@@ -7,7 +7,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.errors.SphereError;
 
 
-public class MatchingPriceNotFoundError extends SphereError {
+public final class MatchingPriceNotFoundError extends SphereError {
     public static final String CODE = "MatchingPriceNotFound";
 
     private final String productId;
