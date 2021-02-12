@@ -156,9 +156,10 @@ import java.util.function.Function;
  </ul>
  -->
  -->
- <h3 class=released-version id="v1_60_0">1.60.0 (01.03.2021)</h3>
+ <h3 class=released-version id="v1_60_0">1.60.0 (16.02.2021)</h3>
  <ul>
  <li class=new-in-release>Support custom fields and itemShippingDetails in OrderImport for CustomLineItems {@link CustomLineItemImportDraft#getShippingDetails()}</li>
+ <li class=new-in-release>Support Error codes adding the related classes that has to be found in this page of the documentation {@link //docs.commercetools.com/api/errors#top} </li>
  </ul>
  <h3 class=released-version id="v1_58_0">1.58.0 (01.02.2021)</h3>
  <ul>
