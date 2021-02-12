@@ -1,6 +1,7 @@
 package io.sphere.sdk.customers.errors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import io.sphere.sdk.customers.commands.CustomerChangePasswordCommand;
 import io.sphere.sdk.models.errors.SphereError;
 
 public final class CustomerMissingTaxRateForCountry extends SphereError {

@@ -6,9 +6,6 @@ import io.sphere.sdk.products.Price;
 
 import java.util.List;
 
-/**
-  * {@include.example io.sphere.sdk.orders.errors.ProductUpdateCommandIntegrationTest#duplicatePriceScopeError()}
-  */
 public final class DuplicatePriceScopeError extends SphereError {
 
     public static final String CODE = "DuplicatePriceScope";
