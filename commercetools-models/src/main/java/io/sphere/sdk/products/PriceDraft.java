@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.customergroups.CustomerGroup;
-import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.types.CustomDraft;
 import io.sphere.sdk.types.CustomFieldsDraft;
@@ -24,7 +23,7 @@ public interface PriceDraft extends CustomDraft {
     @Nullable
     CountryCode getCountry();
     @Nullable
-    Reference<CustomerGroup> getCustomerGroup();
+    ResourceIdentifier<CustomerGroup> getCustomerGroup();
 
     @Nullable
     ResourceIdentifier<Channel> getChannel();
