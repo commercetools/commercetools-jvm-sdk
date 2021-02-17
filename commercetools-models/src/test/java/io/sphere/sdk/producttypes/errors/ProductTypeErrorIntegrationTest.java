@@ -26,6 +26,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import static io.sphere.sdk.producttypes.ProductTypeFixtures.deleteProductType;
 import static io.sphere.sdk.producttypes.ProductTypeFixtures.withUpdateableProductType;
@@ -154,28 +155,19 @@ public class ProductTypeErrorIntegrationTest extends IntegrationTest {
     @Test
     public void duplicateEnumValues() {
         withUpdateableProductType(client(), productType -> {
-            final String attributeName = "size";
-            assertThat(productType.findAttribute(attributeName)).isPresent();
             final EnumValue value = EnumValue.of("XXXL", "XXXL");
+            final AttributeDefinitionDraft attributeName = AttributeDefinitionDraftBuilder.of(EnumAttributeType.of(value, value), "duplicateEnum", LocalizedString.of(ENGLISH, "duplicateEnum"), false).build();
 
-            final ProductType updatedProductType = client().executeBlocking(ProductTypeUpdateCommand.of(productType,
-                    AddEnumValue.of(attributeName, value)));
-
-            assertThat(updatedProductType.getAttribute(attributeName).getAttributeType())
-                    .isInstanceOf(EnumAttributeType.class)
-                    .matches(type -> ((EnumAttributeType) type).getValues().contains(value));
-
-            final Throwable throwable = catchThrowable(() -> client().executeBlocking(ProductTypeUpdateCommand.of(updatedProductType,
-                    AddEnumValue.of(attributeName, value))));
+            final Throwable throwable = catchThrowable(() -> client().executeBlocking(ProductTypeUpdateCommand.of(productType,
+                    AddAttributeDefinition.of(attributeName))));
 
             assertThat(throwable).isInstanceOf(ErrorResponseException.class);
             final ErrorResponseException e = (ErrorResponseException) throwable;
             assertThat(e.hasErrorCode(DuplicateEnumValuesError.CODE)).isTrue();
             assertThat(e.getErrors().get(0).getCode()).isEqualTo(DuplicateEnumValuesError.CODE);
             final DuplicateEnumValuesError error = e.getErrors().get(0).as(DuplicateEnumValuesError.class);
-            assertThat(error.getDuplicates()).isEqualTo(updatedProductType.getAttributes().get(0).getName());
 
-            return updatedProductType;
+            return productType;
         });
     }
 
