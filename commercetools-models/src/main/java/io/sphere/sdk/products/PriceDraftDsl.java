@@ -6,7 +6,6 @@ import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.types.CustomFieldsDraft;
@@ -30,7 +29,7 @@ public final class PriceDraftDsl extends Base implements PriceDraft {
     @Nullable
     private final CountryCode country;
     @Nullable
-    private final Reference<CustomerGroup> customerGroup;
+    private final ResourceIdentifier<CustomerGroup> customerGroup;
     @Nullable
     private final ResourceIdentifier<Channel> channel;
     @Nullable
@@ -44,7 +43,7 @@ public final class PriceDraftDsl extends Base implements PriceDraft {
 
      @JsonCreator
     PriceDraftDsl(final MonetaryAmount value, @Nullable final CountryCode country,
-                  @Nullable final Reference<CustomerGroup> customerGroup, @Nullable final ResourceIdentifier<Channel> channel,
+                  @Nullable final ResourceIdentifier<CustomerGroup> customerGroup, @Nullable final ResourceIdentifier<Channel> channel,
                   @Nullable final ZonedDateTime validFrom, @Nullable final ZonedDateTime validUntil,
                   @Nullable final CustomFieldsDraft custom, @Nullable final List<PriceTier> tiers) {
         this.value = value;
@@ -67,7 +66,7 @@ public final class PriceDraftDsl extends Base implements PriceDraft {
     }
 
     @Nullable
-    public Reference<CustomerGroup> getCustomerGroup() {
+    public ResourceIdentifier<CustomerGroup> getCustomerGroup() {
         return customerGroup;
     }
 
@@ -99,7 +98,7 @@ public final class PriceDraftDsl extends Base implements PriceDraft {
     }
 
     public PriceDraftDsl withCustomerGroup(@Nullable final Referenceable<CustomerGroup> customerGroup) {
-        return PriceDraftBuilder.of(this).customerGroup(Optional.ofNullable(customerGroup).map(c -> c.toReference()).orElse(null)).build();
+        return PriceDraftBuilder.of(this).customerGroup(Optional.ofNullable(customerGroup).map(Referenceable::toResourceIdentifier).orElse(null)).build();
     }
 
     public PriceDraftDsl withCustomerGroupId(@Nullable final String customerGroupId) {
@@ -148,10 +147,10 @@ public final class PriceDraftDsl extends Base implements PriceDraft {
     public static PriceDraftDsl of(final Price template) {
 
         final ResourceIdentifier<Channel> channelResourceIdentifier = Optional.ofNullable(template.getChannel()).map(Referenceable::toResourceIdentifier).orElse(null);
-
+        final ResourceIdentifier<CustomerGroup> customerGroupResourceIdentifier = Optional.ofNullable(template.getCustomerGroup()).map(Referenceable::toResourceIdentifier).orElse(null);
         return PriceDraftBuilder.of(template.getValue())
                 .country(template.getCountry())
-                .customerGroup(template.getCustomerGroup())
+                .customerGroup(customerGroupResourceIdentifier)
                 .channel(channelResourceIdentifier)
                 .validFrom(template.getValidFrom())
                 .validUntil(template.getValidUntil())

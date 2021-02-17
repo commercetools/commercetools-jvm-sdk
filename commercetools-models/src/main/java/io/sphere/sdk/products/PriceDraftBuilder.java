@@ -3,10 +3,12 @@ package io.sphere.sdk.products;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.customergroups.CustomerGroup;
-import io.sphere.sdk.models.*;
+import io.sphere.sdk.models.Base;
+import io.sphere.sdk.models.Builder;
+import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.types.CustomFieldsDraft;
 import io.sphere.sdk.types.CustomFieldsDraftBuilder;
-import io.sphere.sdk.utils.MoneyImpl;
 
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
@@ -19,7 +21,7 @@ public final class PriceDraftBuilder extends Base implements Builder<PriceDraftD
     @Nullable
     private CountryCode country;
     @Nullable
-    private Reference<CustomerGroup> customerGroup;
+    private ResourceIdentifier<CustomerGroup> customerGroup;
     @Nullable
     private ResourceIdentifier<Channel> channel;
     @Nullable
@@ -51,6 +53,11 @@ public final class PriceDraftBuilder extends Base implements Builder<PriceDraftD
 
     public PriceDraftBuilder customerGroup(@Nullable final Referenceable<CustomerGroup> customerGroup) {
         this.customerGroup = Optional.ofNullable(customerGroup).map(Referenceable::toReference).orElse(null);
+        return this;
+    }
+
+    public PriceDraftBuilder customerGroup(@Nullable final ResourceIdentifier<CustomerGroup> customerGroup) {
+        this.customerGroup = customerGroup;
         return this;
     }
 
@@ -105,7 +112,7 @@ public final class PriceDraftBuilder extends Base implements Builder<PriceDraftD
     }
 
     @Nullable
-    public Reference<CustomerGroup> getCustomerGroup() {
+    public ResourceIdentifier<CustomerGroup> getCustomerGroup() {
         return customerGroup;
     }
 
@@ -155,9 +162,10 @@ public final class PriceDraftBuilder extends Base implements Builder<PriceDraftD
     }
 
     public static PriceDraftBuilder of(final Price template) {
+        final ResourceIdentifier<CustomerGroup> customerGroupResourceIdentifier = Optional.ofNullable(template.getCustomerGroup()).map(Referenceable::toResourceIdentifier).orElse(null);
         return of(template.getValue())
                 .country(template.getCountry())
-                .customerGroup(template.getCustomerGroup())
+                .customerGroup(customerGroupResourceIdentifier)
                 .channel(Optional.ofNullable(template.getChannel()).map(Referenceable::toResourceIdentifier).orElse(null))
                 .validFrom(template.getValidFrom())
                 .validUntil(template.getValidUntil())
