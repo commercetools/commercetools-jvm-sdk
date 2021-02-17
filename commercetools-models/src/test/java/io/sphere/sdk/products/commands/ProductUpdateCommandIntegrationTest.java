@@ -62,8 +62,7 @@ import static io.sphere.sdk.types.TypeFixtures.*;
 import static java.util.Collections.*;
 import static java.util.Locale.ENGLISH;
 import static java.util.stream.Collectors.toList;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     public static final Random RANDOM = new Random();
