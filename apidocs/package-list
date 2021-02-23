@@ -58,6 +58,7 @@ io.sphere.sdk.expansion
 io.sphere.sdk.extensions
 io.sphere.sdk.extensions.commands
 io.sphere.sdk.extensions.commands.updateactions
+io.sphere.sdk.extensions.errors
 io.sphere.sdk.extensions.expansion
 io.sphere.sdk.extensions.queries
 io.sphere.sdk.http
@@ -99,12 +100,14 @@ io.sphere.sdk.plugin
 io.sphere.sdk.productdiscounts
 io.sphere.sdk.productdiscounts.commands
 io.sphere.sdk.productdiscounts.commands.updateactions
+io.sphere.sdk.productdiscounts.errors
 io.sphere.sdk.productdiscounts.expansion
 io.sphere.sdk.productdiscounts.queries
 io.sphere.sdk.products
 io.sphere.sdk.products.attributes
 io.sphere.sdk.products.commands
 io.sphere.sdk.products.commands.updateactions
+io.sphere.sdk.products.errors
 io.sphere.sdk.products.expansion
 io.sphere.sdk.products.messages
 io.sphere.sdk.products.queries
@@ -112,6 +115,7 @@ io.sphere.sdk.products.search
 io.sphere.sdk.producttypes
 io.sphere.sdk.producttypes.commands
 io.sphere.sdk.producttypes.commands.updateactions
+io.sphere.sdk.producttypes.errors
 io.sphere.sdk.producttypes.expansion
 io.sphere.sdk.producttypes.queries
 io.sphere.sdk.projects
