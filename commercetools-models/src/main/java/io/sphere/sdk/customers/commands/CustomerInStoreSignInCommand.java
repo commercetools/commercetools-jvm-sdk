@@ -2,10 +2,13 @@ package io.sphere.sdk.customers.commands;
 
 import com.fasterxml.jackson.databind.JavaType;
 import io.sphere.sdk.carts.AnonymousCartSignInMode;
+import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.commands.CommandImpl;
+import io.sphere.sdk.customers.CustomerDraft;
 import io.sphere.sdk.customers.CustomerSignInResult;
 import io.sphere.sdk.json.SphereJsonUtils;
+import io.sphere.sdk.models.ResourceIdentifier;
 
 import javax.annotation.Nullable;
 
@@ -17,8 +20,14 @@ public final class CustomerInStoreSignInCommand extends CommandImpl<CustomerSign
 
     private final String email;
     private final String password;
+    /**
+     * @deprecated use {@link CustomerInStoreSignInCommand#anonymousCart} instead
+     */
+    @Deprecated
     @Nullable
     private final String anonymousCartId;
+    @Nullable
+    private final ResourceIdentifier<Cart> anonymousCart;
     @Nullable
     private final String anonymousId;
     @Nullable
@@ -28,11 +37,12 @@ public final class CustomerInStoreSignInCommand extends CommandImpl<CustomerSign
 
     private final String storeKey;
 
-    private CustomerInStoreSignInCommand(final String storeKey, final String email, final String password, @Nullable final String anonymousCartId, @Nullable final String anonymousId, final AnonymousCartSignInMode anonymousCartSignInMode,
+    private CustomerInStoreSignInCommand(final String storeKey, final String email, final String password, @Nullable ResourceIdentifier<Cart> anonymousCart, @Nullable final String anonymousCartId, @Nullable final String anonymousId, final AnonymousCartSignInMode anonymousCartSignInMode,
                                   @Nullable final Boolean updateProductData) {
         this.email = email;
         this.password = password;
         this.anonymousCartId = anonymousCartId;
+        this.anonymousCart = anonymousCart;
         this.anonymousId = anonymousId;
         this.anonymousCartSignInMode = anonymousCartSignInMode;
         this.updateProductData = updateProductData;
@@ -43,20 +53,32 @@ public final class CustomerInStoreSignInCommand extends CommandImpl<CustomerSign
         return of(storeKey, email, password, null);
     }
 
+    /**
+     * @deprecated use {@link CustomerInStoreSignInCommand#ofAnonymousCart(String, String, String, ResourceIdentifier)} ()} instead
+     */
+    @Deprecated
     public static CustomerInStoreSignInCommand of(final String storeKey, final String email, final String password, @Nullable final String anonymousCartId) {
-        return new CustomerInStoreSignInCommand(storeKey, email, password, anonymousCartId, null, null, null);
+        return new CustomerInStoreSignInCommand(storeKey, email, password, null, anonymousCartId, null, null, null);
+    }
+
+    public static CustomerInStoreSignInCommand ofAnonymousCart(final String storeKey, final String email, final String password, @Nullable final ResourceIdentifier<Cart> anonymousCart) {
+        return new CustomerInStoreSignInCommand(storeKey, email, password, anonymousCart, null, null, null, null);
     }
 
     public CustomerInStoreSignInCommand withAnonymousId(final String storeKey, @Nullable final String anonymousId) {
-        return new CustomerInStoreSignInCommand(storeKey, email, password, anonymousCartId, anonymousId, anonymousCartSignInMode, updateProductData);
+        return new CustomerInStoreSignInCommand(storeKey, email, password, anonymousCart, anonymousCartId, anonymousId, anonymousCartSignInMode, updateProductData);
+    }
+
+    public CustomerInStoreSignInCommand withAnonymousCart(final String storeKey, @Nullable final ResourceIdentifier<Cart> anonymousCart) {
+        return new CustomerInStoreSignInCommand(storeKey, email, password, anonymousCart, null, anonymousId, anonymousCartSignInMode, updateProductData);
     }
 
     public CustomerInStoreSignInCommand withAnonymousCartSignInMode(final String storeKey, @Nullable final AnonymousCartSignInMode anonymousCartSignInMode) {
-        return new CustomerInStoreSignInCommand(storeKey, email, password, anonymousCartId, anonymousId, anonymousCartSignInMode, updateProductData);
+        return new CustomerInStoreSignInCommand(storeKey, email, password, anonymousCart, anonymousCartId, anonymousId, anonymousCartSignInMode, updateProductData);
     }
 
     public CustomerInStoreSignInCommand withUpdateProductData(final String storeKey, @Nullable final Boolean updateProductData) {
-        return new CustomerInStoreSignInCommand(storeKey, email, password, anonymousCartId, anonymousId, anonymousCartSignInMode, updateProductData);
+        return new CustomerInStoreSignInCommand(storeKey, email, password, anonymousCart, anonymousCartId, anonymousId, anonymousCartSignInMode, updateProductData);
     }
 
     @Override
@@ -77,9 +99,18 @@ public final class CustomerInStoreSignInCommand extends CommandImpl<CustomerSign
         return password;
     }
 
+    /**
+     * @deprecated use {@link CustomerInStoreSignInCommand#getAnonymousCart()} instead
+     */
+    @Deprecated
     @Nullable
     public String getAnonymousCartId() {
         return anonymousCartId;
+    }
+
+    @Nullable
+    public ResourceIdentifier<Cart> getAnonymousCart() {
+        return anonymousCart;
     }
 
     @Nullable
