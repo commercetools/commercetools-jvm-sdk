@@ -9,7 +9,6 @@ import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.models.WithKey;
-import io.sphere.sdk.orders.OrderFromCartDraft;
 import io.sphere.sdk.stores.Store;
 import io.sphere.sdk.types.CustomDraft;
 import io.sphere.sdk.types.CustomFieldsDraft;
