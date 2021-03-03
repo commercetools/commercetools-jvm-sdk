@@ -124,13 +124,14 @@ public class CustomerSignInCommandIntegrationTest extends CustomerIntegrationTes
         final CartDraft cartDraft = CartDraft.of(EUR).withCountry(DE).withAnonymousId(anonymousId);
         final Cart cart = client().executeBlocking(CartCreateCommand.of(cartDraft));
         withCustomer(client(), customer -> {
-            final CustomerSignInCommand cmd =
+            final CustomerSignInCommand customerSignInCommand =
                     CustomerSignInCommand.of(customer.getEmail(), CustomerFixtures.PASSWORD)
                             .withAnonymousCart(cart.toResourceIdentifier());
-            final CustomerSignInResult customerSignInResult = client().executeBlocking(cmd);
+            final CustomerSignInResult customerSignInResult = client().executeBlocking(customerSignInCommand);
             assertThat(customerSignInResult.getCart().getId())
                     .as("the customer gets the cart from the anonymous session assigned while on sign-in")
                     .isEqualTo(cart.getId());
+            assertThat(customerSignInCommand.getAnonymousCart()).isEqualTo(cart.toResourceIdentifier());
         });
     }
 
