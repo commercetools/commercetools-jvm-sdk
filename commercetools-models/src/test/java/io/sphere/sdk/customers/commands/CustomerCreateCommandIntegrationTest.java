@@ -102,7 +102,7 @@ public class CustomerCreateCommandIntegrationTest extends CustomerIntegrationTes
     public void createCustomerWithCart() throws Exception {
         final Cart cart = client().executeBlocking(CartCreateCommand.of(CartDraft.of(EUR)));//could of course be filled with products
         final String email = randomEmail(CustomerCreateCommandIntegrationTest.class);
-        final CustomerDraft draft = CustomerDraftDsl.of(CUSTOMER_NAME, email, PASSWORD).withCart(cart);
+        final CustomerDraft draft = CustomerDraftDsl.of(CUSTOMER_NAME, email, PASSWORD).withCartAnonymousCart(cart);
         final CustomerSignInResult result = client().executeBlocking(CustomerCreateCommand.of(draft));
         assertThat(result.getCart()).isNotNull();
         assertThat(result.getCart().getId()).isEqualTo(cart.getId());
@@ -113,7 +113,7 @@ public class CustomerCreateCommandIntegrationTest extends CustomerIntegrationTes
         final CustomerGroup customerGroup = CustomerGroupFixtures.b2cCustomerGroup(client());
         final Cart cart = client().executeBlocking(CartCreateCommand.of(CartDraft.of(EUR)));
         final String email = randomEmail(CustomerCreateCommandIntegrationTest.class);
-        final CustomerDraft draft = CustomerDraftDsl.of(CUSTOMER_NAME, email, PASSWORD).withCart(cart).withCustomerGroup(customerGroup);
+        final CustomerDraft draft = CustomerDraftDsl.of(CUSTOMER_NAME, email, PASSWORD).withCartAnonymousCart(cart).withCustomerGroup(customerGroup);
         final CustomerCreateCommand customerCreateCommand = CustomerCreateCommand.of(draft)
                 .withExpansionPaths(m -> m.cart().customerGroup());
         final CustomerSignInResult result = client().executeBlocking(customerCreateCommand);

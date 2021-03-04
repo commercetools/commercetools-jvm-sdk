@@ -36,6 +36,11 @@ public final class CustomerDraftDsl extends CustomerDraftDslBase<CustomerDraftDs
         return withAnonymousCartId(cart.getId());
     }
 
+    public CustomerDraftDsl withCartAnonymousCart(final io.sphere.sdk.carts.Cart cart) {
+        Objects.requireNonNull(cart);
+        return withAnonymousCart(cart.toResourceIdentifier());
+    }
+
     private static boolean isValidAddressIndex(final List<Address> addresses, final Integer addressIndex) {
         return Optional.ofNullable(addressIndex).map(i -> i < addresses.size() && i >= 0).orElse(true);
     }
