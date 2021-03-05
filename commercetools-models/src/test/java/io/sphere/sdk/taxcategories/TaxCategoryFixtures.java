@@ -2,6 +2,7 @@ package io.sphere.sdk.taxcategories;
 
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.client.BlockingSphereClient;
+import io.sphere.sdk.client.ErrorResponseException;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.taxcategories.commands.TaxCategoryCreateCommand;
@@ -45,7 +46,13 @@ public final class TaxCategoryFixtures {
     public static TaxCategory defaultTaxCategory(final BlockingSphereClient client) {
         final String name = "sdk-default-tax-cat-1";
         final TaxCategoryDraft categoryDraft = TaxCategoryDraft.of(name, singletonList(TaxRateDraft.of("xyz", 0.20, true, DE)));
-        return client.executeBlocking(TaxCategoryQuery.of().byName(name)).head().orElseGet(() -> client.executeBlocking(TaxCategoryCreateCommand.of(categoryDraft)));
+        return client.executeBlocking(TaxCategoryQuery.of().byName(name)).head().orElseGet(() -> {
+            try {
+                return client.executeBlocking(TaxCategoryCreateCommand.of(categoryDraft));
+            } catch (ErrorResponseException e) {
+                return client.executeBlocking(TaxCategoryQuery.of().byName(name)).head().orElseThrow(() -> e);
+            }
+        });
     }
 
     public static void withTaxCategory(final BlockingSphereClient client, final String name, final Consumer<TaxCategory> user) {
