@@ -12,6 +12,8 @@ import io.sphere.sdk.models.ResourceIdentifier;
 
 import javax.annotation.Nullable;
 
+import java.util.Optional;
+
 import static io.sphere.sdk.http.HttpMethod.POST;
 
 import static io.sphere.sdk.client.SphereRequestUtils.urlEncode;
@@ -43,18 +45,18 @@ public final class CustomerInStoreSignInCommand extends CommandImpl<CustomerSign
     }
 
     public static CustomerInStoreSignInCommand of(final String storeKey, final String email, final String password) {
-        return of(storeKey, email, password, null);
+        return new CustomerInStoreSignInCommand(storeKey, email, password, null,null, null, null);
     }
 
     /**
-     * @deprecated use {@link CustomerInStoreSignInCommand#ofAnonymousCart(String, String, String, ResourceIdentifier)} ()} instead
+     * @deprecated use {@link CustomerInStoreSignInCommand#of(String, String, String, ResourceIdentifier)} ()} instead
      */
     @Deprecated
     public static CustomerInStoreSignInCommand of(final String storeKey, final String email, final String password, @Nullable final String anonymousCartId) {
         return new CustomerInStoreSignInCommand(storeKey, email, password, Cart.referenceOfId(anonymousCartId),null, null, null);
     }
 
-    public static CustomerInStoreSignInCommand ofAnonymousCart(final String storeKey, final String email, final String password, @Nullable final ResourceIdentifier<Cart> anonymousCart) {
+    public static CustomerInStoreSignInCommand of(final String storeKey, final String email, final String password, @Nullable final ResourceIdentifier<Cart> anonymousCart) {
         return new CustomerInStoreSignInCommand(storeKey, email, password, anonymousCart, null, null, null);
     }
 
@@ -98,7 +100,7 @@ public final class CustomerInStoreSignInCommand extends CommandImpl<CustomerSign
     @Deprecated
     @Nullable
     public String getAnonymousCartId() {
-        return anonymousCart.getId();
+        return  Optional.ofNullable(anonymousCart).map(ResourceIdentifier::getId).orElse(null);
     }
 
     @Nullable
