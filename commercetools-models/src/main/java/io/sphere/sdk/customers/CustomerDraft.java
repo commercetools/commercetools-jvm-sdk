@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
+import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.ResourceIdentifier;
@@ -55,8 +56,15 @@ public interface CustomerDraft extends CustomDraft, WithKey {
     @Nullable
     String getExternalId();
 
+    /**
+     * @deprecated use {@link CustomerDraft#getAnonymousCart()} instead
+     */
+    @Deprecated
     @Nullable
     String getAnonymousCartId();
+
+    @Nullable
+    ResourceIdentifier<Cart> getAnonymousCart();
 
     @Nullable
     String getAnonymousId();
