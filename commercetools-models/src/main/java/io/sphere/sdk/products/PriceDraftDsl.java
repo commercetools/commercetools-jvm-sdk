@@ -8,6 +8,7 @@ import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.models.ResourceIdentifier;
+import io.sphere.sdk.productdiscounts.DiscountedPrice;
 import io.sphere.sdk.types.CustomFieldsDraft;
 import io.sphere.sdk.utils.MoneyImpl;
 
@@ -40,12 +41,15 @@ public final class PriceDraftDsl extends Base implements PriceDraft {
     private final CustomFieldsDraft custom;
     @Nullable
     private final List<PriceTier> tiers;
+    @Nullable
+    private final DiscountedPrice discounted;
 
      @JsonCreator
     PriceDraftDsl(final MonetaryAmount value, @Nullable final CountryCode country,
                   @Nullable final ResourceIdentifier<CustomerGroup> customerGroup, @Nullable final ResourceIdentifier<Channel> channel,
                   @Nullable final ZonedDateTime validFrom, @Nullable final ZonedDateTime validUntil,
-                  @Nullable final CustomFieldsDraft custom, @Nullable final List<PriceTier> tiers) {
+                  @Nullable final CustomFieldsDraft custom, @Nullable final List<PriceTier> tiers,
+                  @Nullable final DiscountedPrice discounted) {
         this.value = value;
         this.country = country;
         this.customerGroup = customerGroup;
@@ -54,6 +58,7 @@ public final class PriceDraftDsl extends Base implements PriceDraft {
         this.validUntil = validUntil;
         this.custom = custom;
         this.tiers = tiers;
+        this.discounted = discounted;
     }
 
     public MonetaryAmount getValue() {
@@ -97,6 +102,11 @@ public final class PriceDraftDsl extends Base implements PriceDraft {
         return tiers;
     }
 
+    @Nullable
+    public DiscountedPrice getDiscounted() {
+        return discounted;
+    }
+
     public PriceDraftDsl withCustomerGroup(@Nullable final Referenceable<CustomerGroup> customerGroup) {
         return PriceDraftBuilder.of(this).customerGroup(Optional.ofNullable(customerGroup).map(Referenceable::toResourceIdentifier).orElse(null)).build();
     }
@@ -134,6 +144,10 @@ public final class PriceDraftDsl extends Base implements PriceDraft {
         return PriceDraftBuilder.of(this).custom(custom).build();
     }
 
+    public PriceDraftDsl withDiscounted(@Nullable final DiscountedPrice discounted) {
+        return PriceDraftBuilder.of(this).discounted(discounted).build();
+    }
+
     @JsonIgnore
     public static PriceDraftDsl of(final MonetaryAmount money) {
         return PriceDraftBuilder.of(money).build();
@@ -156,6 +170,7 @@ public final class PriceDraftDsl extends Base implements PriceDraft {
                 .validUntil(template.getValidUntil())
                 .custom(customFieldsDraftOrNull(template))
                 .tiers(template.getTiers())
+                .discounted(template.getDiscounted())
                 .build();
     }
 

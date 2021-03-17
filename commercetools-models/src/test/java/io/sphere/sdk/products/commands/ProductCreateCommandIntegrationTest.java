@@ -1,13 +1,18 @@
 package io.sphere.sdk.products.commands;
 
 import io.sphere.sdk.cartdiscounts.CartDiscountFixtures;
+import io.sphere.sdk.messages.queries.MessageQuery;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.ResourceIdentifiable;
+import io.sphere.sdk.productdiscounts.*;
 import io.sphere.sdk.products.*;
+import io.sphere.sdk.products.commands.updateactions.SetDiscountedPrice;
 import io.sphere.sdk.products.commands.updateactions.Unpublish;
+import io.sphere.sdk.products.messages.ProductPriceExternalDiscountSetMessage;
 import io.sphere.sdk.products.search.ProductProjectionSearch;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeFixtures;
+import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.search.PagedSearchResult;
 import io.sphere.sdk.search.SearchKeyword;
 import io.sphere.sdk.search.SearchKeywords;
@@ -26,6 +31,8 @@ import java.util.List;
 import java.util.Locale;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
+import static io.sphere.sdk.productdiscounts.ProductDiscountFixtures.withProductDiscount;
+import static io.sphere.sdk.products.ProductFixtures.withProductOfPrices;
 import static io.sphere.sdk.producttypes.ProductTypeFixtures.withEmptyProductType;
 import static io.sphere.sdk.producttypes.ProductTypeFixtures.withProductType;
 import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
@@ -35,6 +42,7 @@ import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
 import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
+import static java.util.Collections.singletonList;
 import static java.util.Collections.singletonMap;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -97,6 +105,36 @@ public class ProductCreateCommandIntegrationTest extends IntegrationTest {
                 })
         );
 
+    }
+
+    @Test
+    public void createProductWithDiscountedPrice() {
+        final ProductDiscountPredicate predicate = ProductDiscountPredicate.of("1 = 1");//can be used for all products
+        final ProductDiscountDraft productDiscountDraft = ProductDiscountDraft.of(randomSlug(), randomSlug(),
+                predicate, ExternalProductDiscountValue.of(), randomSortOrder(), true);
+
+        withProductDiscount(client(), productDiscountDraft, externalProductDiscount -> {
+            withEmptyProductType(client(), randomKey(), productType ->
+                    withUpdateableType(client(), type -> {
+                        final DiscountedPrice discountedPrice = DiscountedPrice.of(EURO_5, externalProductDiscount.toReference());
+                        final PriceDraft price = PriceDraft.of(EURO_10)
+                                .withDiscounted(discountedPrice);
+
+                        final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of().price(price).build();
+                        final ProductDraft productDraft = ProductDraftBuilder.of(productType, randomSlug(), randomSlug(), masterVariant).build();
+
+                        final Product product = client().executeBlocking(ProductCreateCommand.of(productDraft));
+                        final Price productPrice = product.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
+
+                        assertThat(productPrice.getValue()).isEqualTo(EURO_10);
+                        assertThat(productPrice.getDiscounted()).isEqualTo(discountedPrice);
+
+                        client().executeBlocking(ProductDeleteCommand.of(product));
+
+                        return type;
+                    })
+            );
+        });
     }
 
     @Test
