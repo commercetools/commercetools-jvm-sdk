@@ -7,6 +7,7 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.models.ResourceIdentifier;
+import io.sphere.sdk.productdiscounts.DiscountedPrice;
 import io.sphere.sdk.types.CustomFieldsDraft;
 import io.sphere.sdk.types.CustomFieldsDraftBuilder;
 
@@ -32,6 +33,8 @@ public final class PriceDraftBuilder extends Base implements Builder<PriceDraftD
     private CustomFieldsDraft custom;
     @Nullable
     private List<PriceTier> tiers;
+    @Nullable
+    private DiscountedPrice discounted;
 
     private PriceDraftBuilder(final MonetaryAmount value) {
         this.value = value;
@@ -96,6 +99,11 @@ public final class PriceDraftBuilder extends Base implements Builder<PriceDraftD
         return this;
     }
 
+    public PriceDraftBuilder discounted(@Nullable final DiscountedPrice discounted) {
+        this.discounted = discounted;
+        return this;
+    }
+
     @Nullable
     public ResourceIdentifier<Channel> getChannel() {
         return channel;
@@ -135,9 +143,14 @@ public final class PriceDraftBuilder extends Base implements Builder<PriceDraftD
         return tiers;
     }
 
+    @Nullable
+    public DiscountedPrice getDiscounted() {
+        return discounted;
+    }
+
     @Override
     public PriceDraftDsl build() {
-        return new PriceDraftDsl(value, country, customerGroup, channel, validFrom, validUntil, custom, tiers);
+        return new PriceDraftDsl(value, country, customerGroup, channel, validFrom, validUntil, custom, tiers, discounted);
     }
 
 
@@ -152,7 +165,8 @@ public final class PriceDraftBuilder extends Base implements Builder<PriceDraftD
                 .channel(template.getChannel())
                 .validFrom(template.getValidFrom())
                 .validUntil(template.getValidUntil())
-                .custom(template.getCustom());
+                .custom(template.getCustom())
+                .discounted(template.getDiscounted());
     }
 
     private static CustomFieldsDraft copyCustom(Price template) {
@@ -169,6 +183,7 @@ public final class PriceDraftBuilder extends Base implements Builder<PriceDraftD
                 .channel(Optional.ofNullable(template.getChannel()).map(Referenceable::toResourceIdentifier).orElse(null))
                 .validFrom(template.getValidFrom())
                 .validUntil(template.getValidUntil())
-                .custom(copyCustom(template));
+                .custom(copyCustom(template))
+                .discounted(template.getDiscounted());
     }
 }
