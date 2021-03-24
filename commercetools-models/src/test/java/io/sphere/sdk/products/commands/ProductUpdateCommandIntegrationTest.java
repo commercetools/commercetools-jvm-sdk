@@ -96,6 +96,23 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void updateWithProjection() {
+        withUpdateableProduct(client(), (Product product) -> {
+            final ProductProjection p = client().executeBlocking(ProductProjectionByIdGet.ofStaged(product));
+
+            final LocalizedString localizedName = en("New staged name");
+            final ChangeName updateAction = ChangeName.of(localizedName);
+            final ProductUpdateCommand command = ProductUpdateCommand.of(p, updateAction);
+            assertThat(command.getUpdateActions()).hasSize(1);
+            assertThat(command.getUpdateActions().get(0)).isEqualTo(updateAction);
+
+            final Product updatedProduct = client().executeBlocking(command);
+            assertThat(updatedProduct.getMasterData().getStaged().getName()).isEqualTo(localizedName);
+            return updatedProduct;
+        });
+    }
+
+    @Test
     public void moveImageToPositionByVariantId() throws Exception {
         withProductWithImages(client(), IMAGE_URLS, (Product product) -> {
             final List<String> oldImageOrderUrls = product.getMasterData().getStaged().getMasterVariant().getImages()

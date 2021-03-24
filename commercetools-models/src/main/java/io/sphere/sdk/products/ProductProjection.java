@@ -6,6 +6,7 @@ import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
 import io.sphere.sdk.reviews.ReviewRatingStatistics;
 import io.sphere.sdk.search.SearchKeywords;
@@ -40,7 +41,7 @@ import java.util.stream.Collectors;
 
  */
 @JsonDeserialize(as=ProductProjectionImpl.class)
-public interface ProductProjection extends ProductLike<ProductProjection, Product>, ProductDataLike, Referenceable<Product> {
+public interface ProductProjection extends ProductLike<ProductProjection, Product>, ProductDataLike, Referenceable<Product>, Versioned<Product> {
 
     Boolean hasStagedChanges();
 
