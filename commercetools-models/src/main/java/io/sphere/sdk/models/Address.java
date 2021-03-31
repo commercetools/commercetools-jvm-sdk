@@ -2,6 +2,7 @@ package io.sphere.sdk.models;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.customers.Customer;
@@ -229,6 +230,7 @@ public final class Address extends Base implements WithKey{
     }
 
     @Nullable
+    @JsonProperty("pOBox")
     public String getPoBox() {
         return poBox;
     }

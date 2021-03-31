@@ -1,6 +1,8 @@
 package io.sphere.sdk.models;
 
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.json.SphereJsonUtils;
+import io.sphere.sdk.test.SphereTestUtils;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.*;
@@ -27,5 +29,11 @@ public class AddressTest {
         final String externalId = "030000000";
         final Address address = Address.of(CountryCode.DE).withExternalId(externalId);
         assertThat(address.getExternalId()).isEqualTo(externalId);
+    }
+
+    @Test
+    public void addressPOBox() {
+        final Address address = SphereJsonUtils.readObject(SphereTestUtils.stringFromResource("address.json"), Address.class);
+        assertThat(address.getPoBox()).isEqualTo("1234567890");
     }
 }
