@@ -1,12 +1,13 @@
 package io.sphere.sdk.models;
 
-import com.google.common.collect.Maps;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.CustomFieldsDraft;
 import org.junit.Test;
+
+import java.util.HashMap;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -46,7 +47,7 @@ public class AddressTest {
     @Test
     public void customFieldsWrite() {
         final Address address = Address.of(CountryCode.DE);
-        final String customAddress = SphereJsonUtils.toJsonString(address.withCustomFields(CustomFieldsDraft.ofTypeKeyAndObjects("test", Maps.newHashMap())));
+        final String customAddress = SphereJsonUtils.toJsonString(address.withCustomFields(CustomFieldsDraft.ofTypeKeyAndObjects("test", new HashMap<>())));
 
         assertThat(customAddress).isEqualTo("{\"country\":\"DE\",\"custom\":{\"type\":{\"key\":\"test\"},\"fields\":{}}}");
     }
@@ -60,7 +61,7 @@ public class AddressTest {
         assertThat(fields).isInstanceOf(CustomFields.class);
         assertThat(fields.getFieldAsString("foo")).isEqualTo("bar");
 
-        final Address customAddress = Address.of(CountryCode.DE).withCustomFields(CustomFieldsDraft.ofTypeKeyAndObjects("test", Maps.newHashMap()));
+        final Address customAddress = Address.of(CountryCode.DE).withCustomFields(CustomFieldsDraft.ofTypeKeyAndObjects("test", new HashMap<>()));
         assertThat(customAddress.getCustomFieldsDraft()).isInstanceOf(CustomFieldsDraft.class);
         assertThat(customAddress.getCustomFields()).isNull();
 
