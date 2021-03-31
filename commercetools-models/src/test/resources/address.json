@@ -11,5 +11,14 @@
   "pOBox": "1234567890",
   "phone": "7894561",
   "email": "liz.windsor@mailinator.com",
-  "externalId": ""
+  "externalId": "",
+  "custom": {
+    "type": {
+      "typeId": "type",
+      "id": "abc"
+    },
+    "fields": {
+      "foo": "bar"
+    }
+  }
 }

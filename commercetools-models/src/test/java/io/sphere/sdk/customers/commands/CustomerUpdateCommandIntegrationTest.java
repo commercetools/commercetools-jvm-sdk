@@ -13,6 +13,7 @@ import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.stores.Store;
 import io.sphere.sdk.stores.StoreFixtures;
 import io.sphere.sdk.test.utils.VrapRequestDecorator;
+import io.sphere.sdk.types.TypeFixtures;
 import net.jcip.annotations.NotThreadSafe;
 import org.junit.Test;
 
@@ -257,6 +258,26 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
 
             assertThat(updatedCustomer.getDefaultShippingAddressId()).contains(address.getId());
             assertThat(updatedCustomer.findDefaultShippingAddress()).contains(address);
+            return updatedCustomer;
+        });
+    }
+
+    @Test
+    public void setAddressCustomType() throws Exception {
+        TypeFixtures.withUpdateableType(client(), type -> {
+            withCustomerWithOneAddress(client(), customer -> {
+                final Address address = customer.getAddresses().get(0);
+                final Customer updatedCustomer =
+                        client().executeBlocking(CustomerUpdateCommand.of(customer, SetAddressCustomType.ofTypeIdAndObjects(address.getId(), type.getId(), TypeFixtures.STRING_FIELD_NAME, "bar")));
+                assertThat(updatedCustomer.findAddressById(address.getId()).get().getCustomFields().getFieldAsString(TypeFixtures.STRING_FIELD_NAME)).isEqualTo("bar");
+
+                final Customer updatedCustomer2 =
+                        client().executeBlocking(CustomerUpdateCommand.of(updatedCustomer, SetAddressCustomType.ofTypeIdAndObjects(address.getId(), type.getId(), TypeFixtures.STRING_FIELD_NAME, "bar2")));
+                assertThat(updatedCustomer2.findAddressById(address.getId()).get().getCustomFields().getFieldAsString(TypeFixtures.STRING_FIELD_NAME)).isEqualTo("bar2");
+
+                return updatedCustomer2;
+            });
+            return type;
         });
     }
 
@@ -545,7 +566,7 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
             assertThat(updatedCustomer.getShippingAddressIds()).isEmpty();
         });
     }
-    
+
     @Test
     public void setStores() {
         StoreFixtures.withStore(client(), store -> {
@@ -561,7 +582,7 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
             });
         });
     }
-    
+
     @Test
     public void addStore() {
         StoreFixtures.withStore(client(), store -> {
@@ -585,7 +606,7 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
                 Customer updatedCustomer =
                         client().executeBlocking(CustomerUpdateCommand.of(customer, addStore));
                 assertThat(updatedCustomer.getStores().stream().anyMatch(storeKeyReference -> storeKeyReference.getKey().equals(storeResourceIdentifier.getKey()))).isTrue();
-                
+
                 RemoveStore removeStore = RemoveStore.of(storeResourceIdentifier);
                 updatedCustomer =
                         client().executeBlocking(CustomerUpdateCommand.of(updatedCustomer, removeStore));

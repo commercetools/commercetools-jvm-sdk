@@ -42,6 +42,16 @@ public class CustomerFixtures {
         withCustomer(client, newCustomerDraft(), customerUpdater);
     }
 
+    public static void withCustomerWithOneAddress(final BlockingSphereClient client, final UnaryOperator<Customer> operator) {
+        final UnaryOperator<Customer> customerUpdater = customer -> {
+            final Address address = AddressBuilder.of(DE).city("address city").build();
+            final Customer customerWithAddress = client.executeBlocking(CustomerUpdateCommand.of(customer, AddAddress.of(address)));
+            assertThat(customerWithAddress.getAddresses()).hasSize(1);
+            return operator.apply(customerWithAddress);
+        };
+        withUpdateableCustomer(client, customerUpdater);
+    }
+
     public static void withCustomerInGroup(final BlockingSphereClient client, final BiConsumer<Customer, CustomerGroup> consumer) {
         withB2cCustomerGroup(client, group -> {
             withCustomer(client, customer -> {
@@ -50,6 +60,7 @@ public class CustomerFixtures {
             });
         });
     }
+
 
     public static void withUpdateableCustomer(final BlockingSphereClient client, final UnaryOperator<Customer> operator) {
         final CustomerSignInResult signInResult = client.executeBlocking(CustomerCreateCommand.of(newCustomerDraft()));
@@ -79,7 +90,7 @@ public class CustomerFixtures {
     public static CustomerDraftDsl newCustomerDraft() {
         return CustomerDraftDsl.of(CUSTOMER_NAME, randomEmail(CustomerFixtures.class), PASSWORD);
     }
-    
+
     public static void withCustomerInStore(final BlockingSphereClient client, final Consumer<Customer> customerConsumer) {
         StoreFixtures.withStore(client, (store) -> {
             final List<ResourceIdentifier<Store>> stores = new ArrayList<>();
@@ -91,7 +102,7 @@ public class CustomerFixtures {
             client.executeBlocking(CustomerDeleteCommand.of(customer));
         });
     }
-    
+
     public static void withUpdateableCustomerInStore(final BlockingSphereClient client, final UnaryOperator<Customer> operator) {
         StoreFixtures.withStore(client, (store) -> {
             final List<ResourceIdentifier<Store>> stores = new ArrayList<>();

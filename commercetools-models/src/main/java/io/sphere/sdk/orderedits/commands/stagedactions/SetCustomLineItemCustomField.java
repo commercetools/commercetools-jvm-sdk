@@ -6,35 +6,18 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import javax.annotation.Nullable;
 
-public final class SetCustomLineItemCustomField extends OrderEditStagedUpdateActionBase {
+public final class SetCustomLineItemCustomField extends OrderEditSetCustomFieldBase {
 
     private final String customLineItemId;
 
-    private final String name;
-
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    @Nullable
-    private final JsonNode value;
-
     @JsonCreator
     private SetCustomLineItemCustomField(final String customLineItemId, final String name, @Nullable JsonNode value) {
-        super("setCustomLineItemCustomField");
+        super("setCustomLineItemCustomField", name, value);
         this.customLineItemId = customLineItemId;
-        this.name = name;
-        this.value = value;
     }
 
     public static SetCustomLineItemCustomField of(final String customLineItemId, final String name, @Nullable JsonNode value) {
         return new SetCustomLineItemCustomField(customLineItemId, name, value);
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    @Nullable
-    public JsonNode getValue() {
-        return value;
     }
 
     public String getCustomLineItemId() {

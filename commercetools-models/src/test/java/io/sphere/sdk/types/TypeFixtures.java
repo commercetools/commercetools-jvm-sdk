@@ -11,10 +11,7 @@ import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.discountcodes.DiscountCode;
 import io.sphere.sdk.inventory.InventoryEntry;
-import io.sphere.sdk.models.Asset;
-import io.sphere.sdk.models.EnumValue;
-import io.sphere.sdk.models.LocalizedEnumValue;
-import io.sphere.sdk.models.TextInputHint;
+import io.sphere.sdk.models.*;
 import io.sphere.sdk.orderedits.OrderEdit;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.payments.Payment;
@@ -73,7 +70,8 @@ public class TypeFixtures {
                     CustomerGroup.referenceTypeId(),
                     OrderEdit.referenceTypeId(),
                     Store.referenceTypeId(),
-                    ShippingMethod.referenceTypeId()
+                    ShippingMethod.referenceTypeId(),
+                    Address.resourceTypeId()
             )
     );
     public static final String STRING_FIELD_NAME = "string-field-name";
