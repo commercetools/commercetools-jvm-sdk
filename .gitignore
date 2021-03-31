@@ -37,3 +37,4 @@ play-sdk/.project
 .classpath
 
 integrationtest.properties
+.secrets

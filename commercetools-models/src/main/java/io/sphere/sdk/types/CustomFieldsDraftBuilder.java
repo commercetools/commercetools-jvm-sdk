@@ -82,4 +82,9 @@ public final class CustomFieldsDraftBuilder extends Base implements Builder<Cust
     public CustomFieldsDraft build() {
         return new CustomFieldsDraftImpl(typeId, typeKey, fields);
     }
+
+    @Deprecated
+    public CustomFields buildFields() {
+        return new CustomFieldsImpl(Reference.of(Type.referenceTypeId(), typeId), fields);
+    }
 }
