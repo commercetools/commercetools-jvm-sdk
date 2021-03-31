@@ -1,10 +1,7 @@
 package io.sphere.sdk.shoppinglists.commands;
 
 import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.shoppinglists.LineItem;
-import io.sphere.sdk.shoppinglists.ShoppingList;
-import io.sphere.sdk.shoppinglists.ShoppingListDraftDsl;
-import io.sphere.sdk.shoppinglists.TextLineItem;
+import io.sphere.sdk.shoppinglists.*;
 import io.sphere.sdk.shoppinglists.commands.updateactions.*;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
@@ -109,6 +106,27 @@ public class ShoppingListUpdateCommandIntegrationTest extends IntegrationTest {
             withUpdateableShoppingList(client(), shoppingList -> {
                 final ShoppingList updatedShoppingList = client().executeBlocking(
                         ShoppingListUpdateCommand.of(shoppingList, AddLineItem.of(product).withVariantId(1).withQuantity(2L)));
+
+                assertThat(updatedShoppingList.getLineItems()).hasSize(1);
+
+                final LineItem lineItem = updatedShoppingList.getLineItems().get(0);
+
+                assertThat(lineItem.getProductId()).isEqualTo(product.getId());
+                assertThat(lineItem.getVariantId()).isEqualTo(1);
+                assertThat(lineItem.getQuantity()).isEqualTo(2);
+                assertThat(lineItem.getAddedAt()).isNotNull();
+
+                return updatedShoppingList;
+            });
+        });
+    }
+
+    @Test
+    public void addLineItemBySku() throws Exception {
+        withTaxedProduct(client(), product -> {
+            withUpdateableShoppingList(client(), shoppingList -> {
+                final ShoppingList updatedShoppingList = client().executeBlocking(
+                        ShoppingListUpdateCommand.of(shoppingList, AddLineItem.ofSku(product.getMasterData().getCurrent().getMasterVariant().getSku()).withQuantity(2L)));
 
                 assertThat(updatedShoppingList.getLineItems()).hasSize(1);
 
