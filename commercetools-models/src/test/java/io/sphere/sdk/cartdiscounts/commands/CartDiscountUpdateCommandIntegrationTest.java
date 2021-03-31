@@ -1,5 +1,6 @@
 package io.sphere.sdk.cartdiscounts.commands;
 
+import com.neovisionaries.i18n.CurrencyCode;
 import io.sphere.sdk.cartdiscounts.*;
 import io.sphere.sdk.cartdiscounts.commands.updateactions.*;
 import io.sphere.sdk.commands.UpdateAction;
@@ -8,8 +9,10 @@ import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.utils.MoneyImpl;
 import net.jcip.annotations.NotThreadSafe;
+import org.javamoney.moneta.Money;
 import org.junit.Test;
 
+import javax.money.CurrencyUnit;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
@@ -207,7 +210,7 @@ public class CartDiscountUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(updatedDiscount.getValidUntil()).isEqualTo(dateTime);
         });
     }
-    
+
     @Test
     public void setValidUntilUpdatingByKey(){
         withCartDiscount(client(), cartDiscount -> {
@@ -237,6 +240,14 @@ public class CartDiscountUpdateCommandIntegrationTest extends IntegrationTest {
             }
 
             return updatedDiscount;
+        });
+    }
+
+    @Test
+    public void fixedCartDiscountMode() throws Exception {
+        withCartDiscount(client(), draft -> draft.value(FixedCartDiscountValue.of(Money.of(10, EUR))), cartDiscount -> {
+            assertThat(cartDiscount.getValue()).isInstanceOfSatisfying(FixedCartDiscountValue.class, fixedCartDiscountValue -> assertThat(fixedCartDiscountValue.getMoney().stream().findFirst().get().getCurrency()).isEqualTo(EUR));
+            return cartDiscount;
         });
     }
 
@@ -282,7 +293,7 @@ public class CartDiscountUpdateCommandIntegrationTest extends IntegrationTest {
             return updatedCartDiscount;
         });
     }
-    
+
     private ZonedDateTime dateTimeAfterValidFromAndOldValidUntil(final CartDiscount cartDiscount) {
         return Optional.ofNullable(cartDiscount.getValidUntil())
                 .orElse(Optional.ofNullable(cartDiscount.getValidFrom()).orElse(SphereTestUtils.now()).plusSeconds(1000)).plusSeconds(1);
