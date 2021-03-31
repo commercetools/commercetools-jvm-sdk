@@ -17,7 +17,7 @@ public abstract class OrderEditSetCustomTypeBase extends OrderEditStagedUpdateAc
     @Nullable
     protected final Map<String, JsonNode> fields;
 
-    public OrderEditSetCustomTypeBase(String action, @Nullable ResourceIdentifier<Type> type, @Nullable Map<String, JsonNode> fields) {
+    protected OrderEditSetCustomTypeBase(String action, @Nullable ResourceIdentifier<Type> type, @Nullable Map<String, JsonNode> fields) {
         super(action);
         this.type = type;
         this.fields = fields;

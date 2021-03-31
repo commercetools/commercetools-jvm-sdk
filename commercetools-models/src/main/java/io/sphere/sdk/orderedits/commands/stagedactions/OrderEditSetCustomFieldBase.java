@@ -11,7 +11,7 @@ public abstract class OrderEditSetCustomFieldBase extends OrderEditStagedUpdateA
     @Nullable
     protected final JsonNode value;
 
-    public OrderEditSetCustomFieldBase(String action, final String name, @Nullable JsonNode value) {
+    protected OrderEditSetCustomFieldBase(String action, final String name, @Nullable JsonNode value) {
         super(action);
         this.name = name;
         this.value = value;
