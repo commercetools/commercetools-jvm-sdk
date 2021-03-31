@@ -909,6 +909,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     @Test
     public void changeSlug() throws Exception {
         withUpdateableProduct(client(), product -> {
+            final LocalizedString oldSlug = product.getMasterData().getStaged().getSlug();
             final LocalizedString newSlug = LocalizedString.ofEnglish("new-slug-" + RANDOM.nextInt());
             final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, ChangeSlug.of(newSlug)));
 
@@ -924,6 +925,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                 assertThat(results).hasSize(1);
                 final ProductSlugChangedMessage message = results.get(0);
                 assertThat(message.getSlug()).isEqualTo(newSlug);
+                assertThat(message.getOldSlug()).isEqualTo(oldSlug);
             });
 
             return updatedProduct;

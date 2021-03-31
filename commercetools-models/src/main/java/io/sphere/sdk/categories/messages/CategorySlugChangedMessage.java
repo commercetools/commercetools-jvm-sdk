@@ -18,11 +18,13 @@ public final class CategorySlugChangedMessage extends GenericMessageImpl<Categor
             MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, CategorySlugChangedMessage.class, Category.referenceTypeId());
 
     private final LocalizedString slug;
+    private final LocalizedString oldSlug;
 
     @JsonCreator
-    private CategorySlugChangedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final UserProvidedIdentifiers resourceUserProvidedIdentifiers, final LocalizedString slug) {
+    private CategorySlugChangedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final UserProvidedIdentifiers resourceUserProvidedIdentifiers, final LocalizedString slug, final LocalizedString oldSlug) {
         super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type,resourceUserProvidedIdentifiers, Category.class);
         this.slug = slug;
+        this.oldSlug = oldSlug;
     }
 
     /**
@@ -34,4 +36,7 @@ public final class CategorySlugChangedMessage extends GenericMessageImpl<Categor
         return slug;
     }
 
+    public LocalizedString getOldSlug() {
+        return oldSlug;
+    }
 }

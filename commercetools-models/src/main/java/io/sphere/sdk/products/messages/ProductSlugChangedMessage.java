@@ -23,14 +23,20 @@ public final class ProductSlugChangedMessage extends GenericMessageImpl<Product>
             MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, ProductSlugChangedMessage.class, Product.referenceTypeId());
 
     private final LocalizedString slug;
+    private final LocalizedString oldSlug;
 
     @JsonCreator
-    private ProductSlugChangedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final UserProvidedIdentifiers resourceUserProvidedIdentifiers, final LocalizedString slug) {
+    private ProductSlugChangedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final UserProvidedIdentifiers resourceUserProvidedIdentifiers, final LocalizedString slug, final LocalizedString oldSlug) {
         super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type,resourceUserProvidedIdentifiers, Product.class);
         this.slug = slug;
+        this.oldSlug = oldSlug;
     }
 
     public LocalizedString getSlug() {
         return slug;
+    }
+
+    public LocalizedString getOldSlug() {
+        return oldSlug;
     }
 }
