@@ -6,6 +6,9 @@ import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.taxcategories.TaxCategory;
+import io.sphere.sdk.types.CustomDraft;
+import io.sphere.sdk.types.CustomFields;
+import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -17,7 +20,7 @@ import java.util.List;
             @FactoryMethod(parameterNames = {"name", "description", "taxCategory", "zoneRates", "default"}),
             @FactoryMethod(parameterNames = {"name", "taxCategory", "zoneRates", "default"}),
             @FactoryMethod(parameterNames = {"name", "localizedDescription", "taxCategory", "zoneRates", "default"})})
-public interface ShippingMethodDraft extends WithKey {
+public interface ShippingMethodDraft extends WithKey, CustomDraft {
 
     @Nullable
     String getKey();
@@ -40,6 +43,9 @@ public interface ShippingMethodDraft extends WithKey {
 
     @Nullable
     String getPredicate();
+
+    @Nullable
+    CustomFieldsDraft getCustom();
 
     @Deprecated
     static ShippingMethodDraft of(final String name, @Nullable final String description, final Referenceable<TaxCategory> taxCategory, final List<ZoneRateDraft> zoneRates) {

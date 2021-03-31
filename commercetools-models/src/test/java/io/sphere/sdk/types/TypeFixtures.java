@@ -21,6 +21,7 @@ import io.sphere.sdk.payments.Payment;
 import io.sphere.sdk.payments.commands.updateactions.AddInterfaceInteraction;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.reviews.Review;
+import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shoppinglists.ShoppingList;
 import io.sphere.sdk.shoppinglists.TextLineItem;
 import io.sphere.sdk.stores.Store;
@@ -71,7 +72,8 @@ public class TypeFixtures {
                     CartDiscount.referenceTypeId(),
                     CustomerGroup.referenceTypeId(),
                     OrderEdit.referenceTypeId(),
-                    Store.referenceTypeId()
+                    Store.referenceTypeId(),
+                    ShippingMethod.referenceTypeId()
             )
     );
     public static final String STRING_FIELD_NAME = "string-field-name";
