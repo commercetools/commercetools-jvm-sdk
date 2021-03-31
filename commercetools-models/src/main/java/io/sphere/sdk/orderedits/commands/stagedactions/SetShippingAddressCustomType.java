@@ -8,13 +8,6 @@ import io.sphere.sdk.types.Type;
 import javax.annotation.Nullable;
 import java.util.Map;
 
-/**
- * Sets or removes a custom type in a custom line item.
- *
- * {@doc.gen intro}
- *
- * @see io.sphere.sdk.types.Custom
- */
 public final class SetShippingAddressCustomType extends OrderEditSetCustomTypeBase {
 
     @JsonCreator
