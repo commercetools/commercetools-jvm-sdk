@@ -7,6 +7,7 @@ import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
+import io.sphere.sdk.models.WithKey;
 import io.sphere.sdk.shoppinglists.commands.updateactions.*;
 import io.sphere.sdk.types.Custom;
 import io.sphere.sdk.types.CustomFields;
@@ -43,7 +44,7 @@ import java.util.List;
 @HasCreateCommand(javadocSummary = "Creates a {@link io.sphere.sdk.shoppinglists.ShoppingList}.", includeExamples = "io.sphere.sdk.shoppinglists.commands.ShoppingListCreateCommandIntegrationTest#execution()")
 @HasDeleteCommand(javadocSummary = "Deletes a shopping list.", deleteWith = {"key","id"}, canEraseUsersData = true)
 @HasQueryModel
-public interface ShoppingList extends Resource<ShoppingList>, Custom {
+public interface ShoppingList extends Resource<ShoppingList>, Custom, WithKey {
 
     LocalizedString getName();
 

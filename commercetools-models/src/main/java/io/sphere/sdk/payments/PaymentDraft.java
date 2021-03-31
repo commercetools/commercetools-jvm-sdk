@@ -5,6 +5,7 @@ import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.WithKey;
 import io.sphere.sdk.types.CustomDraft;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
@@ -23,7 +24,7 @@ import java.util.List;
 @ResourceDraftValue(
         factoryMethods = {@FactoryMethod(parameterNames = {"amountPlanned"})},
         additionalBuilderInterfaces = "io.sphere.sdk.types.CustomDraft")
-public interface PaymentDraft extends CustomDraft {
+public interface PaymentDraft extends CustomDraft, WithKey {
     @Nullable
     Reference<Customer> getCustomer();
 

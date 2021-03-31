@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
+import io.sphere.sdk.models.WithKey;
 import io.sphere.sdk.orderedits.commands.stagedactions.OrderEditStagedUpdateAction;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.types.Custom;
@@ -28,7 +29,7 @@ import java.util.List;
         "    }\n"
         )
 @HasQueryModel()
-public interface OrderEdit extends Resource<OrderEdit>, Custom {
+public interface OrderEdit extends Resource<OrderEdit>, Custom, WithKey {
 
     String getId();
 

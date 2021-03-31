@@ -6,6 +6,8 @@ import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.ResourceIdentifier;
+import io.sphere.sdk.models.WithKey;
+import io.sphere.sdk.types.CustomDraft;
 import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
@@ -18,7 +20,7 @@ import java.util.List;
         @FactoryMethod(parameterNames = {"key"}),
         @FactoryMethod(parameterNames = {"key", "name"}),
         @FactoryMethod(parameterNames = {"key", "name", "languages"})})
-public interface StoreDraft {
+public interface StoreDraft extends CustomDraft, WithKey {
 
     String getKey();
 

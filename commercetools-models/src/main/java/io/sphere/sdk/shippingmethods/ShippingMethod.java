@@ -5,10 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.carts.CartShippingInfo;
-import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.models.Referenceable;
-import io.sphere.sdk.models.Resource;
+import io.sphere.sdk.models.*;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.zones.Zone;
 
@@ -56,7 +53,7 @@ import static java.util.stream.Collectors.toList;
 @HasQueryModel(additionalContents = "BooleanQueryModel<ShippingMethod> isDefault();")
 @HasUpdateActions
 @HasDeleteCommand(deleteWith = "key")
-public interface ShippingMethod extends Resource<ShippingMethod> {
+public interface ShippingMethod extends Resource<ShippingMethod>, WithKey {
 
     @Nullable
     String getKey();

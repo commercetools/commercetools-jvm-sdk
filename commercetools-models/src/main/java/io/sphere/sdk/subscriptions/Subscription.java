@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
+import io.sphere.sdk.models.WithKey;
 import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.TypeDraft;
 
@@ -22,7 +23,7 @@ import java.util.List;
 @HasByIdGetEndpoint(javadocSummary = "Fetches a subscription by id.")
 @HasByKeyGetEndpoint(javadocSummary = "Fetches a subscription by key.")
 @HasUpdateActions
-public interface Subscription extends Resource<Subscription> {
+public interface Subscription extends Resource<Subscription>, WithKey {
 
     @Nullable
     String getKey();

@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
-import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.models.Referenceable;
-import io.sphere.sdk.models.ResourceIdentifier;
+import io.sphere.sdk.models.*;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
 import javax.annotation.Nullable;
@@ -20,7 +17,7 @@ import java.util.List;
             @FactoryMethod(parameterNames = {"name", "description", "taxCategory", "zoneRates", "default"}),
             @FactoryMethod(parameterNames = {"name", "taxCategory", "zoneRates", "default"}),
             @FactoryMethod(parameterNames = {"name", "localizedDescription", "taxCategory", "zoneRates", "default"})})
-public interface ShippingMethodDraft {
+public interface ShippingMethodDraft extends WithKey {
 
     @Nullable
     String getKey();
