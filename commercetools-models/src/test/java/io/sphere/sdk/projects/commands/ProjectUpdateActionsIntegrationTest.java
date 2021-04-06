@@ -1,6 +1,7 @@
 package io.sphere.sdk.projects.commands;
 
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.models.LastModifiedBy;
 import io.sphere.sdk.projects.ExternalOAuth;
 import io.sphere.sdk.projects.MessagesConfigurationDraft;
 import io.sphere.sdk.projects.Project;
@@ -55,6 +56,8 @@ public class ProjectUpdateActionsIntegrationTest extends ProjectIntegrationTest{
         final SearchIndexingConfigurationStatus status = project.getSearchIndexing().getProducts().getStatus();
         assertThat(status).isInstanceOf(SearchIndexingConfigurationStatus.class);
         assertThat(updatedProject.getSearchIndexing().getProducts().getStatus()).isNotEqualTo(SearchIndexingConfigurationStatus.DEACTIVATED);
+        assertThat(updatedProject.getSearchIndexing().getProducts().getLastModifiedAt()).isNotNull();
+        assertThat(updatedProject.getSearchIndexing().getProducts().getLastModifiedBy()).isInstanceOf(LastModifiedBy.class);
     }
 
 
