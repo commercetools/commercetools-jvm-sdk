@@ -4,6 +4,7 @@ import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.projects.ExternalOAuth;
 import io.sphere.sdk.projects.MessagesConfigurationDraft;
 import io.sphere.sdk.projects.Project;
+import io.sphere.sdk.projects.SearchIndexingConfigurationStatus;
 import io.sphere.sdk.projects.commands.updateactions.*;
 import io.sphere.sdk.projects.queries.ProjectGet;
 import org.assertj.core.api.Assertions;
@@ -44,6 +45,18 @@ public class ProjectUpdateActionsIntegrationTest extends ProjectIntegrationTest{
         assertThat(reversedProject.getCarts().getCountryTaxRateFallbackEnabled()).isEqualTo(countryTaxRateFallbackEnabledActual);
 
     }
+
+    @Test
+    public void checkSearchConfiguration(){
+        final Project project = client().executeBlocking(ProjectGet.of());
+        final ProjectUpdateCommand updateCommand = ProjectUpdateCommand.of(project, ChangeProductSearchIndexingEnabled.of(true));
+        final Project updatedProject = client().executeBlocking(updateCommand);
+
+        final SearchIndexingConfigurationStatus status = project.getSearchIndexing().getProducts().getStatus();
+        assertThat(status).isInstanceOf(SearchIndexingConfigurationStatus.class);
+        assertThat(updatedProject.getSearchIndexing().getProducts().getStatus()).isNotEqualTo(SearchIndexingConfigurationStatus.DEACTIVATED);
+    }
+
 
     @Ignore("Disable because of problems with External OAuth")
     @Test
