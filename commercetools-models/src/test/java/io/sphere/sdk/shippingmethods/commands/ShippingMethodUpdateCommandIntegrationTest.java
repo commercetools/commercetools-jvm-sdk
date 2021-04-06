@@ -4,6 +4,8 @@ import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.queries.QueryPredicate;
+import io.sphere.sdk.reviews.Review;
+import io.sphere.sdk.reviews.commands.ReviewUpdateCommand;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.shippingmethods.ZoneRate;
@@ -21,9 +23,13 @@ import org.junit.Test;
 import java.util.Collections;
 import java.util.Optional;
 
+import static io.sphere.sdk.reviews.ReviewFixtures.withUpdateableReview;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withUpdateableShippingMethod;
 import static io.sphere.sdk.test.SphereTestUtils.*;
+import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
+import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
 import static io.sphere.sdk.zones.ZoneFixtures.withZone;
+import static java.util.Collections.singletonMap;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ShippingMethodUpdateCommandIntegrationTest extends IntegrationTest {
@@ -194,5 +200,27 @@ public class ShippingMethodUpdateCommandIntegrationTest extends IntegrationTest 
                 return shippingMethodWithoutZone;
             });
         }, CountryCode.EA);
+    }
+
+    @Test
+    public void setCustomType() {
+        withUpdateableType(client(), type -> {
+            withUpdateableShippingMethod(client(), shippingMethod -> {
+                final SetCustomType updateAction = SetCustomType
+                        .ofTypeIdAndObjects(type.getId(), singletonMap(STRING_FIELD_NAME, "foo"));
+                final ShippingMethod updatedShippingMethod = client().executeBlocking(ShippingMethodUpdateCommand.of(shippingMethod, updateAction));
+
+                assertThat(updatedShippingMethod.getCustom().getFieldAsString(STRING_FIELD_NAME)).isEqualTo("foo");
+
+                final ShippingMethod updatedShippingMethod2 = client().executeBlocking(ShippingMethodUpdateCommand.of(updatedShippingMethod,
+                       SetCustomField.ofObject(STRING_FIELD_NAME, "bar")));
+
+                assertThat(updatedShippingMethod2.getCustom().getFieldAsString(STRING_FIELD_NAME)).isEqualTo("bar");
+
+                return updatedShippingMethod2;
+            });
+            return type;
+        });
+
     }
 }

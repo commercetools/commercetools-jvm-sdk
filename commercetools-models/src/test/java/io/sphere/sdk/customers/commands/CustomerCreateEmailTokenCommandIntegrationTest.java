@@ -11,13 +11,14 @@ import io.sphere.sdk.queries.Query;
 import org.junit.Test;
 
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
+import static io.sphere.sdk.customers.CustomerFixtures.withUpdateableCustomer;
 import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CustomerCreateEmailTokenCommandIntegrationTest extends CustomerIntegrationTest {
     @Test
     public void execution() throws Exception {
-        withCustomer(client(), customer -> {
+        withUpdateableCustomer(client(), customer -> {
             assertThat(customer.isEmailVerified()).isFalse();
             final int ttlMinutes = 15;
             final Command<CustomerToken> createTokenCommand =
@@ -40,7 +41,7 @@ public class CustomerCreateEmailTokenCommandIntegrationTest extends CustomerInte
                 final PagedQueryResult<CustomerEmailVerifiedMessage> queryResult = client().executeBlocking(messageQuery);
                 assertThat(queryResult.head()).isPresent();
             });
-
+            return loadedCustomer;
         });
     }
 }

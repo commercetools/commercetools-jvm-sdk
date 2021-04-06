@@ -6,6 +6,7 @@ import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Resource;
+import io.sphere.sdk.models.WithKey;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.types.Custom;
 import io.sphere.sdk.types.CustomFields;
@@ -17,7 +18,7 @@ import java.time.ZonedDateTime;
 import java.util.List;
 
 /**
- * Payments hold information about the current state of receiving and/or refunding money, but the process itself is handled by a PSP. 
+ * Payments hold information about the current state of receiving and/or refunding money, but the process itself is handled by a PSP.
  * They are usually referenced by an {@link Order#getPaymentInfo() Order} or a {@link io.sphere.sdk.carts.Cart#getPaymentInfo() Cart}.
  *
  * @see io.sphere.sdk.payments.commands.PaymentCreateCommand
@@ -39,7 +40,7 @@ import java.util.List;
 @HasDeleteCommand(deleteWith = "key", includeExamples = "io.sphere.sdk.payments.commands.PaymentDeleteCommandIntegrationTest#execution()", canEraseUsersData = true)
 @HasQueryModel
 @HasUpdateActions
-public interface Payment extends Resource<Payment>, Custom {
+public interface Payment extends Resource<Payment>, Custom, WithKey {
     @Nullable
     Reference<Customer> getCustomer();
 

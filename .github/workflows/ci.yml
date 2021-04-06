@@ -43,7 +43,7 @@ jobs:
         with:
           java-version: '8'
 
-      - run: mvn clean install javadoc:aggregate -DskipTests --no-transfer-progress -Pbintray,javadoc-jdk-8u121
+      - run: mvn clean install javadoc:aggregate -DskipTests --no-transfer-progress -Pjavadoc-jdk-8u121
       - run: mvn exec:java -pl commercetools-internal-docs -Dexec.mainClass="introspection.rules.RulesMain" -Dexec.classpathScope="test"
       - run: mvn exec:java -pl commercetools-models -Dexec.mainClass="io.sphere.sdk.client.MainMethodThreadLeakTest" -Dexec.classpathScope="test"
       - run: mvn test verify --no-transfer-progress -pl commercetools-convenience,commercetools-internal-docs,commercetools-internal-processors,commercetools-java-client-ahc-1_8,commercetools-java-client-ahc-1_9,commercetools-java-client-ahc-2_0

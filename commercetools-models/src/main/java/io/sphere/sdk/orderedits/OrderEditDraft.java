@@ -6,7 +6,9 @@ import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.commands.StagedUpdateAction;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.WithKey;
 import io.sphere.sdk.orders.Order;
+import io.sphere.sdk.types.CustomDraft;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
@@ -17,7 +19,7 @@ import java.util.List;
         @FactoryMethod(parameterNames = {"key", "resource", "stagedActions", "custom", "comment", "dryRun"}),
         @FactoryMethod(parameterNames = {"resource", "stagedActions"})
         })
-public interface OrderEditDraft {
+public interface OrderEditDraft extends WithKey, CustomDraft {
 
     @Nullable
     String getKey();

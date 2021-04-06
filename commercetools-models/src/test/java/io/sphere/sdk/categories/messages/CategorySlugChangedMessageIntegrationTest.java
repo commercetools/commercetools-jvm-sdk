@@ -21,21 +21,22 @@ public class CategorySlugChangedMessageIntegrationTest extends IntegrationTest {
         CategoryFixtures.withCategory(client(), category -> {
             LocalizedString newSlug = randomSlug();
             client().executeBlocking(CategoryUpdateCommand.of(category, ChangeSlug.of(newSlug)));
-            
+
             Query<CategorySlugChangedMessage> messageQuery = MessageQuery.of()
                 .withPredicates(m -> m.resource().is(category))
                 .withSort(m -> m.createdAt().sort().desc())
                 .withLimit(1L)
                 .forMessageType(CategorySlugChangedMessage.MESSAGE_HINT);
-                
+
             assertEventually(() -> {
                 final PagedQueryResult<CategorySlugChangedMessage> queryResult = client().executeBlocking(messageQuery);
                 assertThat(queryResult.head()).isPresent();
                 final CategorySlugChangedMessage message = queryResult.head().get();
                 assertThat(message.getSlug()).isEqualTo(newSlug);
+                assertThat(message.getOldSlug()).isEqualTo(category.getSlug());
                 assertThat(message.getResource().getId()).isEqualTo(category.getId());
             });
-            
+
         });
     }
 }

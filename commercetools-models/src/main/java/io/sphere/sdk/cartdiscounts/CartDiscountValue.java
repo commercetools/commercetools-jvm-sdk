@@ -22,6 +22,7 @@ import java.util.List;
 @JsonSubTypes({
         @JsonSubTypes.Type(value = RelativeCartDiscountValue.class, name = "relative"),
         @JsonSubTypes.Type(value = AbsoluteCartDiscountValue.class, name = "absolute"),
+        @JsonSubTypes.Type(value = FixedCartDiscountValue.class, name = "fixed"),
         @JsonSubTypes.Type(value = GiftLineItemCartDiscountValue.class, name = "giftLineItem")})
 public interface CartDiscountValue {
     static AbsoluteCartDiscountValue ofAbsolute(final List<MonetaryAmount> money) {
@@ -34,6 +35,10 @@ public interface CartDiscountValue {
 
     static RelativeCartDiscountValue ofRelative(final int permyriad) {
         return RelativeCartDiscountValue.of(permyriad);
+    }
+
+    static FixedCartDiscountValue ofFixed(final MonetaryAmount money) {
+        return FixedCartDiscountValue.of(Collections.singletonList(money));
     }
 
     static GiftLineItemCartDiscountValue ofGiftLineItem(final ByIdVariantIdentifier variantIdentifier,

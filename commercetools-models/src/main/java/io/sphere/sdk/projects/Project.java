@@ -117,10 +117,14 @@ public interface Project extends CreationTimestamped, WithKey {
     @HasUpdateAction(value = "changeCountryTaxRateFallbackEnabled", fields = {@PropertySpec(name = "countryTaxRateFallbackEnabled", type = Boolean.class)})
     @HasUpdateAction(value = "changeCartsConfiguration", fields = {@PropertySpec(name = "cartsConfiguration", type = CartsConfiguration.class)})
     CartsConfiguration getCarts();
-    
+
     @HasUpdateAction(value = "changeShoppingListsConfiguration", fields = {@PropertySpec(name = "shoppingListsConfiguration", type = ShoppingListsConfiguration.class)})
     ShoppingListsConfiguration getShoppingLists();
-    
+
+    @Nullable
+    @HasUpdateAction(value = "changeProductSearchIndexingEnabled", fields = {@PropertySpec(name = "enabled", type = Boolean.class)})
+    SearchIndexingConfiguration getSearchIndexing();
+
     /**
      * Creates a container which contains the full Java type information to deserialize this class from JSON.
      *

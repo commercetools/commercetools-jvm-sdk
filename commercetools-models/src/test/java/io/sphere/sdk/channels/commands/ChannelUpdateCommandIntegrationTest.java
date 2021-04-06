@@ -7,6 +7,7 @@ import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Point;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.types.TypeFixtures;
 import org.junit.Test;
 
 import java.util.Set;
@@ -85,6 +86,27 @@ public class ChannelUpdateCommandIntegrationTest extends IntegrationTest {
             final Channel updatedChannel = client().executeBlocking(ChannelUpdateCommand.of(channel, SetAddress.of(address)));
             assertThat(updatedChannel.getAddress()).isEqualTo(address);
             return updatedChannel;
+        });
+    }
+
+    @Test
+    public void setAddressCustomField() throws Exception {
+        TypeFixtures.withUpdateableType(client(), type -> {
+            withUpdatableChannelOfRole(client(), asSet(PRIMARY), channel -> {
+                final Address address = Address.of(DE)
+                                               .withCity("Berlin");
+                final Channel updatedChannel = client().executeBlocking(ChannelUpdateCommand.of(channel, SetAddress.of(address)));
+                assertThat(updatedChannel.getAddress()).isEqualTo(address);
+
+                final Channel updatedChannel2 = client().executeBlocking(ChannelUpdateCommand.of(updatedChannel, SetAddressCustomType.ofTypeIdAndObjects(type.getId(), TypeFixtures.STRING_FIELD_NAME, "bar")));
+                assertThat(updatedChannel2.getAddress().getCustomFields().getFieldAsString(TypeFixtures.STRING_FIELD_NAME)).isEqualTo("bar");
+
+                final Channel updatedChannel3 = client().executeBlocking(ChannelUpdateCommand.of(updatedChannel2, SetAddressCustomField.ofObject(TypeFixtures.STRING_FIELD_NAME, "bar2")));
+                assertThat(updatedChannel3.getAddress().getCustomFields().getFieldAsString(TypeFixtures.STRING_FIELD_NAME)).isEqualTo("bar2");
+
+                return updatedChannel3;
+            });
+            return type;
         });
     }
 

@@ -1,6 +1,8 @@
 package io.sphere.sdk.products.commands.updateactions;
 
 import io.sphere.sdk.models.Asset;
+import io.sphere.sdk.models.AssetDraft;
+import io.sphere.sdk.models.AssetDraftBuilder;
 import io.sphere.sdk.products.Image;
 import io.sphere.sdk.products.PriceDraft;
 import io.sphere.sdk.products.Product;
@@ -9,6 +11,7 @@ import io.sphere.sdk.products.attributes.AttributeDraft;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Adds a variant to a product.
@@ -35,9 +38,9 @@ public final class AddVariant extends StagedProductUpdateActionImpl<Product> {
     @Nullable
     private final List<Image> images;
     @Nullable
-    private final List<Asset> assets;
+    private final List<AssetDraft> assets;
 
-    private AddVariant(final List<AttributeDraft> attributes, final List<PriceDraft> prices, @Nullable final String sku, @Nullable final String key, @Nullable final List<Image> images, @Nullable final Boolean staged, @Nullable final List<Asset> assets) {
+    private AddVariant(final List<AttributeDraft> attributes, final List<PriceDraft> prices, @Nullable final String sku, @Nullable final String key, @Nullable final List<Image> images, @Nullable final Boolean staged, @Nullable final List<AssetDraft> assets) {
         super("addVariant", staged);
         this.attributes = attributes;
         this.prices = prices;
@@ -71,7 +74,15 @@ public final class AddVariant extends StagedProductUpdateActionImpl<Product> {
     }
 
     @Nullable
+    @Deprecated
     public List<Asset> getAssets() {
+        return assets != null ? assets.stream()
+                                      .map(assetDraft -> AssetDraftBuilder.of(assetDraft)
+                                                                          .buildAsset())
+                                      .collect(Collectors.toList()) : null;
+    }
+
+    public List<AssetDraft> getAssetsDrafts() {
         return assets;
     }
 
@@ -88,8 +99,13 @@ public final class AddVariant extends StagedProductUpdateActionImpl<Product> {
     }
 
     public AddVariant withAssets(final List<Asset> assets) {
+        return new AddVariant(attributes, prices, sku, key, images, staged, assets.stream().map(a -> AssetDraftBuilder.of(a).build()).collect(Collectors.toList()));
+    }
+
+    public AddVariant withAssetDrafts(final List<AssetDraft> assets) {
         return new AddVariant(attributes, prices, sku, key, images, staged, assets);
     }
+
 
     public static AddVariant of(final List<AttributeDraft> attributes, final List<PriceDraft> prices, @Nullable final String sku) {
         return of(attributes, prices, sku, null);

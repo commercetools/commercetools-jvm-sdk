@@ -7,6 +7,7 @@ import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.models.WithKey;
 import io.sphere.sdk.states.State;
+import io.sphere.sdk.types.CustomDraft;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
@@ -26,7 +27,7 @@ import java.util.Locale;
             @FactoryMethod(methodName = "ofTitle", parameterNames = "title"),
             @FactoryMethod(methodName = "ofText", parameterNames = "text"),
             @FactoryMethod(methodName = "ofRating", parameterNames = "rating")})
-public interface ReviewDraft extends WithKey {
+public interface ReviewDraft extends WithKey, CustomDraft {
     @Nullable
     String getAuthorName();
 

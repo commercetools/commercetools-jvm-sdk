@@ -909,6 +909,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     @Test
     public void changeSlug() throws Exception {
         withUpdateableProduct(client(), product -> {
+            final LocalizedString oldSlug = product.getMasterData().getStaged().getSlug();
             final LocalizedString newSlug = LocalizedString.ofEnglish("new-slug-" + RANDOM.nextInt());
             final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, ChangeSlug.of(newSlug)));
 
@@ -924,6 +925,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                 assertThat(results).hasSize(1);
                 final ProductSlugChangedMessage message = results.get(0);
                 assertThat(message.getSlug()).isEqualTo(newSlug);
+                assertThat(message.getOldSlug()).isEqualTo(oldSlug);
             });
 
             return updatedProduct;
@@ -1551,7 +1553,29 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
             final Product productWithoutVariant = client().executeBlocking(ProductUpdateCommand.of(productWithVariant, RemoveVariant.of(variant)));
             assertThat(productWithoutVariant.getMasterData().getStaged().getVariants()).isEmpty();
 
-            return productWithoutVariant;
+            final List<AssetDraft> assetDrafts = product.getMasterData().getStaged().getMasterVariant().getAssets().stream().map(a -> AssetDraftBuilder.of(a).build()).collect(toList());
+            assertThat(assets).hasSize(1);
+
+            final AddVariant updateAction2 = AddVariant.of(attributeValues, prices, sku)
+                                                      .withKey(key)
+                                                      .withImages(singletonList(image))
+                                                      .withAssetDrafts(assetDrafts);
+            final ProductUpdateCommand addVariantCommand2 =
+                    ProductUpdateCommand.of(productWithoutVariant, updateAction2);
+
+            final Product productWithVariant2 = client().executeBlocking(addVariantCommand2);
+            final ProductVariant variant2 = productWithVariant2.getMasterData().getStaged().getVariants().get(0);
+            assertThat(productWithVariant2.getMasterData().hasStagedChanges()).isTrue();
+            assertThat(variant2.getId()).isEqualTo(3);
+            assertThat(variant2.findAttribute(moneyAttribute).get()).isEqualTo(EURO_10);
+            assertThat(variant2.findAttribute(colorAttribute).get()).isEqualTo(color);
+            assertThat(variant2.findAttribute(sizeAttribute).get()).isEqualTo(Sizes.M);
+            assertThat(variant2.getSku()).isEqualTo(sku);
+            assertThat(variant2.getKey()).isEqualTo(key);
+            assertThat(variant2.getImages()).containsExactly(image);
+            assertThat(variant2.getAssets().get(0).getKey()).isEqualTo(assets.get(0).getKey());
+
+            return productWithVariant2;
         });
 
     }

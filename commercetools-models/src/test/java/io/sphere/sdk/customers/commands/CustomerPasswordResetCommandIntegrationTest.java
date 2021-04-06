@@ -8,13 +8,14 @@ import io.sphere.sdk.customers.CustomerToken;
 import org.junit.Test;
 
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
+import static io.sphere.sdk.customers.CustomerFixtures.withUpdateableCustomer;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
 public class CustomerPasswordResetCommandIntegrationTest extends CustomerIntegrationTest {
     @Test
     public void execution() throws Exception {
-        withCustomer(client(), customer -> {
+        withUpdateableCustomer(client(), customer -> {
             final String email = customer.getEmail();
             final CustomerToken token = client().executeBlocking(CustomerCreatePasswordTokenCommand.of(email));
             final String tokenValue = token.getValue();//this may need to be sent by email to the customer
@@ -28,6 +29,7 @@ public class CustomerPasswordResetCommandIntegrationTest extends CustomerIntegra
             assertThat(signInResult.getCustomer().getId())
                     .describedAs("customer can sign in with the new password")
                     .isEqualTo(customer.getId());
+            return updatedCustomer;
         });
     }
 

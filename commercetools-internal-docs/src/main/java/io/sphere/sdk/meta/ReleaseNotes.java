@@ -156,6 +156,21 @@ import java.util.function.Function;
  </ul>
  -->
  -->
+ <h3 class=released-version id="v1_62_0">1.62.0 (06.04.2021)</h3>
+ <ul>
+ <li class=fixed-in-release>Fixed type for asset in AddVariant update action</li>
+ <li class=fixed-in-release>Address PO box gets correctly deserialized</li>
+ <li class=new-in-release>Resources implement WithKey and Custom interfaces</li>
+ <li class=new-in-release>Address supports custom fields</li>
+ <li class=new-in-release>Support for {@link io.sphere.sdk.customers.messages.CustomerPasswordUpdatedMessage}</li>
+ <li class=new-in-release>ShoppingList addLineItem supports variant selection by sku</li>
+ <li class=new-in-release>Support addedAt for shopping list line items</li>
+ <li class=new-in-release>Support oldSlug in product & category slug changed messages</li>
+ <li class=new-in-release>Support fixed amount cart discounts</li>
+ <li class=new-in-release>Support custom fields for shipping methods</li>
+ <li class=new-in-release>Support SearchIndexingConfiguration for project</li>
+ <li class=new-in-release>Support replicate cart in store endpoint</li>
+ </ul>
  <h3 class=released-version id="v1_61_0">1.61.0 (06.04.2021)</h3>
  <ul>
  <li class=new-in-release>Deprecated {@link CustomerDraft#getAnonymousCartId()} and replaced with {@link CustomerDraft#getAnonymousCart()} support anonymousCart into the {@link CustomerDraftBuilder}, into the {@link CustomerSignInCommand} and in the {@link io.sphere.sdk.customers.commands.CustomerInStoreSignInCommand}</li>

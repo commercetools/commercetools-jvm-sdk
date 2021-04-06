@@ -85,6 +85,11 @@ public class CartDiscountCreateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void fixedCartDiscountValue() throws Exception {
+        checkCartDiscountValueSerialization(CartDiscountValue.ofFixed(MoneyImpl.of(10, EUR)));
+    }
+
+    @Test
     public void relativeCartDiscountValue() throws Exception {
         checkCartDiscountValueSerialization(CartDiscountValue.ofRelative(1234));
     }
@@ -151,7 +156,7 @@ public class CartDiscountCreateCommandIntegrationTest extends IntegrationTest {
 
         client().executeBlocking(CartDiscountDeleteCommand.of(cartDiscount));
     }
-    
+
     @Test
     public void deleteByKey(){
         final CartDiscountDraft draft = newCartDiscountDraftBuilder().build();

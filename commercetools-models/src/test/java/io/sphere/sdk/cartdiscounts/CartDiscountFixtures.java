@@ -4,14 +4,17 @@ import io.sphere.sdk.cartdiscounts.commands.CartDiscountCreateCommand;
 import io.sphere.sdk.cartdiscounts.commands.CartDiscountDeleteCommand;
 import io.sphere.sdk.cartdiscounts.queries.CartDiscountQuery;
 import io.sphere.sdk.client.BlockingSphereClient;
+import io.sphere.sdk.discountcodes.DiscountCode;
 import io.sphere.sdk.discountcodes.commands.DiscountCodeDeleteCommand;
 import io.sphere.sdk.discountcodes.queries.DiscountCodeQuery;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.utils.MoneyImpl;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
@@ -22,8 +25,22 @@ public class CartDiscountFixtures {
 
 
     public static void deleteDiscountCodesAndCartDiscounts(final BlockingSphereClient client){
-        client.executeBlocking(DiscountCodeQuery.of()).getResults().forEach(discountCode -> client.executeBlocking(DiscountCodeDeleteCommand.of(discountCode)));
-        client.executeBlocking(CartDiscountQuery.of()).getResults().forEach(cartDiscount -> client.executeBlocking(CartDiscountDeleteCommand.of(cartDiscount)));
+        PagedQueryResult<DiscountCode> discountCodeResponse;
+        PagedQueryResult<CartDiscount> cartDiscountResponse;
+
+        do {
+            discountCodeResponse = client.executeBlocking(DiscountCodeQuery.of());
+            discountCodeResponse.getResults().forEach(discountCode -> {
+                client.executeBlocking(DiscountCodeDeleteCommand.of(discountCode));
+            });
+        } while (discountCodeResponse.getResults().size() != 0);
+
+        do {
+            cartDiscountResponse = client.executeBlocking(CartDiscountQuery.of());
+            cartDiscountResponse.getResults().forEach(cartDiscount -> {
+                client.executeBlocking(CartDiscountDeleteCommand.of(cartDiscount));
+            });
+        } while (cartDiscountResponse.getResults().size() != 0);
     }
 
     public static CartDiscountDraftBuilder newCartDiscountDraftBuilder() {

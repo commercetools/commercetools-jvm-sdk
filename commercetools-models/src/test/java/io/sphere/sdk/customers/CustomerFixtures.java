@@ -2,10 +2,14 @@ package io.sphere.sdk.customers;
 
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.CartDraft;
+import io.sphere.sdk.carts.CartLike;
 import io.sphere.sdk.carts.commands.CartCreateCommand;
+import io.sphere.sdk.carts.commands.CartDeleteCommand;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.SetCustomerEmail;
 import io.sphere.sdk.client.BlockingSphereClient;
+import io.sphere.sdk.client.ConcurrentModificationException;
+import io.sphere.sdk.client.NotFoundException;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.customers.commands.CustomerCreateCommand;
 import io.sphere.sdk.customers.commands.CustomerDeleteCommand;
@@ -15,6 +19,9 @@ import io.sphere.sdk.customers.commands.updateactions.SetCustomerGroup;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.AddressBuilder;
 import io.sphere.sdk.models.ResourceIdentifier;
+import io.sphere.sdk.models.Versioned;
+import io.sphere.sdk.orders.Order;
+import io.sphere.sdk.orders.commands.OrderDeleteCommand;
 import io.sphere.sdk.stores.Store;
 import io.sphere.sdk.stores.StoreFixtures;
 
@@ -42,6 +49,16 @@ public class CustomerFixtures {
         withCustomer(client, newCustomerDraft(), customerUpdater);
     }
 
+    public static void withCustomerWithOneAddress(final BlockingSphereClient client, final UnaryOperator<Customer> operator) {
+        final UnaryOperator<Customer> customerUpdater = customer -> {
+            final Address address = AddressBuilder.of(DE).city("address city").build();
+            final Customer customerWithAddress = client.executeBlocking(CustomerUpdateCommand.of(customer, AddAddress.of(address)));
+            assertThat(customerWithAddress.getAddresses()).hasSize(1);
+            return operator.apply(customerWithAddress);
+        };
+        withUpdateableCustomer(client, customerUpdater);
+    }
+
     public static void withCustomerInGroup(final BlockingSphereClient client, final BiConsumer<Customer, CustomerGroup> consumer) {
         withB2cCustomerGroup(client, group -> {
             withCustomer(client, customer -> {
@@ -51,10 +68,11 @@ public class CustomerFixtures {
         });
     }
 
+
     public static void withUpdateableCustomer(final BlockingSphereClient client, final UnaryOperator<Customer> operator) {
         final CustomerSignInResult signInResult = client.executeBlocking(CustomerCreateCommand.of(newCustomerDraft()));
         final Customer customerToDelete = operator.apply(signInResult.getCustomer());
-        client.executeBlocking(CustomerDeleteCommand.of(customerToDelete));
+        delete(client, customerToDelete);
     }
 
     public static void withCustomer(final BlockingSphereClient client, final Consumer<Customer> customerConsumer) {
@@ -65,7 +83,16 @@ public class CustomerFixtures {
                                     final CustomerDraft draft, final Consumer<Customer> customerConsumer) {
         final CustomerSignInResult signInResult = client.executeBlocking(CustomerCreateCommand.of(draft));
         customerConsumer.accept(signInResult.getCustomer());
-        //currently the backend does not allow customer deletion
+        delete(client, signInResult.getCustomer());
+    }
+
+    private static void delete(final BlockingSphereClient client, final Customer customer) {
+        try {
+            client.executeBlocking(CustomerDeleteCommand.of(customer));
+        } catch (NotFoundException ignored) {
+        } catch (ConcurrentModificationException e) {
+            client.executeBlocking(CustomerDeleteCommand.of(Versioned.of(customer.getId(), e.getCurrentVersion())));
+        }
     }
 
     public static void withCustomerAndCart(final BlockingSphereClient client, final BiConsumer<Customer, Cart> consumer) {
@@ -79,7 +106,7 @@ public class CustomerFixtures {
     public static CustomerDraftDsl newCustomerDraft() {
         return CustomerDraftDsl.of(CUSTOMER_NAME, randomEmail(CustomerFixtures.class), PASSWORD);
     }
-    
+
     public static void withCustomerInStore(final BlockingSphereClient client, final Consumer<Customer> customerConsumer) {
         StoreFixtures.withStore(client, (store) -> {
             final List<ResourceIdentifier<Store>> stores = new ArrayList<>();
@@ -88,10 +115,10 @@ public class CustomerFixtures {
             final CustomerSignInResult signInResult = client.executeBlocking(CustomerCreateCommand.of(customerDraft));
             final Customer customer = signInResult.getCustomer();
             customerConsumer.accept(customer);
-            client.executeBlocking(CustomerDeleteCommand.of(customer));
+            delete(client, customer);
         });
     }
-    
+
     public static void withUpdateableCustomerInStore(final BlockingSphereClient client, final UnaryOperator<Customer> operator) {
         StoreFixtures.withStore(client, (store) -> {
             final List<ResourceIdentifier<Store>> stores = new ArrayList<>();
@@ -100,7 +127,7 @@ public class CustomerFixtures {
             final CustomerSignInResult signInResult = client.executeBlocking(CustomerCreateCommand.of(customerDraft));
             Customer customer = signInResult.getCustomer();
             customer = operator.apply(customer);
-            client.executeBlocking(CustomerDeleteCommand.of(customer));
+            delete(client, customer);
         });
     }
 }

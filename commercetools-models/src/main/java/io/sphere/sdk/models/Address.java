@@ -1,10 +1,11 @@
 package io.sphere.sdk.models;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.customers.Customer;
+import io.sphere.sdk.types.CustomFields;
+import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
 import java.util.Objects;
@@ -33,7 +34,7 @@ import java.util.Objects;
  * @see io.sphere.sdk.carts.commands.updateactions.SetBillingAddress
  * @see io.sphere.sdk.carts.commands.updateactions.SetShippingAddress
  */
-public final class Address extends Base implements WithKey{
+public final class Address extends Base implements WithKey {
 
     @Nullable
     final CountryCode country;
@@ -85,9 +86,13 @@ public final class Address extends Base implements WithKey{
     final String fax;
     @Nullable
     final String externalId;
+    @Nullable
+    final CustomFields customFields;
+    @Nullable
+    final CustomFieldsDraft customFieldsDraft;
 
     @JsonCreator
-    private Address(final CountryCode country, @Nullable final String id,@Nullable final String key, @Nullable final String title, @Nullable final String salutation, @Nullable final String firstName, @Nullable final String lastName, @Nullable final String streetName, @Nullable final String streetNumber, @Nullable final String additionalStreetInfo, @Nullable final String postalCode, @Nullable final String city, @Nullable final String region, @Nullable final String state, @Nullable final String company, @Nullable final String department, @Nullable final String building, @Nullable final String apartment, @Nullable final String poBox, @Nullable final String phone, @Nullable final String mobile, @Nullable final String email, @Nullable final String additionalAddressInfo, @Nullable final String fax, @Nullable final String externalId) {
+    private Address(final CountryCode country, @Nullable final String id,@Nullable final String key, @Nullable final String title, @Nullable final String salutation, @Nullable final String firstName, @Nullable final String lastName, @Nullable final String streetName, @Nullable final String streetNumber, @Nullable final String additionalStreetInfo, @Nullable final String postalCode, @Nullable final String city, @Nullable final String region, @Nullable final String state, @Nullable final String company, @Nullable final String department, @Nullable final String building, @Nullable final String apartment, @JsonProperty("pOBox") @Nullable final String poBox, @Nullable final String phone, @Nullable final String mobile, @Nullable final String email, @Nullable final String additionalAddressInfo, @Nullable final String fax, @Nullable final String externalId, @JsonProperty("custom") @Nullable CustomFields customFields, @Nullable CustomFieldsDraft customFieldsDraft) {
         this.country = country;
         this.id = id;
         this.key = key;
@@ -113,6 +118,8 @@ public final class Address extends Base implements WithKey{
         this.additionalAddressInfo = additionalAddressInfo;
         this.fax = fax;
         this.externalId = externalId;
+        this.customFieldsDraft = customFieldsDraft;
+        this.customFields = customFields;
     }
 
     @JsonIgnore
@@ -142,6 +149,8 @@ public final class Address extends Base implements WithKey{
         this.additionalAddressInfo = builder.additionalAddressInfo;
         this.fax = builder.fax;
         this.externalId = builder.externalId;
+        this.customFields = builder.customFields;
+        this.customFieldsDraft = builder.customFieldsDraft;
     }
 
     public CountryCode getCountry() {
@@ -229,6 +238,7 @@ public final class Address extends Base implements WithKey{
     }
 
     @Nullable
+    @JsonGetter("pOBox")
     public String getPoBox() {
         return poBox;
     }
@@ -267,6 +277,24 @@ public final class Address extends Base implements WithKey{
     @Nullable
     public String getKey() {
         return key;
+    }
+
+    @Nullable
+    @JsonIgnore
+    public CustomFields getCustomFields() {
+        return customFields;
+    }
+
+    @Nullable
+    @JsonIgnore
+    public CustomFieldsDraft getCustomFieldsDraft() {
+        return customFieldsDraft;
+    }
+
+    @Nullable
+    @JsonGetter("custom")
+    public Object getCustom() {
+        return customFieldsDraft != null ? customFieldsDraft : customFields;
     }
 
     public Address withCountry(final CountryCode country) {
@@ -369,6 +397,15 @@ public final class Address extends Base implements WithKey{
         return AddressBuilder.of(this).externalId(externalId).build();
     }
 
+    public Address withCustomFields(@Nullable final CustomFields customFields) {
+        return AddressBuilder.of(this).customFields(customFields).build();
+    }
+
+    public Address withCustomFields(@Nullable final CustomFieldsDraft customFields) {
+        return AddressBuilder.of(this).customFields(customFields).build();
+    }
+
+
     public static Address of(final CountryCode country) {
         Objects.requireNonNull(country);
         return AddressBuilder.of(country).build();
@@ -402,10 +439,16 @@ public final class Address extends Base implements WithKey{
                 ", additionalAddressInfo=" + additionalAddressInfo +
                 ", fax=" + fax +
                 ", externalId=" + externalId +
+                ", customFields=" + customFields +
+                ", customFieldsDraft=" + customFieldsDraft +
                 '}';
     }
 
     public boolean equalsIgnoreId(final Address address) {
         return address != null && address.withId(null).equals(withId(null));
+    }
+
+    public static String resourceTypeId() {
+        return "address";
     }
 }

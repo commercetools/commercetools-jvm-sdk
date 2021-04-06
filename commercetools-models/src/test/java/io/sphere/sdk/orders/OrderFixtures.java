@@ -8,12 +8,17 @@ import io.sphere.sdk.carts.commands.updateactions.SetCustomShippingMethod;
 import io.sphere.sdk.carts.commands.updateactions.SetCustomerEmail;
 import io.sphere.sdk.carts.queries.CartByIdGet;
 import io.sphere.sdk.client.BlockingSphereClient;
+import io.sphere.sdk.client.ConcurrentModificationException;
+import io.sphere.sdk.client.NotFoundException;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.customers.CustomerFixtures;
 import io.sphere.sdk.customers.CustomerSignInResult;
 import io.sphere.sdk.customers.commands.CustomerSignInCommand;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.Versioned;
+import io.sphere.sdk.orderedits.OrderEdit;
+import io.sphere.sdk.orderedits.commands.OrderEditDeleteCommand;
 import io.sphere.sdk.orders.commands.OrderDeleteCommand;
 import io.sphere.sdk.orders.commands.OrderFromCartCreateCommand;
 import io.sphere.sdk.orders.commands.OrderUpdateCommand;
@@ -71,7 +76,7 @@ public class OrderFixtures {
         withFilledCart(client, cart -> {
             final Order updatedOrder = createOrderFromCart(client, customer, cart);
             final Order orderToDelete = op.apply(updatedOrder);
-            client.executeBlocking(OrderDeleteCommand.of(orderToDelete));
+            delete(client, orderToDelete);
         });
     }
 
@@ -79,13 +84,14 @@ public class OrderFixtures {
         withFilledCart(client, cart -> {
             final Order updatedOrder = createOrderFromCart(client, customer, cart);
             consumer.accept(updatedOrder);
+            delete(client, updatedOrder);
         });
     }
 
     public static void withOrder(final BlockingSphereClient client, final Customer customer, final Cart cart, final UnaryOperator<Order> op) {
             final Order updatedOrder = createOrderFromCart(client, customer, cart);
             final Order orderToDelete = op.apply(updatedOrder);
-            client.executeBlocking(OrderDeleteCommand.of(orderToDelete));
+            delete(client, orderToDelete);
     }
 
     public static void withOrderInStore(final BlockingSphereClient client, final Store store, final Function<Order, Order> f) {
@@ -110,7 +116,7 @@ public class OrderFixtures {
 
                                 final Address shippingAddress = Address.of(CountryCode.DE).withAdditionalAddressInfo("shipping");
                                 final Address billingAddress = Address.of(CountryCode.DE).withAdditionalAddressInfo("billing");
-                                
+
                                 final CartDraft cartDraft = CartDraft.of(EUR)
                                         .withCountry(DE)
                                         .withLocale(Locale.GERMAN)
@@ -137,7 +143,7 @@ public class OrderFixtures {
             });
         });
     }
-    
+
     private static Order createOrderFromCart(BlockingSphereClient client, Customer customer, Cart cart) {
         final TaxCategory taxCategory = TaxCategoryFixtures.defaultTaxCategory(client);
         final SetCustomShippingMethod shippingMethodAction = SetCustomShippingMethod.of("custom shipping method", ShippingRate.of(EURO_10), taxCategory);
@@ -166,7 +172,7 @@ public class OrderFixtures {
 
             final Order order = client.executeBlocking(OrderFromCartCreateCommand.of(signInResult.getCart()));
             final Order orderToDelete = op.apply(order);
-            client.executeBlocking(OrderDeleteCommand.of(orderToDelete));
+            delete(client, orderToDelete);
         });
     }
 
@@ -181,6 +187,7 @@ public class OrderFixtures {
             final Cart cartWith5 = client.executeBlocking(CartUpdateCommand.of(cart, AddCustomLineItem.of(item)));
             final Order order = client.executeBlocking(OrderFromCartCreateCommand.of(cartWith5));
             f.accept(order);
+            delete(client, order);
         });
     }
 
@@ -196,5 +203,14 @@ public class OrderFixtures {
             final ReturnInfo returnInfo = updatedOrder.getReturnInfo().get(0);
             return f.apply(updatedOrder, returnInfo);
         });
+    }
+
+    private static void delete(final BlockingSphereClient client, final Order order) {
+        try {
+            client.executeBlocking(OrderDeleteCommand.of(order));
+        } catch (NotFoundException ignored) {
+        } catch (ConcurrentModificationException e) {
+            client.executeBlocking(OrderDeleteCommand.of(Versioned.of(order.getId(), e.getCurrentVersion())));
+        }
     }
 }

@@ -6,6 +6,8 @@ import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.ResourceIdentifier;
+import io.sphere.sdk.models.WithKey;
+import io.sphere.sdk.types.CustomDraft;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
@@ -20,7 +22,7 @@ import java.util.List;
 @ResourceDraftValue(
         factoryMethods = {@FactoryMethod(parameterNames = {"name"})},
         abstractBuilderClass = true)
-public interface ShoppingListDraft {
+public interface ShoppingListDraft extends CustomDraft, WithKey {
 
     LocalizedString getName();
 

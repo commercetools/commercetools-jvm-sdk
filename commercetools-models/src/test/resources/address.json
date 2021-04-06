@@ -1,0 +1,24 @@
+{
+  "firstName": "Liz",
+  "lastName": "Windsor",
+  "streetName": "Buckingham Palace",
+  "additionalStreetInfo": "West Wing",
+  "postalCode": "SW1A 1AA",
+  "city": "London",
+  "region": "",
+  "state": "",
+  "country": "GB",
+  "pOBox": "1234567890",
+  "phone": "7894561",
+  "email": "liz.windsor@mailinator.com",
+  "externalId": "",
+  "custom": {
+    "type": {
+      "typeId": "type",
+      "id": "abc"
+    },
+    "fields": {
+      "foo": "bar"
+    }
+  }
+}

@@ -1,6 +1,8 @@
 package io.sphere.sdk.models;
 
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.types.CustomFields;
+import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
 import java.util.Objects;
@@ -66,7 +68,10 @@ public final class AddressBuilder extends Base implements Builder<Address> {
     String fax;
     @Nullable
     String externalId;
-
+    @Nullable
+    CustomFields customFields;
+    @Nullable
+    CustomFieldsDraft customFieldsDraft;
 
     AddressBuilder(final CountryCode country) {
         this.country = country;
@@ -98,6 +103,8 @@ public final class AddressBuilder extends Base implements Builder<Address> {
         builder.fax = address.fax;
         builder.externalId = address.externalId;
         builder.key = address.key;
+        builder.customFields = address.customFields;
+        builder.customFieldsDraft = address.customFieldsDraft;
         return builder;
     }
 
@@ -220,7 +227,7 @@ public final class AddressBuilder extends Base implements Builder<Address> {
         this.email = email;
         return this;
     }
-    
+
     public AddressBuilder additionalAddressInfo(@Nullable final String additionalAddressInfo) {
         this.additionalAddressInfo = additionalAddressInfo;
         return this;
@@ -233,6 +240,18 @@ public final class AddressBuilder extends Base implements Builder<Address> {
 
     public AddressBuilder externalId(@Nullable final String externalId) {
         this.externalId = externalId;
+        return this;
+    }
+
+    public AddressBuilder customFields(@Nullable final CustomFields customFields) {
+        this.customFields = customFields;
+        this.customFieldsDraft = null;
+        return this;
+    }
+
+    public AddressBuilder customFields(@Nullable final CustomFieldsDraft customFieldsDraft) {
+        this.customFieldsDraft = customFieldsDraft;
+        this.customFields = null;
         return this;
     }
 }

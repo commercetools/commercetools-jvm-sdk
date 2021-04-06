@@ -7,6 +7,7 @@ import io.sphere.sdk.types.CustomDraft;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
+import java.time.ZonedDateTime;
 
 /**
  * Adds a text line item to a shopping list.
@@ -25,17 +26,20 @@ public final class AddTextLineItem extends UpdateActionImpl<ShoppingList> implem
     private final LocalizedString description;
     @Nullable
     private final CustomFieldsDraft custom;
+    @Nullable
+    private final ZonedDateTime addedAt;
 
-    private AddTextLineItem(final LocalizedString name, @Nullable final Long quantity, @Nullable final LocalizedString description, @Nullable final CustomFieldsDraft custom) {
+    private AddTextLineItem(final LocalizedString name, @Nullable final Long quantity, @Nullable final LocalizedString description, @Nullable ZonedDateTime addedAt, @Nullable final CustomFieldsDraft custom) {
         super("addTextLineItem");
         this.name = name;
         this.quantity = quantity;
         this.description = description;
         this.custom = custom;
+        this.addedAt = addedAt;
     }
 
     public static AddTextLineItem of(final LocalizedString name) {
-        return new AddTextLineItem(name, null, null, null);
+        return new AddTextLineItem(name, null, null, null, null);
     }
 
     public LocalizedString getName() {
@@ -57,15 +61,25 @@ public final class AddTextLineItem extends UpdateActionImpl<ShoppingList> implem
         return custom;
     }
 
+    @Nullable
+    public ZonedDateTime getAddedAt() {
+        return addedAt;
+    }
+
     public AddTextLineItem withQuantity(@Nullable final Long quantity) {
-        return new AddTextLineItem(getName(), quantity, getDescription(), getCustom());
+        return new AddTextLineItem(getName(), quantity, getDescription(), getAddedAt(), getCustom());
     }
 
     public AddTextLineItem withCustom(@Nullable final CustomFieldsDraft custom) {
-        return new AddTextLineItem(getName(), getQuantity(), getDescription(), custom);
+        return new AddTextLineItem(getName(), getQuantity(), getDescription(), getAddedAt(), custom);
     }
 
     public AddTextLineItem withDescription(@Nullable final LocalizedString description) {
-        return new AddTextLineItem(getName(), getQuantity(), description, getCustom());
+        return new AddTextLineItem(getName(), getQuantity(), description, getAddedAt(), getCustom());
     }
+
+    public AddTextLineItem withAddedAt(@Nullable final ZonedDateTime addedAt) {
+        return new AddTextLineItem(getName(), getQuantity(), getDescription(), addedAt, getCustom());
+    }
+
 }
