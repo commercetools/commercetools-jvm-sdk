@@ -117,7 +117,7 @@ public class CartFixtures {
             f.accept(updatedCart);
         });
     }
-    
+
     public static void withFilledCartInStore(final BlockingSphereClient client, final Store store, final Consumer<Cart> f) {
         withTaxedProduct(client, product -> {
 
@@ -136,7 +136,7 @@ public class CartFixtures {
             assertThat(lineItem.getName()).isEqualTo(product.getMasterData().getStaged().getName());
             assertThat(lineItem.getQuantity()).isEqualTo(quantity);
             f.accept(updatedCart);
-
+            client.executeBlocking(CartDeleteCommand.of(updatedCart));
         });
     }
 
