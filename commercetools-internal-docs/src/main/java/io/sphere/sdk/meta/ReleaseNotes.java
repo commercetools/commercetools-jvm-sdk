@@ -156,7 +156,7 @@ import java.util.function.Function;
  </ul>
  -->
  -->
- <h3 class=released-version id="v1_61_0">1.60.0 (01.04.2021)</h3>
+ <h3 class=released-version id="v1_61_0">1.61.0 (06.04.2021)</h3>
  <ul>
  <li class=new-in-release>Deprecated {@link CustomerDraft#getAnonymousCartId()} and replaced with {@link CustomerDraft#getAnonymousCart()} support anonymousCart into the {@link CustomerDraftBuilder}, into the {@link CustomerSignInCommand} and in the {@link io.sphere.sdk.customers.commands.CustomerInStoreSignInCommand}</li>
  <li class=new-in-release>Support discounted field in the {@link PriceDraft#getDiscounted()}
