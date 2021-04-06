@@ -115,6 +115,7 @@ public class CartFixtures {
             assertThat(lineItem.getName()).isEqualTo(product.getMasterData().getStaged().getName());
             assertThat(lineItem.getQuantity()).isEqualTo(quantity);
             f.accept(updatedCart);
+            client.executeBlocking(CartDeleteCommand.of(updatedCart));
         });
     }
 
@@ -154,6 +155,7 @@ public class CartFixtures {
             assertThat(lineItem.getName()).isEqualTo(product.getMasterData().getStaged().getName());
             assertThat(lineItem.getQuantity()).isEqualTo(quantity);
             f.accept(updatedCart);
+            client.executeBlocking(CartDeleteCommand.of(updatedCart));
         });
     }
 

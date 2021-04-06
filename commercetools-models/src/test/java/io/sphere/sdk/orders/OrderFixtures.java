@@ -79,6 +79,7 @@ public class OrderFixtures {
         withFilledCart(client, cart -> {
             final Order updatedOrder = createOrderFromCart(client, customer, cart);
             consumer.accept(updatedOrder);
+            client.executeBlocking(OrderDeleteCommand.of(updatedOrder));
         });
     }
 
@@ -110,7 +111,7 @@ public class OrderFixtures {
 
                                 final Address shippingAddress = Address.of(CountryCode.DE).withAdditionalAddressInfo("shipping");
                                 final Address billingAddress = Address.of(CountryCode.DE).withAdditionalAddressInfo("billing");
-                                
+
                                 final CartDraft cartDraft = CartDraft.of(EUR)
                                         .withCountry(DE)
                                         .withLocale(Locale.GERMAN)
@@ -137,7 +138,7 @@ public class OrderFixtures {
             });
         });
     }
-    
+
     private static Order createOrderFromCart(BlockingSphereClient client, Customer customer, Cart cart) {
         final TaxCategory taxCategory = TaxCategoryFixtures.defaultTaxCategory(client);
         final SetCustomShippingMethod shippingMethodAction = SetCustomShippingMethod.of("custom shipping method", ShippingRate.of(EURO_10), taxCategory);
@@ -181,6 +182,7 @@ public class OrderFixtures {
             final Cart cartWith5 = client.executeBlocking(CartUpdateCommand.of(cart, AddCustomLineItem.of(item)));
             final Order order = client.executeBlocking(OrderFromCartCreateCommand.of(cartWith5));
             f.accept(order);
+            client.executeBlocking(OrderDeleteCommand.of(order));
         });
     }
 

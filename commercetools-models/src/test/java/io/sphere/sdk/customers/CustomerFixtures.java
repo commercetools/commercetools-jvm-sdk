@@ -76,6 +76,7 @@ public class CustomerFixtures {
                                     final CustomerDraft draft, final Consumer<Customer> customerConsumer) {
         final CustomerSignInResult signInResult = client.executeBlocking(CustomerCreateCommand.of(draft));
         customerConsumer.accept(signInResult.getCustomer());
+        client.executeBlocking(CustomerDeleteCommand.of(signInResult.getCustomer()));
         //currently the backend does not allow customer deletion
     }
 
