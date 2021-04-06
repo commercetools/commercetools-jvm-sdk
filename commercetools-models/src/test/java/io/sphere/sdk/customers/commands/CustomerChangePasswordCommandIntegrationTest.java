@@ -22,7 +22,7 @@ public class CustomerChangePasswordCommandIntegrationTest extends CustomerIntegr
 
     @Test
     public void execution() throws Exception {
-        withCustomer(client(), customer -> {
+        withUpdateableCustomer(client(), customer -> {
             final String oldPassword = PASSWORD;
             final String newPassword = "newSecret";
             final Customer updatedCustomer = client().executeBlocking(CustomerChangePasswordCommand.of(customer, oldPassword, newPassword));
@@ -37,6 +37,7 @@ public class CustomerChangePasswordCommandIntegrationTest extends CustomerIntegr
             assertThat(throwable).isInstanceOf(ErrorResponseException.class);
             final ErrorResponseException errorResponseException = (ErrorResponseException) throwable;
             assertThat(errorResponseException.hasErrorCode(CustomerInvalidCredentials.CODE)).isTrue();
+            return updatedCustomer;
         });
     }
 
@@ -67,7 +68,7 @@ public class CustomerChangePasswordCommandIntegrationTest extends CustomerIntegr
 
     @Test
     public void executionDemo() throws Exception {
-        withCustomer(client(), customer -> {
+        withUpdateableCustomer(client(), customer -> {
             final SphereClient client = client();
             demo(client, customer.getEmail());
 
@@ -86,6 +87,7 @@ public class CustomerChangePasswordCommandIntegrationTest extends CustomerIntegr
             } catch (final ErrorResponseException e) {
                 assertThat(e.hasErrorCode(CustomerInvalidCredentials.CODE)).isTrue();
             }
+            return updatedCustomer;
         });
     }
 

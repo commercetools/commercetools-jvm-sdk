@@ -13,8 +13,7 @@ import org.junit.Test;
 
 import java.util.HashMap;
 
-import static io.sphere.sdk.customers.CustomerFixtures.newCustomerDraft;
-import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
+import static io.sphere.sdk.customers.CustomerFixtures.*;
 import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
 import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -42,7 +41,7 @@ public class CustomerCustomFieldsIntegrationTest extends IntegrationTest {
     @Test
     public void setCustomType() {
         withUpdateableType(client(), type -> {
-           withCustomer(client(), customer -> {
+           withUpdateableCustomer(client(), customer -> {
                final HashMap<String, Object> fields = new HashMap<>();
                fields.put(STRING_FIELD_NAME, "hello");
                final Customer updatedCustomer = client().executeBlocking(CustomerUpdateCommand.of(customer, SetCustomType.ofTypeIdAndObjects(type.getId(), fields)));
@@ -51,6 +50,7 @@ public class CustomerCustomFieldsIntegrationTest extends IntegrationTest {
 
                final Customer updated2 = client().executeBlocking(CustomerUpdateCommand.of(updatedCustomer, SetCustomType.ofRemoveType()));
                assertThat(updated2.getCustom()).isNull();
+               return updated2;
            });
             return type;
         });

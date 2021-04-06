@@ -10,15 +10,19 @@ import io.sphere.sdk.carts.commands.CartInStoreCreateCommand;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.*;
 import io.sphere.sdk.client.BlockingSphereClient;
+import io.sphere.sdk.client.ConcurrentModificationException;
+import io.sphere.sdk.client.NotFoundException;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.discountcodes.DiscountCode;
 import io.sphere.sdk.discountcodes.DiscountCodeDraftDsl;
+import io.sphere.sdk.discountcodes.DiscountCodeFixtures;
 import io.sphere.sdk.discountcodes.commands.DiscountCodeCreateCommand;
 import io.sphere.sdk.discountcodes.commands.DiscountCodeDeleteCommand;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.AddressBuilder;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.commands.OrderDeleteCommand;
 import io.sphere.sdk.products.Product;
@@ -74,7 +78,9 @@ public class CartFixtures {
     public static void withCart(final BlockingSphereClient client, final UnaryOperator<Cart> operator) {
         final Cart cart = createCartWithCountry(client);
         final Cart cartToDelete = operator.apply(cart);
-        client.executeBlocking(CartDeleteCommand.of(cartToDelete));
+        try {
+            client.executeBlocking(CartDeleteCommand.of(cartToDelete));
+        } catch (NotFoundException ignored) {}
     }
 
     public static void withCart(final BlockingSphereClient client, final Cart cart, final Function<Cart, CartLike<?>> operator) {
@@ -88,16 +94,26 @@ public class CartFixtures {
         final Cart updatedCart = client.executeBlocking(CartUpdateCommand.of(cart, SetKey.of(key)));
         assertThat(updatedCart.getKey()).isEqualTo(key);
         final Cart cartToDelete = operator.apply(cart);
-        client.executeBlocking(CartDeleteCommand.of(cartToDelete));
+        delete(client, cartToDelete);
     }
 
     private static void delete(final BlockingSphereClient client, final CartLike<?> cartLike) {
         if (cartLike instanceof Cart) {
             final Cart cart = (Cart) cartLike;
-            client.executeBlocking(CartDeleteCommand.of(cart));
+            try {
+                client.executeBlocking(CartDeleteCommand.of(cart));
+            } catch (NotFoundException ignored) {
+            } catch (ConcurrentModificationException e) {
+                client.executeBlocking(CartDeleteCommand.of(Versioned.of(cart.getId(), e.getCurrentVersion())));
+            }
         } else {
             final Order order = (Order) cartLike;
-            client.executeBlocking(OrderDeleteCommand.of(order));
+            try {
+                client.executeBlocking(OrderDeleteCommand.of(order));
+            } catch (NotFoundException ignored) {
+            } catch (ConcurrentModificationException e) {
+                client.executeBlocking(CartDeleteCommand.of(Versioned.of(order.getId(), e.getCurrentVersion())));
+            }
         }
     }
 
@@ -115,7 +131,7 @@ public class CartFixtures {
             assertThat(lineItem.getName()).isEqualTo(product.getMasterData().getStaged().getName());
             assertThat(lineItem.getQuantity()).isEqualTo(quantity);
             f.accept(updatedCart);
-            client.executeBlocking(CartDeleteCommand.of(updatedCart));
+            delete(client, updatedCart);
         });
     }
 
@@ -137,7 +153,7 @@ public class CartFixtures {
             assertThat(lineItem.getName()).isEqualTo(product.getMasterData().getStaged().getName());
             assertThat(lineItem.getQuantity()).isEqualTo(quantity);
             f.accept(updatedCart);
-            client.executeBlocking(CartDeleteCommand.of(updatedCart));
+            delete(client, updatedCart);
         });
     }
 
@@ -155,7 +171,7 @@ public class CartFixtures {
             assertThat(lineItem.getName()).isEqualTo(product.getMasterData().getStaged().getName());
             assertThat(lineItem.getQuantity()).isEqualTo(quantity);
             f.accept(updatedCart);
-            client.executeBlocking(CartDeleteCommand.of(updatedCart));
+            delete(client, updatedCart);
         });
     }
 
@@ -175,7 +191,7 @@ public class CartFixtures {
 
             final Cart cartToDelete = f.apply(cart, product);
 
-            client.executeBlocking(CartDeleteCommand.of(cartToDelete));
+            delete(client, cartToDelete);
         });
     }
 
@@ -201,7 +217,7 @@ public class CartFixtures {
             assertThat(lineItem.getName()).isEqualTo(product.getMasterData().getStaged().getName());
             assertThat(lineItem.getQuantity()).isEqualTo(quantity);
             final Cart cartToDelete = op.apply(updatedCart);
-            client.executeBlocking(CartDeleteCommand.of(cartToDelete));
+            delete(client, cartToDelete);
         });
     }
 
@@ -218,7 +234,7 @@ public class CartFixtures {
             final Cart updatedCart = client.executeBlocking(CartUpdateCommand.of(cart, asList(addCustomLineItemAction)));
 
             final Cart cartToDelete = op.apply(updatedCart);
-            client.executeBlocking(CartDeleteCommand.of(cartToDelete));
+            delete(client, cartToDelete);
         });
     }
 
@@ -283,8 +299,13 @@ public class CartFixtures {
             final DiscountCode discountCode = client.executeBlocking(DiscountCodeCreateCommand.of(DiscountCodeDraftDsl.of(randomKey(), cartDiscount)));
             final Cart updatedCart = user.apply(cart, discountCode);
             client.executeBlocking(CartDeleteCommand.of(updatedCart));
-            client.executeBlocking(DiscountCodeDeleteCommand.of(discountCode));
-            client.executeBlocking(CartDiscountDeleteCommand.of(cartDiscount));
+            delete(client, updatedCart);
+            try {
+                client.executeBlocking(DiscountCodeDeleteCommand.of(discountCode));
+            } catch (NotFoundException ignored) {}
+            try {
+                client.executeBlocking(CartDiscountDeleteCommand.of(cartDiscount));
+            } catch (NotFoundException ignored) {}
         });
     }
 
@@ -297,6 +318,6 @@ public class CartFixtures {
         final CartCreateCommand cmd = CartCreateCommand.of(cartDraft);
         final Cart cart = client.executeBlocking(cmd);
         final Cart updatedCart = op.apply(cart);
-        client.executeBlocking(CartDeleteCommand.of(updatedCart));
+        delete(client, updatedCart);
     }
 }

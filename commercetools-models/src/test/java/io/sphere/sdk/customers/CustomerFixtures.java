@@ -2,10 +2,14 @@ package io.sphere.sdk.customers;
 
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.CartDraft;
+import io.sphere.sdk.carts.CartLike;
 import io.sphere.sdk.carts.commands.CartCreateCommand;
+import io.sphere.sdk.carts.commands.CartDeleteCommand;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.SetCustomerEmail;
 import io.sphere.sdk.client.BlockingSphereClient;
+import io.sphere.sdk.client.ConcurrentModificationException;
+import io.sphere.sdk.client.NotFoundException;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.customers.commands.CustomerCreateCommand;
 import io.sphere.sdk.customers.commands.CustomerDeleteCommand;
@@ -15,6 +19,9 @@ import io.sphere.sdk.customers.commands.updateactions.SetCustomerGroup;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.AddressBuilder;
 import io.sphere.sdk.models.ResourceIdentifier;
+import io.sphere.sdk.models.Versioned;
+import io.sphere.sdk.orders.Order;
+import io.sphere.sdk.orders.commands.OrderDeleteCommand;
 import io.sphere.sdk.stores.Store;
 import io.sphere.sdk.stores.StoreFixtures;
 
@@ -65,7 +72,7 @@ public class CustomerFixtures {
     public static void withUpdateableCustomer(final BlockingSphereClient client, final UnaryOperator<Customer> operator) {
         final CustomerSignInResult signInResult = client.executeBlocking(CustomerCreateCommand.of(newCustomerDraft()));
         final Customer customerToDelete = operator.apply(signInResult.getCustomer());
-        client.executeBlocking(CustomerDeleteCommand.of(customerToDelete));
+        delete(client, customerToDelete);
     }
 
     public static void withCustomer(final BlockingSphereClient client, final Consumer<Customer> customerConsumer) {
@@ -76,8 +83,16 @@ public class CustomerFixtures {
                                     final CustomerDraft draft, final Consumer<Customer> customerConsumer) {
         final CustomerSignInResult signInResult = client.executeBlocking(CustomerCreateCommand.of(draft));
         customerConsumer.accept(signInResult.getCustomer());
-        client.executeBlocking(CustomerDeleteCommand.of(signInResult.getCustomer()));
-        //currently the backend does not allow customer deletion
+        delete(client, signInResult.getCustomer());
+    }
+
+    private static void delete(final BlockingSphereClient client, final Customer customer) {
+        try {
+            client.executeBlocking(CustomerDeleteCommand.of(customer));
+        } catch (NotFoundException ignored) {
+        } catch (ConcurrentModificationException e) {
+            client.executeBlocking(CustomerDeleteCommand.of(Versioned.of(customer.getId(), e.getCurrentVersion())));
+        }
     }
 
     public static void withCustomerAndCart(final BlockingSphereClient client, final BiConsumer<Customer, Cart> consumer) {
@@ -100,7 +115,7 @@ public class CustomerFixtures {
             final CustomerSignInResult signInResult = client.executeBlocking(CustomerCreateCommand.of(customerDraft));
             final Customer customer = signInResult.getCustomer();
             customerConsumer.accept(customer);
-            client.executeBlocking(CustomerDeleteCommand.of(customer));
+            delete(client, customer);
         });
     }
 
@@ -112,7 +127,7 @@ public class CustomerFixtures {
             final CustomerSignInResult signInResult = client.executeBlocking(CustomerCreateCommand.of(customerDraft));
             Customer customer = signInResult.getCustomer();
             customer = operator.apply(customer);
-            client.executeBlocking(CustomerDeleteCommand.of(customer));
+            delete(client, customer);
         });
     }
 }
