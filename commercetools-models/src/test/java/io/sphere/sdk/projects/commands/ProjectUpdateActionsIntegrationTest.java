@@ -53,7 +53,7 @@ public class ProjectUpdateActionsIntegrationTest extends ProjectIntegrationTest{
         final ProjectUpdateCommand updateCommand = ProjectUpdateCommand.of(project, ChangeProductSearchIndexingEnabled.of(true));
         final Project updatedProject = client().executeBlocking(updateCommand);
 
-        final SearchIndexingConfigurationStatus status = project.getSearchIndexing().getProducts().getStatus();
+        final SearchIndexingConfigurationStatus status = updatedProject.getSearchIndexing().getProducts().getStatus();
         assertThat(status).isInstanceOf(SearchIndexingConfigurationStatus.class);
         assertThat(updatedProject.getSearchIndexing().getProducts().getStatus()).isNotEqualTo(SearchIndexingConfigurationStatus.DEACTIVATED);
         assertThat(updatedProject.getSearchIndexing().getProducts().getLastModifiedAt()).isNotNull();
