@@ -33,6 +33,7 @@ public class ProjectUpdateActionsIntegrationTest extends ProjectIntegrationTest{
         Assertions.assertThat(updatedProject.getExternalOAuth()).isNull();
     }
 
+    @Ignore("Disabled due as it's flaky with cached project information")
     @Test
     public void checkChangeCountryTaxRateFallbackEnabledIsWorking(){
         final Project project = client().executeBlocking(ProjectGet.of());
