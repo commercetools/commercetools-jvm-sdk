@@ -156,6 +156,10 @@ import java.util.function.Function;
  </ul>
  -->
  -->
+ <h3 class=released-version id="v1_63_0">1.63.0 (03.05.2021)</h3>
+ <ul>
+ <li class=fixed-in-release>Fixed bug in the {@link io.sphere.sdk.retry.RetryAction#ofScheduledRetry(long, Function)} introduced try catch to handle the throwing of an exception
+ </ul>
  <h3 class=released-version id="v1_62_0">1.62.0 (06.04.2021)</h3>
  <ul>
  <li class=fixed-in-release>Fixed type for asset in AddVariant update action</li>
