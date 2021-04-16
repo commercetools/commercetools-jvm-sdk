@@ -169,8 +169,8 @@ public class ProductCreateCommandIntegrationTest extends IntegrationTest {
         withEmptyProductType(client(), randomKey(), productType ->
                 withUpdateableType(client(), type -> {
                     final List<PriceTier> tiers = Arrays.asList(PriceTierBuilder.of(10, EURO_5).build());
-                    final PriceDraft priceWithTiers = PriceDraft.of(EURO_1)
-                            .withTiers(tiers);
+                    final PriceDraft priceWithTiers = PriceDraftBuilder.of(EURO_1)
+                            .plusTiers(PriceTierBuilder.of(10, EURO_5).build()).build();
 
                     final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of()
                             .price(priceWithTiers)

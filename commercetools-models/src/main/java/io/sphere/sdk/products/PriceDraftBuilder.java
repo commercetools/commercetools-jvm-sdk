@@ -103,16 +103,16 @@ public final class PriceDraftBuilder extends Base implements Builder<PriceDraftD
     }
 
     public PriceDraftBuilder tiers(@Nullable final List<PriceTier> tiers) {
-        this.tiers = tiers;
+        this.tiers = Optional.ofNullable(tiers).map(t -> Collections.unmodifiableList(new ArrayList<>(t))).orElse(null);
         return this;
     }
 
     public PriceDraftBuilder plusTiers(final PriceTier tierToAdd) {
-        return tiers(listOf(this.tiers, tierToAdd));
+        return tiers(listOf(Optional.ofNullable(tiers).orElse(Collections.emptyList()), tierToAdd));
     }
 
     public PriceDraftBuilder plusTiers(final List<PriceTier> tierToAdd) {
-        return tiers(listOf(this.tiers, tierToAdd));
+        return tiers(listOf(Optional.ofNullable(tiers).orElse(Collections.emptyList()), tierToAdd));
     }
 
 
