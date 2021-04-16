@@ -23,10 +23,8 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static io.sphere.sdk.client.TestDoubleSphereClientFactory.createHttpTestDouble;
 import static io.sphere.sdk.client.retry.RetryableSphereClientBuilder.DEFAULT_INITIAL_RETRY_DELAY;
 import static io.sphere.sdk.client.retry.RetryableSphereClientBuilder.DEFAULT_MAX_DELAY;
 import static io.sphere.sdk.client.retry.RetryableSphereClientBuilder.DEFAULT_MAX_PARALLEL_REQUESTS;
@@ -37,7 +35,6 @@ import static io.sphere.sdk.http.HttpStatusCode.SERVICE_UNAVAILABLE_503;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
 
 public class RetryableSphereClientBuilderTest {
 
@@ -151,22 +148,22 @@ public class RetryableSphereClientBuilderTest {
 
     @Test
     public void retryWhen502Response() {
-        final int maxAttempts = 5;
+        final long maxAttempts = 5L;
         final FakeUnderlyingClient fakeUnderlyingClient = FakeUnderlyingClient.of(BAD_GATEWAY_502);
         final RetryableSphereClientBuilder client = fakeUnderlyingClient.toRetryClient();
-        final RetryAction retryAction = RetryAction.ofExponentialBackoff(maxAttempts, 1000, 1);
+        final RetryAction retryAction = RetryAction.ofScheduledRetry(maxAttempts, context -> Duration.ofSeconds(context.getAttempt() * 2));
 
         final SphereClient decoratedSphereClient = client.decorateSphereClient(
                 fakeUnderlyingClient.getSphereClient(), retryAction, DEFAULT_MAX_PARALLEL_REQUESTS);
 
 
-        final List<RetryRule> retryRules = singletonList(RetryRule.of(
-                RetryPredicate.ofMatchingStatusCodes(HttpStatusCode.BAD_GATEWAY_502),
-                RetryAction.ofScheduledRetry(maxAttempts, context -> {
-
-                    throw new IllegalArgumentException();
-                }))
-        );
+//        final List<RetryRule> retryRules = singletonList(RetryRule.of(
+//                RetryPredicate.ofMatchingStatusCodes(HttpStatusCode.BAD_GATEWAY_502),
+//                RetryAction.ofScheduledRetry(maxAttempts, context -> {
+//
+//                    throw new IllegalArgumentException();
+//                }))
+//        );
 
         final CustomerUpdateCommand customerUpdateCommand = getCustomerUpdateCommand();
 
