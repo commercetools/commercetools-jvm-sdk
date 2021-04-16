@@ -13,7 +13,7 @@ import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.retry.RetryAction;
 import io.sphere.sdk.retry.RetryPredicate;
 import io.sphere.sdk.retry.RetryRule;
-import org.assertj.core.api.Assertions;
+
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -23,7 +23,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionException;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicInteger;
