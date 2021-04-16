@@ -8,14 +8,22 @@ import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.productdiscounts.DiscountedPrice;
+import io.sphere.sdk.products.attributes.AttributeDefinition;
+import io.sphere.sdk.products.attributes.AttributeDefinitionDraftBuilder;
+import io.sphere.sdk.producttypes.ProductTypeDraftBuilder;
 import io.sphere.sdk.types.CustomFieldsDraft;
 import io.sphere.sdk.types.CustomFieldsDraftBuilder;
+import io.sphere.sdk.utils.SphereInternalUtils;
 
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+
+import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 
 public final class PriceDraftBuilder extends Base implements Builder<PriceDraftDsl> {
     private MonetaryAmount value;
@@ -99,6 +107,15 @@ public final class PriceDraftBuilder extends Base implements Builder<PriceDraftD
         return this;
     }
 
+    public PriceDraftBuilder plusTiers(final PriceTier tierToAdd) {
+        return tiers(listOf(this.tiers, tierToAdd));
+    }
+
+    public PriceDraftBuilder plusTiers(final List<PriceTier> tierToAdd) {
+        return tiers(listOf(this.tiers, tierToAdd));
+    }
+
+
     public PriceDraftBuilder discounted(@Nullable final DiscountedPrice discounted) {
         this.discounted = discounted;
         return this;
@@ -152,7 +169,6 @@ public final class PriceDraftBuilder extends Base implements Builder<PriceDraftD
     public PriceDraftDsl build() {
         return new PriceDraftDsl(value, country, customerGroup, channel, validFrom, validUntil, custom, tiers, discounted);
     }
-
 
     public static PriceDraftBuilder of(final MonetaryAmount value) {
         return new PriceDraftBuilder(value);
