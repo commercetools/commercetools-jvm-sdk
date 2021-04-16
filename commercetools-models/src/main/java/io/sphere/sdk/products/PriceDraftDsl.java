@@ -148,6 +148,10 @@ public final class PriceDraftDsl extends Base implements PriceDraft {
         return PriceDraftBuilder.of(this).discounted(discounted).build();
     }
 
+    public PriceDraftDsl withTiers(@Nullable final List<PriceTier> tiers) {
+        return PriceDraftBuilder.of(this).tiers(tiers).build();
+    }
+
     @JsonIgnore
     public static PriceDraftDsl of(final MonetaryAmount money) {
         return PriceDraftBuilder.of(money).build();

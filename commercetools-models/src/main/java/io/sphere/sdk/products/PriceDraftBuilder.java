@@ -166,6 +166,7 @@ public final class PriceDraftBuilder extends Base implements Builder<PriceDraftD
                 .validFrom(template.getValidFrom())
                 .validUntil(template.getValidUntil())
                 .custom(template.getCustom())
+                .tiers(template.getTiers())
                 .discounted(template.getDiscounted());
     }
 
@@ -184,6 +185,7 @@ public final class PriceDraftBuilder extends Base implements Builder<PriceDraftD
                 .validFrom(template.getValidFrom())
                 .validUntil(template.getValidUntil())
                 .custom(copyCustom(template))
+                .tiers(template.getTiers())
                 .discounted(template.getDiscounted());
     }
 }
