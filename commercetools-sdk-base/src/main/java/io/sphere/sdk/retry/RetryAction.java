@@ -44,9 +44,13 @@ public interface RetryAction extends Function<RetryContext, RetryStrategy> {
                 if (retryOperationContext.getAttempt() > maxAttempts) {
                     return RetryStrategy.resume(retryOperationContext.getLatestError());
                 } else {
-                    final Duration duration = durationFunction.apply(retryOperationContext);
-                    final Object parameterObject = retryOperationContext.getLatestParameter();
-                    return RetryStrategy.retryScheduled(parameterObject, duration);
+                    try {
+                        final Duration duration = durationFunction.apply(retryOperationContext);
+                        final Object parameterObject = retryOperationContext.getLatestParameter();
+                        return RetryStrategy.retryScheduled(parameterObject, duration);
+                    } catch (Throwable e) {
+                        return RetryStrategy.resume(e);
+                    }
                 }
             }
 

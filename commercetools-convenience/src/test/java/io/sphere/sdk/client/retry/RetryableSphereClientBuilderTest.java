@@ -13,18 +13,22 @@ import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.retry.RetryAction;
 import io.sphere.sdk.retry.RetryPredicate;
 import io.sphere.sdk.retry.RetryRule;
+import org.assertj.core.api.Assertions;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import java.time.Duration;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static io.sphere.sdk.client.TestDoubleSphereClientFactory.createHttpTestDouble;
 import static io.sphere.sdk.client.retry.RetryableSphereClientBuilder.DEFAULT_INITIAL_RETRY_DELAY;
 import static io.sphere.sdk.client.retry.RetryableSphereClientBuilder.DEFAULT_MAX_DELAY;
 import static io.sphere.sdk.client.retry.RetryableSphereClientBuilder.DEFAULT_MAX_PARALLEL_REQUESTS;
@@ -147,30 +151,24 @@ public class RetryableSphereClientBuilderTest {
     }
 
     @Test
-    public void retryWhen502Response() {
-        final long maxAttempts = 5L;
-        final FakeUnderlyingClient fakeUnderlyingClient = FakeUnderlyingClient.of(BAD_GATEWAY_502);
-        final RetryableSphereClientBuilder client = fakeUnderlyingClient.toRetryClient();
-        final RetryAction retryAction = RetryAction.ofScheduledRetry(maxAttempts, context -> Duration.ofSeconds(context.getAttempt() * 2));
-
-        final SphereClient decoratedSphereClient = client.decorateSphereClient(
-                fakeUnderlyingClient.getSphereClient(), retryAction, DEFAULT_MAX_PARALLEL_REQUESTS);
-
-
-//        final List<RetryRule> retryRules = singletonList(RetryRule.of(
-//                RetryPredicate.ofMatchingStatusCodes(HttpStatusCode.BAD_GATEWAY_502),
-//                RetryAction.ofScheduledRetry(maxAttempts, context -> {
-//
-//                    throw new IllegalArgumentException();
-//                }))
-//        );
+    public void createClient_stucked_on_duration_calculation() {
+        final SphereClient mockSphereUnderlyingClient =
+                createHttpTestDouble(intent -> HttpResponse.of(HttpStatusCode.BAD_GATEWAY_502));
+        final int maxAttempts = 5;
+        final List<RetryRule> retryRules = Collections.singletonList(RetryRule.of(
+                RetryPredicate.ofMatchingStatusCodes(HttpStatusCode.BAD_GATEWAY_502),
+                RetryAction.ofScheduledRetry(maxAttempts, context -> {
+                    // durationFunction.apply() in retry action.
+                    throw new IllegalArgumentException();
+                }))
+        );
+        final SphereClient sphereClient = RetrySphereClientDecorator.of(mockSphereUnderlyingClient, retryRules);
 
         final CustomerUpdateCommand customerUpdateCommand = getCustomerUpdateCommand();
 
-        assertThatThrownBy(() -> decoratedSphereClient.execute(customerUpdateCommand).toCompletableFuture().get())
+        assertThatThrownBy(() -> sphereClient.execute(customerUpdateCommand).toCompletableFuture().get())
                 .isInstanceOf(ExecutionException.class)
-                .hasCauseExactlyInstanceOf(BadGatewayException.class)
-                .hasMessageContaining("502");
+                .hasCauseExactlyInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
