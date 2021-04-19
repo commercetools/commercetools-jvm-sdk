@@ -159,6 +159,7 @@ import java.util.function.Function;
  <h3 class=released-version id="v1_63_0">1.63.0 (03.05.2021)</h3>
  <ul>
  <li class=fixed-in-release>Fixed method that did not include the field tiers {@link PriceDraftBuilder#of(Price)} and {@link PriceDraftBuilder#of(PriceDraft)}. In introduced the method to set tiers directly by {@link PriceDraftDsl#withTiers(List)}
+ <li class=fixed-in-release>Fixed deadlock bug in the {@link io.sphere.sdk.retry.RetryAction#ofScheduledRetry(long, Function)} in case of exception
  </ul>
  <h3 class=released-version id="v1_62_0">1.62.0 (06.04.2021)</h3>
  <ul>

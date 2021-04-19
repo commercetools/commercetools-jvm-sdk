@@ -1,14 +1,6 @@
 package io.sphere.sdk.client.retry;
 
-import io.sphere.sdk.client.BadGatewayException;
-import io.sphere.sdk.client.ErrorResponseException;
-import io.sphere.sdk.client.GatewayTimeoutException;
-import io.sphere.sdk.client.InternalServerErrorException;
-import io.sphere.sdk.client.ServiceUnavailableException;
-import io.sphere.sdk.client.SphereAccessTokenSupplier;
-import io.sphere.sdk.client.SphereApiConfig;
-import io.sphere.sdk.client.SphereClient;
-import io.sphere.sdk.client.SphereClientConfig;
+import io.sphere.sdk.client.*;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.customers.commands.CustomerUpdateCommand;
@@ -19,19 +11,23 @@ import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.HttpStatusCode;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.retry.RetryAction;
+import io.sphere.sdk.retry.RetryPredicate;
+import io.sphere.sdk.retry.RetryRule;
+
 import org.junit.Ignore;
 import org.junit.Test;
 
 import java.time.Duration;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static io.sphere.sdk.client.TestDoubleSphereClientFactory.createHttpTestDouble;
 import static io.sphere.sdk.client.retry.RetryableSphereClientBuilder.DEFAULT_INITIAL_RETRY_DELAY;
 import static io.sphere.sdk.client.retry.RetryableSphereClientBuilder.DEFAULT_MAX_DELAY;
 import static io.sphere.sdk.client.retry.RetryableSphereClientBuilder.DEFAULT_MAX_PARALLEL_REQUESTS;
@@ -151,6 +147,27 @@ public class RetryableSphereClientBuilderTest {
 
         // first request + retry.
         assertThat(fakeUnderlyingClient.getRetryCount()).isEqualTo(2);
+    }
+
+    @Test
+    public void createClient_stucked_on_duration_calculation() {
+        final SphereClient mockSphereUnderlyingClient =
+                createHttpTestDouble(intent -> HttpResponse.of(HttpStatusCode.BAD_GATEWAY_502));
+        final int maxAttempts = 5;
+        final List<RetryRule> retryRules = Collections.singletonList(RetryRule.of(
+                RetryPredicate.ofMatchingStatusCodes(HttpStatusCode.BAD_GATEWAY_502),
+                RetryAction.ofScheduledRetry(maxAttempts, context -> {
+                    // durationFunction.apply() in retry action.
+                    throw new IllegalArgumentException();
+                }))
+        );
+        final SphereClient sphereClient = RetrySphereClientDecorator.of(mockSphereUnderlyingClient, retryRules);
+
+        final CustomerUpdateCommand customerUpdateCommand = getCustomerUpdateCommand();
+
+        assertThatThrownBy(() -> sphereClient.execute(customerUpdateCommand).toCompletableFuture().get())
+                .isInstanceOf(ExecutionException.class)
+                .hasCauseExactlyInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
