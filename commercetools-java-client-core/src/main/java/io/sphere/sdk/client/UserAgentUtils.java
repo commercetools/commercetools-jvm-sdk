@@ -48,7 +48,7 @@ final class UserAgentUtils {
                 .collect(joining(" "));
     }
 
-    private static String format(final SolutionInfo solutionInfo) {
+    public static String format(final SolutionInfo solutionInfo) {
         final StringBuilder stringBuilder = new StringBuilder();
         stringBuilder
                 .append(solutionInfo.getName())
