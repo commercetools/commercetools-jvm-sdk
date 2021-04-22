@@ -6,9 +6,8 @@ import org.apache.commons.lang3.SystemUtils;
 import org.apache.commons.lang3.text.StrSubstitutor;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.joining;
@@ -20,14 +19,23 @@ final class UserAgentUtils {
 
     static String obtainUserAgent(final HttpClient httpClient) {
         try {
-            return userAgent(httpClient);
+            return userAgent(httpClient, Collections.emptyList());
         } catch (final Exception e) {
             LoggerFactory.getLogger(UserAgentUtils.class).error("cannot determine user agent", e);
             return "commercetools-jvm-sdk/unknown";
         }
     }
 
-    private static String userAgent(final HttpClient httpClient) {
+    static String obtainUserAgent(final HttpClient httpClient, List<SolutionInfo> additionalSolutionInfos) {
+        try {
+            return userAgent(httpClient, additionalSolutionInfos);
+        } catch (final Exception e) {
+            LoggerFactory.getLogger(UserAgentUtils.class).error("cannot determine user agent", e);
+            return "commercetools-jvm-sdk/unknown";
+        }
+    }
+
+    private static String userAgent(final HttpClient httpClient, List<SolutionInfo> additionalSolutionInfos) {
         final String template = "${sdkLikeGitHubRepo}/${sdkVersion} (${underlyingHttpClient}) ${runtime}/${runtimeVersion} (${optionalOs}; ${optionalOsarch}) ${solutionInfos}";
         final Map<String, String> values = new HashMap<>();
         values.put("sdkLikeGitHubRepo", "commercetools-jvm-sdk");
@@ -38,12 +46,13 @@ final class UserAgentUtils {
         values.put("runtimeVersion", SystemUtils.JAVA_RUNTIME_VERSION);
         values.put("optionalOs", SystemUtils.OS_NAME);
         values.put("optionalOsarch", SystemUtils.OS_ARCH);
-        values.put("solutionInfos", getSolutionInfoString());
+        values.put("solutionInfos", getSolutionInfoString(additionalSolutionInfos));
         return new StrSubstitutor(values).replace(template).trim();
     }
 
-    private static String getSolutionInfoString() {
-        return SolutionInfoService.getInstance().getSolutionInfos().stream()
+    private static String getSolutionInfoString(List<SolutionInfo> additionalSolutionInfos) {
+        return Stream.of(SolutionInfoService.getInstance().getSolutionInfos(), additionalSolutionInfos)
+                .flatMap(Collection::stream)
                 .map(UserAgentUtils::format)
                 .collect(joining(" "));
     }

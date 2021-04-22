@@ -33,21 +33,19 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
 
     private final String userAgent;
 
-    private TokensSupplierImpl(final SphereAuthConfig config, final HttpClient httpClient, final boolean closeHttpClient, final List<SolutionInfo> solutionInfos) {
+    private TokensSupplierImpl(final SphereAuthConfig config, final HttpClient httpClient, final boolean closeHttpClient, final List<SolutionInfo> additionalSolutionInfos) {
         this.config = config;
         this.httpClient = httpClient;
         this.closeHttpClient = closeHttpClient;
-        this.userAgent = UserAgentUtils.obtainUserAgent(httpClient).concat(" ").concat(solutionInfos.stream()
-                                                                                        .map(UserAgentUtils::format)
-                                                                                        .collect(joining(" "))).trim();
+        this.userAgent = UserAgentUtils.obtainUserAgent(httpClient, additionalSolutionInfos);
     }
 
     static TokensSupplier of(final SphereAuthConfig config, final HttpClient httpClient, final boolean closeHttpClient) {
         return new TokensSupplierImpl(config, httpClient, closeHttpClient, Collections.emptyList());
     }
 
-    static TokensSupplier of(final SphereAuthConfig config, final HttpClient httpClient, final boolean closeHttpClient, final List<SolutionInfo> solutionInfos) {
-        return new TokensSupplierImpl(config, httpClient, closeHttpClient, solutionInfos);
+    static TokensSupplier of(final SphereAuthConfig config, final HttpClient httpClient, final boolean closeHttpClient, final List<SolutionInfo> additionalSolutionInfos) {
+        return new TokensSupplierImpl(config, httpClient, closeHttpClient, additionalSolutionInfos);
     }
 
     /**
@@ -167,8 +165,8 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
     public static TokensSupplier ofCustomerPasswordFlowTokensImpl(final SphereAuthConfig authConfig, final String email,
                                                                   final String password, final HttpClient httpClient,
                                                                   final boolean closeHttpClient,
-                                                                  final List<SolutionInfo> solutionInfos) {
-        final TokensSupplierImpl tokensSupplier = new TokensSupplierImpl(authConfig, httpClient, closeHttpClient, solutionInfos);
+                                                                  final List<SolutionInfo> additionalSolutionInfos) {
+        final TokensSupplierImpl tokensSupplier = new TokensSupplierImpl(authConfig, httpClient, closeHttpClient, additionalSolutionInfos);
         tokensSupplier.username = email;
         tokensSupplier.password = password;
         return tokensSupplier;

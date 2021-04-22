@@ -10,6 +10,7 @@ import io.sphere.sdk.utils.SphereInternalLogger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.ServiceLoader;
@@ -29,11 +30,11 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
     private final CorrelationIdGenerator correlationIdGenerator;
 
     private SphereClientImpl(final SphereApiConfig config, final SphereAccessTokenSupplier tokenSupplier,
-                             final HttpClient httpClient, final CorrelationIdGenerator correlationIdGenerator) {
+                             final HttpClient httpClient, final CorrelationIdGenerator correlationIdGenerator, final List<SolutionInfo> additionalSolutionInfos) {
         this.httpClient = httpClient;
         this.config = config;
         this.tokenSupplier = tokenSupplier;
-        userAgent = UserAgentUtils.obtainUserAgent(httpClient);
+        this.userAgent = UserAgentUtils.obtainUserAgent(httpClient, additionalSolutionInfos);
         this.correlationIdGenerator = correlationIdGenerator;
     }
 
@@ -166,12 +167,24 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
 
     public static SphereClient of(final SphereApiConfig config, final HttpClient httpClient,
                                   final SphereAccessTokenSupplier tokenSupplier) {
-        return new SphereClientImpl(config, tokenSupplier, httpClient, CorrelationIdGenerator.of(config.getProjectKey()));
+        return new SphereClientImpl(config, tokenSupplier, httpClient, CorrelationIdGenerator.of(config.getProjectKey()), Collections.emptyList());
     }
 
     public static SphereClient of(final SphereApiConfig config, final HttpClient httpClient,
                                   final SphereAccessTokenSupplier tokenSupplier, final CorrelationIdGenerator correlationIdGenerator) {
-        return new SphereClientImpl(config, tokenSupplier, httpClient, correlationIdGenerator);
+        return new SphereClientImpl(config, tokenSupplier, httpClient, correlationIdGenerator, Collections.emptyList());
+    }
+
+    public static SphereClient of(final SphereApiConfig config, final HttpClient httpClient,
+                                  final SphereAccessTokenSupplier tokenSupplier,
+                                  final List<SolutionInfo> additionalSolutionInfos) {
+        return new SphereClientImpl(config, tokenSupplier, httpClient, CorrelationIdGenerator.of(config.getProjectKey()), additionalSolutionInfos);
+    }
+
+    public static SphereClient of(final SphereApiConfig config, final HttpClient httpClient,
+                                  final SphereAccessTokenSupplier tokenSupplier, final CorrelationIdGenerator correlationIdGenerator,
+                                  final List<SolutionInfo> additionalSolutionInfos) {
+        return new SphereClientImpl(config, tokenSupplier, httpClient, correlationIdGenerator, additionalSolutionInfos);
     }
 
     @Override
