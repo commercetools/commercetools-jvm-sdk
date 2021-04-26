@@ -31,14 +31,21 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
     @Nullable
     private String password;//only for password flow required
 
-    private TokensSupplierImpl(final SphereAuthConfig config, final HttpClient httpClient, final boolean closeHttpClient) {
+    private final String userAgent;
+
+    private TokensSupplierImpl(final SphereAuthConfig config, final HttpClient httpClient, final boolean closeHttpClient, final List<SolutionInfo> additionalSolutionInfos) {
         this.config = config;
         this.httpClient = httpClient;
         this.closeHttpClient = closeHttpClient;
+        this.userAgent = UserAgentUtils.obtainUserAgent(httpClient, additionalSolutionInfos);
     }
 
     static TokensSupplier of(final SphereAuthConfig config, final HttpClient httpClient, final boolean closeHttpClient) {
-        return new TokensSupplierImpl(config, httpClient, closeHttpClient);
+        return new TokensSupplierImpl(config, httpClient, closeHttpClient, Collections.emptyList());
+    }
+
+    static TokensSupplier of(final SphereAuthConfig config, final HttpClient httpClient, final boolean closeHttpClient, final List<SolutionInfo> additionalSolutionInfos) {
+        return new TokensSupplierImpl(config, httpClient, closeHttpClient, additionalSolutionInfos);
     }
 
     /**
@@ -84,7 +91,7 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
         final String correlationId = String.join("/", config.getProjectKey(), UUID.randomUUID().toString());
         final HttpHeaders httpHeaders = HttpHeaders
                 .of(HttpHeaders.AUTHORIZATION, "Basic " + encodedString)
-                .plus(HttpHeaders.USER_AGENT, UserAgentUtils.obtainUserAgent(httpClient))
+                .plus(HttpHeaders.USER_AGENT, userAgent)
                 .plus(HttpHeaders.CONTENT_TYPE, "application/x-www-form-urlencoded")
                 .plus(HttpHeaders.X_CORRELATION_ID, correlationId);
         final String projectKey = config.getProjectKey();
@@ -93,7 +100,7 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
         final String scopeValue = config.getRawScopes().stream()
                 //.map(scope -> format("%s:%s", scope, projectKey))
                 .collect(joining(" "));
-        
+
         data.put("scope", scopeValue);
         if (isPasswordFlow()) {
             data.put("username", username);
@@ -149,7 +156,17 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
     public static TokensSupplier ofCustomerPasswordFlowTokensImpl(final SphereAuthConfig authConfig, final String email,
                                                                   final String password, final HttpClient httpClient,
                                                                   final boolean closeHttpClient) {
-        final TokensSupplierImpl tokensSupplier = new TokensSupplierImpl(authConfig, httpClient, closeHttpClient);
+        final TokensSupplierImpl tokensSupplier = new TokensSupplierImpl(authConfig, httpClient, closeHttpClient, Collections.emptyList());
+        tokensSupplier.username = email;
+        tokensSupplier.password = password;
+        return tokensSupplier;
+    }
+
+    public static TokensSupplier ofCustomerPasswordFlowTokensImpl(final SphereAuthConfig authConfig, final String email,
+                                                                  final String password, final HttpClient httpClient,
+                                                                  final boolean closeHttpClient,
+                                                                  final List<SolutionInfo> additionalSolutionInfos) {
+        final TokensSupplierImpl tokensSupplier = new TokensSupplierImpl(authConfig, httpClient, closeHttpClient, additionalSolutionInfos);
         tokensSupplier.username = email;
         tokensSupplier.password = password;
         return tokensSupplier;

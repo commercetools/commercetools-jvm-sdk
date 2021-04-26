@@ -2,6 +2,7 @@ package io.sphere.sdk.client;
 
 import io.sphere.sdk.http.HttpClient;
 
+import java.util.List;
 import java.util.concurrent.CompletionStage;
 
 /**
@@ -35,7 +36,7 @@ public interface SphereClient extends AutoCloseable {
 
     /**
      * Raw client creation.
-     * See also SphereClientFactory.
+     * See also {@link SphereClientFactory}.
      *
      * @param config platform project and location
      * @param httpClient client to execute requests
@@ -44,6 +45,19 @@ public interface SphereClient extends AutoCloseable {
      */
     static SphereClient of(final SphereApiConfig config, final HttpClient httpClient, final SphereAccessTokenSupplier tokenSupplier) {
         return SphereClientImpl.of(config, httpClient, tokenSupplier, CorrelationIdGenerator.of(config.getProjectKey()));
+    }
+
+    /**
+     * Raw client creation.
+     * See also SphereClientFactory.
+     *
+     * @param config platform project and location
+     * @param httpClient client to execute requests
+     * @param tokenSupplier delivery of access tokens
+     * @return sphere client
+     */
+    static SphereClient of(final SphereApiConfig config, final HttpClient httpClient, final SphereAccessTokenSupplier tokenSupplier, final List<SolutionInfo> additionalSolutionInfos) {
+        return SphereClientImpl.of(config, httpClient, tokenSupplier, CorrelationIdGenerator.of(config.getProjectKey()), additionalSolutionInfos);
     }
 
     /**
