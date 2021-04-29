@@ -1,0 +1,25 @@
+{
+  "extends": [
+    "config:base",
+    ":enableVulnerabilityAlerts",
+    "schedule:weekly"
+  ],
+  "separateMajorMinor": true,
+  "packageRules": [
+    {
+      "packagePatterns": [
+        "*"
+      ],
+      "updateTypes": ["minor", "patch"],
+      "groupName": "all dependencies",
+      "groupSlug": "all"
+    }
+  ],
+  "lockFileMaintenance": {
+    "enabled": true
+  },
+  "labels": [
+    "Type: Maintenance"
+  ],
+  "ignoreDeps": []
+}
