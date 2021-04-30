@@ -13,6 +13,8 @@ import java.util.Optional;
 import java.util.concurrent.*;
 import java.util.function.Function;
 
+import static java.lang.String.format;
+
 final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySupervisor {
     private static final Logger logger = LoggerFactory.getLogger(AsyncRetrySupervisor.class);
     private final List<RetryRule> retryRules;
@@ -82,6 +84,7 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
     }
 
     private <P, R> void retry(final RetryContextImpl<P, R> retryContext, final Function<P, CompletionStage<R>> function, final Object parameter) {
+        logger.error( format("We have already retried [%d] times. We are going to retry again...", retryContext.getAttempt()), retryContext.getLatestError());
         final CompletionStage<R> completionStage = forceApply(function, parameter);
         handleResultAndEnqueueErrorHandlingAgain(completionStage, parameter, retryContext);
     }
