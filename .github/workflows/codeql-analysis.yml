@@ -39,6 +39,7 @@ jobs:
     - name: "Setup java"
       uses: actions/setup-java@v2
       with:
+        distribution: 'adopt'
         java-version: '8'
 
     # If this run was triggered by a pull request event, then checkout
