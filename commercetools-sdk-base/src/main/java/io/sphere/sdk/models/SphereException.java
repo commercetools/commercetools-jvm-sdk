@@ -114,7 +114,7 @@ public class SphereException extends RuntimeException {
                 .toString();
     }
 
-    private String httpSummary() {
+    public final String httpSummary() {
         try {
             final StringBuilder builder = new StringBuilder();
             if (this.httpRequest != null || this.httpRequestIntent != null) {

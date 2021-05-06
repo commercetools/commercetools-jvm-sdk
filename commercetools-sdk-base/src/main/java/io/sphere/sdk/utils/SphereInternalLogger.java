@@ -107,6 +107,14 @@ public final class SphereInternalLogger {
         return this;
     }
 
+    public SphereInternalLogger info(final Supplier<Object> message) {
+        if (underlyingLogger.isInfoEnabled()) {
+            underlyingLogger.info(message.get().toString());
+        }
+        return this;
+    }
+
+
     public static SphereInternalLogger getLogger(final HttpRequest httpRequest) {
         return getLogger(getPathElement(httpRequest) + ".requests." + requestOrCommandScopeSegment(httpRequest));
     }

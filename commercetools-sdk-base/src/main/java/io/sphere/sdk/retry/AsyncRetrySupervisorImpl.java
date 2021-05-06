@@ -1,7 +1,9 @@
 package io.sphere.sdk.retry;
 
 import io.sphere.sdk.models.Base;
+import io.sphere.sdk.models.SphereException;
 import io.sphere.sdk.retry.RetryStrategy.StrategyType;
+import io.sphere.sdk.utils.SphereInternalLogger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,8 +15,10 @@ import java.util.Optional;
 import java.util.concurrent.*;
 import java.util.function.Function;
 
+import static java.lang.String.format;
+
 final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySupervisor {
-    private static final Logger logger = LoggerFactory.getLogger(AsyncRetrySupervisor.class);
+    private static final SphereInternalLogger logger = SphereInternalLogger.getLogger(AsyncRetrySupervisor.class);
     private final List<RetryRule> retryRules;
     private final ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
 
@@ -82,15 +86,30 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
     }
 
     private <P, R> void retry(final RetryContextImpl<P, R> retryContext, final Function<P, CompletionStage<R>> function, final Object parameter) {
+        logRetry(retryContext);
         final CompletionStage<R> completionStage = forceApply(function, parameter);
         handleResultAndEnqueueErrorHandlingAgain(completionStage, parameter, retryContext);
+    }
+
+    private <P, R>  void logRetry(final RetryContextImpl<P, R> retryContext) {
+        logger.info(() -> {
+            final String output;
+            final Throwable error = retryContext.getLatestError();
+            if (error instanceof SphereException) {
+                output = ((SphereException) error).httpSummary();
+            } else {
+                output = "";
+            }
+            return format("We have already retried [%d] times.\n%s", retryContext.getAttempt(), output).trim();
+        });
+        logger.trace(() -> format("We have already retried [%d] times.\n[%s]", retryContext.getAttempt(), retryContext.getLatestError()).trim());
     }
 
     private <P, R> void closeService(final RetryContextImpl<P, R> retryContext) {
         try {
             retryContext.getService().close();
         } catch (final Exception e) {
-            logger.error("Error occurred while closing service in retry strategy.", e);
+            logger.error(() -> "Error occurred while closing service in retry strategy.", e);
         }
     }
 
