@@ -1,6 +1,7 @@
 package javax.money.spi;
 
-import org.javamoney.moneta.internal.PriorityAwareServiceProvider;
+
+import org.javamoney.moneta.spi.PriorityAwareServiceProvider;
 
 import javax.annotation.Priority;
 import java.util.ArrayList;
