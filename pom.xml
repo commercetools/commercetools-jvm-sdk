@@ -93,7 +93,7 @@
         <asynchttpclient25.version>2.5.4</asynchttpclient25.version>
         <commercetools-taglets.version>0.8.7</commercetools-taglets.version>
         <commons-lang3>3.4</commons-lang3>
-        <commons-io.version>2.4</commons-io.version>
+        <commons-io.version>2.6</commons-io.version>
         <felix.maven.version>3.3.0</felix.maven.version>
         <felix.version>5.6.2</felix.version>
         <gson.version>2.5</gson.version>
