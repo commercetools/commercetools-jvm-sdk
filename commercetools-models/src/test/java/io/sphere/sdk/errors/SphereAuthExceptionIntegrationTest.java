@@ -213,7 +213,8 @@ public class SphereAuthExceptionIntegrationTest extends IntegrationTest {
                 .hasFailedWithThrowableThat()
                 .isInstanceOf(JsonException.class)
                 .hasMessageContaining("{invalid}")
-                .hasMessageContaining("http request: HttpRequestImpl[httpMethod=POST,url=https://auth.europe-west1.gcp.commercetools.com/oauth/token");
+                .hasMessageContaining("http request: HttpRequestImpl[")
+                .hasMessageContaining("httpMethod=POST,url=https://auth.europe-west1.gcp.commercetools.com/oauth/token");
     }
 
     private void checkInvalidCredentialForAuthTokenSupplier(final Function<SphereAuthConfig, SphereAccessTokenSupplier> authTokenSupplierSupplier) {
