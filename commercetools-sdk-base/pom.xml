@@ -27,7 +27,6 @@
             <groupId>org.javamoney</groupId>
             <artifactId>moneta</artifactId>
             <version>${moneta.version}</version>
-            <type>pom</type>
             <exclusions>
                 <exclusion>
                     <groupId>javax.money</groupId>
