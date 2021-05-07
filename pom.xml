@@ -91,6 +91,8 @@
         <asynchttpclient19.version>1.9.33</asynchttpclient19.version>
         <asynchttpclient20.version>2.0.38</asynchttpclient20.version>
         <asynchttpclient25.version>2.5.4</asynchttpclient25.version>
+        <aws-sdk.version>1.11.1014</aws-sdk.version>
+        <azure-sdk.version>1.2.18</azure-sdk.version>
         <commercetools-taglets.version>0.8.7</commercetools-taglets.version>
         <commons-lang3>3.4</commons-lang3>
         <commons-io.version>2.6</commons-io.version>
