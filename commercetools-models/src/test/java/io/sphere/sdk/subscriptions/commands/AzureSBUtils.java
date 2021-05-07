@@ -22,7 +22,7 @@ public abstract class AzureSBUtils  extends SubscriptionIntegrationTest{
     public static void consumeMessages() throws Exception {
         assumeHasAzureSBEnv();
         final String connectionString = azureSBConnectionStringFromEnv();
-        final QueueClient queueClient = new QueueClient(new ConnectionStringBuilder(connectionString), ReceiveMode.PeekLock);
+        final QueueClient queueClient = new QueueClient(new ConnectionStringBuilder(connectionString), ReceiveMode.PEEKLOCK);
         receiveMessages(queueClient);
         Thread.sleep(getAzureTimeoutFromEnvInMillis());
         queueClient.close();
