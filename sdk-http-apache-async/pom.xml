@@ -38,22 +38,6 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <version>${felix.maven.version}</version>
-                <extensions>true</extensions>
-                <configuration>
-
-                    <instructions>
-                        <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
-                        <Export-Package>io.sphere.sdk.http</Export-Package>
-                        <Import-Package>org.apache.*</Import-Package>
-                        <Bundle-Version>${project.version}</Bundle-Version>
-                        <Fragment-Host>${project.groupId}.sdk-http</Fragment-Host>
-                    </instructions>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
