@@ -72,7 +72,6 @@
         <module>sdk-http-ahc-2_0</module>
         <module>sdk-http-ahc-2_5</module>
         <module>sdk-http-apache-async</module>
-        <module>osgi-support</module>
     </modules>
     <scm>
         <url>git@github.com:commercetools/commercetools-jvm-sdk.git</url>
