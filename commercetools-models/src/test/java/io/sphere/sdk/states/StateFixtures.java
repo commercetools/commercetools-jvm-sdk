@@ -1,6 +1,7 @@
 package io.sphere.sdk.states;
 
 import io.sphere.sdk.client.BlockingSphereClient;
+import io.sphere.sdk.client.NotFoundException;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.states.commands.StateCreateCommand;
@@ -59,7 +60,9 @@ public class StateFixtures {
     public static void withState(final BlockingSphereClient client, final StateDraft stateDraft, final Consumer<State> consumer) {
         final State state = client.executeBlocking(StateCreateCommand.of(stateDraft));
         consumer.accept(state);
-        client.executeBlocking(StateDeleteCommand.of(state));
+        try {
+            client.executeBlocking(StateDeleteCommand.of(state));
+        } catch (NotFoundException ignored) {}
     }
 
     public static void withState(final BlockingSphereClient client, final Consumer<State> consumer) {
@@ -101,7 +104,9 @@ public class StateFixtures {
     public static void withUpdateableState(final BlockingSphereClient client, final Function<State, State> f) {
         final State state = createStateByKey(client, randomKey());
         final State updatedState = f.apply(state);
-        client.executeBlocking(StateDeleteCommand.of(updatedState));
+        try {
+            client.executeBlocking(StateDeleteCommand.of(updatedState));
+        } catch (NotFoundException ignored) {}
     }
 
     public static void withUpdatableStateOfRole(final BlockingSphereClient client, final Set<StateRole> roles, final UnaryOperator<State> f) {
@@ -110,6 +115,8 @@ public class StateFixtures {
                 .build();
         final State state = client.executeBlocking(StateCreateCommand.of(draft));
         final State updatedState = f.apply(state);
-        client.executeBlocking(StateDeleteCommand.of(updatedState));
+        try {
+            client.executeBlocking(StateDeleteCommand.of(updatedState));
+        } catch (NotFoundException ignored) {}
     }
 }
