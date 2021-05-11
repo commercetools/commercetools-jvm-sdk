@@ -4,6 +4,7 @@ import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.queries.LocalizedStringQueryModel;
 import io.sphere.sdk.queries.LocalizedStringQuerySortingModel;
 import io.sphere.sdk.queries.ReferenceCollectionQueryModel;
+import io.sphere.sdk.queries.StringQuerySortingModel;
 
 /**
  * internal interface for queryable fields which are in {@link io.sphere.sdk.products.ProductProjection} AND {@link io.sphere.sdk.products.ProductData}.
@@ -32,4 +33,6 @@ interface SharedProductProjectionProductDataQueryModel<T> {
     ReferenceCollectionQueryModel<T, Category> categories();
 
     CategoryOrderHintsQueryModel<T> categoryOrderHints();
+
+    StringQuerySortingModel<T> key();
 }

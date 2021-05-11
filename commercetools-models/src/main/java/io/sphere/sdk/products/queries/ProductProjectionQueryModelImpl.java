@@ -80,6 +80,11 @@ final class ProductProjectionQueryModelImpl extends ProductDataQueryModelBaseImp
     }
 
     @Override
+    public StringQuerySortingModel<ProductProjection> key() {
+        return super.key();
+    }
+
+    @Override
     public ReviewRatingStatisticsQueryModel<ProductProjection> reviewRatingStatistics() {
         return ReviewRatingStatisticsQueryModel.of(this, "reviewRatingStatistics");
     }

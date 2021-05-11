@@ -46,6 +46,9 @@ public interface ProductProjectionQueryModel extends ResourceQueryModel<ProductP
     @Override
     CategoryOrderHintsQueryModel<ProductProjection> categoryOrderHints();
 
+    @Override
+    StringQuerySortingModel<ProductProjection> key();
+
     ReviewRatingStatisticsQueryModel<ProductProjection> reviewRatingStatistics();
 
     QueryPredicate<ProductProjection> is(Referenceable<Product> product);
