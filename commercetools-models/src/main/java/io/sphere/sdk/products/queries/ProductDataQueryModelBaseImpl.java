@@ -76,5 +76,10 @@ class ProductDataQueryModelBaseImpl<T> extends ResourceQueryModelImpl<T> impleme
     public CategoryOrderHintsQueryModel<T> categoryOrderHints() {
         return new CategoryOrderHintsQueryModelImpl<>(this, "categoryOrderHints");
     }
+
+    @Override
+    public StringQuerySortingModel<T> key() {
+        return stringQuerySortingModel("key");
+    }
 }
 

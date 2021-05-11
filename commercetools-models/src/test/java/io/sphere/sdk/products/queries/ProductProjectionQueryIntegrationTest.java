@@ -182,6 +182,24 @@ public class ProductProjectionQueryIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void queryByKey() throws Exception {
+        final String key = randomKey();
+        ProductFixtures.withProduct(client(), builder -> builder.key(key), product -> {
+            final ProductByKeyGet request = ProductByKeyGet.of(key);
+            final Product loadedProduct = client().executeBlocking(request);
+            assertThat(loadedProduct.getId()).isEqualTo(product.getId());
+
+            final Query<ProductProjection> query1 = ProductProjectionQuery.ofStaged()
+                    .withPredicates(m -> m.key().is(loadedProduct.getKey()))
+                    .withSort(m -> m.createdAt().sort().desc())
+                    .withLimit(1L);
+            final PagedQueryResult<ProductProjection> result = client().executeBlocking(query1);
+
+            assertThat(result.getResults().get(0).getKey()).isEqualTo(key);
+        });
+    }
+
+    @Test
     public void queryByCategory() throws Exception {
         withCategory(client(), cat3 ->
                         withCategory(client(), cat1 ->
