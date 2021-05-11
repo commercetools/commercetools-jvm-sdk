@@ -11,7 +11,7 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 
 public class StateDeleteCommandIntegrationTest extends IntegrationTest {
 
-    public static final String KEY = StateDeleteCommandIntegrationTest.class.getSimpleName();
+    public static final String KEY = randomKey();
 
     @Before
     public void setUp() throws Exception {
