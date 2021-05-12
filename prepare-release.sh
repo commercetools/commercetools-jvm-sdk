@@ -15,6 +15,11 @@ function updateReleaseVersion() {
     fi
 }
 
+function setReleaseVersion() {
+  SET_RELEASE_VERSION=$1
+  ./mvnw build-helper:parse-version versions:set -DnewVersion=${SET_RELEASE_VERSION} -DgenerateBackupPoms=false
+}
+
 function getBranchVersion() {
     VERSION=`./mvnw -q build-helper:parse-version -Dexec.executable="echo" -Dexec.args='${parsedVersion.majorVersion}.${parsedVersion.minorVersion}' --non-recursive org.codehaus.mojo:exec-maven-plugin:1.3.1:exec | tail -n 1`
     echo ${VERSION}
@@ -43,7 +48,7 @@ GIT_STATUS=$?
 set -e
 
 export JAVA_HOME=$JDK_18_x64
-echo "Java version: " 
+echo "Java version: "
 echo $JAVA_HOME
 export PATH=$JAVA_HOME/bin:$PATH
 java -version
@@ -85,7 +90,12 @@ echo "Done"
 cd ${TMPDIR}
 
 
-updateReleaseVersion ${TYPE}
+if [ -z ${SET_VERSION} ]
+then
+  updateReleaseVersion ${TYPE}
+else
+  setReleaseVersion ${SET_VERSION}
+fi
 
 RELEASE_VERSION=$(getVersion)
 echo Build release ${RELEASE_VERSION} without running tests
