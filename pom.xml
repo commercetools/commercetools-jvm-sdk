@@ -109,7 +109,7 @@
         <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
         <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
         <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
-        <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
+        <maven-javadoc-plugin.version>2.10.4</maven-javadoc-plugin.version>
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
         <maven-scm-publish-plugin.version>1.1</maven-scm-publish-plugin.version>
         <maven-scm-publish-plugin.scm.url>scm:git:git@github.com:commercetools/commercetools-jvm-sdk.git</maven-scm-publish-plugin.scm.url>
@@ -296,8 +296,8 @@
                         <encoding>${project.build.sourceEncoding}</encoding>
                         <charset>${project.build.sourceEncoding}</charset>
                         <docencoding>${project.build.sourceEncoding}</docencoding>
-                        <additionalOptions>-Xdoclint:missing,syntax,accessibility,reference --allow-script-in-comments ${javadoc.additionalparams}
-                        </additionalOptions>
+                        <additionalparam>-Xdoclint:missing,syntax,accessibility,reference --allow-script-in-comments ${javadoc.additionalparams}
+                        </additionalparam>
                         <taglets>
                             <!-- see https://github.com/commercetools/commercetools-taglets -->
                             <taglet>
