@@ -161,6 +161,10 @@ import java.util.function.Function;
  <li class=removed-in-release>Removed the OSGi support</li>
  <li class=change-in-release>Updated Apache HTTP client to 5.1</li>
  </ul>
+ <h3 class=released-version id="v1_64_0">1.64.0 (07.06.2021)</h3>
+ <ul>
+ <li class=fixed-in-release>Added in the Product Projection Model the possibility to filter by key from the predicate {@link ProductProjectionQueryModelImpl#key()} and {@link ProductProjectionQueryModel#key()}  }
+ </ul>
  <h3 class=released-version id="v1_63_0">1.63.0 (03.05.2021)</h3>
  <ul>
  <li class=fixed-in-release>Fixed method that did not include the field tiers {@link PriceDraftBuilder#of(Price)} and {@link PriceDraftBuilder#of(PriceDraft)}. In introduced the method to set tiers directly by {@link PriceDraftDsl#withTiers(List)}
