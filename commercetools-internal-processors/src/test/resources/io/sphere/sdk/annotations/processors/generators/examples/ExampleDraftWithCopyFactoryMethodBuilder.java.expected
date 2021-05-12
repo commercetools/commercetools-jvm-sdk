@@ -61,7 +61,8 @@ public final class ExampleDraftWithCopyFactoryMethodBuilder extends Base impleme
    * @param template the template
    * @return a new object initialized from the template
    */
-  public static ExampleDraftWithCopyFactoryMethodBuilder of(final ExampleDraftWithCopyFactoryMethod template) {
+  public static ExampleDraftWithCopyFactoryMethodBuilder of(
+      final ExampleDraftWithCopyFactoryMethod template) {
     return new ExampleDraftWithCopyFactoryMethodBuilder(template.getName());
   }
 

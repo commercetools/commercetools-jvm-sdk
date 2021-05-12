@@ -65,7 +65,8 @@ abstract class ExampleWithAbstractBaseClassDraftBuilderBase<T extends ExampleWit
    * @param template the template
    * @return a new object initialized from the template
    */
-  public static ExampleWithAbstractBaseClassDraftBuilder of(final ExampleWithAbstractBaseClassDraft template) {
+  public static ExampleWithAbstractBaseClassDraftBuilder of(
+      final ExampleWithAbstractBaseClassDraft template) {
     return new ExampleWithAbstractBaseClassDraftBuilder(template.getName());
   }
 }

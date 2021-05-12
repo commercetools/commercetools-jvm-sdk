@@ -81,7 +81,8 @@ public final class ExampleWithSuperInterfaceDraftBuilder extends Base implements
    * @param template the template
    * @return a new object initialized from the template
    */
-  public static ExampleWithSuperInterfaceDraftBuilder of(final ExampleWithSuperInterfaceDraft template) {
+  public static ExampleWithSuperInterfaceDraftBuilder of(
+      final ExampleWithSuperInterfaceDraft template) {
     return new ExampleWithSuperInterfaceDraftBuilder(template.getName(), template.getSku());
   }
 }
