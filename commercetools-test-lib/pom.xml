@@ -19,8 +19,8 @@
     </licenses>
     <dependencies>
         <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpasyncclient-osgi</artifactId>
+            <groupId>org.apache.httpcomponents.client5</groupId>
+            <artifactId>httpclient5</artifactId>
             <version>${apache.httpclient.version}</version>
         </dependency>
         <dependency>

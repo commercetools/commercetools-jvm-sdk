@@ -1,6 +1,6 @@
 package io.sphere.sdk.http;
 
-import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
+import org.apache.hc.client5.http.impl.async.CloseableHttpAsyncClient;
 
 /**
  * Adapter to use a {@link CloseableHttpAsyncClient} as {@link HttpClient}.

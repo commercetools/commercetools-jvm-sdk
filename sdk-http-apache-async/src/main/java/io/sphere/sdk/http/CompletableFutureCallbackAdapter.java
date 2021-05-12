@@ -1,6 +1,6 @@
 package io.sphere.sdk.http;
 
-import org.apache.http.concurrent.FutureCallback;
+import org.apache.hc.core5.concurrent.FutureCallback;
 
 import java.util.concurrent.CompletableFuture;
 

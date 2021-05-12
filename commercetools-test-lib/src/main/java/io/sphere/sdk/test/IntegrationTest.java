@@ -11,11 +11,17 @@ import io.sphere.sdk.models.DefaultCurrencyUnits;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
-import org.apache.http.conn.ssl.NoopHostnameVerifier;
-import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
-import org.apache.http.impl.nio.client.HttpAsyncClients;
-import org.apache.http.ssl.SSLContexts;
-import org.apache.http.ssl.TrustStrategy;
+
+import org.apache.hc.client5.http.impl.async.CloseableHttpAsyncClient;
+import org.apache.hc.client5.http.impl.async.HttpAsyncClients;
+import org.apache.hc.client5.http.impl.nio.PoolingAsyncClientConnectionManager;
+import org.apache.hc.client5.http.ssl.DefaultClientTlsStrategy;
+import org.apache.hc.client5.http.ssl.NoopHostnameVerifier;
+import org.apache.hc.core5.http.config.Lookup;
+import org.apache.hc.core5.http.config.RegistryBuilder;
+import org.apache.hc.core5.http.nio.ssl.TlsStrategy;
+import org.apache.hc.core5.ssl.SSLContexts;
+import org.apache.hc.core5.ssl.TrustStrategy;
 import org.assertj.core.api.Condition;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Before;
@@ -35,7 +41,6 @@ import java.io.UncheckedIOException;
 import java.lang.reflect.Modifier;
 import java.nio.file.Paths;
 import java.security.cert.X509Certificate;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
@@ -133,9 +138,12 @@ public abstract class IntegrationTest {
         final TrustStrategy acceptingTrustStrategy = (X509Certificate[] chain, String authType) ->  true;
         try {
             final SSLContext sslContext = SSLContexts.custom().loadTrustMaterial(null, acceptingTrustStrategy).build();
-            return HttpAsyncClients.custom()
-                    .setSSLHostnameVerifier(NoopHostnameVerifier.INSTANCE)
-                    .setSSLContext(sslContext).build();
+            Lookup<TlsStrategy> socketFactoryRegistry = RegistryBuilder.<TlsStrategy>create()
+                   .register("https", new DefaultClientTlsStrategy(sslContext, NoopHostnameVerifier.INSTANCE))
+                   .build();
+            PoolingAsyncClientConnectionManager connManager = new PoolingAsyncClientConnectionManager(
+                    socketFactoryRegistry);
+            return HttpAsyncClients.createMinimal(connManager);
         } catch (Exception e) {
             logger.error("Could not create SSLContext",e);
             return null;

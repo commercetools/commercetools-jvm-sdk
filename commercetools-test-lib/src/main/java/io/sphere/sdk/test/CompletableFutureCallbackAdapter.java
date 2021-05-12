@@ -3,7 +3,7 @@ package io.sphere.sdk.test;
 
 
 import io.sphere.sdk.models.Base;
-import org.apache.http.concurrent.FutureCallback;
+import org.apache.hc.core5.concurrent.FutureCallback;
 
 import java.util.concurrent.CompletableFuture;
 
