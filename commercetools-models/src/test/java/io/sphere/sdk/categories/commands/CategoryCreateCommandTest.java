@@ -14,4 +14,11 @@ public class CategoryCreateCommandTest {
         final CategoryCreateCommand categoryCreateCommand = CategoryCreateCommand.of(categoryDraft);
         assertThat(categoryCreateCommand.getDraft()).isEqualTo(categoryDraft);
     }
+
+    @Test
+    public void expandByString() {
+        final CategoryDraft categoryDraft = CategoryDraftBuilder.of(randomSlug(), randomSlug()).build();
+        final CategoryCreateCommand actual = CategoryCreateCommand.of(categoryDraft).withExpansionPaths("id").plusExpansionPaths("name");
+        assertThat(actual.httpRequestIntent().toHttpRequest("").getUrl()).isEqualTo("/categories?expand=id&expand=name");
+    }
 }

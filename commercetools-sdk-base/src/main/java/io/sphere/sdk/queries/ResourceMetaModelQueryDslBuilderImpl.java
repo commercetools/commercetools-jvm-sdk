@@ -32,6 +32,11 @@ public abstract class ResourceMetaModelQueryDslBuilderImpl<B, T, C extends MetaM
     }
 
     @Override
+    public B plusPredicates(final String queryPredicate) {
+        return op(d -> d.plusPredicates(queryPredicate));
+    }
+
+    @Override
     public B plusPredicates(final List<QueryPredicate<T>> queryPredicates) {
         return op(d -> d.plusPredicates(queryPredicates));
     }
@@ -52,12 +57,22 @@ public abstract class ResourceMetaModelQueryDslBuilderImpl<B, T, C extends MetaM
     }
 
     @Override
+    public B plusSort(final String sort) {
+        return op(d -> d.plusSort(sort));
+    }
+
+    @Override
     public B predicates(final Function<Q, QueryPredicate<T>> m) {
         return op(d -> d.withPredicates(m));
     }
 
     @Override
     public B predicates(final QueryPredicate<T> queryPredicate) {
+        return op(d -> d.withPredicates(queryPredicate));
+    }
+
+    @Override
+    public B predicates(final String queryPredicate) {
         return op(d -> d.withPredicates(queryPredicate));
     }
 
@@ -82,6 +97,11 @@ public abstract class ResourceMetaModelQueryDslBuilderImpl<B, T, C extends MetaM
     }
 
     @Override
+    public B sort(final String sort) {
+        return op(d -> d.withSort(sort));
+    }
+
+    @Override
     public B sortMulti(final Function<Q, List<QuerySort<T>>> m) {
         return op(d -> d.withSortMulti(m));
     }
@@ -92,7 +112,17 @@ public abstract class ResourceMetaModelQueryDslBuilderImpl<B, T, C extends MetaM
     }
 
     @Override
+    public B plusExpansionPaths(final String m) {
+        return op(d -> d.plusExpansionPaths(m));
+    }
+
+    @Override
     public B expansionPaths(final Function<E, ExpansionPathContainer<T>> m) {
+        return op(d -> d.withExpansionPaths(m));
+    }
+
+    @Override
+    public B expansionPaths(final String m) {
         return op(d -> d.withExpansionPaths(m));
     }
 

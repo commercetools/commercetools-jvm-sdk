@@ -1,6 +1,7 @@
 package io.sphere.sdk.categories.commands;
 
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.categories.CategoryBuilder;
 import io.sphere.sdk.categories.CategoryDraft;
 import io.sphere.sdk.categories.CategoryDraftBuilder;
 import io.sphere.sdk.categories.queries.CategoryQuery;
@@ -53,4 +54,12 @@ public class CategoryDeleteCommandIntegrationTest extends IntegrationTest {
         assertThat(deletedCategory.getParent().getObj()).isNotNull().isEqualTo(parent);
         client().executeBlocking(CategoryDeleteCommand.of(parent));
     }
+
+    @Test
+    public void expandByString() {
+        final Category category = CategoryBuilder.of("abc", randomSlug(), randomSlug()).build();
+        final CategoryDeleteCommand actual = CategoryDeleteCommand.of(category).withExpansionPaths("id").plusExpansionPaths("name");
+        assertThat(actual.httpRequestIntent().toHttpRequest("").getUrl()).isEqualTo("/categories/abc?version=1&expand=id&expand=name");
+    }
+
 }

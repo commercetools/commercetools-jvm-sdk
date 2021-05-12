@@ -3,6 +3,7 @@ package io.sphere.sdk.search;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.SphereRequestUtils;
+import io.sphere.sdk.expansion.ExpansionDslUtils;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.expansion.ExpansionPathContainer;
 import io.sphere.sdk.http.*;
@@ -311,6 +312,16 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     @Override
     public C plusExpansionPaths(final Function<E, ExpansionPathContainer<T>> m) {
         return plusExpansionPaths(m.apply(expansionModel).expansionPaths());
+    }
+
+    @Override
+    public C withExpansionPaths(final String expansionPath) {
+        return withExpansionPaths(ExpansionPath.of(expansionPath));
+    }
+
+    @Override
+    public C plusExpansionPaths(final String expansionPath) {
+        return plusExpansionPaths(ExpansionPath.of(expansionPath));
     }
 
     @Override

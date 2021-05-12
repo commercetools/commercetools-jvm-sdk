@@ -140,6 +140,16 @@ public abstract class MetaModelGetDslImpl<R, T, C extends MetaModelGetDsl<R, T, 
     }
 
     @Override
+    public C withExpansionPaths(final String expansionPath) {
+        return withExpansionPaths(ExpansionPath.of(expansionPath));
+    }
+
+    @Override
+    public C plusExpansionPaths(final String expansionPath) {
+        return plusExpansionPaths(ExpansionPath.of(expansionPath));
+    }
+
+    @Override
     public E expansionModel() {
         return expansionModel;
     }
