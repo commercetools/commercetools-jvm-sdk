@@ -1,11 +1,8 @@
 package io.sphere.sdk.json;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.neovisionaries.i18n.CurrencyCode;
-import org.javamoney.moneta.internal.DefaultRoundingProvider;
+import org.javamoney.moneta.spi.DefaultRoundingProvider;
 
 import javax.money.CurrencyUnit;
 import javax.money.MonetaryAmount;
