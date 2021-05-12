@@ -22,12 +22,6 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>sdk-http-apache-async</artifactId>
             <version>${project.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-            </exclusions>
             <scope>compile</scope>
         </dependency>
         <dependency>
