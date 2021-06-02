@@ -1,0 +1,57 @@
+package io.sphere.sdk.carts.commands.updateactions;
+
+import io.sphere.sdk.carts.Cart;
+import io.sphere.sdk.carts.LineItem;
+import io.sphere.sdk.channels.Channel;
+import io.sphere.sdk.commands.UpdateActionImpl;
+import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.ResourceIdentifier;
+
+import javax.annotation.Nullable;
+import javax.money.MonetaryAmount;
+
+/**
+ * Sets the distribution channel of the given LineItem.
+ * The LineItem price is updated as described in LineItem Price selection.
+ *
+ * {@doc.gen intro}
+ *
+ * {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandIntegrationTest#setLineItemDistributionChannel()}
+ */
+public final class SetLineItemDistributionChannel extends UpdateActionImpl<Cart> {
+
+    final private String lineItemId;
+    @Nullable
+    final private Reference<Channel> distributionChannel;
+
+    private SetLineItemDistributionChannel(final String lineItemId, @Nullable final Reference<Channel> distributionChannel ) {
+        super("setLineItemDistributionChannel");
+        this.lineItemId = lineItemId;
+        this.distributionChannel = distributionChannel;
+    }
+
+    public static SetLineItemDistributionChannel of(final LineItem lineItem) {
+        return of(lineItem.getId());
+    }
+
+    public static SetLineItemDistributionChannel of(final String lineItemId) {
+        return of(lineItemId, null);
+    }
+
+    public static SetLineItemDistributionChannel of(final LineItem lineItem, @Nullable final Reference<Channel> distributionChannel) {
+        return of(lineItem.getId(), distributionChannel);
+    }
+
+    public static SetLineItemDistributionChannel of(final String lineItemId, @Nullable final Reference<Channel> distributionChannel) {
+        return new SetLineItemDistributionChannel(lineItemId, distributionChannel);
+    }
+
+    public String getLineItemId() {
+        return lineItemId;
+    }
+
+    @Nullable
+    public Reference<Channel> getDistributionChannel() {
+        return distributionChannel;
+    }
+}
