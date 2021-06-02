@@ -5,10 +5,8 @@ import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.models.ResourceIdentifier;
 
 import javax.annotation.Nullable;
-import javax.money.MonetaryAmount;
 
 /**
  * Sets the distribution channel of the given LineItem.
