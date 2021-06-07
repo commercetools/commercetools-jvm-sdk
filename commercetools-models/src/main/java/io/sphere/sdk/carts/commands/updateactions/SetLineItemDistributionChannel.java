@@ -12,6 +12,8 @@ import javax.annotation.Nullable;
  * Sets the distribution channel of the given LineItem.
  * The LineItem price is updated as described in LineItem Price selection.
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandIntegrationTest}
  */
 public final class SetLineItemDistributionChannel extends UpdateActionImpl<Cart> {
