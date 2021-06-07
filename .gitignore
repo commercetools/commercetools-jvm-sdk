@@ -38,3 +38,4 @@ play-sdk/.project
 
 integrationtest.properties
 .secrets
+.java-version
