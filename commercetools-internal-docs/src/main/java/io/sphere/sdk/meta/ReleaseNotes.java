@@ -200,7 +200,7 @@ import java.util.function.Function;
  <li class=new-in-release>Support {@link io.sphere.sdk.products.messages.ProductVariantAddedMessage}</li>
  <li class=new-in-release>Support discount codes in {@link CartDraft#getDiscountCodes()}</li>
  <li class=new-in-release>Support key to Cart {@link Cart#getKey()}, support update action {@link SetKey}, support {@link io.sphere.sdk.carts.queries.CartByKeyGet}, support {@link CartReplicationDraft#getKey()}</li>
- <li class=new-in-release>Deprecated {@link OrderFromCartDraft#getId()} and related methods, it has been replaced with support {@link OrderFromCartDraft#getCart()}; support "of" method for the Cart in {@link OrderFromCartDraft}</li>
+ <li class=new-in-release>Deprecated {@link OrderFromCartDraft#getId()} and related methods, it has been replaced with support {@link OrderFromCartDraft#getCart()}; support <i>of</i> method for the Cart in {@link OrderFromCartDraft}</li>
  <li class=new-in-release>Support resource identifier to set customer groups in {@link io.sphere.sdk.customers.commands.updateactions.SetCustomerGroup}, {@link io.sphere.sdk.orderedits.commands.stagedactions.SetCustomerGroup}, {@link SetCustomerGroup}</li>
  <li class=new-in-release>Support resource identifier to set customer in {@link io.sphere.sdk.reviews.commands.updateactions.SetCustomer}, {@link io.sphere.sdk.shoppinglists.commands.updateactions.SetCustomer}</li>
  <li class=new-in-release>Add lastModifiedAt to {@link LineItem#getLastModifiedAt()}</li>
@@ -886,7 +886,7 @@ import java.util.function.Function;
  <li class=new-in-release>add convenience factory methods for {@link SetAttribute}: {@link SetAttribute#ofVariantId(java.lang.Integer, java.lang.String, java.lang.Object)}, {@link SetAttribute#ofSku(java.lang.String, java.lang.String, java.lang.Object)}</li>
  <li class=new-in-release>{@link io.sphere.sdk.orders.errors.PriceChangedError}</li>
  <li class=new-in-release>{@link ProductDraftBuilder#of(ResourceIdentifiable, LocalizedString, LocalizedString, List)} to pass all variants as one list</li>
- <li class=change-in-release>{@link io.sphere.sdk.search.model.Range} constructor no longer throws {@code InvertedBoundsException}. See <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/1247">#1247</a></li>
+ <li class=change-in-release> <i>io.sphere.sdk.search.model.Range</i> constructor no longer throws {@code InvertedBoundsException}. See <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/1247">#1247</a></li>
  <li class=fixed-in-release>A JavaMoney initialization issue with sbt has been fixed.</li>
  <li class=fixed-in-release>{@link io.sphere.sdk.sequencegenerators.CustomObjectBigIntegerNumberGenerator} does retries only on {@link io.sphere.sdk.client.ConcurrentModificationException}s.</li>
  </ul>
@@ -910,7 +910,7 @@ import java.util.function.Function;
  <li class=new-in-release>key on products and product variants: {@link Product#getKey()}, {@link ProductProjection#getKey()}, {@link ProductVariant#getKey()}, {@link io.sphere.sdk.products.commands.ProductDeleteCommand#ofKey(String, Long)}, {@link io.sphere.sdk.products.commands.ProductUpdateCommand#ofKey(String, Long, List)}</li>
  <li class=new-in-release>{@link io.sphere.sdk.products.commands.updateactions.AddVariant#withImages(List)}, {@link io.sphere.sdk.products.commands.updateactions.AddVariant#withKey(String)}, {@link io.sphere.sdk.products.commands.updateactions.AddVariant#withSku(String)}, {@link io.sphere.sdk.products.commands.updateactions.SetKey}, {@link io.sphere.sdk.products.commands.updateactions.SetProductVariantKey}, {@link ProductByKeyGet}, {@link ProductProjectionByKeyGet}</li>
  <li class=new-in-release>{@link io.sphere.sdk.orders.errors.OutOfStockError}</li>
- <li class=new-in-release>{@link SetShippingMethod#ofId(String)} which is easier to use in a form than {@link SetShippingMethod#of(Referenceable)} </li>
+ <li class=new-in-release>{@link SetShippingMethod#ofId(String)} which is easier to use in a form than <i>SetShippingMethod#of(Referenceable)</i> </li>
  <li class=new-in-release>product update actions like {@link io.sphere.sdk.products.commands.updateactions.RemoveImage} now support to address a {@link ProductVariant} by using the SKU with {@link io.sphere.sdk.products.commands.updateactions.RemoveImage#ofSku(String, String)} </li>
  <li class=new-in-release>type update actions: {@link io.sphere.sdk.types.commands.updateactions.ChangeEnumValueOrder}, {@link io.sphere.sdk.types.commands.updateactions.ChangeFieldDefinitionOrder} and {@link io.sphere.sdk.types.commands.updateactions.ChangeLocalizedEnumValueOrder}</li>
  <li class=new-in-release>{@link io.sphere.sdk.customers.Customer#findAddressById(String)} </li>
@@ -1570,7 +1570,7 @@ PagedSearchResult<ProductProjection> result = client.execute(search);
  <li class=removed-in-release>Builders for resources (read objects) have been removed. See {@link TestingDocumentation} to build the objects anyway.</li>
  <li class=removed-in-release>QueryToFetch adapter has been removed.</li>
 
- <li class=fixed-in-release>{@link io.sphere.sdk.queries.StringQueryModel#isGreaterThan(Object)} and other methods do not quote strings correctly. See <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/558">558</a>.</li>
+ <li class=fixed-in-release>In {@link io.sphere.sdk.queries.StringQueryModel} <i>isGreaterThan(Object)</i> and other methods do not quote strings correctly. See <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/558">558</a>.</li>
  <li class=fixed-in-release>Product variant expansion does not work. See <a href="https://github.com/commercetools/commercetools-jvm-sdk/issues/631">631</a>.</li>
 
  </ul>

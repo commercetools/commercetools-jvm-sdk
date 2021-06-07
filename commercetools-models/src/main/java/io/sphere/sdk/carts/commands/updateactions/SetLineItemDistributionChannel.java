@@ -14,7 +14,7 @@ import javax.annotation.Nullable;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandIntegrationTest#setLineItemDistributionChannel()}
+ * {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandIntegrationTest}
  */
 public final class SetLineItemDistributionChannel extends UpdateActionImpl<Cart> {
 
