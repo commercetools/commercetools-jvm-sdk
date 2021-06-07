@@ -7,7 +7,7 @@ import io.sphere.sdk.models.Reference;
 
 import javax.annotation.Nullable;
 
-public class SetLineItemDistributionChannel extends UpdateActionImpl<Cart> {
+public final class SetLineItemDistributionChannel extends UpdateActionImpl<Cart> {
     final private String lineItemId;
     @Nullable
     final private Reference<Channel> distributionChannel;
