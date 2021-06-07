@@ -115,6 +115,7 @@ import io.sphere.sdk.shoppinglists.ShoppingListDraft;
 import io.sphere.sdk.shoppinglists.expansion.LineItemExpansionModel;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.states.StateDraftDsl;
+import io.sphere.sdk.stores.commands.updateactions.SetLanguages;
 import io.sphere.sdk.states.queries.StateByKeyGet;
 import io.sphere.sdk.stores.Store;
 import io.sphere.sdk.stores.StoreDraft;
