@@ -11,6 +11,9 @@ import io.sphere.sdk.channels.ChannelFixtures;
 import io.sphere.sdk.channels.ChannelRole;
 import io.sphere.sdk.client.ErrorResponseException;
 import io.sphere.sdk.client.SphereRequest;
+import io.sphere.sdk.customers.Customer;
+import io.sphere.sdk.customers.commands.CustomerUpdateCommand;
+import io.sphere.sdk.customers.commands.updateactions.SetAddressCustomType;
 import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.payments.Payment;
@@ -47,6 +50,7 @@ import static io.sphere.sdk.channels.ChannelFixtures.withChannelOfRole;
 import static io.sphere.sdk.channels.ChannelRole.PRODUCT_DISTRIBUTION;
 import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withB2cCustomerGroup;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
+import static io.sphere.sdk.customers.CustomerFixtures.withCustomerWithOneAddress;
 import static io.sphere.sdk.payments.PaymentFixtures.withPayment;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withDynamicShippingMethodForGermany;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethodForGermany;
@@ -895,18 +899,18 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
         });
     }
 
-    @Test
-    public void setLineItemDistributionChannel() throws Exception {
-        withChannelOfRole(client(), PRODUCT_DISTRIBUTION, channel -> {
-            withFilledCart(client(), cart -> {
-                final String lineItemId = cart.getLineItems().get(0).getId();
-                final Reference<Channel> channelReference = Channel.referenceOfId(channel.getId());
-                final SetLineItemDistributionChannel updateAction = SetLineItemDistributionChannel.of(lineItemId, channelReference);
-                final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, updateAction));
-
-                final LineItem lineItem = updatedCart.getLineItems().get(0);
-                assertThat(lineItem.getDistributionChannel()).isEqualTo(channelReference);
-            });
-        });
-    }
+//    @Test
+//    public void setLineItemDistributionChannel() throws Exception {
+//        withChannelOfRole(client(), PRODUCT_DISTRIBUTION, channel -> {
+//            withFilledCart(client(), cart -> {
+//                final String lineItemId = cart.getLineItems().get(0).getId();
+//                final Reference<Channel> channelReference = Channel.referenceOfId(channel.getId());
+//                final SetLineItemDistributionChannel updateAction = SetLineItemDistributionChannel.of(lineItemId, channelReference);
+//                final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, updateAction));
+//
+//                final LineItem lineItem = updatedCart.getLineItems().get(0);
+//                assertThat(lineItem.getDistributionChannel()).isEqualTo(channelReference);
+//            });
+//        });
+//    }
 }
