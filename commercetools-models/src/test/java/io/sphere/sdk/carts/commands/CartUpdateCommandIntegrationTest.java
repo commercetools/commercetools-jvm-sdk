@@ -46,6 +46,9 @@ import java.util.stream.Collectors;
 
 import static io.sphere.sdk.carts.CartFixtures.*;
 import static io.sphere.sdk.carts.CustomLineItemFixtures.createCustomLineItemDraft;
+import static io.sphere.sdk.channels.ChannelRole.PRODUCT_DISTRIBUTION;
+import static io.sphere.sdk.channels.ChannelFixtures.withChannelOfRole;
+import static io.sphere.sdk.channels.ChannelRole.PRODUCT_DISTRIBUTION;
 import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withB2cCustomerGroup;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomerWithOneAddress;
@@ -120,7 +123,7 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(cart.getLineItems()).isEmpty();
             final long quantity = 3;
             final Channel inventorySupplyChannel = ChannelFixtures.persistentChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY);
-            final Channel distributionChannel = ChannelFixtures.persistentChannelOfRole(client(), ChannelRole.PRODUCT_DISTRIBUTION);
+            final Channel distributionChannel = ChannelFixtures.persistentChannelOfRole(client(), PRODUCT_DISTRIBUTION);
 
             final String sku = product.getMasterData().getStaged().getMasterVariant().getSku();
             final LineItemDraft lineItemDraft =
@@ -177,7 +180,7 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(cart.getLineItems()).isEmpty();
             final long quantity = 3;
             final Channel inventorySupplyChannel = ChannelFixtures.persistentChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY);
-            final Channel distributionChannel = ChannelFixtures.persistentChannelOfRole(client(), ChannelRole.PRODUCT_DISTRIBUTION);
+            final Channel distributionChannel = ChannelFixtures.persistentChannelOfRole(client(), PRODUCT_DISTRIBUTION);
 
             ByIdVariantIdentifier variantIdentifier = product.getMasterData().getStaged().getMasterVariant().getIdentifier();
             final LineItemDraft lineItemDraft =
@@ -215,7 +218,7 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
     @Test
     public void addLineItemWithChannels() throws Exception {
         final Channel inventorySupplyChannel = ChannelFixtures.persistentChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY);
-        final Channel distributionChannel = ChannelFixtures.persistentChannelOfRole(client(), ChannelRole.PRODUCT_DISTRIBUTION);
+        final Channel distributionChannel = ChannelFixtures.persistentChannelOfRole(client(), PRODUCT_DISTRIBUTION);
 
         withEmptyCartAndProduct(client(), (cart, product) -> {
             assertThat(cart.getLineItems()).hasSize(0);
@@ -894,6 +897,21 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
                 return updatedCart2;
             });
             return type;
+        });
+    }
+
+    @Test
+    public void setLineItemDistributionChannel() throws Exception {
+        withChannelOfRole(client(), PRODUCT_DISTRIBUTION, channel -> {
+            withFilledCart(client(), cart -> {
+                final String lineItemId = cart.getLineItems().get(0).getId();
+                final Reference<Channel> channelReference = Channel.referenceOfId(channel.getId());
+                final SetLineItemDistributionChannel updateAction = SetLineItemDistributionChannel.of(lineItemId, channelReference);
+                final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, updateAction));
+
+                final LineItem lineItem = updatedCart.getLineItems().get(0);
+                assertThat(lineItem.getDistributionChannel()).isEqualTo(channelReference);
+            });
         });
     }
 }
