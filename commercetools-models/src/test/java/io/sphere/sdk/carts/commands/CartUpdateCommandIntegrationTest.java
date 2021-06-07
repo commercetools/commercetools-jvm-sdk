@@ -899,18 +899,18 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
         });
     }
 
-//    @Test
-//    public void setLineItemDistributionChannel() throws Exception {
-//        withChannelOfRole(client(), PRODUCT_DISTRIBUTION, channel -> {
-//            withFilledCart(client(), cart -> {
-//                final String lineItemId = cart.getLineItems().get(0).getId();
-//                final Reference<Channel> channelReference = Channel.referenceOfId(channel.getId());
-//                final SetLineItemDistributionChannel updateAction = SetLineItemDistributionChannel.of(lineItemId, channelReference);
-//                final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, updateAction));
-//
-//                final LineItem lineItem = updatedCart.getLineItems().get(0);
-//                assertThat(lineItem.getDistributionChannel()).isEqualTo(channelReference);
-//            });
-//        });
-//    }
+    @Test
+    public void setLineItemDistributionChannel() throws Exception {
+        withChannelOfRole(client(), PRODUCT_DISTRIBUTION, channel -> {
+            withFilledCart(client(), cart -> {
+                final String lineItemId = cart.getLineItems().get(0).getId();
+                final Reference<Channel> channelReference = Channel.referenceOfId(channel.getId());
+                final SetLineItemDistributionChannel updateAction = SetLineItemDistributionChannel.of(lineItemId, channelReference);
+                final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, updateAction));
+
+                final LineItem lineItem = updatedCart.getLineItems().get(0);
+                assertThat(lineItem.getDistributionChannel()).isEqualTo(channelReference);
+            });
+        });
+    }
 }
