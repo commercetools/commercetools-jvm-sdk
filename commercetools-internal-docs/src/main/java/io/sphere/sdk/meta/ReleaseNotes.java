@@ -158,7 +158,7 @@ import java.util.function.Function;
  -->
  <h3 class=released-version id="v1_64_0">1.64.0 (07.06.2021)</h3>
  <ul>
- <li class=fixed-in-release>Added in the Product Projection Model the possibility to filter by key from the predicate {@link  io.sphere.sdk.products.queries.ProductProjectionQueryModelImpl#key()} and {@link ProductProjectionQueryModel#key()}  }
+ <li class=fixed-in-release>Added in the Product Projection Model the possibility to filter by key from the predicate and {@link ProductProjectionQueryModel#key()}
  <li class=fixed-in-release>Added as an update action for Cart: SetLineItemDistributionChannel
  </ul>
  <h3 class=released-version id="v1_63_0">1.63.0 (03.05.2021)</h3>
@@ -200,7 +200,7 @@ import java.util.function.Function;
  <li class=new-in-release>Support {@link io.sphere.sdk.products.messages.ProductVariantAddedMessage}</li>
  <li class=new-in-release>Support discount codes in {@link CartDraft#getDiscountCodes()}</li>
  <li class=new-in-release>Support key to Cart {@link Cart#getKey()}, support update action {@link SetKey}, support {@link io.sphere.sdk.carts.queries.CartByKeyGet}, support {@link CartReplicationDraft#getKey()}</li>
- <li class=new-in-release>Deprecated {@link OrderFromCartDraft#getId()} and related methods, it has been replaced with support {@link OrderFromCartDraft#getCart()}; support of method for the Cart {@link OrderFromCartDraft#of(Cart)}</li>
+ <li class=new-in-release>Deprecated {@link OrderFromCartDraft#getId()} and related methods, it has been replaced with support {@link OrderFromCartDraft#getCart()}; support "of" method for the Cart in {@link OrderFromCartDraft}</li>
  <li class=new-in-release>Support resource identifier to set customer groups in {@link io.sphere.sdk.customers.commands.updateactions.SetCustomerGroup}, {@link io.sphere.sdk.orderedits.commands.stagedactions.SetCustomerGroup}, {@link SetCustomerGroup}</li>
  <li class=new-in-release>Support resource identifier to set customer in {@link io.sphere.sdk.reviews.commands.updateactions.SetCustomer}, {@link io.sphere.sdk.shoppinglists.commands.updateactions.SetCustomer}</li>
  <li class=new-in-release>Add lastModifiedAt to {@link LineItem#getLastModifiedAt()}</li>
@@ -245,12 +245,12 @@ import java.util.function.Function;
 
  <h3 class=released-version id="v1_52_0">1.52.0 (07.07.2020)</h3>
  <ul>
- <li class=new-in-release>Added missing {@link ExternalTaxRateDraft#isIncludedInPrice()} and added it to builder {@link ExternalTaxRateDraftBuilder#includedInPrice()}</li>
+ <li class=new-in-release>Added missing {@link ExternalTaxRateDraft#isIncludedInPrice()} and added it to the builder {@link ExternalTaxRateDraftBuilder}</li>
  <li class=new-in-release>Added support for additional query parameters for updates {@link io.sphere.sdk.commands.UpdateCommandDsl#withAdditionalHttpQueryParameters(NameValuePair)} and search endpoints {@link io.sphere.sdk.search.MetaModelSearchDsl#withAdditionalQueryParameter(NameValuePair)}.</li>
- <li class=new-in-release>Added missing {@link ShippingMethodDraft#getLocalizedDescription()} and added it to builder {@link ShippingMethodDraftBuilder#localizedDescription()}</li>
+ <li class=new-in-release>Added missing {@link ShippingMethodDraft#getLocalizedDescription()} and added it to the builder {@link ShippingMethodDraftBuilder}</li>
  <li class=new-in-release>Added support for additional action {@link io.sphere.sdk.shippingmethods.commands.updateactions.SetLocalizedDescription} and deprecated the attribute "description" and the action "setDescription" </li>
  <li class=new-in-release>Added {@link Store#getLanguages()} and {@link StoreDraft#getLanguages()} and added update action {@link io.sphere.sdk.stores.commands.updateactions.SetLanguages} </li>
- <li class=new-in-release>Added query parameters in ProductProjection {@link PriceSelection#getLocaleProjection()} and {@link PriceSelection#getStoreProjection()} and also in the {@link PriceSelectionBuilder }  </li>
+ <li class=new-in-release>Added query parameters localeProjection and storeProjection in ProductProjection see {@link PriceSelection}and also in the {@link PriceSelectionBuilder }  </li>
  </ul>
 
  </ul>
@@ -580,7 +580,7 @@ import java.util.function.Function;
  deleting {@link io.sphere.sdk.orders.commands.OrderDeleteCommand#ofOrderNumber(String, Long)} of an order by order number.
  </li>
  <li class=new-in-release>
- Added new {@link CustomerSignInCommand#updateProductData} property to {@link CustomerSignInCommand}.
+ Added new updateProductData in {@link CustomerSignInCommand} property to {@link CustomerSignInCommand}.
  </li>
  </ul>
 
