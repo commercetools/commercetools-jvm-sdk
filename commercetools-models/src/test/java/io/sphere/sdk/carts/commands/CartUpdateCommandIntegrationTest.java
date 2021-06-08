@@ -905,12 +905,12 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
         withChannelOfRole(client(), PRODUCT_DISTRIBUTION, channel -> {
             withFilledCart(client(), cart -> {
                 final String lineItemId = cart.getLineItems().get(0).getId();
-                final Reference<Channel> channelReference = Channel.referenceOfId(channel.getId());
-                final SetLineItemDistributionChannel updateAction = SetLineItemDistributionChannel.of(lineItemId, channelReference);
+                final ResourceIdentifier<Channel> channelResourceIdentifier = ResourceIdentifier.ofId(channel.getId());
+                final SetLineItemDistributionChannel updateAction = SetLineItemDistributionChannel.of(lineItemId, channelResourceIdentifier);
                 final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, updateAction));
 
                 final LineItem lineItem = updatedCart.getLineItems().get(0);
-                assertThat(lineItem.getDistributionChannel()).isEqualTo(channelReference);
+                assertThat(Objects.requireNonNull(lineItem.getDistributionChannel()).getId()).isEqualTo(channelResourceIdentifier.getId());
             });
         });
     }
