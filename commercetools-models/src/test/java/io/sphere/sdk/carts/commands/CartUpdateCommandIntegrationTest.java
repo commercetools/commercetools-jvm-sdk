@@ -863,6 +863,22 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void setLineItemDistributionChannel() throws Exception {
+        withChannelOfRole(client(), PRODUCT_DISTRIBUTION, channel -> {
+            withFilledCart(client(), cart -> {
+                final String lineItemId = cart.getLineItems().get(0).getId();
+                final ResourceIdentifier<Channel> channelResourceIdentifier = ResourceIdentifier.ofId(channel.getId());
+                final SetLineItemDistributionChannel updateAction = SetLineItemDistributionChannel.of(lineItemId, channelResourceIdentifier);
+                final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, updateAction));
+
+                final LineItem lineItem = updatedCart.getLineItems().get(0);
+                assertThat(lineItem.getDistributionChannel()).isNotNull();
+                assertThat(lineItem.getDistributionChannel().getId()).isEqualTo(channelResourceIdentifier.getId());
+            });
+        });
+    }
+
+    @Test
     public void setBillingAddressCustomType() throws Exception {
         final Address a = Address.of(CountryCode.DE);
         TypeFixtures.withUpdateableType(client(), type -> {
@@ -897,21 +913,6 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
                 return updatedCart2;
             });
             return type;
-        });
-    }
-
-    @Test
-    public void setLineItemDistributionChannel() throws Exception {
-        withChannelOfRole(client(), PRODUCT_DISTRIBUTION, channel -> {
-            withFilledCart(client(), cart -> {
-                final String lineItemId = cart.getLineItems().get(0).getId();
-                final ResourceIdentifier<Channel> channelResourceIdentifier = ResourceIdentifier.ofId(channel.getId());
-                final SetLineItemDistributionChannel updateAction = SetLineItemDistributionChannel.of(lineItemId, channelResourceIdentifier);
-                final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, updateAction));
-
-                final LineItem lineItem = updatedCart.getLineItems().get(0);
-                assertThat(Objects.requireNonNull(lineItem.getDistributionChannel()).getId()).isEqualTo(channelResourceIdentifier.getId());
-            });
         });
     }
 }

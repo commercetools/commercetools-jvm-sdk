@@ -13,12 +13,12 @@ import javax.annotation.Nullable;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandIntegrationTest}
+ * {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandIntegrationTest#setLineItemDistributionChannel()}
  */
 public final class SetLineItemDistributionChannel extends UpdateActionImpl<Cart> {
-    final private String lineItemId;
     @Nullable
     final private ResourceIdentifier<Channel> distributionChannel;
+    final private String lineItemId;
 
     private SetLineItemDistributionChannel(final String lineItemId, @Nullable final ResourceIdentifier<Channel> distributionChannel) {
         super("setLineItemDistributionChannel");
