@@ -22,6 +22,7 @@ import static io.sphere.sdk.products.ProductsScenario1Fixtures.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @NotOSGiCompatible
+@Ignore
 public class DefaultProductAttributeFormatterIntegrationTest extends IntegrationTest {
 
     private static ProductsScenario1Fixtures.Data data;
