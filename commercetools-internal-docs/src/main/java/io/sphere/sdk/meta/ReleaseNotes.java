@@ -159,6 +159,7 @@ import java.util.function.Function;
  <h3 class=released-version id="v1_64_0">1.64.0 (07.06.2021)</h3>
  <ul>
  <li class=fixed-in-release>Added in the Product Projection Model the possibility to filter by key from the predicate {@link ProductProjectionQueryModelImpl#key()} and {@link ProductProjectionQueryModel#key()}  }
+ <li class=fixed-in-release>Added as an update action for Cart: SetLineItemDistributionChannel
  </ul>
  <h3 class=released-version id="v1_63_0">1.63.0 (03.05.2021)</h3>
  <ul>
