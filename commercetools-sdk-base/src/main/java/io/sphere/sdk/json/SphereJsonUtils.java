@@ -311,7 +311,7 @@ public final class SphereJsonUtils {
 
     public static JavaType convertToJavaType(final Class<?> clazz) {
         final TypeFactory typeFactory = TypeFactory.defaultInstance();
-        return typeFactory.uncheckedSimpleType(clazz);
+        return typeFactory.constructSimpleType(clazz, null);
     }
 
     @FunctionalInterface

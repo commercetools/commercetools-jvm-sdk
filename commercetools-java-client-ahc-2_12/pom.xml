@@ -7,7 +7,7 @@
         <relativePath>..</relativePath>
     </parent>
     <groupId>com.commercetools.sdk.jvm.core</groupId>
-    <artifactId>commercetools-java-client</artifactId>
+    <artifactId>commercetools-java-client-ahc-2_12</artifactId>
     <packaging>jar</packaging>
     <version>1.65.0-SNAPSHOT</version>
     <licenses>
@@ -20,9 +20,21 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>commercetools-java-client-ahc-2_12</artifactId>
+            <artifactId>sdk-http-ahc-2_12</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>commercetools-java-client-core</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>commercetools-java-client-internal-test</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <build>

@@ -6,6 +6,7 @@ import org.apache.commons.io.input.AutoCloseInputStream;
 import org.apache.hc.client5.http.async.methods.SimpleBody;
 import org.apache.hc.client5.http.async.methods.SimpleHttpResponse;
 import org.apache.hc.client5.http.async.methods.SimpleResponseConsumer;
+import org.apache.hc.client5.http.entity.UrlEncodedFormEntity;
 import org.apache.hc.client5.http.impl.async.CloseableHttpAsyncClient;
 import org.apache.hc.core5.http.ContentType;
 import org.apache.hc.core5.http.Header;
@@ -13,7 +14,7 @@ import org.apache.hc.core5.http.message.BasicNameValuePair;
 import org.apache.hc.core5.http.nio.AsyncRequestProducer;
 import org.apache.hc.core5.http.nio.entity.AsyncEntityProducers;
 import org.apache.hc.core5.http.nio.support.AsyncRequestBuilder;
-import org.apache.hc.core5.net.URLEncodedUtils;
+import org.apache.hc.core5.net.WWWFormCodec;
 import org.apache.hc.core5.reactor.IOReactorStatus;
 
 import javax.annotation.Nullable;
@@ -124,7 +125,7 @@ final class IntegrationTestHttpClient extends HttpClientAdapterBase {
                                                     .stream()
                                                     .map(entry -> new BasicNameValuePair(entry.getName(), entry.getValue()))
                                                     .collect(Collectors.toList());
-        return URLEncodedUtils.format(values, ContentType.APPLICATION_FORM_URLENCODED.getCharset());
+        return WWWFormCodec.format(values, ContentType.APPLICATION_FORM_URLENCODED.getCharset());
     }
 
     @Nullable

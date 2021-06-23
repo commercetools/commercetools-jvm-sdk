@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import static java.util.Arrays.asList;
-import static org.apache.commons.lang3.text.WordUtils.capitalize;
+import static org.apache.commons.text.WordUtils.capitalize;
 
 @SupportedAnnotationTypes({"io.sphere.sdk.annotations.HasDeleteCommand"})
 @SupportedSourceVersion(SourceVersion.RELEASE_8)

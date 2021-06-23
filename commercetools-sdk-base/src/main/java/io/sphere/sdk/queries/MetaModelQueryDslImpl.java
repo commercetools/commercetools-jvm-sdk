@@ -387,7 +387,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
 
     private static <T> JavaType resolveJavaType(final JavaType javaType) {
         final TypeFactory typeFactory = TypeFactory.defaultInstance();
-        final JavaType resultJavaType = typeFactory.constructParametrizedType(PagedQueryResult.class, PagedQueryResult.class, javaType);
+        final JavaType resultJavaType = typeFactory.constructParametricType(PagedQueryResult.class, javaType);
         return resultJavaType;
     }
 }

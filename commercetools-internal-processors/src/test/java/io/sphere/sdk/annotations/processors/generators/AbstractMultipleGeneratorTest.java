@@ -2,7 +2,6 @@ package io.sphere.sdk.annotations.processors.generators;
 
 import com.google.testing.compile.CompilationRule;
 import com.squareup.javapoet.JavaFile;
-import org.apache.commons.io.Charsets;
 import org.apache.commons.io.IOUtils;
 import org.junit.Rule;
 
@@ -10,6 +9,7 @@ import javax.annotation.processing.Messager;
 import javax.lang.model.element.TypeElement;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +30,7 @@ public abstract class AbstractMultipleGeneratorTest {
             final String fixtureFile = className + ".java.expected";
             InputStream resourceAsStream = clazz.getResourceAsStream(fixtureFile);
             try {
-                expectedContentList.add(IOUtils.toString(resourceAsStream, Charsets.UTF_8));
+                expectedContentList.add(IOUtils.toString(resourceAsStream, StandardCharsets.UTF_8));
             } catch (IOException e) {
                 throw new IllegalStateException("Fixture file '" + fixtureFile + "' not found.", e);
             }

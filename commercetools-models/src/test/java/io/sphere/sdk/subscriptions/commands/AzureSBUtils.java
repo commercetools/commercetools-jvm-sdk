@@ -7,6 +7,7 @@ import io.sphere.sdk.subscriptions.SubscriptionIntegrationTest;
 
 import java.time.Duration;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ForkJoinPool;
 
 import static io.sphere.sdk.subscriptions.SubscriptionFixtures.assumeHasAzureSBEnv;
 import static io.sphere.sdk.subscriptions.SubscriptionFixtures.azureSBConnectionStringFromEnv;
@@ -43,6 +44,6 @@ public abstract class AzureSBUtils  extends SubscriptionIntegrationTest{
             }
 
             public void notifyException(Throwable exception, ExceptionPhase phase) {}
-        }, new MessageHandlerOptions(10000, true, Duration.ofMinutes(2)));
+        }, new MessageHandlerOptions(10000, true, Duration.ofMinutes(2)), ForkJoinPool.commonPool());
     }
 }

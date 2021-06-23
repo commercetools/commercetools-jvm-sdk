@@ -10,12 +10,13 @@ import org.apache.hc.core5.http.message.BasicNameValuePair;
 import org.apache.hc.core5.http.nio.AsyncRequestProducer;
 import org.apache.hc.core5.http.nio.entity.AsyncEntityProducers;
 import org.apache.hc.core5.http.nio.support.AsyncRequestBuilder;
-import org.apache.hc.core5.net.URLEncodedUtils;
+import org.apache.hc.core5.net.WWWFormCodec;
 import org.apache.hc.core5.reactor.IOReactorStatus;
 
 import javax.annotation.Nullable;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -73,8 +74,8 @@ final class ApacheHttpClientAdapterImpl extends HttpClientAdapterBase {
                     }
                 }).orElse(null);
         final Integer statusCode = apacheResponse.getCode();
-        final Map<String, List<Header>> apacheHeaders = asList(apacheResponse.getHeaders()).stream()
-                .collect(Collectors.groupingBy(Header::getName));
+        final Map<String, List<Header>> apacheHeaders = Arrays.stream(apacheResponse.getHeaders())
+                                                              .collect(Collectors.groupingBy(Header::getName));
         final Function<Map.Entry<String, List<Header>>, String> keyMapper = e -> e.getKey();
         final Map<String, List<String>> headers = apacheHeaders.entrySet().stream()
                 .collect(Collectors.toMap(
@@ -86,7 +87,7 @@ final class ApacheHttpClientAdapterImpl extends HttpClientAdapterBase {
         return HttpResponse.of(statusCode, bodyNullable, httpRequest, HttpHeaders.of(headers));
     }
 
-    private AsyncRequestProducer toApacheRequest(final HttpRequest httpRequest) throws UnsupportedEncodingException {
+    private AsyncRequestProducer toApacheRequest(final HttpRequest httpRequest) {
         final String method = httpRequest.getHttpMethod().toString();
         final String uri = httpRequest.getUrl();
         final AsyncRequestBuilder builder = AsyncRequestBuilder.create(method);
@@ -108,12 +109,12 @@ final class ApacheHttpClientAdapterImpl extends HttpClientAdapterBase {
         return builder.build();
     }
 
-    private static String urlEncodedOf(final FormUrlEncodedHttpRequestBody body) throws UnsupportedEncodingException {
+    private static String urlEncodedOf(final FormUrlEncodedHttpRequestBody body) {
         final List<BasicNameValuePair> values = body.getParameters()
                                                     .stream()
                                                     .map(entry -> new BasicNameValuePair(entry.getName(), entry.getValue()))
                                                     .collect(Collectors.toList());
-        return URLEncodedUtils.format(values, ContentType.APPLICATION_FORM_URLENCODED.getCharset());
+        return WWWFormCodec.format(values, ContentType.APPLICATION_FORM_URLENCODED.getCharset());
     }
 
     @Nullable
