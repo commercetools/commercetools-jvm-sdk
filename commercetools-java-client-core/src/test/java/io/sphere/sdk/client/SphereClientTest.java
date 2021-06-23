@@ -73,4 +73,33 @@ public class SphereClientTest {
             assertThat(uuid).isNotNull();
         }
     }
+
+    @Test
+    public void shouldUseCustomGenerator() throws ExecutionException, InterruptedException  {
+        final String projectKey = "my-project";
+
+        when: {
+            when(sphereApiConfig.getProjectKey()).thenReturn(projectKey);
+            when(sphereApiConfig.getApiUrl()).thenReturn("http://api.commercetools.de");
+            when(sphereApiConfig.getCorrelationIdGenerator()).thenReturn(() -> "custom-id");
+            when(httpClient.getUserAgent()).thenReturn("user-agent");
+            when(sphereAccessTokenSupplier.get()).thenReturn(CompletableFutureUtils.successful("token"));
+
+            when(httpClient.execute(httpRequestArgumentCaptor.capture()))
+                    .thenReturn(CompletableFuture.completedFuture(HttpResponse.of(200, "ok")));
+        }
+        then: {
+            final SphereClient sphereClient = SphereClient.of(sphereApiConfig, httpClient, sphereAccessTokenSupplier);
+            final DummySphereRequest sphereRequest = DummySphereRequest.of();
+
+            final CompletableFuture<String> completionStage = (CompletableFuture<String>) sphereClient.execute(sphereRequest);
+            final String response = completionStage.get();
+            assertThat(response).isEqualTo(DummySphereRequest.DEFAULT_RESPONSE_OBJECT);
+
+            final HttpHeaders headers = httpRequestArgumentCaptor.getValue().getHeaders();
+            final Optional<String> correlationId = headers.findFlatHeader(HttpHeaders.X_CORRELATION_ID);
+
+            assertThat(correlationId).isPresent().contains("custom-id");
+        }
+    }
 }

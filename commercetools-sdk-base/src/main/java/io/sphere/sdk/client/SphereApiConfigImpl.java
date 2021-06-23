@@ -4,7 +4,7 @@ import io.sphere.sdk.models.Base;
 
 import static io.sphere.sdk.client.ClientPackage.requireNonBlank;
 
-final class SphereApiConfigImpl extends Base implements SphereApiConfig {
+final class SphereApiConfigImpl extends Base implements SphereApiConfig, SphereCorrelationIdConfig {
     private final String apiUrl;
     private final String projectKey;
     private final CorrelationIdGenerator correlationIdGenerator;
@@ -25,7 +25,8 @@ final class SphereApiConfigImpl extends Base implements SphereApiConfig {
         return projectKey;
     }
 
-    CorrelationIdGenerator getCorrelationIdGenerator() {
+    @Override
+    public CorrelationIdGenerator getCorrelationIdGenerator() {
         return correlationIdGenerator;
     }
 }

@@ -15,7 +15,7 @@ import static io.sphere.sdk.client.ClientPackage.*;
  * @see SphereClientConfigBuilder
  *
  */
-public final class SphereClientConfig extends Base implements SphereAuthConfig, SphereApiConfig {
+public final class SphereClientConfig extends Base implements SphereAuthConfig, SphereApiConfig, SphereCorrelationIdConfig {
     public static final String ENVIRONMENT_VARIABLE_API_URL_SUFFIX = "API_URL";
     public static final String ENVIRONMENT_VARIABLE_AUTH_URL_SUFFIX = "AUTH_URL";
     public static final String ENVIRONMENT_VARIABLE_PROJECT_KEY_SUFFIX = "PROJECT_KEY";
@@ -56,6 +56,10 @@ public final class SphereClientConfig extends Base implements SphereAuthConfig, 
         return new SphereClientConfig(projectKey, clientId, clientSecret, authUrl, apiUrl, ClientPackage.DEFAULT_SCOPES, CorrelationIdGenerator.of(projectKey));
     }
 
+    public static SphereClientConfig of(final String projectKey, final String clientId, final String clientSecret, final String authUrl, final String apiUrl, final CorrelationIdGenerator correlationIdGenerator) {
+        return new SphereClientConfig(projectKey, clientId, clientSecret, authUrl, apiUrl, ClientPackage.DEFAULT_SCOPES, correlationIdGenerator);
+    }
+
     @Override
     public String getApiUrl() {
         return apiUrl;
@@ -81,7 +85,8 @@ public final class SphereClientConfig extends Base implements SphereAuthConfig, 
         return projectKey;
     }
 
-    CorrelationIdGenerator getCorrelationIdGenerator() {
+    @Override
+    public CorrelationIdGenerator getCorrelationIdGenerator() {
         return correlationIdGenerator;
     }
 
@@ -105,7 +110,7 @@ public final class SphereClientConfig extends Base implements SphereAuthConfig, 
     public SphereClientConfig withApiUrl(final String apiUrl) {
         return new SphereClientConfig(getProjectKey(), getClientId(), getClientSecret(), getAuthUrl(), apiUrl, getScopes(), getCorrelationIdGenerator());
     }
-    
+
     public SphereClientConfig withAuthUrl(final String authUrl) {
         return new SphereClientConfig(getProjectKey(), getClientId(), getClientSecret(), authUrl, getApiUrl(), getScopes(), getCorrelationIdGenerator());
     }
