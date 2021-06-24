@@ -43,11 +43,11 @@ public abstract class GenericMessageImpl<R> extends ResourceImpl<Message> implem
         requireNonNull(clazz, "class of reference must be explicitly given, it cannot be part of a JsonCreator.");
         final JavaType javaType = SphereJsonUtils.convertToJavaType(clazz);
         final TypeFactory typeFactory = TypeFactory.defaultInstance();
-        this.referenceJavaType = typeFactory.constructParametrizedType(Reference.class, Reference.class, javaType);
+        this.referenceJavaType = typeFactory.constructParametricType(Reference.class, javaType);
 
         final ObjectMapper objectMapper = SphereJsonUtils.newObjectMapper();
         JsonNode node = null;
-        
+
         if(resourceUserProvidedIdentifiers != null) {
             node = objectMapper.createObjectNode()
                     .put("key", resourceUserProvidedIdentifiers.getKey())
@@ -101,7 +101,7 @@ public abstract class GenericMessageImpl<R> extends ResourceImpl<Message> implem
     @Override
     public <T> T as(final Class<T> messageClass) {
         final ObjectMapper objectMapper = SphereJsonUtils.newObjectMapper();
-        
+
         final ObjectNode jsonNode = objectMapper.createObjectNode()
                 .put("id", getId())
                 .put("version", getVersion())
@@ -110,7 +110,7 @@ public abstract class GenericMessageImpl<R> extends ResourceImpl<Message> implem
                 .put("sequenceNumber", sequenceNumber)
                 .put("resourceVersion", resourceVersion)
                 .put("type", type);
-        
+
         furtherFields.entrySet().forEach(entry -> jsonNode.replace(entry.getKey(), entry.getValue()));
         jsonNode.replace("resource", resource);
         return SphereJsonUtils.readObject(jsonNode, messageClass);

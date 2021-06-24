@@ -3,11 +3,10 @@ package io.sphere.sdk.client;
 import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.meta.BuildInfo;
 import org.apache.commons.lang3.SystemUtils;
-import org.apache.commons.lang3.text.StrSubstitutor;
+import org.apache.commons.text.StringSubstitutor;
 import org.slf4j.LoggerFactory;
 
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.joining;
@@ -47,7 +46,7 @@ final class UserAgentUtils {
         values.put("optionalOs", SystemUtils.OS_NAME);
         values.put("optionalOsarch", SystemUtils.OS_ARCH);
         values.put("solutionInfos", getSolutionInfoString(additionalSolutionInfos));
-        return new StrSubstitutor(values).replace(template).trim();
+        return new StringSubstitutor(values).replace(template).trim();
     }
 
     private static String getSolutionInfoString(List<SolutionInfo> additionalSolutionInfos) {

@@ -156,6 +156,11 @@ import java.util.function.Function;
  </ul>
  -->
  -->
+ <h3 class=released-version id="v2_0_0">2.0.0 beta 1 (03.06.2021)</h3>
+ <ul>
+ <li class=removed-in-release>Removed the OSGi support</li>
+ <li class=change-in-release>Updated Apache HTTP client to 5.1</li>
+ </ul>
  <h3 class=released-version id="v1_64_0">1.64.0 (07.06.2021)</h3>
  <ul>
  <li class=fixed-in-release>Added in the Product Projection Model the possibility to filter by key from the predicate {@link ProductProjectionQueryModelImpl#key()} and {@link ProductProjectionQueryModel#key()}  }

@@ -15,10 +15,12 @@ import io.sphere.sdk.models.Base;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nullable;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static io.sphere.sdk.queries.QueryParameterKeys.*;
 import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
@@ -131,6 +133,16 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     }
 
     @Override
+    public C withPredicates(final String queryPredicate) {
+        return withPredicates(QueryPredicate.of(queryPredicate));
+    }
+
+    @Override
+    public C plusPredicates(final String queryPredicate) {
+        return plusPredicates(QueryPredicate.of(queryPredicate));
+    }
+
+    @Override
     public C plusPredicates(final QueryPredicate<T> queryPredicate) {
         return plusPredicates(singletonList(requireNonNull(queryPredicate)));
     }
@@ -148,6 +160,11 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     @Override
     public C withSort(final QuerySort<T> sort) {
         return withSort(singletonList(sort));
+    }
+
+    @Override
+    public C withSort(final String sort) {
+        return withSort(singletonList(QuerySort.of(sort)));
     }
 
     @Override
@@ -177,6 +194,11 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     }
 
     @Override
+    public C plusSort(final String sort) {
+        return plusSort(singletonList(QuerySort.of(sort)));
+    }
+
+    @Override
     public C withFetchTotal(final boolean fetchTotal) {
         return copyBuilder().fetchTotal(fetchTotal).build();
     }
@@ -202,6 +224,11 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     }
 
     @Override
+    public C withExpansionPaths(final String expansionPath) {
+        return withExpansionPaths(singletonList(requireNonNull(ExpansionPath.of(expansionPath))));
+    }
+
+    @Override
     public C withExpansionPaths(final Function<E, ExpansionPathContainer<T>> m) {
         return withExpansionPaths(m.apply(expansionModel).expansionPaths());
     }
@@ -214,6 +241,11 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     @Override
     public C plusExpansionPaths(final ExpansionPath<T> expansionPath) {
         return plusExpansionPaths(singletonList(requireNonNull(expansionPath)));
+    }
+
+    @Override
+    public C plusExpansionPaths(final String expansionPath) {
+        return plusExpansionPaths(singletonList(requireNonNull(ExpansionPath.of(expansionPath))));
     }
 
     @Override
@@ -355,7 +387,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
 
     private static <T> JavaType resolveJavaType(final JavaType javaType) {
         final TypeFactory typeFactory = TypeFactory.defaultInstance();
-        final JavaType resultJavaType = typeFactory.constructParametrizedType(PagedQueryResult.class, PagedQueryResult.class, javaType);
+        final JavaType resultJavaType = typeFactory.constructParametricType(PagedQueryResult.class, javaType);
         return resultJavaType;
     }
 }

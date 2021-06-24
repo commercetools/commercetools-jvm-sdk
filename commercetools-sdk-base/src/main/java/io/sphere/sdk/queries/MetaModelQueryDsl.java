@@ -22,6 +22,9 @@ public interface MetaModelQueryDsl<T, C extends MetaModelQueryDsl<T, C, Q, E>, Q
     @Override
     C withPredicates(final QueryPredicate<T> queryPredicate);
 
+    @Override
+    C withPredicates(final String queryPredicate);
+
     /**
      * Returns a new instance with the new predicate as only predicate.
      * @param predicateFunction function given a meta model description of the model return a {@link QueryPredicate}
@@ -36,6 +39,9 @@ public interface MetaModelQueryDsl<T, C extends MetaModelQueryDsl<T, C, Q, E>, Q
     @Override
     C plusPredicates(final QueryPredicate<T> queryPredicate);
 
+    @Override
+    C plusPredicates(final String queryPredicate);
+
     /**
      * Returns a new instance with the new predicate appended (AND semantics).
      * @param predicateFunction function given a meta model description of the model return a {@link QueryPredicate}
@@ -49,6 +55,9 @@ public interface MetaModelQueryDsl<T, C extends MetaModelQueryDsl<T, C, Q, E>, Q
 
     @Override
     C withSort(final QuerySort<T> sort);
+
+    @Override
+    C withSort(final String sort);
 
     /**
      * Returns a query with the new sort as only sort parameter.
@@ -72,6 +81,9 @@ public interface MetaModelQueryDsl<T, C extends MetaModelQueryDsl<T, C, Q, E>, Q
 
     @Override
     C plusSort(final QuerySort<T> sort);
+
+    @Override
+    C plusSort(final String sort);
 
     /**
      * Returns a query with the sort expression appended to the existing ones.

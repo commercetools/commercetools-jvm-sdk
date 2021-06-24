@@ -8,7 +8,7 @@
     </parent>
     <groupId>com.commercetools.sdk.jvm.core</groupId>
     <artifactId>commercetools-test-lib</artifactId>
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
     <version>1.65.0-SNAPSHOT</version>
     <licenses>
         <license>
@@ -19,9 +19,15 @@
     </licenses>
     <dependencies>
         <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpasyncclient-osgi</artifactId>
+            <groupId>org.apache.httpcomponents.client5</groupId>
+            <artifactId>httpclient5</artifactId>
             <version>${apache.httpclient.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -47,26 +53,6 @@
     </dependencies>
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <version>${felix.maven.version}</version>
-                <extensions>true</extensions>
-                <configuration>
-
-                    <instructions>
-                        <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
-                        <Export-Package>io.sphere.sdk.test</Export-Package>
-                        <Import-Package>
-                            javax.*,
-                            org.junit.*,
-                            org.apache.*
-                        </Import-Package>
-                        <Bundle-Version>${project.version}</Bundle-Version>
-                        <Fragment-Host>${project.groupId}.commercetools-sdk-base</Fragment-Host>
-                    </instructions>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>

@@ -48,6 +48,7 @@ public class ProjectUpdateActionsIntegrationTest extends ProjectIntegrationTest{
 
     }
 
+    @Ignore("disabled as search integration tests getting flaky")
     @Test
     public void checkSearchConfiguration(){
         final Project project = client().executeBlocking(ProjectGet.of());

@@ -9,7 +9,7 @@ import java.util.function.Supplier;
  * {@code <projectKey> / <UUID> (/ customId)*}
  */
 @FunctionalInterface
-interface CorrelationIdGenerator extends Supplier<String> {
+public interface CorrelationIdGenerator extends Supplier<String> {
 
     /**
      * Creates a new correlation id.

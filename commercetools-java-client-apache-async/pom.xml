@@ -8,7 +8,7 @@
     </parent>
     <groupId>com.commercetools.sdk.jvm.core</groupId>
     <artifactId>commercetools-java-client-apache-async</artifactId>
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
     <version>1.65.0-SNAPSHOT</version>
     <licenses>
         <license>
@@ -39,31 +39,6 @@
     </dependencies>
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <version>${felix.maven.version}</version>
-                <extensions>true</extensions>
-                <configuration>
-
-                    <instructions>
-                        <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
-                        <Export-Package>
-                            io.sphere.sdk.client
-                        </Export-Package>
-                        <Bundle-Version>${project.version}</Bundle-Version>
-                        <Fragment-Host>${project.groupId}.commercetools-sdk-base</Fragment-Host>
-                        <Provide-Capability>
-                            osgi.serviceloader;
-                            osgi.serviceloader="io.sphere.sdk.client.SphereHttpClientFactory"
-                        </Provide-Capability>
-                        <Import-Package>
-                            com.fasterxml.jackson.*;version="[2.3.0,3.0.0)" ,
-                            *
-                        </Import-Package>
-                    </instructions>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

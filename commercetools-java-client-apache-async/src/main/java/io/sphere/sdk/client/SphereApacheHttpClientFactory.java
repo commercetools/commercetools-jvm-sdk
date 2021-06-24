@@ -2,7 +2,7 @@ package io.sphere.sdk.client;
 
 import io.sphere.sdk.http.ApacheHttpClientAdapter;
 import io.sphere.sdk.http.HttpClient;
-import org.apache.http.impl.nio.client.HttpAsyncClients;
+import org.apache.hc.client5.http.impl.async.HttpAsyncClients;
 
 public final class SphereApacheHttpClientFactory extends SphereHttpClientFactory {
 

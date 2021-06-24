@@ -6,6 +6,7 @@
         <version>1.65.0-SNAPSHOT</version>
         <relativePath>..</relativePath>
     </parent>
+    <groupId>com.commercetools.sdk.jvm.core</groupId>
     <artifactId>sdk-http-ahc-2_5</artifactId>
     <packaging>jar</packaging>
     <version>1.65.0-SNAPSHOT</version>

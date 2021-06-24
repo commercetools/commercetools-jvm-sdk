@@ -8,7 +8,7 @@
     </parent>
     <groupId>com.commercetools.sdk.jvm.core</groupId>
     <artifactId>commercetools-java-client-core</artifactId>
-    <packaging>bundle</packaging>
+    <packaging>jar</packaging>
     <version>1.65.0-SNAPSHOT</version>
     <licenses>
         <license>
@@ -27,33 +27,6 @@
     </dependencies>
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <version>${felix.maven.version}</version>
-                <extensions>true</extensions>
-                <configuration>
-
-                    <instructions>
-                        <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
-                        <Export-Package>
-                            io.sphere.sdk.client
-                        </Export-Package>
-                        <Import-Package />
-                        <Bundle-Version>${project.version}</Bundle-Version>
-                        <Fragment-Host>${project.groupId}.commercetools-sdk-base</Fragment-Host>
-                        <Require-Capability>
-                            osgi.extender;
-                            filter:="(osgi.extender=osgi.serviceloader.registrar)",
-                            osgi.extender;
-                            filter:="(osgi.extender=osgi.serviceloader.processor)",
-                            osgi.serviceloader;
-                            filter:="(osgi.serviceloader=io.sphere.sdk.client.SolutionInfo)";
-                            cardinality:=multiple,
-                        </Require-Capability>
-                    </instructions>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

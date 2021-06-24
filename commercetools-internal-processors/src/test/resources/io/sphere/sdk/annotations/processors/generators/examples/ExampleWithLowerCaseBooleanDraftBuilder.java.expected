@@ -73,7 +73,8 @@ public final class ExampleWithLowerCaseBooleanDraftBuilder extends Base implemen
    * @param template the template
    * @return a new object initialized from the template
    */
-  public static ExampleWithLowerCaseBooleanDraftBuilder of(final ExampleWithLowerCaseBooleanDraft template) {
+  public static ExampleWithLowerCaseBooleanDraftBuilder of(
+      final ExampleWithLowerCaseBooleanDraft template) {
     return new ExampleWithLowerCaseBooleanDraftBuilder(template.isLowerCased());
   }
 }

@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -47,7 +48,7 @@ public abstract class HttpClientAdapterTest {
         final String bodyData = "123456789";
 
         final File file = File.createTempFile(RandomStringUtils.randomAlphanumeric(32), "ext");
-        FileUtils.writeStringToFile(file, bodyData);
+        FileUtils.writeStringToFile(file, bodyData, Charset.defaultCharset());
         file.deleteOnExit();
 
         final HttpRequestBody requestBody = FileHttpRequestBody.of(file);
@@ -89,7 +90,7 @@ public abstract class HttpClientAdapterTest {
                     stringBuilder.append(inputLine).append("\n");
                 }
                 final OutputStream outputStream = socket.getOutputStream();
-                IOUtils.write("HTTP/1.0 200 OK\r\n\r\n", outputStream);
+                IOUtils.write("HTTP/1.0 200 OK\r\n\r\n", outputStream, Charset.defaultCharset());
                 outputStream.flush();
                 outputStream.close();
                 in.close();

@@ -16,7 +16,7 @@ final class TypedMessageQuery<T> extends Base implements Query<T> {
     public TypedMessageQuery(final HttpRequestIntent httpRequestIntent, final JavaType elementJavaType) {
         this.httpRequestIntent = httpRequestIntent;
         final TypeFactory typeFactory = TypeFactory.defaultInstance();
-        resultJavaType = typeFactory.constructParametrizedType(PagedQueryResult.class, PagedQueryResult.class, elementJavaType);
+        resultJavaType = typeFactory.constructParametricType(PagedQueryResult.class, elementJavaType);
     }
 
     @Override

@@ -6,7 +6,7 @@ import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.projects.queries.ProjectGet;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
-import org.apache.http.impl.nio.client.HttpAsyncClients;
+import org.apache.hc.client5.http.impl.async.HttpAsyncClients;
 import org.junit.Test;
 
 import java.util.concurrent.TimeUnit;

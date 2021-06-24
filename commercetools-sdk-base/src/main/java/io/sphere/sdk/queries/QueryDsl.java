@@ -28,6 +28,13 @@ public interface QueryDsl<T, C extends QueryDsl<T, C>> extends ResourceQuery<T>,
      */
     C withPredicates(final QueryPredicate<T> predicate);
 
+    /**
+     * Returns a new instance with the new predicate as only predicate.
+     * @param predicate the new predicate
+     * @return instance with the predicate
+     * @see #plusPredicates(QueryPredicate)
+     */
+    C withPredicates(final String predicate);
 
     /**
      * Returns a new instance with the new predicate list appended to the existing predicates (AND semantic).
@@ -46,6 +53,14 @@ public interface QueryDsl<T, C extends QueryDsl<T, C>> extends ResourceQuery<T>,
     C plusPredicates(final QueryPredicate<T> predicate);
 
     /**
+     * Returns a new instance with the new predicate appended to the existing predicates (AND semantic).
+     * @param predicate the new predicate
+     * @return instance with the existing predicate list plus the new predicate list
+     * @see #withPredicates(QueryPredicate)
+     */
+    C plusPredicates(final String predicate);
+
+    /**
      * Returns a query with the new sort list as only sort parameters.
      * @param sort list of sorts how the results of the query should be sorted
      * @return Query with sort
@@ -62,6 +77,14 @@ public interface QueryDsl<T, C extends QueryDsl<T, C>> extends ResourceQuery<T>,
     C withSort(final QuerySort<T> sort);
 
     /**
+     * Returns a query with the new sort as only sort parameter.
+     * @param sort sort expression how the results of the query should be sorted
+     * @return Query with sort
+     * @see #plusSort(QuerySort)
+     */
+    C withSort(final String sort);
+
+    /**
      * Returns a query with the sort expressions appended to the existing ones.
      * @param sort sort expressions how the results of the query should be sorted
      * @return Query with sort
@@ -76,6 +99,14 @@ public interface QueryDsl<T, C extends QueryDsl<T, C>> extends ResourceQuery<T>,
      * @see #withSort(QuerySort)
      */
     C plusSort(final QuerySort<T> sort);
+
+    /**
+     * Returns a query with the sort expression appended to the existing ones.
+     * @param sort sort expression how the results of the query should be sorted
+     * @return Query with sort
+     * @see #withSort(QuerySort)
+     */
+    C plusSort(final String sort);
 
     /**
      * Enables/disables a flag it the total amount of items should be counted.

@@ -18,8 +18,8 @@ public class AutoRefreshSphereAccessTokenSupplierImplTest {
         final TestDoubleHttpClient httpClient = getHttpClient();
         try(final SphereAccessTokenSupplier supplier =
                 AutoRefreshSphereAccessTokenSupplierImpl.createAndBeginRefreshInBackground(SphereAuthConfig.of("project-key", "client-id", "clientSecret"), httpClient, true)) {
-            Thread.sleep(3000);
-            assertThat(httpClient.getTimesCalledCount()).isGreaterThan(2).isLessThan(5);
+            Thread.sleep(4000);
+            assertThat(httpClient.getTimesCalledCount()).isGreaterThan(2).isLessThan(6);
         }
     }
 

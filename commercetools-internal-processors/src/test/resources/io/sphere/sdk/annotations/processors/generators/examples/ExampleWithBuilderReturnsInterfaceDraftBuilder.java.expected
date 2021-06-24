@@ -39,7 +39,8 @@ public final class ExampleWithBuilderReturnsInterfaceDraftBuilder extends Base i
    * @param template the template
    * @return a new object initialized from the template
    */
-  public static ExampleWithBuilderReturnsInterfaceDraftBuilder of(final ExampleWithBuilderReturnsInterfaceDraft template) {
+  public static ExampleWithBuilderReturnsInterfaceDraftBuilder of(
+      final ExampleWithBuilderReturnsInterfaceDraft template) {
     return new ExampleWithBuilderReturnsInterfaceDraftBuilder();
   }
 }

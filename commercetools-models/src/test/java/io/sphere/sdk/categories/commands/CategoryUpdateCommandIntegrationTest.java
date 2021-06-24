@@ -1,6 +1,7 @@
 package io.sphere.sdk.categories.commands;
 
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.categories.CategoryBuilder;
 import io.sphere.sdk.categories.commands.updateactions.*;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.commands.UpdateCommand;
@@ -362,5 +363,12 @@ public class CategoryUpdateCommandIntegrationTest extends IntegrationTest {
             final Asset updatedAsset = updatedCategory.getAssets().get(0);
             assertThat(updatedAsset.getTags()).isEqualTo(newTags);
         });
+    }
+
+    @Test
+    public void expandByString() {
+        final Category category = CategoryBuilder.of("abc", randomSlug(), randomSlug()).build();
+        final CategoryUpdateCommand actual = CategoryUpdateCommand.of(category, ChangeName.of(randomSlug())).withExpansionPaths("id").plusExpansionPaths("name");
+        assertThat(actual.httpRequestIntent().toHttpRequest("").getUrl()).isEqualTo("/categories/abc?expand=id&expand=name");
     }
 }
