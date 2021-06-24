@@ -47,4 +47,4 @@ jobs:
       - run: mvn clean install javadoc:aggregate -DskipTests --no-transfer-progress -Pjavadoc-jdk-8u121
       - run: mvn exec:java -pl commercetools-internal-docs -Dexec.mainClass="introspection.rules.RulesMain" -Dexec.classpathScope="test"
       - run: mvn exec:java -pl commercetools-models -Dexec.mainClass="io.sphere.sdk.client.MainMethodThreadLeakTest" -Dexec.classpathScope="test"
-      - run: mvn test verify --no-transfer-progress
+      - run: mvn test verify --no-transfer-progress -Djava.util.logging.config.file=src/test/resources/logging.properties
