@@ -20,7 +20,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>commercetools-java-client-ahc-2_12</artifactId>
+            <artifactId>commercetools-java-client-ahc-2_0</artifactId>
             <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>

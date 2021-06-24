@@ -55,6 +55,7 @@ Tested with JDKs: Oracle 1.8.0_221, OpenJDK 1.8.0_221 and Amazon Corretto 8.222.
 * `commercetools-java-client-ahc-1_9`: uses async HTTP client 1.9 (AHC 1.9 is incompatible to AHC 1.8)
 * `commercetools-java-client-ahc-2_0`: uses async HTTP client 2.0 (do not mix it with the other AHC modules)
 * `commercetools-java-client-ahc-2_5`: uses async HTTP client 2.5 (AHC 2.5 is incompatible to AHC 2.0)
+* `commercetools-java-client-ahc-2_12`: uses async HTTP client 2.12
 * `commercetools-models`: models which do not depend to a client implementation
 
 ### Java SDK with gradle
