@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.type.SimpleType;
+import com.fasterxml.jackson.databind.type.TypeBindings;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
@@ -311,7 +313,10 @@ public final class SphereJsonUtils {
 
     public static JavaType convertToJavaType(final Class<?> clazz) {
         final TypeFactory typeFactory = TypeFactory.defaultInstance();
-        return typeFactory.constructSimpleType(clazz, null);
+        if (clazz.getTypeParameters().length == 0) {
+            return typeFactory.constructSimpleType(clazz, new JavaType[0]);
+        }
+        return typeFactory.constructParametricType(clazz, TypeBindings.emptyBindings());
     }
 
     @FunctionalInterface
