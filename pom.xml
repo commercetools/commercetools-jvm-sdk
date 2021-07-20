@@ -311,8 +311,8 @@
                         <encoding>${project.build.sourceEncoding}</encoding>
                         <charset>${project.build.sourceEncoding}</charset>
                         <docencoding>${project.build.sourceEncoding}</docencoding>
-                        <additionalparam>-Xdoclint:missing,syntax,accessibility,reference --allow-script-in-comments ${javadoc.additionalparams}
-                        </additionalparam>
+                        <additionalOptions>-Xdoclint:missing,syntax,accessibility,reference --allow-script-in-comments ${javadoc.additionalparams}
+                        </additionalOptions>
                         <taglets>
                             <!-- see https://github.com/commercetools/commercetools-taglets -->
                             <taglet>
