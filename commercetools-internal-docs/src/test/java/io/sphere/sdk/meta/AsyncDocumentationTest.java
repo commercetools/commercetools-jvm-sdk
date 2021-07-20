@@ -12,6 +12,7 @@ import io.sphere.sdk.models.DefaultCurrencyUnits;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
 import io.sphere.sdk.utils.CompletableFutureUtils;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -35,9 +36,6 @@ public class AsyncDocumentationTest {
     public static void warmUpJavaMoney() throws Exception {
         final CurrencyUnit eur = DefaultCurrencyUnits.EUR;//workaround for https://github.com/commercetools/commercetools-jvm-sdk/issues/779
     }
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void createFailedFuture() throws Exception {
@@ -324,8 +322,8 @@ public class AsyncDocumentationTest {
     @Test
     public void futureGetTimeoutDemoWithActualTimeout() throws Exception {
         final CompletableFuture<String> futureThatTakesTooLong = new CompletableFuture<>();
-        thrown.expect(TimeoutException.class);
-        futureThatTakesTooLong.get(12, TimeUnit.MILLISECONDS);
+        Assert.assertThrows(TimeoutException.class, () -> futureThatTakesTooLong.get(12, TimeUnit.MILLISECONDS));
+
     }
 
     @Test
@@ -355,9 +353,8 @@ public class AsyncDocumentationTest {
     @Test
     public void testOrElseThrow() throws Exception {
         final CompletableFuture<String> incompleteFuture = new CompletableFuture<>();
-        thrown.expect(WhatEverException.class);
-        CompletableFutureUtils //SDK utils class
-                .orElseThrow(incompleteFuture, () -> new WhatEverException());
+        Assert.assertThrows(WhatEverException.class, () -> CompletableFutureUtils //SDK utils class
+                    .orElseThrow(incompleteFuture, WhatEverException::new));
     }
 
     @Test

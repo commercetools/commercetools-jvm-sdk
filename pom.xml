@@ -86,40 +86,40 @@
         <java.major.version>8</java.major.version>
         <java.version>1.${java.major.version}</java.version>
 
-        <assertj.version>3.8.0</assertj.version>
+        <assertj.version>3.20.2</assertj.version>
         <apache.httpclient.version>5.1</apache.httpclient.version>
         <asynchttpclient18.version>1.8.16</asynchttpclient18.version>
         <asynchttpclient19.version>1.9.40</asynchttpclient19.version>
         <asynchttpclient20.version>2.0.38</asynchttpclient20.version>
         <asynchttpclient25.version>2.5.4</asynchttpclient25.version>
         <asynchttpclient212.version>2.12.3</asynchttpclient212.version>
-        <aws-sdk.version>1.11.1014</aws-sdk.version>
-        <azure-sdk.version>1.2.18</azure-sdk.version>
+        <aws-sdk.version>1.12.27</aws-sdk.version>
+        <azure-sdk.version>3.6.4</azure-sdk.version>
         <commercetools-taglets.version>0.8.7</commercetools-taglets.version>
         <commons-lang3>3.12.0</commons-lang3>
         <commons-text>1.9</commons-text>
-        <commons-io.version>2.8.0</commons-io.version>
-        <gson.version>2.3.1</gson.version>
+        <commons-io.version>2.11.0</commons-io.version>
+        <gson.version>2.8.7</gson.version>
         <handlebars.version>4.2.0</handlebars.version>
         <httpasyncclient.version>4.1.1</httpasyncclient.version>
-        <jackson.version>2.12.3</jackson.version>
+        <jackson.version>2.12.4</jackson.version>
         <jacoco.version>0.8.7</jacoco.version>
         <javadoc.additionalparams/>
         <jsr305.version>3.0.2</jsr305.version>
         <junit.version>4.13.2</junit.version>
-        <logback.version>1.2.3</logback.version>
-        <maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
+        <logback.version>1.2.4</logback.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
         <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
         <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
         <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
         <maven-javadoc-plugin.version>2.10.4</maven-javadoc-plugin.version>
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
-        <maven-scm-publish-plugin.version>1.1</maven-scm-publish-plugin.version>
+        <maven-scm-publish-plugin.version>3.1.0</maven-scm-publish-plugin.version>
         <maven-scm-publish-plugin.scm.url>scm:git:git@github.com:commercetools/commercetools-jvm-sdk.git</maven-scm-publish-plugin.scm.url>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-        <mockito.version>2.9.0</mockito.version>
+        <mockito.version>3.11.2</mockito.version>
         <money-api.version>1.1</money-api.version>
         <moneta.version>1.4.2</moneta.version>
         <netty.version>4.0.54.Final</netty.version>
@@ -127,7 +127,7 @@
         <nv-i18n.version>1.28</nv-i18n.version>
         <pax-exam.version>4.11.0</pax-exam.version>
         <pax-exam.logging.version>1.10.1</pax-exam.logging.version>
-        <slf4j.version>1.7.30</slf4j.version>
+        <slf4j.version>1.7.31</slf4j.version>
         <build-helper-maven-plugin.version>3.2.0</build-helper-maven-plugin.version>
     </properties>
     <dependencyManagement>
@@ -447,7 +447,7 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>license-maven-plugin</artifactId>
-                    <version>1.20</version>
+                    <version>2.0.0</version>
                 </plugin>
             </plugins>
         </pluginManagement>

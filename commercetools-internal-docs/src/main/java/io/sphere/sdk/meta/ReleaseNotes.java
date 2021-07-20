@@ -156,14 +156,11 @@ import java.util.function.Function;
  </ul>
  -->
  -->
- <h3 class=released-version id="v1_65_0">1.65.0 (02.08.2021)</h3>
- <ul>
- <li class=new-in-release>Support external Tax Rate For Shipping Method in {@link CartDraft#getExternalTaxRateForShippingMethod()}</li>
- </ul>
- <h3 class=released-version id="v2_0_0">2.0.0 beta 1 (03.06.2021)</h3>
+ <h3 class=released-version id="v2_0_0">2.0.0 (23.07.2021)</h3>
  <ul>
  <li class=removed-in-release>Removed the OSGi support</li>
  <li class=change-in-release>Updated Apache HTTP client to 5.1</li>
+ <li class=new-in-release>Support external Tax Rate For Shipping Method in {@link CartDraft#getExternalTaxRateForShippingMethod()}</li>
  </ul>
  <h3 class=released-version id="v1_64_0">1.64.0 (07.06.2021)</h3>
  <ul>
