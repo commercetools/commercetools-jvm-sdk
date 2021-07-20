@@ -86,7 +86,7 @@
         <java.major.version>8</java.major.version>
         <java.version>1.${java.major.version}</java.version>
 
-        <assertj.version>3.8.0</assertj.version>
+        <assertj.version>3.20.2</assertj.version>
         <apache.httpclient.version>5.1</apache.httpclient.version>
         <asynchttpclient18.version>1.8.16</asynchttpclient18.version>
         <asynchttpclient19.version>1.9.40</asynchttpclient19.version>
