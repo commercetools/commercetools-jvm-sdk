@@ -193,7 +193,7 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
     }
 
     protected final AddressCollectionQueryModel<T> addressCollectionQueryModel(final String pathSegment){
-        return new AddressCollectionQueryModelImpl(parent,pathSegment);
+        return new AddressCollectionQueryModelImpl<>(parent, pathSegment);
     }
 
     protected final LocaleQuerySortingModel<T> localeQueryModel(final String pathSegment) {

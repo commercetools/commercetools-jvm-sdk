@@ -8,7 +8,7 @@ import java.lang.annotation.Annotation;
 import java.util.Iterator;
 import java.util.Set;
 
-abstract class MethodLevelAnnotationProcessor<A extends Annotation> extends AbstractAnnotationProcessor {
+abstract class MethodLevelAnnotationProcessor<A extends Annotation> extends AbstractAnnotationProcessor<A> {
 
     protected MethodLevelAnnotationProcessor(final Class<A> clazz) {
         super(clazz);
