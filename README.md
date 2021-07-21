@@ -97,18 +97,6 @@ Useful code from external developers
 * [Donut](https://github.com/commercetools/commercetools-donut) - single product subscription shop example with Play Framework 2.x and Twirl (Plays default) as template engine
 * [commercetools Spring MVC archetype](https://github.com/commercetools/commercetools-spring-mvc-archetype) - template integrating the SDK with Spring DI and Spring MVC and showing just some products, thymeleaf template engine
 * [Reproducer Example](https://github.com/commercetools/commercetools-jvm-sdk-reproducer-example) - a demo which shows how to reproduce errors
-
-## OSGi support
-
-* The JVM SDK is OSGi compatible, the module structure is as follows:
-    * Bundle `sdk-http` responsible for http client features, this bundle has the following fragments 
-        * Fragment `sdk-htt-apache-async` which provide an implementation of the http clients.
-    * Bundle `commercetools-sdk-base` that contains the base types used for the sdk models, this bundle has the following fragments
-        * `commercetools-java-client-core`
-        * `commercetools-java-client-apache-async` with the previous fragment, it allow to publish a service describing the http client implementation for our API.
-        * `commercetools-models` contains a description model of the commercetools backend and the different actions that alows interaction with it.
-* A demo test that shows a minimum configuration for use in production in an OSGi setup can be found here: 
-[DemoOSGiMinimalConfigTest](https://github.com/commercetools/commercetools-jvm-sdk/blob/master/osgi-support/sdk-osgi-test-campaign/src/test/java/io/sphere/sdk/test/DemoOSGiMinimalConfigTest.java)
  
 ## Stability
 
