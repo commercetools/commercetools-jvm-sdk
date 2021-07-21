@@ -26,7 +26,7 @@ RELEASE_VERSION=$(getVersion)
 echo "Performing release ${RELEASE_VERSION}"
 
 echo "Deploying release ${RELEASE_VERSION}"
-./mvnw clean deploy -pl "!osgi-support, !osgi-support/sdk-osgi-test-campaign, !osgi-support/commercetools-tests-fragment" -DskipTests -Prelease,javadoc-jdk-8u121
+./mvnw clean deploy -DskipTests -Prelease,javadoc-jdk-8u121
 
 git tag -a v${RELEASE_VERSION} -m 'TASK Release v${RELEASE_VERSION}'
 CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD`
