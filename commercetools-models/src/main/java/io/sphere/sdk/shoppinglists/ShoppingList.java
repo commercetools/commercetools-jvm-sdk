@@ -4,11 +4,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.customers.Customer;
-import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.models.Resource;
-import io.sphere.sdk.models.WithKey;
+import io.sphere.sdk.models.*;
 import io.sphere.sdk.shoppinglists.commands.updateactions.*;
+import io.sphere.sdk.stores.Store;
 import io.sphere.sdk.types.Custom;
 import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.TypeDraft;
@@ -75,6 +73,9 @@ public interface ShoppingList extends Resource<ShoppingList>, Custom, WithKey {
     @HasUpdateAction
     @Nullable
     String getAnonymousId();
+
+    @Nullable
+    KeyReference<Store> getStore();
 
     /**
      * Creates a container which contains the full Java type information to deserialize this class from JSON.

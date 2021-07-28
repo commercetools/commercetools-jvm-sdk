@@ -3,6 +3,7 @@ package io.sphere.sdk.shoppinglists.commands;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.shoppinglists.*;
 import io.sphere.sdk.shoppinglists.commands.updateactions.*;
+import io.sphere.sdk.stores.StoreFixtures;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
@@ -336,5 +337,20 @@ public class ShoppingListUpdateCommandIntegrationTest extends IntegrationTest {
             });
         });
     }
+
+//    @Test
+//    public void setStore() throws Exception {
+//        StoreFixtures::withStore(client(), store -> {
+//           withUpdateableShoppingList(client(), shoppingList -> {
+//               final ShoppingList updatedShoppingListWithStore = client().executeBlocking(
+//                       ShoppingListUpdateCommand.of(shoppingList, SetStore.of(store)));
+//
+//               assertThat(updatedShoppingListWithStore.getStore()).isEqualTo(store.toReference());
+//
+//               return updatedShoppingListWithStore;
+//           });
+//        });
+//    }
+
 }
 

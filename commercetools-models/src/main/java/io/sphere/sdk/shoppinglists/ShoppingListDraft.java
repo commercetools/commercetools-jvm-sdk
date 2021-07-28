@@ -4,9 +4,11 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.customers.Customer;
+import io.sphere.sdk.models.KeyReference;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.models.WithKey;
+import io.sphere.sdk.stores.Store;
 import io.sphere.sdk.types.CustomDraft;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
@@ -52,4 +54,7 @@ public interface ShoppingListDraft extends CustomDraft, WithKey {
 
     @Nullable
     String getAnonymousId();
+
+    @Nullable
+    ResourceIdentifier<Store> getStore();
 }
