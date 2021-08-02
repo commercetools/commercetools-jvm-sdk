@@ -1,0 +1,18 @@
+package io.sphere.sdk.meta;
+
+public final class BuildInfo {
+    private static final String version = "version-replaced-through-maven-replacer-plugin";
+    private static final String userAgent = "commercetools-jvm-sdk/" + version;
+
+    private BuildInfo() {
+        //utility class
+    }
+
+    public static String userAgent() {
+        return userAgent;
+    }
+
+    public static String version() {
+        return version;
+    }
+}
