@@ -337,20 +337,5 @@ public class ShoppingListUpdateCommandIntegrationTest extends IntegrationTest {
             });
         });
     }
-
-//    @Test
-//    public void setStore() throws Exception {
-//        StoreFixtures::withStore(client(), store -> {
-//           withUpdateableShoppingList(client(), shoppingList -> {
-//               final ShoppingList updatedShoppingListWithStore = client().executeBlocking(
-//                       ShoppingListUpdateCommand.of(shoppingList, SetStore.of(store)));
-//
-//               assertThat(updatedShoppingListWithStore.getStore()).isEqualTo(store.toReference());
-//
-//               return updatedShoppingListWithStore;
-//           });
-//        });
-//    }
-
 }
 
