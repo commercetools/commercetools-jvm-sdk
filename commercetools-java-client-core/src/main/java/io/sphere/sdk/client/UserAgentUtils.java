@@ -30,22 +30,15 @@ final class UserAgentUtils {
             return userAgent(httpClient, additionalSolutionInfos);
         } catch (final Exception e) {
             LoggerFactory.getLogger(UserAgentUtils.class).error("cannot determine user agent", e);
-            return "commercetools-jvm-sdk/unknown";
+            return "commercetools-sdk-Java-V1/unknown";
         }
     }
 
     private static String userAgent(final HttpClient httpClient, List<SolutionInfo> additionalSolutionInfos) {
-        final String template = "${sdkLikeGitHubRepo}/${sdkVersion} (${underlyingHttpClient}) ${runtime}/${runtimeVersion} (${optionalOs}; ${optionalOsarch}) ${solutionInfos}";
+        final String template = "${sdkLikeGitHubRepo}${sdkVersion}";
         final Map<String, String> values = new HashMap<>();
-        values.put("sdkLikeGitHubRepo", "commercetools-jvm-sdk");
+        values.put("sdkLikeGitHubRepo", "commercetools-sdk-Java-V1-");
         values.put("sdkVersion", BuildInfo.version());
-        final String underlyingHttpClient = Optional.ofNullable(httpClient.getUserAgent()).orElse("unknown/" + BuildInfo.version());
-        values.put("underlyingHttpClient", underlyingHttpClient);
-        values.put("runtime", "Java");
-        values.put("runtimeVersion", SystemUtils.JAVA_RUNTIME_VERSION);
-        values.put("optionalOs", SystemUtils.OS_NAME);
-        values.put("optionalOsarch", SystemUtils.OS_ARCH);
-        values.put("solutionInfos", getSolutionInfoString(additionalSolutionInfos));
         return new StringSubstitutor(values).replace(template).trim();
     }
 
