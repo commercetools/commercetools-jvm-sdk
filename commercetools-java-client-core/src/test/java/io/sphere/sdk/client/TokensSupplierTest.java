@@ -68,7 +68,7 @@ public class TokensSupplierTest {
         final Optional<String> userAgentHeader = httpRequest.getHeaders().findFlatHeader(HttpHeaders.USER_AGENT);
         assertThat(userAgentHeader).isPresent();
         final String userAgent = userAgentHeader.get();
-        assertThat(userAgent).startsWith("commercetools-jvm-sdk/");
+        assertThat(userAgent).startsWith(UserAgentUtils.userAgent);
     }
 
     @Test
@@ -88,7 +88,7 @@ public class TokensSupplierTest {
         final Optional<String> userAgentHeader = httpRequest.getHeaders().findFlatHeader(HttpHeaders.USER_AGENT);
         assertThat(userAgentHeader).isPresent();
         final String userAgent = userAgentHeader.get();
-        assertThat(userAgent).startsWith("commercetools-jvm-sdk/");
+        assertThat(userAgent).startsWith(UserAgentUtils.userAgent);
         assertThat(userAgent).endsWith(" sdk-test/1.2.3 (+example.com; +John Doe)");
     }
 }
