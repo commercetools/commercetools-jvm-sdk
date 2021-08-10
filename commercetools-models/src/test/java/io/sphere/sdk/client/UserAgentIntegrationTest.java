@@ -21,7 +21,7 @@ public class UserAgentIntegrationTest extends IntegrationTest {
             try (final SphereClient client = SphereClientFactory.of(() -> httpClient).createClient(getSphereClientConfig())) {
                 client.execute(ProjectGet.of()).toCompletableFuture().join();
                 assertThat(httpClient.getLastUserAgent())
-                        .startsWith("commercetools-jvm-sdk")
+                        .startsWith("commercetools-sdk-java-v1")
                         .contains("JVM-SDK-integration-tests")
                         .contains(BuildInfo.version());
             }
