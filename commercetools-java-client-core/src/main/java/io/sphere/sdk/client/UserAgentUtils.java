@@ -16,8 +16,8 @@ final class UserAgentUtils {
     private UserAgentUtils() {
     }
 
-    public static String unknownUserAgent = "commercetools-java-v1/unknown";
-    public static String userAgent = "commercetools-sdk-java-v1";
+    final static String unknownUserAgent = "commercetools-java-v1/unknown";
+    final static String userAgent = "commercetools-sdk-java-v1";
 
     static String obtainUserAgent(final HttpClient httpClient) {
         try {

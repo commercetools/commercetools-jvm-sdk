@@ -25,7 +25,7 @@ import static org.mockito.Mockito.when;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class TokensSupplierTest {
-    private String startWithUserAgent = "commercetools-sdk-java-v1/";
+    final private String startWithUserAgent = "commercetools-sdk-java-v1/";
     @Mock
     private HttpClient httpClient;
 
