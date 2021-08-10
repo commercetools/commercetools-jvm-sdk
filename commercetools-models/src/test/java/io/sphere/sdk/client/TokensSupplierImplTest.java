@@ -18,7 +18,7 @@ public class TokensSupplierImplTest {
         final SphereAuthConfig authConfig = SphereAuthConfig.of("a", "b", "c");
         final RecordHttpClient httpClient = new RecordHttpClient();
         SphereAccessTokenSupplier.ofOneTimeFetchingToken(authConfig, httpClient, true).get();
-        final String expectedValue = BuildInfo.userAgent();
+        final String expectedValue = UserAgentUtils.obtainUserAgent(httpClient);
         final String header = httpClient.request.getHeaders().findFlatHeader(HttpHeaders.USER_AGENT).orElse("");
         assertThat(header).matches("^(?<sdkOrClient>[^\\s\\/]+)(\\/(?<sdkOrClientVersion>\\S+))?(\\s+\\((?<sdkOrClientInfo>[^(]*)\\))?\\s+(?<environment>[^\\s\\/]+)(\\/(?<environmentVersion>\\S+))?(\\s+\\((?<environmentInfo>[^(]*)\\))?\\s+(?<solution>[^\\s\\/]+)(\\/(?<solutionVersion>\\S+))?(\\s+\\((?<solutionInfo>[^(]*)\\))?$").contains(expectedValue);
     }
