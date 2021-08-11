@@ -16,12 +16,15 @@ final class UserAgentUtils {
     private UserAgentUtils() {
     }
 
+    final static String unknownUserAgent = "commercetools-java-v1/unknown";
+    final static String userAgent = "commercetools-sdk-java-v1";
+
     static String obtainUserAgent(final HttpClient httpClient) {
         try {
             return userAgent(httpClient, Collections.emptyList());
         } catch (final Exception e) {
             LoggerFactory.getLogger(UserAgentUtils.class).error("cannot determine user agent", e);
-            return "commercetools-jvm-sdk/unknown";
+            return unknownUserAgent;
         }
     }
 
@@ -30,14 +33,14 @@ final class UserAgentUtils {
             return userAgent(httpClient, additionalSolutionInfos);
         } catch (final Exception e) {
             LoggerFactory.getLogger(UserAgentUtils.class).error("cannot determine user agent", e);
-            return "commercetools-jvm-sdk/unknown";
+            return unknownUserAgent;
         }
     }
 
     private static String userAgent(final HttpClient httpClient, List<SolutionInfo> additionalSolutionInfos) {
         final String template = "${sdkLikeGitHubRepo}/${sdkVersion} (${underlyingHttpClient}) ${runtime}/${runtimeVersion} (${optionalOs}; ${optionalOsarch}) ${solutionInfos}";
         final Map<String, String> values = new HashMap<>();
-        values.put("sdkLikeGitHubRepo", "commercetools-jvm-sdk");
+        values.put("sdkLikeGitHubRepo", userAgent);
         values.put("sdkVersion", BuildInfo.version());
         final String underlyingHttpClient = Optional.ofNullable(httpClient.getUserAgent()).orElse("unknown/" + BuildInfo.version());
         values.put("underlyingHttpClient", underlyingHttpClient);

@@ -25,6 +25,7 @@ import static org.mockito.Mockito.when;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class TokensSupplierTest {
+    final private String startWithUserAgent = "commercetools-sdk-java-v1/";
     @Mock
     private HttpClient httpClient;
 
@@ -68,7 +69,7 @@ public class TokensSupplierTest {
         final Optional<String> userAgentHeader = httpRequest.getHeaders().findFlatHeader(HttpHeaders.USER_AGENT);
         assertThat(userAgentHeader).isPresent();
         final String userAgent = userAgentHeader.get();
-        assertThat(userAgent).startsWith("commercetools-jvm-sdk/");
+        assertThat(userAgent).startsWith(startWithUserAgent);
     }
 
     @Test
@@ -88,7 +89,7 @@ public class TokensSupplierTest {
         final Optional<String> userAgentHeader = httpRequest.getHeaders().findFlatHeader(HttpHeaders.USER_AGENT);
         assertThat(userAgentHeader).isPresent();
         final String userAgent = userAgentHeader.get();
-        assertThat(userAgent).startsWith("commercetools-jvm-sdk/");
+        assertThat(userAgent).startsWith(startWithUserAgent);
         assertThat(userAgent).endsWith(" sdk-test/1.2.3 (+example.com; +John Doe)");
     }
 }

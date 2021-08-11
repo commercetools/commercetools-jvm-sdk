@@ -7,7 +7,7 @@ import io.sphere.sdk.models.Base;
  * Marker interface to generate a solution info for the JVM SDK user agent.
  *
  * <p>A User-Agent header with a solution information looks like this:
- * {@code commercetools-jvm-sdk/1.4.1 (AHC/2.0) Java/1.8.0_92-b14 (Mac OS X; x86_64) SOLUTION_NAME/SOLUTION_VERSION (+https://website.tld; +info@SOLUTION.com)}</p>
+ * {@code commercetools-sdk-java-v1/1.4.1 (AHC/2.0) Java/1.8.0_92-b14 (Mac OS X; x86_64) SOLUTION_NAME/SOLUTION_VERSION (+https://website.tld; +info@SOLUTION.com)}</p>
  *
  * <p>To add a solution information to the JVM SDK create a resource file {@code src/main/resources/META-INF/services/io.sphere.sdk.client.SolutionInfo}
  * which contains a fully qualified class name like (replace at least SOLUTION with your solution name)

@@ -159,6 +159,7 @@ import java.util.function.Function;
  <h3 class=released-version id="v2_1_0">2.1.0 (06.09.2021)</h3>
  <ul>
  <li class=new-in-release>Support store for Shopping List in {@link ShoppingList#getStore()} and {@link ShoppingListDraft#getStore()} </li>
+ <li class=new-in-release>Updated User Agent</li>
  </ul>
  <h3 class=released-version id="v2_0_0">2.0.0 (23.07.2021)</h3>
  <ul>
