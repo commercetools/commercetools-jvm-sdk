@@ -12,7 +12,6 @@ import javax.annotation.Nullable;
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.shoppinglists.commands.ShoppingListUpdateCommandIntegrationTest#setStore()}
  */
 public final class SetStore extends UpdateActionImpl<ShoppingList> {
     @Nullable
