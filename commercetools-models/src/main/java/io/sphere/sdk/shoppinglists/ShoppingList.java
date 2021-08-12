@@ -74,9 +74,8 @@ public interface ShoppingList extends Resource<ShoppingList>, Custom, WithKey {
     @Nullable
     String getAnonymousId();
 
-    @HasUpdateAction
     @Nullable
-    @IgnoreInQueryModel
+    @QueryModelHint(type = "KeyReferenceQueryModel<ShoppingList>", impl = "return keyReferenceQueryModel(fieldName);")
     KeyReference<Store> getStore();
 
     /**

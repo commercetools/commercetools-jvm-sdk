@@ -1,23 +1,20 @@
-package io.sphere.sdk.orders.commands.updateactions;
+package io.sphere.sdk.shoppinglists.commands.updateactions;
 
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.ResourceIdentifier;
-import io.sphere.sdk.orders.Order;
-import io.sphere.sdk.products.commands.updateactions.SetTaxCategory;
+import io.sphere.sdk.shoppinglists.ShoppingList;
 import io.sphere.sdk.stores.Store;
-import io.sphere.sdk.taxcategories.TaxCategory;
 
 import javax.annotation.Nullable;
-import java.util.Locale;
 
 /**
- * Sets the store.
+ * Sets the Store.
  *
  * {@doc.gen intro}
  *
- * {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandIntegrationTest#setStore()}
+ * {@include.example io.sphere.sdk.shoppinglists.commands.ShoppingListUpdateCommandIntegrationTest#setStore()}
  */
-public final class SetStore extends UpdateActionImpl<Order> {
+public final class SetStore extends UpdateActionImpl<ShoppingList> {
     @Nullable
     private final ResourceIdentifier<Store> store;
 

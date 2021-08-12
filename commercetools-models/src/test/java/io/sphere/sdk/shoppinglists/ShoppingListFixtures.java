@@ -1,19 +1,25 @@
 package io.sphere.sdk.shoppinglists;
 
 import io.sphere.sdk.client.BlockingSphereClient;
+import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.shoppinglists.commands.ShoppingListCreateCommand;
 import io.sphere.sdk.shoppinglists.commands.ShoppingListDeleteCommand;
 import io.sphere.sdk.shoppinglists.queries.ShoppingListQuery;
 import io.sphere.sdk.shoppinglists.queries.ShoppingListQueryModel;
+import io.sphere.sdk.stores.Store;
+import io.sphere.sdk.stores.StoreFixtures;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 import static io.sphere.sdk.products.ProductFixtures.withTaxedProduct;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -108,5 +114,37 @@ public class ShoppingListFixtures {
                 .key(randomKey())
                 .build();
         return client.executeBlocking(ShoppingListCreateCommand.of(draft));
+    }
+
+    public static void withUpdateableShoppingListInStore(final BlockingSphereClient client, final Function<ShoppingList, ShoppingList> f) {
+        StoreFixtures.withStore(client, store -> {
+            final ShoppingListDraft draft = newShoppingListDraftBuilder()
+                    .name(en(randomString()))
+                    .description(en(randomString()))
+                    .key(randomKey())
+                    .slug(randomSlug())
+                    .store(store.toResourceIdentifier())
+                    .build();
+            final ShoppingList shoppingList = client.executeBlocking(ShoppingListCreateCommand.of(draft));
+            final ShoppingList possiblyUpdatedShoppingList = f.apply(shoppingList);
+            client.executeBlocking(ShoppingListDeleteCommand.of(possiblyUpdatedShoppingList));
+        });
+    }
+
+    public static void withShoppingListInStore(final BlockingSphereClient client, final Function<ShoppingList, ShoppingList> f) {
+        StoreFixtures.withStore(client, store -> {
+            final ShoppingListDraft draft = newShoppingListDraftBuilder()
+                    .name(en(randomString()))
+                    .description(en(randomString()))
+                    .key(randomKey())
+                    .slug(randomSlug())
+                    .store(store.toResourceIdentifier())
+                    .build();
+            final ShoppingList shoppingList = client.executeBlocking(ShoppingListCreateCommand.of(draft));
+
+            final ShoppingList shoppingListToDelete = f.apply(shoppingList);
+
+            client.executeBlocking(ShoppingListDeleteCommand.of(shoppingListToDelete));
+        });
     }
 }
