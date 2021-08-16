@@ -3,6 +3,7 @@ package io.sphere.sdk.carts.commands;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.carts.queries.CartQuery;
+import io.sphere.sdk.discountcodes.DiscountCodeDraft;
 import io.sphere.sdk.discountcodes.DiscountCodeFixtures;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.ResourceIdentifier;
@@ -19,10 +20,14 @@ import io.sphere.sdk.types.queries.TypeQuery;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
+import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.withCartDiscount;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
+import static io.sphere.sdk.discountcodes.DiscountCodeFixtures.withDiscountCode;
 import static io.sphere.sdk.products.ProductFixtures.withTaxedProduct;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethodForGermany;
 import static io.sphere.sdk.stores.StoreFixtures.withStore;
@@ -199,12 +204,16 @@ public class    CartCreateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void createWithDiscount() throws Exception {
-        DiscountCodeFixtures.withPersistentDiscountCode(client(), discountCode -> {
-            final CartDraft cartDraft = CartDraft.of(EUR).withCountry(DE).withDiscountCodes(singletonList(discountCode.getCode()));
-            final Cart cart = client().executeBlocking(CartCreateCommand.of(cartDraft));
+    public void createCartWithActiveDiscount() throws Exception {
+        withCartDiscount(client(), builder -> builder.requiresDiscountCode(true), cartDiscount -> {
+            DiscountCodeDraft discountCodeDraft = DiscountCodeDraft.of(randomString(), cartDiscount).withActive(true);
+            withDiscountCode(client(), discountCodeDraft, discountCode -> {
+                CartDraft cartDraft = CartDraft.of(EUR).withCountry(DE).withDiscountCodes(Arrays.asList(discountCode.getCode()));
+                Cart cart = client().executeBlocking(CartCreateCommand.of(cartDraft));
+                assertThat(cart.getDiscountCodes().get(0).getDiscountCode().getId()).isEqualTo(discountCode.getId());
 
-            assertThat(cart.getDiscountCodes().get(0).getDiscountCode().getId()).isEqualTo( discountCode.getId());
+                client().executeBlocking(CartDeleteCommand.of(cart));
+            });
         });
     }
 
