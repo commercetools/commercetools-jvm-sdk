@@ -3132,11 +3132,11 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
     @Test
     public void setDiscountedPrice() {
         final ProductDiscountPredicate predicate = ProductDiscountPredicate.of("1 = 1");//can be used for all products
-        final ProductDiscountDraft productDiscountDraft = ProductDiscountDraft.of(randomSlug(), randomSlug(),
+        final ProductDiscountDraft productDiscountDraft = ProductDiscountDraft.of(randomSlug(), randomKey(), randomSlug(),
                 predicate, ExternalProductDiscountValue.of(), randomSortOrder(), true);
         //don't forget that one product discount can be used for multiple products
         withProductDiscount(client(), productDiscountDraft, externalProductDiscount -> {
-            withProductOfPrices(client(), singletonList(PriceDraft.of(EURO_40)), product -> {
+            withUpdateablePricedProduct(client(), product -> {
                 final Price originalPrice = product.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
                 assertThat(originalPrice.getDiscounted()).isNull();
 
@@ -3145,7 +3145,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                         SetDiscountedPrice.of(priceId, DiscountedPrice.of(EURO_5, externalProductDiscount.toReference()));
                 final Product updatedProduct = client().executeBlocking(ProductUpdateCommand.of(product, action));
                 final Price updatedPrice = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
-                assertThat(updatedPrice.getValue()).isEqualTo(EURO_40);
+                assertThat(updatedPrice.getValue()).isEqualTo(originalPrice.getValue());
                 assertThat(updatedPrice.getDiscounted().getValue()).isEqualTo(EURO_5);
                 assertThat(updatedPrice.getDiscounted().getDiscount()).isEqualTo(externalProductDiscount.toReference());
 
@@ -3159,6 +3159,7 @@ public class ProductUpdateCommandIntegrationTest extends IntegrationTest {
                     final ProductPriceExternalDiscountSetMessage message = results.get(0);
                     assertThat(message.getPriceId()).isEqualTo(priceId);
                 });
+                return updatedProduct;
             });
         });
     }
