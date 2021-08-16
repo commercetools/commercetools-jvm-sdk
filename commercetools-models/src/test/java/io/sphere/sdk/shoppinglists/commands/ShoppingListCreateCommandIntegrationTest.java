@@ -61,7 +61,6 @@ public class ShoppingListCreateCommandIntegrationTest extends IntegrationTest {
             final ShoppingList shoppingList = client().executeBlocking(ShoppingListCreateCommand.of(shoppingListDraft).withExpansionPaths(m -> m.lineItems()));
 
             assertThat(shoppingList).isNotNull();
-            assertThat(shoppingList.getVersion()).isEqualTo(1L);
             assertThat(shoppingList.getLineItems())
                     .hasSize(1);
 
