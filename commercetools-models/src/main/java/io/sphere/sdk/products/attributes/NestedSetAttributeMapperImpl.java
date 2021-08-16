@@ -6,10 +6,10 @@ import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.products.AttributeContainer;
 
 import java.io.IOException;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-
-import static java.util.stream.Collectors.toSet;
+import java.util.stream.Collectors;
 
 class NestedSetAttributeMapperImpl extends AttributeMapperImpl<Set<AttributeContainer>> {
     NestedSetAttributeMapperImpl() {
@@ -21,7 +21,7 @@ class NestedSetAttributeMapperImpl extends AttributeMapperImpl<Set<AttributeCont
         try {
             final Set<List<Attribute>> raw = mapper().readerFor(new TypeReference<Set<List<Attribute>>>() {}).readValue(value);
 
-            return raw.stream().map(AttributeContainer::of).collect(toSet());
+            return raw.stream().map(AttributeContainer::of).collect(Collectors.toCollection(LinkedHashSet::new));
         } catch (final IOException e) {
             throw new JsonException(e);
         }
@@ -29,6 +29,6 @@ class NestedSetAttributeMapperImpl extends AttributeMapperImpl<Set<AttributeCont
 
     @Override
     public JsonNode serialize(final Set<AttributeContainer> attributeContainer) {
-        return mapper().valueToTree(attributeContainer.stream().map(AttributeContainer::getAttributes).collect(toSet()));
+        return mapper().valueToTree(attributeContainer.stream().map(AttributeContainer::getAttributes).collect(Collectors.toCollection(LinkedHashSet::new)));
     }
 }

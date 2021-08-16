@@ -7,9 +7,9 @@ import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.WithKey;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
-
-import static java.util.stream.Collectors.toSet;
+import java.util.stream.Collectors;
 
 /**
  * Input object to create a product attribute.
@@ -37,7 +37,7 @@ public interface AttributeDraft {
                 final Object setValue = set.stream().findAny().get();
                 if (setValue instanceof LocalizedEnumValue || setValue instanceof EnumValue) {
                     //WithKey is a interface the enum like implement
-                    final Set<String> newValues = set.stream().map(x -> ((WithKey) x).getKey()).collect(toSet());
+                    final Set<String> newValues = set.stream().map(x -> ((WithKey) x).getKey()).collect(Collectors.toCollection(LinkedHashSet::new));
                     result = of(name, newValues);
                 } else {
                     result = of(name, SphereJsonUtils.toJsonNode(value));
