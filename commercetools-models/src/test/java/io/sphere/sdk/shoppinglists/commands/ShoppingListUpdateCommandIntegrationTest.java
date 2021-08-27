@@ -3,6 +3,7 @@ package io.sphere.sdk.shoppinglists.commands;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.shoppinglists.*;
 import io.sphere.sdk.shoppinglists.commands.updateactions.*;
+import io.sphere.sdk.stores.StoreFixtures;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
@@ -94,6 +95,19 @@ public class ShoppingListUpdateCommandIntegrationTest extends IntegrationTest {
                     ShoppingListUpdateCommand.of(shoppingList, SetDeleteDaysAfterLastModification.of(deleteDaysAfterLastModification)));
 
                 assertThat(updatedShoppingList.getDeleteDaysAfterLastModification()).isEqualTo(deleteDaysAfterLastModification);
+
+                return updatedShoppingList;
+            });
+        });
+    }
+
+    @Test
+    public void setStore() throws Exception {
+        StoreFixtures.withStore(client(), newStore -> {
+            withUpdateableShoppingList(client(), shoppingList -> {
+                final ShoppingList updatedShoppingList = client().executeBlocking(
+                        ShoppingListUpdateCommand.of(shoppingList, SetStore.of(newStore.toResourceIdentifier())));
+                assertThat(updatedShoppingList.getStore().getKey()).isEqualTo(newStore.getKey());
 
                 return updatedShoppingList;
             });

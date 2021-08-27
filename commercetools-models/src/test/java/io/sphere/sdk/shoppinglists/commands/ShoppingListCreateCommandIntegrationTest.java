@@ -63,6 +63,7 @@ public class ShoppingListCreateCommandIntegrationTest extends IntegrationTest {
             assertThat(shoppingList).isNotNull();
             assertThat(shoppingList.getLineItems())
                     .hasSize(1);
+            client().executeBlocking(ShoppingListDeleteCommand.of(shoppingList));
 
             return productWithSku;
         });
