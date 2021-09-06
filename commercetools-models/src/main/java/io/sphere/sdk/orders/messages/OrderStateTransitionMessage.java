@@ -10,6 +10,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.states.State;
 
+import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
 /**
@@ -29,14 +30,27 @@ public final class OrderStateTransitionMessage extends GenericMessageImpl<Order>
 
 
     private final Reference<State> state;
+    @Nullable
+    private final Reference<State> oldState;
+    private final boolean force;
 
     @JsonCreator
-    private OrderStateTransitionMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final UserProvidedIdentifiers resourceUserProvidedIdentifiers, final Reference<State> state) {
+    private OrderStateTransitionMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final UserProvidedIdentifiers resourceUserProvidedIdentifiers, final Reference<State> state, final Reference<State> oldState, final boolean force) {
         super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type,resourceUserProvidedIdentifiers, Order.class);
         this.state = state;
+        this.oldState = oldState;
+        this.force = force;
     }
 
     public Reference<State> getState() {
         return state;
+    }
+
+    public Reference<State> getOldState() {
+        return oldState;
+    }
+
+    public boolean getForce() {
+        return force;
     }
 }
