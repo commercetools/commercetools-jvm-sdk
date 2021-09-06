@@ -1,16 +1,18 @@
 package io.sphere.sdk.inventory.commands;
 
-import io.sphere.sdk.channels.ChannelFixtures;
-import io.sphere.sdk.channels.ChannelRole;
 import io.sphere.sdk.commands.DeleteCommand;
 import io.sphere.sdk.inventory.InventoryEntry;
 import io.sphere.sdk.inventory.InventoryEntryDraft;
 import io.sphere.sdk.inventory.InventoryEntryFixtures;
+import io.sphere.sdk.inventory.messages.InventoryEntryCreatedMessage;
+import io.sphere.sdk.messages.queries.MessageQuery;
+import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.JsonNodeReferenceResolver;
 import org.junit.Test;
 
 import java.time.ZonedDateTime;
+import java.util.Optional;
 
 import static io.sphere.sdk.channels.ChannelFixtures.withChannelOfRole;
 import static io.sphere.sdk.channels.ChannelRole.INVENTORY_SUPPLY;
@@ -38,6 +40,18 @@ public class InventoryEntryCreateCommandIntegrationTest extends IntegrationTest 
             assertThat(inventoryEntry.getExpectedDelivery()).isEqualTo(expectedDelivery);
             assertThat(inventoryEntry.getRestockableInDays()).isEqualTo(restockableInDays);
             assertThat(inventoryEntry.getSupplyChannel()).isEqualTo(channel.toReference());
+
+            assertEventually(() -> {
+                final PagedQueryResult<InventoryEntryCreatedMessage> pagedQueryResult = client().executeBlocking(
+                        MessageQuery.of().withPredicates(m -> m.resource().is(inventoryEntry))
+                            .forMessageType(InventoryEntryCreatedMessage.MESSAGE_HINT)
+                );
+
+                final Optional<InventoryEntryCreatedMessage> inventoryCreatedMessage = pagedQueryResult.head();
+
+                assertThat(inventoryCreatedMessage).isPresent();
+                assertThat(inventoryCreatedMessage.get().getResource().getId()).isEqualTo(inventoryEntry.getId());
+            });
 
             //delete
             final DeleteCommand<InventoryEntry> deleteCommand = InventoryEntryDeleteCommand.of(inventoryEntry);
