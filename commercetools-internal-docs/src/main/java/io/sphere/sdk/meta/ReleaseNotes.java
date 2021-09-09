@@ -156,6 +156,10 @@ import java.util.function.Function;
  </ul>
  -->
  -->
+ <h3 class=released-version id="v2_2_0">2.2.0 (04.10.2021)</h3>
+ <ul>
+ <li class=new-in-release>Support command for Customer in store change Password in {@link io.sphere.sdk.customers.commands.CustomerInStoreChangePasswordCommandpdate} </li>
+ </ul>
  <h3 class=released-version id="v2_1_0">2.1.0 (06.09.2021)</h3>
  <ul>
  <li class=new-in-release>Support store for Shopping List in {@link ShoppingList#getStore()}, {@link ShoppingListDraft#getStore()} and related update actions {@link io.sphere.sdk.shoppinglists.commands.updateactions.SetStore </li>
