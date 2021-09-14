@@ -161,6 +161,7 @@ import java.util.function.Function;
  <ul>
  <li class=new-in-release>Support store messages for {@link io.sphere.sdk.stores.messages.StoreCreatedMessage} and {@link io.sphere.sdk.stores.messages.StoreDeletedMessage} </li>
  <li class=new-in-release>Support oldState for {@link OrderStateTransitionMessage#getOldState()} </li>
+ <li class=new-in-release>Support command for Customer in store change Password in {@link io.sphere.sdk.customers.commands.CustomerInStoreChangePasswordCommandpdate} </li>
  </ul>
  <h3 class=released-version id="v2_1_0">2.1.0 (06.09.2021)</h3>
  <ul>
