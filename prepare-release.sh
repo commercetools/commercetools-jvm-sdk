@@ -133,3 +133,8 @@ cd ${WORKDIR}
 
 git fetch
 git checkout ${BRANCH_NAME}
+
+if [[ ${TYPE} == "PATCH" ]]
+then
+  git pull -r
+fi
