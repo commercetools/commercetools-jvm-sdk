@@ -96,7 +96,6 @@ io.sphere.sdk.payments.commands.updateactions
 io.sphere.sdk.payments.expansion
 io.sphere.sdk.payments.messages
 io.sphere.sdk.payments.queries
-io.sphere.sdk.plugin
 io.sphere.sdk.productdiscounts
 io.sphere.sdk.productdiscounts.commands
 io.sphere.sdk.productdiscounts.commands.updateactions
@@ -170,7 +169,6 @@ io.sphere.sdk.taxcategories.commands
 io.sphere.sdk.taxcategories.commands.updateactions
 io.sphere.sdk.taxcategories.expansion
 io.sphere.sdk.taxcategories.queries
-io.sphere.sdk.test.annotations
 io.sphere.sdk.types
 io.sphere.sdk.types.commands
 io.sphere.sdk.types.commands.updateactions
