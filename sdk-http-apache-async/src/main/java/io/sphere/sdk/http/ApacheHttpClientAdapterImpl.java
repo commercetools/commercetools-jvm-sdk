@@ -53,7 +53,12 @@ final class ApacheHttpClientAdapterImpl extends HttpClientAdapterBase {
     protected CompletionStage<HttpResponse> executeDelegate(final HttpRequest httpRequest) throws Throwable {
         final HttpUriRequest realHttpRequest = toApacheRequest(httpRequest);
         final CompletableFuture<org.apache.http.HttpResponse> apacheResponseFuture = new CompletableFuture<>();
-        apacheHttpClient.execute(realHttpRequest, new CompletableFutureCallbackAdapter<>(apacheResponseFuture));
+        try {
+            apacheHttpClient.execute(realHttpRequest, new CompletableFutureCallbackAdapter<>(apacheResponseFuture));
+        } catch (IllegalStateException e) {
+            close();
+            throw new HttpClientClosedException(e);
+        }
         return apacheResponseFuture.thenApply(apacheResponse -> convertApacheToSphereResponse(apacheResponse, httpRequest));
     }
 

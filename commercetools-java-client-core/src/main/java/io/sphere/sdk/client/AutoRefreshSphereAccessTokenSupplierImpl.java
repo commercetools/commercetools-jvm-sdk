@@ -1,6 +1,7 @@
 package io.sphere.sdk.client;
 
 import io.sphere.sdk.http.HttpClient;
+import io.sphere.sdk.http.HttpClientClosedException;
 import io.sphere.sdk.http.HttpException;
 import io.sphere.sdk.retry.*;
 import io.sphere.sdk.utils.CompletableFutureUtils;
@@ -38,9 +39,10 @@ final class AutoRefreshSphereAccessTokenSupplierImpl extends AutoCloseableServic
     private List<RetryRule> createRules() {
         final Predicate<RetryContext> isFatal = r -> {
             final Throwable latestError = r.getLatestError();
-            final boolean unknownHost = latestError instanceof HttpException && latestError != null && latestError instanceof UnknownHostException;
+            final boolean unknownHost = latestError instanceof HttpException && latestError.getCause() instanceof UnknownHostException;
             final boolean unauthorized = latestError instanceof UnauthorizedException;
-            return unknownHost || unauthorized;
+            final boolean stopped = latestError instanceof HttpClientClosedException;
+            return unknownHost || unauthorized || stopped;
         };
         final RetryRule fatalRetryRule = RetryRule.of(isFatal, RetryAction.ofShutdownServiceAndSendLatestException());
         final RetryRule retryScheduledRetryRule = RetryRule.of(RetryPredicate.ofAlwaysTrue(), RetryAction.ofScheduledRetry(2, retryContext -> Duration.ofMillis(retryContext.getAttempt() * retryContext.getAttempt() * 50)));
