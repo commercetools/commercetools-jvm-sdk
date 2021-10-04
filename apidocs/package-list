@@ -158,6 +158,7 @@ io.sphere.sdk.stores.commands
 io.sphere.sdk.stores.commands.updateactions
 io.sphere.sdk.stores.error
 io.sphere.sdk.stores.expansion
+io.sphere.sdk.stores.messages
 io.sphere.sdk.stores.queries
 io.sphere.sdk.subscriptions
 io.sphere.sdk.subscriptions.commands
