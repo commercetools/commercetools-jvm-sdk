@@ -1,7 +1,14 @@
 package io.sphere.sdk.categories.queries;
 
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.categories.CategoryDraft;
 import io.sphere.sdk.categories.CategoryDraftBuilder;
+import io.sphere.sdk.categories.commands.CategoryCreateCommand;
+import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.products.Product;
+import io.sphere.sdk.products.queries.EmbeddedProductDataQueryModel;
+import io.sphere.sdk.products.queries.ProductQuery;
+import io.sphere.sdk.products.queries.ProductQueryModel;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.test.IntegrationTest;
@@ -15,6 +22,8 @@ import java.util.function.Consumer;
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.test.SphereTestUtils.en;
 import static java.util.Arrays.asList;
+import static java.util.Locale.ENGLISH;
+import static java.util.Locale.GERMAN;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -98,5 +107,27 @@ public class CategoryPredicatesIntegrationTest extends IntegrationTest {
                 });
             });
         });
+    }
+
+    @Test
+    public void fetchAmountProductPerCategory() {
+        final LocalizedString name = LocalizedString.of(Locale.ENGLISH, "winter clothing");
+        final LocalizedString slug = name.slugifiedUnique();
+        final LocalizedString metaDescription = LocalizedString.of(Locale.ENGLISH, "winter clothing to keep you warm");
+        final LocalizedString metaTitle = LocalizedString.of(Locale.ENGLISH, "winter warm clothing");
+        final LocalizedString metaKeywords = LocalizedString.of(Locale.ENGLISH, "winter,clothes");
+        final CategoryDraft categoryDraft = CategoryDraftBuilder.of(name, slug)
+                .metaDescription(metaDescription)
+                .metaTitle(metaTitle)
+                .metaKeywords(metaKeywords)
+                .build();
+        final Category category = client().executeBlocking(CategoryCreateCommand.of(categoryDraft));
+        final QueryPredicate<EmbeddedProductDataQueryModel> predicate =
+                EmbeddedProductDataQueryModel.of().categories().id().is(category.getId());
+        final QueryPredicate<Product> productQueryPredicate = ProductQueryModel.of().masterData().where(m -> m.current().where(predicate).and(m.staged().where(predicate)));
+        assertThat(productQueryPredicate.toSphereQuery()).isEqualTo("masterData(current(categories(id=\"" + category.getId() + "\")) and staged(categories(id=\"" + category.getId() + "\")))");
+        final Query<Product> query = ProductQuery.of().withPredicates(productQueryPredicate).withFetchTotal(true);
+        final List<Product> results = client().executeBlocking(query).getResults();
+        assertThat(results).isNotNull();
     }
 }
