@@ -157,6 +157,10 @@ import java.util.function.Function;
  </ul>
  -->
  -->
+ <h3 class=released-version id="v2_3_0">2.3.0 (01.11.2021)</h3>
+ <ul>
+ <li class=change-in-release> Add deprecation announcement</li>
+ </ul>
  <h3 class=released-version id="v2_2_0">2.2.0 (04.10.2021)</h3>
  <ul>
  <li class=new-in-release>Support store messages for {@link io.sphere.sdk.stores.messages.StoreCreatedMessage} and {@link io.sphere.sdk.stores.messages.StoreDeletedMessage} </li>
