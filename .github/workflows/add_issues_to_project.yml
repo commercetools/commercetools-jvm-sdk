@@ -1,0 +1,12 @@
+name: Add Issues to project
+on:
+  issues:
+    types:
+      - opened
+jobs:
+  add_issues:
+    uses: commercetools/commercetools-sdk-php-v2/.github/workflows/workflow_issues_to_project.yml@7f5bd7952e1f05fbd5f98f065c87428cb882b6a6
+    with:
+      issue_id: ${{ github.event.issue.node_id }}
+    secrets:
+      token: ${{ secrets.PROJECT_TOKEN }}
