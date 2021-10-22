@@ -4,9 +4,13 @@ on:
     types:
       - opened
 jobs:
-  add_issues:
-    uses: commercetools/commercetools-sdk-php-v2/.github/workflows/workflow_issues_to_project.yml@7f5bd7952e1f05fbd5f98f065c87428cb882b6a6
+  add_issue:
+    uses: commercetools/clients-automation/.github/workflows/workflow_issues_pr_to_project.yml@305d1520c0bd905939f21f22e20431013c199020
     with:
-      issue_id: ${{ github.event.issue.node_id }}
+      node_id: ${{ github.event.issue.node_id }}
+      org: commercetools
+      project: 32
+      repository: ${{ github.event.repository.name }}
+      login: ${{ github.event.issue.user.login }}
     secrets:
       token: ${{ secrets.PROJECT_TOKEN }}
