@@ -42,9 +42,14 @@ final class AutoRefreshSphereAccessTokenSupplierImpl extends AutoCloseableServic
             final boolean unauthorized = latestError instanceof UnauthorizedException;
             return unknownHost || unauthorized;
         };
+        final Predicate<RetryContext> isSuspended = r -> {
+            final Throwable latestError = r.getLatestError();
+            return latestError instanceof SuspendedProjectException;
+        };
         final RetryRule fatalRetryRule = RetryRule.of(isFatal, RetryAction.ofShutdownServiceAndSendLatestException());
         final RetryRule retryScheduledRetryRule = RetryRule.of(RetryPredicate.ofAlwaysTrue(), RetryAction.ofScheduledRetry(2, retryContext -> Duration.ofMillis(retryContext.getAttempt() * retryContext.getAttempt() * 50)));
-        return asList(fatalRetryRule, retryScheduledRetryRule);
+        final RetryRule suspendedRetryRule = RetryRule.of(isSuspended, RetryAction.ofExponentialBackoff(10, 1000, 15000));
+        return asList(suspendedRetryRule, fatalRetryRule, retryScheduledRetryRule);
     }
 
     private CompletionStage<Tokens> supervisedTokenSupplier(final Supplier<CompletionStage<Tokens>> supplier) {
