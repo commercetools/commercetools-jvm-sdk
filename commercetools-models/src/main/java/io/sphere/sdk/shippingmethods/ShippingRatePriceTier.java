@@ -1,8 +1,7 @@
 package io.sphere.sdk.shippingmethods;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
@@ -19,6 +18,7 @@ import javax.money.MonetaryAmount;
         @JsonSubTypes.Type(value = CartClassificationImpl.class, name = "CartClassification"),
         @JsonSubTypes.Type(value = CartScoreImpl.class, name = "CartScore")
 })
+@JsonIgnoreProperties(value = {"type"})
 public interface ShippingRatePriceTier{
 
     String getType();

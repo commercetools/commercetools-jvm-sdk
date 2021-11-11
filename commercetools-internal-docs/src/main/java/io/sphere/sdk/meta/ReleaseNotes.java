@@ -157,6 +157,10 @@ import java.util.function.Function;
  </ul>
  -->
  -->
+ <h3 class=released-version id="v2_5_0">2.5.0 (01.12.2021)</h3>
+ <ul>
+ <li class=fixed-in-release>Fixed serialization issue with duplicate type property in ShippingRateTier model</li>
+ </ul>
  <h3 class=released-version id="v2_4_0">2.4.0 (01.11.2021)</h3>
  <ul>
  <li class=change-in-release> Add deprecation announcement</li>

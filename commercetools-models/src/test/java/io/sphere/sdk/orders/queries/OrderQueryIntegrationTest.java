@@ -133,7 +133,7 @@ public class OrderQueryIntegrationTest extends IntegrationTest {
                 order -> client().executeBlocking(OrderUpdateCommand.of(order, UpdateSyncInfo.of(channel).withExternalId(externalId))),
                 order -> MODEL.syncInfo().channel().is(channel).and(MODEL.syncInfo().externalId().is(externalId)).and(MODEL.syncInfo().isNotEmpty()));
     }
-    
+
     @Test
     public void queryOrderInStore() {
         withStateByBuilder(client(), builder -> builder.type(StateType.ORDER_STATE), state -> {
@@ -149,11 +149,11 @@ public class OrderQueryIntegrationTest extends IntegrationTest {
                     assertThat(order).isNotNull();
                     assertThat(order.getStore()).isNotNull();
                     assertThat(order.getStore().getKey()).isEqualTo(store.getKey());
-                    
+
                     final OrderInStoreQuery query = OrderInStoreQuery.of(store.getKey()).withPredicates(m -> m.id().is(order.getId()));
                     final PagedQueryResult<Order> result = client().executeBlocking(query);
                     assertThat(result.getResults()).isNotEmpty();
-                    
+
                     client().executeBlocking(OrderDeleteCommand.of(order));
                     client().executeBlocking(CartDeleteCommand.of(order.getCart().getObj()));
                 });
