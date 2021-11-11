@@ -48,7 +48,7 @@ final class AutoRefreshSphereAccessTokenSupplierImpl extends AutoCloseableServic
         };
         final RetryRule fatalRetryRule = RetryRule.of(isFatal, RetryAction.ofShutdownServiceAndSendLatestException());
         final RetryRule retryScheduledRetryRule = RetryRule.of(RetryPredicate.ofAlwaysTrue(), RetryAction.ofScheduledRetry(2, retryContext -> Duration.ofMillis(retryContext.getAttempt() * retryContext.getAttempt() * 50)));
-        final RetryRule suspendedRetryRule = RetryRule.of(isSuspended, RetryAction.ofExponentialBackoff(10, 1000, 15000));
+        final RetryRule suspendedRetryRule = RetryRule.of(isSuspended, RetryAction.ofExponentialBackoff(100, 1000, 60000));
         return asList(suspendedRetryRule, fatalRetryRule, retryScheduledRetryRule);
     }
 
