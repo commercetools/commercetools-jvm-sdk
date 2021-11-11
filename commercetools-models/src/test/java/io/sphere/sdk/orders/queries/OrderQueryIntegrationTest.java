@@ -5,6 +5,7 @@ import io.sphere.sdk.carts.CartFixtures;
 import io.sphere.sdk.carts.commands.CartDeleteCommand;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.customers.CustomerFixtures;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.orders.*;
 import io.sphere.sdk.orders.commands.OrderDeleteCommand;
 import io.sphere.sdk.orders.commands.OrderFromCartInStoreCreateCommand;
@@ -14,8 +15,13 @@ import io.sphere.sdk.orders.commands.updateactions.UpdateSyncInfo;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.queries.QuerySort;
+import io.sphere.sdk.shippingmethods.CartClassification;
+import io.sphere.sdk.shippingmethods.CartClassificationBuilder;
+import io.sphere.sdk.shippingmethods.ShippingRatePriceTier;
 import io.sphere.sdk.states.StateType;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.utils.MoneyImpl;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import java.util.List;
@@ -50,6 +56,17 @@ public class OrderQueryIntegrationTest extends IntegrationTest {
                 return order;
             });
         });
+    }
+
+    @Test
+    public void serialize() {
+        final String s = SphereJsonUtils.toPrettyJsonString(CartClassificationBuilder.of("small", MoneyImpl.ofCents(100, "EUR")).build());
+
+        Assertions.assertThat(s).containsOnlyOnce("CartClassification");
+        final ShippingRatePriceTier shippingRatePriceTier = SphereJsonUtils.readObject(s, ShippingRatePriceTier.class);
+        Assertions.assertThat(shippingRatePriceTier).isInstanceOf(CartClassification.class);
+        final String t = SphereJsonUtils.toJsonString(shippingRatePriceTier);
+        Assertions.assertThat(t).containsOnlyOnce("CartClassification");
     }
 
     @Test
@@ -133,7 +150,7 @@ public class OrderQueryIntegrationTest extends IntegrationTest {
                 order -> client().executeBlocking(OrderUpdateCommand.of(order, UpdateSyncInfo.of(channel).withExternalId(externalId))),
                 order -> MODEL.syncInfo().channel().is(channel).and(MODEL.syncInfo().externalId().is(externalId)).and(MODEL.syncInfo().isNotEmpty()));
     }
-    
+
     @Test
     public void queryOrderInStore() {
         withStateByBuilder(client(), builder -> builder.type(StateType.ORDER_STATE), state -> {
@@ -149,11 +166,11 @@ public class OrderQueryIntegrationTest extends IntegrationTest {
                     assertThat(order).isNotNull();
                     assertThat(order.getStore()).isNotNull();
                     assertThat(order.getStore().getKey()).isEqualTo(store.getKey());
-                    
+
                     final OrderInStoreQuery query = OrderInStoreQuery.of(store.getKey()).withPredicates(m -> m.id().is(order.getId()));
                     final PagedQueryResult<Order> result = client().executeBlocking(query);
                     assertThat(result.getResults()).isNotEmpty();
-                    
+
                     client().executeBlocking(OrderDeleteCommand.of(order));
                     client().executeBlocking(CartDeleteCommand.of(order.getCart().getObj()));
                 });

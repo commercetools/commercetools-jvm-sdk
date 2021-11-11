@@ -1,5 +1,6 @@
 package io.sphere.sdk.shippingmethods;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -21,6 +22,7 @@ import javax.money.MonetaryAmount;
 })
 public interface ShippingRatePriceTier{
 
+    @JsonIgnore
     String getType();
 
     MonetaryAmount getPrice();
