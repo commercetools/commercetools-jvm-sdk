@@ -5,6 +5,7 @@ import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.Base;
 import org.junit.Test;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
@@ -31,6 +32,21 @@ public class AutoRefreshSphereAccessTokenSupplierImplTest {
         assertThat(AuthActor.selectNextRetryTime(-100L)).as("at least a second").isEqualTo(1L);
     }
 
+    @Test
+    public void testSuspendedClient() throws Exception {
+        final SuspendableDoubleHttpClient httpClient = getSuspendableHttpClient();
+
+        try(final SphereAccessTokenSupplier supplier =
+                AutoRefreshSphereAccessTokenSupplierImpl.createAndBeginRefreshInBackground(SphereAuthConfig.of("project-key", "client-id", "clientSecret"), httpClient, true)) {
+            Thread.sleep(2000);
+            httpClient.suspended = true;
+            Thread.sleep(120000);
+            LoggerFactory.getLogger(AutoRefreshSphereAccessTokenSupplierImplTest.class).debug("Project unsuspended");
+            httpClient.suspended = false;
+            Thread.sleep(10000);
+        }
+    }
+
     private TestDoubleHttpClient getHttpClient() {
         return new TestDoubleHttpClient() {
             @Override
@@ -38,6 +54,31 @@ public class AutoRefreshSphereAccessTokenSupplierImplTest {
                 return HttpResponse.of(200, "{\"access_token\": \"vkFuQ6oTwj8_Ye4eiRSsqMeqLYNeQRJi\", \"expires_in\": 1}");
             }
         };
+    }
+
+    private SuspendableDoubleHttpClient getSuspendableHttpClient() {
+        return new SuspendableDoubleHttpClient() {
+            @Override
+            protected HttpResponse executeSync(final HttpRequest httpRequest, final int requestId) {
+                if (suspended) {
+                    return HttpResponse.of(400, "{\n" +
+                            "      \"statusCode\" : 400,\n" +
+                            "      \"message\" : \"Project 'test-project-suspension-1' is suspended\",\n" +
+                            "      \"errors\" : [ {\n" +
+                            "        \"code\" : \"invalid_scope\",\n" +
+                            "        \"message\" : \"Project 'test-project-suspension-1' is suspended\"\n" +
+                            "      } ],\n" +
+                            "      \"error\" : \"invalid_scope\",\n" +
+                            "      \"error_description\" : \"Project 'test-project-suspension-1' is suspended\"\n" +
+                            "    }");
+                }
+                return HttpResponse.of(200, "{\"access_token\": \"vkFuQ6oTwj8_Ye4eiRSsqMeqLYNeQRJi\", \"expires_in\": 1}");
+            }
+        };
+    }
+
+    public static abstract class SuspendableDoubleHttpClient extends TestDoubleHttpClient {
+        public boolean suspended = false;
     }
 
     public static abstract class TestDoubleHttpClient extends Base implements HttpClient {

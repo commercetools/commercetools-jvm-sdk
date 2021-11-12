@@ -129,7 +129,12 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
                         exception = new InvalidClientCredentialsException(config);
                     }
                     if (error.equals("invalid_scope")) {
-                        exception = new InvalidScopeException(exception);
+                        final String description = jsonNode.get("error_description").asText();
+                        if (description.endsWith("suspended")) {
+                            exception = new SuspendedProjectException(exception);
+                        } else {
+                            exception = new InvalidScopeException(exception);
+                        }
                     }
                 } catch (final JsonException e) {
                     exception = new UnauthorizedException(httpResponse.toString(), e,httpResponse.getStatusCode());
