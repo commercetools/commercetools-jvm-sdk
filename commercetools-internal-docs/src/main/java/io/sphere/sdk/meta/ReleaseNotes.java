@@ -115,10 +115,7 @@ import io.sphere.sdk.shoppinglists.expansion.LineItemExpansionModel;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.states.StateDraftDsl;
 import io.sphere.sdk.stores.commands.updateactions.SetLanguages;
-import io.sphere.sdk.subscriptions.AzureServiceBusDestination;
-import io.sphere.sdk.subscriptions.MessageSubscriptionPayload;
-import io.sphere.sdk.subscriptions.Payload;
-import io.sphere.sdk.subscriptions.Subscription;
+import io.sphere.sdk.subscriptions.*;
 import io.sphere.sdk.taxcategories.*;
 import io.sphere.sdk.types.*;
 import io.sphere.sdk.zones.ZoneDraftBuilder;
@@ -161,6 +158,7 @@ import java.util.function.Function;
  <ul>
  <li class=fixed-in-release>Fixed serialization issue with duplicate type property in ShippingRateTier model</li>
  <li class=new-in-release>Support order edit with the update action for {@link io.sphere.sdk.orderedits.commands.stagedactions.SetLineItemDistributionChannel} and related message {@link io.sphere.sdk.orders.messages.OrderLineItemDistributionChannelSetMessage} </li>
+ <li class=new-in-release>Add new field in the {@link ResourceDeletedPayload#getDataErasure()} </li>
  </ul>
  <h3 class=released-version id="v2_4_0">2.4.0 (01.11.2021)</h3>
  <ul>
