@@ -160,6 +160,7 @@ import java.util.function.Function;
  <h3 class=released-version id="v2_5_0">2.5.0 (01.12.2021)</h3>
  <ul>
  <li class=fixed-in-release>Fixed serialization issue with duplicate type property in ShippingRateTier model</li>
+ <li class=new-in-release>Support order edit with the update action for {@link io.sphere.sdk.orderedits.commands.stagedactions.SetLineItemDistributionChannel} and related message {@link io.sphere.sdk.orders.messages.OrderLineItemDistributionChannelSetMessage} </li>
  </ul>
  <h3 class=released-version id="v2_4_0">2.4.0 (01.11.2021)</h3>
  <ul>
