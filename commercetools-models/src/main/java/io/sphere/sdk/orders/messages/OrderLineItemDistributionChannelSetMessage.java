@@ -13,7 +13,7 @@ import io.sphere.sdk.orders.Order;
 import java.time.ZonedDateTime;
 
 @JsonDeserialize(as = OrderLineItemDistributionChannelSetMessage.class)
-public class OrderLineItemDistributionChannelSetMessage extends GenericMessageImpl<Order> implements SimpleOrderMessage{
+public final class OrderLineItemDistributionChannelSetMessage extends GenericMessageImpl<Order> implements SimpleOrderMessage{
     public static final String MESSAGE_TYPE = "OrderLineItemDistributionChannelSet";
     public static final MessageDerivateHint<OrderLineItemDistributionChannelSetMessage> MESSAGE_HINT =
             MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE, OrderLineItemDistributionChannelSetMessage.class, Order.referenceTypeId());
