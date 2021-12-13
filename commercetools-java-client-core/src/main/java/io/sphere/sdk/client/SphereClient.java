@@ -44,7 +44,7 @@ public interface SphereClient extends AutoCloseable {
      * @return sphere client
      */
     static SphereClient of(final SphereApiConfig config, final HttpClient httpClient, final SphereAccessTokenSupplier tokenSupplier) {
-        return SphereClientImpl.of(config, httpClient, tokenSupplier, CorrelationIdGenerator.of(config.getProjectKey()));
+        return SphereClientImpl.of(config, httpClient, tokenSupplier, config.getCorrelationIdGenerator());
     }
 
     /**
@@ -57,7 +57,7 @@ public interface SphereClient extends AutoCloseable {
      * @return sphere client
      */
     static SphereClient of(final SphereApiConfig config, final HttpClient httpClient, final SphereAccessTokenSupplier tokenSupplier, final List<SolutionInfo> additionalSolutionInfos) {
-        return SphereClientImpl.of(config, httpClient, tokenSupplier, CorrelationIdGenerator.of(config.getProjectKey()), additionalSolutionInfos);
+        return SphereClientImpl.of(config, httpClient, tokenSupplier, config.getCorrelationIdGenerator(), additionalSolutionInfos);
     }
 
     /**

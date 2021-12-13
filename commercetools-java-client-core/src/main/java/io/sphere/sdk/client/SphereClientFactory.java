@@ -62,7 +62,7 @@ public interface SphereClientFactory {
      * For the credentials consult <a href="https://mc.commercetools.com">the Merchant Center</a>.
      * @param projectKey the project identifier
      * @param clientId username
-     * @param clientSecret passwor
+     * @param clientSecret password
      * @param authUrl authentication url for the Api
      * @param apiUrl api url for the Api
      * @return sphere client
