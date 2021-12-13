@@ -2,17 +2,18 @@ package io.sphere.sdk.orderedits.commands.stagedactions;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.channels.Channel;
-import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.ResourceIdentifier;
 
 import javax.annotation.Nullable;
 
 public final class SetLineItemDistributionChannel extends OrderEditStagedUpdateActionBase {
 
     private final String lineItemId;
-    private final Reference<Channel> distributionChannel;
+    @Nullable
+    private final ResourceIdentifier<Channel> distributionChannel;
 
     @JsonCreator
-    private SetLineItemDistributionChannel(final String lineItemId, final Reference<Channel> distributionChannel) {
+    private SetLineItemDistributionChannel(final String lineItemId, @Nullable final ResourceIdentifier<Channel> distributionChannel) {
         super("setLineItemDistributionChannel");
         this.lineItemId = lineItemId;
         this.distributionChannel = distributionChannel;
@@ -27,11 +28,11 @@ public final class SetLineItemDistributionChannel extends OrderEditStagedUpdateA
     }
 
     @Nullable
-    public Reference<Channel> getDistributionChannel() {
+    public ResourceIdentifier<Channel> getDistributionChannel() {
         return distributionChannel;
     }
 
-    public SetLineItemDistributionChannel withDistributionChannel(@Nullable final Reference<Channel> distributionChannel) {
+    public SetLineItemDistributionChannel withDistributionChannel(@Nullable final ResourceIdentifier<Channel> distributionChannel) {
         return new SetLineItemDistributionChannel(getLineItemId(), distributionChannel);
     }
 }
