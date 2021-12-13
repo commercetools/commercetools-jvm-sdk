@@ -3,13 +3,13 @@
     <parent>
         <groupId>com.commercetools.sdk.jvm.core</groupId>
         <artifactId>commercetools-jvm-sdk</artifactId>
-        <version>1.64.1</version>
+        <version>1.64.2</version>
         <relativePath>..</relativePath>
     </parent>
     <groupId>com.commercetools.sdk.jvm.core</groupId>
     <artifactId>commercetools-java-client-ahc-1_8</artifactId>
     <packaging>jar</packaging>
-    <version>1.64.1</version>
+    <version>1.64.2</version>
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
