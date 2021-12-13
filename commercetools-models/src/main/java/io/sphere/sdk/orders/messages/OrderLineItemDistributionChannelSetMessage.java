@@ -22,7 +22,7 @@ public final class OrderLineItemDistributionChannelSetMessage extends GenericMes
     private final Reference<Channel> distributionChannel;
 
     @JsonCreator
-    public OrderLineItemDistributionChannelSetMessage(String id, Long version, ZonedDateTime createdAt, ZonedDateTime lastModifiedAt, JsonNode resource, Long sequenceNumber, Long resourceVersion, String type, UserProvidedIdentifiers resourceUserProvidedIdentifiers, String lineItemId, Reference<Channel> distributionChannel) {
+    private OrderLineItemDistributionChannelSetMessage(String id, Long version, ZonedDateTime createdAt, ZonedDateTime lastModifiedAt, JsonNode resource, Long sequenceNumber, Long resourceVersion, String type, UserProvidedIdentifiers resourceUserProvidedIdentifiers, String lineItemId, Reference<Channel> distributionChannel) {
         super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, resourceUserProvidedIdentifiers, Order.class);
         this.lineItemId = lineItemId;
         this.distributionChannel = distributionChannel;
