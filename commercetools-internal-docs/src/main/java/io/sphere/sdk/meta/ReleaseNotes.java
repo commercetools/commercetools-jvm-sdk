@@ -159,6 +159,8 @@ import java.util.function.Function;
  <li class=fixed-in-release>Fixed serialization issue with duplicate type property in ShippingRateTier model</li>
  <li class=new-in-release>Support order edit with the update action for {@link io.sphere.sdk.orderedits.commands.stagedactions.SetLineItemDistributionChannel} and related message {@link io.sphere.sdk.orders.messages.OrderLineItemDistributionChannelSetMessage} </li>
  <li class=new-in-release>Add new field in the {@link ResourceDeletedPayload#getDataErasure()} </li>
+ <li class=new-in-release>Support new message for customer {@link io.sphere.sdk.customers.messages.CustomerDeletedMessage} </li>
+ <li class=new-in-release>Support localizedName field for ShippingMethod {@link ShippingMethod#getLocalizedName() and {@link ShippingMethodDraft#getLocalizedName()} and related action {@link io.sphere.sdk.shippingmethods.commands.updateactions.SetLocalizedName} </li>
  </ul>
  <h3 class=released-version id="v2_4_0">2.4.0 (01.11.2021)</h3>
  <ul>

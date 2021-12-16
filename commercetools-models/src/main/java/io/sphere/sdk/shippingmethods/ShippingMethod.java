@@ -72,6 +72,11 @@ public interface ShippingMethod extends Resource<ShippingMethod>, WithKey, Custo
     @HasUpdateAction
     LocalizedString getLocalizedDescription();
 
+    @Nullable
+    @IgnoreInQueryModel
+    @HasUpdateAction
+    LocalizedString getLocalizedName();
+
     Reference<TaxCategory> getTaxCategory();
 
     @QueryModelHint(type = "ZoneRateCollectionQueryModel<ShippingMethod>", impl = "return new ZoneRateCollectionQueryModelImpl<>(this, fieldName);")
