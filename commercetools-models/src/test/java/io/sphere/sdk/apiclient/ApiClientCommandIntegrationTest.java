@@ -14,6 +14,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.concurrent.CompletionStage;
 import java.util.stream.Collectors;
@@ -48,15 +49,15 @@ public class ApiClientCommandIntegrationTest extends IntegrationTest {
         final String projectKey = getSphereClientConfig().getProjectKey();
         final ApiClientCreateCommand createCommand  =ApiClientCreateCommand.of(ApiClientDraftBuilder.of(GENERATED_CLIENT_NAME, projectKey, MANAGE_MY_ORDERS, MANAGE_API_CLIENTS).deleteDaysAfterCreation(1).build());
         final ApiClient res = client().executeBlocking(createCommand);assertThat(res).isNotNull();
-        final PagedQueryResult<ApiClient> result = client().executeBlocking(ApiClientQuery.of()
-                .plusPredicates(m -> m.id().is(res.getId()))
-        );
 
-        assertEventually(() ->{
+        assertEventually(Duration.ofSeconds(60), Duration.ofSeconds(1), () ->{
+            final PagedQueryResult<ApiClient> result = client().executeBlocking(ApiClientQuery.of()
+                .plusPredicates(m -> m.id().is(res.getId()))
+            );
             assertThat(result.getResults()).hasSize(1);
+            assertThat(result.getResults().get(0)).isEqualToIgnoringGivenFields(res,"secret");
         });
 
-        assertThat(result.getResults().get(0)).isEqualToIgnoringGivenFields(res,"secret");
         final ApiClient deletedRes =client().executeBlocking(ApiClientDeleteCommand.of(res));
         assertThat(deletedRes).isEqualToIgnoringGivenFields(res,"secret");
     }
