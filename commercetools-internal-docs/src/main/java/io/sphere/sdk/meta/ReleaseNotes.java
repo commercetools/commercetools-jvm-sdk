@@ -154,8 +154,9 @@ import java.util.function.Function;
  </ul>
  -->
  -->
- <h3 class=released-version id="v2_5_0">2.5.0 (01.12.2021)</h3>
+ <h3 class=released-version id="v2_5_0">2.5.0 (01.03.2022)</h3>
  <ul>
+ <li class=new-in-release>Support {@link io.sphere.sdk.inventory.messages.InventoryEntryQuantitySetMessage} </li>
  <li class=new-in-release>Support SetReturnInfo in order and order edit {@link io.sphere.sdk.orders.commands.updateactions.SetReturnInfo} and the related message {@link io.sphere.sdk.orders.messages.ReturnInfoSetMessage } </li>
  <li class=fixed-in-release>Fixed serialization issue with duplicate type property in ShippingRateTier model</li>
  <li class=new-in-release>Support order edit with the update action for {@link io.sphere.sdk.orderedits.commands.stagedactions.SetLineItemDistributionChannel} and related message {@link io.sphere.sdk.orders.messages.OrderLineItemDistributionChannelSetMessage} </li>

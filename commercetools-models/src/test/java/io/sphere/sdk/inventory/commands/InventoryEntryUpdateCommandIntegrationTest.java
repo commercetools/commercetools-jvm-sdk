@@ -4,6 +4,9 @@ import io.sphere.sdk.channels.ChannelRole;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.inventory.InventoryEntry;
 import io.sphere.sdk.inventory.commands.updateactions.*;
+import io.sphere.sdk.inventory.messages.InventoryEntryCreatedMessage;
+import io.sphere.sdk.messages.queries.MessageQuery;
+import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
 import org.junit.Test;
@@ -14,6 +17,7 @@ import java.util.Optional;
 
 import static io.sphere.sdk.channels.ChannelFixtures.withChannelOfRole;
 import static io.sphere.sdk.inventory.InventoryEntryFixtures.withUpdateableInventoryEntry;
+import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class InventoryEntryUpdateCommandIntegrationTest extends IntegrationTest {
@@ -24,6 +28,19 @@ public class InventoryEntryUpdateCommandIntegrationTest extends IntegrationTest 
             final UpdateAction<InventoryEntry> action = AddQuantity.of(additionalQuantity);
             final InventoryEntry updatedEntry = client().executeBlocking(InventoryEntryUpdateCommand.of(entry, action));
             assertThat(updatedEntry.getQuantityOnStock()).isEqualTo(entry.getQuantityOnStock() + additionalQuantity);
+
+            assertEventually(() -> {
+                final PagedQueryResult<InventoryEntryCreatedMessage> pagedQueryResult = client().executeBlocking(
+                        MessageQuery.of().withPredicates(m -> m.resource().is(updatedEntry))
+                                .forMessageType(InventoryEntryCreatedMessage.MESSAGE_HINT)
+                );
+
+                final Optional<InventoryEntryCreatedMessage> inventoryCreatedMessage = pagedQueryResult.head();
+
+                assertThat(inventoryCreatedMessage).isPresent();
+                assertThat(inventoryCreatedMessage.get().getResource().getId()).isEqualTo(updatedEntry.getId());
+            });
+
             return updatedEntry;
         });
     }
@@ -45,6 +62,19 @@ public class InventoryEntryUpdateCommandIntegrationTest extends IntegrationTest 
             final UpdateAction<InventoryEntry> action = RemoveQuantity.of(removingQuantity);
             final InventoryEntry updatedEntry = client().executeBlocking(InventoryEntryUpdateCommand.of(entry, action));
             assertThat(updatedEntry.getQuantityOnStock()).isEqualTo(entry.getQuantityOnStock() - removingQuantity);
+
+            assertEventually(() -> {
+                final PagedQueryResult<InventoryEntryCreatedMessage> pagedQueryResult = client().executeBlocking(
+                        MessageQuery.of().withPredicates(m -> m.resource().is(updatedEntry))
+                                .forMessageType(InventoryEntryCreatedMessage.MESSAGE_HINT)
+                );
+
+                final Optional<InventoryEntryCreatedMessage> inventoryCreatedMessage = pagedQueryResult.head();
+
+                assertThat(inventoryCreatedMessage).isPresent();
+                assertThat(inventoryCreatedMessage.get().getResource().getId()).isEqualTo(updatedEntry.getId());
+            });
+
             return updatedEntry;
         });
     }
