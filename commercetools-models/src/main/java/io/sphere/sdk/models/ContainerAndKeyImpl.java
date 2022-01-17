@@ -3,7 +3,7 @@ package io.sphere.sdk.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class ContainerAndKeyImpl extends Base implements ContainerAndKey{
+final class ContainerAndKeyImpl extends Base implements ContainerAndKey{
     private final String container;
     private final String key;
 
