@@ -156,6 +156,7 @@ import java.util.function.Function;
  -->
  <h3 class=released-version id="v2_5_0">2.5.0 (01.03.2022)</h3>
  <ul>
+ <li class=new-in-release>Support productKey in LineItem {@link LineItem#getProductKey()}
  <li class=new-in-release>Support for Cart the uodate action {@link SetLineItemSupplyChannel}</li>
  <li class=new-in-release>Add new field for {@link UserProvidedIdentifiers#getContainerAndKey()} and related classes {@link ContainerAndKey} and {@link ContainerAndKeyImpl} </li>
  <li class=new-in-release>Support {@link io.sphere.sdk.inventory.messages.InventoryEntryQuantitySetMessage} </li>
