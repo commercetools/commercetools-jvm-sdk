@@ -1,6 +1,20 @@
 package io.sphere.sdk.payments.commands;
 
+import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.cartdiscounts.CartDiscount;
+import io.sphere.sdk.cartdiscounts.commands.CartDiscountUpdateCommand;
+import io.sphere.sdk.carts.Cart;
+import io.sphere.sdk.carts.CartDraft;
+import io.sphere.sdk.carts.LineItem;
+import io.sphere.sdk.carts.commands.CartUpdateCommand;
+import io.sphere.sdk.carts.commands.updateactions.SetBillingAddressCustomField;
+import io.sphere.sdk.carts.commands.updateactions.SetBillingAddressCustomType;
+import io.sphere.sdk.carts.commands.updateactions.SetShippingAddressCustomField;
+import io.sphere.sdk.carts.commands.updateactions.SetShippingAddressCustomType;
+import io.sphere.sdk.json.TypeReferences;
 import io.sphere.sdk.messages.queries.MessageQuery;
+import io.sphere.sdk.models.Address;
+import io.sphere.sdk.models.Asset;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.payments.*;
 import io.sphere.sdk.payments.commands.updateactions.*;
@@ -8,20 +22,34 @@ import io.sphere.sdk.payments.messages.PaymentInteractionAddedMessage;
 import io.sphere.sdk.payments.messages.PaymentStatusStateTransitionMessage;
 import io.sphere.sdk.payments.messages.PaymentTransactionAddedMessage;
 import io.sphere.sdk.payments.messages.PaymentTransactionStateChangedMessage;
+import io.sphere.sdk.products.Product;
+import io.sphere.sdk.products.ProductVariant;
+import io.sphere.sdk.products.commands.ProductUpdateCommand;
+import io.sphere.sdk.products.commands.updateactions.SetAssetCustomField;
+import io.sphere.sdk.products.commands.updateactions.SetAssetCustomType;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.types.CustomFieldsDraft;
+import io.sphere.sdk.types.CustomFieldsDraftBuilder;
+import io.sphere.sdk.types.Type;
+import io.sphere.sdk.types.TypeFixtures;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Objects;
 
+import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.withCartDiscount;
+import static io.sphere.sdk.carts.CartFixtures.withCartDraft;
 import static io.sphere.sdk.carts.CartFixtures.withCustomerAndFilledCart;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.payments.PaymentFixtures.withPayment;
 import static io.sphere.sdk.payments.PaymentFixtures.withPaymentTransaction;
+import static io.sphere.sdk.products.ProductFixtures.withProductHavingAssets;
 import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
 import static io.sphere.sdk.states.StateType.PAYMENT_STATE;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -403,6 +431,27 @@ public class PaymentUpdateCommandIntegrationTest extends IntegrationTest {
             assertThat(updatedPayment.getKey()).isEqualTo(newKey);
 
             return updatedPayment;
+        });
+    }
+
+    @Test
+    public void setTransactionCustomType() throws Exception {
+        TypeFixtures.withUpdateableType(client(), type -> {
+            withPaymentTransaction(client(), (Payment payment, Transaction transaction) -> {
+                final HashMap<String, Object> fields = new HashMap<>();
+                fields.put(STRING_FIELD_NAME, "test-transaction");
+
+                final Payment updatedPayment = client().executeBlocking(PaymentUpdateCommand.of(payment, SetTransactionCustomType.ofTypeIdAndObjects(type.getId(), fields, transaction.getId())));
+                assertThat(updatedPayment.getTransactions().get(0).getId()).isEqualTo(transaction.getId());
+                assertThat(updatedPayment.getTransactions().get(0).getCustom().getFieldAsString(STRING_FIELD_NAME)).isEqualTo("test-transaction");
+
+                final Payment updatedPayment2 = client().executeBlocking(PaymentUpdateCommand.of(updatedPayment, SetTransactionCustomField.ofObject(STRING_FIELD_NAME, "a new value", transaction.getId())));
+                assertThat(updatedPayment2.getTransactions().get(0).getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference()))
+                        .isEqualTo("a new value");
+
+                return updatedPayment2;
+            });
+            return type;
         });
     }
 }
