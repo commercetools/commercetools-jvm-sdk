@@ -14,6 +14,7 @@ import io.sphere.sdk.inventory.InventoryEntry;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.orderedits.OrderEdit;
 import io.sphere.sdk.orders.Order;
+import io.sphere.sdk.orders.Parcel;
 import io.sphere.sdk.orders.ReturnItem;
 import io.sphere.sdk.payments.Payment;
 import io.sphere.sdk.payments.Transaction;
@@ -75,7 +76,8 @@ public class TypeFixtures {
                     ShippingMethod.referenceTypeId(),
                     Address.resourceTypeId(),
                     Transaction.referenceTypeId(),
-                    ReturnItem.referenceTypeId()
+                    ReturnItem.referenceTypeId(),
+                    Parcel.referenceTypeId()
             )
     );
     public static final String STRING_FIELD_NAME = "string-field-name";

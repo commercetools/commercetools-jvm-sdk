@@ -64,7 +64,7 @@ import io.sphere.sdk.messages.Message;
 import io.sphere.sdk.messages.UserProvidedIdentifiers;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.orders.*;
-import io.sphere.sdk.orders.commands.updateactions.AddDelivery;
+import io.sphere.sdk.orders.commands.updateactions.*;
 import io.sphere.sdk.orders.expansion.OrderExpansionModel;
 import io.sphere.sdk.orders.messages.OrderPaymentStateChangedMessage;
 import io.sphere.sdk.orders.messages.OrderStateTransitionMessage;
@@ -156,7 +156,8 @@ import java.util.function.Function;
  -->
  <h3 class=released-version id="v2_5_0">2.5.0 (01.03.2022)</h3>
  <ul>
- <li class=new-in-release>Support custom field in {@link ReturnItem} and  {@link ReturnItemDraft} and added related update actions for Order and OrderEdit {@link io.sphere.sdk.orders.commands.updateactions.SetReturnItemCustomField}, {@link io.sphere.sdk.orders.commands.updateactions.SetReturnItemCustomType}, {@link io.sphere.sdk.orderedits.commands.stagedactions.SetReturnItemCustomType} and {@link io.sphere.sdk.orderedits.commands.stagedactions.SetReturnItemCustomField}</li>
+ <li class=new-in-release>Support custom field in {@link Parcel} and  {@link ParcelDraft} and added related update actions for Order and OrderEdit {@link SetParcelCustomField}, {@link SetParcelCustomType}, {@link SetParcelCustomType} and {@link SetParcelCustomField}</li>
+ <li class=new-in-release>Support custom field in {@link ReturnItem} and  {@link ReturnItemDraft} and added related update actions for Order and OrderEdit {@link SetReturnItemCustomField}, {@link SetReturnItemCustomType}, {@link SetReturnItemCustomType} and {@link SetReturnItemCustomField}</li>
  <li class=new-in-release>Support update commands for Custom Field and Type for Payment transactions {@link io.sphere.sdk.payments.commands.updateactions.SetTransactionCustomField} and {@link io.sphere.sdk.payments.commands.updateactions.SetTransactionCustomType} </li>
  <li class=new-in-release>Support productKey in LineItem {@link LineItem#getProductKey()} </li>
  <li class=new-in-release>Support for Cart the uodate action {@link SetLineItemSupplyChannel}</li>
