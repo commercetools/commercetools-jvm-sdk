@@ -156,8 +156,9 @@ import java.util.function.Function;
  -->
  <h3 class=released-version id="v2_5_0">2.5.0 (01.03.2022)</h3>
  <ul>
- <li class=new-in-release>Support update commands for Custom Field and Type for Payment transactions {@link io.sphere.sdk.payments.commands.updateactions.SetTransactionCustomField} and {@link io.sphere.sdk.payments.commands.updateactions.SetTransactionCustomType}
- <li class=new-in-release>Support productKey in LineItem {@link LineItem#getProductKey()}
+ <li class=new-in-release>Support custom field in {@link ReturnItem} and  {@link ReturnItemDraft} and added related update actions for Order and OrderEdit {@link io.sphere.sdk.orders.commands.updateactions.SetReturnItemCustomField}, {@link io.sphere.sdk.orders.commands.updateactions.SetReturnItemCustomType}, {@link io.sphere.sdk.orderedits.commands.stagedactions.SetReturnItemCustomType} and {@link io.sphere.sdk.orderedits.commands.stagedactions.SetReturnItemCustomField}</li>
+ <li class=new-in-release>Support update commands for Custom Field and Type for Payment transactions {@link io.sphere.sdk.payments.commands.updateactions.SetTransactionCustomField} and {@link io.sphere.sdk.payments.commands.updateactions.SetTransactionCustomType} </li>
+ <li class=new-in-release>Support productKey in LineItem {@link LineItem#getProductKey()} </li>
  <li class=new-in-release>Support for Cart the uodate action {@link SetLineItemSupplyChannel}</li>
  <li class=new-in-release>Add new field for {@link UserProvidedIdentifiers#getContainerAndKey()} and related classes {@link ContainerAndKey} and {@link ContainerAndKeyImpl} </li>
  <li class=new-in-release>Support {@link io.sphere.sdk.inventory.messages.InventoryEntryQuantitySetMessage} </li>
