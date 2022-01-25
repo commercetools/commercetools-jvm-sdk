@@ -10,9 +10,9 @@ import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public final class SetLineItemCustomType extends OrderEditStagedUpdateActionBase {
+public final class SetReturnItemCustomType extends OrderEditStagedUpdateActionBase {
 
-    private final String lineItemId;
+    private final String returnItemId;
 
     @Nullable
     private final ResourceIdentifier<Type> type;
@@ -21,19 +21,19 @@ public final class SetLineItemCustomType extends OrderEditStagedUpdateActionBase
     @Nullable
     private final Map<String, JsonNode> fields;
 
-    private SetLineItemCustomType(final String lineItemId, @Nullable final String typeId, @Nullable final String typeKey, @Nullable final Map<String, JsonNode> fields) {
-        super("setLineItemCustomType");
-        this.lineItemId = lineItemId;
+    private SetReturnItemCustomType(final String returnItemId, @Nullable final String typeId, @Nullable final String typeKey, @Nullable final Map<String, JsonNode> fields) {
+        super("setReturnItemCustomType");
+        this.returnItemId = returnItemId;
         this.type = ResourceIdentifier.ofIdOrKey(typeId, typeKey);
         this.fields = fields;
     }
 
-    public static SetLineItemCustomType of(final String lineItemId, @Nullable final String typeId, @Nullable final String typeKey, @Nullable final Map<String, JsonNode> fields) {
-        return new SetLineItemCustomType(lineItemId, typeId, typeKey, fields);
+    public static SetReturnItemCustomType of(final String returnItemId, @Nullable final String typeId, @Nullable final String typeKey, @Nullable final Map<String, JsonNode> fields) {
+        return new SetReturnItemCustomType(returnItemId, typeId, typeKey, fields);
     }
 
-    public static SetLineItemCustomType of(final String lineItemId){
-        return new SetLineItemCustomType(lineItemId, null, null, null);
+    public static SetReturnItemCustomType of(final String returnItemId){
+        return new SetReturnItemCustomType(returnItemId, null, null, null);
     }
 
     @Nullable
@@ -53,7 +53,7 @@ public final class SetLineItemCustomType extends OrderEditStagedUpdateActionBase
                         entry -> SphereJsonUtils.toJsonNode(entry.getValue())));
     }
 
-    public String getLineItemId() {
-        return lineItemId;
+    public String getReturnItemId() {
+        return returnItemId;
     }
 }

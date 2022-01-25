@@ -1,5 +1,6 @@
 package io.sphere.sdk.orders;
 
+import io.sphere.sdk.types.CustomFieldsDraft;
 import javax.annotation.Nullable;
 
 public interface ReturnItemDraft {
@@ -11,4 +12,6 @@ public interface ReturnItemDraft {
     @Nullable
     String getComment();
 
+    @Nullable
+    CustomFieldsDraft getCustom();
 }
