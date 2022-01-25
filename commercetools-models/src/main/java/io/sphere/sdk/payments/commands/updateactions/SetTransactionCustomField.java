@@ -6,7 +6,7 @@ import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.payments.Payment;
 import io.sphere.sdk.types.customupdateactions.SetCustomFieldBase;
 
-public class SetTransactionCustomField extends SetCustomFieldBase<Payment> {
+public final class SetTransactionCustomField extends SetCustomFieldBase<Payment> {
     private final String transactionId;
 
     private SetTransactionCustomField(final String name, final JsonNode value, final String transactionId) {

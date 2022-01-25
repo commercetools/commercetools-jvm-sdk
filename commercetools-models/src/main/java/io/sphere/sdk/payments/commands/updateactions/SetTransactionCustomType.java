@@ -9,7 +9,7 @@ import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.Map;
 
-public class SetTransactionCustomType extends SetCustomTypeBase<Payment> {
+public final class SetTransactionCustomType extends SetCustomTypeBase<Payment> {
     private final String transactionId;
 
     private SetTransactionCustomType(@Nullable final String typeId, @Nullable final String typeKey, @Nullable final Map<String, JsonNode> fields, final String transactionId) {
