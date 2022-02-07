@@ -1,0 +1,130 @@
+{
+    "dependencies": [
+        {
+            "moduleName": "com.commercetools.sdk.jvm.core:sdk-http",
+            "moduleVersion": "2.6.0-SNAPSHOT",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "com.fasterxml.jackson.core:jackson-core",
+            "moduleVersion": "2.12.4",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "com.fasterxml.jackson.core:jackson-databind",
+            "moduleVersion": "2.12.4",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "com.fasterxml.jackson.dataformat:jackson-dataformat-cbor",
+            "moduleVersion": "2.12.4",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "com.fasterxml.jackson.datatype:jackson-datatype-jsr310",
+            "moduleVersion": "2.12.4",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "com.fasterxml.jackson.module:jackson-module-parameter-names",
+            "moduleVersion": "2.12.4",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "com.google.code.findbugs:jsr305",
+            "moduleVersion": "3.0.2",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "commons-codec:commons-codec",
+            "moduleVersion": "1.15",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "commons-io:commons-io",
+            "moduleVersion": "2.11.0",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "org.apache.commons:commons-lang3",
+            "moduleVersion": "3.12.0",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "org.apache.httpcomponents.client5:httpclient5",
+            "moduleVersion": "5.1",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "org.apache.httpcomponents.core5:httpcore5",
+            "moduleVersion": "5.1.1",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "org.apache.httpcomponents.core5:httpcore5-h2",
+            "moduleVersion": "5.1.1",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "org.slf4j:slf4j-api",
+            "moduleVersion": "1.7.31",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "MIT License"
+                }
+            ]
+        }
+    ]
+}
