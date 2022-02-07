@@ -13,6 +13,12 @@ import java.time.ZonedDateTime;
 public interface CustomLineItemReturnItem extends ReturnItem {
     static CustomLineItemReturnItem of(@Nullable final String comment, final ZonedDateTime createdAt,
                                        final String customLineItemId, final String id, final ZonedDateTime lastModifiedAt , final ReturnPaymentState paymentState, final Long quantity,
+                                       final ReturnShipmentState shipmentState) {
+        return new CustomLineItemReturnItemImpl(comment, createdAt, null, customLineItemId, id, lastModifiedAt, paymentState, quantity, shipmentState);
+    }
+
+    static CustomLineItemReturnItem of(@Nullable final String comment, final ZonedDateTime createdAt,
+                                       final String customLineItemId, final String id, final ZonedDateTime lastModifiedAt , final ReturnPaymentState paymentState, final Long quantity,
                                        final ReturnShipmentState shipmentState, @Nullable final CustomFields custom) {
         return new CustomLineItemReturnItemImpl(comment, createdAt, custom, customLineItemId, id, lastModifiedAt, paymentState, quantity, shipmentState);
     }
