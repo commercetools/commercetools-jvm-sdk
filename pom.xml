@@ -282,6 +282,7 @@
                             <!--<arg>-Xlint:-path</arg>-->
                             <!--<arg>-parameters</arg>-->
                         </compilerArguments>
+                    	<fork>true</fork>
                     </configuration>
                 </plugin>
                 <plugin>
