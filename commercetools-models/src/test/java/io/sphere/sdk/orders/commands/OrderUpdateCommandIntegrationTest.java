@@ -961,4 +961,27 @@ public class OrderUpdateCommandIntegrationTest extends IntegrationTest {
                 })
         );
     }
+
+    @Test
+    public void setReturnInfo() throws Exception {
+        withOrder(client(), order -> {
+            assertThat(order.getReturnInfo()).isEmpty();
+            final String lineItemId = order.getLineItems().get(0).getId();
+            final List<ReturnItemDraft> items = asList(LineItemReturnItemDraft.of(1L, lineItemId, ReturnShipmentState.RETURNED, "foo bar"));
+            final List<ReturnInfoDraft> returnInfoDrafts = asList(ReturnInfoDraftBuilder.of().items(items).returnTrackingId(randomString()).build());
+            final SetReturnInfo action = SetReturnInfo.of(returnInfoDrafts);
+            final Order updatedOrder = client().executeBlocking(OrderUpdateCommand.of(order, action));
+
+            final ReturnInfo returnInfo = updatedOrder.getReturnInfo().get(0);
+            final ReturnItem returnItem = returnInfo.getItems().get(0);
+            assertThat(returnItem).isInstanceOf(LineItemReturnItem.class);
+            final LineItemReturnItem lineItemReturnItem = (LineItemReturnItem) returnItem;
+
+            assertThat(lineItemReturnItem.getLineItemId()).isEqualTo(lineItemId);
+            assertThat(lineItemReturnItem.getShipmentState()).isEqualTo(ReturnShipmentState.RETURNED);
+            assertThat(lineItemReturnItem.getComment()).contains("foo bar");
+
+            return updatedOrder;
+        });
+    }
 }

@@ -22,7 +22,7 @@ public final class SetLineItemCustomType extends OrderEditStagedUpdateActionBase
     private final Map<String, JsonNode> fields;
 
     private SetLineItemCustomType(final String lineItemId, @Nullable final String typeId, @Nullable final String typeKey, @Nullable final Map<String, JsonNode> fields) {
-        super("setCustomType");
+        super("setLineItemCustomType");
         this.lineItemId = lineItemId;
         this.type = ResourceIdentifier.ofIdOrKey(typeId, typeKey);
         this.fields = fields;

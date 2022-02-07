@@ -34,6 +34,9 @@ public interface ShippingMethodDraft extends WithKey, CustomDraft {
     @Nullable
     LocalizedString getLocalizedDescription();
 
+    @Nullable
+    LocalizedString getLocalizedName();
+
     ResourceIdentifier<TaxCategory> getTaxCategory();
 
     List<ZoneRateDraft> getZoneRates();

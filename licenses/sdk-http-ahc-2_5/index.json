@@ -1,0 +1,247 @@
+{
+    "dependencies": [
+        {
+            "moduleName": "com.commercetools.sdk.jvm.core:sdk-http",
+            "moduleVersion": "2.6.0-SNAPSHOT",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "com.fasterxml.jackson.core:jackson-core",
+            "moduleVersion": "2.12.4",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "com.fasterxml.jackson.core:jackson-databind",
+            "moduleVersion": "2.12.4",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "com.fasterxml.jackson.dataformat:jackson-dataformat-cbor",
+            "moduleVersion": "2.12.4",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "com.fasterxml.jackson.datatype:jackson-datatype-jsr310",
+            "moduleVersion": "2.12.4",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "com.fasterxml.jackson.module:jackson-module-parameter-names",
+            "moduleVersion": "2.12.4",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "com.google.code.findbugs:jsr305",
+            "moduleVersion": "3.0.2",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "com.sun.activation:javax.activation",
+            "moduleVersion": "1.2.0",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "CDDL/GPLv2+CE"
+                }
+            ]
+        },
+        {
+            "moduleName": "com.typesafe.netty:netty-reactive-streams",
+            "moduleVersion": "2.0.0",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "io.netty:netty-buffer",
+            "moduleVersion": "4.1.30.Final",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "io.netty:netty-codec",
+            "moduleVersion": "4.1.30.Final",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "io.netty:netty-codec-dns",
+            "moduleVersion": "4.1.30.Final",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "io.netty:netty-codec-http",
+            "moduleVersion": "4.1.30.Final",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "io.netty:netty-codec-socks",
+            "moduleVersion": "4.1.30.Final",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "io.netty:netty-common",
+            "moduleVersion": "4.1.30.Final",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "io.netty:netty-handler",
+            "moduleVersion": "4.1.30.Final",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "io.netty:netty-handler-proxy",
+            "moduleVersion": "4.1.30.Final",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "io.netty:netty-resolver",
+            "moduleVersion": "4.1.30.Final",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "io.netty:netty-resolver-dns",
+            "moduleVersion": "4.1.30.Final",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "io.netty:netty-transport",
+            "moduleVersion": "4.1.30.Final",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "io.netty:netty-transport-native-epoll",
+            "moduleVersion": "4.1.30.Final",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "io.netty:netty-transport-native-unix-common",
+            "moduleVersion": "4.1.30.Final",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "org.apache.commons:commons-lang3",
+            "moduleVersion": "3.12.0",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "org.asynchttpclient:async-http-client",
+            "moduleVersion": "2.5.4",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "org.asynchttpclient:async-http-client-netty-utils",
+            "moduleVersion": "2.5.4",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "org.reactivestreams:reactive-streams",
+            "moduleVersion": "1.0.2",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "CC0"
+                }
+            ]
+        },
+        {
+            "moduleName": "org.slf4j:slf4j-api",
+            "moduleVersion": "1.7.31",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "MIT License"
+                }
+            ]
+        }
+    ]
+}

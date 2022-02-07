@@ -2,14 +2,18 @@ package io.sphere.sdk.orderedit.commands.stagedactions;
 
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.carts.*;
+import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.orderedit.OrderEditFixtures;
 import io.sphere.sdk.orderedit.commands.OrderEditUpdateCommandIntegrationTest;
 import io.sphere.sdk.orderedits.OrderEdit;
+
 import io.sphere.sdk.orderedits.commands.OrderEditUpdateCommand;
 import io.sphere.sdk.orderedits.commands.stagedactions.*;
 import io.sphere.sdk.orderedits.commands.updateactions.AddStagedAction;
+import io.sphere.sdk.orders.Order;
+import io.sphere.sdk.orders.commands.OrderFromCartCreateCommand;
 import io.sphere.sdk.shippingmethods.CartValueBuilder;
 import io.sphere.sdk.shippingmethods.ShippingMethodFixtures;
 import io.sphere.sdk.shippingmethods.ShippingRate;
@@ -23,10 +27,11 @@ import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
-import java.util.Arrays;
-import java.util.Locale;
-import java.util.UUID;
+import java.util.*;
 
+import static io.sphere.sdk.carts.CartFixtures.withFilledCart;
+import static io.sphere.sdk.channels.ChannelFixtures.withChannelOfRole;
+import static io.sphere.sdk.channels.ChannelRole.PRODUCT_DISTRIBUTION;
 import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withB2cCustomerGroup;
 import static io.sphere.sdk.payments.PaymentFixtures.withPayment;
 import static io.sphere.sdk.products.ProductFixtures.withTaxedProduct;
@@ -332,6 +337,29 @@ public class OrderEditStagedActionsIntegrationTest extends IntegrationTest {
     public void addCustomLineItem() {
         final AddCustomLineItem addCustomLineItem = AddCustomLineItem.of(LocalizedString.ofEnglish("customItem"), "slug", MoneyImpl.of("23.50", EUR), null, 2L, null, null);
         testOrderEditStagedUpdateAction(addCustomLineItem);
+    }
+
+    @Test
+    public void setLineItemDistributionChannel() {
+        withChannelOfRole(client(), PRODUCT_DISTRIBUTION, channel -> {
+            withFilledCart(client(), cart -> {
+                final Order order = client().executeBlocking(OrderFromCartCreateCommand.of(cart));
+                OrderEditFixtures.withUpdateableOrderEdit(client(), order.toReference(), orderEdit -> {
+                    final LineItem firstLineItem = order.getLineItems().get(0);
+                    final SetLineItemDistributionChannel setLineItemDistributionChannel = SetLineItemDistributionChannel.of(firstLineItem.getId())
+                            .withDistributionChannel(Channel.referenceOfId(channel.getId()));
+
+                    final OrderEditUpdateCommand orderEditUpdateCommand = OrderEditUpdateCommand.of(orderEdit, AddStagedAction.of(setLineItemDistributionChannel));
+                    final OrderEdit updatedOrderEdit = client().executeBlocking(orderEditUpdateCommand);
+                    Assertions.assertThat(updatedOrderEdit.getVersion()).isNotEqualTo(orderEdit.getVersion());
+                    Assertions.assertThat(updatedOrderEdit.getStagedActions().size()).isEqualTo(1);
+                    Assertions.assertThat(updatedOrderEdit.getStagedActions().get(0).getAction()).isEqualTo(setLineItemDistributionChannel.getAction());
+                    Assertions.assertThat(updatedOrderEdit.getStagedActions().get(0)).isInstanceOf(setLineItemDistributionChannel.getClass());
+
+                    return updatedOrderEdit;
+                });
+            });
+        });
     }
 
     @Test

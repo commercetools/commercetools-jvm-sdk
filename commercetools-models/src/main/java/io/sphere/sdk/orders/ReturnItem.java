@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import io.sphere.sdk.carts.ClassificationShippingRateInputDraftDsl;
 import io.sphere.sdk.carts.ScoreShippingRateInputDraftDsl;
 import io.sphere.sdk.models.Timestamped;
+import io.sphere.sdk.types.CustomFields;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
@@ -30,9 +31,16 @@ public interface ReturnItem extends Timestamped {
 
     ReturnPaymentState getPaymentState();
 
+    @Nullable
+    CustomFields getCustom();
+
     @Override
     ZonedDateTime getCreatedAt();
 
     @Override
     ZonedDateTime getLastModifiedAt();
+
+    static String referenceTypeId() {
+        return "order-return-item";
+    }
 }

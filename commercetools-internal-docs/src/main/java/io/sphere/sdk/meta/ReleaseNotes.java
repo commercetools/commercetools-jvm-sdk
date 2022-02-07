@@ -64,7 +64,7 @@ import io.sphere.sdk.messages.Message;
 import io.sphere.sdk.messages.UserProvidedIdentifiers;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.orders.*;
-import io.sphere.sdk.orders.commands.updateactions.AddDelivery;
+import io.sphere.sdk.orders.commands.updateactions.*;
 import io.sphere.sdk.orders.expansion.OrderExpansionModel;
 import io.sphere.sdk.orders.messages.OrderPaymentStateChangedMessage;
 import io.sphere.sdk.orders.messages.OrderStateTransitionMessage;
@@ -115,10 +115,7 @@ import io.sphere.sdk.shoppinglists.expansion.LineItemExpansionModel;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.states.StateDraftDsl;
 import io.sphere.sdk.stores.commands.updateactions.SetLanguages;
-import io.sphere.sdk.subscriptions.AzureServiceBusDestination;
-import io.sphere.sdk.subscriptions.MessageSubscriptionPayload;
-import io.sphere.sdk.subscriptions.Payload;
-import io.sphere.sdk.subscriptions.Subscription;
+import io.sphere.sdk.subscriptions.*;
 import io.sphere.sdk.taxcategories.*;
 import io.sphere.sdk.types.*;
 import io.sphere.sdk.zones.ZoneDraftBuilder;
@@ -157,9 +154,21 @@ import java.util.function.Function;
  </ul>
  -->
  -->
- <h3 class=released-version id="v2_5_0">2.5.0 (01.12.2021)</h3>
+ <h3 class=released-version id="v2_5_0">2.5.0 (01.03.2022)</h3>
  <ul>
+ <li class=new-in-release>Support custom field in {@link Parcel} and  {@link ParcelDraft} and added related update actions for Order and OrderEdit {@link SetParcelCustomField}, {@link SetParcelCustomType}, {@link SetParcelCustomType} and {@link SetParcelCustomField}</li>
+ <li class=new-in-release>Support custom field in {@link ReturnItem} and  {@link ReturnItemDraft} and added related update actions for Order and OrderEdit {@link SetReturnItemCustomField}, {@link SetReturnItemCustomType}, {@link SetReturnItemCustomType} and {@link SetReturnItemCustomField}</li>
+ <li class=new-in-release>Support update commands for Custom Field and Type for Payment transactions {@link io.sphere.sdk.payments.commands.updateactions.SetTransactionCustomField} and {@link io.sphere.sdk.payments.commands.updateactions.SetTransactionCustomType} </li>
+ <li class=new-in-release>Support productKey in LineItem {@link LineItem#getProductKey()} </li>
+ <li class=new-in-release>Support for Cart the uodate action {@link SetLineItemSupplyChannel}</li>
+ <li class=new-in-release>Add new field for {@link UserProvidedIdentifiers#getContainerAndKey()} and related classes {@link ContainerAndKey} and {@link ContainerAndKeyImpl} </li>
+ <li class=new-in-release>Support {@link io.sphere.sdk.inventory.messages.InventoryEntryQuantitySetMessage} </li>
+ <li class=new-in-release>Support SetReturnInfo in order and order edit {@link io.sphere.sdk.orders.commands.updateactions.SetReturnInfo} and the related message {@link io.sphere.sdk.orders.messages.ReturnInfoSetMessage } </li>
  <li class=fixed-in-release>Fixed serialization issue with duplicate type property in ShippingRateTier model</li>
+ <li class=new-in-release>Support order edit with the update action for {@link io.sphere.sdk.orderedits.commands.stagedactions.SetLineItemDistributionChannel} and related message {@link io.sphere.sdk.orders.messages.OrderLineItemDistributionChannelSetMessage} </li>
+ <li class=new-in-release>Add new field in the {@link ResourceDeletedPayload#getDataErasure()} </li>
+ <li class=new-in-release>Support new message for customer {@link io.sphere.sdk.customers.messages.CustomerDeletedMessage} </li>
+ <li class=new-in-release>Support localizedName field for ShippingMethod {@link ShippingMethod#getLocalizedName() and {@link ShippingMethodDraft#getLocalizedName()} and related action {@link io.sphere.sdk.shippingmethods.commands.updateactions.SetLocalizedName} </li>
  </ul>
  <h3 class=released-version id="v2_4_0">2.4.0 (01.11.2021)</h3>
  <ul>

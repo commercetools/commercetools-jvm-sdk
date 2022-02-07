@@ -24,4 +24,9 @@ public interface ResourceDeletedPayload<T> extends Payload<T> {
      * @return The point in time when the resource was deleted
      */
     ZonedDateTime getModifiedAt();
+
+    /**
+     * @return true if the dataErasure parameter was set to true.
+     */
+    Boolean getDataErasure();
 }

@@ -47,6 +47,7 @@ import java.util.stream.Collectors;
 import static io.sphere.sdk.carts.CartFixtures.*;
 import static io.sphere.sdk.carts.CustomLineItemFixtures.createCustomLineItemDraft;
 import static io.sphere.sdk.channels.ChannelFixtures.withChannelOfRole;
+import static io.sphere.sdk.channels.ChannelRole.INVENTORY_SUPPLY;
 import static io.sphere.sdk.channels.ChannelRole.PRODUCT_DISTRIBUTION;
 import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withB2cCustomerGroup;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
@@ -909,7 +910,22 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
                 final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, updateAction));
 
                 final LineItem lineItem = updatedCart.getLineItems().get(0);
-                assertThat(lineItem.getDistributionChannel()).isEqualTo(channelReference);
+                assertThat(lineItem.getDistributionChannel()).isEqualTo(updatedCart.getLineItems().get(0).getDistributionChannel());
+            });
+        });
+    }
+
+    @Test
+    public void setLineItemSupplyChannel() throws Exception {
+        withChannelOfRole(client(), INVENTORY_SUPPLY, channel -> {
+            withFilledCart(client(), cart -> {
+                final String lineItemId = cart.getLineItems().get(0).getId();
+                final Reference<Channel> channelReference = Channel.referenceOfId(channel.getId());
+                final SetLineItemSupplyChannel updateAction = SetLineItemSupplyChannel.of(lineItemId, channelReference);
+                final Cart updatedCart = client().executeBlocking(CartUpdateCommand.of(cart, updateAction));
+
+                final LineItem lineItem = updatedCart.getLineItems().get(0);
+                assertThat(lineItem.getSupplyChannel()).isEqualTo(updatedCart.getLineItems().get(0).getSupplyChannel());
             });
         });
     }

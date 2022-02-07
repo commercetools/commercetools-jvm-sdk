@@ -97,6 +97,9 @@ public interface LineItem extends LineItemLike {
     @Nullable
     ZonedDateTime getLastModifiedAt();
 
+    @Nullable
+    String getProductKey();
+
     /**
      * An identifier for this resource which supports {@link CustomFields}.
      * @see TypeDraft#getResourceTypeIds()

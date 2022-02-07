@@ -223,4 +223,17 @@ public class ShippingMethodUpdateCommandIntegrationTest extends IntegrationTest 
         });
 
     }
+
+    @Test
+    public void setLocalizedName() throws Exception {
+        withUpdateableShippingMethod(client(), shippingMethod -> {
+            final LocalizedString newLocalizedName = LocalizedString.ofEnglish(randomString());
+            assertThat(shippingMethod.getLocalizedDescription()).isNotEqualTo(newLocalizedName);
+            final ShippingMethodUpdateCommand cmd = ShippingMethodUpdateCommand.of(shippingMethod, SetLocalizedName.of(newLocalizedName));
+            final ShippingMethod updatedShippingMethod = client().executeBlocking(cmd);
+            assertThat(updatedShippingMethod.getLocalizedName()).isEqualTo(newLocalizedName);
+
+            return updatedShippingMethod;
+        });
+    }
 }

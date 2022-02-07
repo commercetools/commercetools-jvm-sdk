@@ -3,6 +3,7 @@ package io.sphere.sdk.messages;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.ResourceValue;
+import io.sphere.sdk.models.ContainerAndKey;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.WithKey;
 
@@ -31,4 +32,6 @@ public interface UserProvidedIdentifiers extends WithKey {
     @Nullable
     String getCustomerNumber();
 
+    @Nullable
+    ContainerAndKey getContainerAndKey();
 }

@@ -44,7 +44,16 @@ jobs:
           distribution: 'adopt'
           java-version: '8'
 
-      - run: mvn clean install javadoc:aggregate -DskipTests --no-transfer-progress -Pjavadoc-jdk-8u121
+      - run: mvn clean install javadoc:aggregate -DskipTests --no-transfer-progress -Pjavadoc-jdk-8u121,third-party-licenses
       - run: mvn exec:java -pl commercetools-internal-docs -Dexec.mainClass="introspection.rules.RulesMain" -Dexec.classpathScope="test"
       - run: mvn exec:java -pl commercetools-models -Dexec.mainClass="io.sphere.sdk.client.MainMethodThreadLeakTest" -Dexec.classpathScope="test"
       - run: mvn test verify --no-transfer-progress -Djava.util.logging.config.file=src/test/resources/logging.properties
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          file_pattern: 'licenses/*'
+          disable_globbing: true
+          commit_message: "Update licenses"
+          commit_user_name: Auto Mation
+          commit_user_email: automation@commercetools.com
+          commit_author: Auto Mation <automation@commercetools.com>
