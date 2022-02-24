@@ -154,7 +154,16 @@ import java.util.function.Function;
  </ul>
  -->
  -->
- <h3 class=released-version id="v2_5_0">2.5.0 (01.03.2022)</h3>
+ <h3 class=released-version id="v2_7_0">2.6.0 (24.02.2022)</h3>
+ <ul>
+ </ul>
+ <h3 class=released-version id="v2_6_0">2.6.0 (07.02.2022)</h3>
+ <ul>
+ </ul>
+ <h3 class=released-version id="v1_64_2">1.64.2 (13.12.2021)</h3>
+ <ul>
+ </ul>
+ <h3 class=released-version id="v2_5_0">2.5.0 (22.11.2021)</h3>
  <ul>
  <li class=new-in-release>Support custom field in {@link Parcel} and  {@link ParcelDraft} and added related update actions for Order and OrderEdit {@link SetParcelCustomField}, {@link SetParcelCustomType}, {@link SetParcelCustomType} and {@link SetParcelCustomField}</li>
  <li class=new-in-release>Support custom field in {@link ReturnItem} and  {@link ReturnItemDraft} and added related update actions for Order and OrderEdit {@link SetReturnItemCustomField}, {@link SetReturnItemCustomType}, {@link SetReturnItemCustomType} and {@link SetReturnItemCustomField}</li>
@@ -168,7 +177,7 @@ import java.util.function.Function;
  <li class=new-in-release>Support order edit with the update action for {@link io.sphere.sdk.orderedits.commands.stagedactions.SetLineItemDistributionChannel} and related message {@link io.sphere.sdk.orders.messages.OrderLineItemDistributionChannelSetMessage} </li>
  <li class=new-in-release>Add new field in the {@link ResourceDeletedPayload#getDataErasure()} </li>
  <li class=new-in-release>Support new message for customer {@link io.sphere.sdk.customers.messages.CustomerDeletedMessage} </li>
- <li class=new-in-release>Support localizedName field for ShippingMethod {@link ShippingMethod#getLocalizedName() and {@link ShippingMethodDraft#getLocalizedName()} and related action {@link io.sphere.sdk.shippingmethods.commands.updateactions.SetLocalizedName} </li>
+ <li class=new-in-release>Support localizedName field for ShippingMethod {@link ShippingMethod#getLocalizedName()} and {@link ShippingMethodDraft#getLocalizedName()} and related action {@link io.sphere.sdk.shippingmethods.commands.updateactions.SetLocalizedName} </li>
  </ul>
  <h3 class=released-version id="v2_4_0">2.4.0 (01.11.2021)</h3>
  <ul>
