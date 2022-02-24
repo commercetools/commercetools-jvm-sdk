@@ -36,10 +36,18 @@ jobs:
           distribution: 'adopt'
           java-version: '8'
 
-      - run: scripts/setup-signing-key.sh
+      - name: "Setup signing key"
+        run: scripts/setup-signing-key.sh
         env:
           DECRYPTER: ${{ secrets.DECRYPTER }}
           SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
           PASSPHRASE: ${{ secrets.PASSPHRASE }}
 
-#      - run: ./prepare-release.sh ${{ github.event.inputs.release_type }} ${{ github.ref_name }}
+      - name: "Prepare release"
+        run: ./prepare-release.sh ${{ github.event.inputs.release_type }} ${{ github.ref_name }}
+
+      - name: "Perform release"
+        run: |
+          GPG_TTY=$(tty)
+          export GPG_TTY
+          ./perform-release.sh
