@@ -5,7 +5,7 @@ on:
         description: 'Release Type'
         required: true
         type: choice
-        default: PATCH
+        default: MINOR
         options:
           - MAJOR
           - MINOR
@@ -36,10 +36,10 @@ jobs:
           distribution: 'adopt'
           java-version: '8'
 
-#      - run: scripts/setup-signing-key.sh
-#        env:
-#          DECRYPTER: ${{ secrets.DECRYPTER }}
-#          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
-#          PASSPHRASE: ${{ secrets.PASSPHRASE }}
+      - run: scripts/setup-signing-key.sh
+        env:
+          DECRYPTER: ${{ secrets.DECRYPTER }}
+          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+          PASSPHRASE: ${{ secrets.PASSPHRASE }}
 
 #      - run: ./prepare-release.sh ${{ github.event.inputs.release_type }} ${{ github.ref_name }}
