@@ -154,7 +154,11 @@ import java.util.function.Function;
  </ul>
  -->
  -->
- <h3 class=released-version id="v2_7_0">2.6.0 (24.02.2022)</h3>
+ <h3 class=released-version id="v2_8_0">2.8.0 (24.02.2022)</h3>
+ <ul>
+ <li class=new-in-release>Support new Order message: {@link io.sphere.sdk.orders.messages.OrderPaymentAddedMessage}</li>
+ </ul>
+ <h3 class=released-version id="v2_7_0">2.7.0 (24.02.2022)</h3>
  <ul>
  </ul>
  <h3 class=released-version id="v2_6_0">2.6.0 (07.02.2022)</h3>
