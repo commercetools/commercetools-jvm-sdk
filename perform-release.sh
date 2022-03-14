@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function getVersion() {
-    VERSION=`./mvnw -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive org.codehaus.mojo:exec-maven-plugin:1.3.1:exec | tail -n 1`
+    VERSION=`./mvnw -q -Dexec.executable="echo" -Dexec.args='${project.version}' --no-transfer-progress --non-recursive org.codehaus.mojo:exec-maven-plugin:1.3.1:exec | tail -n 1`
     echo ${VERSION}
 }
 
