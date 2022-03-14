@@ -43,13 +43,11 @@ jobs:
           SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
           PASSPHRASE: ${{ secrets.PASSPHRASE }}
 
-      - run: printenv
+      - name: "Prepare release"
+        run: ./prepare-release.sh ${{ github.event.inputs.release_type }} ${{ github.ref_name }}
 
-#      - name: "Prepare release"
-#        run: ./prepare-release.sh ${{ github.event.inputs.release_type }} ${{ github.ref_name }}
-#
-#      - name: "Perform release"
-#        run: |
-#          GPG_TTY=$(tty)
-#          export GPG_TTY
-#          ./perform-release.sh
+      - name: "Perform release"
+        run: |
+          GPG_TTY=$(tty)
+          export GPG_TTY
+          ./perform-release.sh
