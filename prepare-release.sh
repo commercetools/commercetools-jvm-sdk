@@ -47,13 +47,11 @@ git diff --exit-code >/dev/null 2>&1
 GIT_STATUS=$?
 set -e
 
-export JAVA_HOME=${$JDK_18_x64:-$JAVA_HOME}
+export JAVA_HOME=${JAVA_HOME:-$JDK_18_x64}
 echo "Java version: "
 echo $JAVA_HOME
 export PATH=$JAVA_HOME/bin:$PATH
 java -version
-
-exit 1
 
 if [[ ! ${GIT_STATUS} -eq 0 ]]
 then
@@ -103,6 +101,8 @@ RELEASE_VERSION=$(getVersion)
 echo Build release ${RELEASE_VERSION} without running tests
 
 ./mvnw clean install -DskipTests
+
+exit 1
 
 if [[ ${TYPE} != "PATCH" ]]
 then
