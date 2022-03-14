@@ -6,27 +6,27 @@ function updateReleaseVersion() {
     RELEASE_TYPE=$1
     if [[ ${RELEASE_TYPE} == "MAJOR" ]]
     then
-        ./mvnw build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.nextMajorVersion}.0.0 -DgenerateBackupPoms=false
+        ./mvnw build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.nextMajorVersion}.0.0 -DgenerateBackupPoms=false --no-transfer-progress
     elif [[ ${RELEASE_TYPE} == "PATCH" ]]
     then
-        ./mvnw build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion} -DgenerateBackupPoms=false
+        ./mvnw build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion} -DgenerateBackupPoms=false --no-transfer-progress
     else
-        ./mvnw build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.0 -DgenerateBackupPoms=false
+        ./mvnw build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.0 -DgenerateBackupPoms=false --no-transfer-progress
     fi
 }
 
 function setReleaseVersion() {
   SET_RELEASE_VERSION=$1
-  ./mvnw build-helper:parse-version versions:set -DnewVersion=${SET_RELEASE_VERSION} -DgenerateBackupPoms=false
+  ./mvnw build-helper:parse-version versions:set -DnewVersion=${SET_RELEASE_VERSION} -DgenerateBackupPoms=false --no-transfer-progress
 }
 
 function getBranchVersion() {
-    VERSION=`./mvnw -q build-helper:parse-version -Dexec.executable="echo" -Dexec.args='${parsedVersion.majorVersion}.${parsedVersion.minorVersion}' --non-recursive org.codehaus.mojo:exec-maven-plugin:1.3.1:exec | tail -n 1`
+    VERSION=`./mvnw -q build-helper:parse-version -Dexec.executable="echo" -Dexec.args='${parsedVersion.majorVersion}.${parsedVersion.minorVersion}' --no-transfer-progress --non-recursive org.codehaus.mojo:exec-maven-plugin:1.3.1:exec | tail -n 1`
     echo ${VERSION}
 }
 
 function getVersion() {
-    VERSION=`./mvnw -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive org.codehaus.mojo:exec-maven-plugin:1.3.1:exec | tail -n 1`
+    VERSION=`./mvnw -q -Dexec.executable="echo" -Dexec.args='${project.version}' --no-transfer-progress --non-recursive org.codehaus.mojo:exec-maven-plugin:1.3.1:exec | tail -n 1`
     echo ${VERSION}
 }
 
@@ -38,7 +38,7 @@ function updateSnapshotVersion() {
         echo "Patch not allowed at this branch"
         exit 1
     else
-        ./mvnw build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.0-SNAPSHOT -DgenerateBackupPoms=false
+        ./mvnw build-helper:parse-version versions:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.nextMinorVersion}.0-SNAPSHOT -DgenerateBackupPoms=false --no-transfer-progress
     fi
 }
 
@@ -47,7 +47,7 @@ git diff --exit-code >/dev/null 2>&1
 GIT_STATUS=$?
 set -e
 
-export JAVA_HOME=$JDK_18_x64
+export JAVA_HOME=${JAVA_HOME:-$JDK_18_x64}
 echo "Java version: "
 echo $JAVA_HOME
 export PATH=$JAVA_HOME/bin:$PATH
@@ -100,7 +100,7 @@ fi
 RELEASE_VERSION=$(getVersion)
 echo Build release ${RELEASE_VERSION} without running tests
 
-./mvnw clean install -DskipTests
+./mvnw clean install -DskipTests --no-transfer-progress
 
 if [[ ${TYPE} != "PATCH" ]]
 then
