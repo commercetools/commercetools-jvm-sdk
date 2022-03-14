@@ -9,23 +9,31 @@ import javax.annotation.Nullable;
 
 @JsonDeserialize(as= ProductSelectionImpl.class)
 @ResourceValue
+@HasQueryEndpoint()
 @ResourceInfo(pluralName = "product selections", pathElement = "product-selections")
-public interface ProductSelection extends Resource<ProductSelection>, WithClientLogging, WithKey {
+@HasByIdGetEndpoint
+@HasByKeyGetEndpoint
+@HasCreateCommand(includeExamples = "io.sphere.sdk.productselections.commands.ProductSelectionCreateCommandIntegrationTest#execution()")
+@HasUpdateCommand(updateWith = {"key","id"})
+@HasDeleteCommand(deleteWith = {"key","id"})
+@HasQueryModel
+public interface ProductSelection extends Resource<ProductSelection>, WithKey {
     @Nullable
     String getKey();
-    /**
-     * Name of this product selection.
-     *
-     * @see io.sphere.sdk.productselections.commands.updateactions.ChangeName
-     *
-     * @return name
-     */
     @HasUpdateAction
     LocalizedString getName();
 
     Long getProductCount();
 
     ProductSelectionType getType();
+
+    @IgnoreInQueryModel
+    @Nullable
+    LastModifiedBy getLastModifiedBy();
+
+    @IgnoreInQueryModel
+    @Nullable
+    CreatedBy getCreatedBy();
 
     @Override
     default Reference<ProductSelection> toReference() {
