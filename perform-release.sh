@@ -16,8 +16,6 @@ echo $JAVA_HOME
 export PATH=$JAVA_HOME/bin:$PATH
 java -version
 
-exit 1
-
 if [[ ! GIT_STATUS -eq 0 ]]
 then
     echo "Aborting due to uncommited changes"

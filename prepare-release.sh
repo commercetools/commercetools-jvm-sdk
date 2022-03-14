@@ -102,8 +102,6 @@ echo Build release ${RELEASE_VERSION} without running tests
 
 ./mvnw clean install -DskipTests --no-transfer-progress
 
-exit 1
-
 if [[ ${TYPE} != "PATCH" ]]
 then
     BRANCH_NAME=v$(getBranchVersion)
