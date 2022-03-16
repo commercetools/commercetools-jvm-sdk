@@ -39,6 +39,12 @@ public interface ApiClient  extends Identifiable<ApiClient>, Referenceable<ApiCl
     @Nullable
     ZonedDateTime getDeleteAt();
 
+    @Nullable
+    Long getAccessTokenValiditySeconds();
+
+    @Nullable
+    Long getRefreshTokenValiditySeconds();
+
     @JsonIgnore
     String getProjectKey();
 
