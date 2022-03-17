@@ -16,7 +16,7 @@ public final class ApiClientDraftBuilder extends ApiClientDraftBuilderBase {
     }
 
     ApiClientDraftBuilder(final @Nullable Long accessTokenValiditySecondsfinal, @Nullable Integer deleteDaysAfterCreation, final String name, final @Nullable Long refreshTokenValiditySeconds, final String scope) {
-        super(null, deleteDaysAfterCreation, name, null, scope);
+        super(accessTokenValiditySecondsfinal, deleteDaysAfterCreation, name, refreshTokenValiditySeconds, scope);
     }
 
     public static ApiClientDraftBuilder of(final String name, String projectKey, final SphereScope scope0, final SphereScope... scopes) {
