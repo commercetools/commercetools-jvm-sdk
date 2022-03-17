@@ -57,10 +57,10 @@ public abstract class MetaModelHeadDslImpl<R, T, C extends MetaModelHeadDsl<R, T
         this(builder.javaType, builder.endpoint, builder.identifierToSearchFor, builder.expansionPaths, builder.expansionModel, builder.builderFunction, builder.additionalParameters);
     }
 
-    protected MetaModelHeadDslImpl(final JavaType javaType, final String endpoint, final String identifierToSearchFor, final List<ExpansionPath<T>> expansionPaths, final E expansionModel, final Function<MetaModelHeadDslBuilder<R, T, C, E>, C> builderFunction, final List<NameValuePair> additionalParameters) {
+    protected MetaModelHeadDslImpl(final JavaType javaType, final String endpoint, @Nullable final String identifierToSearchFor, final List<ExpansionPath<T>> expansionPaths, final E expansionModel, final Function<MetaModelHeadDslBuilder<R, T, C, E>, C> builderFunction, final List<NameValuePair> additionalParameters) {
         this.javaType = requireNonNull(javaType);
         this.endpoint = requireNonNull(endpoint);
-        this.identifierToSearchFor = requireNonNull(identifierToSearchFor);
+        this.identifierToSearchFor = identifierToSearchFor;
         this.expansionPaths = requireNonNull(expansionPaths);
         this.expansionModel = requireNonNull(expansionModel);
         this.builderFunction = requireNonNull(builderFunction);
