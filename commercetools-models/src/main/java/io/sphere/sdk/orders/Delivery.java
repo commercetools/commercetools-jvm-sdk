@@ -7,6 +7,7 @@ import io.sphere.sdk.annotations.ResourceValue;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.CreationTimestamped;
 import io.sphere.sdk.models.Identifiable;
+import io.sphere.sdk.types.CustomFields;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
@@ -41,7 +42,10 @@ public interface Delivery extends Identifiable<Delivery>, CreationTimestamped {
     @Nullable
     Address getAddress();
 
+    @Nullable
+    CustomFields getCustom();
+
     static Delivery of(final String id, final ZonedDateTime createdAt, final List<DeliveryItem> items, final List<Parcel> parcels) {
-        return new DeliveryImpl(null,createdAt,id,items,parcels);
+        return new DeliveryImpl(null, createdAt, null, id, items, parcels);
     }
 }
