@@ -30,9 +30,8 @@ import static java.util.Objects.requireNonNull;
  * @param <R> result type, maybe directly {@code T} or sth. like {@code List<T>}
  * @param <T> type of the query result
  * @param <C> type of the class implementing this class
- * @param <E> type of the expansion model
  */
-public abstract class MetaModelHeadDslImpl<R, T, C extends MetaModelHeadDsl<R, T, C, E>, E> extends Base implements MetaModelHeadDsl<R, T, C, E>, MetaModelExpansionDslExpansionModelRead<T, C, E> {
+public abstract class MetaModelHeadDslImpl<R, T, C extends MetaModelHeadDsl<R, T, C>> extends Base implements MetaModelHeadDsl<R, T, C> {
 
     final JavaType javaType;
     final String endpoint;
@@ -40,29 +39,25 @@ public abstract class MetaModelHeadDslImpl<R, T, C extends MetaModelHeadDsl<R, T
      for example an ID, a key, slug, token
      */
     final String identifierToSearchFor;
-    final List<ExpansionPath<T>> expansionPaths;
     final List<NameValuePair> additionalParameters;
-    final E expansionModel;
-    final Function<MetaModelHeadDslBuilder<R, T, C, E>, C> builderFunction;
+    final Function<MetaModelHeadDslBuilder<R, T, C>, C> builderFunction;
 
-    protected MetaModelHeadDslImpl(final JsonEndpoint<R> endpoint, final String identifierToSearchFor, final E expansionModel, final Function<MetaModelHeadDslBuilder<R, T, C, E>, C> builderFunction, final List<NameValuePair> additionalParameters) {
-        this(SphereJsonUtils.convertToJavaType(endpoint.typeReference()), endpoint.endpoint(), identifierToSearchFor, Collections.emptyList(), expansionModel, builderFunction, additionalParameters);
+    protected MetaModelHeadDslImpl(final JsonEndpoint<R> endpoint, final String identifierToSearchFor, final Function<MetaModelHeadDslBuilder<R, T, C>, C> builderFunction, final List<NameValuePair> additionalParameters) {
+        this(SphereJsonUtils.convertToJavaType(endpoint.typeReference()), endpoint.endpoint(), identifierToSearchFor, builderFunction, additionalParameters);
     }
 
-    protected MetaModelHeadDslImpl(final String identifierToSearchFor, final JsonEndpoint<R> endpoint, final E expansionModel, final Function<MetaModelHeadDslBuilder<R, T, C, E>, C> builderFunction) {
-        this(SphereJsonUtils.convertToJavaType(endpoint.typeReference()), endpoint.endpoint(), identifierToSearchFor, Collections.emptyList(), expansionModel, builderFunction, Collections.emptyList());
+    protected MetaModelHeadDslImpl(final String identifierToSearchFor, final JsonEndpoint<R> endpoint, final Function<MetaModelHeadDslBuilder<R, T, C>, C> builderFunction) {
+        this(SphereJsonUtils.convertToJavaType(endpoint.typeReference()), endpoint.endpoint(), identifierToSearchFor, builderFunction, Collections.emptyList());
     }
 
-    protected MetaModelHeadDslImpl(final MetaModelHeadDslBuilder<R, T, C, E> builder) {
-        this(builder.javaType, builder.endpoint, builder.identifierToSearchFor, builder.expansionPaths, builder.expansionModel, builder.builderFunction, builder.additionalParameters);
+    protected MetaModelHeadDslImpl(final MetaModelHeadDslBuilder<R, T, C> builder) {
+        this(builder.javaType, builder.endpoint, builder.identifierToSearchFor, builder.builderFunction, builder.additionalParameters);
     }
 
-    protected MetaModelHeadDslImpl(final JavaType javaType, final String endpoint, @Nullable final String identifierToSearchFor, final List<ExpansionPath<T>> expansionPaths, final E expansionModel, final Function<MetaModelHeadDslBuilder<R, T, C, E>, C> builderFunction, final List<NameValuePair> additionalParameters) {
+    protected MetaModelHeadDslImpl(final JavaType javaType, final String endpoint, @Nullable final String identifierToSearchFor, final Function<MetaModelHeadDslBuilder<R, T, C>, C> builderFunction, final List<NameValuePair> additionalParameters) {
         this.javaType = requireNonNull(javaType);
         this.endpoint = requireNonNull(endpoint);
         this.identifierToSearchFor = identifierToSearchFor;
-        this.expansionPaths = requireNonNull(expansionPaths);
-        this.expansionModel = requireNonNull(expansionModel);
         this.builderFunction = requireNonNull(builderFunction);
         this.additionalParameters = requireNonNull(additionalParameters);
     }
@@ -83,7 +78,6 @@ public abstract class MetaModelHeadDslImpl<R, T, C extends MetaModelHeadDsl<R, T
         }
         final boolean urlEncoded = true;
         final UrlQueryBuilder builder = UrlQueryBuilder.of();
-        expansionPaths().forEach(path -> builder.add(EXPAND, path.toSphereExpand(), urlEncoded));
         additionalQueryParameters().forEach(parameter -> builder.add(parameter.getName(), parameter.getValue(), urlEncoded));
         final String queryParameters = builder.toStringWithOptionalQuestionMark();
         final String path = endpoint + "/" + identifierToSearchFor + (queryParameters.length() > 1 ? queryParameters : "");
@@ -104,57 +98,7 @@ public abstract class MetaModelHeadDslImpl<R, T, C extends MetaModelHeadDsl<R, T
         return httpResponse.hasSuccessResponseCode() || httpResponse.getStatusCode() == NOT_FOUND_404;
     }
 
-    @Override
-    public List<ExpansionPath<T>> expansionPaths() {
-        return expansionPaths;
-    }
-
-    @Override
-    public final C withExpansionPaths(final List<ExpansionPath<T>> expansionPaths) {
-        return copyBuilder().expansionPaths(expansionPaths).build();
-    }
-
-    @Override
-    public C withExpansionPaths(final ExpansionPath<T> expansionPath) {
-        return ExpansionDslUtils.withExpansionPaths(this, expansionPath);
-    }
-
-    @Override
-    public C withExpansionPaths(final Function<E, ExpansionPathContainer<T>> m) {
-        return ExpansionDslUtils.withExpansionPaths(this, m);
-    }
-
-    @Override
-    public C plusExpansionPaths(final List<ExpansionPath<T>> expansionPaths) {
-        return withExpansionPaths(listOf(expansionPaths(), expansionPaths));
-    }
-
-    @Override
-    public C plusExpansionPaths(final ExpansionPath<T> expansionPath) {
-        return ExpansionDslUtils.plusExpansionPaths(this, Collections.singletonList(expansionPath));
-    }
-
-    @Override
-    public C plusExpansionPaths(final Function<E, ExpansionPathContainer<T>> m) {
-        return ExpansionDslUtils.plusExpansionPaths(this, m);
-    }
-
-    @Override
-    public C withExpansionPaths(final String expansionPath) {
-        return withExpansionPaths(ExpansionPath.of(expansionPath));
-    }
-
-    @Override
-    public C plusExpansionPaths(final String expansionPath) {
-        return plusExpansionPaths(ExpansionPath.of(expansionPath));
-    }
-
-    @Override
-    public E expansionModel() {
-        return expansionModel;
-    }
-
-    protected MetaModelHeadDslBuilder<R, T, C, E> copyBuilder() {
+    protected MetaModelHeadDslBuilder<R, T, C> copyBuilder() {
         return new MetaModelHeadDslBuilder<>(this);
     }
 
