@@ -3,15 +3,11 @@ package io.sphere.sdk.stores.messages;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.messages.GenericMessageImpl;
 import io.sphere.sdk.messages.MessageDerivateHint;
 import io.sphere.sdk.messages.UserProvidedIdentifiers;
-import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.stores.ProductSelectionSetting;
 import io.sphere.sdk.stores.Store;
-import io.sphere.sdk.types.CustomFields;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;

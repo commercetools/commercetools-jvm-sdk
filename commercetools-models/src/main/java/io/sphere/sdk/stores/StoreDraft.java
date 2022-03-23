@@ -2,6 +2,7 @@ package io.sphere.sdk.stores;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.FactoryMethod;
+import io.sphere.sdk.annotations.IgnoreInQueryModel;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.LocalizedString;
@@ -37,10 +38,13 @@ public interface StoreDraft extends CustomDraft, WithKey {
     List<ResourceIdentifier<Channel>> getSupplyChannels();
 
     @Nullable
+    List<ProductSelectionSettingDraft> getProductSelections();
+
+    @Nullable
     CustomFieldsDraft getCustom();
 
     static StoreDraftDsl of(final String key, @Nullable final LocalizedString name) {
-        return new StoreDraftDsl(null, null, key, new ArrayList<>(), name, null);
+        return new StoreDraftDsl(null, null, key, new ArrayList<>(), name, null, null);
     }
 
 }
