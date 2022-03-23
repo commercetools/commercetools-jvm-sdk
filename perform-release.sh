@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function getVersion() {
-    VERSION=`./mvnw -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive org.codehaus.mojo:exec-maven-plugin:1.3.1:exec | tail -n 1`
+    VERSION=`./mvnw -q -Dexec.executable="echo" -Dexec.args='${project.version}' --no-transfer-progress --non-recursive org.codehaus.mojo:exec-maven-plugin:1.3.1:exec | tail -n 1`
     echo ${VERSION}
 }
 
@@ -10,7 +10,7 @@ git diff --exit-code >/dev/null 2>&1
 GIT_STATUS=$?
 set -e
 
-export JAVA_HOME=$JDK_18_x64
+export JAVA_HOME=${JAVA_HOME:-$JDK_18_x64}
 echo "Java version: "
 echo $JAVA_HOME
 export PATH=$JAVA_HOME/bin:$PATH
@@ -33,4 +33,4 @@ CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD`
 git push origin ${CURRENT_BRANCH} --tags
 
 echo "Publish release javadoc  ${RELEASE_VERSION}"
-./mvnw javadoc:aggregate scm-publish:publish-scm -Ppublish-site,javadoc-jdk-8u121
+./mvnw javadoc:aggregate scm-publish:publish-scm -Ppublish-site,javadoc-jdk-8u121 --no-transfer-progress
