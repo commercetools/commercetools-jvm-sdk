@@ -9,6 +9,7 @@ import io.sphere.sdk.messages.MessageDerivateHint;
 import io.sphere.sdk.messages.UserProvidedIdentifiers;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.stores.ProductSelectionSetting;
 import io.sphere.sdk.stores.Store;
 import io.sphere.sdk.types.CustomFields;
 
