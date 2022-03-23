@@ -5,6 +5,7 @@ import io.sphere.sdk.annotations.FactoryMethod;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.WithKey;
+import io.sphere.sdk.types.CustomDraft;
 
 import javax.annotation.Nullable;
 
@@ -18,7 +19,7 @@ import javax.annotation.Nullable;
         abstractBuilderClass = true,
         abstractResourceDraftValueClass = true,
         factoryMethods = {@FactoryMethod(parameterNames = {"name"})})
-public interface ProductSelectionDraft extends WithKey {
+public interface ProductSelectionDraft extends WithKey, CustomDraft {
     @Nullable
     String getKey();
 

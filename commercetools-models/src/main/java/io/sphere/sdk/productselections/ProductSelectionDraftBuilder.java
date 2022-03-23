@@ -1,6 +1,7 @@
 package io.sphere.sdk.productselections;
 
 import io.sphere.sdk.models.*;
+import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
 
@@ -10,11 +11,7 @@ import javax.annotation.Nullable;
  */
 public final class ProductSelectionDraftBuilder extends ProductSelectionDraftBuilderBase<ProductSelectionDraftBuilder> {
 
-  ProductSelectionDraftBuilder(@Nullable final String key, final LocalizedString name) {
-    super(key, name);
-  }
-
-  public static ProductSelectionDraftBuilder of(final LocalizedString name) {
-    return of(name);
+  ProductSelectionDraftBuilder(@Nullable final CustomFieldsDraft custom, @Nullable final String key, final LocalizedString name) {
+    super(custom, key, name);
   }
 }

@@ -2,6 +2,7 @@ package io.sphere.sdk.productselections;
 
 
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
 
@@ -10,11 +11,11 @@ import javax.annotation.Nullable;
  */
 public final class ProductSelectionDraftDsl extends ProductSelectionDraftDslBase<ProductSelectionDraftDsl> {
 
-  ProductSelectionDraftDsl(@Nullable final String key, final LocalizedString name) {
-    super(key, name);
+  ProductSelectionDraftDsl(@Nullable final CustomFieldsDraft custom, @Nullable final String key, final LocalizedString name) {
+    super(custom, key, name);
   }
 
-  public static ProductSelectionDraftDsl of(final LocalizedString name) {
-    return of(name);
+  public ProductSelectionDraftDsl withName(LocalizedString name) {
+    return super.withName(name);
   }
 }

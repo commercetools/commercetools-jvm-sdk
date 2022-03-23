@@ -1,15 +1,26 @@
 package io.sphere.sdk.productselections;
 
+import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.*;
 import io.sphere.sdk.models.*;
+import io.sphere.sdk.types.Custom;
 
 import javax.annotation.Nullable;
 
 @JsonDeserialize(as= ProductSelectionImpl.class)
 @ResourceValue
-@HasQueryEndpoint()
+@HasQueryEndpoint(additionalContentsQueryInterface = {
+        "    default ProductSelectionQuery byName(final Locale locale, final String name) {\n" +
+        "        return withPredicates(m -> m.name().lang(locale).is(name));\n" +
+        "    }\n" +
+        "\n" +
+        "    default ProductSelectionQuery byKey(final String key) {\n" +
+        "        return withPredicates(m -> m.key().is(key));\n" +
+        "    }\n"
+     })
 @ResourceInfo(pluralName = "product selections", pathElement = "product-selections")
 @HasByIdGetEndpoint
 @HasByKeyGetEndpoint
@@ -17,14 +28,16 @@ import javax.annotation.Nullable;
 @HasUpdateCommand(updateWith = {"key","id"})
 @HasDeleteCommand(deleteWith = {"key","id"})
 @HasQueryModel
-public interface ProductSelection extends Resource<ProductSelection>, WithKey {
+public interface ProductSelection extends Resource<ProductSelection>, WithKey, Custom {
     @Nullable
     String getKey();
+
     @HasUpdateAction
     LocalizedString getName();
 
     Long getProductCount();
 
+    @IgnoreInQueryModel
     ProductSelectionType getType();
 
     @IgnoreInQueryModel
@@ -80,19 +93,6 @@ public interface ProductSelection extends Resource<ProductSelection>, WithKey {
         };
     }
 
-    /**
-     * Creates a reference for one item of this class by a known ID.
-     *
-     * <p>An example for categories but this applies for other resources, too:</p>
-     * {@include.example io.sphere.sdk.categories.CategoryTest#referenceOfId()}
-     *
-     * <p>If you already have a resource object, then use {@link #toReference()} instead:</p>
-     *
-     * {@include.example io.sphere.sdk.categories.CategoryTest#toReference()}
-     *
-     * @param id the ID of the resource which should be referenced.
-     * @return reference
-     */
     static Reference<ProductSelection> referenceOfId(final String id) {
         return Reference.of(referenceTypeId(), id);
     }
