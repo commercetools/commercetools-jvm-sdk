@@ -91,6 +91,7 @@ import io.sphere.sdk.products.messages.ProductRevertedStagedChangesMessage;
 import io.sphere.sdk.products.messages.ProductVariantDeletedMessage;
 import io.sphere.sdk.products.queries.*;
 import io.sphere.sdk.products.search.*;
+import io.sphere.sdk.productselections.ProductSelection;
 import io.sphere.sdk.producttypes.*;
 import io.sphere.sdk.producttypes.commands.updateactions.ChangeInputHint;
 import io.sphere.sdk.producttypes.commands.updateactions.RemoveEnumValues;
@@ -154,6 +155,11 @@ import java.util.function.Function;
  </ul>
  -->
  -->
+ <h3 class=released-version id="v2_8_0">2.8.0 (04.04.2022)</h3>
+ <ul>
+ <li class=new-in-release>Support product selection as a new feature {@link ProductSelection}</li>
+ <li class=new-in-release>Support product projection in Store {@link ProductProjectionInStoreByIdGet}, {@link ProductProjectionInStoreQuery} and {@link ProductProjectionByKeyGet}</li>
+ </ul>
  <h3 class=released-version id="v2_7_0">2.7.0 (24.02.2022)</h3>
  <ul>
  </ul>
