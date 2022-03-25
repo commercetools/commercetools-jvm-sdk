@@ -10,6 +10,7 @@ import io.sphere.sdk.products.Product;
 
 @ResourceValue
 @JsonDeserialize(as = ProductSelectionAssignmentImpl.class)
+@HasQueryModel
 public interface ProductSelectionAssignment {
 
     Reference<Product> getProduct();
