@@ -18,18 +18,6 @@ import static io.sphere.sdk.test.SphereTestUtils.en;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductSelectionCreateCommandIntegrationTest extends IntegrationTest {
-    @BeforeClass
-    public static void prepare() {
-        client().executeBlocking(TypeQuery.of().withPredicates(m -> m.key().is("json-demo-type-key")))
-                .getResults()
-                .forEach(type -> {
-                    client().executeBlocking(ProductSelectionQuery.of().withPredicates(m -> m.custom().type().is(type)))
-                            .getResults()
-                            .forEach(productSelection -> client().executeBlocking(ProductSelectionDeleteCommand.of(productSelection)));
-                    client().executeBlocking(TypeDeleteCommand.of(type));
-                });
-    }
-
     @Test
     public void execution() throws Exception {
         final LocalizedString name  = en("Summer");
@@ -37,13 +25,6 @@ public class ProductSelectionCreateCommandIntegrationTest extends IntegrationTes
 
         final ProductSelection productSelection = client().executeBlocking(ProductSelectionCreateCommand.of(productSelectionDraft));
         assertThat(productSelection.getType()).isEqualTo(ProductSelectionType.INDIVIDUAL);
+        assertThat(productSelection.getName()).isEqualTo(name);
     }
-
-    @Test
-    public void productSelectionCreateFromJson() throws IOException {
-        final ProductSelection productSelection = SphereJsonUtils.readObjectFromResource("productSelections/product-selection.json", ProductSelection.class);
-
-        assertThat(productSelection.getType()).isEqualTo(ProductSelectionType.INDIVIDUAL);
-    }
-
 }

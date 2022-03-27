@@ -1,6 +1,8 @@
 package io.sphere.sdk.productselections;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
 import io.sphere.sdk.models.SphereEnumeration;
 
 /**
@@ -9,14 +11,16 @@ import io.sphere.sdk.models.SphereEnumeration;
  * For the import and the export of values see also {@link SphereEnumeration}.
  */
 public enum ProductSelectionType {
-    INDIVIDUAL;
+    INDIVIDUAL("individual");
 
-    public static ProductSelectionType defaultValue() {
-        return INDIVIDUAL;
+    private final String jsonValue;
+
+    private ProductSelectionType(final String json) {
+        this.jsonValue = json;
     }
 
-    @JsonCreator
-    public static ProductSelectionType ofSphereValue(final String value) {
-        return SphereEnumeration.findBySphereName(values(), value).get();
+    @JsonValue
+    public String jsonValue() {
+        return this.jsonValue;
     }
 }

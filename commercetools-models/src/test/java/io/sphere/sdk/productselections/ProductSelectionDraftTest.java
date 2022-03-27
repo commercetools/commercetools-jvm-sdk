@@ -1,8 +1,11 @@
 package io.sphere.sdk.productselections;
 
 
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.LocalizedString;
 import org.junit.Test;
+
+import java.io.IOException;
 
 import static io.sphere.sdk.test.SphereTestUtils.en;
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
@@ -20,4 +23,10 @@ public class ProductSelectionDraftTest {
         assertThat(bla.getCustom()).isNull();
     }
 
+    @Test
+    public void productSelectionReadFromJson() throws IOException {
+        final ProductSelection productSelection = SphereJsonUtils.readObjectFromResource("productSelections/product-selection.json", ProductSelection.class);
+
+        assertThat(productSelection.getType()).isEqualTo(ProductSelectionType.INDIVIDUAL);
+    }
 }
