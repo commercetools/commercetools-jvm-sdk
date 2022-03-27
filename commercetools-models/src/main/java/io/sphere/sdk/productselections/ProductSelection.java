@@ -1,7 +1,5 @@
 package io.sphere.sdk.productselections;
 
-import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.*;
@@ -12,21 +10,13 @@ import javax.annotation.Nullable;
 
 @JsonDeserialize(as= ProductSelectionImpl.class)
 @ResourceValue
-@HasQueryEndpoint(additionalContentsQueryInterface = {
-        "    default ProductSelectionQuery byName(final Locale locale, final String name) {\n" +
-        "        return withPredicates(m -> m.name().lang(locale).is(name));\n" +
-        "    }\n" +
-        "\n" +
-        "    default ProductSelectionQuery byKey(final String key) {\n" +
-        "        return withPredicates(m -> m.key().is(key));\n" +
-        "    }\n"
-     })
+@HasQueryEndpoint()
 @ResourceInfo(pluralName = "product selections", pathElement = "product-selections")
-@HasByIdGetEndpoint
-@HasByKeyGetEndpoint
+@HasByIdGetEndpoint(javadocSummary = "Gets a product selection by ID.", includeExamples = "io.sphere.sdk.productselections.queries.ProductSelectionByIdGetIntegrationTest#fetchById()")
+@HasByKeyGetEndpoint (javadocSummary = "Gets a product selection by Key.", includeExamples = "io.sphere.sdk.productselections.queries.ProductSelectionByKeyGetIntegrationTest#fetchByKeyWithUpdateAction()")
 @HasCreateCommand(includeExamples = "io.sphere.sdk.productselections.commands.ProductSelectionCreateCommandIntegrationTest#execution()")
-@HasUpdateCommand(updateWith = {"key","id"})
-@HasDeleteCommand(deleteWith = {"key","id"})
+@HasUpdateCommand(javadocSummary = "Updates a cart.", updateWith = {"key","id"})
+@HasDeleteCommand(javadocSummary = "Deletes a cart", deleteWith = {"key","id"})
 @HasQueryModel
 public interface ProductSelection extends Resource<ProductSelection>, WithKey, Custom {
     @Nullable
