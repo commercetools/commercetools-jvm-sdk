@@ -15,11 +15,11 @@ import io.sphere.sdk.stores.Store;
  *
  * @see Store#getProductSelections() ()
  */
-public final class SetProductSelection extends UpdateActionImpl<Store> {
+public final class SetProductSelections extends UpdateActionImpl<Store> {
     private final List<ProductSelectionSettingDraft> productSelections;
 
-    private SetProductSelection(final List<ProductSelectionSettingDraft> productSelections) {
-        super("setProductSelection");
+    private SetProductSelections(final List<ProductSelectionSettingDraft> productSelections) {
+        super("setProductSelections");
         this.productSelections = productSelections;
     }
 
@@ -27,7 +27,7 @@ public final class SetProductSelection extends UpdateActionImpl<Store> {
         return productSelections;
     }
 
-    public static SetProductSelection of(final List<ProductSelectionSettingDraft> productSelections) {
-        return new SetProductSelection(productSelections);
+    public static SetProductSelections of(final List<ProductSelectionSettingDraft> productSelections) {
+        return new SetProductSelections(productSelections);
     }
 }
