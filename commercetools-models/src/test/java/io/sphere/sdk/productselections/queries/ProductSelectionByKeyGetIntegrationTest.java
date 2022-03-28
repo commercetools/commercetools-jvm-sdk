@@ -1,9 +1,6 @@
 package io.sphere.sdk.productselections.queries;
 
 import io.sphere.sdk.productselections.ProductSelection;
-import io.sphere.sdk.productselections.ProductSelectionType;
-import io.sphere.sdk.productselections.commands.ProductSelectionUpdateCommand;
-import io.sphere.sdk.productselections.commands.updateactions.SetKey;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
@@ -14,16 +11,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ProductSelectionByKeyGetIntegrationTest extends IntegrationTest {
 
     @Test
-    public void fetchByKeyWithUpdateAction()  {
+    public void execution() {
         withProductSelection(client(), productSelection -> {
-            assertThat(productSelection.getType()).isEqualTo(ProductSelectionType.INDIVIDUAL);
             final String key = randomKey();
-            final ProductSelection updatedProductSelection = client().executeBlocking(ProductSelectionUpdateCommand.of(productSelection, SetKey.of(key)));
 
-            final ProductSelection fetchedProductSelection = client().executeBlocking(ProductSelectionByKeyGet.of(key));
-            assertThat(fetchedProductSelection).isEqualTo(updatedProductSelection);
+            final ProductSelection loadedProductSelection = client().executeBlocking(ProductSelectionByKeyGet.of(key));
 
-            return updatedProductSelection;
+            assertThat(loadedProductSelection).isEqualTo(productSelection);
         });
+
     }
 }

@@ -2,44 +2,51 @@ package io.sphere.sdk.productselections;
 
 import io.sphere.sdk.client.BlockingSphereClient;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.productdiscounts.AbsoluteProductDiscountValue;
+import io.sphere.sdk.productdiscounts.ProductDiscount;
+import io.sphere.sdk.productdiscounts.ProductDiscountDraft;
+import io.sphere.sdk.productdiscounts.ProductDiscountPredicate;
+import io.sphere.sdk.productdiscounts.commands.ProductDiscountCreateCommand;
+import io.sphere.sdk.products.Product;
+
 import io.sphere.sdk.productselections.commands.ProductSelectionCreateCommand;
 import io.sphere.sdk.productselections.commands.ProductSelectionDeleteCommand;
+import io.sphere.sdk.test.SphereTestUtils;
 
+import java.util.function.BiFunction;
+import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.function.UnaryOperator;
 
+import static io.sphere.sdk.products.ProductFixtures.withUpdateableProduct;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 
 public class ProductSelectionFixtures {
-    public static ProductSelection createProductSelection(final BlockingSphereClient client, final ProductSelectionDraft productSelectionDraft) {
-        return client.executeBlocking(ProductSelectionCreateCommand.of(productSelectionDraft));
+
+    public static void withUpdateableProductSelection(final BlockingSphereClient client, final Function<ProductSelection, ProductSelection> function) {
+        withUpdateableProductSelection(client, (productSelection, product) -> function.apply(productSelection));
     }
 
-    public static ProductSelection createProductSelectionWithName(final BlockingSphereClient client) {
-        final LocalizedString name = en("Winter");
-        return createProductSelection(client, ProductSelectionDraft.ofName(name));
-    }
-
-    public static void withUpdateableProductSelection(final BlockingSphereClient client, final Function<ProductSelection, ProductSelection> f) {
+    public static void withUpdateableProductSelection(final BlockingSphereClient client, final BiFunction<ProductSelection, Product, ProductSelection> function) {
         final LocalizedString name = en("Summer");
-        withUpdateableProductSelection(client, ProductSelectionDraft.ofName(name), f);
-    }
 
-    public static void withUpdateableProductSelection(final BlockingSphereClient client, final ProductSelectionDraft productSelectionDraft, final Function<ProductSelection, ProductSelection> f) {
+        final ProductSelectionDraft productSelectionDraft =
+                    ProductSelectionDraft.ofName(name);
+
         final ProductSelection productSelection = client.executeBlocking(ProductSelectionCreateCommand.of(productSelectionDraft));
-        final ProductSelection updatedEntry = f.apply(productSelection);
-        client.executeBlocking(ProductSelectionDeleteCommand.of(updatedEntry));
+
+        client.executeBlocking(ProductSelectionDeleteCommand.of(productSelection));
     }
 
-    public static void withProductSelection(final BlockingSphereClient client, final UnaryOperator<ProductSelectionDraftBuilder> builderMapping, final UnaryOperator<ProductSelection> op) {
+    public static void withProductSelection(final BlockingSphereClient client, final ProductSelectionDraft draft, final Consumer<ProductSelection> consumer) {
+        final ProductSelection productSelection = client.executeBlocking(ProductSelectionCreateCommand.of(draft));
+        consumer.accept(productSelection);
+        client.executeBlocking(ProductSelectionDeleteCommand.of(productSelection));
+    }
+
+    public static void withProductSelection(final BlockingSphereClient client, Consumer<ProductSelection> consumer) {
         final LocalizedString name = en("Winter");
-        final ProductSelectionDraft productSelectionDraft = builderMapping.apply(ProductSelectionDraftBuilder.of(name).key(randomKey())).build();
+        final ProductSelectionDraft productSelectionDraft = ProductSelectionDraft.ofName(name);
         final ProductSelection productSelection = client.executeBlocking(ProductSelectionCreateCommand.of(productSelectionDraft));
-        final ProductSelection productSelectionToDelete = op.apply(productSelection);
-        client.executeBlocking(ProductSelectionDeleteCommand.of(productSelectionToDelete));
-    }
-
-    public static void withProductSelection(final BlockingSphereClient client, final UnaryOperator<ProductSelection> op) {
-        withProductSelection(client, a -> a, op);
+        consumer.accept(productSelection);
     }
 }

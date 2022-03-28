@@ -11,7 +11,6 @@ import static io.sphere.sdk.test.SphereTestUtils.en;
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static org.assertj.core.api.Assertions.assertThat;
 
-
 public class ProductSelectionDraftTest {
 
     @Test
