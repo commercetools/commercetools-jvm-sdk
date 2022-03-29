@@ -5,12 +5,6 @@ import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.productselections.ProductSelection;
 
-/**
- *
- * {@doc.gen intro}
- *
- * {@include.example io.sphere.sdk.productselections.commands.ProductSelectionUpdateCommandIntegrationTest#addProduct()}
- */
 public final class AddProduct extends UpdateActionImpl<ProductSelection> {
     private final ResourceIdentifier<Product> productResourceIdentifier;
 
