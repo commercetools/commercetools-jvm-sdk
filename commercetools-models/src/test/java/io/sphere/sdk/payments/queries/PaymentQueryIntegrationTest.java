@@ -8,6 +8,7 @@ import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.types.CustomFieldsDraft;
 import io.sphere.sdk.types.TypeFixtures;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
@@ -25,6 +26,7 @@ import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.*;
 
 public class PaymentQueryIntegrationTest extends IntegrationTest {
+    @Ignore
     @Test
     public void fullTest() {
         withStateByBuilder(client(), stateBuilder -> stateBuilder.initial(true).type(PAYMENT_STATE), paidState -> {
