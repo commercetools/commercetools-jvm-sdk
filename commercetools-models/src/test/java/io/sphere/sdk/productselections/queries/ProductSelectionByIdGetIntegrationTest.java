@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ProductSelectionByIdGetIntegrationTest extends IntegrationTest {
 
     @Test
-    public void execution() {
+    public void fetchById() {
         withProductSelection(client(), productSelection -> {
             final String productSelectionId = productSelection.getId();
 

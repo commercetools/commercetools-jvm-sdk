@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ProductSelectionByKeyGetIntegrationTest extends IntegrationTest {
 
     @Test
-    public void execution() {
+    public void fetchByKeyWithUpdateAction() {
         withProductSelection(client(), productSelection -> {
             final String key = randomKey();
 
