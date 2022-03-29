@@ -12,7 +12,7 @@ import static io.sphere.sdk.client.SphereRequestUtils.urlEncode;
 final class ProductSelectionByKeyProductsGetImpl extends MetaModelGetDslImpl<ProductSelection, ProductSelection, ProductSelectionByKeyProductsGet, ProductSelectionExpansionModel<ProductSelection>> implements ProductSelectionByKeyProductsGet {
 
     ProductSelectionByKeyProductsGetImpl(final String key) {
-        super(key, JsonEndpoint.of(ProductSelection.typeReference(), "/product-selections/" + "key=" + urlEncode(key) + "/products"), ProductSelectionExpansionModel.of(), ProductSelectionByKeyProductsGetImpl::new);
+        super(key, JsonEndpoint.of(ProductSelection.typeReference(), "/product-selections/key=" + urlEncode(key) + "/products"), ProductSelectionExpansionModel.of(), ProductSelectionByKeyProductsGetImpl::new);
     }
 
     public ProductSelectionByKeyProductsGetImpl(final MetaModelGetDslBuilder<ProductSelection, ProductSelection, ProductSelectionByKeyProductsGet, ProductSelectionExpansionModel<ProductSelection>> builder) {
