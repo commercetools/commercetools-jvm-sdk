@@ -17,6 +17,7 @@ import io.sphere.sdk.search.tokenizer.CustomSuggestTokenizer;
 import io.sphere.sdk.search.tokenizer.WhiteSpaceSuggestTokenizer;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -75,7 +76,8 @@ public class SuggestQueryIntegrationTest extends IntegrationTest {
 
         return client().executeBlocking(ProductCreateCommand.of(productDraftBuilder.build()));
     }
-
+// dependency to Search Activation of the project
+    @Ignore
     @Test
     public void execution() {
         final SearchKeywords searchKeywords = SearchKeywords.of(
@@ -97,7 +99,8 @@ public class SuggestQueryIntegrationTest extends IntegrationTest {
                             .anyMatch(suggestion -> suggestion.getText().equals("Swiss Army Knife")));
         });
     }
-
+    // dependency to Search Activation of the project
+    @Ignore
     @Test
     public void executionWithCustomTokenizer() {
         final SearchKeywords searchKeywords = SearchKeywords.of(
@@ -119,7 +122,8 @@ public class SuggestQueryIntegrationTest extends IntegrationTest {
                             .anyMatch(suggestion -> suggestion.getText().equals("Schweizer Messer")));
         });
     }
-
+    // dependency to Search Activation of the project
+    @Ignore
     @Test
     public void suggestionForMultipleLanguages() {
         final SearchKeywords searchKeywords = SearchKeywords.of(
@@ -148,7 +152,8 @@ public class SuggestQueryIntegrationTest extends IntegrationTest {
                             .anyMatch(suggestion -> suggestion.getText().equals("Multi tool")));
         });
     }
-
+    // dependency to Search Activation of the project
+    @Ignore
     @Test
     public void fuzzy() {
         final SearchKeywords searchKeywords = SearchKeywords.of(
