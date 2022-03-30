@@ -17,4 +17,10 @@ public interface ApiClientDraft {
     @Nullable
     Integer getDeleteDaysAfterCreation();
 
+    @Nullable
+    Long getAccessTokenValiditySeconds();
+
+    @Nullable
+    Long getRefreshTokenValiditySeconds();
+
 }

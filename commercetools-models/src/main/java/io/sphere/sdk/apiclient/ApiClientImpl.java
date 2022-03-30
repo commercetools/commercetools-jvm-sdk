@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 
 class ApiClientImpl extends ApiClientImplBase {
 
-    public ApiClientImpl(final @Nullable ZonedDateTime createdAt, final @Nullable ZonedDateTime deleteAt, final String id, final @Nullable LocalDate lastUsedAt, final String name, final String scope, final @Nullable String secret) {
-        super(createdAt, deleteAt, id, lastUsedAt, name, scope, secret);
+    public ApiClientImpl(final @Nullable ZonedDateTime createdAt, final @Nullable ZonedDateTime deleteAt, final String id, final @Nullable LocalDate lastUsedAt, final String name, final String scope, final @Nullable String secret, final @Nullable Long accessTokenValiditySeconds, final @Nullable Long refreshTokenValiditySeconds) {
+        super(accessTokenValiditySeconds, createdAt, deleteAt, id, lastUsedAt, name, refreshTokenValiditySeconds, scope, secret);
     }
 
     @Override
@@ -36,6 +36,8 @@ class ApiClientImpl extends ApiClientImplBase {
                 ", name='" + getName() + '\'' +
                 ", scope='" + getScope() + '\'' +
                 ", secret='*************'" +
+                ", accessTokenValiditySeconds='" + getAccessTokenValiditySeconds() + '\'' +
+                ", refreshTokenValiditySeconds='" + getRefreshTokenValiditySeconds() + '\'' +
                 '}';
     }
 }

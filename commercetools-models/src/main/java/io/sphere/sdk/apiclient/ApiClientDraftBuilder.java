@@ -12,7 +12,11 @@ import java.util.stream.Collectors;
 public final class ApiClientDraftBuilder extends ApiClientDraftBuilderBase {
 
     ApiClientDraftBuilder(final @Nullable Integer deleteDaysAfterCreation, final String name, final String scope) {
-        super(deleteDaysAfterCreation, name, scope);
+        super(null, deleteDaysAfterCreation, name, null, scope);
+    }
+
+    ApiClientDraftBuilder(final @Nullable Long accessTokenValiditySecondsfinal, @Nullable Integer deleteDaysAfterCreation, final String name, final @Nullable Long refreshTokenValiditySeconds, final String scope) {
+        super(accessTokenValiditySecondsfinal, deleteDaysAfterCreation, name, refreshTokenValiditySeconds, scope);
     }
 
     public static ApiClientDraftBuilder of(final String name, String projectKey, final SphereScope scope0, final SphereScope... scopes) {
