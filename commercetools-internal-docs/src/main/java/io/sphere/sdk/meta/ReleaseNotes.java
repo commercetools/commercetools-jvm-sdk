@@ -92,6 +92,7 @@ import io.sphere.sdk.products.messages.ProductRevertedStagedChangesMessage;
 import io.sphere.sdk.products.messages.ProductVariantDeletedMessage;
 import io.sphere.sdk.products.queries.*;
 import io.sphere.sdk.products.search.*;
+import io.sphere.sdk.productselections.ProductSelection;
 import io.sphere.sdk.producttypes.*;
 import io.sphere.sdk.producttypes.commands.updateactions.ChangeInputHint;
 import io.sphere.sdk.producttypes.commands.updateactions.RemoveEnumValues;
@@ -161,8 +162,10 @@ import java.util.function.Function;
  <li class=new-in-release>Support of the new properties {@link ApiClient#getAccessTokenValiditySeconds()} and {@link ApiClient#getRefreshTokenValiditySeconds()} as for ApiClient as for ApiClientDraft</li>
  <li class=new-in-release>Support of the HTTP Method HEAD and applied it for Products {@link ProductsHead}, {@link ProductByIdHead} and {@link ProductByKeyHead}</li>
  <li class=new-in-release>Support new custom field in {@link Delivery#getCustom()} and created update action for Order and OrderEdit {@link SetDeliveryCustomType}, {@link SetDeliveryCustomField}, {@link io.sphere.sdk.orderedits.commands.stagedactions.SetDeliveryCustomType} and {@link io.sphere.sdk.orderedits.commands.stagedactions.SetDeliveryCustomField}</li>
+ <li class=new-in-release>Support product selection as a new feature {@link ProductSelection}</li>
+ <li class=new-in-release>Support product projection in Store {@link ProductProjectionInStoreByIdGet}, {@link ProductProjectionInStoreQuery} and {@link ProductProjectionByKeyGet}</li>
  </ul>
- <h3 class=released-version id="v2_7_0">2.6.0 (24.02.2022)</h3>
+ <h3 class=released-version id="v2_7_0">2.7.0 (24.02.2022)</h3>
  <ul>
  </ul>
  <h3 class=released-version id="v2_6_0">2.6.0 (07.02.2022)</h3>

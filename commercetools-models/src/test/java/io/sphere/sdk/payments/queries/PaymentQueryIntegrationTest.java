@@ -93,8 +93,8 @@ public class PaymentQueryIntegrationTest extends IntegrationTest {
                     final PagedQueryResult<Payment> pagedQueryResult = client().executeBlocking(paymentQuery);
                     assertThat(pagedQueryResult).has(onlyTheResult(payment));
                     final Payment loadedPayment = pagedQueryResult.head().get();
-                    assertThat(loadedPayment.getCustomer()).is(expanded(customer));
-                    assertThat(loadedPayment.getPaymentStatus().getState()).is(expanded(paidState));
+                    assertThat(loadedPayment.getCustomer().getObj().getId()).isEqualTo(customer.getId());
+                    assertThat(loadedPayment.getPaymentStatus().getState().getObj().getId()).isEqualTo(paidState.getId());
 
                     client().executeBlocking(PaymentDeleteCommand.of(payment));
                 }));

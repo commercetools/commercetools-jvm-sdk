@@ -58,6 +58,10 @@ public interface Store extends Resource<Store>, Custom, WithKey {
     @IgnoreInQueryModel
     List<Reference<Channel>> getSupplyChannels();
 
+    @Nullable
+    @IgnoreInQueryModel
+    List<ProductSelectionSetting> getProductSelections();
+
     /**
      * Creates a container which contains the full Java type information to deserialize this class from JSON.
      *

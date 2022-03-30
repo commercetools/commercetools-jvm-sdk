@@ -76,7 +76,7 @@ public class SuggestQueryIntegrationTest extends IntegrationTest {
 
         return client().executeBlocking(ProductCreateCommand.of(productDraftBuilder.build()));
     }
-// dependency to Search Activation of the project
+    // dependency to Search Activation of the project
     @Ignore
     @Test
     public void execution() {
