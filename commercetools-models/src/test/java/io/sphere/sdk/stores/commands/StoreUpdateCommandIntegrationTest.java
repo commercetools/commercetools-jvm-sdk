@@ -4,9 +4,7 @@ import io.sphere.sdk.channels.ChannelDraft;
 import io.sphere.sdk.channels.ChannelRole;
 import io.sphere.sdk.json.TypeReferences;
 import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.stores.Store;
-import io.sphere.sdk.stores.StoreDraft;
-import io.sphere.sdk.stores.StoreDraftDsl;
+import io.sphere.sdk.stores.*;
 import io.sphere.sdk.stores.commands.updateactions.*;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
@@ -17,6 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static io.sphere.sdk.channels.ChannelFixtures.withChannel;
+import static io.sphere.sdk.productselections.ProductSelectionFixtures.withProductSelection;
 import static io.sphere.sdk.stores.StoreFixtures.withUpdateableStore;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
@@ -201,6 +200,22 @@ public class StoreUpdateCommandIntegrationTest extends IntegrationTest {
                 return storeWithCustomField;
             });
             return type;
+        });
+    }
+
+    @Test
+    public void setProductSelections() {
+        withProductSelection(client(), productSelection -> {
+            withUpdateableStore(client(), store -> {
+                Assertions.assertThat(store.getProductSelections()).isEmpty();
+                final ProductSelectionSettingDraft productSelectionSettingDraft =
+                        ProductSelectionSettingDraftBuilder.of(productSelection.toResourceIdentifier(), true).build();
+                final Store updatedStore = client().executeBlocking(StoreUpdateCommand.of(store, SetProductSelections.of(asList(productSelectionSettingDraft))));
+
+                Assertions.assertThat(updatedStore.getProductSelections()).isNotNull();
+
+                return updatedStore;
+            });
         });
     }
 }

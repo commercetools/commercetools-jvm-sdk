@@ -9,6 +9,7 @@ import io.sphere.sdk.messages.MessageDerivateHint;
 import io.sphere.sdk.messages.UserProvidedIdentifiers;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.stores.ProductSelectionSetting;
 import io.sphere.sdk.stores.Store;
 import io.sphere.sdk.types.CustomFields;
 
@@ -27,16 +28,18 @@ public final class StoreCreatedMessage extends GenericMessageImpl<Store> {
     private final List<String> languages;
     private final List<Reference<Channel>> distributionChannels;
     private final List<Reference<Channel>> supplyChannels;
+    private final List<ProductSelectionSetting> productSelections;
     @Nullable
     private final CustomFields custom;
 
     @JsonCreator
-    private StoreCreatedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final UserProvidedIdentifiers resourceUserProvidedIdentifiers, final LocalizedString name, final List<String> languages, final List<Reference<Channel>> distributionChannels, final List<Reference<Channel>> supplyChannels, final CustomFields custom) {
+    private StoreCreatedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final UserProvidedIdentifiers resourceUserProvidedIdentifiers, final LocalizedString name, final List<String> languages, final List<Reference<Channel>> distributionChannels, final List<Reference<Channel>> supplyChannels, final List<ProductSelectionSetting> productSelections, final CustomFields custom) {
         super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, resourceUserProvidedIdentifiers, Store.class);
         this.name = name;
         this.languages = languages;
         this.distributionChannels = distributionChannels;
         this.supplyChannels = supplyChannels;
+        this.productSelections = productSelections;
         this.custom = custom;
 
     }
@@ -55,6 +58,10 @@ public final class StoreCreatedMessage extends GenericMessageImpl<Store> {
 
     public List<Reference<Channel>> getSupplyChannels() {
         return supplyChannels;
+    }
+
+    public List<ProductSelectionSetting> getProductSelections() {
+        return productSelections;
     }
 
     @Nullable
