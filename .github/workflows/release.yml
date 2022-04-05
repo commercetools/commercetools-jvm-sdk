@@ -43,6 +43,11 @@ jobs:
           SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
           PASSPHRASE: ${{ secrets.PASSPHRASE }}
 
+      - name: "Git config"
+        run: |
+          git config --global user.email "automation@commercetools.de"
+          git config --global user.name "automation-commercetools"
+
       - name: "Prepare release"
         run: ./prepare-release.sh ${{ github.event.inputs.release_type }} ${{ github.ref_name }}
 
