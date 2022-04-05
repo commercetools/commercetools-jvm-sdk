@@ -51,8 +51,8 @@ jobs:
       - name: "Prepare release"
         run: ./prepare-release.sh ${{ github.event.inputs.release_type }} ${{ github.ref_name }}
 
-      - name: "Perform release"
-        run: |
 #          GPG_TTY=$(tty)
 #          export GPG_TTY
+      - name: "Perform release"
+        run: |
           ./perform-release.sh
