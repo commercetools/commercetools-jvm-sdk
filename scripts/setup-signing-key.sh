@@ -40,7 +40,7 @@ KEYNAME=`gpg --with-colons --keyid-format long --list-keys automation@commerceto
 
 cat > .mvn/maven.config <<_EOF
 -Dgpg.passphrase=$(cat signing_passphrase.txt)
--Dgnupg.keyName=$KEYNAME"
+-Dgnupg.keyName=$KEYNAME
 _EOF
 
 mkdir -p ~/.m2
