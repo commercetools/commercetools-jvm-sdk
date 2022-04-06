@@ -14,22 +14,22 @@ import javax.annotation.Nullable;
  * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandIntegrationTest#setAuthenticationMode()}
  */
 public final class SetAuthenticationMode extends UpdateActionImpl<Customer> {
-    private final AuthenticationMode authenticationMode;
+    private final AuthenticationMode authMode;
     @Nullable
     private final String password;
 
-    private SetAuthenticationMode(final AuthenticationMode authenticationMode, @Nullable final String password) {
+    private SetAuthenticationMode(final AuthenticationMode authMode, @Nullable final String password) {
         super("setAuthenticationMode");
-        this.authenticationMode = authenticationMode;
+        this.authMode = authMode;
         this.password = password;
     }
 
-    public static SetAuthenticationMode of(final AuthenticationMode authenticationMode, @Nullable final String password) {
-        return new SetAuthenticationMode(authenticationMode, password);
+    public static SetAuthenticationMode of(final AuthenticationMode authMode, @Nullable final String password) {
+        return new SetAuthenticationMode(authMode, password);
     }
 
-    public AuthenticationMode getAuthenticationMode() {
-        return authenticationMode;
+    public AuthenticationMode getAuthMode() {
+        return authMode;
     }
 
     @Nullable
