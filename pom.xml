@@ -600,6 +600,30 @@
             </build>
         </profile>
         <profile>
+            <id>gh-publish-site</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <!--
+                        mvn clean javadoc:aggregate scm-publish:publish-scm -P publish-site
+                        -->
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-scm-publish-plugin</artifactId>
+                        <version>${maven-scm-publish-plugin.version}</version>
+                        <configuration>
+                            <checkoutDirectory>${project.build.directory}/javadoc-stage</checkoutDirectory>
+                            <checkinComment>publishing Javadoc for ${project.artifactId}:${project.version}
+                            </checkinComment>
+                            <content>${project.build.directory}/site</content>
+                            <skipDeletedFiles>false</skipDeletedFiles>
+                            <pubScmUrl>scm:git:https://oauth2:${env.GITHUB_TOKEN}@github.com/commercetools/commercetools-jvm-sdk.git</pubScmUrl>
+                            <scmBranch>gh-pages</scmBranch>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
             <id>javadoc-jdk-8u121</id>
             <activation>
                 <activeByDefault>true</activeByDefault>

@@ -33,4 +33,4 @@ CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD`
 git push origin ${CURRENT_BRANCH} --tags
 
 echo "Publish release javadoc  ${RELEASE_VERSION}"
-./mvnw javadoc:aggregate scm-publish:publish-scm -Ppublish-site,javadoc-jdk-8u121 --no-transfer-progress
+./mvnw javadoc:aggregate scm-publish:publish-scm -Pgh-publish-site,javadoc-jdk-8u121 --no-transfer-progress
