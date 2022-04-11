@@ -111,6 +111,12 @@ io.sphere.sdk.products.expansion
 io.sphere.sdk.products.messages
 io.sphere.sdk.products.queries
 io.sphere.sdk.products.search
+io.sphere.sdk.productselections
+io.sphere.sdk.productselections.commands
+io.sphere.sdk.productselections.commands.updateactions
+io.sphere.sdk.productselections.expansion
+io.sphere.sdk.productselections.messages
+io.sphere.sdk.productselections.queries
 io.sphere.sdk.producttypes
 io.sphere.sdk.producttypes.commands
 io.sphere.sdk.producttypes.commands.updateactions
