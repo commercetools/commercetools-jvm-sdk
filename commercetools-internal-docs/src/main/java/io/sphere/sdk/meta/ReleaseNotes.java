@@ -157,7 +157,11 @@ import java.util.function.Function;
  </ul>
  -->
  -->
- <h3 class=released-version id="v2_8_0">2.8.0 (04.04.2022)</h3>
+ <h3 class=released-version id="v2_7_0">2.7.0 (04.04.2022)</h3>
+ <ul>
+ <li class=new-in-release>Support Authentication Mode for Customer {@link Customer#getAuthenticationMode()} and related update action {@link SetAuthenticationMode}</li>
+ </ul>
+ <h3 class=released-version id="v2_7_0">2.7.0 (04.04.2022)</h3>
  <ul>
  <li class=new-in-release>Support Authentication Mode for Customer {@link Customer#getAuthenticationMode()} and related update action {@link SetAuthenticationMode}</li>
  <li class=new-in-release>Support new Order message {@link OrderPaymentAddedMessage}</li>
@@ -166,9 +170,6 @@ import java.util.function.Function;
  <li class=new-in-release>Support new custom field in {@link Delivery#getCustom()} and created update action for Order and OrderEdit {@link SetDeliveryCustomType}, {@link SetDeliveryCustomField}, {@link io.sphere.sdk.orderedits.commands.stagedactions.SetDeliveryCustomType} and {@link io.sphere.sdk.orderedits.commands.stagedactions.SetDeliveryCustomField}</li>
  <li class=new-in-release>Support product selection as a new feature {@link ProductSelection}</li>
  <li class=new-in-release>Support product projection in Store {@link ProductProjectionInStoreByIdGet}, {@link ProductProjectionInStoreQuery} and {@link ProductProjectionByKeyGet}</li>
- </ul>
- <h3 class=released-version id="v2_7_0">2.7.0 (24.02.2022)</h3>
- <ul>
  </ul>
  <h3 class=released-version id="v2_6_0">2.6.0 (07.02.2022)</h3>
  <ul>
