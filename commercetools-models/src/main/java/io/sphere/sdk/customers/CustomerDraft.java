@@ -3,6 +3,7 @@ package io.sphere.sdk.customers;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.annotations.FactoryMethod;
+import io.sphere.sdk.annotations.IgnoreInQueryModel;
 import io.sphere.sdk.annotations.ResourceDraftValue;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.customergroups.CustomerGroup;
@@ -114,4 +115,7 @@ public interface CustomerDraft extends CustomDraft, WithKey {
     
     @Nullable
     List<ResourceIdentifier<Store>> getStores();
+
+    @Nullable
+    AuthenticationMode getAuthenticationMode();
 }

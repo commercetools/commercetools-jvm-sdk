@@ -378,6 +378,10 @@ public interface Customer extends Resource<Customer>, Custom, WithKey {
     @IgnoreInQueryModel
     LocalDate getDateOfBirth();
 
+    @Nullable
+    @IgnoreInQueryModel
+    AuthenticationMode getAuthenticationMode();
+
     @Override
     default Reference<Customer> toReference() {
         return Reference.of(referenceTypeId(), getId(), this);

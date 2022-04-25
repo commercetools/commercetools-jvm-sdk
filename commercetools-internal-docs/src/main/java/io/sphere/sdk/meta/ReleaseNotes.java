@@ -39,6 +39,7 @@ import io.sphere.sdk.customers.commands.CustomerPasswordResetCommand;
 import io.sphere.sdk.customers.commands.CustomerSignInCommand;
 import io.sphere.sdk.customers.commands.CustomerVerifyEmailCommand;
 import io.sphere.sdk.customers.commands.updateactions.AddShippingAddressId;
+import io.sphere.sdk.customers.commands.updateactions.SetAuthenticationMode;
 import io.sphere.sdk.customers.commands.updateactions.SetSalutation;
 import io.sphere.sdk.customers.errors.CustomerInvalidCurrentPassword;
 import io.sphere.sdk.customers.expansion.CustomerSignInResultExpansionModel;
@@ -156,17 +157,19 @@ import java.util.function.Function;
  </ul>
  -->
  -->
- <h3 class=released-version id="v2_8_0">2.8.0 (04.04.2022)</h3>
+ <h3 class=released-version id="v2_7_0">2.7.0 (04.04.2022)</h3>
  <ul>
- <li class=new-in-release>Support new Order message: {@link OrderPaymentAddedMessage}</li>
+ <li class=new-in-release>Support Authentication Mode for Customer {@link Customer#getAuthenticationMode()} and related update action {@link SetAuthenticationMode}</li>
+ </ul>
+ <h3 class=released-version id="v2_7_0">2.7.0 (04.04.2022)</h3>
+ <ul>
+ <li class=new-in-release>Support Authentication Mode for Customer {@link Customer#getAuthenticationMode()} and related update action {@link SetAuthenticationMode}</li>
+ <li class=new-in-release>Support new Order message {@link OrderPaymentAddedMessage}</li>
  <li class=new-in-release>Support of the new properties {@link ApiClient#getAccessTokenValiditySeconds()} and {@link ApiClient#getRefreshTokenValiditySeconds()} as for ApiClient as for ApiClientDraft</li>
  <li class=new-in-release>Support of the HTTP Method HEAD and applied it for Products {@link ProductsHead}, {@link ProductByIdHead} and {@link ProductByKeyHead}</li>
  <li class=new-in-release>Support new custom field in {@link Delivery#getCustom()} and created update action for Order and OrderEdit {@link SetDeliveryCustomType}, {@link SetDeliveryCustomField}, {@link io.sphere.sdk.orderedits.commands.stagedactions.SetDeliveryCustomType} and {@link io.sphere.sdk.orderedits.commands.stagedactions.SetDeliveryCustomField}</li>
  <li class=new-in-release>Support product selection as a new feature {@link ProductSelection}</li>
  <li class=new-in-release>Support product projection in Store {@link ProductProjectionInStoreByIdGet}, {@link ProductProjectionInStoreQuery} and {@link ProductProjectionByKeyGet}</li>
- </ul>
- <h3 class=released-version id="v2_7_0">2.7.0 (24.02.2022)</h3>
- <ul>
  </ul>
  <h3 class=released-version id="v2_6_0">2.6.0 (07.02.2022)</h3>
  <ul>

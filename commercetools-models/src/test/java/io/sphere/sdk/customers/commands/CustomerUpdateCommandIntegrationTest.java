@@ -365,6 +365,18 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
     }
 
     @Test
+    public void setAuthenticationMode() throws Exception {
+        withUpdateableCustomer(client(), customer -> {
+            CustomerUpdateCommand update = CustomerUpdateCommand.of(customer, SetAuthenticationMode.of(AuthenticationMode.EXTERNAL_AUTH, null));
+            final Customer updatedCustomer = client().executeBlocking(update);
+
+            assertThat(updatedCustomer.getAuthenticationMode()).isEqualTo(AuthenticationMode.EXTERNAL_AUTH);
+
+            return updatedCustomer;
+        });
+    }
+
+    @Test
     public void setDateOfBirth() throws Exception {
         withCustomer(client(), customer -> {
             assertThat(customer.getDateOfBirth()).isNull();
