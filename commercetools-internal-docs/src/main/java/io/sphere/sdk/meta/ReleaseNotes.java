@@ -157,7 +157,7 @@ import java.util.function.Function;
  </ul>
  -->
  -->
- <h3 class=released-version id="v2_7_0">2.7.0 (04.04.2022)</h3>
+ <h3 class=released-version id="v2_8_0">2.8.0 (02.05.2022)</h3>
  <ul>
  <li class=new-in-release>Support Authentication Mode for Customer {@link Customer#getAuthenticationMode()} and related update action {@link SetAuthenticationMode}</li>
  </ul>
