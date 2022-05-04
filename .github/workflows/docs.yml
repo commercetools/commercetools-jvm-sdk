@@ -1,0 +1,47 @@
+on:
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+*'
+  workflow_dispatch:
+name: Release Docs
+
+jobs:
+  release_docs:
+    name: "Release docs"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v2
+
+      - name: "Cache maven repository"
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: "Setup java"
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '8'
+
+      - name: "Setup signing key"
+        run: scripts/setup-signing-key.sh
+        env:
+          DECRYPTER: ${{ secrets.DECRYPTER }}
+          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+          PASSPHRASE: ${{ secrets.PASSPHRASE }}
+
+      - name: "Git config"
+        run: |
+          git config --global user.email "automation@commercetools.de"
+          git config --global user.name "automation-commercetools"
+
+      - name: "Perform docs release"
+        run: |
+          ./mvnw javadoc:aggregate scm-publish:publish-scm -Pgh-publish-site,javadoc-jdk-8u121 --no-transfer-progress
+        env:
+          GITHUB_TOKEN : ${{ secrets.GITHUB_TOKEN }}

@@ -32,5 +32,5 @@ git tag -a v${RELEASE_VERSION} -m 'TASK Release v${RELEASE_VERSION}'
 CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD`
 git push origin ${CURRENT_BRANCH} --tags
 
-echo "Publish release javadoc  ${RELEASE_VERSION}"
-./mvnw javadoc:aggregate scm-publish:publish-scm -Pgh-publish-site,javadoc-jdk-8u121 --no-transfer-progress
+#echo "Publish release javadoc  ${RELEASE_VERSION}"
+#./mvnw javadoc:aggregate scm-publish:publish-scm -Pgh-publish-site,javadoc-jdk-8u121 --no-transfer-progress
