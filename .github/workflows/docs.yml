@@ -42,6 +42,7 @@ jobs:
 
       - name: "Perform docs release"
         run: |
+          ./mvnw clean install -DskipTests --no-transfer-progress
           ./mvnw javadoc:aggregate scm-publish:publish-scm -Pgh-publish-site,javadoc-jdk-8u121 --no-transfer-progress
         env:
           GITHUB_TOKEN : ${{ secrets.GITHUB_TOKEN }}
