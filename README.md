@@ -1,9 +1,9 @@
 # commercetools JVM SDK
-:warning: **This commercetools JVM SDK is in its Active Support mode currently, and is planned to be deprecated, please note the following dates.
+:warning: **This commercetools JVM SDK is in its Maintenance Support mode currently, and is planned to be deprecated, please note the following dates.
 
 | Active Support        | Maintenance Support   | End of Life           |
 | --------------------- | --------------------- | --------------------- |
-| `28th February, 2022` | `31st December 2022.` | `1st January 2023.`   |
+| `28th February, 2022` | `31st December 2023.` | `1st January 2024.`   |
 
 We recommend to use our [Java SDK V2](https://docs.commercetools.com/sdk/jvm-sdk#java-sdk-v2).
 
