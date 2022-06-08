@@ -7,7 +7,7 @@ import org.asynchttpclient.DefaultAsyncHttpClient;
 import org.asynchttpclient.DefaultAsyncHttpClientConfig;
 
 /**
- * Creates an {@link HttpClient} with a commercetools configured underlying {@link org.asynchttpclient.AsyncHttpClient}.
+ * Creates an {@link HttpClient} with Composable Commerce configured underlying {@link org.asynchttpclient.AsyncHttpClient}.
  */
 public final class SphereAsyncHttpClientFactory extends SphereHttpClientFactory {
     @Deprecated

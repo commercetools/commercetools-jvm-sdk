@@ -7,7 +7,7 @@ import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.json.TypeReferences;
 
 /**
- * <p>Deletes a custom object in the platform.</p>
+ * <p>Deletes a custom object in the system.</p>
  *
  * {@include.example io.sphere.sdk.customobjects.commands.CustomObjectDeleteCommandIntegrationTest#demo()}
  *
@@ -18,7 +18,7 @@ public interface CustomObjectDeleteCommand<T> extends DeleteCommand<CustomObject
     /**
      * Deletes a custom object without optimistic concurrency control and uses the delete endpoint via container and key and returns the old custom object with the in {@code valueTypeReference}specified value type.
      * @param customObject the custom object to delete
-     * @param valueTypeReference the type reference to deserialize the updated custom object from the platform response
+     * @param valueTypeReference the type reference to deserialize the updated custom object from the API response
      * @param <T> type of the value of the custom object
      * @return custom object
      */
@@ -41,7 +41,7 @@ public interface CustomObjectDeleteCommand<T> extends DeleteCommand<CustomObject
      * Deletes a custom object without optimistic concurrency control and uses the delete endpoint via container and key and returns the old custom object with the in {@code valueTypeReference}specified value type.
      * @param container the container name of the custom object to delete
      * @param key the key name of the custom object to delete
-     * @param valueTypeReference the type reference to deserialize the updated custom object from the platform response
+     * @param valueTypeReference the type reference to deserialize the updated custom object from the API response
      * @param <T> type of the value of the custom object
      * @return custom object with a JsonNode value
      */
@@ -98,7 +98,7 @@ public interface CustomObjectDeleteCommand<T> extends DeleteCommand<CustomObject
      * Convenience method to not specify the {@link com.fasterxml.jackson.core.type.TypeReference} but lacking the accessible value in the result.
      * @param id the id of the custom object to delete
      * @param version the version of the custom object to delete
-     * @param valueTypeReference the type reference to deserialize the updated custom object from the platform response
+     * @param valueTypeReference the type reference to deserialize the updated custom object from the API response
      * @param <T> type of the value of the custom object
      * @return custom object with a JsonNode value
      */
@@ -126,8 +126,8 @@ public interface CustomObjectDeleteCommand<T> extends DeleteCommand<CustomObject
      * Deletes a custom object without optimistic concurrency control and uses the delete endpoint via container and key and returns the old custom object with the in {@code valueTypeReference}specified value type.
      *
      * @param customObject       the custom object to delete
-     * @param valueTypeReference the type reference to deserialize the updated custom object from the platform response
-     * @param eraseData          If set to {@literal true},  commercetools platform guarantees that all personal data related to the particular object, including invisible data, is erased, in compliance with the GDPR.
+     * @param valueTypeReference the type reference to deserialize the updated custom object from the API response
+     * @param eraseData          If set to {@literal true}, Composable Commerce guarantees that all personal data related to the particular object, including invisible data, is erased, in compliance with the GDPR.
      * @param <T>                type of the value of the custom object
      * @return custom object
      */
@@ -141,7 +141,7 @@ public interface CustomObjectDeleteCommand<T> extends DeleteCommand<CustomObject
      * @param customObject the custom object to delete
      * @param valueClass   the class of the value, if it not uses generics like lists, typically for POJOs
      * @param <T>          type of the value of the custom object
-     * @param eraseData    If set to {@literal true},  commercetools platform guarantees that all personal data related to the particular object, including invisible data, is erased, in compliance with the GDPR.
+     * @param eraseData    If set to {@literal true}, Composable Commerce guarantees that all personal data related to the particular object, including invisible data, is erased, in compliance with the GDPR.
      * @return custom object
      */
     static <T> DeleteCommand<CustomObject<T>> of(final CustomObject<T> customObject, final Class<T> valueClass, final boolean eraseData) {
@@ -153,9 +153,9 @@ public interface CustomObjectDeleteCommand<T> extends DeleteCommand<CustomObject
      *
      * @param container          the container name of the custom object to delete
      * @param key                the key name of the custom object to delete
-     * @param valueTypeReference the type reference to deserialize the updated custom object from the platform response
+     * @param valueTypeReference the type reference to deserialize the updated custom object from the API response
      * @param <T>                type of the value of the custom object
-     * @param eraseData          If set to {@literal true},  commercetools platform guarantees that all personal data related to the particular object, including invisible data, is erased, in compliance with the GDPR.
+     * @param eraseData          If set to {@literal true}, Composable Commerce guarantees that all personal data related to the particular object, including invisible data, is erased, in compliance with the GDPR.
      * @return custom object with a JsonNode value
      */
     static <T> DeleteCommand<CustomObject<T>> of(final String container, final String key, final TypeReference<T> valueTypeReference, final boolean eraseData) {
@@ -169,7 +169,7 @@ public interface CustomObjectDeleteCommand<T> extends DeleteCommand<CustomObject
      * @param key        the key name of the custom object to delete
      * @param valueClass the class of the value, if it not uses generics like lists, typically for POJOs
      * @param <T>        type of the value of the custom object
-     * @param eraseData  If set to {@literal true},  commercetools platform guarantees that all personal data related to the particular object, including invisible data, is erased, in compliance with the GDPR.
+     * @param eraseData  If set to {@literal true}, Composable Commerce guarantees that all personal data related to the particular object, including invisible data, is erased, in compliance with the GDPR.
      * @return custom object with a JsonNode value
      */
     static <T> DeleteCommand<CustomObject<T>> of(final String container, final String key, final Class<T> valueClass, final boolean eraseData) {
@@ -181,7 +181,7 @@ public interface CustomObjectDeleteCommand<T> extends DeleteCommand<CustomObject
      * Convenience method to not specify the {@link com.fasterxml.jackson.core.type.TypeReference} but lacking the accessible value in the result.
      *
      * @param customObject the custom object to delete
-     * @param eraseData    If set to {@literal true},  commercetools platform guarantees that all personal data related to the particular object, including invisible data, is erased, in compliance with the GDPR.
+     * @param eraseData    If set to {@literal true}, Composable Commerce guarantees that all personal data related to the particular object, including invisible data, is erased, in compliance with the GDPR.
      * @return custom object with a JsonNode value
      */
     static DeleteCommand<CustomObject<JsonNode>> ofJsonNode(final CustomObject<?> customObject, final boolean eraseData) {
@@ -194,7 +194,7 @@ public interface CustomObjectDeleteCommand<T> extends DeleteCommand<CustomObject
      *
      * @param container the container name of the custom object to delete
      * @param key       the key name of the custom object to delete
-     * @param eraseData If set to {@literal true},  commercetools platform guarantees that all personal data related to the particular object, including invisible data, is erased, in compliance with the GDPR.
+     * @param eraseData If set to {@literal true}, Composable Commerce guarantees that all personal data related to the particular object, including invisible data, is erased, in compliance with the GDPR.
      * @return custom object with a JsonNode value
      */
     static DeleteCommand<CustomObject<JsonNode>> ofJsonNode(final String container, final String key, final boolean eraseData) {
@@ -207,7 +207,7 @@ public interface CustomObjectDeleteCommand<T> extends DeleteCommand<CustomObject
      *
      * @param id        the id of the custom object to delete
      * @param version   the version of the custom object to delete
-     * @param eraseData If set to {@literal true},  commercetools platform guarantees that all personal data related to the particular object, including invisible data, is erased, in compliance with the GDPR.
+     * @param eraseData If set to {@literal true}, Composable Commerce guarantees that all personal data related to the particular object, including invisible data, is erased, in compliance with the GDPR.
      * @return custom object with a JsonNode value
      */
     static DeleteCommand<CustomObject<JsonNode>> ofJsonNode(final String id, final Long version, final boolean eraseData) {
@@ -220,9 +220,9 @@ public interface CustomObjectDeleteCommand<T> extends DeleteCommand<CustomObject
      *
      * @param id                 the id of the custom object to delete
      * @param version            the version of the custom object to delete
-     * @param valueTypeReference the type reference to deserialize the updated custom object from the platform response
+     * @param valueTypeReference the type reference to deserialize the updated custom object from the API response
      * @param <T>                type of the value of the custom object
-     * @param eraseData          If set to {@literal true},  commercetools platform guarantees that all personal data related to the particular object, including invisible data, is erased, in compliance with the GDPR.
+     * @param eraseData          If set to {@literal true}, Composable Commerce guarantees that all personal data related to the particular object, including invisible data, is erased, in compliance with the GDPR.
      * @return custom object with a JsonNode value
      */
     static <T> DeleteCommand<CustomObject<T>> of(final String id, final Long version, final TypeReference<T> valueTypeReference, final boolean eraseData) {
@@ -238,7 +238,7 @@ public interface CustomObjectDeleteCommand<T> extends DeleteCommand<CustomObject
      * @param version    the version of the custom object to delete
      * @param valueClass the class of the value, if it not uses generics like lists, typically for POJOs
      * @param <T>        type of the value of the custom object
-     * @param eraseData  If set to {@literal true},  commercetools platform guarantees that all personal data related to the particular object, including invisible data, is erased, in compliance with the GDPR.
+     * @param eraseData  If set to {@literal true}, Composable Commerce guarantees that all personal data related to the particular object, including invisible data, is erased, in compliance with the GDPR.
      * @return custom object with a JsonNode value
      */
     static <T> DeleteCommand<CustomObject<T>> of(final String id, final Long version, final Class<T> valueClass, final boolean eraseData) {

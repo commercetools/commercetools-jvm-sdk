@@ -24,7 +24,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Public utility class to work with JSON from the commercetools platform.
+ * Public utility class to work with JSON from commercetools Composable Commerce.
  * <p>
  * <p>If an error occurs, the {@link JsonException} (a {@link RuntimeException}) will be thrown:</p>
  * <p>
@@ -57,10 +57,10 @@ public final class SphereJsonUtils {
      * <li>Jackson config: do not use getters as setters</li>
      * <li>Jackson config: do not serialize null value properties</li>
      * <li>Serialize LinkedHashSet as Set</li>
-     * <li>commercetools LocalizedString</li>
-     * <li>commercetools Time, Date, DateTime</li>
-     * <li>commercetools Money for Java MonetaryAmount</li>
-     * <li>commercetools Enum</li>
+     * <li>Composable Commerce LocalizedString</li>
+     * <li>Composable Commerce Time, Date, DateTime</li>
+     * <li>Composable Commerce Money for Java MonetaryAmount</li>
+     * <li>Composable Commerce Enum</li>
      * </ul>
      *
      * @param objectMapper the object mapper to configure
@@ -85,7 +85,7 @@ public final class SphereJsonUtils {
     }
 
     /**
-     * Converts a commercetools platform Java object to JSON as String (one liner).
+     * Converts a commercetools Composable Commerce Java object to JSON as String (one liner).
      * <p>
      * {@include.example io.sphere.sdk.json.SphereJsonUtilsTest#toJsonString()}
      *
@@ -97,7 +97,7 @@ public final class SphereJsonUtils {
     }
 
     /**
-     * Converts a commercetools platform Java object to JSON as String (pretty).
+     * Converts a Composable Commerce Java object to JSON as String (pretty).
      * <p>
      * {@include.example io.sphere.sdk.json.SphereJsonUtilsTest#toPrettyJsonString()}
      *
@@ -109,7 +109,7 @@ public final class SphereJsonUtils {
     }
 
     /**
-     * Converts a commercetools platform Java object to JSON as {@link JsonNode}.
+     * Converts a Composable Commerce Java object to JSON as {@link JsonNode}.
      * <p>If {@code value} is of type String and contains JSON data, that will be ignored, {@code value} will be treated as just any String.
      * If you want to parse a JSON String to a JsonNode use {@link SphereJsonUtils#parse(java.lang.String)} instead.</p>
      * <p>
@@ -263,7 +263,7 @@ public final class SphereJsonUtils {
     }
 
     /**
-     * Creates a new {@link ObjectNode} created by the commercetools platform object mapper.
+     * Creates a new {@link ObjectNode} created by the commercetools Composable Commerce object mapper.
      * <p>
      * {@include.example io.sphere.sdk.json.SphereJsonUtilsTest#readObjectFromJsonNodeWithClass()}
      *

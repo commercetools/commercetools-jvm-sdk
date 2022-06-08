@@ -109,8 +109,8 @@ public final class RangeTermFacetSearchModel<T, V extends Comparable<? super V>>
 
     /**
      * Creates an instance of the search model to generate range and term facet expressions.
-     * @param attributePath the path of the attribute as expected by Commercetools Platform (e.g. "variants.attributes.color.key")
-     * @param typeSerializer the function to convert the provided value to a string accepted by Commercetools Platform
+     * @param attributePath the path of the attribute as expected by Composable Commerce (e.g. "variants.attributes.color.key")
+     * @param typeSerializer the function to convert the provided value to a string accepted by Composable Commerce
      * @param <T> type of the resource
      * @param <V> type of the value
      * @return new instance of RangeTermFacetSearchModel

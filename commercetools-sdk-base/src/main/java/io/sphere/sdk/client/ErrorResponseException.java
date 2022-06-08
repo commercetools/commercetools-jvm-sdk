@@ -9,7 +9,7 @@ import java.util.List;
 /**
  Typical exception for bad requests containing error information.
 
- <p>A <a href="https://docs.commercetools.com/http-api-errors.html#400-bad-request" target="_blank">list of error codes</a> can be found on the commercetools website.</p>
+ <p>A <a href="https://docs.commercetools.com/http-api-errors.html#400-bad-request" target="_blank">list of error codes</a> can be found on the commercetools Composable Commerce website.</p>
 
  */
 public class ErrorResponseException extends BadRequestException implements ErrorResponse {

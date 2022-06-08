@@ -39,7 +39,7 @@ public interface CustomLineItemDraft extends CustomDraft {
 
     /**
      * Possible custom tax rate.
-     * If set, this tax rate will override the tax rate selected by the platform.
+     * If set, this tax rate will override the tax rate selected by the system.
      *
      * @return external tax rate or null
      * @see #getTaxCategory()

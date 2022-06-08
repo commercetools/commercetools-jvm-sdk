@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.SphereEnumeration;
 
 /**
- * A rounding mode specifies how the platform should round monetary values.
+ * A rounding mode specifies how Composable Commerce should round monetary values.
  */
 public enum RoundingMode implements SphereEnumeration {
 

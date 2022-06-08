@@ -34,7 +34,7 @@ public final class TermFacetedSearchSearchModel<T> extends TermFacetedSearchBase
 
     /**
      * Creates an instance of the search model to generate term faceted search expressions.
-     * @param attributePath the path of the attribute as expected by Commercetools Platform (e.g. "variants.attributes.color.key")
+     * @param attributePath the path of the attribute as expected by Composable Commerce (e.g. "variants.attributes.color.key")
      * @param <T> type of the resource
      * @return new instance of TermFacetAndFilterSearchModel
      */

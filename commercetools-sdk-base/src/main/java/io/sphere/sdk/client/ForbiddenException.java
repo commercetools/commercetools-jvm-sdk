@@ -1,7 +1,7 @@
 package io.sphere.sdk.client;
 
 /**
- * The commercetools platform received the request but refuses to process it, typically to insufficient rights.
+ * The commercetools Composable Commerce API received the request but refuses to process it, typically to insufficient rights.
  *
  * For example it happens if an access token has been received to view products but a request to the customers endpoint is requested.
  *

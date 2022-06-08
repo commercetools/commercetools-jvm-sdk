@@ -6,7 +6,7 @@ import io.sphere.sdk.taxcategories.TaxCategory;
 
 public enum TaxMode implements SphereEnumeration {
     /**
-     * The tax rates are selected by the platform from the {@link TaxCategory tax categories} based on the cart shipping address.
+     * The tax rates are selected by the system from the {@link TaxCategory tax categories} based on the cart shipping address.
      */
     PLATFORM,
 
@@ -58,9 +58,9 @@ public enum TaxMode implements SphereEnumeration {
      * <p>It fails if the products does not have a tax category set</p>
      * {@include.example io.sphere.sdk.carts.ExternalTaxRatesIntegrationTest#errorMovingFromExternalToPlatformTaxMode()}
      *
-     * <p>In case you use {@link CustomLineItem}s as well as external and the platform tax mode it is advised to
+     * <p>In case you use {@link CustomLineItem}s as well as external and Composable Commerce tax mode, it is advised to
      * add the tax category at the time of the creation of the custom line item if you don't know which tax mode will be used later.
-     * A cart with an external tax mode having a custom line item without a tax category cannot transformed into a cart with platform tax calculation,
+     * A cart with an external tax mode having a custom line item without a tax category cannot be transformed into a cart with Composable Commerce tax calculation,
      * to recover from this the custom object needs to be removed and added with a tax category.</p>
      *
      */

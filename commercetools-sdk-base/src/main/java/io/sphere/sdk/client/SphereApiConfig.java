@@ -3,7 +3,7 @@ package io.sphere.sdk.client;
 import static io.sphere.sdk.client.ClientPackage.API_URL;
 
 /**
- * Configuration to make request for a platform web service, does not include authentication configuration or tokens.
+ * Configuration to make request for a Composable Commerce web service, does not include authentication configuration or tokens.
  */
 public interface SphereApiConfig extends SphereCorrelationIdConfig {
     String getApiUrl();

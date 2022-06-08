@@ -8,7 +8,7 @@ import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.models.ResourceView;
 
 /**
-  Custom objects are a way to store arbitrary JSON-formatted data on the platform. It allows you to persist data that does not fit our standard data model.
+  Custom objects are a way to store arbitrary JSON-formatted data in Composable Commerce. It allows you to persist data that does not fit our standard data model.
 
   The storage can be seen as key value store but with an additional prefix called container to improve querying custom objects and provide an additional namespace.
 
@@ -17,7 +17,7 @@ import io.sphere.sdk.models.ResourceView;
 <hr>
 
 A {@link io.sphere.sdk.customobjects.CustomObject} contains an ID, a version, timestamps
-like the other resources in the platform and in addition {@link io.sphere.sdk.customobjects.CustomObject#getContainer()},
+like the other resources in Composable Commerce and in addition {@link io.sphere.sdk.customobjects.CustomObject#getContainer()},
 {@link io.sphere.sdk.customobjects.CustomObject#getKey()} and {@link io.sphere.sdk.customobjects.CustomObject#getValue()}.
 
 <p>Container and key are namespaces like in a key-value store. The value is a JSON structure
@@ -88,9 +88,9 @@ Or you can just override the value using {@link io.sphere.sdk.customobjects.Cust
 <h3 id=increment-example>Using Optimistic Concurrency Control</h3>
 
 <p>In this example we want to create unique readable IDs (successive numbers)
-for customers since the platform returns IDs like 8547b810-9dad-11d1-80b4-44c04fd430c8.</p>
+for customers since the system returns IDs like 8547b810-9dad-11d1-80b4-44c04fd430c8.</p>
 
-The data model contains the last number and the last platform customer ID (just to have more than one field).
+The data model contains the last number and the last Composable Commerce customer ID (just to have more than one field).
 
 {@include.example io.sphere.sdk.customobjects.occexample.CustomerNumberCounter}
 

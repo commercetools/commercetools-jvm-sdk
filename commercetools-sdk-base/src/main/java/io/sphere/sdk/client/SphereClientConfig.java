@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import static io.sphere.sdk.client.ClientPackage.*;
 
 /**
- * The full api and auth configuration for a commercetools client.
+ * The full api and auth configuration for a Composable Commerce client.
  *
  * @see SphereClientConfigBuilder
  *
@@ -148,7 +148,7 @@ public final class SphereClientConfig extends Base implements SphereAuthConfig, 
     /**
      Creates a {@link SphereClientConfig} using {@link Properties} using {@code prefix} as namespace parameter.
 
-     An example properties file with "commercetools." (including the dot) as {@code prefix}:
+     An example properties file with "commercetoComposable Commerceols." (including the dot) as {@code prefix}:
      <pre>{@code
     commercetools.projectKey=YOUR project key without quotes
     commercetools.clientId=YOUR client id without quotes
@@ -169,7 +169,7 @@ public final class SphereClientConfig extends Base implements SphereAuthConfig, 
      {@value #PROPERTIES_KEY_API_URL_SUFFIX} and
      {@value #PROPERTIES_KEY_SCOPES_SUFFIX}.
 
-     @param properties properties containing the commercetools platform credentials
+     @param properties properties containing the Composable Commerce HTTP API credentials
      @param prefix prefix of the property keys
      @return a new {@link SphereClientConfig} containing the values of the properties.
      */

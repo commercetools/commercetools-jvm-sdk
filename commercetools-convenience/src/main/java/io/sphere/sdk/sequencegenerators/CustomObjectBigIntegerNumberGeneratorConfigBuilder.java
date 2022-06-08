@@ -67,7 +67,7 @@ public final class CustomObjectBigIntegerNumberGeneratorConfigBuilder extends Ba
     /**
      * Creates a new builder instance.
      *
-     * @param sphereClient A client to perform requests to the platform.
+     * @param sphereClient A client to perform requests to the Composable Commerce APIs.
      * @param key the key is part of the namespace to store the {@link CustomObject} with the last used sequence number, it normally is sth. like "orderNumber" or "customerNumber"
      * @return the builder instance
      * @see CustomObject

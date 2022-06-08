@@ -327,7 +327,7 @@ import java.util.function.Function;
     <li class=fixed-in-release>{@link TransactionDraftDsl} is now public</li>
     <li class=new-in-release>Added new method {@link ParcelDraft#of(TrackingData, List)}</li>
     <li class=new-in-release>Added support for carts and shopping lists configuration to {@link Project} </li>
-    <li class=new-in-release>{@link io.sphere.sdk.client.correlationid.CorrelationIdRequestDecorator} to attach a user-defined correlation id as a value for a header with key "X-Correlation-ID" on requests going to the commercetools platform.</li>
+    <li class=new-in-release>{@link io.sphere.sdk.client.correlationid.CorrelationIdRequestDecorator} to attach a user-defined correlation id as a value for a header with key "X-Correlation-ID" on requests going to the commercetools Composable Commerce.</li>
     <li class=fixed-in-release>fixed {@link io.sphere.sdk.messages.GenericMessageImpl} json deserialization where {@link GenericMessageImpl#getResourceUserProvidedIdentifiers()} was missing </li>
  </ul>
 
@@ -496,7 +496,7 @@ import java.util.function.Function;
  <li class=change-in-release>update jackson to 2.9.5</li>
  <li class=change-in-release>Update org.asynchttpclient:async-http-client from version 2.0.38 to 2.4.5</li>
  <li class=change-in-release>Changed return type of {@link Cart#getCustomerGroup()} and {@link Customer#getCustomerGroup()} from {@link Reference<CustomerGroup>} to {@link ResourceIdentifier<CustomerGroup>}</li>
- <li class=change-in-release>Add {@link io.sphere.sdk.utils.HighPrecisionMoneyImpl} to enable high precision money in commercetools plateform when needed.</li>
+ <li class=change-in-release>Add {@link io.sphere.sdk.utils.HighPrecisionMoneyImpl} to enable high precision money in Composable Commerce when needed.</li>
  <li class=change-in-release>to enable permanent erasure of users data, a boolean parameter can be set now to specify this in
     {@link io.sphere.sdk.customers.commands.CustomerDeleteCommand},{@link io.sphere.sdk.orders.commands.OrderDeleteCommand}, {@link io.sphere.sdk.carts.commands.CartDeleteCommand}, {@link io.sphere.sdk.payments.commands.PaymentDeleteCommand},
     {@link io.sphere.sdk.shoppinglists.commands.ShoppingListDeleteCommand}, {@link io.sphere.sdk.reviews.commands.ReviewDeleteCommand}, {@link io.sphere.sdk.discountcodes.commands.DiscountCodeDeleteCommand}, {@link CustomObjectDeleteCommand}.
@@ -957,7 +957,7 @@ import java.util.function.Function;
  <li class=change-in-release>The format of the User-Agent header changed to sth. like
  "{@code commercetools-jvm-sdk/1.5.0 (AHC/2.0) Java/1.8.0_101-b13 (Linux; amd64)}" from originally "{@code commercetools JVM SDK 1.4.0}". It is also possible to add a solution info, see {@link io.sphere.sdk.client.SolutionInfo}.</li>
  <li class=change-in-release>Using the default {@link SphereClient} will attempt to fetch a new token if an {@link io.sphere.sdk.client.InvalidTokenException} occurs.</li>
- <li class=change-in-release>{@link LocalizedString#slugified()} and {@link LocalizedString#slugifiedUnique()} generate a String with a max length of 256 to be valid for the commercetools platform. In addition, only allowed characters like {@code [-_a-zA-Z0-9]} will be in the output. Before that it was possible to keep for example a "+".</li>
+ <li class=change-in-release>{@link LocalizedString#slugified()} and {@link LocalizedString#slugifiedUnique()} generate a String with a max length of 256 to be valid for commercetools Composable Commerce. In addition, only allowed characters like {@code [-_a-zA-Z0-9]} will be in the output. Before that it was possible to keep for example a "+".</li>
  </ul>
 
  <h3 class=released-version id="v1_4_0">1.4.0 (29.09.2016)</h3>
@@ -1036,7 +1036,7 @@ import java.util.function.Function;
 
  <h3 class=released-version id="v1_0_0">1.0.0 (03.06.2016)</h3>
  <ul>
- <li class=new-in-release>a new commercetools landing page for the JVM SDK is available at <a href="https://docs.commercetools.com/sdk/jvm-sdk">https://docs.commercetools.com/sdk/jvm-sdk</a></li>
+ <li class=new-in-release>a new Composable Commerce landing page for the JVM SDK is available at <a href="https://docs.commercetools.com/sdk/jvm-sdk">https://docs.commercetools.com/sdk/jvm-sdk</a></li>
  <li class=new-in-release>the GitHub repository has been relocated to <a href="https://github.com/commercetools/commercetools-jvm-sdk">https://github.com/commercetools/commercetools-jvm-sdk</a></li>
  <li class=new-in-release>{@link io.sphere.sdk.client.RetrySphereClientDecorator} to deal with server errors and retry requests</li>
  <li class=new-in-release>{@link ProductProjectionSearch#withFuzzyLevel(java.lang.Integer)} to configure the fuzzy level in the product search</li>
@@ -1345,7 +1345,7 @@ import java.util.function.Function;
  {@include.example io.sphere.sdk.meta.M26Demo#queryCustomObjectsByKeyExample()}
  </div>
  </li>
- <li class=new-in-release>Added {@link Project#getCurrencies()} and {@link Project#getCurrencyUnits()} so you can get your enabled currencies for the commercetools project.</li>
+ <li class=new-in-release>Added {@link Project#getCurrencies()} and {@link Project#getCurrencyUnits()} so you can get your enabled currencies for the Project.</li>
 
  <li class=new-in-release>Added some short hand methods for the work with product attributes like {@link Attribute#getValueAsLong()} and {@link Attribute#getValueAsString()}. For all see {@link Attribute}.</li>
  <li class=new-in-release>Added {@code LocalizedToStringProductAttributeConverter} which provides some defaults to present product attribute (including monetary amounts and date) values as String. The behaviour can be changed through subclasses.</li>
@@ -1360,7 +1360,7 @@ import java.util.function.Function;
  <h3 class=released-version id="v1_0_0_M24">1.0.0-M24 (05.01.2016)</h3>
 
  <ul>
- <li class=new-in-release>Commercetools responses are gzipped which should result in less traffic and faster responses. {@link HttpResponse#getResponseBody()} returns the unpacked body.</li>
+ <li class=new-in-release>Composable Commerce responses are gzipped which should result in less traffic and faster responses. {@link HttpResponse#getResponseBody()} returns the unpacked body.</li>
  <li class=new-in-release>Added {@link io.sphere.sdk.client.BlockingSphereClient} which does not execute asynchronous: {@include.example io.sphere.sdk.meta.BlockingClientValueGetDemo}</li>
  <li class=new-in-release>Added {@link ProductProjectionExpansionModel#allVariants()} for expanding objects in masterVariant and the other variants with one code expression. {@include.example io.sphere.sdk.products.expansion.ProductProjectionExpansionModelTest#allVariants()}</li>
  <li class=new-in-release>{@link io.sphere.sdk.meta.GraphQLDocumentation GraphQL Example}</li>
@@ -1407,7 +1407,7 @@ import java.util.function.Function;
  <li class=change-in-release>Http core: {@link io.sphere.sdk.http.FormUrlEncodedHttpRequestBody} did not respect the order of elements and possible duplicates.
  Use  {@link io.sphere.sdk.http.FormUrlEncodedHttpRequestBody#of(List)} for construction and {@link FormUrlEncodedHttpRequestBody#getParameters()} for getting the data.
  {@code FormUrlEncodedHttpRequestBody#getData()} is deprecated.</li>
- <li class=new-in-release>Added {@link io.sphere.sdk.client.SphereClientConfig#ofProperties(Properties, String)} to get the commercetools credentials form a properties file.</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.client.SphereClientConfig#ofProperties(Properties, String)} to get the Composable Commerce credentials form a properties file.</li>
  <li class=new-in-release>For SDK contributors: <a href="https://github.com/commercetools/commercetools-jvm-sdk#executing-integration-tests" target="_blank">integration test credentials can be set via a properties file</a></li>
  </ul>
 
@@ -1506,7 +1506,7 @@ PagedSearchResult<ProductProjection> result = client.execute(search);
  <li class=change-in-release>Renamed {@code SearchSort} to {@link io.sphere.sdk.search.SortExpression}, which now shares the same properties as {@link io.sphere.sdk.search.FacetExpression} and {@link io.sphere.sdk.search.FilterExpression} under the {@link io.sphere.sdk.search.SearchExpression} interface.</li>
  <li class=change-in-release>The static factory method to directly build unsafe {@link io.sphere.sdk.search.FacetExpression} is now located in {@link io.sphere.sdk.search.TermFacetExpression}, {@link io.sphere.sdk.search.RangeFacetExpression} and {@link io.sphere.sdk.search.FilteredFacetExpression}, so that a facet expression for the corresponding type is obtained.</li>
  <li class=change-in-release>Moved related Search Model classes from {@code io.sphere.sdk.search} to {@code io.sphere.sdk.search.model} package, to clearly separate the Search Model from the Search API classes.</li>
- <li class=removed-in-release>Removed type parameters from {@link io.sphere.sdk.search.TermFacetResult}, {@link io.sphere.sdk.search.RangeFacetResult} and {@link io.sphere.sdk.search.FilteredFacetResult}, which now return simple strings as they are received from the platform.</li>
+ <li class=removed-in-release>Removed type parameters from {@link io.sphere.sdk.search.TermFacetResult}, {@link io.sphere.sdk.search.RangeFacetResult} and {@link io.sphere.sdk.search.FilteredFacetResult}, which now return simple strings as they are received from Composable Commerce.</li>
  <li class=new-in-release>Added {@link ProductProjection#getCategoryOrderHints()} and {@link ProductProjectionQueryModel#categoryOrderHints()}. It can be used for search as shown in the following example, but the meta model comes in a later release.
  <div class="rn-hidden">{@include.example io.sphere.sdk.products.ProductCategoryOrderHintIntegrationTest#searchForCategoryAndSort()}</div>
  </li>
@@ -1601,7 +1601,7 @@ PagedSearchResult<ProductProjection> result = client.execute(search);
  <li class=new-in-release>Added documentation how to query for large offsets in {@link QueryDocumentation}.</li>
  <li class=new-in-release>Added hints how to format date and monetary data in {@link FormattingDocumentation}.</li>
  <li class=new-in-release>Added {@link io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommand}.</li>
- <li class=new-in-release>To imrove the query speed the calculation of the total amount of items in commercetools platform can be deactivated with {@link io.sphere.sdk.products.queries.ProductQuery#withFetchTotal(boolean)}.</li>
+ <li class=new-in-release>To improve the query speed the calculation of the total amount of items in commercetools Composable Commerce can be deactivated with {@link io.sphere.sdk.products.queries.ProductQuery#withFetchTotal(boolean)}.</li>
  <li class=new-in-release>{@link QueryPredicate}s can be negated with {@link QueryPredicate#negate()}</li>
  <li class=new-in-release>Added {@link io.sphere.sdk.carts.CartState#ORDERED} and {@link Order#getCart()}.</li>
  <li class=new-in-release>Added {@code io.sphere.sdk.products.ProductProjection#findVariantBySky(String)}.</li>
@@ -1612,7 +1612,7 @@ PagedSearchResult<ProductProjection> result = client.execute(search);
  <li class=change-in-release>The instantiation of the {@link io.sphere.sdk.client.SphereClient} has been changed, see {@link GettingStarted} and {@link io.sphere.sdk.client.SphereClientFactory}.</li>
  <li class=change-in-release>Product type creation has been refactored. Have a look at {@link ProductAttributeDocumentation product attribute tutorial}.</li>
  <li class=change-in-release>Product prices have an ID and price updates need to be performed via the price ID: {@link io.sphere.sdk.products.commands.updateactions.ChangePrice}, {@link io.sphere.sdk.products.commands.updateactions.RemovePrice}. Keep in mind that {@code io.sphere.sdk.products.Price#equals(Object)} includes the ID.</li>
- <li class=change-in-release>The naming conventions in the commercetools platform have been changed:
+ <li class=change-in-release>The naming conventions in Composable Commerce have been changed:
  <ul>
  <li>PlainEnumValue is now EnumValue</li>
  <li>LocalizedStrings is now LocalizedString</li>
@@ -1621,7 +1621,7 @@ PagedSearchResult<ProductProjection> result = client.execute(search);
  </ul>
  </li>
 
- <li class=change-in-release>{@code JsonUtils} have been renamed to {@link io.sphere.sdk.json.SphereJsonUtils}, this is an internal utility class working for the commercetools platform context, it is not intended to build apps or libs on it.</li>
+ <li class=change-in-release>{@code JsonUtils} have been renamed to {@link io.sphere.sdk.json.SphereJsonUtils}, this is an internal utility class working for commercetools Composable Commerce context, it is not intended to build apps or libs on it.</li>
  <li class=change-in-release>{@code ChannelRoles} have been renamed to {@link io.sphere.sdk.channels.ChannelRole}.</li>
  <li class=change-in-release>{@code SearchText} is now {@link io.sphere.sdk.models.LocalizedStringEntry}</li>
  <li class=removed-in-release>Removed {@code ProductUpdateScope}, so all product update actions update only staged.</li>
@@ -1676,7 +1676,7 @@ PagedSearchResult<ProductProjection> result = client.execute(search);
  <li class=new-in-release>{@link io.sphere.sdk.client.SphereClientConfig#ofEnvironmentVariables(String)} to get the </li>
  <li class=change-in-release>The product attributes have been refactored, look at the {@link ProductAttributeDocumentation} how it works now.</li>
  <li class=change-in-release>{@link io.sphere.sdk.client.SphereClient} implements {@link AutoCloseable} instead of {@link java.io.Closeable}.</li>
- <li class=change-in-release>For timestamps we moved from {@link java.time.Instant} to {@link java.time.ZonedDateTime} since the latter also contains a timezone which better reflects the platforms date time data.</li>
+ <li class=change-in-release>For timestamps we moved from {@link java.time.Instant} to {@link java.time.ZonedDateTime} since the latter also contains a timezone which better reflects Composable Commerce's date time data.</li>
  <li class=change-in-release>Getting the child categories of a category is not in category anymore but in {@link CategoryTree#findChildren(Identifiable)}.</li>
  <li class=fixed-in-release>Sphere client does not shutdown actors properly.  See <a target="_blank" href="https://github.com/commercetools/commercetools-jvm-sdk/issues/491">#491</a>.</li>
  <li class=removed-in-release>{@code Category#getPathInTree()}</li>
@@ -1689,11 +1689,11 @@ PagedSearchResult<ProductProjection> result = client.execute(search);
  <h3 class=released-version id=v1_0_0_M14>1.0.0-M14 (27.05.2015)</h3>
  <ul>
  <li class=new-in-release>New fields in {@link io.sphere.sdk.products.Price}: {@link Price#getValidFrom()} and {@link Price#getValidUntil()}.</li>
- <li class=new-in-release>Use {@link io.sphere.sdk.products.queries.ProductProjectionQueryModel#allVariants()} to formulate a predicate for all variants. In the platform the json fields masterVariant (object) and variants (array of objects) together contain all variants.</li>
+ <li class=new-in-release>Use {@link io.sphere.sdk.products.queries.ProductProjectionQueryModel#allVariants()} to formulate a predicate for all variants. In Composable Commerce, the json fields masterVariant (object) and variants (array of objects) together contain all variants.</li>
  <li class=new-in-release>Using {@link ProductProjectionQuery#ofCurrent()} and {@link ProductProjectionQuery#ofStaged()} saves you the import of {@link ProductProjectionType}.</li>
- <li class=new-in-release>{@link CompletionStage} does not support by default timeouts which are quite important in a reactive application so you can decorate the {@link io.sphere.sdk.client.SphereClient} with {@link io.sphere.sdk.client.TimeoutSphereClientDecorator} to get a {@link java.util.concurrent.TimeoutException} after a certain amount of time. But this does NOT cancel the request to the platform.</li>
+ <li class=new-in-release>{@link CompletionStage} does not support by default timeouts which are quite important in a reactive application so you can decorate the {@link io.sphere.sdk.client.SphereClient} with {@link io.sphere.sdk.client.TimeoutSphereClientDecorator} to get a {@link java.util.concurrent.TimeoutException} after a certain amount of time. But this does NOT cancel the request to Composable Commerce.</li>
  <li class=new-in-release>The {@code io.sphere.sdk.reviews.Review} endpoints and models are implemented, but we suggest to not use it, since {@code io.sphere.sdk.reviews.Review}s cannot be deleted or marked as hidden.</li>
- <li class=new-in-release>New endpoint: Use {@link io.sphere.sdk.projects.queries.ProjectGet} to get the currencies, countries and languages of the commercetools project.</li>
+ <li class=new-in-release>New endpoint: Use {@link io.sphere.sdk.projects.queries.ProjectGet} to get the currencies, countries and languages of the Project.</li>
  <li class=new-in-release>Categories with SEO meta attributes {@link Category#getMetaTitle()}, {@link Category#getMetaDescription()} and {@link Category#getMetaKeywords()} and
  update actions {@link io.sphere.sdk.categories.commands.updateactions.SetMetaTitle}, {@link io.sphere.sdk.categories.commands.updateactions.SetMetaDescription} and {@link io.sphere.sdk.categories.commands.updateactions.SetMetaKeywords}.</li>
  <li class=new-in-release>Cart discounts: {@link io.sphere.sdk.cartdiscounts.commands.CartDiscountCreateCommand}.</li>
@@ -1704,7 +1704,7 @@ PagedSearchResult<ProductProjection> result = client.execute(search);
  <li class=change-in-release>Sort related classes for the Query API have been renamed with a "Query" prefix, to distinguish them from the Search API sort classes.</li>
  <li class=change-in-release>{@code io.sphere.sdk.queries.Predicate} has been renamed to {@link io.sphere.sdk.queries.QueryPredicate}.</li>
  <li class=change-in-release>The JVM SDK itself uses for tests the <a href="https://joel-costigliola.github.io/assertj/">assertj</a> assertion methods instead of fest assertions.</li>
- <li class=change-in-release>{@code io.sphere.sdk.products.commands.updateactions.SetMetaAttributes} has been removed since it is deprecated in the commercetools platform.
+ <li class=change-in-release>{@code io.sphere.sdk.products.commands.updateactions.SetMetaAttributes} has been removed since it is deprecated in Composable Commerce.
  Use {@link SetMetaTitle},
  {@link SetMetaDescription},
  {@link SetMetaKeywords} or {@link io.sphere.sdk.products.commands.updateactions.MetaAttributesUpdateActions} for all together.
@@ -1756,7 +1756,7 @@ PagedSearchResult<ProductProjection> result = client.execute(search);
  <ul>
  <li class=new-in-release>Added the {@link io.sphere.sdk.orders.commands.OrderImportCommand}.</li>
  <li class=new-in-release>Added the nested attributes: {@code io.sphere.sdk.attributes.AttributeAccess#ofNested()} + {@code io.sphere.sdk.attributes.AttributeAccess#ofNestedSet()}.</li>
- <li class=new-in-release>The error JSON body from the platform responses can be directly extracted as JSON with {@link io.sphere.sdk.client.SphereServiceException#getJsonBody()}.</li>
+ <li class=new-in-release>The error JSON body from Composable Commerce responses can be directly extracted as JSON with {@link io.sphere.sdk.client.SphereServiceException#getJsonBody()}.</li>
  <li class=new-in-release>{@link io.sphere.sdk.http.HttpResponse} also contains {@link io.sphere.sdk.http.HttpHeaders}.</li>
  <li class=new-in-release>Experimental search filter/facet/sort expression model {@code ProductProjectionSearchModel}. See also {@link io.sphere.sdk.meta.SearchDocumentation}.</li>
  <li class=change-in-release>The {@link io.sphere.sdk.producttypes.ProductType} creation has been simplified (TextAttributeDefinition, LocalizedStringsAttributeDefinition, ... are just AttributeDefinition), see {@link io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand} how to create them.</li>
@@ -1779,8 +1779,8 @@ PagedSearchResult<ProductProjection> result = client.execute(search);
  <ul>
  <li>{@link AsyncHttpClientAdapter} enables to use a custom underlying Ning HTTP client for settings like proxies or max connections per host.</li>
  <li>The new module {@code java-client-apache-async} contains an {@link ApacheHttpClientAdapter adapter} to use the Apache HTTP client instead of the current default client Ning.</li>
- <li>The {@link io.sphere.sdk.client.QueueSphereClientDecorator} enables to limit the amount of concurrent requests to the platform with a task queue.</li>
- <li>{@code io.sphere.sdk.client.SphereAccessTokenSupplierFactory} is a starting point to create custom access token suppliers for one token (either fetched from commercetools or as String) or auto refreshing for online shops.</li>
+ <li>The {@link io.sphere.sdk.client.QueueSphereClientDecorator} enables to limit the amount of concurrent requests to Composable Commerce with a task queue.</li>
+ <li>{@code io.sphere.sdk.client.SphereAccessTokenSupplierFactory} is a starting point to create custom access token suppliers for one token (either fetched from Composable Commerce or as String) or auto refreshing for online shops.</li>
  </ul>
  </li>
  <li class=new-in-release>Added {@link io.sphere.sdk.client.SphereRequestDecorator} to decorate {@link io.sphere.sdk.client.SphereRequest}s.</li>
@@ -1836,8 +1836,8 @@ PagedSearchResult<ProductProjection> result = client.execute(search);
  <li class=new-in-release>Added {@link io.sphere.sdk.products.ProductProjection#getVariant(int)} and {@link io.sphere.sdk.products.ProductProjection#getVariantOrMaster(int)} to find a product variant by id.</li>
  <li class=new-in-release>Added {@code VariantIdentifier} to have a container to address product variants which needs a product ID and a variant ID.</li>
  <li class=new-in-release>added {@link io.sphere.sdk.customers.commands.CustomerDeleteCommand} to delete customers.</li>
- <li class=new-in-release>Added {@link io.sphere.sdk.products.commands.updateactions.AddExternalImage} to connect products with images not hosted by the commercetools platform.</li>
- <li class=new-in-release>Added {@link io.sphere.sdk.products.commands.updateactions.RemoveImage} to disconnect images from a product (external images and commercetools platform hosted).</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.products.commands.updateactions.AddExternalImage} to connect products with images not hosted by the system.</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.products.commands.updateactions.RemoveImage} to disconnect images from a product (external images and commercetools Composable Commerce hosted).</li>
  <li class=new-in-release>Added {@link io.sphere.sdk.client.SphereAccessTokenSupplier} as authentication method in the {@link io.sphere.sdk.client.SphereClient}.
  It is possible to automatically refresh a token or just pass a token to the client, see {@link io.sphere.sdk.client.SphereClientFactory#createClient(io.sphere.sdk.client.SphereApiConfig, io.sphere.sdk.client.SphereAccessTokenSupplier)} and {@link io.sphere.sdk.client.SphereAccessTokenSupplier#ofConstantToken(String)}.</li>
 
@@ -1884,7 +1884,7 @@ PagedSearchResult<ProductProjection> result = client.execute(search);
  <h3>1.0.0-M7</h3>
 
  <ul>
- <li>Incompatible change: Classes to create templates for new entries in the platform like {@code NewCategory} have been renamed to {@link io.sphere.sdk.categories.CategoryDraft}. </li>
+ <li>Incompatible change: Classes to create templates for new entries in Composable Commerce like {@code NewCategory} have been renamed to {@link io.sphere.sdk.categories.CategoryDraft}. </li>
  <li>Incompatible change: {@link ProductTypeDraft} has now only
  factory methods with an explicit parameter for the attribute declarations to prevent to use
  the getter {@link ProductTypeDraft#getAttributes()} and list add operations. </li>

@@ -1,7 +1,7 @@
 package io.sphere.sdk.client;
 
 /**
- * HTTP code 413 response from the platform.
+ * HTTP code 413 response from the API.
  *
  * Probable error cause: Predicate for a query is too long. Try to split the request into multiple ones or use the in operator.
  *

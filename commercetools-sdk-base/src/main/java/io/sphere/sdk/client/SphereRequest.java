@@ -20,7 +20,7 @@ public interface SphereRequest<T> {
      Before calling this method, check with {@link #canDeserialize(HttpResponse)} if the response can be consumed.
 
      @return the deserialized object
-     @param httpResponse the http response of the platform
+     @param httpResponse the http response of the API
      */
     @Nullable
     T deserialize(final HttpResponse httpResponse);

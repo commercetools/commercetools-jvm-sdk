@@ -22,7 +22,7 @@ public final class QueryExecutionUtils {
     /**
      * Queries all elements matching a query by using an offset based pagination with page size {@value DEFAULT_PAGE_SIZE}.
      *
-     * @param client commercetools client
+     * @param client commercetools Composable Commerce client
      * @param query  query containing predicates and expansion paths
      * @param <T>    type of one query result element
      * @param <C>    type of the query
@@ -35,7 +35,7 @@ public final class QueryExecutionUtils {
     /**
      * Queries all elements matching a query by using an offset based pagination.
      *
-     * @param client   commercetools client
+     * @param client   commercetools Composable Commerce client
      * @param query    query containing predicates and expansion paths
      * @param pageSize size of one batch to fetch
      * @param <T>      type of one query result element
@@ -52,7 +52,7 @@ public final class QueryExecutionUtils {
      * page of elements queried. Eventually, the method returns a {@link CompletionStage} that contains a list of all
      * the results of the callbacks returned from every page.
      *
-     * @param client        commercetools client
+     * @param client        commercetools Composable Commerce client
      * @param query         query containing predicates and expansion paths
      * @param resultsMapper callback function that is called on every page queried.
      * @param <T>           type of one query result element
@@ -72,7 +72,7 @@ public final class QueryExecutionUtils {
      * Eventually, the method returns a {@link CompletionStage} that contains a list of all the results of the
      * callbacks returned from every page.
      *
-     * @param client        commercetools client
+     * @param client        commercetools Composable Commerce client
      * @param query         query containing predicates and expansion paths
      * @param resultsMapper callback function that is called on every page queried.
      * @param <T>           type of one query result element
@@ -108,7 +108,7 @@ public final class QueryExecutionUtils {
      * Queries all elements matching a query by using an offset based pagination. The method takes a consumer
      * {@link Consumer} that is applied on on every page of elements queried.
      *
-     * @param client          commercetools client
+     * @param client          commercetools Composable Commerce client
      * @param query           query containing predicates and expansion paths
      * @param resultsConsumer that is applied on every page queried.
      * @param <T>             type of one query result element

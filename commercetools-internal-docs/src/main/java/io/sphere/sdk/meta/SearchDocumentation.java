@@ -13,7 +13,7 @@ import io.sphere.sdk.models.Base;
 
  <p>Currently only products have a search endpoint for {@link io.sphere.sdk.products.ProductProjection} only. Therefore, be aware that the class to create a search request for products is called {@link io.sphere.sdk.products.search.ProductProjectionSearch}.</p>
 
- <p>The following examples in this document are based on the search for products. The product data defined in the platform used for the following code examples are:
+ <p>The following examples in this document are based on the search for products. The product data defined in Composable Commerce used for the following code examples are:
 
  <table border="1" class="doc-table" summary="table that shows the products used for the code examples">
     <tr>
@@ -64,7 +64,7 @@ import io.sphere.sdk.models.Base;
 
 <h3 id=pagination>Pagination</h3>
 
- <p>Use {@link io.sphere.sdk.search.SearchDsl#withOffset(Long)} and {@link io.sphere.sdk.search.SearchDsl#withLimit(Long)} for pagination. An extended explanation about how pagination works in the platform can be found in {@link io.sphere.sdk.meta.QueryDocumentation}.</p>
+ <p>Use {@link io.sphere.sdk.search.SearchDsl#withOffset(Long)} and {@link io.sphere.sdk.search.SearchDsl#withLimit(Long)} for pagination. An extended explanation about how pagination works in the API can be found in {@link io.sphere.sdk.meta.QueryDocumentation}.</p>
 
  <p>The following request skips the first 50 products and limits the result set to only 25 products:</p>
 

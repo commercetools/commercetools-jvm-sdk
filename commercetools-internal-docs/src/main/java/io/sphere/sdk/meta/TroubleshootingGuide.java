@@ -3,7 +3,7 @@ package io.sphere.sdk.meta;
 /**
  <h3 id="mixed-dependencies">Mixed dependencies</h3>
  <h4>Indications</h4>
- {@code java.lang.NoClassDefFoundError: <a commercetools related class>}
+ {@code java.lang.NoClassDefFoundError: <a Composable Commerce related class>}
  <h4>Possible solutions</h4>
  The JVM SDK depends on multiple modules like the Java client and the models, make sure that they have the same version number in your build file.
 
@@ -37,7 +37,7 @@ package io.sphere.sdk.meta;
 
   <h3 id="jackson-dependency">JSON Jackson Initialization Problems</h3>
   <h4>Indications</h4>
- {@code Could not initialize class <a commercetools related class>}
+ {@code Could not initialize class <a Composable Commerce related class>}
 
  <h4>Possible solutions</h4>
  It could be the case that you use a build tool like Maven which has other code in it depending on an older Jackson version.
@@ -130,7 +130,7 @@ package io.sphere.sdk.meta;
  <h3 id="product-not-found-by-text">Product not found</h3>
  <ul>
     <li>Maybe the product is not published. See {@link io.sphere.sdk.products.commands.updateactions.Publish}.</li>
-    <li>The product was not found for the search because the locale was not activated in the commercetools platform project. Enable it in the Merchant Center.</li>
+    <li>The product was not found for the search because the locale was not activated in the Project. Enable it in the Merchant Center.</li>
  </ul>
  */
 public final class TroubleshootingGuide {

@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * Set of enum constants in the commercetools platform.
+ * Set of enum constants in Composable Commerce.
  *
  * <p>Hints for importing {@link SphereEnumeration}s:</p>
  *

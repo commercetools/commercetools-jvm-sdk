@@ -44,14 +44,14 @@ import static java.util.stream.Collectors.toList;
  * <h3 id="verify-email">Verify the customers email address</h3>
  *
  * The customer contains the property {@link Customer#isEmailVerified()}, which is by default false.
- * If the shop is not supposed to use the commercetools platform email authentication and proved the customer email somehow else
+ * If the shop is not supposed to use the commercetools Composable Commerce's email authentication and proved the customer email somehow else
  * then a customer can be created with this field set to true: {@link CustomerDraftBuilder#emailVerified(Boolean)}.
  *
- * To verify the customers email address with commercetools platform first an email token needs to be created with {@link io.sphere.sdk.customers.commands.CustomerCreateEmailTokenCommand}.
+ * To verify the customers email address with Composable Commerce, first an email token needs to be created with {@link io.sphere.sdk.customers.commands.CustomerCreateEmailTokenCommand}.
  * You can specify a certain time frame so that the token gets invalidated at some point.
  * The response contains a token {@link CustomerToken#getValue()} which needs to be sent to the customer.
- * Commercetools platform won't send an email to the customer. The shop must implement this feature.
- * When the customer received the token send he/she needs to submit to the shop and then the shop to the platform with {@link io.sphere.sdk.customers.commands.CustomerVerifyEmailCommand}.
+ * commercetools Composable Commerce won't send an email to the customer. The shop must implement this feature.
+ * When the customer received the token send he/she needs to submit to the shop and then the shop to Composable Commerce with {@link io.sphere.sdk.customers.commands.CustomerVerifyEmailCommand}.
  *
  * <p>Example</p>
  *
@@ -79,8 +79,8 @@ import static java.util.stream.Collectors.toList;
  * This covers the case that the customer forgot the password or just want to change it.
  *
  * First a password reset token needs to be created with {@link CustomerCreatePasswordTokenCommand} by using the customers email.
- * This token ({@link CustomerToken#getValue()} from the result of {@link CustomerCreatePasswordTokenCommand}) needs to be sent to the customers email address by the shop. Commercetools platform won't send the email.
- * The customer receives the token and can submit it to the shop including the new password. To change then the password in the commercetools platform use {@link CustomerPasswordResetCommand}.
+ * This token ({@link CustomerToken#getValue()} from the result of {@link CustomerCreatePasswordTokenCommand}) needs to be sent to the customers email address by the shop. commercetools Composable Commerce won't send the email.
+ * The customer receives the token and can submit it to the shop including the new password. To change then the password in Composable Commerce, use {@link CustomerPasswordResetCommand}.
  * The result of the command is the updated customer, so if the customer needs to sign in after the password change the command {@link io.sphere.sdk.customers.commands.CustomerSignInCommand} is required.
  *
  * {@include.example io.sphere.sdk.customers.commands.CustomerPasswordResetCommandIntegrationTest#execution()}
