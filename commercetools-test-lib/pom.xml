@@ -51,6 +51,18 @@
             <version>${assertj.version}</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>com.commercetools.sdk</groupId>
+            <artifactId>commercetools-sdk-compat-v1</artifactId>
+            <version>8.8.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.commercetools.sdk</groupId>
+            <artifactId>commercetools-apachehttp-client</artifactId>
+            <version>8.8.0</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

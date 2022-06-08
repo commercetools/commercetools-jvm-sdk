@@ -1,5 +1,8 @@
 package io.sphere.sdk.test;
 
+import com.commercetools.api.client.ProjectApiRoot;
+import com.commercetools.api.defaultconfig.ApiRootBuilder;
+import com.commercetools.compat.CompatSphereClient;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import io.sphere.sdk.client.*;
@@ -12,6 +15,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 
+import io.vrap.rmf.base.client.oauth2.ClientCredentials;
 import org.apache.hc.client5.http.impl.async.CloseableHttpAsyncClient;
 import org.apache.hc.client5.http.impl.async.HttpAsyncClients;
 import org.apache.hc.client5.http.impl.nio.PoolingAsyncClientConnectionManager;
@@ -78,11 +82,18 @@ public abstract class IntegrationTest {
     public static void setupClient() {
         if (client == null) {
             final SphereClientConfig config = getSphereClientConfig();
-            final HttpClient httpClient = newHttpClient();
-            final SphereAccessTokenSupplier tokenSupplier = SphereAccessTokenSupplier.ofAutoRefresh(config, httpClient, false);
-            final SphereClient underlying = SphereClient.of(config, httpClient, tokenSupplier);
-            final SphereClient underlying1 = withMaybeDeprecationWarnTool(underlying);
-            client = BlockingSphereClient.of(underlying1, 30, TimeUnit.SECONDS);
+            ProjectApiRoot apiRoot = ApiRootBuilder.of()
+                    .defaultClient(ClientCredentials.of()
+                            .withClientSecret(config.getClientSecret())
+                            .withClientId(config.getClientId())
+                            .build())
+                    .build(config.getProjectKey());
+            client = BlockingSphereClient.of(CompatSphereClient.of(apiRoot), 30, TimeUnit.SECONDS);
+//            final HttpClient httpClient = newHttpClient();
+//            final SphereAccessTokenSupplier tokenSupplier = SphereAccessTokenSupplier.ofAutoRefresh(config, httpClient, false);
+//            final SphereClient underlying = SphereClient.of(config, httpClient, tokenSupplier);
+//            final SphereClient underlying1 = withMaybeDeprecationWarnTool(underlying);
+//            client = BlockingSphereClient.of(underlying1, 30, TimeUnit.SECONDS);
             assertProjectSettingsAreFine(client);
         }
     }
