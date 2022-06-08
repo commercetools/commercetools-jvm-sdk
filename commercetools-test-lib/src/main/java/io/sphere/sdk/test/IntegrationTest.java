@@ -62,6 +62,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
+import static io.sphere.sdk.utils.SphereInternalUtils.setOf;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class IntegrationTest {
@@ -89,14 +90,24 @@ public abstract class IntegrationTest {
     }
 
     static class NotFoundExceptionMiddlewareImpl implements NotFoundExceptionMiddleware {
-        NotFoundExceptionMiddlewareImpl() {
+        private final Set<ApiHttpMethod> methods;
+
+        public NotFoundExceptionMiddlewareImpl() {
+            methods = Collections.emptySet();
         }
 
-        public CompletableFuture<ApiHttpResponse<byte[]>> invoke(ApiHttpRequest request, Function<ApiHttpRequest, CompletableFuture<ApiHttpResponse<byte[]>>> next) {
+        public NotFoundExceptionMiddlewareImpl(final Set<ApiHttpMethod> methods) {
+            this.methods = methods;
+        }
+
+        @Override
+        public CompletableFuture<ApiHttpResponse<byte[]>> invoke(ApiHttpRequest request,
+                Function<ApiHttpRequest, CompletableFuture<ApiHttpResponse<byte[]>>> next) {
             return CompletableFutures.exceptionallyCompose(next.apply(request), (throwable) -> {
-                if (throwable.getCause() instanceof NotFoundException && request.getMethod() == ApiHttpMethod.GET) {
-                    ApiHttpResponse<byte[]> response = ((NotFoundException)throwable.getCause()).getResponse();
-                    return CompletableFuture.completedFuture(new ApiHttpResponse<>(response.getStatusCode(), response.getHeaders(), null));
+                if (throwable.getCause() instanceof NotFoundException && methods.contains(request.getMethod())) {
+                    ApiHttpResponse<byte[]> response = ((NotFoundException) throwable.getCause()).getResponse();
+                    return CompletableFuture
+                            .completedFuture(new ApiHttpResponse<>(response.getStatusCode(), response.getHeaders(), null));
                 }
                 CompletableFuture<ApiHttpResponse<byte[]>> future = new CompletableFuture<>();
                 future.completeExceptionally(throwable.getCause());
@@ -114,7 +125,7 @@ public abstract class IntegrationTest {
                             .withClientId(config.getClientId())
                             .build(),
                             ServiceRegion.GCP_US_CENTRAL1)
-                    .withMiddleware(new NotFoundExceptionMiddlewareImpl())
+                    .withMiddleware(new NotFoundExceptionMiddlewareImpl(Collections.singleton(ApiHttpMethod.GET)))
                     .build(config.getProjectKey());
             client = BlockingSphereClient.of(CompatSphereClient.of(apiRoot), 30, TimeUnit.SECONDS);
 //            final HttpClient httpClient = newHttpClient();
