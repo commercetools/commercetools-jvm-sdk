@@ -17,6 +17,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 
+import io.vrap.rmf.base.client.ApiHttpMethod;
 import io.vrap.rmf.base.client.ApiHttpRequest;
 import io.vrap.rmf.base.client.ApiHttpResponse;
 import io.vrap.rmf.base.client.error.NotFoundException;
@@ -49,6 +50,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.lang.reflect.Modifier;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.security.cert.X509Certificate;
 import java.util.*;
@@ -86,22 +88,22 @@ public abstract class IntegrationTest {
         final CurrencyUnit eur = DefaultCurrencyUnits.EUR;//workaround for https://github.com/commercetools/commercetools-jvm-sdk/issues/779
     }
 
-//    static class NotFoundExceptionMiddlewareImpl implements NotFoundExceptionMiddleware {
-//        NotFoundExceptionMiddlewareImpl() {
-//        }
-//
-//        public CompletableFuture<ApiHttpResponse<byte[]>> invoke(ApiHttpRequest request, Function<ApiHttpRequest, CompletableFuture<ApiHttpResponse<byte[]>>> next) {
-//            return CompletableFutures.exceptionallyCompose(next.apply(request), (throwable) -> {
-//                if (throwable.getCause() instanceof io.vrap.rmf.base.client.error.NotFoundException) {
-//                    ApiHttpResponse<byte[]> response = ((NotFoundException)throwable.getCause()).getResponse();
-//                    return CompletableFuture.completedFuture(new ApiHttpResponse<>(response.getStatusCode(), response.getHeaders(), null));
-//                }
-//                CompletableFuture<ApiHttpResponse<byte[]>> future = new CompletableFuture<>();
-//                future.completeExceptionally(throwable.getCause());
-//                return future;
-//            }).toCompletableFuture();
-//        }
-//    }
+    static class NotFoundExceptionMiddlewareImpl implements NotFoundExceptionMiddleware {
+        NotFoundExceptionMiddlewareImpl() {
+        }
+
+        public CompletableFuture<ApiHttpResponse<byte[]>> invoke(ApiHttpRequest request, Function<ApiHttpRequest, CompletableFuture<ApiHttpResponse<byte[]>>> next) {
+            return CompletableFutures.exceptionallyCompose(next.apply(request), (throwable) -> {
+                if (throwable.getCause() instanceof NotFoundException && request.getMethod() == ApiHttpMethod.GET) {
+                    ApiHttpResponse<byte[]> response = ((NotFoundException)throwable.getCause()).getResponse();
+                    return CompletableFuture.completedFuture(new ApiHttpResponse<>(response.getStatusCode(), response.getHeaders(), null));
+                }
+                CompletableFuture<ApiHttpResponse<byte[]>> future = new CompletableFuture<>();
+                future.completeExceptionally(throwable.getCause());
+                return future;
+            }).toCompletableFuture();
+        }
+    }
 
     public static void setupClient() {
         if (client == null) {
@@ -112,7 +114,7 @@ public abstract class IntegrationTest {
                             .withClientId(config.getClientId())
                             .build(),
                             ServiceRegion.GCP_US_CENTRAL1)
-                    .withMiddleware(NotFoundExceptionMiddleware.of())
+                    .withMiddleware(new NotFoundExceptionMiddlewareImpl())
                     .build(config.getProjectKey());
             client = BlockingSphereClient.of(CompatSphereClient.of(apiRoot), 30, TimeUnit.SECONDS);
 //            final HttpClient httpClient = newHttpClient();
