@@ -6,6 +6,7 @@ import com.commercetools.api.defaultconfig.ServiceRegion;
 import com.commercetools.compat.CompatSphereClient;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.spotify.futures.CompletableFutures;
 import io.sphere.sdk.client.*;
 import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.http.HttpMethod;
@@ -16,6 +17,9 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 
+import io.vrap.rmf.base.client.ApiHttpHeaders;
+import io.vrap.rmf.base.client.ApiHttpRequest;
+import io.vrap.rmf.base.client.ApiHttpResponse;
 import io.vrap.rmf.base.client.http.NotFoundExceptionMiddleware;
 import io.vrap.rmf.base.client.oauth2.ClientCredentials;
 import org.apache.hc.client5.http.impl.async.CloseableHttpAsyncClient;
@@ -47,12 +51,13 @@ import java.io.UncheckedIOException;
 import java.lang.reflect.Modifier;
 import java.nio.file.Paths;
 import java.security.cert.X509Certificate;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -81,6 +86,33 @@ public abstract class IntegrationTest {
         final CurrencyUnit eur = DefaultCurrencyUnits.EUR;//workaround for https://github.com/commercetools/commercetools-jvm-sdk/issues/779
     }
 
+    static class NotFoundExceptionMiddlewareImpl implements NotFoundExceptionMiddleware {
+        NotFoundExceptionMiddlewareImpl() {
+        }
+
+        public CompletableFuture<ApiHttpResponse<byte[]>> invoke(ApiHttpRequest request, Function<ApiHttpRequest, CompletableFuture<ApiHttpResponse<byte[]>>> next) {
+            return CompletableFutures.exceptionallyCompose(next.apply(request), (throwable) -> {
+                if (throwable.getCause() instanceof NotFoundException) {
+                    HttpResponse response = ((NotFoundException)throwable.getCause()).getHttpResponse();
+                    List<Map.Entry<String, String>> headers = response.getHeaders()
+                                                                         .getHeadersAsMap()
+                                                                         .entrySet()
+                                                                         .stream()
+                                                                         .flatMap(
+                                                                                 e -> e.getValue().stream().map(v -> new AbstractMap.SimpleEntry<String, String>(e.getKey(), v) {
+                                                                                 }))
+                                                                         .collect(Collectors.toList());
+
+                    return CompletableFuture.completedFuture(new ApiHttpResponse(response.getStatusCode(), new ApiHttpHeaders(headers), (Object)null));
+                } else {
+                    CompletableFuture<ApiHttpResponse<byte[]>> future = new CompletableFuture<>();
+                    future.completeExceptionally(throwable.getCause());
+                    return future;
+                }
+            }).toCompletableFuture();
+        }
+    }
+
     public static void setupClient() {
         if (client == null) {
             final SphereClientConfig config = getSphereClientConfig();
@@ -90,7 +122,7 @@ public abstract class IntegrationTest {
                             .withClientId(config.getClientId())
                             .build(),
                             ServiceRegion.GCP_US_CENTRAL1)
-                    .withMiddleware(NotFoundExceptionMiddleware.of())
+                    .withMiddleware(new NotFoundExceptionMiddlewareImpl())
                     .build(config.getProjectKey());
             client = BlockingSphereClient.of(CompatSphereClient.of(apiRoot), 30, TimeUnit.SECONDS);
 //            final HttpClient httpClient = newHttpClient();
