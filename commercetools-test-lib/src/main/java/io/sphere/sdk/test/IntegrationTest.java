@@ -103,12 +103,11 @@ public abstract class IntegrationTest {
                                                                                  }))
                                                                          .collect(Collectors.toList());
 
-                    return CompletableFuture.completedFuture(new ApiHttpResponse(response.getStatusCode(), new ApiHttpHeaders(headers), (Object)null));
-                } else {
-                    CompletableFuture<ApiHttpResponse<byte[]>> future = new CompletableFuture<>();
-                    future.completeExceptionally(throwable.getCause());
-                    return future;
+                    return CompletableFuture.completedFuture(new ApiHttpResponse<>(response.getStatusCode(), new ApiHttpHeaders(headers), null));
                 }
+                CompletableFuture<ApiHttpResponse<byte[]>> future = new CompletableFuture<>();
+                future.completeExceptionally(throwable.getCause());
+                return future;
             }).toCompletableFuture();
         }
     }
