@@ -2,6 +2,7 @@ package io.sphere.sdk.test;
 
 import com.commercetools.api.client.ProjectApiRoot;
 import com.commercetools.api.defaultconfig.ApiRootBuilder;
+import com.commercetools.api.defaultconfig.ServiceRegion;
 import com.commercetools.compat.CompatSphereClient;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -86,7 +87,8 @@ public abstract class IntegrationTest {
                     .defaultClient(ClientCredentials.of()
                             .withClientSecret(config.getClientSecret())
                             .withClientId(config.getClientId())
-                            .build())
+                            .build(),
+                            ServiceRegion.GCP_US_CENTRAL1)
                     .build(config.getProjectKey());
             client = BlockingSphereClient.of(CompatSphereClient.of(apiRoot), 30, TimeUnit.SECONDS);
 //            final HttpClient httpClient = newHttpClient();
