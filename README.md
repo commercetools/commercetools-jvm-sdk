@@ -101,7 +101,7 @@ Useful code from external developers
 ## Open Source Examples
 * [Sunrise Java](https://github.com/commercetools/commercetools-sunrise-java) - a shop using Play Framework 2.x with Handlebars.java as template engine, Google Guice for DI
 * [Donut](https://github.com/commercetools/commercetools-donut) - single product subscription shop example with Play Framework 2.x and Twirl (Plays default) as template engine
-* [Composable Commerce Spring MVC archetype](https://github.com/commercetools/commercetools-spring-mvc-archetype) - template integrating the SDK with Spring DI and Spring MVC and showing just some products, thymeleaf template engine
+* [commercetools Spring MVC archetype](https://github.com/commercetools/commercetools-spring-mvc-archetype) - template integrating the SDK with Spring DI and Spring MVC and showing just some products, thymeleaf template engine
 * [Reproducer Example](https://github.com/commercetools/commercetools-jvm-sdk-reproducer-example) - a demo which shows how to reproduce errors
 
 ## Stability
