@@ -7,7 +7,7 @@ import io.sphere.sdk.taxcategories.ExternalTaxRateDraft;
 import javax.annotation.Nullable;
 
 /**
- Sets a new tax rate that overrides the tax rate selected by the system.
+ Sets a new tax rate that overrides the tax rate selected by default.
 
  {@doc.gen intro}
 
