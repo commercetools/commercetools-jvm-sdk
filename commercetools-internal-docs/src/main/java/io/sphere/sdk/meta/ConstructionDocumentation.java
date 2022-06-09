@@ -54,7 +54,7 @@ import io.sphere.sdk.models.LocalizedString;
  *  <h3 id=persisting-changes>Persisting Changes</h3>
  *
  *
- *  <p>For persistent changes you need to use the commercetools Composable Commerce system
+ *  <p>For persistent changes you need to use a commercetools Composable Commerce
  *  client and to execute a {@link io.sphere.sdk.commands.Command}. Available commands for the Composable Commerce API resources
  *  are listed in {@link io.sphere.sdk.meta.SphereResources}</p>
  *
