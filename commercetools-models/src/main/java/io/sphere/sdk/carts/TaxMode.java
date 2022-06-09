@@ -60,7 +60,7 @@ public enum TaxMode implements SphereEnumeration {
      *
      * <p>In case you use {@link CustomLineItem}s as well as external and Composable Commerce tax mode, it is advised to
      * add the tax category at the time of the creation of the custom line item if you don't know which tax mode will be used later.
-     * A cart with an external tax mode having a custom line item without a tax category cannot be transformed into a cart with Composable Commerce tax calculation,
+     * A cart with an external tax mode and a custom line item without a tax category cannot be transformed into a cart with 'Platform' mode tax calculation,
      * to recover from this the custom object needs to be removed and added with a tax category.</p>
      *
      */
