@@ -5,7 +5,7 @@ import io.sphere.sdk.models.Base;
 import java.util.concurrent.CompletionStage;
 
 /**
- * Provides facilities to fetch Composable Commerce access and refresh tokens.
+ * Provides facilities to fetch access and refresh tokens from Composable Commerce.
  */
 public final class TokensFacade extends Base {
     private TokensFacade() {
