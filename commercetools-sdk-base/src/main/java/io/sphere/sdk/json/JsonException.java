@@ -6,7 +6,7 @@ import io.sphere.sdk.http.HttpResponse;
 /**
  * Exception concerning JSON.
  *
- * This may occur by parsing JSON from the Composable Commerce API and the POJO mapping does not work correctly.
+ * This may occur when parsing JSON from the Composable Commerce API and the POJO mapping does not work correctly.
  *
  * <h3>No suitable constructor</h3>
  * {@code detailMessage: com.fasterxml.jackson.databind.JsonMappingException:
