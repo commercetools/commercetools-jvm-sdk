@@ -7,7 +7,7 @@ import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.json.TypeReferences;
 
 /**
- * <p>Deletes a custom object in the system.</p>
+ * <p>Deletes a custom object in Composable Commerce.</p>
  *
  * {@include.example io.sphere.sdk.customobjects.commands.CustomObjectDeleteCommandIntegrationTest#demo()}
  *
