@@ -148,7 +148,7 @@ public final class SphereClientConfig extends Base implements SphereAuthConfig, 
     /**
      Creates a {@link SphereClientConfig} using {@link Properties} using {@code prefix} as namespace parameter.
 
-     An example properties file with "commercetoComposable Commerceols." (including the dot) as {@code prefix}:
+     An example properties file with "commercetools." (including the dot) as {@code prefix}:
      <pre>{@code
     commercetools.projectKey=YOUR project key without quotes
     commercetools.clientId=YOUR client id without quotes
