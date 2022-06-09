@@ -136,12 +136,14 @@ public abstract class IntegrationTest {
             final Map<String, String> v2TestConfig = v2TestConfig();
             final SphereClientConfig config = getSphereClientConfig();
             if (v2TestConfig.getOrDefault(ENVIRONMENT_VARIABLE_CLIENT_VERSION, "V1").equals("V2")) {
+                String region = v2TestConfig.computeIfAbsent(ENVIRONMENT_VARIABLE_SERVICE_REGION, s -> ServiceRegion.GCP_EUROPE_WEST1.name());
+                ServiceRegion serviceRegion = ServiceRegion.valueOf(region);
                 ProjectApiRoot apiRoot = ApiRootBuilder.of()
                        .defaultClient(ClientCredentials.of()
                                    .withClientSecret(config.getClientSecret())
                                    .withClientId(config.getClientId())
                                    .build(),
-                               ServiceRegion.valueOf(v2TestConfig.computeIfAbsent(ENVIRONMENT_VARIABLE_SERVICE_REGION, s -> ServiceRegion.GCP_EUROPE_WEST1.name())))
+                               serviceRegion)
                        .addNotFoundExceptionMiddleware(Collections.singleton(ApiHttpMethod.GET))
                        .build(config.getProjectKey());
                 client = BlockingSphereClient.of(CompatSphereClient.of(apiRoot), 30, TimeUnit.SECONDS);
