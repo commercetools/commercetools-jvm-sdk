@@ -5,7 +5,7 @@ import io.sphere.sdk.models.LocalizedString;
 /**
  * This documentation is about creating objects.
  *
- * The commercetools Composable Commerce APIs saves e-commerce data in the cloud. The JVM SDK is one way to read and write the data.
+ * The commercetools Composable Commerce APIs save e-commerce data in the cloud. The JVM SDK is one way to read and write the data.
  * There can be other tools like the Merchant Center or product sync tools which can also change data.
  * As a result the data loaded with the JVM SDK is a record of the present or the
  * past since another tool might have changed the data just after loading the data .
