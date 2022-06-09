@@ -1621,7 +1621,7 @@ PagedSearchResult<ProductProjection> result = client.execute(search);
  </ul>
  </li>
 
- <li class=change-in-release>{@code JsonUtils} have been renamed to {@link io.sphere.sdk.json.SphereJsonUtils}, this is an internal utility class working for commercetools Composable Commerce context, it is not intended to build apps or libs on it.</li>
+ <li class=change-in-release>{@code JsonUtils} have been renamed to {@link io.sphere.sdk.json.SphereJsonUtils}, this is an internal utility class working for the Composable Commerce context, it is not intended to build apps or libs on it.</li>
  <li class=change-in-release>{@code ChannelRoles} have been renamed to {@link io.sphere.sdk.channels.ChannelRole}.</li>
  <li class=change-in-release>{@code SearchText} is now {@link io.sphere.sdk.models.LocalizedStringEntry}</li>
  <li class=removed-in-release>Removed {@code ProductUpdateScope}, so all product update actions update only staged.</li>
