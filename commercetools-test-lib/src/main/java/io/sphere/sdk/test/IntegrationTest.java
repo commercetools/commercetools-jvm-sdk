@@ -122,7 +122,7 @@ public abstract class IntegrationTest {
     private static Map<String, String> v2TestConfig() {
         return asList(ENVIRONMENT_VARIABLE_SERVICE_REGION, ENVIRONMENT_VARIABLE_CLIENT_VERSION).stream()
                                        .map(suffix -> {
-                                          final String key = "JVM_SDK_IT" + suffix;
+                                          final String key = "JVM_SDK_IT_" + suffix;
                                           final String nullableValue = System.getenv(key);
                                           return new ImmutablePair<>(suffix, nullableValue);
                                        })
