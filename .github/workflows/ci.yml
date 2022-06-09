@@ -57,6 +57,10 @@ jobs:
       - run: mvn test verify --no-transfer-progress -Djava.util.logging.config.file=src/test/resources/logging.properties
         if: ${{ matrix.client_version == 'V1' }}
         env:
+          JVM_SDK_IT_CLIENT_ID: ${{ secrets.JVM_SDK_IT_CLIENT_ID }}
+          JVM_SDK_IT_CLIENT_SECRET: ${{ secrets.JVM_SDK_IT_CLIENT_SECRET }}
+          JVM_SDK_IT_PROJECT_KEY: ${{ secrets.JVM_SDK_IT_PROJECT_KEY }}
+          JVM_SDK_IT_SERVICE_REGION: ${{ secrets.JVM_SDK_IT_SERVICE_REGION }}
           JVM_SDK_IT_CLIENT_VERSION: ${{ matrix.client_version }}
 
       - run: mvn test verify --no-transfer-progress -Djava.util.logging.config.file=src/test/resources/logging.properties
@@ -65,6 +69,7 @@ jobs:
           JVM_SDK_IT_CLIENT_ID: ${{ secrets.JVM_SDK_V2_CLIENT_ID }}
           JVM_SDK_IT_CLIENT_SECRET: ${{ secrets.JVM_SDK_V2_CLIENT_SECRET }}
           JVM_SDK_IT_PROJECT_KEY: ${{ secrets.JVM_SDK_V2_PROJECT_KEY }}
+          JVM_SDK_IT_SERVICE_REGION: ${{ secrets.JVM_SDK_V2_SERVICE_REGION }}
           JVM_SDK_IT_CLIENT_VERSION: ${{ matrix.client_version }}
 
       - uses: stefanzweifel/git-auto-commit-action@v4
