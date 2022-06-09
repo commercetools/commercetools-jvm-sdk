@@ -13,6 +13,7 @@
 
     <logger name="sphere" level="ERROR"/>
     <logger name="io.sphere" level="ERROR"/>
+    <logger name="commercetools" level="ERROR"/>
     <logger name="com.ning.http.client" level="ERROR"/>
     <logger name="org.javamoney.moneta.DefaultMonetaryContextFactory" level="ERROR"/>
     <logger name="DefaultMonetaryContextFactory" level="ERROR"/>
