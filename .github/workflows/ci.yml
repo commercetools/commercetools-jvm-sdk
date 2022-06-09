@@ -25,6 +25,7 @@ jobs:
       JVM_SDK_IT_OAUTH_SCOPES: ${{ secrets.JVM_SDK_IT_SCOPES }}
       JVM_SDK_IT_OAUTH_AUTH_URL: ${{ secrets.JVM_SDK_IT_AUTH_URL }}
       JVM_SDK_IT_OAUTH_API_URL: ${{ secrets.JVM_SDK_IT_API_URL }}
+      JVM_SDK_IT_SERVICE_REGION: ${{ secrets.JVM_SDK_IT_SERVICE_REGION }}
 
     strategy:
       matrix:
