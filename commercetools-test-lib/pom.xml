@@ -54,13 +54,13 @@
         <dependency>
             <groupId>com.commercetools.sdk</groupId>
             <artifactId>commercetools-sdk-compat-v1</artifactId>
-            <version>8.8.0</version>
+            <version>${cocosdkv2.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.commercetools.sdk</groupId>
             <artifactId>commercetools-apachehttp-client</artifactId>
-            <version>8.8.0</version>
+            <version>${cocosdkv2.version}</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

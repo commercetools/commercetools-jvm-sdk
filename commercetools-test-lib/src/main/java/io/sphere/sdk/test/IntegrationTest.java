@@ -23,6 +23,7 @@ import io.vrap.rmf.base.client.ApiHttpResponse;
 import io.vrap.rmf.base.client.error.NotFoundException;
 import io.vrap.rmf.base.client.http.NotFoundExceptionMiddleware;
 import io.vrap.rmf.base.client.oauth2.ClientCredentials;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.hc.client5.http.impl.async.CloseableHttpAsyncClient;
 import org.apache.hc.client5.http.impl.async.HttpAsyncClients;
 import org.apache.hc.client5.http.impl.nio.PoolingAsyncClientConnectionManager;
@@ -50,7 +51,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.lang.reflect.Modifier;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.security.cert.X509Certificate;
 import java.util.*;
@@ -62,7 +62,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
-import static io.sphere.sdk.utils.SphereInternalUtils.setOf;
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class IntegrationTest {
@@ -116,23 +116,42 @@ public abstract class IntegrationTest {
         }
     }
 
+    public static final String ENVIRONMENT_VARIABLE_SERVICE_REGION = "SERVICE_REGION";
+    public static final String ENVIRONMENT_VARIABLE_CLIENT_VERSION = "CLIENT_VERSION";
+
+    private static Map<String, String> v2TestConfig() {
+        return asList(ENVIRONMENT_VARIABLE_SERVICE_REGION, ENVIRONMENT_VARIABLE_CLIENT_VERSION).stream()
+                                       .map(suffix -> {
+                                          final String key = "JVM_SDK_IT" + suffix;
+                                          final String nullableValue = System.getenv(key);
+                                          return new ImmutablePair<>(suffix, nullableValue);
+                                       })
+                                       .filter(pair -> null != pair.getRight())
+                                       .collect(Collectors.toMap(ImmutablePair::getLeft, ImmutablePair::getRight));
+    }
+
     public static void setupClient() {
+
         if (client == null) {
+            final Map<String, String> v2TestConfig = v2TestConfig();
             final SphereClientConfig config = getSphereClientConfig();
-            ProjectApiRoot apiRoot = ApiRootBuilder.of()
-                    .defaultClient(ClientCredentials.of()
-                            .withClientSecret(config.getClientSecret())
-                            .withClientId(config.getClientId())
-                            .build(),
-                            ServiceRegion.GCP_US_CENTRAL1)
-                    .withMiddleware(new NotFoundExceptionMiddlewareImpl(Collections.singleton(ApiHttpMethod.GET)))
-                    .build(config.getProjectKey());
-            client = BlockingSphereClient.of(CompatSphereClient.of(apiRoot), 30, TimeUnit.SECONDS);
-//            final HttpClient httpClient = newHttpClient();
-//            final SphereAccessTokenSupplier tokenSupplier = SphereAccessTokenSupplier.ofAutoRefresh(config, httpClient, false);
-//            final SphereClient underlying = SphereClient.of(config, httpClient, tokenSupplier);
-//            final SphereClient underlying1 = withMaybeDeprecationWarnTool(underlying);
-//            client = BlockingSphereClient.of(underlying1, 30, TimeUnit.SECONDS);
+            if (v2TestConfig.getOrDefault(ENVIRONMENT_VARIABLE_CLIENT_VERSION, "V1").equals("V2")) {
+                ProjectApiRoot apiRoot = ApiRootBuilder.of()
+                       .defaultClient(ClientCredentials.of()
+                                   .withClientSecret(config.getClientSecret())
+                                   .withClientId(config.getClientId())
+                                   .build(),
+                               ServiceRegion.valueOf(v2TestConfig.computeIfAbsent(ENVIRONMENT_VARIABLE_SERVICE_REGION, s -> ServiceRegion.GCP_EUROPE_WEST1.name())))
+                       .addNotFoundExceptionMiddleware(Collections.singleton(ApiHttpMethod.GET))
+                       .build(config.getProjectKey());
+                client = BlockingSphereClient.of(CompatSphereClient.of(apiRoot), 30, TimeUnit.SECONDS);
+            } else {
+                final HttpClient httpClient = newHttpClient();
+                final SphereAccessTokenSupplier tokenSupplier = SphereAccessTokenSupplier.ofAutoRefresh(config, httpClient, false);
+                final SphereClient underlying = SphereClient.of(config, httpClient, tokenSupplier);
+                final SphereClient underlying1 = withMaybeDeprecationWarnTool(underlying);
+                client = BlockingSphereClient.of(underlying1, 30, TimeUnit.SECONDS);
+            }
             assertProjectSettingsAreFine(client);
         }
     }
