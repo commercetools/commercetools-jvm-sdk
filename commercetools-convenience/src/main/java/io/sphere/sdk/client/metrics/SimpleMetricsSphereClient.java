@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * A decorator for {@link SphereClient}s which collects the time of serialization from and to JSON
- * as well as the time waiting for the response of the Composable Commerce API.
+ * as well as the time waiting for the response from the Composable Commerce API.
  *
  * {@include.example io.sphere.sdk.client.metrics.SimpleMetricsSphereClientDemo}
  */
