@@ -55,12 +55,12 @@ jobs:
       - run: mvn exec:java -pl commercetools-internal-docs -Dexec.mainClass="introspection.rules.RulesMain" -Dexec.classpathScope="test"
       - run: mvn exec:java -pl commercetools-models -Dexec.mainClass="io.sphere.sdk.client.MainMethodThreadLeakTest" -Dexec.classpathScope="test"
       - run: mvn test verify --no-transfer-progress -Djava.util.logging.config.file=src/test/resources/logging.properties
-        if: matrix.client_version == "V1"
+        if: ${{ matrix.client_version == "V1" }}
         env:
           JVM_SDK_IT_CLIENT_VERSION: ${{ matrix.client_version }}
 
       - run: mvn test verify --no-transfer-progress -Djava.util.logging.config.file=src/test/resources/logging.properties
-        if: matrix.client_version == "V2"
+        if: ${{ matrix.client_version == "V2" }}
         env:
           JVM_SDK_IT_CLIENT_ID: ${{ secrets.JVM_SDK_V2_CLIENT_ID }}
           JVM_SDK_IT_CLIENT_SECRET: ${{ secrets.JVM_SDK_V2_CLIENT_SECRET }}
