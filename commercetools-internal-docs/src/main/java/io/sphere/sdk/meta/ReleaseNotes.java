@@ -1837,7 +1837,7 @@ PagedSearchResult<ProductProjection> result = client.execute(search);
  <li class=new-in-release>Added {@code VariantIdentifier} to have a container to address product variants which needs a product ID and a variant ID.</li>
  <li class=new-in-release>added {@link io.sphere.sdk.customers.commands.CustomerDeleteCommand} to delete customers.</li>
  <li class=new-in-release>Added {@link io.sphere.sdk.products.commands.updateactions.AddExternalImage} to connect products with images not hosted by Composable Commerce.</li>
- <li class=new-in-release>Added {@link io.sphere.sdk.products.commands.updateactions.RemoveImage} to disconnect images from a product (external images and commercetools Composable Commerce hosted).</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.products.commands.updateactions.RemoveImage} to disconnect images from a product (external images and ones hosted by Composable Commerce).</li>
  <li class=new-in-release>Added {@link io.sphere.sdk.client.SphereAccessTokenSupplier} as authentication method in the {@link io.sphere.sdk.client.SphereClient}.
  It is possible to automatically refresh a token or just pass a token to the client, see {@link io.sphere.sdk.client.SphereClientFactory#createClient(io.sphere.sdk.client.SphereApiConfig, io.sphere.sdk.client.SphereAccessTokenSupplier)} and {@link io.sphere.sdk.client.SphereAccessTokenSupplier#ofConstantToken(String)}.</li>
 
