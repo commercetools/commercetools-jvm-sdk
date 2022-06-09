@@ -21,7 +21,7 @@ import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Internal base class to implement commands which deletes a resource by ID in the system.
+ * Internal base class to implement commands which delete a resource by ID in Composable Commerce.
  *
  * @param <T> the type of the result of the command
  *
