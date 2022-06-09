@@ -17,7 +17,7 @@ import static java.lang.String.format;
 import static java.util.stream.Collectors.joining;
 
 /**
- * Component that can fetch Composable Commerce access tokens.
+ * Component that can fetch access tokens from Composable Commerce.
  * Does not refresh them,
  */
 final class TokensSupplierImpl extends AutoCloseableService implements TokensSupplier {
