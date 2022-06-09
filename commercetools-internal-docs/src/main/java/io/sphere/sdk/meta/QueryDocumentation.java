@@ -4,7 +4,7 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.queries.QueryPredicate;
 
 /**
- <p>The Query API is for reading specific resources from the system.
+ <p>The Query API is for reading specific resources from Composable Commerce.
  The resources can be sorted and fetched in batches.</p>
 
  <p>First, you need to specify a query, for example:</p>
