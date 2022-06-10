@@ -59,8 +59,14 @@
         </dependency>
         <dependency>
             <groupId>com.commercetools.sdk</groupId>
-            <artifactId>commercetools-apachehttp-client</artifactId>
+            <artifactId>commercetools-http-client</artifactId>
             <version>${cocosdkv2.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>${okhttp.version}</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
