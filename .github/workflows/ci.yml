@@ -91,6 +91,7 @@ jobs:
           JVM_SDK_IT_OAUTH_API_URL: ${{ secrets.JVM_SDK_V2_API_URL }}
 
       - uses: stefanzweifel/git-auto-commit-action@v4
+        if: ${{ matrix.client_version == 'V1' }}
         with:
           file_pattern: 'licenses/*'
           disable_globbing: true

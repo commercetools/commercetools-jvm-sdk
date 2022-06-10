@@ -92,33 +92,6 @@ public abstract class IntegrationTest {
         final CurrencyUnit eur = DefaultCurrencyUnits.EUR;//workaround for https://github.com/commercetools/commercetools-jvm-sdk/issues/779
     }
 
-    static class NotFoundExceptionMiddlewareImpl implements NotFoundExceptionMiddleware {
-        private final Set<ApiHttpMethod> methods;
-
-        public NotFoundExceptionMiddlewareImpl() {
-            methods = Collections.emptySet();
-        }
-
-        public NotFoundExceptionMiddlewareImpl(final Set<ApiHttpMethod> methods) {
-            this.methods = methods;
-        }
-
-        @Override
-        public CompletableFuture<ApiHttpResponse<byte[]>> invoke(ApiHttpRequest request,
-                Function<ApiHttpRequest, CompletableFuture<ApiHttpResponse<byte[]>>> next) {
-            return CompletableFutures.exceptionallyCompose(next.apply(request), (throwable) -> {
-                if (throwable.getCause() instanceof NotFoundException && methods.contains(request.getMethod())) {
-                    ApiHttpResponse<byte[]> response = ((NotFoundException) throwable.getCause()).getResponse();
-                    return CompletableFuture
-                            .completedFuture(new ApiHttpResponse<>(response.getStatusCode(), response.getHeaders(), null));
-                }
-                CompletableFuture<ApiHttpResponse<byte[]>> future = new CompletableFuture<>();
-                future.completeExceptionally(throwable.getCause());
-                return future;
-            }).toCompletableFuture();
-        }
-    }
-
     public static final String ENVIRONMENT_VARIABLE_SERVICE_REGION = "SERVICE_REGION";
     public static final String ENVIRONMENT_VARIABLE_CLIENT_VERSION = "CLIENT_VERSION";
 
