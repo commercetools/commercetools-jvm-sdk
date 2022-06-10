@@ -61,6 +61,7 @@ jobs:
       - name: "Build SDK v2"
         if: ${{ matrix.client_version == 'V2' }}
         run: ./gradlew publishMavenPublicationToMavenLocal
+        working-directory: commercetools-sdk-java-v2
 
       - run: mvn clean install javadoc:aggregate -DskipTests --no-transfer-progress -Pjavadoc-jdk-8u121,third-party-licenses
       - run: mvn exec:java -pl commercetools-internal-docs -Dexec.mainClass="introspection.rules.RulesMain" -Dexec.classpathScope="test"
