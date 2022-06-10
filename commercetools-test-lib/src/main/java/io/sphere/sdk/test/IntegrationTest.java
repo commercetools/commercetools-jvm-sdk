@@ -1,5 +1,6 @@
 package io.sphere.sdk.test;
 
+import com.commercetools.api.client.ApiInternalLoggerFactory;
 import com.commercetools.api.client.ProjectApiRoot;
 import com.commercetools.api.defaultconfig.ApiRootBuilder;
 import com.commercetools.api.defaultconfig.ServiceRegion;
@@ -20,6 +21,7 @@ import io.sphere.sdk.queries.Query;
 import io.vrap.rmf.base.client.ApiHttpMethod;
 import io.vrap.rmf.base.client.ApiHttpRequest;
 import io.vrap.rmf.base.client.ApiHttpResponse;
+import io.vrap.rmf.base.client.error.ApiClientException;
 import io.vrap.rmf.base.client.error.NotFoundException;
 import io.vrap.rmf.base.client.http.NotFoundExceptionMiddleware;
 import io.vrap.rmf.base.client.oauth2.ClientCredentials;
@@ -42,6 +44,7 @@ import org.junit.Rule;
 import org.junit.rules.Timeout;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.event.Level;
 
 import javax.annotation.Nullable;
 import javax.money.CurrencyUnit;
@@ -139,13 +142,14 @@ public abstract class IntegrationTest {
                 String region = v2TestConfig.computeIfAbsent(ENVIRONMENT_VARIABLE_SERVICE_REGION, s -> ServiceRegion.GCP_EUROPE_WEST1.name());
                 ServiceRegion serviceRegion = ServiceRegion.valueOf(region);
                 ProjectApiRoot apiRoot = ApiRootBuilder.of()
-                       .defaultClient(ClientCredentials.of()
+                        .defaultClient(ClientCredentials.of()
                                    .withClientSecret(config.getClientSecret())
                                    .withClientId(config.getClientId())
                                    .build(),
                                serviceRegion)
-                       .addNotFoundExceptionMiddleware(Collections.singleton(ApiHttpMethod.GET))
-                       .build(config.getProjectKey());
+                        .withInternalLoggerFactory(ApiInternalLoggerFactory::get, Level.INFO, Level.INFO, Level.ERROR, Collections.singletonMap(ApiClientException.class, Level.INFO))
+                        .addNotFoundExceptionMiddleware(Collections.singleton(ApiHttpMethod.GET))
+                        .build(config.getProjectKey());
                 client = BlockingSphereClient.of(CompatSphereClient.of(apiRoot), 30, TimeUnit.SECONDS);
             } else {
                 final HttpClient httpClient = newHttpClient();
