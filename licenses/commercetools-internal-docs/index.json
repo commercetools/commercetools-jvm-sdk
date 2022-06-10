@@ -1,8 +1,53 @@
 {
     "dependencies": [
         {
+            "moduleName": "com.commercetools.sdk:commercetools-apachehttp-client",
+            "moduleVersion": "8.9.0",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "com.commercetools.sdk:commercetools-money",
+            "moduleVersion": "8.9.0",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "com.commercetools.sdk:commercetools-sdk-compat-v1",
+            "moduleVersion": "8.9.0",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "com.commercetools.sdk:commercetools-sdk-java-api",
+            "moduleVersion": "8.9.0",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "com.commercetools.sdk:rmf-java-base",
+            "moduleVersion": "8.9.0",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
             "moduleName": "com.commercetools.sdk.jvm.core:commercetools-convenience",
-            "moduleVersion": "2.8.0-SNAPSHOT",
+            "moduleVersion": "2.9.0-SNAPSHOT",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -11,7 +56,7 @@
         },
         {
             "moduleName": "com.commercetools.sdk.jvm.core:commercetools-java-client",
-            "moduleVersion": "2.8.0-SNAPSHOT",
+            "moduleVersion": "2.9.0-SNAPSHOT",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -20,7 +65,7 @@
         },
         {
             "moduleName": "com.commercetools.sdk.jvm.core:commercetools-java-client-ahc-2_0",
-            "moduleVersion": "2.8.0-SNAPSHOT",
+            "moduleVersion": "2.9.0-SNAPSHOT",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -29,7 +74,7 @@
         },
         {
             "moduleName": "com.commercetools.sdk.jvm.core:commercetools-java-client-apache-async",
-            "moduleVersion": "2.8.0-SNAPSHOT",
+            "moduleVersion": "2.9.0-SNAPSHOT",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -38,7 +83,7 @@
         },
         {
             "moduleName": "com.commercetools.sdk.jvm.core:commercetools-java-client-core",
-            "moduleVersion": "2.8.0-SNAPSHOT",
+            "moduleVersion": "2.9.0-SNAPSHOT",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -47,7 +92,7 @@
         },
         {
             "moduleName": "com.commercetools.sdk.jvm.core:commercetools-models",
-            "moduleVersion": "2.8.0-SNAPSHOT",
+            "moduleVersion": "2.9.0-SNAPSHOT",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -56,7 +101,7 @@
         },
         {
             "moduleName": "com.commercetools.sdk.jvm.core:commercetools-sdk-base",
-            "moduleVersion": "2.8.0-SNAPSHOT",
+            "moduleVersion": "2.9.0-SNAPSHOT",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -65,7 +110,7 @@
         },
         {
             "moduleName": "com.commercetools.sdk.jvm.core:commercetools-test-lib",
-            "moduleVersion": "2.8.0-SNAPSHOT",
+            "moduleVersion": "2.9.0-SNAPSHOT",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -74,7 +119,7 @@
         },
         {
             "moduleName": "com.commercetools.sdk.jvm.core:sdk-http",
-            "moduleVersion": "2.8.0-SNAPSHOT",
+            "moduleVersion": "2.9.0-SNAPSHOT",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -83,7 +128,7 @@
         },
         {
             "moduleName": "com.commercetools.sdk.jvm.core:sdk-http-ahc-2_0",
-            "moduleVersion": "2.8.0-SNAPSHOT",
+            "moduleVersion": "2.9.0-SNAPSHOT",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -92,7 +137,7 @@
         },
         {
             "moduleName": "com.commercetools.sdk.jvm.core:sdk-http-apache-async",
-            "moduleVersion": "2.8.0-SNAPSHOT",
+            "moduleVersion": "2.9.0-SNAPSHOT",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -172,8 +217,26 @@
             ]
         },
         {
+            "moduleName": "com.spotify:completable-futures",
+            "moduleVersion": "0.3.5",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
             "moduleName": "commons-codec:commons-codec",
             "moduleVersion": "1.15",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "dev.failsafe:failsafe",
+            "moduleVersion": "3.2.0",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -255,6 +318,15 @@
         {
             "moduleName": "javax.money:money-api",
             "moduleVersion": "1.1",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "javax.validation:validation-api",
+            "moduleVersion": "2.0.1.Final",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -416,7 +488,7 @@
         },
         {
             "moduleName": "org.slf4j:slf4j-api",
-            "moduleVersion": "1.7.31",
+            "moduleVersion": "1.7.32",
             "moduleLicenses": [
                 {
                     "moduleLicense": "MIT License"

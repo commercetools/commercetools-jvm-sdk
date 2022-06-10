@@ -2,7 +2,7 @@
     "dependencies": [
         {
             "moduleName": "com.commercetools.sdk.jvm.core:commercetools-java-client-core",
-            "moduleVersion": "2.8.0-SNAPSHOT",
+            "moduleVersion": "2.9.0-SNAPSHOT",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -11,7 +11,7 @@
         },
         {
             "moduleName": "com.commercetools.sdk.jvm.core:commercetools-sdk-base",
-            "moduleVersion": "2.8.0-SNAPSHOT",
+            "moduleVersion": "2.9.0-SNAPSHOT",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -20,7 +20,7 @@
         },
         {
             "moduleName": "com.commercetools.sdk.jvm.core:sdk-http",
-            "moduleVersion": "2.8.0-SNAPSHOT",
+            "moduleVersion": "2.9.0-SNAPSHOT",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -29,7 +29,7 @@
         },
         {
             "moduleName": "com.commercetools.sdk.jvm.core:sdk-http-ahc-1_9",
-            "moduleVersion": "2.8.0-SNAPSHOT",
+            "moduleVersion": "2.9.0-SNAPSHOT",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -218,7 +218,7 @@
         },
         {
             "moduleName": "org.slf4j:slf4j-api",
-            "moduleVersion": "1.7.31",
+            "moduleVersion": "1.7.32",
             "moduleLicenses": [
                 {
                     "moduleLicense": "MIT License"
