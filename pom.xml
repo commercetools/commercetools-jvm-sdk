@@ -130,7 +130,7 @@
         <pax-exam.version>4.11.0</pax-exam.version>
         <pax-exam.logging.version>1.10.1</pax-exam.logging.version>
         <slf4j.version>1.7.32</slf4j.version>
-        <cocosdkv2.version>8.8.1</cocosdkv2.version>
+        <cocosdkv2.version>8.9.0-SNAPSHOT</cocosdkv2.version>
         <build-helper-maven-plugin.version>3.2.0</build-helper-maven-plugin.version>
     </properties>
     <dependencyManagement>

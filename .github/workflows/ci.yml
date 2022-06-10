@@ -51,6 +51,17 @@ jobs:
           distribution: 'adopt'
           java-version: '8'
 
+      - name: "Checkout SDK v2"
+        if: ${{ matrix.client_version == 'V2' }}
+        uses: actions/checkout@v2
+        with:
+          repository: commercetools/commercetools-sdk-java-v2
+          path: commercetools-sdk-java-v2
+          ref: main
+      - name: "Build SDK v2"
+        if: ${{ matrix.client_version == 'V2' }}
+        run: ./gradlew publishMavenPublicationToMavenLocal
+
       - run: mvn clean install javadoc:aggregate -DskipTests --no-transfer-progress -Pjavadoc-jdk-8u121,third-party-licenses
       - run: mvn exec:java -pl commercetools-internal-docs -Dexec.mainClass="introspection.rules.RulesMain" -Dexec.classpathScope="test"
       - run: mvn exec:java -pl commercetools-models -Dexec.mainClass="io.sphere.sdk.client.MainMethodThreadLeakTest" -Dexec.classpathScope="test"
