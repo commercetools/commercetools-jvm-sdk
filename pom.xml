@@ -131,7 +131,6 @@
         <pax-exam.logging.version>1.10.1</pax-exam.logging.version>
         <slf4j.version>1.7.32</slf4j.version>
         <cocosdkv2.version>8.9.0</cocosdkv2.version>
-        <okhttp.version>4.9.3</okhttp.version>
         <build-helper-maven-plugin.version>3.2.0</build-helper-maven-plugin.version>
     </properties>
     <dependencyManagement>
