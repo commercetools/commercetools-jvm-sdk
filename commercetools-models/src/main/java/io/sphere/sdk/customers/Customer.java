@@ -44,14 +44,14 @@ import static java.util.stream.Collectors.toList;
  * <h3 id="verify-email">Verify the customers email address</h3>
  *
  * The customer contains the property {@link Customer#isEmailVerified()}, which is by default false.
- * If you don't want the shop to use the email authentication from Composable Commerce and verify the customer email via a different method, 
+ * If you don't want the shop to use the email authentication from Composable Commerce and verify the customer email via a different method,
  * then a customer can be created with this field set to true: {@link CustomerDraftBuilder#emailVerified(Boolean)}.
  *
  * To verify the customers email address with Composable Commerce, first an email token needs to be created with {@link io.sphere.sdk.customers.commands.CustomerCreateEmailTokenCommand}.
  * You can specify a certain time frame so that the token gets invalidated at some point.
  * The response contains a token {@link CustomerToken#getValue()} which needs to be sent to the customer.
  * commercetools Composable Commerce won't send an email to the customer. The shop must implement this feature.
- * When the customer received the token send he/she needs to submit to the shop and then the shop to Composable Commerce with {@link io.sphere.sdk.customers.commands.CustomerVerifyEmailCommand}.
+ * When the customer receives the token, he/she needs to send it to the shop and then the shop to Composable Commerce with {@link io.sphere.sdk.customers.commands.CustomerVerifyEmailCommand}.
  *
  * <p>Example</p>
  *
