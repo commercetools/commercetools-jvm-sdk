@@ -11,7 +11,7 @@ import java.util.Optional;
 /**
  * A variant of {@link MoneyImpl}, this class can be used when the user intends to pass to high precision
  * price, the fractions taken into account can be specified in fractions digits, and it allows to fractionDigits up or down
- * the platform precision for a particular price.
+ * the default precision for a particular price.
  */
 public final class HighPrecisionMoneyImpl extends Base implements MonetaryAmount {
     private final MonetaryAmount money;

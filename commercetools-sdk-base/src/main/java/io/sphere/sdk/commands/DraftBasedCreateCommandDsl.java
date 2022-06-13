@@ -1,7 +1,7 @@
 package io.sphere.sdk.commands;
 
 /**
- * Command to create a resource in commercetools based on a draft object and having a wither to replace the current draft.
+ * Command to create a resource in Composable Commerce based on a draft object and having a wither to replace the current draft.
  *
  * @param <T> the type of the result of the command
  * @param <D> the type of the draft (body of the command)

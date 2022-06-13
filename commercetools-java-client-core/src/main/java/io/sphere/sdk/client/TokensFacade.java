@@ -5,7 +5,7 @@ import io.sphere.sdk.models.Base;
 import java.util.concurrent.CompletionStage;
 
 /**
- * Provides facilities to fetch commercetools access and refresh tokens.
+ * Provides facilities to fetch access and refresh tokens from Composable Commerce.
  */
 public final class TokensFacade extends Base {
     private TokensFacade() {
@@ -20,7 +20,7 @@ public final class TokensFacade extends Base {
      *
      * {@include.example io.sphere.sdk.client.TokensFacadeIntegrationTest#fetchAccessToken()}
      *
-     * @param authConfig the commercetools project which the token should belong to
+     * @param authConfig the Project which the token should belong to
      * @return token
      */
     public static CompletionStage<Tokens> fetchTokens(final SphereAuthConfig authConfig) {

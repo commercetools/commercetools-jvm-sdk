@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 /**
- * A {@link io.sphere.sdk.models.Reference} is a loose reference to another resource on the platform.
+ * A {@link io.sphere.sdk.models.Reference} is a loose reference to another resource in Composable Commerce.
  *
  * <p>The reference <em>may</em> have a copy of the referenced object available via the method {@link io.sphere.sdk.models.Reference#getObj()} on {@link io.sphere.sdk.models.Reference#getObj() certain conditions}.</p>
  *

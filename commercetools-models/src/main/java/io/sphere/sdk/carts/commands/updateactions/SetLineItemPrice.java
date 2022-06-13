@@ -10,7 +10,7 @@ import javax.money.MonetaryAmount;
 /**
  * Sets the price of a line item and changes the priceMode of the line item to ExternalPrice.
  * If the price mode of the line item is ExternalPrice and no externalPrice is given, the external price is unset
- * and the priceMode is set to Platform.
+ * and the priceMode is set to 'Platform'.
  *
  * {@doc.gen intro}
  *

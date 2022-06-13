@@ -1,5 +1,5 @@
 # commercetools JVM SDK
-:warning: **This commercetools JVM SDK is in its Active Support mode currently, and is planned to be deprecated, please note the following dates.
+:warning: **This commercetools Composable Commerce JVM SDK is in its Active Support mode currently, and is planned to be deprecated, please note the following dates.
 
 | Active Support        | Maintenance Support   | End of Life           |
 | --------------------- | --------------------- | --------------------- |
@@ -14,19 +14,19 @@ We recommend to use our [Java SDK V2](https://docs.commercetools.com/sdk/jvm-sdk
 [![][maven img]][maven]
 [![][license img]][license]
 
-The JVM SDK enables developers to use Java 8 methods and objects to communicate with the [commercetools platform](https://www.commercetools.com/) rather than using plain HTTP calls.
+The JVM SDK enables developers to use Java 8 methods and objects to communicate with the [Composable Commerce API](https://www.commercetools.com/) rather than using plain HTTP calls.
 Users gain type-safety, encapsulation, IDE auto completion and an internal domain specific language to discover and formulate valid requests.
 
 ## JDK compatibility
 Tested with JDKs: Oracle 1.8.0_221, OpenJDK 1.8.0_221 and Amazon Corretto 8.222.10.1.
 
-## Using the SDK 
+## Using the SDK
 * install [Java 8](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 * (since May 19, 2016 new link) [<strong>Javadoc</strong>](https://commercetools.github.io/commercetools-jvm-sdk/apidocs/index.html), there you find also code snippets and insights
     * [Getting Started](https://commercetools.github.io/commercetools-jvm-sdk/apidocs/io/sphere/sdk/meta/GettingStarted.html)
     * [Release Notes](https://commercetools.github.io/commercetools-jvm-sdk/apidocs/io/sphere/sdk/meta/ReleaseNotes.html)
     * [Contributing](https://commercetools.github.io/commercetools-jvm-sdk/apidocs/io/sphere/sdk/meta/ContributorDocumentation.html)
- 
+
 ## Installation
 
 ### Java SDK with Maven
@@ -74,7 +74,7 @@ repositories {
 dependencies {
     def jvmSdkVersion = "1.61.0"
     compile "com.commercetools.sdk.jvm.core:commercetools-models:$jvmSdkVersion"
-    compile "com.commercetools.sdk.jvm.core:commercetools-java-client:$jvmSdkVersion"    
+    compile "com.commercetools.sdk.jvm.core:commercetools-java-client:$jvmSdkVersion"
     compile "com.commercetools.sdk.jvm.core:commercetools-convenience:$jvmSdkVersion"
 }
 ````
@@ -103,7 +103,7 @@ Useful code from external developers
 * [Donut](https://github.com/commercetools/commercetools-donut) - single product subscription shop example with Play Framework 2.x and Twirl (Plays default) as template engine
 * [commercetools Spring MVC archetype](https://github.com/commercetools/commercetools-spring-mvc-archetype) - template integrating the SDK with Spring DI and Spring MVC and showing just some products, thymeleaf template engine
 * [Reproducer Example](https://github.com/commercetools/commercetools-jvm-sdk-reproducer-example) - a demo which shows how to reproduce errors
- 
+
 ## Stability
 
 1. Experimental features in the API are also experimental features of the SDK.
@@ -125,7 +125,7 @@ Useful code from external developers
 1. set "de", "de-AT", "en" as languages in the Admin Center
 1. set at least one country in the Admin Center
 1. create a file "integrationtest.properties" inside the project root
-1. fill it with the credentials of a new empty commercetools project which is for testing;
+1. fill it with the credentials of a new empty Project which is for testing;
 
 ```
 projectKey=YOUR project key without quotes

@@ -37,7 +37,7 @@ import java.util.Optional;
 @ResourceInfo(pluralName = "product types", pathElement = "product-types")
 @HasByIdGetEndpoint(javadocSummary = "Retrieves a product type by a known ID.", includeExamples = "io.sphere.sdk.producttypes.queries.ProductTypeByIdGetIntegrationTest#execution()")
 @HasByKeyGetEndpoint(javadocSummary = "Retrieves a product type by a known key.", includeExamples = "io.sphere.sdk.producttypes.queries.ProductTypeByKeyGetIntegrationTest#execution()")
-@HasCreateCommand(javadocSummary = "Command to create a {@link io.sphere.sdk.producttypes.ProductType} in the platform.\n" +
+@HasCreateCommand(javadocSummary = "Command to create a {@link io.sphere.sdk.producttypes.ProductType} in Composable Commerce.\n" +
         "\n" +
         "\n" +
         "  <p>{@link io.sphere.sdk.producttypes.ProductType}s can be created in the backend by executing a {@link io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand}:</p>\n" +

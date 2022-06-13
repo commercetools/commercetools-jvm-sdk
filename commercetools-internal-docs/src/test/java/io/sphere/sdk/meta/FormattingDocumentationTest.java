@@ -176,7 +176,7 @@ public class FormattingDocumentationTest {
 
     @Test
     public void formatZonedDateTime() throws Exception {
-        final String timeAsString = "2015-07-09T07:46:40.230Z";//typical date format from the platform
+        final String timeAsString = "2015-07-09T07:46:40.230Z";//typical date format from the API
         final ZonedDateTime dateTime = ZonedDateTime.parse(timeAsString);
         final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
         assertThat(dateTime.format(formatter)).isEqualTo("09.07.2015 07:46");

@@ -1,4 +1,4 @@
 /**
- * Provides base classes for errors related to the commercetools platform.
+ * Provides base classes for errors related to Composable Commerce.
  */
 package io.sphere.sdk.models.errors;

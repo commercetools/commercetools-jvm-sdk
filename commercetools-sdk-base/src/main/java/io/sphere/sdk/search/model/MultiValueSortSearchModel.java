@@ -50,7 +50,7 @@ public final class MultiValueSortSearchModel<T> extends SortSearchModelImpl<T> {
 
     /**
      * Creates an instance of the search model to generate multi-valued sort expressions.
-     * @param attributePath the path of the attribute as expected by Commercetools Platform (e.g. "variants.attributes.color.key")
+     * @param attributePath the path of the attribute as expected by Composable Commerce (e.g. "variants.attributes.color.key")
      * @param <T> type of the resource
      * @return new instance of MultiValueSortSearchModel
      */

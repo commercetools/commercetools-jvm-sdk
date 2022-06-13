@@ -39,7 +39,7 @@ public final class CustomerCreateEmailTokenCommand extends CommandImpl<CustomerT
      * Creates a command object to create a token to verify a customer's email.
      * No optimistic version control is used.
      * @param id the id belonging to the customer
-     * @param timeToLiveInMinutes the time in minutes the token is valid, platform limitation apply
+     * @param timeToLiveInMinutes the time in minutes the token is valid, Composable Commerce limitation apply
      * @return command
      */
     public static CustomerCreateEmailTokenCommand ofCustomerId(final String id, final Integer timeToLiveInMinutes) {
@@ -50,7 +50,7 @@ public final class CustomerCreateEmailTokenCommand extends CommandImpl<CustomerT
      * Creates a command object to create a token to verify a customer's email.
      * No optimistic version control is used.
      * @param customer customer
-     * @param timeToLiveInMinutes the time in minutes the token is valid, platform limitation apply
+     * @param timeToLiveInMinutes the time in minutes the token is valid, Composable Commerce limitation apply
      * @return command
      */
     public static CustomerCreateEmailTokenCommand of(final Identifiable<Customer> customer, final Integer timeToLiveInMinutes) {

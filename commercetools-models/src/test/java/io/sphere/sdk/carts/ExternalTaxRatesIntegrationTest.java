@@ -304,7 +304,7 @@ public class ExternalTaxRatesIntegrationTest extends IntegrationTest {
     @Test
     public void addLineItemOnPlatformCart() {
         withProductOfPrices(client(), singletonList(PriceDraft.of(EURO_10)), (Product product) -> {
-            final CartDraft draft = CartDraft.of(EUR);//uses by default platform!
+            final CartDraft draft = CartDraft.of(EUR); // Uses the Platform TaxMode by default
             withCartDraft(client(), draft, (Cart cart) -> {
                 final int quantity = 3;
                 final int variantId = product.getMasterData().getStaged().getMasterVariant().getId();

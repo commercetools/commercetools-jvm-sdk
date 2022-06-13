@@ -7,7 +7,7 @@ import static io.sphere.sdk.client.ClientPackage.AUTH_URL;
 import static io.sphere.sdk.client.ClientPackage.DEFAULT_SCOPES;
 
 /**
- * Contains the configuration to fetch access keys for the commercetools platform.
+ * Contains the configuration to fetch access keys for the Composable Commerce API.
  *
  * @see SphereAuthConfigBuilder
  */
@@ -48,7 +48,7 @@ public interface SphereAuthConfig {
     default List<String> getRawScopes() {
         return DEFAULT_SCOPES.stream().map(s -> s + ":" + getProjectKey()).collect(Collectors.toList());
     }
-    
+
     static SphereAuthConfig of(final String projectKey, final String clientId, final String clientSecret) {
         return of(projectKey, clientId, clientSecret, AUTH_URL);
     }

@@ -27,14 +27,14 @@ Note: Integration tests will fail in CI since we use encrypted credentials which
 
 ## Testing
 
-Integration tests should avoid testing the CT Platform, as this is not the focus of the JVM SDK. Nevertheless you need to be aware that the CT Platform will fail silently on certain errors, such as:
+Integration tests should avoid testing the commercetools Composable Commerce API, as this is not the focus of the JVM SDK. Nevertheless you need to be aware that the Composable Commerce API will fail silently on certain errors, such as:
 - wrong field name (unless required)
 - wrong expansion path
 - wrong query predicate
 - wrong sort criteria
 - wrong facet/filter expressions
 
-Therefore you will need to assert that the result provided by the CT Platform is as expected. For example:
+Therefore you will need to assert that the result provided by the Composable Commerce API is as expected. For example:
 ```java
 @Test
 public void testExpansionPath() {

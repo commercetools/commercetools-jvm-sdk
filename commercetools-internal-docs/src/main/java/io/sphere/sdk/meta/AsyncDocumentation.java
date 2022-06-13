@@ -16,7 +16,7 @@ import java.util.function.Supplier;
  If you don't care about threads and asynchronous computation you will probably have a slow and inefficient application.
 
  <p>Suppose you want to show a customer detail page with the cart items and the customer data. For doing this, you need to fetch the cart and the customer.
- Let's suppose fetching those two unrelated documents from the commercetools platform takes 100ms for each document.</p>
+ Let's suppose fetching those two unrelated documents from the commercetools Composable Commerce APIs takes 100ms for each document.</p>
 
 
  {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#serialWayToFetchCustomerAndCart()}
@@ -36,7 +36,7 @@ import java.util.function.Supplier;
 
  {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#firstAsyncThenSync()}
 
- Also for a group of commercetools requests they can be executed in parallel and then collected:
+ Also for a group of commercetools Composable Commerce requests, they can be executed in parallel and then collected:
 
  {@include.example io.sphere.sdk.meta.AsyncCollectorDemo}
 

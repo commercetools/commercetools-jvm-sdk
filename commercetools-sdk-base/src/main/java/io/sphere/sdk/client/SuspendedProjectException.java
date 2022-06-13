@@ -1,7 +1,7 @@
 package io.sphere.sdk.client;
 
 /**
- * when trying to make a call to commercetools with suspended project
+ * when trying to make a call to Composable Commerce with suspended Project
  *
  */
 public class SuspendedProjectException extends UnauthorizedException{

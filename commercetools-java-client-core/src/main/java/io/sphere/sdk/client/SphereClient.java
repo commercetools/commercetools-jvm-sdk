@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.concurrent.CompletionStage;
 
 /**
- * A client interface to perform requests to the platform.
+ * A client interface to perform requests to Composable Commerce.
  *
  * <h3 id=instantiation>Instantiation</h3>
  *
@@ -16,13 +16,13 @@ import java.util.concurrent.CompletionStage;
  *
  * {@include.example example.TaxCategoryQueryExample#exampleQuery()}
  *
- * Refer to <a href="../meta/SphereResources.html">resources</a> for known platform requests.
+ * Refer to <a href="../meta/SphereResources.html">resources</a> for known Composable Commerce requests.
  *
  */
 public interface SphereClient extends AutoCloseable {
     /**
-     * Executes asynchronously a request to commercetools. By default it does not have a timeout.
-     * @param sphereRequest request to commercetools to perfom
+     * Executes asynchronously a request to Composable Commerce. By default it does not have a timeout.
+     * @param sphereRequest request to Composable Commerce to perform
      * @param <T> type of the result for the request
      * @return future monad which can contain the result or an exception
      */
@@ -38,7 +38,7 @@ public interface SphereClient extends AutoCloseable {
      * Raw client creation.
      * See also {@link SphereClientFactory}.
      *
-     * @param config platform project and location
+     * @param config Project and location
      * @param httpClient client to execute requests
      * @param tokenSupplier delivery of access tokens
      * @return sphere client
@@ -51,7 +51,7 @@ public interface SphereClient extends AutoCloseable {
      * Raw client creation.
      * See also SphereClientFactory.
      *
-     * @param config platform project and location
+     * @param config Project and location
      * @param httpClient client to execute requests
      * @param tokenSupplier delivery of access tokens
      * @return sphere client

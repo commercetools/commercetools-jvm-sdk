@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * All product types merged into one.
  *
- * In the platform different product types can be created but the attribute type for one attribute name and labels must be consistent.
+ * In Composable Commerce, different product types can be created but the attribute type for one attribute name and labels must be consistent.
  * So this container can contain all attribute information for all product types.
  *
  */

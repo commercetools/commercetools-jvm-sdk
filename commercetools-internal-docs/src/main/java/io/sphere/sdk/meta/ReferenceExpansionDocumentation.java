@@ -28,7 +28,7 @@ import io.sphere.sdk.expansion.ReferenceExpansionDsl;
 
  <h3 id=guarantees>Guarantees</h3>
  Reference expansion is a feature without any guarantees. So, if you provide a mal-formatted
- reference expansion path, the platform will not inform you about the problem; but just fulfills the query.
+ reference expansion path, the system will not inform you about the problem; but just fulfills the query.
 
  Even if the expansion path is correct, it is possible that it will not be expanded. This can happen, for example,
  if too many resources are expanded at the same time.

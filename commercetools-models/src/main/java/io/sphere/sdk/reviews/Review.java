@@ -25,7 +25,7 @@ import java.util.Locale;
 
  <p>If we have an approval process for a review to be used for a product or a channel, we model the approval process with a state machine.</p>
 
- <p>First of all, once per commercetools project, we create the approved state. Then we create the initial to-approve state, which has a possible transition to the approved state:</p>
+ <p>First of all, once per Project, we create the approved state. Then we create the initial to-approve state, which has a possible transition to the approved state:</p>
 
  {@include.example io.sphere.sdk.reviews.approvaldemo.CreateReviewStates}
 

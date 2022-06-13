@@ -9,7 +9,7 @@ import java.io.File;
 import static io.sphere.sdk.http.HttpHeaders.CONTENT_TYPE;
 
 /**
- * Expresses the http request domain model form commercetools platform as a draft for {@link HttpRequest}.
+ * Expresses the HTTP request domain model from commercetools Composable Commerce as a draft for {@link HttpRequest}.
  */
 public final class HttpRequestIntent extends Base {
     private final HttpMethod httpMethod;

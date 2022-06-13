@@ -6,7 +6,7 @@ import io.sphere.sdk.models.Base;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Operation which can be performed to change the state of a resource in the platform.
+ * Operation which can be performed to change the state of a resource in Composable Commerce.
  *
  * @param <T> the context of the update action
  *

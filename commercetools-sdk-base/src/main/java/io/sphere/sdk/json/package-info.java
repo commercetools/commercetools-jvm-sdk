@@ -1,4 +1,4 @@
 /**
- * Provides utils the JSON mapping from and to the platform.
+ * Provides utils the JSON mapping for resources specific to Composable Commerce.
  */
 package io.sphere.sdk.json;

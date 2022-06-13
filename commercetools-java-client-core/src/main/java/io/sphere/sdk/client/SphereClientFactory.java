@@ -12,7 +12,7 @@ import java.util.concurrent.CompletionStage;
 import java.util.function.Supplier;
 
 /**
- * A factory to instantiate platform Java clients which use {@link CompletionStage} as future implementation.
+ * A factory to instantiate Composable Commerce Java clients which use {@link CompletionStage} as future implementation.
  *
  * {@include.example example.JavaClientInstantiationExample}
  */
@@ -21,7 +21,7 @@ public interface SphereClientFactory {
 
     /**
      * Creates a standard client with configurable service URLs. Intended for commercetools staff
-     * developing with a custom platform instance.
+     * developing with a custom Composable Commerce instance.
      *
      * @param config configuration for the client
      * @return client
