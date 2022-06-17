@@ -157,6 +157,10 @@ import java.util.function.Function;
  </ul>
  -->
  -->
+ <h3 class=released-version id="v2_8_1">2.8.1 (04.07.2022)</h3>
+ <ul>
+ <li class=new-in-release>Support Custom Field in the Order From Cart Draft {@link OrderFromCartDraft#getCustom()} ()}</li>
+ </ul>
  <h3 class=released-version id="v2_8_0">2.8.0 (02.05.2022)</h3>
  <ul>
  <li class=new-in-release>Support Authentication Mode for Customer {@link Customer#getAuthenticationMode()} and related update action {@link SetAuthenticationMode}</li>
