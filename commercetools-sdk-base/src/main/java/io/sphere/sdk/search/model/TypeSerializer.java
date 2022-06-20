@@ -14,7 +14,7 @@ import java.util.function.Function;
 import static java.time.format.DateTimeFormatter.*;
 
 /**
- * Serializer to transform certain types to Commercetools Platform format on search endpoint.
+ * Serializer to transform certain types to Composable Commerce's format on search endpoint.
  * @param <V> type of the data to transform.
  */
 public final class TypeSerializer<V> extends Base implements Function<V, String> {

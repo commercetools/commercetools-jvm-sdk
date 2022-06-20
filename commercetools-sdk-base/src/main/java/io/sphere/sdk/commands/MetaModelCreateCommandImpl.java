@@ -19,7 +19,7 @@ import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Internal base class to implement commands which create a resource in the platform.
+ * Internal base class to implement commands which create a resource in Composable Commerce.
  *
  * @param <T> the type of the result of the command
  * @param <C> class which will serialized as JSON command body, most likely a template

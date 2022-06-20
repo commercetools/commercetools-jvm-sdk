@@ -8,6 +8,8 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.ResourceIdentifier;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.states.State;
+import io.sphere.sdk.types.CustomFields;
+import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
 
@@ -46,6 +48,9 @@ public interface OrderFromCartDraft {
 
     @Nullable
     ShipmentState getShipmentState();
+
+    @Nullable
+    CustomFieldsDraft getCustom();
 
     static OrderFromCartDraft of(final Versioned<Cart> cart, @Nullable final String orderNumber, @Nullable final PaymentState paymentState) {
         return OrderFromCartDraftDsl.of(ResourceIdentifier.ofId(cart.getId()), cart.getVersion(), orderNumber, paymentState);

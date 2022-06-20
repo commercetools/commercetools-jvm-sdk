@@ -1,7 +1,13 @@
 package io.sphere.sdk.test;
 
+import com.commercetools.api.client.ApiInternalLoggerFactory;
+import com.commercetools.api.client.ProjectApiRoot;
+import com.commercetools.api.defaultconfig.ApiRootBuilder;
+import com.commercetools.api.defaultconfig.ServiceRegion;
+import com.commercetools.compat.CompatSphereClient;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.spotify.futures.CompletableFutures;
 import io.sphere.sdk.client.*;
 import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.http.HttpMethod;
@@ -12,6 +18,14 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 
+import io.vrap.rmf.base.client.ApiHttpMethod;
+import io.vrap.rmf.base.client.ApiHttpRequest;
+import io.vrap.rmf.base.client.ApiHttpResponse;
+import io.vrap.rmf.base.client.error.ApiClientException;
+import io.vrap.rmf.base.client.error.NotFoundException;
+import io.vrap.rmf.base.client.http.NotFoundExceptionMiddleware;
+import io.vrap.rmf.base.client.oauth2.ClientCredentials;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.hc.client5.http.impl.async.CloseableHttpAsyncClient;
 import org.apache.hc.client5.http.impl.async.HttpAsyncClients;
 import org.apache.hc.client5.http.impl.nio.PoolingAsyncClientConnectionManager;
@@ -30,6 +44,7 @@ import org.junit.Rule;
 import org.junit.rules.Timeout;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.event.Level;
 
 import javax.annotation.Nullable;
 import javax.money.CurrencyUnit;
@@ -41,14 +56,16 @@ import java.io.UncheckedIOException;
 import java.lang.reflect.Modifier;
 import java.nio.file.Paths;
 import java.security.cert.X509Certificate;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static io.sphere.sdk.utils.SphereInternalUtils.listOf;
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class IntegrationTest {
@@ -75,14 +92,45 @@ public abstract class IntegrationTest {
         final CurrencyUnit eur = DefaultCurrencyUnits.EUR;//workaround for https://github.com/commercetools/commercetools-jvm-sdk/issues/779
     }
 
+    public static final String ENVIRONMENT_VARIABLE_SERVICE_REGION = "SERVICE_REGION";
+    public static final String ENVIRONMENT_VARIABLE_CLIENT_VERSION = "CLIENT_VERSION";
+
+    private static Map<String, String> v2TestConfig() {
+        return asList(ENVIRONMENT_VARIABLE_SERVICE_REGION, ENVIRONMENT_VARIABLE_CLIENT_VERSION).stream()
+                                       .map(suffix -> {
+                                          final String key = "JVM_SDK_IT_" + suffix;
+                                          final String nullableValue = System.getenv(key);
+                                          return new ImmutablePair<>(suffix, nullableValue);
+                                       })
+                                       .filter(pair -> null != pair.getRight())
+                                       .collect(Collectors.toMap(ImmutablePair::getLeft, ImmutablePair::getRight));
+    }
+
     public static void setupClient() {
+
         if (client == null) {
+            final Map<String, String> v2TestConfig = v2TestConfig();
             final SphereClientConfig config = getSphereClientConfig();
-            final HttpClient httpClient = newHttpClient();
-            final SphereAccessTokenSupplier tokenSupplier = SphereAccessTokenSupplier.ofAutoRefresh(config, httpClient, false);
-            final SphereClient underlying = SphereClient.of(config, httpClient, tokenSupplier);
-            final SphereClient underlying1 = withMaybeDeprecationWarnTool(underlying);
-            client = BlockingSphereClient.of(underlying1, 30, TimeUnit.SECONDS);
+            if (v2TestConfig.getOrDefault(ENVIRONMENT_VARIABLE_CLIENT_VERSION, "V1").equals("V2")) {
+                String region = v2TestConfig.computeIfAbsent(ENVIRONMENT_VARIABLE_SERVICE_REGION, s -> ServiceRegion.GCP_EUROPE_WEST1.name());
+                ServiceRegion serviceRegion = ServiceRegion.valueOf(region);
+                ProjectApiRoot apiRoot = ApiRootBuilder.of()
+                        .defaultClient(ClientCredentials.of()
+                                   .withClientSecret(config.getClientSecret())
+                                   .withClientId(config.getClientId())
+                                   .build(),
+                               serviceRegion)
+                        .withInternalLoggerFactory(ApiInternalLoggerFactory::get, Level.INFO, Level.INFO, Level.ERROR, Collections.singletonMap(ApiClientException.class, Level.INFO))
+                        .addNotFoundExceptionMiddleware(Collections.singleton(ApiHttpMethod.GET))
+                        .build(config.getProjectKey());
+                client = BlockingSphereClient.of(CompatSphereClient.of(apiRoot), 30, TimeUnit.SECONDS);
+            } else {
+                final HttpClient httpClient = newHttpClient();
+                final SphereAccessTokenSupplier tokenSupplier = SphereAccessTokenSupplier.ofAutoRefresh(config, httpClient, false);
+                final SphereClient underlying = SphereClient.of(config, httpClient, tokenSupplier);
+                final SphereClient underlying1 = withMaybeDeprecationWarnTool(underlying);
+                client = BlockingSphereClient.of(underlying1, 30, TimeUnit.SECONDS);
+            }
             assertProjectSettingsAreFine(client);
         }
     }

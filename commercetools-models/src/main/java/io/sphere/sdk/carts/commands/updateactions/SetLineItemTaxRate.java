@@ -7,7 +7,7 @@ import io.sphere.sdk.taxcategories.ExternalTaxRateDraft;
 import javax.annotation.Nullable;
 
 /**
- Sets a new tax rate that overrides the tax rate selected by the platform. If `externalTaxRate` is empty, the platform will select a tax rate as in {@link AddLineItem}.
+ Sets a new tax rate that overrides the tax rate selected by default. If `externalTaxRate` is empty, Composable Commerce will select a tax rate as in {@link AddLineItem}.
 
  {@doc.gen intro}
 

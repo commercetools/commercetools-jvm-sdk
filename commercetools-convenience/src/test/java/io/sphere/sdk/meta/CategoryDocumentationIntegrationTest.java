@@ -433,7 +433,7 @@ public class CategoryDocumentationIntegrationTest extends IntegrationTest {
                                 }
                                 final CategoryDraft draft = categoryDraftBuilder.build();
 
-                                //here is the call to the platform
+                                //here is the call to the Composable Commerce API
                                 final Category category = client().executeBlocking(CategoryCreateCommand.of(draft));
 
                                 externalIdToCategoryMap.put(externalId, category);

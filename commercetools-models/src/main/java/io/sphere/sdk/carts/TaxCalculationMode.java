@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.SphereEnumeration;
 
 /**
- * A calculation mode specifies how the platform performs calculation of taxes.
+ * A calculation mode specifies how Composable Commerce performs calculation of taxes.
  */
 public enum TaxCalculationMode implements SphereEnumeration{
 

@@ -17,7 +17,7 @@ import io.sphere.sdk.models.errors.InvalidJsonInputError;
  *
  * <p>JSON serializing and deserializing problems throw {@link io.sphere.sdk.json.JsonException}.</p>
  *
- * <p>{@link io.sphere.sdk.client.SphereServiceException} is a base exception for all error responses from the commercetools platform (HTTP status code {@code >= 400}).</p>
+ * <p>{@link io.sphere.sdk.client.SphereServiceException} is a base exception for all error responses from the commercetools Composable Commerce APIs (HTTP status code {@code >= 400}).</p>
  *
  * <p>{@link io.sphere.sdk.client.ClientErrorException} expresses errors which can be recovered by the client side (HTTP status code {@code >= 400 and < 500}).
  * {@link io.sphere.sdk.client.ServerErrorException} is for server errors.</p>
@@ -25,7 +25,7 @@ import io.sphere.sdk.models.errors.InvalidJsonInputError;
  * <h3>Errors</h3>
  *
  * If a command cannot be performed due to unfulfilled preconditions
- * the platform can return one error response with multiple errors (<a href="https://docs.commercetools.com/http-api-errors.html">listing of error codes</a>).
+ * the system can return one error response with multiple errors (<a href="https://docs.commercetools.com/http-api-errors.html">listing of error codes</a>).
  * The JVM SDK will then put a {@link io.sphere.sdk.client.ErrorResponseException} into a {@link java.util.concurrent.CompletionStage}.
  *
  * The following example shows how to distinguish errors by error code:

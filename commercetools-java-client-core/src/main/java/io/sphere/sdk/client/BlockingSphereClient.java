@@ -6,7 +6,7 @@ import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
 
 /**
- * A client for commercetools which provides thread blocking and non-blocking methods to execute a request.
+ * A client for Composable Commerce which provides thread blocking and non-blocking methods to execute a request.
  *
  * The implementations should be thread-safe so they can be used by multiple threads in parallel.
  *
@@ -34,9 +34,9 @@ public interface BlockingSphereClient extends SphereClient {
     /**
      * Executes a request and blocks the caller thread until the response is available or a client specific timeout occurs.
      *
-     * @param sphereRequest request to commercetools to perfom
+     * @param sphereRequest request to Composable Commerce to perform
      * @param <T> type of the result for the request
-     * @return result for the request to commercetools
+     * @return result for the request to Composable Commerce
      * @throws SphereTimeoutException if a timeout occurs
      */
     <T> T executeBlocking(final SphereRequest<T> sphereRequest);
@@ -44,11 +44,11 @@ public interface BlockingSphereClient extends SphereClient {
     /**
      * Executes a request and blocks the caller thread until the response is available or a request specific timeout occurs.
      *
-     * @param sphereRequest request to commercetools to perfom
+     * @param sphereRequest request to Composable Commerce to perform
      * @param timeout the maximum time to wait for this single request
      * @param unit the time unit of the timeout argument
      * @param <T> type of the result for the request
-     * @return result for the request to commercetools
+     * @return result for the request to Composable Commerce
      * @throws SphereTimeoutException if a timeout occurs
      */
     <T> T executeBlocking(final SphereRequest<T> sphereRequest, final long timeout, final TimeUnit unit);
@@ -56,10 +56,10 @@ public interface BlockingSphereClient extends SphereClient {
     /**
      * Executes a request and blocks the caller thread until the response is available or a request specific timeout occurs.
      *
-     * @param sphereRequest request to commercetools to perfom
+     * @param sphereRequest request to Composable Commerce to perform
      * @param duration the maximum duration to wait for this single request
      * @param <T> type of the result for the request
-     * @return result for the request to commercetools
+     * @return result for the request to Composable Commerce
      * @throws SphereTimeoutException if a timeout occurs
      */
     <T> T executeBlocking(final SphereRequest<T> sphereRequest, final Duration duration);

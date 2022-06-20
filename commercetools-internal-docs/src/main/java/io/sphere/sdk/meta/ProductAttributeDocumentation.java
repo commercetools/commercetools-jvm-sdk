@@ -10,7 +10,7 @@ import io.sphere.sdk.products.attributes.AttributeAccess;
  <h3 id="product-type-creation">ProductType Creation</h3>
  <p>A {@link io.sphere.sdk.producttypes.ProductType} is like a schema that defines how the product attributes are structured.</p>
  <p>{@link io.sphere.sdk.producttypes.ProductType}s contain a list of {@link io.sphere.sdk.products.attributes.AttributeDefinition}s which corresponds to the name and type of each attribute, along with some additional information".
- Each name/type pair must be unique across a commercetools project, so if you create an attribute "foo" of type String, you cannot create
+ Each name/type pair must be unique across a Project, so if you create an attribute "foo" of type String, you cannot create
  another {@link io.sphere.sdk.producttypes.ProductType} where "foo" has another type (e.g. {@link LocalizedString}). If you do it anyway you get an error message like:</p>
 
 <pre>"The attribute with name 'foo' has a different type on product type 'exampleproducttype'."</pre>
@@ -115,7 +115,7 @@ import io.sphere.sdk.products.attributes.AttributeAccess;
 
  <h3 id="attribute-table-creation">Creating a table of attributes using {@link io.sphere.sdk.products.attributes.DefaultProductAttributeFormatter}</h3>
 
- <p>The most convenient way of creating a table of attributes is using a subclass of {@link io.sphere.sdk.products.attributes.DefaultProductAttributeFormatter}, since you can rely on defaults and just override the behaviour you want to specify. To initialize the class you need the supported locales of the user viewing the table and the cached {@link io.sphere.sdk.producttypes.ProductType}s of the commercetools project. Remember that you can fetch them all using {@link io.sphere.sdk.queries.QueryExecutionUtils}.</p>
+ <p>The most convenient way of creating a table of attributes is using a subclass of {@link io.sphere.sdk.products.attributes.DefaultProductAttributeFormatter}, since you can rely on defaults and just override the behaviour you want to specify. To initialize the class you need the supported locales of the user viewing the table and the cached {@link io.sphere.sdk.producttypes.ProductType}s of the Project. Remember that you can fetch them all using {@link io.sphere.sdk.queries.QueryExecutionUtils}.</p>
 
  <p>One example for a subclass:</p>
 

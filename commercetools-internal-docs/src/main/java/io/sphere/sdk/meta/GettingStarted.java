@@ -4,7 +4,7 @@ import io.sphere.sdk.models.Base;
 
 /**
  <h3 id=about-clients>About the clients</h3>
- <p>The commercetools platform client communicates asynchronously with the API via HTTPS and it takes care about authentication.</p>
+ <p>The commercetools Composable Commerce client communicates asynchronously with the API via HTTPS and it takes care about authentication.</p>
  <p>The client uses Java objects to formulate an HTTP request, performs the request and maps the JSON response into a Java object.
  The resulting Java object is not directly accessible as object, but it is embedded in a Future/Promise for asynchronous programming.
  Since the client is thread-safe you need only one client to perform multiple requests in parallel.</p>
