@@ -3,13 +3,13 @@
     <parent>
         <groupId>com.commercetools.sdk.jvm.core</groupId>
         <artifactId>commercetools-jvm-sdk</artifactId>
-        <version>2.9.0-SNAPSHOT</version>
+        <version>2.9.0</version>
         <relativePath>..</relativePath>
     </parent>
     <groupId>com.commercetools.sdk.jvm.core</groupId>
     <artifactId>sdk-http-apache-async</artifactId>
     <packaging>jar</packaging>
-    <version>2.9.0-SNAPSHOT</version>
+    <version>2.9.0</version>
     <name>commercetools Apache Async Java client</name>
     <description>This SDK is announced to be deprecated latest by 31 December 2022, please follow more details on SDK deprecation plan https://docs.commercetools.com/api/releases/2021-08-31-announced-long-term-support-plan-for-commercetools-sdks. We recommend you to use our new SDK here https://docs.commercetools.com/sdk/jvm-sdk#java-sdk-v2.</description>
     <licenses>
