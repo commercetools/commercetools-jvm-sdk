@@ -92,6 +92,15 @@
         },
         {
             "moduleName": "com.commercetools.sdk.jvm.core:commercetools-models",
+            "moduleVersion": "2.8.0",
+            "moduleLicenses": [
+                {
+                    "moduleLicense": "Apache License 2.0"
+                }
+            ]
+        },
+        {
+            "moduleName": "com.commercetools.sdk.jvm.core:commercetools-models",
             "moduleVersion": "2.9.0-SNAPSHOT",
             "moduleLicenses": [
                 {
