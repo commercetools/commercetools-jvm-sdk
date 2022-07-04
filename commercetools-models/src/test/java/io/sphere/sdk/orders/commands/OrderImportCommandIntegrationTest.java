@@ -23,6 +23,7 @@ import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.CustomFieldsDraft;
 import io.sphere.sdk.types.Type;
 import io.sphere.sdk.utils.MoneyImpl;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.annotation.Nullable;
@@ -240,6 +241,7 @@ public class OrderImportCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    @Ignore
     public void shippingInfo() throws Exception {
         withShippingMethodForGermany(client(), shippingMethod -> {
             withTransientTaxCategory(client(), taxCategory -> {
