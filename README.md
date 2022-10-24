@@ -5,7 +5,7 @@
 | --------------------- | --------------------- | --------------------- |
 | `28th February, 2022` | `31st December 2023.` | `1st January 2024.`   |
 
-We recommend to use our [Java SDK V2](https://docs.commercetools.com/sdk/jvm-sdk#java-sdk-v2).
+We recommend to use our [Java SDK V2](https://docs.commercetools.com/sdk/jvm-sdk#java-sdk-v2), and you can migrate to the new version using our [migration guideline](https://docs.commercetools.com/sdk/java-sdk-migrate).
 
 
 <img src="https://docs.commercetools.com/assets/img/CT-logo.svg" width="550px" alt="CT-logo"></img>
