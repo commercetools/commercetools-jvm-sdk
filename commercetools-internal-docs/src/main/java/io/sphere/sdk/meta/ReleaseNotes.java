@@ -159,7 +159,7 @@ import java.util.function.Function;
  -->
  <h3 class=released-version id="v2_10_0">2.10.0 (09.12.2022)</h3>
  <ul>
- <li class=new-in-release>Add error log if the auth service shutsdown due to non recoverable error.</li>
+ <li class=new-in-release>In case of a closed AutoRefreshTokenSupplier due to a non recoverable error the reason will be displayed on rejection</li>
  </ul>
  <h3 class=released-version id="v2_9_0">2.9.0 (04.07.2022)</h3>
  <ul>
