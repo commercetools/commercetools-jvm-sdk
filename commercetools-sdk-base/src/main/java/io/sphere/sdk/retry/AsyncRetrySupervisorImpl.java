@@ -69,6 +69,7 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
         if (strategyType == StrategyType.RESUME || strategyType == StrategyType.STOP) {
             retryContext.getResult().completeExceptionally(retryStrategy.getError());
             if (strategyType == StrategyType.STOP) {
+                logger.error(() -> format("Stopping retry after [%d] attempts. Closing %s", retryContext.getAttempt(), retryContext.getService()) , retryStrategy.getError());
                 closeService(retryContext);
             }
         } else {
