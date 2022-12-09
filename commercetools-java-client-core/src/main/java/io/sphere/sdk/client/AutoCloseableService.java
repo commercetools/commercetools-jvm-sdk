@@ -21,7 +21,7 @@ public abstract class AutoCloseableService extends Base implements ReasonAutoClo
         return this.getClass().getCanonicalName();
     }
 
-    public final void close(final Throwable reason) {
+    public final synchronized void close(final Throwable reason) {
         this.closingReason = reason;
         close();
     }
