@@ -5,8 +5,9 @@ import io.sphere.sdk.utils.SphereInternalLogger;
 
 import java.util.function.Supplier;
 
-abstract class AutoCloseableService extends Base implements AutoCloseable {
+public abstract class AutoCloseableService extends Base implements ReasonAutoClosable {
     private boolean closed = false;
+    private Throwable closingReason;
 
     protected AutoCloseableService() {
         log(() -> "Creating " + getLogName());
@@ -18,6 +19,15 @@ abstract class AutoCloseableService extends Base implements AutoCloseable {
 
     private String getLogName() {
         return this.getClass().getCanonicalName();
+    }
+
+    public final void close(final Throwable reason) {
+        this.closingReason = reason;
+        close();
+    }
+
+    public Throwable getClosingReason() {
+        return closingReason;
     }
 
     @Override
@@ -38,7 +48,7 @@ abstract class AutoCloseableService extends Base implements AutoCloseable {
 
     protected void rejectExcutionIfClosed(final String message) {
         if (isClosed()) {
-            throw new IllegalStateException(message);//rejection for execution so the exception will not be in the CompletionStage
+            throw new IllegalStateException(message, closingReason);//rejection for execution so the exception will not be in the CompletionStage
         }
     }
 
