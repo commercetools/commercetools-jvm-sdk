@@ -1,5 +1,6 @@
 package io.sphere.sdk.retry;
 
+import io.sphere.sdk.client.ReasonAutoClosable;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.SphereException;
 import io.sphere.sdk.retry.RetryStrategy.StrategyType;
@@ -69,6 +70,7 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
         if (strategyType == StrategyType.RESUME || strategyType == StrategyType.STOP) {
             retryContext.getResult().completeExceptionally(retryStrategy.getError());
             if (strategyType == StrategyType.STOP) {
+                logger.error(() -> format("Stopping retry after [%d] attempts. Closing service.", retryContext.getAttempt()) , retryStrategy.getError());
                 closeService(retryContext);
             }
         } else {
@@ -107,6 +109,10 @@ final class AsyncRetrySupervisorImpl extends Base implements AsyncRetrySuperviso
 
     private <P, R> void closeService(final RetryContextImpl<P, R> retryContext) {
         try {
+            if (retryContext.getService() instanceof ReasonAutoClosable) {
+                ((ReasonAutoClosable) retryContext.getService()).close(retryContext.getLatestError());
+                return;
+            }
             retryContext.getService().close();
         } catch (final Exception e) {
             logger.error(() -> "Error occurred while closing service in retry strategy.", e);
