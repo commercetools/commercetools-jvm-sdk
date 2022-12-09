@@ -157,6 +157,10 @@ import java.util.function.Function;
  </ul>
  -->
  -->
+ <h3 class=released-version id="v2_10_0">2.10.0 (09.12.2022)</h3>
+ <ul>
+ <li class=new-in-release>Add error log if the auth service shutsdown due to non recoverable error.</li>
+ </ul>
  <h3 class=released-version id="v2_9_0">2.9.0 (04.07.2022)</h3>
  <ul>
  <li class=new-in-release>Support Custom Field in the Order From Cart Draft {@link OrderFromCartDraft#getCustom()} ()}</li>
