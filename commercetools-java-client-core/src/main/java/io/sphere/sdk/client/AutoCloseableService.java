@@ -5,7 +5,7 @@ import io.sphere.sdk.utils.SphereInternalLogger;
 
 import java.util.function.Supplier;
 
-public abstract class AutoCloseableService extends Base implements ReasonAutoClosable {
+abstract class AutoCloseableService extends Base implements ReasonAutoClosable {
     private boolean closed = false;
     private Throwable closingReason;
 
