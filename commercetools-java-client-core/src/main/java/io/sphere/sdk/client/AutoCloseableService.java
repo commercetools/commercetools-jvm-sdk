@@ -27,7 +27,10 @@ public abstract class AutoCloseableService extends Base implements ReasonAutoClo
     }
 
     public Throwable getClosingReason() {
-        return closingReason;
+        if (isClosed()) {
+            return closingReason;
+        }
+        return null;
     }
 
     @Override
