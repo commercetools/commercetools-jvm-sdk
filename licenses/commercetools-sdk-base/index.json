@@ -2,7 +2,7 @@
     "dependencies": [
         {
             "moduleName": "com.commercetools.sdk.jvm.core:sdk-http",
-            "moduleVersion": "2.10.0-SNAPSHOT",
+            "moduleVersion": "2.11.0-SNAPSHOT",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
