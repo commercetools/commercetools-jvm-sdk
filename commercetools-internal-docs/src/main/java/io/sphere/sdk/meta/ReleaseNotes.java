@@ -157,6 +157,10 @@ import java.util.function.Function;
  </ul>
  -->
  -->
+ <h3 class=released-version id="v2_11_0">2.11.0 (05.01.2023)</h3>
+ <ul>
+ <li class=fixed-in-release>Fixed bug renaming the property in the class {@link io.sphere.sdk.productselections.commands.updateactions.AddProduct}</li>
+ </ul>
  <h3 class=released-version id="v2_10_0">2.10.0 (09.12.2022)</h3>
  <ul>
  <li class=new-in-release>In case of a closed AutoRefreshTokenSupplier due to a non recoverable error the reason will be displayed on rejection</li>
