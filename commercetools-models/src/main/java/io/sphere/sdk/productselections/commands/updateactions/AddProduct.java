@@ -8,13 +8,13 @@ import io.sphere.sdk.productselections.ProductSelection;
 public final class AddProduct extends UpdateActionImpl<ProductSelection> {
     private final ResourceIdentifier<Product> product;
 
-    private AddProduct(final ResourceIdentifier<Product> productResourceIdentifier) {
+    private AddProduct(final ResourceIdentifier<Product> product) {
         super("addProduct");
-        this.product = productResourceIdentifier;
+        this.product = product;
     }
 
-    public static AddProduct of(final ResourceIdentifier<Product> productResourceIdentifier) {
-        return new AddProduct(productResourceIdentifier);
+    public static AddProduct of(final ResourceIdentifier<Product> product) {
+        return new AddProduct(product);
     }
 
     public ResourceIdentifier<Product> getProduct() {
