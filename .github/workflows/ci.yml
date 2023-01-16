@@ -80,13 +80,13 @@ jobs:
           JVM_SDK_IT_PROJECT_KEY: ${{ secrets.JVM_SDK_V2_PROJECT_KEY }}
           JVM_SDK_IT_SERVICE_REGION: ${{ secrets.JVM_SDK_V2_SERVICE_REGION }}
           JVM_SDK_IT_CLIENT_VERSION: ${{ matrix.client_version }}
-          JVM_SDK_IT_SCOPES: ${{ secrets.JVM_SDK_IT_SCOPES }}
+          JVM_SDK_IT_SCOPES: ${{ secrets.JVM_SDK_V2_SCOPES }}
           JVM_SDK_IT_AUTH_URL: ${{ secrets.JVM_SDK_V2_AUTH_URL }}
           JVM_SDK_IT_API_URL: ${{ secrets.JVM_SDK_V2_API_URL }}
           JVM_SDK_IT_OAUTH_CLIENT_ID: ${{ secrets.JVM_SDK_V2_CLIENT_ID }}
           JVM_SDK_IT_OAUTH_CLIENT_SECRET: ${{ secrets.JVM_SDK_V2_CLIENT_SECRET }}
           JVM_SDK_IT_OAUTH_PROJECT_KEY: ${{ secrets.JVM_SDK_V2_PROJECT_KEY }}
-          JVM_SDK_IT_OAUTH_SCOPES: ${{ secrets.JVM_SDK_IT_SCOPES }}
+          JVM_SDK_IT_OAUTH_SCOPES: ${{ secrets.JVM_SDK_V2_SCOPES }}
           JVM_SDK_IT_OAUTH_AUTH_URL: ${{ secrets.JVM_SDK_V2_AUTH_URL }}
           JVM_SDK_IT_OAUTH_API_URL: ${{ secrets.JVM_SDK_V2_API_URL }}
 
