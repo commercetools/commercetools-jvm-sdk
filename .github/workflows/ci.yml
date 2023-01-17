@@ -54,6 +54,7 @@ jobs:
       - run: mvn clean install javadoc:aggregate -DskipTests --no-transfer-progress -Pjavadoc-jdk-8u121,third-party-licenses
       - run: mvn exec:java -pl commercetools-internal-docs -Dexec.mainClass="introspection.rules.RulesMain" -Dexec.classpathScope="test"
       - run: mvn exec:java -pl commercetools-models -Dexec.mainClass="io.sphere.sdk.client.MainMethodThreadLeakTest" -Dexec.classpathScope="test"
+        timeout-minutes: 5
       - run: mvn test verify --no-transfer-progress -Djava.util.logging.config.file=src/test/resources/logging.properties
         if: ${{ matrix.client_version == 'V1' }}
         env:
