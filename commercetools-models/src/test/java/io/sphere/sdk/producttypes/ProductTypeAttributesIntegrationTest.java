@@ -174,6 +174,13 @@ public  class ProductTypeAttributesIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void referenceAttributeEqualsDraft() throws Exception {
+        withEmptyProductType(client(), "productReferenceAttribute-testcase", productType -> {
+            testReferenceAttributeEquals("category-reference", ReferenceAttributeType.ofCategory());
+        });
+    }
+
+    @Test
     public void flatReferenceAttributes() throws Exception {
         testReferenceAttribute("product-type-reference", ReferenceAttributeType.ofProductType());
         testReferenceAttribute("product-reference", ReferenceAttributeType.ofProduct());
@@ -294,6 +301,14 @@ public  class ProductTypeAttributesIntegrationTest extends IntegrationTest {
                 build(), attrDef -> {
             final ReferenceAttributeType receivedType = (ReferenceAttributeType) attrDef.getAttributeType();
             assertThat(receivedType.getReferenceTypeId()).isEqualTo(referenceType.getReferenceTypeId());
+        });
+    }
+
+    private void testReferenceAttributeEquals(final String attributeName, final ReferenceAttributeType referenceType) {
+        executeTest(ReferenceAttributeType.class, AttributeDefinitionBuilder.of(attributeName, LABEL, referenceType).
+                                                                            build(), attrDef -> {
+            final ReferenceAttributeType receivedType = (ReferenceAttributeType) attrDef.getAttributeType();
+            assertThat(receivedType).isEqualTo(referenceType);
         });
     }
 

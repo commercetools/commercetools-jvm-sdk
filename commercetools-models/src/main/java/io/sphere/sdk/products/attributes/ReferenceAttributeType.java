@@ -8,6 +8,8 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.producttypes.ProductType;
 
+import java.util.Objects;
+
 public class ReferenceAttributeType extends AttributeTypeBase {
 
     private final String referenceTypeId;
@@ -48,5 +50,22 @@ public class ReferenceAttributeType extends AttributeTypeBase {
     @JsonIgnore
     private static <T> RichReferenceAttributeType<T> of(final String referenceTypeId, final TypeReference<Reference<T>> typeReference) {
         return RichReferenceAttributeType.of(referenceTypeId, typeReference);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ReferenceAttributeType)) return false;
+
+        ReferenceAttributeType that = (ReferenceAttributeType) o;
+
+        return Objects.equals(referenceTypeId, that.referenceTypeId);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (referenceTypeId != null ? referenceTypeId.hashCode() : 0);
+        return result;
     }
 }
