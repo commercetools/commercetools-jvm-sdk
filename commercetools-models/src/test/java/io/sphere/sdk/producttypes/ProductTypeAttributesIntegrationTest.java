@@ -308,7 +308,7 @@ public  class ProductTypeAttributesIntegrationTest extends IntegrationTest {
         executeTest(ReferenceAttributeType.class, AttributeDefinitionBuilder.of(attributeName, LABEL, referenceType).
                                                                             build(), attrDef -> {
             final ReferenceAttributeType receivedType = (ReferenceAttributeType) attrDef.getAttributeType();
-            assertThat(receivedType).isEqualTo(referenceType);
+            assertThat(receivedType.equalsIgnoreTypeRef(referenceType)).isTrue();
         });
     }
 
