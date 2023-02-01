@@ -455,18 +455,18 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
     @Test
     public void addShippingAddressKey() {
         String key = randomKey();
-        final List<Address> addresses = asList(Address.of(DE).withKey(key), Address.of(FR).withKey(key));
+        final List<Address> addresses = asList(Address.of(DE).withKey(key));
         final CustomerDraft draft = newCustomerDraft().withAddresses(addresses);
         withCustomer(client(), draft, customer -> {
             assertThat(customer.getShippingAddressIds()).isEmpty();
 
-            final Address addressForShipping = customer.getAddresses().get(1);
+            final Address addressForShipping = customer.getAddresses().get(0);
             final String addressKey = addressForShipping.getKey();
             final AddShippingAddressId updateAction = AddShippingAddressId.ofKey(addressKey);
             final Customer updatedCustomer =
                     client().executeBlocking(CustomerUpdateCommand.of(customer, updateAction));
 
-            assertThat(updatedCustomer.getAddresses().get(1).getKey()).isEqualTo(addressKey);
+            assertThat(updatedCustomer.getAddresses().get(0).getKey()).isEqualTo(addressKey);
         });
     }
 
@@ -490,19 +490,19 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
     @Test
     public void addBillingAddressKey() {
         String key = randomKey();
-        final List<Address> addresses = asList(Address.of(DE).withKey(key), Address.of(FR).withKey(key));
+        final List<Address> addresses = asList(Address.of(DE).withKey(key));
         final CustomerDraft draft = newCustomerDraft().withAddresses(addresses);
         withCustomer(client(), draft, customer -> {
             assertThat(customer.getBillingAddressIds()).isEmpty();
 
-            final Address addressForBilling = customer.getAddresses().get(1);
+            final Address addressForBilling = customer.getAddresses().get(0);
             final String addressKey = addressForBilling.getKey();
             assertThat(addressKey.equals(key));
             final AddBillingAddressId updateAction = AddBillingAddressId.ofKey(addressKey);
             final Customer updatedCustomer =
                     client().executeBlocking(CustomerUpdateCommand.of(customer, updateAction));
 
-            assertThat(updatedCustomer.getAddresses().get(1).getKey()).isEqualTo(addressKey);
+            assertThat(updatedCustomer.getAddresses().get(0).getKey()).isEqualTo(addressKey);
         });
     }
 
@@ -526,10 +526,10 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
     @Test
     public void removeBillingAddressKey() {
         String key = randomKey();
-        final List<Address> addresses = asList(Address.of(DE).withKey(key), Address.of(FR).withKey(key));
+        final List<Address> addresses = asList(Address.of(DE).withKey(key));
         final CustomerDraft draft = newCustomerDraft()
                 .withAddresses(addresses)
-                .withBillingAddresses(singletonList(1));
+                .withBillingAddresses(singletonList(0));
         withCustomer(client(), draft, customer -> {
             assertThat(customer.getBillingAddressIds()).isNotEmpty();
             assertThat(customer.getAddresses().get(0).getKey().equals(key));
@@ -563,10 +563,10 @@ public class CustomerUpdateCommandIntegrationTest extends CustomerIntegrationTes
     @Test
     public void removeShippingAddressKey() {
         String key = randomKey();
-        final List<Address> addresses = asList(Address.of(DE).withKey(key), Address.of(FR).withKey(key));
+        final List<Address> addresses = asList(Address.of(DE).withKey(key));
         final CustomerDraft draft = newCustomerDraft()
                 .withAddresses(addresses)
-                .withShippingAddresses(singletonList(1));
+                .withShippingAddresses(singletonList(0));
         withCustomer(client(), draft, customer -> {
             assertThat(customer.getShippingAddressIds()).isNotEmpty();
             assertThat(customer.getAddresses().get(0).getKey().equals(key));
