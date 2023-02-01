@@ -79,10 +79,7 @@ import io.sphere.sdk.productdiscounts.ProductDiscountDraftBuilder;
 import io.sphere.sdk.productdiscounts.queries.MatchingProductDiscountGet;
 import io.sphere.sdk.productdiscounts.queries.ProductDiscountByIdGet;
 import io.sphere.sdk.products.*;
-import io.sphere.sdk.products.attributes.Attribute;
-import io.sphere.sdk.products.attributes.AttributeAccess;
-import io.sphere.sdk.products.attributes.AttributeDefinition;
-import io.sphere.sdk.products.attributes.AttributeDefinitionDraft;
+import io.sphere.sdk.products.attributes.*;
 import io.sphere.sdk.products.commands.ProductImageUploadCommand;
 import io.sphere.sdk.products.commands.updateactions.*;
 import io.sphere.sdk.products.expansion.ProductDataExpansionModel;
@@ -157,6 +154,10 @@ import java.util.function.Function;
  </ul>
  -->
  -->
+ <h3 class=released-version id="v2_12_0">2.12.0 (01.02.2023)</h3>
+ <ul>
+ <li class=new-in-release>Added {@link io.sphere.sdk.products.attributes.ReferenceAttributeType#equalsIgnoreTypeRef(ReferenceAttributeType)} method</li>
+ </ul>
  <h3 class=released-version id="v2_11_0">2.11.0 (05.01.2023)</h3>
  <ul>
  <li class=fixed-in-release>Fixed bug renaming the property in the class {@link io.sphere.sdk.productselections.commands.updateactions.AddProduct}</li>
