@@ -98,7 +98,7 @@ public final class SphereTestUtils {
     }
 
     public static String randomKey() {
-        return  "random-slug-" + random.nextInt();
+        return  "random-slug-" + UUID.randomUUID();
     }
 
     /**

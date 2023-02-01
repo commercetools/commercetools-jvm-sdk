@@ -49,4 +49,8 @@ public class ReferenceAttributeType extends AttributeTypeBase {
     private static <T> RichReferenceAttributeType<T> of(final String referenceTypeId, final TypeReference<Reference<T>> typeReference) {
         return RichReferenceAttributeType.of(referenceTypeId, typeReference);
     }
+
+    public boolean equalsIgnoreTypeRef(ReferenceAttributeType attributeType) {
+        return attributeType != null && ReferenceAttributeType.of(attributeType.getReferenceTypeId()).equals(ReferenceAttributeType.of(this.getReferenceTypeId()));
+    }
 }
