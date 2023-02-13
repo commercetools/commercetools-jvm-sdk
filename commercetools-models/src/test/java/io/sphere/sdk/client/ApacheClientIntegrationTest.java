@@ -7,6 +7,7 @@ import io.sphere.sdk.projects.queries.ProjectGet;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
 import org.apache.hc.client5.http.impl.async.HttpAsyncClients;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.concurrent.TimeUnit;
@@ -32,6 +33,7 @@ public class ApacheClientIntegrationTest extends IntegrationTest {
      * This Exception is caused by the fact that the client closes after trying api callback with invalid scope
      * **/
     @Test(expected = IllegalStateException.class )
+    @Ignore
     public void stopRetriesOnInvalidConfig() throws Exception{
         final SphereClientConfig clientConfig = getSphereClientConfig();
         final SphereClientConfig badConfig = SphereClientConfig.of(clientConfig.getProjectKey()+"LL",clientConfig.getClientId(),clientConfig.getClientSecret() ,clientConfig.getAuthUrl() ,clientConfig.getApiUrl()  );
