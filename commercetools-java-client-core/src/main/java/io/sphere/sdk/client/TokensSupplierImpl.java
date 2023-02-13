@@ -97,11 +97,13 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
         final String projectKey = config.getProjectKey();
         final Map<String, String> data = new HashMap<>();
         data.put("grant_type", isPasswordFlow() ? "password" : "client_credentials");
-        final String scopeValue = config.getRawScopes().stream()
-                //.map(scope -> format("%s:%s", scope, projectKey))
-                .collect(joining(" "));
+        if (!config.getRawScopes().isEmpty()) {
+            final String scopeValue = config.getRawScopes().stream()
+                                            //.map(scope -> format("%s:%s", scope, projectKey))
+                                            .collect(joining(" "));
 
-        data.put("scope", scopeValue);
+            data.put("scope", scopeValue);
+        }
         if (isPasswordFlow()) {
             data.put("username", username);
             data.put("password", password);

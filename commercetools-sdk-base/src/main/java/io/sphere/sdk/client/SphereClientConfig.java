@@ -53,11 +53,11 @@ public final class SphereClientConfig extends Base implements SphereAuthConfig, 
     }
 
     public static SphereClientConfig of(final String projectKey, final String clientId, final String clientSecret, final String authUrl, final String apiUrl) {
-        return new SphereClientConfig(projectKey, clientId, clientSecret, authUrl, apiUrl, ClientPackage.DEFAULT_SCOPES, CorrelationIdGenerator.of(projectKey));
+        return new SphereClientConfig(projectKey, clientId, clientSecret, authUrl, apiUrl, new ArrayList<>(), CorrelationIdGenerator.of(projectKey));
     }
 
     public static SphereClientConfig of(final String projectKey, final String clientId, final String clientSecret, final String authUrl, final String apiUrl, final CorrelationIdGenerator correlationIdGenerator) {
-        return new SphereClientConfig(projectKey, clientId, clientSecret, authUrl, apiUrl, ClientPackage.DEFAULT_SCOPES, correlationIdGenerator);
+        return new SphereClientConfig(projectKey, clientId, clientSecret, authUrl, apiUrl, new ArrayList<>(), correlationIdGenerator);
     }
 
     @Override

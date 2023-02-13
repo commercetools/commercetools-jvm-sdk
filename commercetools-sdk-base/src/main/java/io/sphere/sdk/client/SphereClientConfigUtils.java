@@ -84,7 +84,7 @@ final class SphereClientConfigUtils {
 
     private static List<SphereScope> scopesAsCommaSeparatedStringsToList(final String scopesAsString) {
         return isEmpty(scopesAsString)
-                    ? ClientPackage.DEFAULT_PROJECT_SCOPES
+                    ? new ArrayList<>()
                     : Arrays.stream(scopesAsString.split(","))
                     .map(SphereProjectScope::ofScopeString)
                     .collect(Collectors.toList());
