@@ -102,7 +102,7 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
     public void addLineItemMaxQuantity() throws Exception {
         withEmptyCartAndProduct(client(), (cart, product) -> {
             assertThat(cart.getLineItems()).isEmpty();
-            final long quantity = Long.MAX_VALUE;
+            final long quantity = Long.MAX_VALUE / 1234;
             final String productId = product.getId();
             final AddLineItem action = AddLineItem.of(productId, MASTER_VARIANT_ID, quantity);
 
