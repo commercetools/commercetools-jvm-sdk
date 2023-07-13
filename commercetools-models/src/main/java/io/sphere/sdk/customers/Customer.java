@@ -379,7 +379,6 @@ public interface Customer extends Resource<Customer>, Custom, WithKey {
     LocalDate getDateOfBirth();
 
     @Nullable
-    @HasNoUpdateAction
     @IgnoreInQueryModel
     AuthenticationMode getAuthenticationMode();
 
