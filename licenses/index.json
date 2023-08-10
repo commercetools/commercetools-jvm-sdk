@@ -2,7 +2,7 @@
     "dependencies": [
         {
             "moduleName": "com.commercetools.sdk:commercetools-apachehttp-client",
-            "moduleVersion": "8.9.0",
+            "moduleVersion": "15.0.0",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -11,7 +11,7 @@
         },
         {
             "moduleName": "com.commercetools.sdk:commercetools-money",
-            "moduleVersion": "8.9.0",
+            "moduleVersion": "15.0.0",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -20,7 +20,7 @@
         },
         {
             "moduleName": "com.commercetools.sdk:commercetools-sdk-compat-v1",
-            "moduleVersion": "8.9.0",
+            "moduleVersion": "15.0.0",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -29,7 +29,7 @@
         },
         {
             "moduleName": "com.commercetools.sdk:commercetools-sdk-java-api",
-            "moduleVersion": "8.9.0",
+            "moduleVersion": "15.0.0",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -38,7 +38,7 @@
         },
         {
             "moduleName": "com.commercetools.sdk:rmf-java-base",
-            "moduleVersion": "8.9.0",
+            "moduleVersion": "15.0.0",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -127,15 +127,6 @@
             ]
         },
         {
-            "moduleName": "com.commercetools.sdk.jvm.core:sdk-http-ahc-1_8",
-            "moduleVersion": "2.15.0-SNAPSHOT",
-            "moduleLicenses": [
-                {
-                    "moduleLicense": "Apache License 2.0"
-                }
-            ]
-        },
-        {
             "moduleName": "com.commercetools.sdk.jvm.core:sdk-http-ahc-1_9",
             "moduleVersion": "2.15.0-SNAPSHOT",
             "moduleLicenses": [
@@ -182,7 +173,7 @@
         },
         {
             "moduleName": "com.fasterxml.jackson.core:jackson-annotations",
-            "moduleVersion": "2.12.4",
+            "moduleVersion": "2.13.5",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -191,7 +182,7 @@
         },
         {
             "moduleName": "com.fasterxml.jackson.core:jackson-core",
-            "moduleVersion": "2.12.4",
+            "moduleVersion": "2.13.5",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -200,7 +191,7 @@
         },
         {
             "moduleName": "com.fasterxml.jackson.core:jackson-databind",
-            "moduleVersion": "2.12.4",
+            "moduleVersion": "2.13.5",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -209,7 +200,7 @@
         },
         {
             "moduleName": "com.fasterxml.jackson.dataformat:jackson-dataformat-cbor",
-            "moduleVersion": "2.12.4",
+            "moduleVersion": "2.13.5",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -218,7 +209,7 @@
         },
         {
             "moduleName": "com.fasterxml.jackson.datatype:jackson-datatype-jsr310",
-            "moduleVersion": "2.12.4",
+            "moduleVersion": "2.13.5",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -227,7 +218,7 @@
         },
         {
             "moduleName": "com.fasterxml.jackson.module:jackson-module-parameter-names",
-            "moduleVersion": "2.12.4",
+            "moduleVersion": "2.13.5",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -254,7 +245,7 @@
         },
         {
             "moduleName": "com.google.errorprone:error_prone_annotations",
-            "moduleVersion": "2.5.1",
+            "moduleVersion": "2.18.0",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -272,7 +263,7 @@
         },
         {
             "moduleName": "com.google.guava:guava",
-            "moduleVersion": "30.1.1-jre",
+            "moduleVersion": "32.0.0-jre",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -290,7 +281,7 @@
         },
         {
             "moduleName": "com.google.j2objc:j2objc-annotations",
-            "moduleVersion": "1.3",
+            "moduleVersion": "2.8",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -300,15 +291,6 @@
         {
             "moduleName": "com.neovisionaries:nv-i18n",
             "moduleVersion": "1.28",
-            "moduleLicenses": [
-                {
-                    "moduleLicense": "Apache License 2.0"
-                }
-            ]
-        },
-        {
-            "moduleName": "com.ning:async-http-client",
-            "moduleVersion": "1.8.16",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -407,7 +389,7 @@
         },
         {
             "moduleName": "dev.failsafe:failsafe",
-            "moduleVersion": "3.2.0",
+            "moduleVersion": "3.3.2",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -417,15 +399,6 @@
         {
             "moduleName": "io.netty:netty",
             "moduleVersion": "3.10.6.Final",
-            "moduleLicenses": [
-                {
-                    "moduleLicense": "Apache License 2.0"
-                }
-            ]
-        },
-        {
-            "moduleName": "io.netty:netty",
-            "moduleVersion": "3.9.2.Final",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -902,7 +875,7 @@
         },
         {
             "moduleName": "org.checkerframework:checker-qual",
-            "moduleVersion": "3.8.0",
+            "moduleVersion": "3.33.0",
             "moduleLicenses": [
                 {
                     "moduleLicense": "The MIT License"
@@ -992,7 +965,7 @@
         },
         {
             "moduleName": "org.slf4j:slf4j-api",
-            "moduleVersion": "1.7.32",
+            "moduleVersion": "1.7.36",
             "moduleLicenses": [
                 {
                     "moduleLicense": "MIT License"
