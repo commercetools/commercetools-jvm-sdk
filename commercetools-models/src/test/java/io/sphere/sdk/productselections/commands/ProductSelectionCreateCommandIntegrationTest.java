@@ -3,6 +3,7 @@ package io.sphere.sdk.productselections.commands;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.productselections.ProductSelection;
 import io.sphere.sdk.productselections.ProductSelectionDraft;
+import io.sphere.sdk.productselections.ProductSelectionMode;
 import io.sphere.sdk.productselections.ProductSelectionType;
 import io.sphere.sdk.test.IntegrationTest;
 
@@ -19,7 +20,7 @@ public class ProductSelectionCreateCommandIntegrationTest extends IntegrationTes
         final ProductSelectionDraft productSelectionDraft = ProductSelectionDraft.ofName(name);
 
         final ProductSelection productSelection = client().executeBlocking(ProductSelectionCreateCommand.of(productSelectionDraft));
-        assertThat(productSelection.getType()).isEqualTo(ProductSelectionType.INDIVIDUAL);
+        assertThat(productSelection.getMode()).isEqualTo(ProductSelectionMode.INDIVIDUAL);
         assertThat(productSelection.getName()).isEqualTo(name);
     }
 }
