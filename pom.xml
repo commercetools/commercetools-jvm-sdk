@@ -58,7 +58,6 @@
         <module>commercetools-internal-docs</module>
         <module>commercetools-internal-processors</module>
         <module>commercetools-java-client</module>
-        <module>commercetools-java-client-ahc-1_8</module>
         <module>commercetools-java-client-ahc-1_9</module>
         <module>commercetools-java-client-ahc-2_0</module>
         <module>commercetools-java-client-ahc-2_5</module>
@@ -70,7 +69,6 @@
         <module>commercetools-sdk-base</module>
         <module>commercetools-test-lib</module>
         <module>sdk-http</module>
-        <module>sdk-http-ahc-1_8</module>
         <module>sdk-http-ahc-1_9</module>
         <module>sdk-http-ahc-2_0</module>
         <module>sdk-http-ahc-2_5</module>
