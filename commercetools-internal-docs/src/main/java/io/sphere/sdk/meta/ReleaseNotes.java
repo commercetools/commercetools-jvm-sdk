@@ -154,6 +154,19 @@ import java.util.function.Function;
  </ul>
  -->
  -->
+ <h3 class=released-version id="v2_15_0">2.15.0 (11.08.2023)</h3>
+ <ul>
+ <li class=change-in-release>Update Jackson to 2.13.5</li>
+ <li class=change-in-release>Update Commons Text to 1.10.0</li>
+ <li class=change-in-release>Update SLF4J to 1.7.36</li>
+ <li class=removed-in-release>AHC 1.8 module</li>
+ </ul>
+ <h3 class=released-version id="v2_14_0">2.14.0 (21.02.2023)</h3>
+ <ul>
+ </ul>
+ <h3 class=released-version id="v2_13_0">2.13.0 (16.02.2023)</h3>
+ <ul>
+ </ul>
  <h3 class=released-version id="v2_12_0">2.12.0 (01.02.2023)</h3>
  <ul>
  <li class=new-in-release>Added {@link io.sphere.sdk.products.attributes.ReferenceAttributeType#equalsIgnoreTypeRef(ReferenceAttributeType)} method</li>
