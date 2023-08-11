@@ -28,7 +28,11 @@ public interface ProductSelection extends Resource<ProductSelection>, WithKey, C
     Long getProductCount();
 
     @IgnoreInQueryModel
+    @Deprecated
     ProductSelectionType getType();
+
+    @IgnoreInQueryModel
+    ProductSelectionMode getMode();
 
     @IgnoreInQueryModel
     @Nullable
