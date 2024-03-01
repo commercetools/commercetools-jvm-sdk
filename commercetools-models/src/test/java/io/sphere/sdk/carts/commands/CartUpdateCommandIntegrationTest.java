@@ -597,7 +597,7 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
 
     @Test
     public void freezeUnfreeze() throws Exception {
-        withCart(client(), emptyCart -> {
+        withLineItemAndCustomLineItemFilledCart(client(), emptyCart -> {
             assertThat(emptyCart.getCartState())
                     .isEqualTo(CartState.ACTIVE);
             final Cart frozenCart = client().executeBlocking(CartUpdateCommand.of(emptyCart, FreezeCart.of()));
@@ -606,7 +606,7 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
                     .isEqualTo(CartState.FROZEN);
 
             final Cart unfrozenCart = client().executeBlocking(CartUpdateCommand.of(frozenCart, UnfreezeCart.of()));
-            assertThat(frozenCart.getCartState())
+            assertThat(unfrozenCart.getCartState())
                     .isEqualTo(CartState.ACTIVE);
             return unfrozenCart;
         });
