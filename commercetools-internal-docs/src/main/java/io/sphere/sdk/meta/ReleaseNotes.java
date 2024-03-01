@@ -154,6 +154,10 @@ import java.util.function.Function;
  </ul>
  -->
  -->
+ <h3 class=released-version id="v2_16_0">2.16.0 (01.03.2023)</h3>
+ <ul>
+ <li class=new-in-release>Support for freezing carts</li>
+ </ul>
  <h3 class=released-version id="v2_15_0">2.15.0 (11.08.2023)</h3>
  <ul>
  <li class=change-in-release>Update Jackson to 2.13.5</li>
