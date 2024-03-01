@@ -596,6 +596,23 @@ public class CartUpdateCommandIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void freezeUnfreeze() throws Exception {
+        withLineItemAndCustomLineItemFilledCart(client(), emptyCart -> {
+            assertThat(emptyCart.getCartState())
+                    .isEqualTo(CartState.ACTIVE);
+            final Cart frozenCart = client().executeBlocking(CartUpdateCommand.of(emptyCart, FreezeCart.of()));
+
+            assertThat(frozenCart.getCartState())
+                    .isEqualTo(CartState.FROZEN);
+
+            final Cart unfrozenCart = client().executeBlocking(CartUpdateCommand.of(frozenCart, UnfreezeCart.of()));
+            assertThat(unfrozenCart.getCartState())
+                    .isEqualTo(CartState.ACTIVE);
+            return unfrozenCart;
+        });
+    }
+
+    @Test
     public void recalculateAndUpdateProductData() throws Exception {
         withEmptyCartAndProduct(client(), (emptyCart, product) -> {
             //create cart with line item

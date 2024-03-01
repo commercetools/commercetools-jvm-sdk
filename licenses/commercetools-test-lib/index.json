@@ -47,7 +47,7 @@
         },
         {
             "moduleName": "com.commercetools.sdk.jvm.core:commercetools-java-client-core",
-            "moduleVersion": "2.15.0-SNAPSHOT",
+            "moduleVersion": "2.16.0-SNAPSHOT",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -56,7 +56,7 @@
         },
         {
             "moduleName": "com.commercetools.sdk.jvm.core:commercetools-sdk-base",
-            "moduleVersion": "2.15.0-SNAPSHOT",
+            "moduleVersion": "2.16.0-SNAPSHOT",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"
@@ -65,7 +65,7 @@
         },
         {
             "moduleName": "com.commercetools.sdk.jvm.core:sdk-http",
-            "moduleVersion": "2.15.0-SNAPSHOT",
+            "moduleVersion": "2.16.0-SNAPSHOT",
             "moduleLicenses": [
                 {
                     "moduleLicense": "Apache License 2.0"

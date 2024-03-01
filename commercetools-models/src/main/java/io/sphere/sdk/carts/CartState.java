@@ -20,7 +20,10 @@ public enum CartState implements SphereEnumeration {
     /**
      The cart was ordered. No further operations on the cart are allowed.
      */
-    ORDERED;
+    ORDERED,
+
+    FROZEN
+    ;
 
     public static CartState defaultValue() {
         return CartState.ACTIVE;
