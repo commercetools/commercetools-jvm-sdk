@@ -226,6 +226,7 @@ import java.util.function.Function;
  <h3 class=released-version id="v2_4_0">2.4.0 (01.11.2021)</h3>
  <ul>
  <li class=change-in-release> Add deprecation announcement</li>
+ <li class=new-in-release>Support for {@link io.sphere.sdk.customers.messages.CustomerPasswordTokenCreatedMessage}</li>
  </ul>
  <h3 class=released-version id="v2_2_0">2.2.0 (04.10.2021)</h3>
  <ul>
